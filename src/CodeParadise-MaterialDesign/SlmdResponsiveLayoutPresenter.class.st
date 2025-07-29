@@ -89,7 +89,7 @@ SlmdResponsiveLayoutPresenter >> renderView [
 	self model paneLayout ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #paneLayout ].
 
-	self application sidesheetModel ifNotNil: [ :value |
+	self model sidesheet ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
 
 	self model dockedToolbar ifNotNil: [ :value |

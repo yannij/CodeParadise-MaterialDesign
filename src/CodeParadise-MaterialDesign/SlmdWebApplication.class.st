@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'navActions',
 		'actionItems',
-		'layout',
-		'sidesheetModel'
+		'layout'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
@@ -83,16 +82,4 @@ SlmdWebApplication >> pane1Model [
 SlmdWebApplication >> pane2Model [
 
 	^ self layout paneLayout pane2
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> sidesheetModel [
-
-	^ sidesheetModel
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> sidesheetModel: anObject [
-
-	sidesheetModel := anObject
 ]
