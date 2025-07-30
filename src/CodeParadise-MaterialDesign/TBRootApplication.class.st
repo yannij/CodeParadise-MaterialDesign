@@ -53,19 +53,6 @@ TBRootApplication >> initialize [
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
-	navActions := OrderedCollection new
-		add: (SlmdNavAction id: #settings iconName: 'gear' iconLabel: 'Settings' arg1: 'Settings');
-		add: (SlmdNavAction id: #home iconName: 'house' iconLabel: 'Home' arg1: 'Home Page');
-		yourself.
-	actionItems := OrderedCollection new
-		add: (SlmdNavAction id: #slmdRefresh iconName: 'arrow-clockwise' iconLabel: 'Refresh' actionName: #action actionGroup: #primary arg1: 'refresh');
-		add: (SlmdNavAction id: #crudCreate iconName: 'plus' iconLabel: 'Add' actionName: #action actionGroup: #fab arg1: 'create');
-		add: (SlmdNavAction id: #crudRead iconName: 'file-ruled' iconLabel: 'View' actionName: #action actionGroup: #toolbar arg1: 'read');
-		add: (SlmdNavAction id: #crudDelete iconName: 'trash' iconLabel: 'Delete' actionName: #action actionGroup: #toolbar arg1: 'delete');
-		add: (SlmdNavAction id: #crudUpdate iconName: 'pencil' iconLabel: 'Edit' actionName: #action actionGroup: #toolbar arg1: 'update');
-		add: (SlmdNavAction id: #crudSave iconName: 'check' iconLabel: 'Save' actionName: #action actionGroup: #toolbar arg1: 'save');
-		add: (SlmdNavAction id: #crudCancel iconName: 'x' iconLabel: 'Cancel' actionName: #action actionGroup: #toolbar arg1: 'cancel');
-		yourself.
 	self setUpAppBar2.
 	self setDetailWithIndex: 1.
 
@@ -77,8 +64,8 @@ TBRootApplication >> setDetailAddNew [
 
 	detail := SlmdItemWrapperModel onNewModel: TBPostModel new.
 
-	self pane1Model paneContent detail: detail.
-	self pane2Model setPaneContent: detail.
+	self layout pane1 paneContent detail: detail.
+	self layout pane2 setPaneContent: detail.
 
 ]
 
@@ -86,11 +73,25 @@ TBRootApplication >> setDetailAddNew [
 TBRootApplication >> setDetailWithIndex: index [
 	| list detail |
 
-	list := self pane1Model paneContent list.
+	list := self layout pane1 paneContent list.
 	detail := list at: index.
 
-	self pane1Model paneContent detail: detail.
-	self pane2Model setPaneContent: detail.
+	self layout pane1 paneContent detail: detail.
+	self layout pane2 setPaneContent: detail.
+
+]
+
+{ #category : 'initialization' }
+TBRootApplication >> setUpActionItems [
+
+	self actionItems
+		add: (SlmdNavAction id: #slmdRefresh iconName: 'arrow-clockwise' iconLabel: 'Refresh' actionName: #action actionGroup: #primary arg1: 'refresh');
+		add: (SlmdNavAction id: #crudCreate iconName: 'plus' iconLabel: 'Add' actionName: #action actionGroup: #fab arg1: 'create');
+		add: (SlmdNavAction id: #crudRead iconName: 'file-ruled' iconLabel: 'View' actionName: #action actionGroup: #toolbar arg1: 'read');
+		add: (SlmdNavAction id: #crudDelete iconName: 'trash' iconLabel: 'Delete' actionName: #action actionGroup: #toolbar arg1: 'delete');
+		add: (SlmdNavAction id: #crudUpdate iconName: 'pencil' iconLabel: 'Edit' actionName: #action actionGroup: #toolbar arg1: 'update');
+		add: (SlmdNavAction id: #crudSave iconName: 'check' iconLabel: 'Save' actionName: #action actionGroup: #toolbar arg1: 'save');
+		add: (SlmdNavAction id: #crudCancel iconName: 'x' iconLabel: 'Cancel' actionName: #action actionGroup: #toolbar arg1: 'cancel').
 
 ]
 
@@ -101,5 +102,15 @@ TBRootApplication >> setUpAppBar2 [
 		actionItemsAdd: (self actionItemNamed: #crudDelete);
 		actionItemsAdd: (self actionItemNamed: #crudUpdate);
 		yourself.
+
+]
+
+{ #category : 'initialization' }
+TBRootApplication >> setUpNavItems [
+
+	self navItems
+		add: (SlmdNavAction id: #settings iconName: 'gear' iconLabel: 'Settings' arg1: 'Settings');
+		add: (SlmdNavAction id: #home iconName: 'house' iconLabel: 'Home' arg1: 'Home Page').
+
 
 ]

@@ -2,9 +2,9 @@ Class {
 	#name : 'SlmdWebApplication',
 	#superclass : 'CpMvpWebApplication',
 	#instVars : [
-		'navActions',
-		'actionItems',
-		'layout'
+		'layout',
+		'navItems',
+		'actionItems'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
@@ -43,8 +43,11 @@ SlmdWebApplication >> initialize [
 	super initialize.
 
 	layout := SlmdResponsiveLayoutModel new.
-	navActions := OrderedCollection new.
+	navItems := OrderedCollection new.
 	actionItems := OrderedCollection new.
+
+	self setUpNavItems.
+	self setUpActionItems.
 
 ]
 
@@ -61,25 +64,25 @@ SlmdWebApplication >> layout: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdWebApplication >> navActions [
+SlmdWebApplication >> navItems [
 
-	^ navActions
+	^ navItems
 ]
 
 { #category : 'accessing' }
-SlmdWebApplication >> navActions: anObject [
+SlmdWebApplication >> navItems: anObject [
 
-	navActions := anObject
+	navItems := anObject
 ]
 
-{ #category : 'accessing' }
-SlmdWebApplication >> pane1Model [
+{ #category : 'initialization' }
+SlmdWebApplication >> setUpActionItems [
+	"Subclasses may enhance"
 
-	^ self layout paneLayout pane1
 ]
 
-{ #category : 'accessing' }
-SlmdWebApplication >> pane2Model [
+{ #category : 'initialization' }
+SlmdWebApplication >> setUpNavItems [
+	"Subclasses may enhance"
 
-	^ self layout paneLayout pane2
 ]

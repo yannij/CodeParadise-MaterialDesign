@@ -33,8 +33,8 @@ SlmdPresenter >> doRefresh: anObject [
 
 	self logTrace: self printString, '<==', anObject printString aspect: 'handleRefresh:' level: 3.
 
-	self application pane1Model paneContent valueChanged.
-	self application pane1Model valueChanged.
+	self layout pane1 paneContent valueChanged.
+	self layout pane1 valueChanged.
 
 ]
 
@@ -54,8 +54,14 @@ SlmdPresenter >> handleNav: anObject [
 	(anObject parameterAt: #to) = #refresh ifTrue: [
 		^ self doRefresh: anObject ].
 
-	self application pane1Model handleActionRequest: anObject; valueChanged.
+	self layout pane1 handleActionRequest: anObject; valueChanged.
 
+]
+
+{ #category : 'accessing - model' }
+SlmdPresenter >> layout [
+
+	^ self application layout
 ]
 
 { #category : 'logging' }

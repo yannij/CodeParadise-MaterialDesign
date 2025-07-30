@@ -40,35 +40,33 @@ SlmdResponsiveLayoutPresenter >> handleAction: anObject [
 
 	type := anObject parameterAt: #type.
 
-	type = 'save' ifTrue: [ | app theModel |
-		app := self application.
-		theModel := app pane2Model paneContent.
+	type = 'save' ifTrue: [ | theModel |
+		theModel := self layout pane2 paneContent.
 		theModel wrappedModel handleSave: anObject.
 		theModel valueChanged.
-		app pane2Model valueChanged.
+		self layout pane2 valueChanged.
 		self appBar2ButtonsSetEditDelete.
 		theModel isNew ifTrue: [
-			self application pane1Model paneContent listAdd: theModel.
+			self layout pane1 paneContent listAdd: theModel.
 			self application setDetailWithIndex: 1 ] ].
 
 	type = 'cancel' ifTrue: [
 		self appBar2ButtonsSetEditDelete ].
 
-	type = 'update' ifTrue: [ | app |
-		app := self application.
-		app pane2Model valueChanged.
+	type = 'update' ifTrue: [
+		self layout pane2 valueChanged.
 		self appBar2ButtonsSetSaveCancel.
 		self view beEditablePane2 ].
 
 	type = 'delete' ifTrue: [ | listDetail |
 		self view primaryPaneOnly.
-		listDetail := self application pane1Model paneContent.
+		listDetail := self layout pane1 paneContent.
 		listDetail removeDetail.
 		self application setDetailWithIndex: 1 ].
 
 	type = 'create' ifTrue: [
 		self application setDetailAddNew.
-		self application pane2Model valueChanged.
+		self layout pane2 valueChanged.
 		self view beEditablePane2.
 		self view secondaryPaneOnly.
 		self appBar2ButtonsSetSaveCancel ].
@@ -113,23 +111,5 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 
 	self subscribeToActionRequest.
 	self subscribeToNavRequest.
-
-]
-
-{ #category : 'view' }
-SlmdResponsiveLayoutPresenter >> viewInitialized [
-	| v |
-
-	super viewInitialized.
-
-	v := self view.
-
-	self application navActions do: [ :eachNavAction |
-		v addNavAction: eachNavAction asDictionary ].
-
-	self application actionItems do: [ :each |
-		each asDictionary keysAndValuesDo: [ :key :value |
-			v addActionItemId: each id key: key value: value ] ].
-
 
 ]

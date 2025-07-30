@@ -9,7 +9,7 @@ Class {
 { #category : 'rendering' }
 SlmdNavPresenter >> renderView [
 
-	self view renderNavContent: (self application navActions collect: [ :each | each asDictionary ]) asArray.
+	self view renderNavContent: (self application navItems collect: [ :each | each asDictionary ]) asArray.
 
 ]
 

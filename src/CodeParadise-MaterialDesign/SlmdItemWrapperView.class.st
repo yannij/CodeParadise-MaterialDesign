@@ -45,21 +45,6 @@ SlmdItemWrapperView class >> template [
 </div>'
 ]
 
-{ #category : 'rendering' }
-SlmdItemWrapperView >> renderButtons [
-	| items div |
-
-	items := self layoutViewLazy actionItems.
-
-	div := #div asHtmlTag
-		addClass: 'slmd-item-wrapper-header';
-		appendChild: (self iconButtonForAction: (items at: #crudSave) css: 'cssClass');
-		appendChild: (self iconButtonForAction: (items at: #crudCancel) css: 'cssClass');
-		yourself.
-	self replaceAllChildrenWith: div atSlotNamed: #header.
-
-]
-
 { #category : 'finding' }
 SlmdItemWrapperView >> wrappedView [
 

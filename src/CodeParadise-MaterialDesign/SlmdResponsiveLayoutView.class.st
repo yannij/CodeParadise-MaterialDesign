@@ -5,8 +5,6 @@ Class {
 		'debounceTransition',
 		'layoutSettingsView',
 		'layoutWidthCached',
-		'navActions',
-		'actionItems',
 		'activeToolbarDocked',
 		'activeToolbarFloating',
 		'activeFab'
@@ -177,18 +175,6 @@ SlmdResponsiveLayoutView class >> template [
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> actionItems [
-
-	^ actionItems
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> actionItems: anObject [
-
-	actionItems := anObject
-]
-
-{ #category : 'accessing' }
 SlmdResponsiveLayoutView >> activeFab [
 
 	^ activeFab
@@ -222,22 +208,6 @@ SlmdResponsiveLayoutView >> activeToolbarFloating [
 SlmdResponsiveLayoutView >> activeToolbarFloating: anObject [
 
 	activeToolbarFloating := anObject
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutView >> addActionItemId: id key: key value: value [
-	| item |
-
-	(actionItems includesKey: id) ifFalse: [
-		actionItems at: id put: Dictionary new ].
-	item := actionItems at: id.
-	item at: key put: value
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutView >> addNavAction: props [
-
-	navActions at: (props at: #id) put: props
 ]
 
 { #category : 'body' }
@@ -522,8 +492,6 @@ SlmdResponsiveLayoutView >> initialize [
 	super initialize.
 
 	layoutWidthCached := 0.
-	navActions := Dictionary new.
-	actionItems := Dictionary new.
 	activeToolbarDocked := false.
 	activeToolbarFloating := false.
 	activeFab := false.
@@ -715,18 +683,6 @@ SlmdResponsiveLayoutView >> layoutWidthCached [
 SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
 
 	layoutWidthCached := anObject
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> navActions [
-
-	^ navActions
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> navActions: anObject [
-
-	navActions := anObject
 ]
 
 { #category : 'navbar' }
