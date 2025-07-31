@@ -13,8 +13,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetEditDelete [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app actionItemNamed: #crudDelete);
-		actionItemsAdd: (app actionItemNamed: #crudUpdate);
+		actionItemsAdd: (app editItemNamed: #delete);
+		actionItemsAdd: (app editItemNamed: #update);
 		valueChanged;
 		yourself
 ]
@@ -26,8 +26,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app actionItemNamed: #crudSave);
-		actionItemsAdd: (app actionItemNamed: #crudCancel);
+		actionItemsAdd: (app editItemNamed: #save);
+		actionItemsAdd: (app editItemNamed: #cancel);
 		valueChanged;
 		yourself
 ]
@@ -48,28 +48,35 @@ SlmdResponsiveLayoutPresenter >> handleAction: anObject [
 		self appBar2ButtonsSetEditDelete.
 		theModel isNew ifTrue: [
 			self layout pane1 paneContent listAdd: theModel.
-			self application setDetailWithIndex: 1 ] ].
+			self application setDetailWithIndex: 1 ].
+		^ self ].
 
 	type = 'cancel' ifTrue: [
-		self appBar2ButtonsSetEditDelete ].
+		self appBar2ButtonsSetEditDelete.
+		^ self ].
 
 	type = 'update' ifTrue: [
 		self layout pane2 valueChanged.
 		self appBar2ButtonsSetSaveCancel.
-		self view beEditablePane2 ].
+		self view beEditablePane2.
+		^ self ].
 
 	type = 'delete' ifTrue: [ | listDetail |
 		self view primaryPaneOnly.
 		listDetail := self layout pane1 paneContent.
 		listDetail removeDetail.
-		self application setDetailWithIndex: 1 ].
+		self application setDetailWithIndex: 1.
+		^ self ].
 
 	type = 'create' ifTrue: [
 		self application setDetailAddNew.
 		self layout pane2 valueChanged.
 		self view beEditablePane2.
 		self view secondaryPaneOnly.
-		self appBar2ButtonsSetSaveCancel ].
+		self appBar2ButtonsSetSaveCancel.
+		^ self ].
+
+	self model pane1 handleActionRequest: anObject; valueChanged.
 
 ]
 

@@ -30,14 +30,14 @@ SlmdView class >> traceLevel: anObject [
 { #category : 'events' }
 SlmdView >> announceActionKey: key value: value [
 
-	self serverAnnounce: (SlmdNavActionRequest actionParameter: { key -> value } asDictionary).
+	self serverAnnounce: (SlmdUserEvent actionParameter: { key -> value } asDictionary).
 
 ]
 
 { #category : 'events' }
 SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
 
-	self serverAnnounce: (SlmdNavActionRequest actionParameter: {
+	self serverAnnounce: (SlmdUserEvent actionParameter: {
 		key -> value.
 		key2 -> value2
 	} asDictionary).
@@ -47,14 +47,14 @@ SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
 { #category : 'events' }
 SlmdView >> announceNavKey: key value: value [
 
-	self serverAnnounce: (SlmdNavActionRequest navParameter: { key -> value } asDictionary).
+	self serverAnnounce: (SlmdUserEvent navParameter: { key -> value } asDictionary).
 
 ]
 
 { #category : 'events' }
 SlmdView >> announceSetting: key value: anObject [
 
-	self serverAnnounce: (SlmdNavActionRequest actionParameter: {
+	self serverAnnounce: (SlmdUserEvent actionParameter: {
 			#aspect -> key.
 			#value -> anObject
 		} asDictionary).
@@ -117,21 +117,22 @@ SlmdView >> element: element show: aBoolean [
 
 { #category : 'actions - nav' }
 SlmdView >> executeNavAction: aNavAction [
-	| navId arg1 |
+	| itemName |
 
 	self logTrace: aNavAction printString aspect: 'executeNavAction:' level: 3.
 
-	navId := aNavAction at: #id.
-	navId = #settings ifTrue: [
-		^ self modalSettingsOpen ].
-	navId = #modalNavButton ifTrue: [
+	itemName := aNavAction at: #itemName.
+
+	itemName = #modalNav ifTrue: [
 		^ self modalNavOpen ].
 
-	(aNavAction at: #actionName) = #action ifTrue: [
+	(aNavAction at: #userActionType) = #action ifTrue: [
 		^ self doAction: aNavAction ].
 
-	arg1 := aNavAction at: #arg1.
-	self announceNavKey: #to value: arg1.
+	itemName = 'Settings' ifTrue: [
+		^ self modalSettingsOpen ].
+
+	self announceNavKey: #to value: itemName.
 
 ]
 

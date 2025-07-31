@@ -85,13 +85,8 @@ TBRootApplication >> setDetailWithIndex: index [
 TBRootApplication >> setUpActionItems [
 
 	self actionItems
-		add: (SlmdNavAction id: #slmdRefresh iconName: 'arrow-clockwise' iconLabel: 'Refresh' actionName: #action actionGroup: #primary arg1: 'refresh');
-		add: (SlmdNavAction id: #crudCreate iconName: 'plus' iconLabel: 'Add' actionName: #action actionGroup: #fab arg1: 'create');
-		add: (SlmdNavAction id: #crudRead iconName: 'file-ruled' iconLabel: 'View' actionName: #action actionGroup: #toolbar arg1: 'read');
-		add: (SlmdNavAction id: #crudDelete iconName: 'trash' iconLabel: 'Delete' actionName: #action actionGroup: #toolbar arg1: 'delete');
-		add: (SlmdNavAction id: #crudUpdate iconName: 'pencil' iconLabel: 'Edit' actionName: #action actionGroup: #toolbar arg1: 'update');
-		add: (SlmdNavAction id: #crudSave iconName: 'check' iconLabel: 'Save' actionName: #action actionGroup: #toolbar arg1: 'save');
-		add: (SlmdNavAction id: #crudCancel iconName: 'x' iconLabel: 'Cancel' actionName: #action actionGroup: #toolbar arg1: 'cancel').
+		add: (self actionItemName: 'refesh' actionGroup: #primary iconName: 'arrow-clockwise' iconLabel: 'Refresh');
+		add: (self actionItemName: 'create' actionGroup: #fab iconName: 'plus' iconLabel: 'Add').
 
 ]
 
@@ -99,8 +94,8 @@ TBRootApplication >> setUpActionItems [
 TBRootApplication >> setUpAppBar2 [
 
 	self layout pane2 appBarModel
-		actionItemsAdd: (self actionItemNamed: #crudDelete);
-		actionItemsAdd: (self actionItemNamed: #crudUpdate);
+		actionItemsAdd: (self editItemNamed: #delete);
+		actionItemsAdd: (self editItemNamed: #update);
 		yourself.
 
 ]
@@ -109,8 +104,8 @@ TBRootApplication >> setUpAppBar2 [
 TBRootApplication >> setUpNavItems [
 
 	self navItems
-		add: (SlmdNavAction id: #settings iconName: 'gear' iconLabel: 'Settings' arg1: 'Settings');
-		add: (SlmdNavAction id: #home iconName: 'house' iconLabel: 'Home' arg1: 'Home Page').
+		add: (self navItemName: 'Settings' iconName: 'gear' iconLabel: 'Settings');
+		add: (self navItemName: 'Home Page' iconName: 'house' iconLabel: 'Home').
 
 
 ]

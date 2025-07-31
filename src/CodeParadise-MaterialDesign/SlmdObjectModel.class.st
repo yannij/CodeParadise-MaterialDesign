@@ -28,7 +28,7 @@ SlmdObjectModel >> handleSave: anObject [
 
 	self traceCr: anObject printString.
 
-	changes := anObject parameters at: #changes.
+	changes := anObject parameters at: #changes ifAbsent: [ ^ self traceCr: 'Missing "changes" value on "save" event'].
 	self applyChanges: changes.
 
 ]

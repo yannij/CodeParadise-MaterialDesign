@@ -17,7 +17,7 @@ SlmdToolbarPresenter >> actionItemFabOrNil [
 	| list |
 
 	list := self application actionItems.
-	^ list detect: [ :each | each actionGroup = #fab ] ifNone: []
+	^ list detect: [ :each | each groupTag = #fab ] ifNone: []
 ]
 
 { #category : 'view' }
@@ -26,7 +26,7 @@ SlmdToolbarPresenter >> actionItemsToUse [
 
 	list := self application actionItems.
 	groupName := self actionGroupToUse.
-	^ list select: [ :each | each actionGroup = groupName ]
+	^ list select: [ :each | each groupTag = groupName ]
 ]
 
 { #category : 'view' }

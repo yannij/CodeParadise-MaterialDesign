@@ -380,32 +380,24 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 
 { #category : 'actions - nav' }
 SlmdResponsiveLayoutView >> doAction: aNavAction [
-	| arg1 |
+	| itemName |
 
 	self logTrace: aNavAction printString aspect: 'doAction:' level: 3.
 
-	arg1 := aNavAction at: #arg1.
+	itemName := aNavAction at: #itemName.
 
-	(aNavAction at: #id) = #slmdRefresh ifTrue: [
-		self announceNavKey: #to value: arg1 ].
+	itemName = 'refresh' ifTrue: [
+		self announceNavKey: #to value: itemName.
+		^ self ].
 
-	arg1 = 'cancel' ifTrue: [
-		self announceActionKey: #type value: arg1 ].
-
-	arg1 = 'save' ifTrue: [ | changes paneContentView |
+	itemName = 'save' ifTrue: [ | changes paneContentView |
 		paneContentView := self pane2View paneContentView.
 		paneContentView ifNil: [ ^ self ].
 		changes := paneContentView wrappedView changeMap.
-		"paneContentView" self announceActionKey: #type value: arg1 key2: #changes value2: changes ].
+		"paneContentView" self announceActionKey: #type value: itemName key2: #changes value2: changes.
+		^ self ].
 
-	arg1 = 'update' ifTrue: [
-		self announceActionKey: #type value: arg1 ].
-
-	arg1 = 'create' ifTrue: [
-		self announceActionKey: #type value: arg1 ].
-
-	arg1 = 'delete' ifTrue: [
-		self announceActionKey: #type value: arg1 ].
+	self announceActionKey: #type value: itemName.
 
 ]
 

@@ -31,8 +31,12 @@ SlmdPaneContentModel >> content: anObject [
 
 { #category : 'actions' }
 SlmdPaneContentModel >> handleActionRequest: aBasicEvent [
+	| newContent |
 
-	self setContent: (aBasicEvent parameterAt: #to).
+	newContent := aBasicEvent parameterAt: #to.
+	newContent ifNil: [
+		newContent := aBasicEvent parameterAt: #type ].
+	self setContent: newContent.
 
 ]
 

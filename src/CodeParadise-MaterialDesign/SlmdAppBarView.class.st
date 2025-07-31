@@ -178,10 +178,10 @@ SlmdAppBarView >> renderTrailingActions: buttons [
 ]
 
 { #category : 'rendering' }
-SlmdAppBarView >> setUpBackAction [
+SlmdAppBarView >> setUpBackNav [
 	| actionItem leadingAction |
 
-	leadingAction := (SlmdNavAction id: #backNavButton iconName: 'arrow-left' iconLabel: 'Back' arg1: #back) asDictionary.
+	leadingAction := (SlmdNavItem itemName: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back') asDictionary.
 	actionItem := self iconButtonForAction: leadingAction css: nil.
 
 	self removeChildrenAtSlotNamed: 'leadingAction'.
@@ -193,7 +193,7 @@ SlmdAppBarView >> setUpBackAction [
 SlmdAppBarView >> setUpLeadingAction [
 	| actionItem leadingAction |
 
-	leadingAction := (SlmdNavAction id: #modalNavButton iconName: 'list' iconLabel: 'Menu' arg1: #modalNav) asDictionary.
+	leadingAction := (SlmdActionItem itemName: #modalNav groupTag: #primary iconName: 'list' iconLabel: 'Menu') asDictionary.
 	actionItem := self iconButtonForAction: leadingAction css: nil.
 
 	self removeChildrenAtSlotNamed: 'leadingAction'.

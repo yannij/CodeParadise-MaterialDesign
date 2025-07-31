@@ -70,10 +70,10 @@ MD3ExampleApplication >> load [
 MD3ExampleApplication >> setUpActionItems [
 
 	self actionItems
-		add: (SlmdNavAction id: #circle1 iconName: '1-circle' iconLabel: '1-circle' arg1: '1-circle');
-		add: (SlmdNavAction id: #circle2 iconName: '2-circle' iconLabel: '2-circle' arg1: '2-circle');
-		add: (SlmdNavAction id: #circle3 iconName: '3-circle' iconLabel: '3-circle' arg1: '3-circle');
-		add: (SlmdNavAction id: #circle4 iconName: '4-circle' iconLabel: '4-circle' arg1: '4-circle');
+		add: (self actionItemName: '1-circle' actionGroup: #primary iconName: '1-circle' iconLabel: '1-circle');
+		add: (self actionItemName: '2-circle' actionGroup: #primary  iconName: '2-circle' iconLabel: '2-circle');
+		add: (self actionItemName: '3-circle' actionGroup: #primary  iconName: '3-circle' iconLabel: '3-circle' );
+		add: (self actionItemName: '4-circle' actionGroup: #primary  iconName: '4-circle' iconLabel: '4-circle' );
 		yourself.
 
 ]
@@ -82,14 +82,14 @@ MD3ExampleApplication >> setUpActionItems [
 MD3ExampleApplication >> setUpNavItems [
 
 	self navItems
-		add: (SlmdNavAction id: #settings iconName: 'gear' iconLabel: 'Settings' arg1: 'Settings');
-		add: (SlmdNavAction id: #club iconName: 'suit-club' iconLabel: 'Club' arg1: 'Club Page');
-		add: (SlmdNavAction id: #diamond iconName: 'suit-diamond' iconLabel: 'Diamond' arg1: 'Diamond Page');
-		add: (SlmdNavAction id: #heart iconName: 'suit-heart' iconLabel: 'Heart' arg1: 'Heart Page');
-		add: (SlmdNavAction id: #spade iconName: 'suit-spade' iconLabel: 'Spade' arg1: 'Spade Page');
-		add: (SlmdNavAction id: #square1 iconName: '1-square' iconLabel: 'Square1' arg1: 'Square-1');
-		add: (SlmdNavAction id: #square2 iconName: '2-square' iconLabel: 'Square2' arg1: 'Square-2');
-		add: (SlmdNavAction id: #square3 iconName: '3-square' iconLabel: 'Square3' arg1: 'Square-3');
+		add: (self navItemName: 'Settings' iconName: 'gear' iconLabel: 'Settings');
+		add: (self navItemName: 'Club Page' iconName: 'suit-club' iconLabel: 'Club');
+		add: (self navItemName: 'Diamond Page' iconName: 'suit-diamond' iconLabel: 'Diamond');
+		add: (self navItemName: 'Heart Page' iconName: 'suit-heart' iconLabel: 'Heart');
+		add: (self navItemName: 'Spade Page' iconName: 'suit-spade' iconLabel: 'Spade');
+		add: (self navItemName: 'Square-1' iconName: '1-square' iconLabel: 'Square1');
+		add: (self navItemName: 'Square-2' iconName: '2-square' iconLabel: 'Square2');
+		add: (self navItemName: 'Square-3' iconName: '3-square' iconLabel: 'Square3');
 		yourself.
 
 ]

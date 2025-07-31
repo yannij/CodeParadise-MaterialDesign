@@ -21,7 +21,7 @@ SlmdAppBarPresenter >> actionItemsToUse [
 
 	list := self application actionItems.
 	groupName := self actionGroupToUse.
-	^ list select: [ :each | each actionGroup = groupName ]
+	^ list select: [ :each | each groupTag = groupName ]
 ]
 
 { #category : 'view' }
@@ -30,7 +30,7 @@ SlmdAppBarPresenter >> renderView [
 
 	self model isPrimary
 		ifTrue: [ self view setUpLeadingAction ]
-		ifFalse: [ self view setUpBackAction ].
+		ifFalse: [ self view setUpBackNav ].
 
 	self model isPrimary ifTrue: [
 		self view renderHeadline: self application class appName ].

@@ -114,13 +114,13 @@ SlmdPresenter >> logTrace: aString aspect: aspect level: level [
 { #category : 'events' }
 SlmdPresenter >> subscribeToActionRequest [
 
-	self view when: SlmdNavActionRequest actionRequest send: #handleAction: to: self
+	self view when: SlmdUserEvent actionRequest send: #handleAction: to: self
 ]
 
 { #category : 'events' }
 SlmdPresenter >> subscribeToNavRequest [
 
-	self view when: (SlmdNavActionRequest navParameterKeys: #(#to)) send: #handleNav: to: self
+	self view when: (SlmdUserEvent navParameterKeys: #(#to)) send: #handleNav: to: self
 ]
 
 { #category : 'view' }

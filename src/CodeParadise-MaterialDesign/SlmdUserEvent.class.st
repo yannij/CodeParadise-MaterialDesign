@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdNavActionRequest',
+	#name : 'SlmdUserEvent',
 	#superclass : 'CpActionRequested',
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,25 +7,25 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdNavActionRequest class >> actionParameter: anObject [
+SlmdUserEvent class >> actionParameter: anObject [
 
 	^ self id: #action parameter: anObject
 ]
 
 { #category : 'instance creation' }
-SlmdNavActionRequest class >> actionRequest [
+SlmdUserEvent class >> actionRequest [
 
 	^ self id: #action
 ]
 
 { #category : 'instance creation' }
-SlmdNavActionRequest class >> navParameter: anObject [
+SlmdUserEvent class >> navParameter: anObject [
 
 	^ self id: #navigate parameter: anObject
 ]
 
 { #category : 'instance creation' }
-SlmdNavActionRequest class >> navParameterKeys: anObject [
+SlmdUserEvent class >> navParameterKeys: anObject [
 
 	^ self id: #navigate parameterKeys: anObject
 ]
