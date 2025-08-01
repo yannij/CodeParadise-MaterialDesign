@@ -28,13 +28,3 @@ SlmdToolbarPresenter >> actionItemsToUse [
 	groupName := self actionGroupToUse.
 	^ list select: [ :each | each groupTag = groupName ]
 ]
-
-{ #category : 'view' }
-SlmdToolbarPresenter >> viewCreated [
-
-	super viewCreated.
-
-	self subscribeToActionRequest.
-	self subscribeToNavRequest.
-
-]

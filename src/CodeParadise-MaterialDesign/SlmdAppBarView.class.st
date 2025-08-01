@@ -155,6 +155,17 @@ SlmdAppBarView >> renderHeadline: aString [
 ]
 
 { #category : 'rendering' }
+SlmdAppBarView >> renderLeadingAction: leadingAction [
+	| actionItem |
+
+	actionItem := self iconButtonForAction: leadingAction css: nil.
+
+	self removeChildrenAtSlotNamed: 'leadingAction'.
+	self appendChild: actionItem atSlotNamed: 'leadingAction'.
+
+]
+
+{ #category : 'rendering' }
 SlmdAppBarView >> renderTrailingActions: buttons [
 	| overflowThreshold actionItem actionList overflowList |
 
@@ -174,29 +185,5 @@ SlmdAppBarView >> renderTrailingActions: buttons [
 
 	overflowList := buttons copyFrom: overflowThreshold to: buttons size.
 	self appendChild: (self dropdownMenu: overflowList css: 'smd-toolbar-item') atSlotNamed: 'trailingActions'.
-
-]
-
-{ #category : 'rendering' }
-SlmdAppBarView >> setUpBackNav [
-	| actionItem leadingAction |
-
-	leadingAction := (SlmdNavItem itemName: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back') asDictionary.
-	actionItem := self iconButtonForAction: leadingAction css: nil.
-
-	self removeChildrenAtSlotNamed: 'leadingAction'.
-	self appendChild: actionItem atSlotNamed: 'leadingAction'.
-
-]
-
-{ #category : 'rendering' }
-SlmdAppBarView >> setUpLeadingAction [
-	| actionItem leadingAction |
-
-	leadingAction := (SlmdActionItem itemName: #modalNav groupTag: #primary iconName: 'list' iconLabel: 'Menu') asDictionary.
-	actionItem := self iconButtonForAction: leadingAction css: nil.
-
-	self removeChildrenAtSlotNamed: 'leadingAction'.
-	self appendChild: actionItem atSlotNamed: 'leadingAction'.
 
 ]

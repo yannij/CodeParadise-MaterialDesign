@@ -226,7 +226,7 @@ SlmdNavRailView >> navrailExpandedBuildItem: aNavAction [
 	^ #div asHtmlTag
 		addClass: 'smd-navrailx-item';
 		addClass: 'smd-nav-font';
-		when: CpClickEvent basicPrimary do: [ self executeNavAction: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
 		when: CpClickEvent basicPrimary send: #hide to: drawer;
 		appendChild: ((SlIconButton named: iconName) addClass: 'smd-navrailx-icon'; yourself);
 		appendChild: (#div asHtmlTag
@@ -259,7 +259,7 @@ SlmdNavRailView >> navrailNarrowBuildItem: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'smd-navrail-item';
-		when: CpClickEvent basicPrimary do: [ self executeNavAction: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
 		when: CpClickEvent basicPrimary send: #hide to: drawer;
 		appendChild: (
 			#div asHtmlTag

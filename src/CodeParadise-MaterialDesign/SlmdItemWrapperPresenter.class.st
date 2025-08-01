@@ -15,12 +15,3 @@ SlmdItemWrapperPresenter >> renderView [
 		renderChildViewForModel: self model wrappedModel
 		atSlotNamed: #wrapped
 ]
-
-{ #category : 'view' }
-SlmdItemWrapperPresenter >> viewCreated [
-
-	super viewCreated.
-
-	"self subscribeToActionRequest.
-"
-]

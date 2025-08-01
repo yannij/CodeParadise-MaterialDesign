@@ -378,29 +378,6 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 	debounceTransition startDelayedBy: 100.
 ]
 
-{ #category : 'actions - nav' }
-SlmdResponsiveLayoutView >> doAction: aNavAction [
-	| itemName |
-
-	self logTrace: aNavAction printString aspect: 'doAction:' level: 3.
-
-	itemName := aNavAction at: #itemName.
-
-	itemName = 'refresh' ifTrue: [
-		self announceNavKey: #to value: itemName.
-		^ self ].
-
-	itemName = 'save' ifTrue: [ | changes paneContentView |
-		paneContentView := self pane2View paneContentView.
-		paneContentView ifNil: [ ^ self ].
-		changes := paneContentView wrappedView changeMap.
-		"paneContentView" self announceActionKey: #type value: itemName key2: #changes value2: changes.
-		^ self ].
-
-	self announceActionKey: #type value: itemName.
-
-]
-
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> dockedToolbarOff [
 
@@ -666,6 +643,12 @@ SlmdResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
 ]
 
 { #category : 'accessing' }
+SlmdResponsiveLayoutView >> layoutViewLazy [
+
+	^ self
+]
+
+{ #category : 'accessing' }
 SlmdResponsiveLayoutView >> layoutWidthCached [
 
 	^ layoutWidthCached
@@ -675,6 +658,24 @@ SlmdResponsiveLayoutView >> layoutWidthCached [
 SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
 
 	layoutWidthCached := anObject
+]
+
+{ #category : 'actions - toolbar' }
+SlmdResponsiveLayoutView >> modalNavOpen [
+	| drawer |
+
+	drawer := self modalNavElementOrNil.
+	drawer
+		ifNil: [ self logError: 'modal nav element is nil' ]
+		ifNotNil: [ drawer show ]
+]
+
+{ #category : 'actions - toolbar' }
+SlmdResponsiveLayoutView >> modalSettingsOpen [
+
+	self logTrace: 'modalSettingsOpen'.
+	self modalSettingsElement beOpen
+
 ]
 
 { #category : 'navbar' }
@@ -992,6 +993,39 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 	element ifNil: [ ^ self ].
 	element := element shadowedFirstDescendantMatching: '#container'.
 	self element: element show: aBoolean.
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutView >> triggerUserEvent: aNavAction [
+	| itemName |
+
+	self logTrace: aNavAction printString method: 'triggerUserEvent'.
+
+	itemName := aNavAction at: #itemName.
+
+(aNavAction at: #userActionType) = #action ifTrue: [
+	"itemName = 'refresh' ifTrue: [
+		self announceNavKey: #to value: itemName.
+		^ self ]."
+
+	itemName = #modalNav ifTrue: [
+		^ self modalNavOpen ].
+
+	itemName = 'save' ifTrue: [ | changes paneContentView |
+		paneContentView := self layoutViewLazy pane2View paneContentView.
+		paneContentView ifNil: [ ^ self ].
+		changes := paneContentView wrappedView changeMap.
+		"paneContentView" self announceActionKey: #type value: itemName key2: #changes value2: changes.
+		^ self ].
+
+	self announceActionKey: #type value: itemName.
+	^ self ].
+
+	itemName = 'Settings' ifTrue: [
+		^ self modalSettingsOpen ].
+
+	self announceNavKey: #to value: itemName.
 
 ]
 

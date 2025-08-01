@@ -12,12 +12,3 @@ SlmdNavPresenter >> renderView [
 	self view renderNavContent: (self application navItems collect: [ :each | each asDictionary ]) asArray.
 
 ]
-
-{ #category : 'view' }
-SlmdNavPresenter >> viewCreated [
-
-	super viewCreated.
-
-	self subscribeToNavRequest.
-
-]

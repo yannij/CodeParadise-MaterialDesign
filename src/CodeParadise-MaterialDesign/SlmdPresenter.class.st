@@ -41,21 +41,14 @@ SlmdPresenter >> doRefresh: anObject [
 { #category : 'events' }
 SlmdPresenter >> handleAction: anObject [
 
-	self logTrace5: self printString, '<==', anObject printString method: 'handleAction:'.
+	"self logTrace5: anObject printString method: 'handleAction:'."
 
 ]
 
 { #category : 'events' }
 SlmdPresenter >> handleNav: anObject [
 
-	(anObject parameterAt: #to) = #back ifTrue: [
-		^ self view primaryPaneOnly ].
-
-	(anObject parameterAt: #to) = #refresh ifTrue: [
-		^ self doRefresh: anObject ].
-
-	self layout pane1 handleActionRequest: anObject; valueChanged.
-
+	"self logTrace5: anObject printString method: 'handleNav:'"
 ]
 
 { #category : 'accessing - model' }
@@ -109,6 +102,12 @@ SlmdPresenter >> logTrace: aString aspect: aspect level: level [
 	aspect
 		ifNil: [ self log: aString ]
 		ifNotNil: [ self log: '[', aspect, '] ', aString ]
+]
+
+{ #category : 'logging' }
+SlmdPresenter >> logTrace: aString method: methodName [
+
+	self logTrace: aString aspect: self class name, '>>', methodName
 ]
 
 { #category : 'events' }

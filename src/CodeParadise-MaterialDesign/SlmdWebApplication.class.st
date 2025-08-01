@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'initialization' }
-SlmdWebApplication >> actionItemName: itemName actionGroup: groupTag iconName: iconName iconLabel: itemLabel [
+SlmdWebApplication >> actionItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
 	^ SlmdActionItem itemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
 ]
@@ -61,7 +61,7 @@ SlmdWebApplication >> initialize [
 
 	super initialize.
 
-	self setUpEditItems.
+	self setUpCommonUserActions.
 
 	navItems := OrderedCollection new.
 	actionItems := OrderedCollection new.
@@ -85,15 +85,9 @@ SlmdWebApplication >> layout: anObject [
 ]
 
 { #category : 'initialization' }
-SlmdWebApplication >> navItemName: itemName actionGroup: groupTag iconName: iconName iconLabel: itemLabel [
+SlmdWebApplication >> navItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
 	^ SlmdNavItem itemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
-]
-
-{ #category : 'initialization' }
-SlmdWebApplication >> navItemName: itemName iconName: iconName iconLabel: itemLabel [
-
-	^ SlmdNavItem itemName: itemName groupTag: #primary iconName: iconName iconLabel: itemLabel
 ]
 
 { #category : 'accessing' }
@@ -115,14 +109,16 @@ SlmdWebApplication >> setUpActionItems [
 ]
 
 { #category : 'initialization' }
-SlmdWebApplication >> setUpEditItems [
+SlmdWebApplication >> setUpCommonUserActions [
 
 	editItems := IdentityDictionary new
-		at: #read put: (SlmdActionItem itemName: 'read' groupTag: #toolbar iconName: 'file-ruled' iconLabel: 'View');
-		at: #update put: (SlmdActionItem itemName: 'update' groupTag: #toolbar iconName: 'pencil' iconLabel: 'Edit');
-		at: #delete put: (SlmdActionItem itemName: 'delete' groupTag: #toolbar iconName: 'trash' iconLabel: 'Delete');
-		at: #save put: (SlmdActionItem itemName: 'save' groupTag: #toolbar iconName: 'check' iconLabel: 'Save');
-		at: #cancel put: (SlmdActionItem itemName: 'cancel' groupTag: #toolbar iconName: 'x' iconLabel: 'Cancel');
+		at: #read put: (self actionItemName: 'read' groupTag: #toolbar iconName: 'file-ruled' iconLabel: 'View');
+		at: #update put: (self actionItemName: 'update' groupTag: #toolbar iconName: 'pencil' iconLabel: 'Edit');
+		at: #delete put: (self actionItemName: 'delete' groupTag: #toolbar iconName: 'trash' iconLabel: 'Delete');
+		at: #save put: (self actionItemName: 'save' groupTag: #toolbar iconName: 'check' iconLabel: 'Save');
+		at: #cancel put: (self actionItemName: 'cancel' groupTag: #toolbar iconName: 'x' iconLabel: 'Cancel');
+		at: #modalNav put: (self actionItemName: 'modalNav' groupTag: #primary iconName: 'list' iconLabel: 'Menu');
+		at: #back put: (self navItemName: 'back' groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back');
 		yourself.
 
 ]

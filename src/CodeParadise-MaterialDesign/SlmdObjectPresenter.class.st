@@ -15,12 +15,3 @@ SlmdObjectPresenter >> renderView [
 
 
 ]
-
-{ #category : 'view' }
-SlmdObjectPresenter >> viewCreated [
-
-	super viewCreated.
-
-	self subscribeToActionRequest.
-
-]

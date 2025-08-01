@@ -33,12 +33,26 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 ]
 
 { #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
+
+	self logTrace: anObject printString method: 'doRefresh:'.
+
+	self model pane1 paneContent valueChanged.
+	self model pane1 valueChanged.
+
+]
+
+{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> handleAction: anObject [
 	| type |
 
-	self logTrace5: anObject printString method: 'handleAction:'.
+	self logTrace: anObject printString method: 'handleAction:'.
 
 	type := anObject parameterAt: #type.
+
+	type = 'refresh' ifTrue: [
+		self doRefresh: anObject.
+		^ self ].
 
 	type = 'save' ifTrue: [ | theModel |
 		theModel := self layout pane2 paneContent.
@@ -77,6 +91,18 @@ SlmdResponsiveLayoutPresenter >> handleAction: anObject [
 		^ self ].
 
 	self model pane1 handleActionRequest: anObject; valueChanged.
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> handleNav: anObject [
+
+	self logTrace: anObject printString method: 'handleNav:'.
+
+	(anObject parameterAt: #to) = #back ifTrue: [
+		^ self view primaryPaneOnly ].
+
+	self layout pane1 handleActionRequest: anObject; valueChanged.
 
 ]
 

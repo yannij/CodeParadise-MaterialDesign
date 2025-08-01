@@ -61,11 +61,6 @@ SlmdView >> announceSetting: key value: anObject [
 
 ]
 
-{ #category : 'actions - nav' }
-SlmdView >> doAction: aNavAction [
-	"Subclasses may specialize"
-]
-
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 	| menu trigger dropdown |
@@ -76,7 +71,7 @@ SlmdView >> dropdownMenu: actionList css: cssClass [
 		icon := (SlIcon named: (each at: #iconName)) addClass: 'smd-menu-icon'; yourself.
 		menu appendChild: (SlMenuItem new
 			addClass: 'smd-menu-item';
-			when: CpClickEvent basicPrimary do: [ self executeNavAction: each ] for: self;
+			when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: each ] for: self;
 			prefix: icon;
 			textContent: (each at: #iconLabel);
 			yourself) ].
@@ -113,27 +108,6 @@ SlmdView >> element: element show: aBoolean [
 
 	element ifNotNil: [
 		element classed: #'smd-hidden' if: aBoolean not ]
-]
-
-{ #category : 'actions - nav' }
-SlmdView >> executeNavAction: aNavAction [
-	| itemName |
-
-	self logTrace: aNavAction printString aspect: 'executeNavAction:' level: 3.
-
-	itemName := aNavAction at: #itemName.
-
-	itemName = #modalNav ifTrue: [
-		^ self modalNavOpen ].
-
-	(aNavAction at: #userActionType) = #action ifTrue: [
-		^ self doAction: aNavAction ].
-
-	itemName = 'Settings' ifTrue: [
-		^ self modalSettingsOpen ].
-
-	self announceNavKey: #to value: itemName.
-
 ]
 
 { #category : 'utilities' }
@@ -209,7 +183,7 @@ SlmdView >> iconButtonForAction: aNavAction css: cssClass [
 SlmdView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 
 	^ (SlIconButton named: iconName)
-		when: CpClickEvent primary do: [ :event | self executeNavAction: aNavAction ] for: self;
+		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
 		addClass: cssClass;
 		yourself
 ]
@@ -218,6 +192,12 @@ SlmdView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 SlmdView >> layoutViewFind [
 
 	^ SlmdResponsiveLayoutView first
+]
+
+{ #category : 'accessing' }
+SlmdView >> layoutViewLazy [
+
+	self subclassResponsibility
 ]
 
 { #category : 'logging' }
@@ -274,6 +254,12 @@ SlmdView >> logTrace: aString aspect: aspect level: level [
 ]
 
 { #category : 'logging' }
+SlmdView >> logTrace: aString method: methodName [
+
+	self logTrace: aString aspect: self class name, '>>', methodName
+]
+
+{ #category : 'logging' }
 SlmdView >> logTraceMethod: methodName [
 
 	self logTrace: self class name, '>>', methodName
@@ -295,30 +281,12 @@ SlmdView >> modalNavElementOrNil [
 	^ component ifNil: [ nil ] ifNotNil: [ component drawer ].
 ]
 
-{ #category : 'actions - toolbar' }
-SlmdView >> modalNavOpen [
-	| drawer |
-
-	drawer := self modalNavElementOrNil.
-	drawer
-		ifNil: [ self logError: 'modal nav element is nil' ]
-		ifNotNil: [ drawer show ]
-]
-
 { #category : 'find element' }
 SlmdView >> modalSettingsElement [
 	| component |
 
 	component := SlmdLayoutSettingsView first.
 	^ component ifNil: [ self error: 'Not found: layout settings view' ] ifNotNil: [ component drawer ].
-]
-
-{ #category : 'actions - toolbar' }
-SlmdView >> modalSettingsOpen [
-
-	self logTrace: 'modalSettingsOpen'.
-	self modalSettingsElement beOpen
-
 ]
 
 { #category : 'utilities' }

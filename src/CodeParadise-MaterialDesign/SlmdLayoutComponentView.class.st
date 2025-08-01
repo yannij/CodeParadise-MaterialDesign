@@ -9,12 +9,6 @@ Class {
 	#tag : 'ShoelaceBase'
 }
 
-{ #category : 'actions' }
-SlmdLayoutComponentView >> doAction: aNavAction [
-
-	^ self layoutViewLazy doAction: aNavAction
-]
-
 { #category : 'accessing' }
 SlmdLayoutComponentView >> layoutView [
 
