@@ -7,6 +7,6 @@ Class {
 }
 
 { #category : 'actions' }
-SlmdModel >> handleActionRequest: aBasicEvent [
+SlmdModel >> handleUserEvent: aBasicEvent [
 	"Hook to receive UI events for handling"
 ]

@@ -29,6 +29,18 @@ SlmdPresenter class >> traceLevel: anObject [
 ]
 
 { #category : 'events' }
+SlmdPresenter >> dispatchUserEvent: anObject [
+	| type |
+
+	type := anObject parameterAt: #userActionType.
+	type ifNil: [ ^ self ].
+
+	type = SlmdUserAction userActionTypeNav
+		ifTrue: [ self handleNav: anObject ]
+		ifFalse: [ self handleAction: anObject ]
+]
+
+{ #category : 'events' }
 SlmdPresenter >> doRefresh: anObject [
 
 	self logTrace: self printString, '<==', anObject printString aspect: 'handleRefresh:' level: 3.
@@ -113,13 +125,7 @@ SlmdPresenter >> logTrace: aString method: methodName [
 { #category : 'events' }
 SlmdPresenter >> subscribeToActionRequest [
 
-	self view when: SlmdUserEvent actionRequest send: #handleAction: to: self
-]
-
-{ #category : 'events' }
-SlmdPresenter >> subscribeToNavRequest [
-
-	self view when: (SlmdUserEvent navParameterKeys: #(#to)) send: #handleNav: to: self
+	self view when: SlmdUserEvent actionRequest send: #dispatchUserEvent: to: self
 ]
 
 { #category : 'view' }

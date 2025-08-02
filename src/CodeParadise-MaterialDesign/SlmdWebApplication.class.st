@@ -15,7 +15,7 @@ Class {
 { #category : 'initialization' }
 SlmdWebApplication >> actionItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	^ SlmdActionItem itemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
+	^ SlmdUserAction actionItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
 ]
 
 { #category : 'accessing' }
@@ -87,7 +87,7 @@ SlmdWebApplication >> layout: anObject [
 { #category : 'initialization' }
 SlmdWebApplication >> navItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	^ SlmdNavItem itemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
+	^ SlmdUserAction navItemName: itemName groupTag: groupTag iconName: iconName iconLabel: itemLabel
 ]
 
 { #category : 'accessing' }

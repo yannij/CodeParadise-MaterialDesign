@@ -30,7 +30,7 @@ SlmdPaneContentModel >> content: anObject [
 ]
 
 { #category : 'actions' }
-SlmdPaneContentModel >> handleActionRequest: aBasicEvent [
+SlmdPaneContentModel >> handleUserEvent: aBasicEvent [
 	| newContent |
 
 	newContent := aBasicEvent parameterAt: #to.

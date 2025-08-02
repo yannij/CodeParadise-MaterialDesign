@@ -46,9 +46,9 @@ SlmdPaneModel >> appBarModel: anObject [
 ]
 
 { #category : 'actions' }
-SlmdPaneModel >> handleActionRequest: aBasicEvent [
+SlmdPaneModel >> handleUserEvent: aBasicEvent [
 
-	self paneContent handleActionRequest: aBasicEvent.
+	self paneContent handleUserEvent: aBasicEvent.
 
 ]
 

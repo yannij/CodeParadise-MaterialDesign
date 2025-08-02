@@ -17,15 +17,3 @@ SlmdUserEvent class >> actionRequest [
 
 	^ self id: #action
 ]
-
-{ #category : 'instance creation' }
-SlmdUserEvent class >> navParameter: anObject [
-
-	^ self id: #navigate parameter: anObject
-]
-
-{ #category : 'instance creation' }
-SlmdUserEvent class >> navParameterKeys: anObject [
-
-	^ self id: #navigate parameterKeys: anObject
-]

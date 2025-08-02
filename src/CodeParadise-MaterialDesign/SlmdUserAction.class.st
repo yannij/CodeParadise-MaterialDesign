@@ -3,6 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'itemName',
+		'userActionType',
 		'iconName',
 		'iconLabel',
 		'groupTag'
@@ -13,20 +14,51 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdUserAction class >> itemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
+SlmdUserAction class >> actionItemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
 
 	^ self new
 		itemName: itemName;
+		userActionType: self userActionTypeAction;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
 		yourself
 ]
 
+{ #category : 'instance creation' }
+SlmdUserAction class >> navItemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
+
+	^ self new
+		itemName: itemName;
+		userActionType: self userActionTypeNav;
+		groupTag: groupTag;
+		iconName: iconName;
+		iconLabel: iconLabel;
+		yourself
+]
+
+{ #category : 'accessing' }
+SlmdUserAction class >> userActionTypeAction [
+
+	^ #action
+]
+
+{ #category : 'accessing' }
+SlmdUserAction class >> userActionTypeNav [
+
+	^ #nav
+]
+
 { #category : 'converting' }
 SlmdUserAction >> asDictionary [
 
-	self subclassResponsibility
+	^ Dictionary new
+		at: #itemName put: itemName;
+		at: #userActionType put: self userActionType;
+		at: #groupTag put: groupTag;
+		at: #iconName put: iconName;
+		at: #iconLabel put: iconLabel;
+		yourself
 ]
 
 { #category : 'accessing' }
@@ -75,4 +107,16 @@ SlmdUserAction >> itemName [
 SlmdUserAction >> itemName: anObject [
 
 	itemName := anObject
+]
+
+{ #category : 'accessing' }
+SlmdUserAction >> userActionType [
+
+	^ userActionType
+]
+
+{ #category : 'accessing' }
+SlmdUserAction >> userActionType: anObject [
+
+	userActionType := anObject
 ]

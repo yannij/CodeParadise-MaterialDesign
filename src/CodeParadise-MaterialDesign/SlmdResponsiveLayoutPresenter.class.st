@@ -90,7 +90,7 @@ SlmdResponsiveLayoutPresenter >> handleAction: anObject [
 		self appBar2ButtonsSetSaveCancel.
 		^ self ].
 
-	self model pane1 handleActionRequest: anObject; valueChanged.
+	self model pane1 handleUserEvent: anObject; valueChanged.
 
 ]
 
@@ -102,7 +102,7 @@ SlmdResponsiveLayoutPresenter >> handleNav: anObject [
 	(anObject parameterAt: #to) = #back ifTrue: [
 		^ self view primaryPaneOnly ].
 
-	self layout pane1 handleActionRequest: anObject; valueChanged.
+	self layout pane1 handleUserEvent: anObject; valueChanged.
 
 ]
 
@@ -143,6 +143,5 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 	super viewCreated.
 
 	self subscribeToActionRequest.
-	self subscribeToNavRequest.
 
 ]
