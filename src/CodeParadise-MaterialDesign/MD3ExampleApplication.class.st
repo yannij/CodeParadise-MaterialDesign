@@ -70,10 +70,10 @@ MD3ExampleApplication >> load [
 MD3ExampleApplication >> setUpActionItems [
 
 	self actionItems
-		add: (self actionItemName: '1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle');
-		add: (self actionItemName: '2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle');
-		add: (self actionItemName: '3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' );
-		add: (self actionItemName: '4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' );
+		add: (self itemName: '1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle');
+		add: (self itemName: '2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle');
+		add: (self itemName: '3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' );
+		add: (self itemName: '4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' );
 		yourself.
 
 ]
@@ -82,14 +82,14 @@ MD3ExampleApplication >> setUpActionItems [
 MD3ExampleApplication >> setUpNavItems [
 
 	self navItems
-		add: (self navItemName: 'Settings' groupTag: #primary iconName: 'gear' iconLabel: 'Settings');
-		add: (self navItemName: 'Club Page' groupTag: #primary iconName: 'suit-club' iconLabel: 'Club');
-		add: (self navItemName: 'Diamond Page' groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond');
-		add: (self navItemName: 'Heart Page' groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart');
-		add: (self navItemName: 'Spade Page' groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade');
-		add: (self navItemName: 'Square-1' groupTag: #primary iconName: '1-square' iconLabel: 'Square1');
-		add: (self navItemName: 'Square-2' groupTag: #primary iconName: '2-square' iconLabel: 'Square2');
-		add: (self navItemName: 'Square-3' groupTag: #primary iconName: '3-square' iconLabel: 'Square3');
+		add: (self itemName: #nav groupTag: #primary iconName: 'gear' iconLabel: 'Settings' navTo: 'Settings');
+		add: (self itemName: #nav groupTag: #primary iconName: 'suit-club' iconLabel: 'Club' navTo: 'Club Page');
+		add: (self itemName: #nav groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond' navTo: 'Diamond Page');
+		add: (self itemName: #nav groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart' navTo: 'Heart Page');
+		add: (self itemName: #nav groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade' navTo: 'Spade Page');
+		add: (self itemName: #nav groupTag: #primary iconName: '1-square' iconLabel: 'Square1' navTo: 'Square-1');
+		add: (self itemName: #nav groupTag: #primary iconName: '2-square' iconLabel: 'Square2' navTo: 'Square-2');
+		add: (self itemName: #nav groupTag: #primary iconName: '3-square' iconLabel: 'Square3' navTo: 'Square-3');
 		yourself.
 
 ]

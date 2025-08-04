@@ -232,7 +232,7 @@ SlmdLayoutSettingsView >> layoutUpdate [
 		#useModalNav -> self useModalNav.
 	} asDictionary.
 
-	self announceSetting: #layoutUpdate value: props
+	self layoutViewLazy announceSetting: #layoutUpdate value: props
 ]
 
 { #category : 'initalize' }

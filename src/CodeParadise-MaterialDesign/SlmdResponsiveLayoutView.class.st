@@ -1004,10 +1004,11 @@ SlmdResponsiveLayoutView >> triggerUserEvent: aNavAction [
 
 	itemName := aNavAction at: #itemName.
 
-(aNavAction at: #userActionType) = #action ifTrue: [
-	"itemName = 'refresh' ifTrue: [
-		self announceNavKey: #to value: itemName.
-		^ self ]."
+	itemName = #nav ifTrue: [ | navTo |
+		navTo := aNavAction at: #navTo ifAbsent: [].
+		navTo = 'Settings' ifTrue: [
+			^ self modalSettingsOpen ].
+		^ self announceNavKey: #to value: navTo ].
 
 	itemName = #modalNav ifTrue: [
 		^ self modalNavOpen ].
@@ -1020,12 +1021,6 @@ SlmdResponsiveLayoutView >> triggerUserEvent: aNavAction [
 		^ self ].
 
 	self announceActionKey: #type value: itemName.
-	^ self ].
-
-	itemName = 'Settings' ifTrue: [
-		^ self modalSettingsOpen ].
-
-	self announceNavKey: #to value: itemName.
 
 ]
 

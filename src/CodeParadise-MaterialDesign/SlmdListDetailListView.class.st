@@ -67,19 +67,10 @@ SlmdListDetailListView >> renderTextSlot: slotName value: aString index: index [
 ]
 
 { #category : 'rendering' }
-SlmdListDetailListView >> secondaryPaneOnly [
-
-	self logTrace5Method: 'secondaryPaneOnly'.
-
-	self layoutViewFind secondaryPaneOnly.
-
-]
-
-{ #category : 'rendering' }
 SlmdListDetailListView >> setDetail: index [
 
 	self logTrace5: index printString method: 'setDetail:'.
 
-	self announceActionKey: #index value: index.
+	self layoutViewFind announceActionKey: #type value: 'setDetail' key2: #index value2: index.
 
 ]

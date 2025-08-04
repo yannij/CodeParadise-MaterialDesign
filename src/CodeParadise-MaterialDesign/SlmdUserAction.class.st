@@ -3,10 +3,10 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'itemName',
-		'userActionType',
 		'iconName',
 		'iconLabel',
-		'groupTag'
+		'groupTag',
+		'navTo'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
@@ -14,11 +14,10 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdUserAction class >> actionItemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
+SlmdUserAction class >> itemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
 
 	^ self new
 		itemName: itemName;
-		userActionType: self userActionTypeAction;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
@@ -26,27 +25,15 @@ SlmdUserAction class >> actionItemName: itemName groupTag: groupTag iconName: ic
 ]
 
 { #category : 'instance creation' }
-SlmdUserAction class >> navItemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel [
+SlmdUserAction class >> itemName: itemName groupTag: groupTag iconName: iconName iconLabel: iconLabel navTo: navTo [
 
 	^ self new
 		itemName: itemName;
-		userActionType: self userActionTypeNav;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
+		navTo: navTo;
 		yourself
-]
-
-{ #category : 'accessing' }
-SlmdUserAction class >> userActionTypeAction [
-
-	^ #action
-]
-
-{ #category : 'accessing' }
-SlmdUserAction class >> userActionTypeNav [
-
-	^ #nav
 ]
 
 { #category : 'converting' }
@@ -54,7 +41,7 @@ SlmdUserAction >> asDictionary [
 
 	^ Dictionary new
 		at: #itemName put: itemName;
-		at: #userActionType put: self userActionType;
+		at: #navTo put: navTo;
 		at: #groupTag put: groupTag;
 		at: #iconName put: iconName;
 		at: #iconLabel put: iconLabel;
@@ -110,13 +97,13 @@ SlmdUserAction >> itemName: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdUserAction >> userActionType [
+SlmdUserAction >> navTo [
 
-	^ userActionType
+	^ navTo
 ]
 
 { #category : 'accessing' }
-SlmdUserAction >> userActionType: anObject [
+SlmdUserAction >> navTo: anObject [
 
-	userActionType := anObject
+	navTo := anObject
 ]

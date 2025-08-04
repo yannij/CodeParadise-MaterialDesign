@@ -30,10 +30,7 @@ SlmdView class >> traceLevel: anObject [
 { #category : 'events' }
 SlmdView >> announceActionKey: key value: value [
 
-	self serverAnnounce: (SlmdUserEvent actionParameter: {
-		#userActionType -> #action.
-		key -> value
-	} asDictionary).
+	self serverAnnounce: (SlmdUserEvent actionParameter: { key -> value } asDictionary).
 
 ]
 
@@ -41,7 +38,6 @@ SlmdView >> announceActionKey: key value: value [
 SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
 
 	self serverAnnounce: (SlmdUserEvent actionParameter: {
-		#userActionType -> #action.
 		key -> value.
 		key2 -> value2
 	} asDictionary).
@@ -52,7 +48,7 @@ SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
 SlmdView >> announceNavKey: key value: value [
 
 	self serverAnnounce: (SlmdUserEvent actionParameter: {
-		#userActionType -> #nav.
+		#type -> #nav.
 		key -> value
 	} asDictionary).
 
@@ -62,7 +58,7 @@ SlmdView >> announceNavKey: key value: value [
 SlmdView >> announceSetting: key value: anObject [
 
 	self serverAnnounce: (SlmdUserEvent actionParameter: {
-		#userActionType -> #action.
+		#type -> #settings.
 		#aspect -> key.
 		#value -> anObject
 	} asDictionary).

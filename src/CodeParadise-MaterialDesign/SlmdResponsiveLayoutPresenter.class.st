@@ -33,6 +33,54 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 ]
 
 { #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doCancel: anObject [
+
+	self appBar2ButtonsSetEditDelete
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doCreate: anObject [
+
+	self application setDetailAddNew.
+	self layout pane2 valueChanged.
+	self view beEditablePane2.
+	self view secondaryPaneOnly.
+	self appBar2ButtonsSetSaveCancel.
+
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doDelete: anObject [
+	| listDetail |
+
+	self view primaryPaneOnly.
+	listDetail := self layout pane1 paneContent.
+	listDetail removeDetail.
+	self application setDetailWithIndex: 1.
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doLayoutSettings: anObject [
+	| aspect aspectValue |
+
+	self logTrace5: anObject printString method: 'handleViewAction:'.
+	aspect := anObject parameterAt: #aspect.
+	aspectValue := anObject parameterAt: #value.
+
+	aspect = #layoutUpdate ifTrue: [
+		self layoutUpdate: aspectValue.
+		^ self ].
+
+	self logTrace5: aspect asString, ' BEFORE: ', (self model layoutSettings perform: aspect) printString.
+	self model layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
+	self logTrace5: aspect asString, '  AFTER: ', (self model layoutSettings perform: aspect) printString.
+
+]
+
+{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
 
 	self logTrace: anObject printString method: 'doRefresh:'.
@@ -43,66 +91,91 @@ SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> handleAction: anObject [
+SlmdResponsiveLayoutPresenter >> doSave: anObject [
+	| theModel |
+
+	theModel := self layout pane2 paneContent.
+	theModel wrappedModel handleSave: anObject.
+	theModel valueChanged.
+	self layout pane2 valueChanged.
+	self appBar2ButtonsSetEditDelete.
+	theModel isNew ifTrue: [
+		self layout pane1 paneContent listAdd: theModel.
+		self application setDetailWithIndex: 1 ].
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
+
+	self logTrace: anObject printString method: 'doSetDetail:'.
+
+	self view secondaryPaneOnly.
+	self application setDetailWithIndex: (anObject parameterAt: #index).
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
+
+	self layout pane2 valueChanged.
+	self appBar2ButtonsSetSaveCancel.
+	self view beEditablePane2.
+
+]
+
+{ #category : 'events' }
+SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	| type |
 
 	self logTrace: anObject printString method: 'handleAction:'.
 
+	(anObject parameterAt: #to) = #back ifTrue: [
+		^ self view primaryPaneOnly ].
+
 	type := anObject parameterAt: #type.
 
-	type = 'refresh' ifTrue: [
-		self doRefresh: anObject.
-		^ self ].
+	type = 'setDetail' ifTrue: [
+		^ self doSetDetail: anObject ].
 
-	type = 'save' ifTrue: [ | theModel |
-		theModel := self layout pane2 paneContent.
-		theModel wrappedModel handleSave: anObject.
-		theModel valueChanged.
-		self layout pane2 valueChanged.
-		self appBar2ButtonsSetEditDelete.
-		theModel isNew ifTrue: [
-			self layout pane1 paneContent listAdd: theModel.
-			self application setDetailWithIndex: 1 ].
-		^ self ].
+	type = 'settings' ifTrue: [
+		^ self doLayoutSettings: anObject ].
+
+	type = 'refresh' ifTrue: [
+		^ self doRefresh: anObject ].
+
+	type = 'save' ifTrue: [
+		^ self doSave: anObject].
 
 	type = 'cancel' ifTrue: [
-		self appBar2ButtonsSetEditDelete.
-		^ self ].
+		^ self doCancel: anObject ].
 
 	type = 'update' ifTrue: [
-		self layout pane2 valueChanged.
-		self appBar2ButtonsSetSaveCancel.
-		self view beEditablePane2.
-		^ self ].
+		^ self doUpdate: anObject ].
 
-	type = 'delete' ifTrue: [ | listDetail |
-		self view primaryPaneOnly.
-		listDetail := self layout pane1 paneContent.
-		listDetail removeDetail.
-		self application setDetailWithIndex: 1.
-		^ self ].
+	type = 'delete' ifTrue: [
+		^ self doDelete: anObject ].
 
 	type = 'create' ifTrue: [
-		self application setDetailAddNew.
-		self layout pane2 valueChanged.
-		self view beEditablePane2.
-		self view secondaryPaneOnly.
-		self appBar2ButtonsSetSaveCancel.
-		^ self ].
+		^ self doCreate: anObject ].
 
 	self model pane1 handleUserEvent: anObject; valueChanged.
 
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> handleNav: anObject [
+SlmdResponsiveLayoutPresenter >> layoutUpdate: props [
+	| m |
 
-	self logTrace: anObject printString method: 'handleNav:'.
+	self logTrace5: props printString method: 'layoutUpdate:'.
 
-	(anObject parameterAt: #to) = #back ifTrue: [
-		^ self view primaryPaneOnly ].
-
-	self layout pane1 handleUserEvent: anObject; valueChanged.
+	m := self model layoutSettings.
+	props keysAndValuesDo: [ :k :v | | setAccessor |
+		setAccessor := (k, ':') asSymbol.
+		self logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
+		m perform: setAccessor with: v.
+		self logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
+		].
 
 ]
 
@@ -142,6 +215,6 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 
 	super viewCreated.
 
-	self subscribeToActionRequest.
+	self subscribeToUserEvent.
 
 ]
