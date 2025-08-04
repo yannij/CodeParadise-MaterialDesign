@@ -71,6 +71,6 @@ SlmdListDetailListView >> setDetail: index [
 
 	self logTrace5: index printString method: 'setDetail:'.
 
-	self layoutViewFind announceActionKey: #type value: 'setDetail' key2: #index value2: index.
+	self layoutViewFind announceActionSubtype: #setDetail key: #index value: index.
 
 ]

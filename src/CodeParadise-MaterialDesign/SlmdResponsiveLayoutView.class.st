@@ -375,7 +375,7 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 				duration: 0 "Execute once" ].
 
 	"Set timeout for the debounce"
-	debounceTransition startDelayedBy: 100.
+	debounceTransition startDelayedBy: 50.
 ]
 
 { #category : 'toolbar' }
@@ -997,30 +997,29 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutView >> triggerUserEvent: aNavAction [
-	| itemName |
+SlmdResponsiveLayoutView >> triggerUserEvent: aUserEventSpec [
+	| type subtype |
 
-	self logTrace: aNavAction printString method: 'triggerUserEvent'.
+	self logTrace: aUserEventSpec printString method: 'triggerUserEvent:'.
 
-	itemName := aNavAction at: #itemName.
+	type := aUserEventSpec at: #type.
+	subtype := aUserEventSpec at: #subtype.
 
-	itemName = #nav ifTrue: [ | navTo |
-		navTo := aNavAction at: #navTo ifAbsent: [].
-		navTo = 'Settings' ifTrue: [
+	type = #nav ifTrue: [
+		subtype = #modalNav ifTrue: [
+			^ self modalNavOpen ].
+		subtype = #settingsOpen ifTrue: [
 			^ self modalSettingsOpen ].
-		^ self announceNavKey: #to value: navTo ].
+		^ self announceNavSubtype: subtype navTo: (aUserEventSpec at: #data ifAbsent: []) ].
 
-	itemName = #modalNav ifTrue: [
-		^ self modalNavOpen ].
-
-	itemName = 'save' ifTrue: [ | changes paneContentView |
+	subtype = 'save' ifTrue: [ | changes paneContentView |
 		paneContentView := self layoutViewLazy pane2View paneContentView.
 		paneContentView ifNil: [ ^ self ].
 		changes := paneContentView wrappedView changeMap.
-		"paneContentView" self announceActionKey: #type value: itemName key2: #changes value2: changes.
+		self announceActionSubtype: subtype key: #changes value: changes.
 		^ self ].
 
-	self announceActionKey: #type value: itemName.
+	self announceActionSubtype: subtype.
 
 ]
 

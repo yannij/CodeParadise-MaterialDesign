@@ -84,9 +84,9 @@ TBRootApplication >> setDetailWithIndex: index [
 { #category : 'initialization' }
 TBRootApplication >> setUpActionItems [
 
-	self actionItems
-		add: (self itemName: 'refresh' groupTag: #primary iconName: 'arrow-clockwise' iconLabel: 'Refresh');
-		add: (self itemName: 'create' groupTag: #fab iconName: 'plus' iconLabel: 'Add').
+	self
+		addActionSubtype: 'refresh' groupTag: #primary iconName: 'arrow-clockwise' iconLabel: 'Refresh';
+		addActionSubtype: 'create' groupTag: #fab iconName: 'plus' iconLabel: 'Add'.
 
 ]
 
@@ -103,9 +103,9 @@ TBRootApplication >> setUpAppBar2 [
 { #category : 'initialization' }
 TBRootApplication >> setUpNavItems [
 
-	self navItems
-		add: (self itemName: #nav groupTag: #primary iconName: 'gear' iconLabel: 'Settings' navTo: 'Settings');
-		add: (self itemName: #nav groupTag: #primary iconName: 'house' iconLabel: 'Home' navTo: 'Home Page').
+	self
+		addNavSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings' navTo: 'Settings';
+		addNavSubtype: #home groupTag: #primary iconName: 'house' iconLabel: 'Home' navTo: 'Home Page'.
 
 
 ]

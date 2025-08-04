@@ -7,13 +7,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdUserEvent class >> actionParameter: anObject [
+SlmdUserEvent class >> eventParameter: anObject [
 
-	^ self id: #action parameter: anObject
-]
-
-{ #category : 'instance creation' }
-SlmdUserEvent class >> actionRequest [
-
-	^ self id: #action
+	^ self id: #event parameter: anObject
 ]

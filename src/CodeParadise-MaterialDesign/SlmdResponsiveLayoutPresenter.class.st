@@ -126,37 +126,37 @@ SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
-	| type |
+	| subtype |
 
 	self logTrace: anObject printString method: 'handleAction:'.
 
-	(anObject parameterAt: #to) = #back ifTrue: [
+	subtype := anObject parameterAt: #subtype.
+
+	subtype = #back ifTrue: [
 		^ self view primaryPaneOnly ].
 
-	type := anObject parameterAt: #type.
-
-	type = 'setDetail' ifTrue: [
+	subtype = #setDetail ifTrue: [
 		^ self doSetDetail: anObject ].
 
-	type = 'settings' ifTrue: [
+	subtype = #layoutSettingChange ifTrue: [
 		^ self doLayoutSettings: anObject ].
 
-	type = 'refresh' ifTrue: [
+	subtype = 'refresh' ifTrue: [
 		^ self doRefresh: anObject ].
 
-	type = 'save' ifTrue: [
+	subtype = 'save' ifTrue: [
 		^ self doSave: anObject].
 
-	type = 'cancel' ifTrue: [
+	subtype = 'cancel' ifTrue: [
 		^ self doCancel: anObject ].
 
-	type = 'update' ifTrue: [
+	subtype = 'update' ifTrue: [
 		^ self doUpdate: anObject ].
 
-	type = 'delete' ifTrue: [
+	subtype = 'delete' ifTrue: [
 		^ self doDelete: anObject ].
 
-	type = 'create' ifTrue: [
+	subtype = 'create' ifTrue: [
 		^ self doCreate: anObject ].
 
 	self model pane1 handleUserEvent: anObject; valueChanged.

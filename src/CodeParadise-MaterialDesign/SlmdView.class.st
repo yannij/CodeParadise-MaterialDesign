@@ -28,18 +28,22 @@ SlmdView class >> traceLevel: anObject [
 ]
 
 { #category : 'events' }
-SlmdView >> announceActionKey: key value: value [
+SlmdView >> announceActionSubtype: subtype [
 
-	self serverAnnounce: (SlmdUserEvent actionParameter: { key -> value } asDictionary).
+	self serverAnnounce: (SlmdUserEvent eventParameter: {
+		#type -> #action.
+		#subtype -> subtype
+	} asDictionary).
 
 ]
 
 { #category : 'events' }
-SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
+SlmdView >> announceActionSubtype: subtype key: key value: value [
 
-	self serverAnnounce: (SlmdUserEvent actionParameter: {
+	self serverAnnounce: (SlmdUserEvent eventParameter: {
+		#type -> #action.
+		#subtype -> subtype.
 		key -> value.
-		key2 -> value2
 	} asDictionary).
 
 ]
@@ -47,19 +51,32 @@ SlmdView >> announceActionKey: key value: value key2: key2 value2: value2 [
 { #category : 'events' }
 SlmdView >> announceNavKey: key value: value [
 
-	self serverAnnounce: (SlmdUserEvent actionParameter: {
+	self serverAnnounce: (SlmdUserEvent eventParameter: {
 		#type -> #nav.
+		#subtype -> #nav.
 		key -> value
 	} asDictionary).
 
 ]
 
 { #category : 'events' }
-SlmdView >> announceSetting: key value: anObject [
+SlmdView >> announceNavSubtype: subtype navTo: value [
 
-	self serverAnnounce: (SlmdUserEvent actionParameter: {
-		#type -> #settings.
-		#aspect -> key.
+	self serverAnnounce: (SlmdUserEvent eventParameter: {
+		#type -> #nav.
+		#subtype -> subtype.
+		#data -> value
+	} asDictionary).
+
+]
+
+{ #category : 'events' }
+SlmdView >> announceSetting: aspect value: anObject [
+
+	self serverAnnounce: (SlmdUserEvent eventParameter: {
+		#type -> #action.
+		#subtype -> #layoutSettingChange.
+		#aspect -> aspect.
 		#value -> anObject
 	} asDictionary).
 

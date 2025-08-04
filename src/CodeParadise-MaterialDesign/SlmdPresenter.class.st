@@ -103,7 +103,7 @@ SlmdPresenter >> logTrace: aString method: methodName [
 { #category : 'events' }
 SlmdPresenter >> subscribeToUserEvent [
 
-	self view when: SlmdUserEvent actionRequest send: #dispatchUserEvent: to: self
+	self view when: SlmdUserEvent send: #dispatchUserEvent: to: self
 ]
 
 { #category : 'view' }
