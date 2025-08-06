@@ -14,10 +14,8 @@ SlmdToolbarPresenter >> actionGroupToUse [
 
 { #category : 'view' }
 SlmdToolbarPresenter >> actionItemFabOrNil [
-	| list |
 
-	list := self application actionItems.
-	^ list detect: [ :each | each groupTag = #fab ] ifNone: []
+	^ self application userEventSpecFAB
 ]
 
 { #category : 'view' }

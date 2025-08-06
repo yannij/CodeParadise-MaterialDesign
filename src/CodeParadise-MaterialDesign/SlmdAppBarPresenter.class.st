@@ -29,7 +29,7 @@ SlmdAppBarPresenter >> renderView [
 	| list leadingActionName leadingAction |
 
 	leadingActionName := self model isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ].
-	leadingAction := self application editItemNamed: leadingActionName.
+	leadingAction := self application userEventSpecAt: leadingActionName.
 	self view renderLeadingAction: leadingAction asDictionary.
 
 	self model isPrimary ifTrue: [

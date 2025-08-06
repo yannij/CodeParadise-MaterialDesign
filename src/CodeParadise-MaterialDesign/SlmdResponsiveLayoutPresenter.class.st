@@ -13,8 +13,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetEditDelete [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app editItemNamed: #delete);
-		actionItemsAdd: (app editItemNamed: #update);
+		actionItemsAdd: (app userEventSpecAt: #delete);
+		actionItemsAdd: (app userEventSpecAt: #update);
 		valueChanged;
 		yourself
 ]
@@ -26,8 +26,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app editItemNamed: #save);
-		actionItemsAdd: (app editItemNamed: #cancel);
+		actionItemsAdd: (app userEventSpecAt: #save);
+		actionItemsAdd: (app userEventSpecAt: #cancel);
 		valueChanged;
 		yourself
 ]
@@ -141,22 +141,22 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	subtype = #layoutSettingChange ifTrue: [
 		^ self doLayoutSettings: anObject ].
 
-	subtype = 'refresh' ifTrue: [
+	subtype = #'refresh' ifTrue: [
 		^ self doRefresh: anObject ].
 
-	subtype = 'save' ifTrue: [
+	subtype = #'save' ifTrue: [
 		^ self doSave: anObject].
 
-	subtype = 'cancel' ifTrue: [
+	subtype = #'cancel' ifTrue: [
 		^ self doCancel: anObject ].
 
-	subtype = 'update' ifTrue: [
+	subtype = #'update' ifTrue: [
 		^ self doUpdate: anObject ].
 
-	subtype = 'delete' ifTrue: [
+	subtype = #'delete' ifTrue: [
 		^ self doDelete: anObject ].
 
-	subtype = 'create' ifTrue: [
+	subtype = #'create' ifTrue: [
 		^ self doCreate: anObject ].
 
 	self model pane1 handleUserEvent: anObject; valueChanged.

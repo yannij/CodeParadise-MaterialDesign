@@ -3,9 +3,7 @@ Class {
 	#superclass : 'CpMvpWebApplication',
 	#instVars : [
 		'layout',
-		'navItems',
-		'actionItems',
-		'editItems'
+		'userEventSpecs'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
@@ -15,25 +13,27 @@ Class {
 { #category : 'accessing' }
 SlmdWebApplication >> actionItems [
 
-	^ actionItems
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> actionItems: anObject [
-
-	actionItems := anObject
+	^ self userEventSpecs select: [ :each | each isActionType ]
 ]
 
 { #category : 'initialization' }
 SlmdWebApplication >> addActionSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self actionItems add: (SlmdUserEventSpec type: #action subtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel)
+	self userEventSpecs at: subtype put: (SlmdUserEventSpec type: #action subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel).
+
 ]
 
 { #category : 'initialization' }
-SlmdWebApplication >> addNavSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel navTo: navTo [
+SlmdWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self navItems add: (SlmdUserEventSpec type: #nav subtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: navTo)
+	self userEventSpecs at: subtype put: (SlmdUserEventSpec type: #native subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel).
+
+]
+
+{ #category : 'initialization' }
+SlmdWebApplication >> addNavSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data [
+
+	self userEventSpecs at: subtype put: (SlmdUserEventSpec type: #nav subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
 ]
 
 { #category : 'accessing' }
@@ -44,35 +44,14 @@ SlmdWebApplication >> applicationModel [
 	^ self
 ]
 
-{ #category : 'accessing' }
-SlmdWebApplication >> editItemNamed: aKey [
-
-	^ self editItems at: aKey
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> editItems [
-
-	^ editItems
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> editItems: anObject [
-
-	editItems := anObject
-]
-
 { #category : 'initialization' }
 SlmdWebApplication >> initialize [
 
 	super initialize.
 
-	self setUpCommonUserActions.
-
-	navItems := OrderedCollection new.
-	actionItems := OrderedCollection new.
-	self setUpNavItems.
-	self setUpActionItems.
+	userEventSpecs := OrderedIdentityDictionary new.
+	self setUpNativeEvents.
+	self setUpCustomEvents.
 
 	layout := SlmdResponsiveLayoutModel new.
 
@@ -93,38 +72,66 @@ SlmdWebApplication >> layout: anObject [
 { #category : 'accessing' }
 SlmdWebApplication >> navItems [
 
-	^ navItems
+	^ OrderedCollection new
 ]
 
 { #category : 'accessing' }
-SlmdWebApplication >> navItems: anObject [
+SlmdWebApplication >> navItemsSpecs [
 
-	navItems := anObject
+	^ self userEventSpecs select: [ :each | each isNavType ]
 ]
 
 { #category : 'initialization' }
-SlmdWebApplication >> setUpActionItems [
+SlmdWebApplication >> setUpCustomEvents [
 	"Subclasses may enhance"
 
 ]
 
 { #category : 'initialization' }
-SlmdWebApplication >> setUpCommonUserActions [
+SlmdWebApplication >> setUpNativeEvents [
 
-	editItems := IdentityDictionary new
-		at: #read put: (SlmdUserEventSpec type: #action subtype: 'read' groupTag: #toolbar iconName: 'file-ruled' iconLabel: 'View');
-		at: #update put: (SlmdUserEventSpec type: #action subtype: 'update' groupTag: #toolbar iconName: 'pencil' iconLabel: 'Edit');
-		at: #delete put: (SlmdUserEventSpec type: #action subtype: 'delete' groupTag: #toolbar iconName: 'trash' iconLabel: 'Delete');
-		at: #save put: (SlmdUserEventSpec type: #action subtype: 'save' groupTag: #toolbar iconName: 'check' iconLabel: 'Save');
-		at: #cancel put: (SlmdUserEventSpec type: #action subtype: 'cancel' groupTag: #toolbar iconName: 'x' iconLabel: 'Cancel');
-		at: #modalNav put: (SlmdUserEventSpec type: #action subtype: 'modalNav' groupTag: #primary iconName: 'list' iconLabel: 'Menu');
-		at: #back put: (SlmdUserEventSpec type: #nav subtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back' data: 'back');
+	self
+		addNativeSubtype: #create groupTag: #fab iconName: 'plus' iconLabel: 'Add';
+		addNativeSubtype: #read groupTag: #toolbar iconName: 'file-ruled' iconLabel: 'View';
+		addNativeSubtype: #update groupTag: #toolbar iconName: 'pencil' iconLabel: 'Edit';
+		addNativeSubtype: #delete groupTag: #toolbar iconName: 'trash' iconLabel: 'Delete';
+		addNativeSubtype: #save groupTag: #toolbar iconName: 'check' iconLabel: 'Save';
+		addNativeSubtype: #cancel groupTag: #toolbar iconName: 'x' iconLabel: 'Cancel';
+		addNativeSubtype: #refresh groupTag: #primary iconName: 'arrow-clockwise' iconLabel: 'Refresh';
+		addNativeSubtype: #modalNav groupTag: #primary iconName: 'list' iconLabel: 'Menu';
+		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings';
+		addNativeSubtype: #home groupTag: #primary iconName: 'house' iconLabel: 'Home';
+		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
 		yourself.
 
 ]
 
-{ #category : 'initialization' }
-SlmdWebApplication >> setUpNavItems [
-	"Subclasses may enhance"
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecAt: aKey [
 
+	^ self userEventSpecs at: aKey ifAbsent: []
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecFAB [
+
+	^ self userEventSpecsNative detect: [ :each | each groupTag = #fab ] ifNone: []
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecs [
+
+	^ userEventSpecs
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecs: anObject [
+
+	userEventSpecs := anObject
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecsNative [
+
+	^ self userEventSpecs select: [ :each | each isNativeType ]
 ]

@@ -59,6 +59,15 @@ TBRootApplication >> initialize [
 ]
 
 { #category : 'accessing' }
+TBRootApplication >> navItems [
+
+	^ OrderedCollection new
+		add: (self userEventSpecAt: #home);
+		add: (self userEventSpecAt: #settingsOpen);
+		yourself.
+]
+
+{ #category : 'accessing' }
 TBRootApplication >> setDetailAddNew [
 	| detail |
 
@@ -82,30 +91,11 @@ TBRootApplication >> setDetailWithIndex: index [
 ]
 
 { #category : 'initialization' }
-TBRootApplication >> setUpActionItems [
-
-	self
-		addActionSubtype: 'refresh' groupTag: #primary iconName: 'arrow-clockwise' iconLabel: 'Refresh';
-		addActionSubtype: 'create' groupTag: #fab iconName: 'plus' iconLabel: 'Add'.
-
-]
-
-{ #category : 'initialization' }
 TBRootApplication >> setUpAppBar2 [
 
 	self layout pane2 appBarModel
-		actionItemsAdd: (self editItemNamed: #delete);
-		actionItemsAdd: (self editItemNamed: #update);
+		actionItemsAdd: (self userEventSpecAt: #delete);
+		actionItemsAdd: (self userEventSpecAt: #update);
 		yourself.
-
-]
-
-{ #category : 'initialization' }
-TBRootApplication >> setUpNavItems [
-
-	self
-		addNavSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings' navTo: 'Settings';
-		addNavSubtype: #home groupTag: #primary iconName: 'house' iconLabel: 'Home' navTo: 'Home Page'.
-
 
 ]

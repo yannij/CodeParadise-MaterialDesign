@@ -67,29 +67,32 @@ MD3ExampleApplication >> load [
 ]
 
 { #category : 'initialization' }
-MD3ExampleApplication >> setUpActionItems [
+MD3ExampleApplication >> navItems [
 
-	self
-		addActionSubtype: '1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle';
-		addActionSubtype: '2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle';
-		addActionSubtype: '3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' ;
-		addActionSubtype: '4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' ;
+	^ OrderedCollection new
+		add: (self userEventSpecAt: #settingsOpen);
+		addAll: self navItemsSpecs;
 		yourself.
-
 ]
 
 { #category : 'initialization' }
-MD3ExampleApplication >> setUpNavItems [
+MD3ExampleApplication >> setUpCustomEvents [
 
 	self
-		addNavSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings' navTo: 'Settings';
-		addNavSubtype: #nav groupTag: #primary iconName: 'suit-club' iconLabel: 'Club' navTo: 'Club Page';
-		addNavSubtype: #nav groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond' navTo: 'Diamond Page';
-		addNavSubtype: #nav groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart' navTo: 'Heart Page';
-		addNavSubtype: #nav groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade' navTo: 'Spade Page';
-		addNavSubtype: #nav groupTag: #primary iconName: '1-square' iconLabel: 'Square1' navTo: 'Square-1';
-		addNavSubtype: #nav groupTag: #primary iconName: '2-square' iconLabel: 'Square2' navTo: 'Square-2';
-		addNavSubtype: #nav groupTag: #primary iconName: '3-square' iconLabel: 'Square3' navTo: 'Square-3';
+		addActionSubtype: #'1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle';
+		addActionSubtype: #'2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle';
+		addActionSubtype: #'3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' ;
+		addActionSubtype: #'4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' ;
+		yourself.
+
+	self
+		addNavSubtype: #'suit-club' groupTag: #primary iconName: 'suit-club' iconLabel: 'Club' data: 'Club Page';
+		addNavSubtype: #'suit-diamond' groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond' data: 'Diamond Page';
+		addNavSubtype: #'suit-heart' groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart' data: 'Heart Page';
+		addNavSubtype: #'suit-spade' groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade' data: 'Spade Page';
+		addNavSubtype: #'1-square' groupTag: #primary iconName: '1-square' iconLabel: 'Square1' data: 'Square-1';
+		addNavSubtype: #'2-square' groupTag: #primary iconName: '2-square' iconLabel: 'Square2' data: 'Square-2';
+		addNavSubtype: #'3-square' groupTag: #primary iconName: '3-square' iconLabel: 'Square3' data: 'Square-3';
 		yourself.
 
 ]

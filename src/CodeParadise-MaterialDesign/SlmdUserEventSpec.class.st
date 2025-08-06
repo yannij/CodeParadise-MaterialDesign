@@ -118,6 +118,24 @@ SlmdUserEventSpec >> iconName: anObject [
 	iconName := anObject
 ]
 
+{ #category : 'testing' }
+SlmdUserEventSpec >> isActionType [
+
+	^ self eventType = #action
+]
+
+{ #category : 'testing' }
+SlmdUserEventSpec >> isNativeType [
+
+	^ self eventType = #native
+]
+
+{ #category : 'testing' }
+SlmdUserEventSpec >> isNavType [
+
+	^ self eventType = #nav
+]
+
 { #category : 'accessing' }
 SlmdUserEventSpec >> itemName [
 
@@ -128,16 +146,4 @@ SlmdUserEventSpec >> itemName [
 SlmdUserEventSpec >> itemName: anObject [
 
 	eventSubtype := anObject
-]
-
-{ #category : 'accessing' }
-SlmdUserEventSpec >> navTo [
-
-	^ data
-]
-
-{ #category : 'accessing' }
-SlmdUserEventSpec >> navTo: anObject [
-
-	data := anObject
 ]

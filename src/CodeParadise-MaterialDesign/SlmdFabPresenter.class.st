@@ -14,10 +14,8 @@ SlmdFabPresenter >> actionGroupToUse [
 
 { #category : 'rendering' }
 SlmdFabPresenter >> renderView [
-	| list |
 
-	list := self actionItemsToUse collect: [ :each | each asDictionary ].
-	list isEmpty ifTrue: [ ^ self ].
-	self view renderFab: self actionItemFabOrNil asDictionary.
+	self actionItemFabOrNil ifNotNil: [ :value |
+		self view renderFab: value asDictionary ].
 
 ]

@@ -1005,11 +1005,12 @@ SlmdResponsiveLayoutView >> triggerUserEvent: aUserEventSpec [
 	type := aUserEventSpec at: #type.
 	subtype := aUserEventSpec at: #subtype.
 
+	subtype = #modalNav ifTrue: [
+		^ self modalNavOpen ].
+	subtype = #settingsOpen ifTrue: [
+		^ self modalSettingsOpen ].
+
 	type = #nav ifTrue: [
-		subtype = #modalNav ifTrue: [
-			^ self modalNavOpen ].
-		subtype = #settingsOpen ifTrue: [
-			^ self modalSettingsOpen ].
 		^ self announceNavSubtype: subtype navTo: (aUserEventSpec at: #data ifAbsent: []) ].
 
 	subtype = 'save' ifTrue: [ | changes paneContentView |
