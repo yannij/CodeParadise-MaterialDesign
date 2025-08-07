@@ -30,7 +30,9 @@ SlmdAppBarPresenter >> renderView [
 
 	leadingActionName := self model isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ].
 	leadingAction := self application userEventSpecAt: leadingActionName.
-	self view renderLeadingAction: leadingAction asDictionary.
+	(self application layout layoutSettings useTwoPaneBody and: [ leadingActionName = #back ])
+		ifTrue: [ self view renderLeadingAction: nil ]
+		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ].
 
 	self model isPrimary ifTrue: [
 		self view renderHeadline: self application class appName ].

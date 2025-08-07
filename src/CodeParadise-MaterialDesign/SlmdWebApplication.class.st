@@ -114,8 +114,9 @@ SlmdWebApplication >> userEventSpecAt: aKey [
 
 { #category : 'accessing' }
 SlmdWebApplication >> userEventSpecFAB [
+	"Subclasses may override"
 
-	^ self userEventSpecsNative detect: [ :each | each groupTag = #fab ] ifNone: []
+	^ nil
 ]
 
 { #category : 'accessing' }

@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'pane1',
 		'pane2',
-		'useTwoPaneBody',
 		'pane1Width'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
@@ -17,7 +16,6 @@ SlmdPaneLayoutModel >> initialize [
 
 	super initialize.
 
-	useTwoPaneBody := false.
 	pane1Width := 500.
 
 ]
@@ -56,27 +54,4 @@ SlmdPaneLayoutModel >> pane2 [
 SlmdPaneLayoutModel >> pane2: anObject [
 
 	pane2 := anObject
-]
-
-{ #category : 'accessing' }
-SlmdPaneLayoutModel >> useTwoPaneBody [
-
-	^ useTwoPaneBody
-]
-
-{ #category : 'accessing' }
-SlmdPaneLayoutModel >> useTwoPaneBody: anObject [
-
-	useTwoPaneBody := anObject
-]
-
-{ #category : 'accessing' }
-SlmdPaneLayoutModel >> useTwoPaneBodySet: anObject [
-
-	self useTwoPaneBody = anObject ifTrue: [
-		^ self ].
-
-	self useTwoPaneBody: anObject.
-	self valueChanged.
-
 ]

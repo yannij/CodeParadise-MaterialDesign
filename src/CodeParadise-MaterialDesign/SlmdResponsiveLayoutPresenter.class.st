@@ -177,6 +177,10 @@ SlmdResponsiveLayoutPresenter >> layoutUpdate: props [
 		self logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
 		].
 
+	"The appbar leading action might depend on two pane mode"
+	self model appBar1 valueChanged.
+	self model appBar2 valueChanged.
+
 ]
 
 { #category : 'rendering' }

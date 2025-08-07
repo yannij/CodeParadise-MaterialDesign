@@ -3,11 +3,11 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'eventType',
+		'eventSubtype',
+		'data',
 		'iconName',
 		'iconLabel',
-		'groupTag',
-		'eventSubtype',
-		'data'
+		'groupTag'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',

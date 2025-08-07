@@ -158,9 +158,10 @@ SlmdAppBarView >> renderHeadline: aString [
 SlmdAppBarView >> renderLeadingAction: leadingAction [
 	| actionItem |
 
-	actionItem := self iconButtonForAction: leadingAction css: nil.
-
 	self removeChildrenAtSlotNamed: 'leadingAction'.
+	leadingAction ifNil: [ ^ self ].
+
+	actionItem := self iconButtonForAction: leadingAction css: nil.
 	self appendChild: actionItem atSlotNamed: 'leadingAction'.
 
 ]
