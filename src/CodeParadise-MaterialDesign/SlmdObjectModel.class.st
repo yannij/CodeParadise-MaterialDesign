@@ -1,10 +1,22 @@
 Class {
 	#name : 'SlmdObjectModel',
 	#superclass : 'SlmdModel',
-	#category : 'CodeParadise-MaterialDesign-TinyBlogApp',
+	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'TinyBlogApp'
+	#tag : 'ShoelaceComponents'
 }
+
+{ #category : 'accessing' }
+SlmdObjectModel class >> soilTransientInstVars [
+
+	^ #( announcer )
+]
+
+{ #category : 'rendering' }
+SlmdObjectModel >> applyChanges: changes [
+
+	self subclassResponsibility
+]
 
 { #category : 'converting' }
 SlmdObjectModel >> asProperties [
@@ -38,4 +50,22 @@ SlmdObjectModel >> handleUpdate: anObject [
 
 	self traceCr: anObject printString.
 
+]
+
+{ #category : 'printing' }
+SlmdObjectModel >> shortSummary [
+	"Answer a short descriptive string of the receiver.
+	Typically used for display in a list.
+	Subclasses should provide better string"
+
+	^ self printString
+]
+
+{ #category : 'printing' }
+SlmdObjectModel >> slmdShortSummary [
+	"Answer a short descriptive string of the receiver.
+	Typically used for display in a list.
+	Subclasses should provide better string"
+
+	^ self printString
 ]

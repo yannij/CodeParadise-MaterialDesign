@@ -13,8 +13,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetEditDelete [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app userEventSpecAt: #delete);
-		actionItemsAdd: (app userEventSpecAt: #update);
+		actionItemsAdd: (app nativeEventSpecAt: #delete);
+		actionItemsAdd: (app nativeEventSpecAt: #update);
 		valueChanged;
 		yourself
 ]
@@ -26,8 +26,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 	app := self application.
 	app layout appBar2
 		actionItemsClear;
-		actionItemsAdd: (app userEventSpecAt: #save);
-		actionItemsAdd: (app userEventSpecAt: #cancel);
+		actionItemsAdd: (app nativeEventSpecAt: #save);
+		actionItemsAdd: (app nativeEventSpecAt: #cancel);
 		valueChanged;
 		yourself
 ]
@@ -53,12 +53,9 @@ SlmdResponsiveLayoutPresenter >> doCreate: anObject [
 
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doDelete: anObject [
-	| listDetail |
 
 	self view primaryPaneOnly.
-	listDetail := self layout pane1 paneContent.
-	listDetail removeDetail.
-	self application setDetailWithIndex: 1.
+	self application listDetailRemove: anObject.
 
 ]
 
@@ -81,6 +78,13 @@ SlmdResponsiveLayoutPresenter >> doLayoutSettings: anObject [
 ]
 
 { #category : 'events' }
+SlmdResponsiveLayoutPresenter >> doNavTo: anObject [
+
+	self application navTo: (anObject parameterAt: #data).
+
+]
+
+{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
 
 	self logTrace: anObject printString method: 'doRefresh:'.
@@ -92,16 +96,10 @@ SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
 
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doSave: anObject [
-	| theModel |
 
-	theModel := self layout pane2 paneContent.
-	theModel wrappedModel handleSave: anObject.
-	theModel valueChanged.
+	self application listDetailAdd: anObject.
 	self layout pane2 valueChanged.
 	self appBar2ButtonsSetEditDelete.
-	theModel isNew ifTrue: [
-		self layout pane1 paneContent listAdd: theModel.
-		self application setDetailWithIndex: 1 ].
 
 ]
 
@@ -128,12 +126,15 @@ SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	| subtype |
 
-	self logTrace: anObject printString method: 'handleAction:'.
+	self logTrace: anObject printString method: 'handleUserEvent:'.
 
 	subtype := anObject parameterAt: #subtype.
 
 	subtype = #back ifTrue: [
 		^ self view primaryPaneOnly ].
+
+	subtype = #navTo ifTrue: [
+		^ self doNavTo: anObject ].
 
 	subtype = #setDetail ifTrue: [
 		^ self doSetDetail: anObject ].

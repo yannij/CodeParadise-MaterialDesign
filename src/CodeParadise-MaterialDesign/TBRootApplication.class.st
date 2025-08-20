@@ -32,6 +32,12 @@ TBRootApplication class >> appName [
 	^ #'Tiny Blog'
 ]
 
+{ #category : 'initialization' }
+TBRootApplication >> allModels [
+
+	^ TBBlogModel current allBlogPosts
+]
+
 { #category : 'accessing' }
 TBRootApplication >> applicationPresenterClass [
 
@@ -45,7 +51,7 @@ TBRootApplication >> initialize [
 	super initialize.
 
 	pane1Content := SlmdListDetailModel new.
-	pane1Content listSet: TBBlogModel current allBlogPosts.
+	pane1Content listSet: self allModels.
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
@@ -58,44 +64,41 @@ TBRootApplication >> initialize [
 
 ]
 
+{ #category : 'initialization' }
+TBRootApplication >> modelAdd: aModel [
+
+	TBBlogModel current writeBlogPost: aModel.
+
+]
+
+{ #category : 'accessing' }
+TBRootApplication >> modelClass [
+
+	^ TBPostModel
+]
+
+{ #category : 'initialization' }
+TBRootApplication >> modelRemove: aModel [
+
+	TBBlogModel current removeBlogPost: aModel.
+
+]
+
 { #category : 'accessing' }
 TBRootApplication >> navItems [
 
 	^ OrderedCollection new
-		add: (self userEventSpecAt: #home);
-		add: (self userEventSpecAt: #settingsOpen);
+		add: (self nativeEventSpecAt: #home);
+		add: (self nativeEventSpecAt: #settingsOpen);
 		yourself.
-]
-
-{ #category : 'accessing' }
-TBRootApplication >> setDetailAddNew [
-	| detail |
-
-	detail := SlmdItemWrapperModel onNewModel: TBPostModel new.
-
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
-
-]
-
-{ #category : 'accessing' }
-TBRootApplication >> setDetailWithIndex: index [
-	| list detail |
-
-	list := self layout pane1 paneContent list.
-	detail := list at: index.
-
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
-
 ]
 
 { #category : 'initialization' }
 TBRootApplication >> setUpAppBar2 [
 
 	self layout pane2 appBarModel
-		actionItemsAdd: (self userEventSpecAt: #delete);
-		actionItemsAdd: (self userEventSpecAt: #update);
+		actionItemsAdd: (self nativeEventSpecAt: #delete);
+		actionItemsAdd: (self nativeEventSpecAt: #update);
 		yourself.
 
 ]

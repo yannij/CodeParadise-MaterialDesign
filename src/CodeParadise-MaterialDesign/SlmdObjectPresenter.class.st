@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdObjectPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-TinyBlogApp',
+	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'TinyBlogApp'
+	#tag : 'ShoelaceComponents'
 }
 
 { #category : 'rendering' }
@@ -12,6 +12,5 @@ SlmdObjectPresenter >> renderView [
 
 	props := self model asProperties.
 	self view fieldsSetUp: props.
-
 
 ]

@@ -100,6 +100,12 @@ SlmdPresenter >> logTrace: aString method: methodName [
 	self logTrace: aString aspect: self class name, '>>', methodName
 ]
 
+{ #category : 'logging' }
+SlmdPresenter >> logTraceMethod: methodName [
+
+	self logTrace: self class name, '>>', methodName
+]
+
 { #category : 'events' }
 SlmdPresenter >> subscribeToUserEvent [
 

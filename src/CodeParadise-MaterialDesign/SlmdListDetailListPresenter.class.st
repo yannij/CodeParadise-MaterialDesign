@@ -11,6 +11,6 @@ SlmdListDetailListPresenter >> renderView [
 
 	self view
 		renderTextSlot: 'listItem'
-		value: self model wrappedModel title
+		value: self model wrappedModel slmdShortSummary
 		index: self model index
 ]

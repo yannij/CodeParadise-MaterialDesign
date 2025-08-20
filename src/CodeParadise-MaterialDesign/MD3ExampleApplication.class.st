@@ -70,13 +70,15 @@ MD3ExampleApplication >> load [
 MD3ExampleApplication >> navItems [
 
 	^ OrderedCollection new
-		add: (self userEventSpecAt: #settingsOpen);
+		add: (self nativeEventSpecAt: #settingsOpen);
 		addAll: self navItemsSpecs;
 		yourself.
 ]
 
 { #category : 'initialization' }
 MD3ExampleApplication >> setUpCustomEvents [
+
+	super setUpCustomEvents.
 
 	self
 		addActionSubtype: #'1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle';

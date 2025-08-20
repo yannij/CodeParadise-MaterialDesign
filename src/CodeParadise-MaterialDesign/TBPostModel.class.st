@@ -116,6 +116,12 @@ TBPostModel >> notVisible [
    self visible: false
 ]
 
+{ #category : 'printing' }
+TBPostModel >> slmdShortSummary [
+
+	^ self title
+]
+
 { #category : 'accessing' }
 TBPostModel >> text [
 
