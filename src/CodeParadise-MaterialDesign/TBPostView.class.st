@@ -12,7 +12,7 @@ TBPostView >> fieldsSetUp: props [
 
 	fieldElements := OrderedDictionary new.
 	card := #div asHtmlTag
-		addClass: 'tblog-post';
+		addClass: 'slmd-fields';
 		appendChild: (self fieldAt: 'title' label: 'Title' text: (props at: 'title'));
 		appendChild: (self fieldAt: 'text' label: 'Text' textarea: (props at: 'text'));
 		appendChild: (self fieldAt: 'date' label: 'Date' text: (props at: 'date'));

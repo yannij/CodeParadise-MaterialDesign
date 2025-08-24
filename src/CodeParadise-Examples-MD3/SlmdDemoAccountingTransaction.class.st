@@ -55,6 +55,14 @@ SlmdDemoAccountingTransaction >> accountId: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdDemoAccountingTransaction >> accountIn: aRepo [
+
+	^ aRepo
+		selectOne: SlmdDemoAccountingAccount
+		where: [ :each | each id = self accountId ]
+]
+
+{ #category : 'accessing' }
 SlmdDemoAccountingTransaction >> amount [
 
 	^ amount
@@ -79,6 +87,14 @@ SlmdDemoAccountingTransaction >> companyId: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdDemoAccountingTransaction >> companyIn: aRepo [
+
+	^ aRepo
+		selectOne: SlmdDemoAccountingCompany
+		where: [ :each | each id = self companyId ]
+]
+
+{ #category : 'accessing' }
 SlmdDemoAccountingTransaction >> id [
 
 	^ id
@@ -100,4 +116,10 @@ SlmdDemoAccountingTransaction >> number [
 SlmdDemoAccountingTransaction >> number: anObject [
 
 	number := anObject
+]
+
+{ #category : 'printing' }
+SlmdDemoAccountingTransaction >> slmdShortSummary [
+
+	^ self summaryString
 ]

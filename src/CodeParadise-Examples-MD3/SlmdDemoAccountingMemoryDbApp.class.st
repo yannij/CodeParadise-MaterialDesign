@@ -15,7 +15,7 @@ SlmdDemoAccountingMemoryDbApp class >> app [
 { #category : 'initialization' }
 SlmdDemoAccountingMemoryDbApp class >> appName [
 
-	^ 'Accounting (memory)'
+	^ 'Accounting'
 ]
 
 { #category : 'initialization' }

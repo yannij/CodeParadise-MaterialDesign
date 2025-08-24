@@ -86,11 +86,11 @@ SlmdWebApplication >> listDetailAdd: anObject [
 	listDetail := self layout pane1 paneContent.
 	theModel isNew
 		ifTrue: [
-			self modelUpdate: listDetail detail wrappedModel ]
-		ifFalse: [
 			self modelAdd: listDetail detail wrappedModel.
 			listDetail listSet: self allModels.
-			self setDetailWithIndex: 1].
+			self setDetailWithIndex: 1 ]
+		ifFalse: [
+			self modelUpdate: listDetail detail wrappedModel ].
 .
 
 ]
@@ -162,6 +162,10 @@ SlmdWebApplication >> navItemsSpecs [
 
 { #category : 'events' }
 SlmdWebApplication >> navTo: data [
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> refresh [
 ]
 
 { #category : 'model' }

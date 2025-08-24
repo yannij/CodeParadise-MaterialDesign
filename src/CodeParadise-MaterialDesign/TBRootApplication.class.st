@@ -59,6 +59,7 @@ TBRootApplication >> initialize [
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
+	self setUpAppBar1.
 	self setUpAppBar2.
 	self setDetailWithIndex: 1.
 
@@ -93,6 +94,22 @@ TBRootApplication >> navItems [
 		yourself.
 ]
 
+{ #category : 'events' }
+TBRootApplication >> refresh [
+
+	self setDetailWithIndex: 1.
+
+]
+
+{ #category : 'initialization' }
+TBRootApplication >> setUpAppBar1 [
+
+	self layout pane1 appBarModel
+		actionItemsAdd: (self nativeEventSpecAt: #refresh);
+		yourself.
+
+]
+
 { #category : 'initialization' }
 TBRootApplication >> setUpAppBar2 [
 
@@ -106,5 +123,5 @@ TBRootApplication >> setUpAppBar2 [
 { #category : 'accessing' }
 TBRootApplication >> userEventSpecFAB [
 
-	^ self userEventSpecsNative detect: [ :each | each groupTag = #fab ] ifNone: []
+	^ self nativeEventSpecs detect: [ :each | each groupTag = #fab ] ifNone: []
 ]

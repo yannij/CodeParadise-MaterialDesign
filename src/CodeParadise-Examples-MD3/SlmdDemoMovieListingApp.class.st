@@ -327,17 +327,6 @@ brand: {
 ]
 
 { #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderItemChoiceOn: html [
-
-	html qTabs
-		vModel: self tab;
-		with: [
-			html qRouteTab label: 'Theatre'; href: (html urlForAction: [ self tabSet: self tabTheatre ]).
-			html qRouteTab label: 'Movie'; href: (html urlForAction: [ self tabSet: self tabMovie ]).
-			html qRouteTab label: 'Show Time'; href: (html urlForAction: [ self tabSet: self tabShowTime ]) ]
-]
-
-{ #category : 'rendering' }
 SlmdDemoMovieListingApp >> renderItemListOn: html [
 
 	self tab = self tabTheatre ifTrue: [
@@ -397,28 +386,6 @@ SlmdDemoMovieListingApp >> renderModelOn: html [
 		^ html heading level2; with: 'No model selected' ].
 
 	html render: self modelView
-]
-
-{ #category : 'rendering - table' }
-SlmdDemoMovieListingApp >> renderModelTable: aList modelClass: aClass title: aTitleString on: html [
-
-	html qTable
-		class: 'q-mt-sm';
-		title: aTitleString;
-		flat; bordered;
-		columns: (self addCols: aList modelClass: aClass);
-		rows: (self addRows: aList modelClass: aClass on: html);
-		vBind: 'pagination' with: '{rowsPerPage: 10}';
-		rowKey: 'name';
-		with: [
-			html qTemplate vSlot: 'body-cell-actions' with: 'props'; with: [
-				html qTd vBind: 'props' with: 'props'; with: [
-					html qBtn
-						round; outline; color: 'primary';
-						vFor: 'actions in props.value';
-						vBind: 'key' with: 'actions.id';
-						vBind: 'icon' with: 'actions.icon';
-						vBind: 'href' with: 'actions.href' ] ] ]
 ]
 
 { #category : 'rendering' }

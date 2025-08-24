@@ -89,8 +89,9 @@ SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
 
 	self logTrace: anObject printString method: 'doRefresh:'.
 
-	self model pane1 paneContent valueChanged.
-	self model pane1 valueChanged.
+	self application refresh.
+	"self model pane1 paneContent valueChanged.
+	self model pane1 valueChanged."
 
 ]
 

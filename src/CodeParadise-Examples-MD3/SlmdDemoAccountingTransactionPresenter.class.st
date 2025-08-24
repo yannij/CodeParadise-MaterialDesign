@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdDemoAccountingAccountPresenter',
+	#name : 'SlmdDemoAccountingTransactionPresenter',
 	#superclass : 'SlmdDemoObjectPresenter',
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
@@ -7,15 +7,15 @@ Class {
 }
 
 { #category : 'rendering' }
-SlmdDemoAccountingAccountPresenter >> renderDetails [
-	| company transactions |
+SlmdDemoAccountingTransactionPresenter >> renderDetails [
+	| account company |
 
 	self view renderModelTableClear.
 
+	account := self model accountIn: self repositoryToUse.
+	self renderDetail: (Array with: account) modelClass: SlmdDemoAccountingAccount label: 'Account'.
+
 	company := self model companyIn: self repositoryToUse.
 	self renderDetail: (Array with: company) modelClass: SlmdDemoAccountingCompany label: 'Company'.
-
-	transactions := self model transactionsIn: self repositoryToUse.
-	self renderDetail: transactions modelClass: SlmdDemoAccountingTransaction label: 'Transactions'.
 
 ]

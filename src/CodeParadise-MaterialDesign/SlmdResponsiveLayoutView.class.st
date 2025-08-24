@@ -58,7 +58,23 @@ SlmdResponsiveLayoutView class >> globalStyle [
   font-size: 24px;
   margin-inline-end: 0;
 }
+
+.slmd-details::part(base) {
+  padding: 0;
+  background: var(--sl-color-primary-200);
+}
+
+.slmd-details::part(summary) {
+  padding: 0;
+  background: var(--sl-color-primary-200);
+}
+
+.slmd-details::part(content) {
+  padding: 0;
+  background: var(--sl-color-primary-200);
+}
 '
+, self styleTable
 
 ]
 
@@ -133,6 +149,28 @@ SlmdResponsiveLayoutView class >> style [
 }
 '
 , SlmdNavRailView styleNav
+
+]
+
+{ #category : 'web resources' }
+SlmdResponsiveLayoutView class >> styleTable [
+	<webResource: #css>
+
+	^ '
+.slmd-table {
+  width: 100%;
+}
+
+table, th, td {
+  border-style: solid;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: 8px 0;
+}
+'
 
 ]
 

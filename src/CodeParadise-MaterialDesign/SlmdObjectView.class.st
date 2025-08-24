@@ -41,7 +41,7 @@ sl-input {
   --sl-input-height-medium: 56px;
 }
 
-.tblog-post{
+.slmd-fields {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -190,6 +190,7 @@ SlmdObjectView class >> template [
 
 	^ '<div id="container">
   <slot name="card"></slot>
+  <slot name="details"></slot>
 </div>'
 ]
 
