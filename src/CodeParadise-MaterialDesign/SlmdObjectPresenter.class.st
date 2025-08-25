@@ -1,16 +1,7 @@
 Class {
 	#name : 'SlmdObjectPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'ShoelaceBase'
 }
-
-{ #category : 'rendering' }
-SlmdObjectPresenter >> renderView [
-	| props |
-
-	props := self model asProperties.
-	self view fieldsSetUp: props.
-
-]

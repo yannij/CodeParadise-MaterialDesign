@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoMoviesShowTime class >> attributeData [
+SlmdDemoMoviesShowTime class >> attributeNames [
 
 	^ #(id movieId theatreId showDate showStartTime)
 ]

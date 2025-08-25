@@ -23,7 +23,7 @@ Class {
 }
 
 { #category : 'converting' }
-SlmdLayoutSettingsModel >> asProperties [
+SlmdLayoutSettingsModel >> asMap [
 
 	^ Dictionary new
 		at: #colorThemeName put: self colorThemeName;

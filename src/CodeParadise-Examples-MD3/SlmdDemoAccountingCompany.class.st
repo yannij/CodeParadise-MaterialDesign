@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoAccountingCompany class >> attributeData [
+SlmdDemoAccountingCompany class >> attributeNames [
 
 	^ #(id name website email taxNumber country currency)
 ]

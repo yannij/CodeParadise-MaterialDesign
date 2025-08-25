@@ -7,41 +7,6 @@ Class {
 }
 
 { #category : 'rendering' }
-SlmdDemoObjectView >> fields: list map: props [
-	| details fields |
-
-	fieldElements := OrderedDictionary new.
-
-	fields := #div asHtmlTag addClass: 'slmd-fields'; yourself.
-	details := SlDetails new.
-	details addClass: 'slmd-details'.
-	details propertyAt: 'summary' put: 'Fields'.
-	details propertyAt: 'open' put: true.
-	details appendChild: fields.
-
-	list do: [ :fieldName |
-		fields appendChild: (self fieldAt: fieldName label: fieldName capitalized text: (props at: fieldName)) ].
-
-	self replaceAllChildrenWith: details atSlotNamed: 'card'.
-
-]
-
-{ #category : 'rendering' }
-SlmdDemoObjectView >> fieldsSetUp: props [
-	| card |
-
-	fieldElements := OrderedDictionary new.
-
-	card := #div asHtmlTag addClass: 'slmd-fields'; yourself.
-
-	props keysAndValuesDo: [ :fieldName :value |
-		card appendChild: (self fieldAt: fieldName label: fieldName capitalized text: value) ].
-
-	self replaceAllChildrenWith: card atSlotNamed: 'card'.
-
-]
-
-{ #category : 'rendering' }
 SlmdDemoObjectView >> renderModelTable: aList columns: columns title: aTitleString [
 	| table thead row tbody details |
 
@@ -71,14 +36,15 @@ SlmdDemoObjectView >> renderModelTable: aList columns: columns title: aTitleStri
 	details := SlDetails new.
 	details addClass: 'slmd-details'.
 	details propertyAt: 'summary' put: aTitleString.
+	details propertyAt: 'open' put: true.
 	details appendChild: table.
 
-	self appendChild: details atSlotNamed: 'details'.
+	self appendChild: details atSlotNamed: #details.
 
 ]
 
 { #category : 'rendering' }
 SlmdDemoObjectView >> renderModelTableClear [
 
-	self removeChildrenAtSlotNamed: 'details'
+	self removeChildrenAtSlotNamed: #details
 ]

@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoObject class >> attributeData [
+SlmdDemoObject class >> attributeNames [
 
 	^ #()
 ]
@@ -21,7 +21,7 @@ SlmdDemoObject class >> modelName [
 { #category : 'rendering' }
 SlmdDemoObject >> applyChanges: changes [
 
-	self class attributeData do: [ :field |
+	self class attributeNames do: [ :field |
 		changes at: field ifPresent: [ :value | self perform: (field, ':') asSymbol with: value ] ].
 
 	self valueChanged.
@@ -34,16 +34,22 @@ SlmdDemoObject >> asMap [
 
 	map := Dictionary new.
 
-	self class attributeData do: [ :each |
+	self class attributeNames do: [ :each |
 		map at: each put: (self perform: each asSymbol) asString ].
 
 	^ map
 ]
 
 { #category : 'printing' }
-SlmdDemoObject >> attributeData [
+SlmdDemoObject >> attributeNames [
 
-	^ self class attributeData
+	^ self class attributeNames
+]
+
+{ #category : 'metadata' }
+SlmdDemoObject >> fieldsData [
+
+	^ self class attributeNames collect: [ :each | each -> #string ]
 ]
 
 { #category : 'printing' }
@@ -70,5 +76,5 @@ SlmdDemoObject >> preferredPresenterClass [
 { #category : 'printing' }
 SlmdDemoObject >> summaryString [
 
-	^ self modelName, ': ', ('/' join: (self attributeData collect: [ :each | self perform: each ]))
+	^ self modelName, ': ', ('/' join: (self attributeNames collect: [ :each | self perform: each ]))
 ]

@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdObjectModel',
 	#superclass : 'SlmdModel',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'ShoelaceBase'
 }
 
 { #category : 'accessing' }
@@ -19,10 +19,16 @@ SlmdObjectModel >> applyChanges: changes [
 ]
 
 { #category : 'converting' }
-SlmdObjectModel >> asProperties [
+SlmdObjectModel >> asMap [
 	"Subclasses may override"
 
 	^ Dictionary new
+]
+
+{ #category : 'metadata' }
+SlmdObjectModel >> fieldsData [
+
+	^ #()
 ]
 
 { #category : 'rendering' }

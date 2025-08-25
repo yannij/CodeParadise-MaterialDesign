@@ -10,7 +10,8 @@ BaselineOfMaterialDesign >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec 
-			package: 'CodeParadise-MaterialDesign'.
+			package: 'CodeParadise-MaterialDesign';
+			package: 'CodeParadise-Examples-MD3'.
 
 		spec 
 			group: 'Core' with: #('CodeParadise-MaterialDesign');

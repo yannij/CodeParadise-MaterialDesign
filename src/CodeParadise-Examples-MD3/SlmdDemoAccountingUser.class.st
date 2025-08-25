@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoAccountingUser class >> attributeData [
+SlmdDemoAccountingUser class >> attributeNames [
 
 	^ #(id name email locale)
 ]

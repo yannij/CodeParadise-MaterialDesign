@@ -11,7 +11,7 @@ SlmdDemoObjectPresenter >> renderDetail: aList modelClass: aClass label: aLabel 
 
 	self view
 		renderModelTable: (aList collect: [ :e | e asMap ]) asArray
-		columns: aClass attributeData
+		columns: aClass attributeNames
 		title: aLabel.
 
 ]
@@ -26,7 +26,7 @@ SlmdDemoObjectPresenter >> renderFields [
 	| props |
 
 	props := self model asMap.
-	self view fields: self model attributeData map: props.
+	self view fields: self model fieldsData map: props.
 
 ]
 

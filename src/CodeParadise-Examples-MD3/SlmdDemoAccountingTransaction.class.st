@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoAccountingTransaction class >> attributeData [
+SlmdDemoAccountingTransaction class >> attributeNames [
 
 	^ #(number amount id companyId accountId)
 ]

@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'repository',
 		'modelClass',
-		'tab',
 		'model',
 		'modelView'
 	],
@@ -166,25 +165,6 @@ SlmdDemoMovieListingApp class >> soilPath [
 	^ 'demo-movies'
 ]
 
-{ #category : 'rendering - table' }
-SlmdDemoMovieListingApp >> addRows: aList modelClass: aClass on: html [
-	| refName data |
-
-	refName := aClass modelName, 'Rows'.
-	data := OrderedCollection new.
-	aList do: [ :eachItem | | map actions |
-		map := eachItem asMap.
-
-		actions := OrderedCollection new.
-		actions add: ({'id' -> 'nav'. 'icon' -> 'arrow_forward'. 'href' -> (html urlForAction: [ self modelSet: eachItem ]) } asDictionary).
-		map at: 'actions' put: actions.
-
-		data add: map ].
-
-	self qdemoApp vueRefsSet: refName -> data.
-	^ refName
-]
-
 { #category : 'model' }
 SlmdDemoMovieListingApp >> allModels [
 
@@ -306,118 +286,6 @@ SlmdDemoMovieListingApp >> navTo: data [
 
 ]
 
-{ #category : 'rendering - quasar hooks' }
-SlmdDemoMovieListingApp >> quasarConfigContentOn: aJSStream with: html [
-
-	aJSStream nextPutAll: '
-brand: {
-	primary: ''#E5E488''
-}'
-	"aJSStream nextPutAll: '
-brand: {
-	primary: ''#E5E4FA'',
-	secondary: ''#e30425'',
-	accent: ''#9C27B0'',
-	dark: ''#1d1d1d'',
-	positive: ''#21BA45'',
-	negative: ''#C10015'',
-	info: ''#31CCEC'',
-	warning: ''#F2C037''
-}'"
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderItemListOn: html [
-
-	self tab = self tabTheatre ifTrue: [
-		self renderTheatreOn: html ].
-
-	self tab = self tabMovie ifTrue: [
-		self renderMovieOn: html ].
-
-	self tab = self tabShowTime ifTrue: [
-		self renderShowTimeOn: html ].
-]
-
-{ #category : 'rendering - quasar hooks' }
-SlmdDemoMovieListingApp >> renderLayoutOn: html [
-
-	self model ifNil: [
-		self modelSet: (self repository selectAll: SlmdDemoMoviesTheatre) any ].
-
-	html qApp id: self appId; with: [
-		html qLayout view: 'hHh lpR fFf'; vCloak; with: [
-			html qHeader heightHint: 98; class: 'bg-primary'; style: 'color: black'; with: [
-				html qToolbar with: [
-					self renderItemChoiceOn: html ] ].
-			self renderLayoutPageOn: html ] ]
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderLayoutPageOn: html [
-
-	html qPageContainer with: [
-		html qPage with: [
-			self renderModelOn: html.
-			html qSeparator.
-			self renderItemListOn: html ] ]
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderModelList: aList on: html [
-
-	html qList style: 'background: white'; with: [
-		aList do: [ :eachObject |
-			html qItem qTag: 'a'; href: (html urlForAction: [ self modelSet: eachObject ]); with: [
-				html qItemSection top; avatar; with: [
-					html qAvatar color: 'primary'; textColor: 'white'; icon: 'star' ].
-				html qItemSection with: [
-					html qItemLabel with: eachObject name.
-					html qItemLabel caption; "lines: 2;"
-						with: eachObject summaryString ].
-				"html qItemSection with: [
-					html qItemLabel style: 'color: red'; with: eachObject price ]" ] ] ]
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderModelOn: html [
-
-	self modelView isNil ifTrue: [
-		^ html heading level2; with: 'No model selected' ].
-
-	html render: self modelView
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderMovieOn: html [
-
-	self tab = self tabMovie ifFalse: [ ^ self ].
-
-	self
-		renderModelList: (self repository selectAll: SlmdDemoMoviesMovie)
-		on: html
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderShowTimeOn: html [
-
-	self tab = self tabShowTime ifFalse: [ ^ self ].
-
-	self
-		renderModelList: (self repository selectAll: SlmdDemoMoviesShowTime)
-		on: html
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> renderTheatreOn: html [
-
-	self tab = self tabTheatre ifFalse: [ ^ self ].
-
-	self
-		renderModelList: (self repository selectAll: SlmdDemoMoviesTheatre)
-		on: html
-]
-
 { #category : 'accessing' }
 SlmdDemoMovieListingApp >> repository [
 
@@ -430,7 +298,7 @@ SlmdDemoMovieListingApp >> repository: anObject [
 	repository := anObject
 ]
 
-{ #category : 'rendering - quasar hooks' }
+{ #category : 'initialization' }
 SlmdDemoMovieListingApp >> repositorySetup [
 
 	self repository: self class movieRepository
@@ -457,41 +325,4 @@ SlmdDemoMovieListingApp >> setUpCustomEvents [
 		addNavSubtype: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Show Times' data: #showtime;
 		yourself.
 
-]
-
-{ #category : 'accessing' }
-SlmdDemoMovieListingApp >> tab [
-
-	^ tab
-]
-
-{ #category : 'accessing' }
-SlmdDemoMovieListingApp >> tab: anObject [
-
-	tab := anObject
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> tabMovie [
-
-	^ #movie
-]
-
-{ #category : 'accessing' }
-SlmdDemoMovieListingApp >> tabSet: anObject [
-
-	self tab: anObject.
-	"self modelSet: nil"
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> tabShowTime [
-
-	^ #showTime
-]
-
-{ #category : 'rendering' }
-SlmdDemoMovieListingApp >> tabTheatre [
-
-	^ #theatre
 ]

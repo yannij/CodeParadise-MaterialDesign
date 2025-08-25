@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoMoviesTheatre class >> attributeData [
+SlmdDemoMoviesTheatre class >> attributeNames [
 
 	^ #(id name address phone)
 ]

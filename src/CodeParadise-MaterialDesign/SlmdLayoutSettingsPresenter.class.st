@@ -12,7 +12,7 @@ SlmdLayoutSettingsPresenter >> viewInitialized [
 
 	super viewInitialized.
 
-	props := self model asProperties.
+	props := self model asMap.
 	self view
 		modalDivSetUp: props;
 		layoutInitialSetUp: props.

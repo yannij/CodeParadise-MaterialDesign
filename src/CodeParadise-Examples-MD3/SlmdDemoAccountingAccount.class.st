@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoAccountingAccount class >> attributeData [
+SlmdDemoAccountingAccount class >> attributeNames [
 
 	^ #(id companyId type name number currencyCode openingBalance bankName bankPhone bankAddress)
 ]

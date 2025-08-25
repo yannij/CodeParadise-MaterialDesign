@@ -50,7 +50,7 @@ TBPostModel >> applyChanges: changes [
 ]
 
 { #category : 'converting' }
-TBPostModel >> asProperties [
+TBPostModel >> asMap [
 
 	^ Dictionary new
 		at: 'title' put: self title;
@@ -88,6 +88,12 @@ TBPostModel >> date [
 TBPostModel >> date: anObject [
 
 	date := anObject
+]
+
+{ #category : 'metadata' }
+TBPostModel >> fieldsData [
+
+	^ { 'title' -> #string. 'text' -> #textarea. 'date' -> #string. 'category' -> #string. 'visible' -> #boolean }
 ]
 
 { #category : 'initialization' }

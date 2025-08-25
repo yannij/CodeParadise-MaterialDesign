@@ -5,9 +5,9 @@ Class {
 		'fieldElements',
 		'memento'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'ShoelaceBase'
 }
 
 { #category : 'class initialization' }
@@ -200,7 +200,7 @@ SlmdObjectView >> changeMap [
 
 	map := Dictionary new.
 	self fieldElements valuesDo: [ :each | | oldValue newValue |
-		oldValue := self memento at: each name.
+		oldValue := self mementoAt: each name.
 		newValue := each slmdValue.
 		oldValue ~= newValue ifTrue: [
 			map at: each name put: each slmdValue ] ].
@@ -285,6 +285,55 @@ SlmdObjectView >> fieldElementsAt: key put: element [
 ]
 
 { #category : 'initialization' }
+SlmdObjectView >> fieldElementsClear [
+
+	fieldElements := OrderedDictionary new.
+]
+
+{ #category : 'rendering' }
+SlmdObjectView >> fieldFor: fieldInfo map: map [
+	| fieldName fieldType fieldLabel fieldValue |
+
+	fieldName := fieldInfo key.
+	fieldType := fieldInfo value.
+	fieldLabel := fieldName capitalized.
+	fieldValue := (map at: fieldName).
+
+	fieldType = #string ifTrue: [
+		^ self fieldAt: fieldName label: fieldName capitalized text: fieldValue ].
+
+	fieldType = #textarea ifTrue: [
+		^ self fieldAt: fieldName label: fieldName capitalized textarea: fieldValue ].
+
+	fieldType = #boolean ifTrue: [
+		^ self fieldAt: fieldName label: fieldName capitalized switch: fieldValue ].
+
+	fieldType = #date ifTrue: [
+		^ self fieldAt: fieldName label: fieldName capitalized text: fieldValue asString ].
+
+]
+
+{ #category : 'rendering' }
+SlmdObjectView >> fields: list map: map [
+	| details fields |
+
+	self fieldElementsClear.
+
+	fields := #div asHtmlTag addClass: 'slmd-fields'; yourself.
+	details := SlDetails new.
+	details addClass: 'slmd-details'.
+	details propertyAt: 'summary' put: 'Fields'.
+	details propertyAt: 'open' put: true.
+	details appendChild: fields.
+
+	list do: [ :each |
+		fields appendChild: (self fieldFor: each map: map) ].
+
+	self replaceAllChildrenWith: details atSlotNamed: #card.
+
+]
+
+{ #category : 'initialization' }
 SlmdObjectView >> initialize [
 
 	super initialize.
@@ -307,9 +356,15 @@ SlmdObjectView >> memento: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdObjectView >> mementoAt: key [
+
+	^ self memento at: key
+]
+
+{ #category : 'accessing' }
 SlmdObjectView >> mementoAt: key put: element [
 
-	^ self memento at: key put: element
+	self memento at: key put: element
 ]
 
 { #category : 'rendering' }

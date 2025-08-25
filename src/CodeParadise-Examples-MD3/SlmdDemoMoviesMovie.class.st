@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'printing' }
-SlmdDemoMoviesMovie class >> attributeData [
+SlmdDemoMoviesMovie class >> attributeNames [
 
 	^ #(id name classification rating duration tags)
 ]

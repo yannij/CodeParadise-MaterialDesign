@@ -209,13 +209,14 @@ SlmdDemoAccountingApp >> initialize [
 
 	self repositorySetup.
 
+	login := SlmdLogin new.
 	modelClass := SlmdDemoAccountingCompany.
 	pane1Content := SlmdListDetailModel new.
 	pane1Content listSet: self allModels.
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	layout := SlmdResponsiveLayoutModel new.
+	"layout := SlmdResponsiveLayoutModel new."
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
@@ -290,22 +291,6 @@ SlmdDemoAccountingApp >> navTo: data [
 	self layout pane1 paneContent listSet: self allModels.
 	self setDetailWithIndex: 1.
 
-]
-
-{ #category : 'rendering - quasar hooks' }
-SlmdDemoAccountingApp >> quasarConfigContentOn: aJSStream with: html [
-
-	aJSStream nextPutAll: '
-brand: {
-	primary: ''#5d1049'',
-	secondary: ''#e30425'',
-	accent: ''#9C27B0'',
-	dark: ''#1d1d1d'',
-	positive: ''#21BA45'',
-	negative: ''#C10015'',
-	info: ''#31CCEC'',
-	warning: ''#F2C037''
-}'
 ]
 
 { #category : 'accessing' }
