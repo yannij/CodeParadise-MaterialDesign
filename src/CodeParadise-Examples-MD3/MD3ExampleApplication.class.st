@@ -5,9 +5,9 @@ I only live in the ServerEnvironment.
 Class {
 	#name : 'MD3ExampleApplication',
 	#superclass : 'SlmdWebApplication',
-	#category : 'CodeParadise-MaterialDesign-SimpleDemoApp',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'SimpleDemoApp'
+	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'SimpleDemo'
 }
 
 { #category : 'accessing' }
@@ -19,7 +19,7 @@ MD3ExampleApplication class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { SlElement package }
+	^ super allowedPackages, { SlElement package. SlmdView package }
 ]
 
 { #category : 'accessing' }

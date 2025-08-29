@@ -8,9 +8,9 @@ Class {
 		'category',
 		'visible'
 	],
-	#category : 'CodeParadise-MaterialDesign-TinyBlogApp',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'TinyBlogApp'
+	#category : 'CodeParadise-Examples-MD3-TinyBlog',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'TinyBlog'
 }
 
 { #category : 'instance creation' }

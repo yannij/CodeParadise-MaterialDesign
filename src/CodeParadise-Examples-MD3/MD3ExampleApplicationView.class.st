@@ -1,9 +1,9 @@
 Class {
 	#name : 'MD3ExampleApplicationView',
 	#superclass : 'CpView',
-	#category : 'CodeParadise-MaterialDesign-SimpleDemoApp',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'SimpleDemoApp'
+	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'SimpleDemo'
 }
 
 { #category : 'web resources' }

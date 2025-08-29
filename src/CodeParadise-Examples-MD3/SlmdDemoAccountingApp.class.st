@@ -28,7 +28,7 @@ SlmdDemoAccountingApp class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { SlElement package. SlmdWebApplication package }
+	^ super allowedPackages, { SlElement package. SlmdView package }
 ]
 
 { #category : 'demo data' }

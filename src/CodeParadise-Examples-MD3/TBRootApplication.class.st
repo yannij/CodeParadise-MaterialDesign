@@ -1,9 +1,9 @@
 Class {
 	#name : 'TBRootApplication',
 	#superclass : 'SlmdWebApplication',
-	#category : 'CodeParadise-MaterialDesign-TinyBlogApp',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'TinyBlogApp'
+	#category : 'CodeParadise-Examples-MD3-TinyBlog',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'TinyBlog'
 }
 
 { #category : 'accessing' }
@@ -15,7 +15,7 @@ TBRootApplication class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { SlElement package }
+	^ super allowedPackages, { SlElement package. SlmdView package }
 ]
 
 { #category : 'accessing' }
