@@ -6,15 +6,27 @@ Class {
 	#tag : 'Accounting'
 }
 
+{ #category : 'events' }
+SlmdDemoAccountingAppPresenter >> handleLoginRequested: anObject [
+
+	self traceCr: 'handleLoginRequested:'.
+	self application username: 'foobar'.
+	self application layout valueChanged.
+
+]
+
 { #category : 'rendering' }
 SlmdDemoAccountingAppPresenter >> renderView [
 
-	self application username isNil
-		ifTrue: [
-			self renderChildViewForModel: self model login atSlotNamed: #layout.
-			self application username: 'foobar' ]
-		ifFalse: [
-			self removeAllChildPresentersAtSlotNamed: #layout.
-			self renderAllChildViewsForModels: {self model layout} atSlotNamed: #layout ].
+	self renderAllChildViewsForModels: {self model layout} atSlotNamed: #layout.
 
+]
+
+{ #category : 'view' }
+SlmdDemoAccountingAppPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self view
+		when: SlmdLoginRequested send: #handleLoginRequested: to: self
 ]

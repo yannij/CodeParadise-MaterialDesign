@@ -189,7 +189,7 @@ SlmdObjectView class >> template [
 	<webResource: #html>
 
 	^ '<div id="container">
-  <slot name="card"></slot>
+  <slot name="fields"></slot>
   <slot name="details"></slot>
 </div>'
 ]
@@ -315,21 +315,42 @@ SlmdObjectView >> fieldFor: fieldInfo map: map [
 
 { #category : 'rendering' }
 SlmdObjectView >> fields: list map: map [
-	| details fields |
+	| fields |
 
 	self fieldElementsClear.
 
 	fields := #div asHtmlTag addClass: 'slmd-fields'; yourself.
-	details := SlDetails new.
-	details addClass: 'slmd-details'.
-	details propertyAt: 'summary' put: 'Fields'.
-	details propertyAt: 'open' put: true.
-	details appendChild: fields.
-
 	list do: [ :each |
 		fields appendChild: (self fieldFor: each map: map) ].
 
-	self replaceAllChildrenWith: details atSlotNamed: #card.
+	^ fields
+
+]
+
+{ #category : 'rendering' }
+SlmdObjectView >> fields: list map: map slot: slotName [
+	| element |
+
+	element := self fields: list map: map.
+	self replaceAllChildrenWith: element atSlotNamed: slotName.
+
+]
+
+{ #category : 'rendering' }
+SlmdObjectView >> fieldsInExpansion: list map: map summary: summary open: aBoolean slot: slotName [
+	| element expansion |
+
+	element := self fields: list map: map.
+
+	expansion := SlDetails new
+		addClass: 'slmd-details';
+		propertyAt: 'summary' put: summary;
+		propertyAt: 'open' put: aBoolean;
+		appendChild: element;
+		yourself.
+
+	self replaceAllChildrenWith: expansion atSlotNamed: slotName.
+
 
 ]
 

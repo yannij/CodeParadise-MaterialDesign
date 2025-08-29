@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdLogin',
-	#superclass : 'SlmdModel',
+	#superclass : 'SlmdObjectModel',
 	#instVars : [
 		'username',
 		'password',
@@ -10,6 +10,21 @@ Class {
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'ShoelaceComponents'
 }
+
+{ #category : 'converting' }
+SlmdLogin >> asMap [
+
+	^ Dictionary new
+		at: 'username' put: self username;
+		at: 'password' put: self password;
+		yourself
+]
+
+{ #category : 'metadata' }
+SlmdLogin >> fieldsData [
+
+	^ { 'username' -> #string. 'password' -> #string }
+]
 
 { #category : 'initialization' }
 SlmdLogin >> initialize [

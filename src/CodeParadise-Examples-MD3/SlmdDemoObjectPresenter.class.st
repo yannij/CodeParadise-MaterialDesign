@@ -26,7 +26,7 @@ SlmdDemoObjectPresenter >> renderFields [
 	| props |
 
 	props := self model asMap.
-	self view fields: self model fieldsData map: props.
+	self view fieldsInExpansion: self model fieldsData map: props summary: 'Fields' open: true slot: #fields.
 
 ]
 

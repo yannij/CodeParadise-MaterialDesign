@@ -51,6 +51,11 @@ SlmdWebApplication >> applicationModel [
 	^ self
 ]
 
+{ #category : 'actions - toolbar' }
+SlmdWebApplication >> doLogout [
+
+]
+
 { #category : 'initialization' }
 SlmdWebApplication >> initialize [
 
@@ -214,6 +219,8 @@ SlmdWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
 		addNativeSubtype: #modalNav groupTag: #primary iconName: 'list' iconLabel: 'Menu';
 		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings';
+		addNativeSubtype: #login groupTag: #primary iconName: 'box-arrow-in-right' iconLabel: 'Login';
+		addNativeSubtype: #logout groupTag: #primary iconName: 'box-arrow-left' iconLabel: 'Logout';
 		yourself.
 
 ]

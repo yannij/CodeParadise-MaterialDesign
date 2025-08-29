@@ -143,22 +143,25 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	subtype = #layoutSettingChange ifTrue: [
 		^ self doLayoutSettings: anObject ].
 
-	subtype = #'refresh' ifTrue: [
+	subtype = #refresh ifTrue: [
 		^ self doRefresh: anObject ].
 
-	subtype = #'save' ifTrue: [
+	subtype = #logout ifTrue: [
+		^ self application doLogout ].
+
+	subtype = #save ifTrue: [
 		^ self doSave: anObject].
 
-	subtype = #'cancel' ifTrue: [
+	subtype = #cancel ifTrue: [
 		^ self doCancel: anObject ].
 
-	subtype = #'update' ifTrue: [
+	subtype = #update ifTrue: [
 		^ self doUpdate: anObject ].
 
-	subtype = #'delete' ifTrue: [
+	subtype = #delete ifTrue: [
 		^ self doDelete: anObject ].
 
-	subtype = #'create' ifTrue: [
+	subtype = #create ifTrue: [
 		^ self doCreate: anObject ].
 
 	self model pane1 handleUserEvent: anObject; valueChanged.

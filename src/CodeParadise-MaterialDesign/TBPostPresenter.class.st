@@ -11,6 +11,6 @@ TBPostPresenter >> renderView [
 	| props |
 
 	props := self model asMap.
-	self view fields: self model fieldsData map: props.
+	self view fields: self model fieldsData map: props  slot: #fields.
 
 ]

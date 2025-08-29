@@ -435,6 +435,13 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 
 ]
 
+{ #category : 'actions - toolbar' }
+SlmdResponsiveLayoutView >> findLoginDialog [
+
+	^ CpHtmlElement documentBody firstDescendantMatching: '#login-dialog'
+
+]
+
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> floatingToolbarOff [
 
@@ -696,6 +703,14 @@ SlmdResponsiveLayoutView >> layoutWidthCached [
 SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
 
 	layoutWidthCached := anObject
+]
+
+{ #category : 'actions - toolbar' }
+SlmdResponsiveLayoutView >> loginOpen [
+
+	self logTrace: 'loginOpen'.
+	self findLoginDialog show
+
 ]
 
 { #category : 'actions - toolbar' }
@@ -1047,6 +1062,8 @@ SlmdResponsiveLayoutView >> triggerUserEvent: aUserEventSpec [
 		^ self modalNavOpen ].
 	subtype = #settingsOpen ifTrue: [
 		^ self modalSettingsOpen ].
+	subtype = #login ifTrue: [
+		^ self loginOpen ].
 
 	type = #nav ifTrue: [
 		^ self announceNavSubtype: subtype navTo: (aUserEventSpec at: #data ifAbsent: []) ].

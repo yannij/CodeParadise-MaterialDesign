@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'repository',
 		'modelClass',
-		'username',
-		'login'
+		'username'
 	],
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
@@ -201,6 +200,20 @@ SlmdDemoAccountingApp >> applicationTitle [
 	^ 'Accounting'
 ]
 
+{ #category : 'accessing' }
+SlmdDemoAccountingApp >> clientBehaviorClass [
+
+	^ SlmdDemoAccountingAppClientBehavior
+]
+
+{ #category : 'actions - toolbar' }
+SlmdDemoAccountingApp >> doLogout [
+
+	self traceCr: 'doLogout'.
+	self username: nil.
+
+]
+
 { #category : 'initialization' }
 SlmdDemoAccountingApp >> initialize [
 	| pane1Model pane2Model pane1Content |
@@ -209,7 +222,6 @@ SlmdDemoAccountingApp >> initialize [
 
 	self repositorySetup.
 
-	login := SlmdLogin new.
 	modelClass := SlmdDemoAccountingCompany.
 	pane1Content := SlmdListDetailModel new.
 	pane1Content listSet: self allModels.
@@ -223,18 +235,6 @@ SlmdDemoAccountingApp >> initialize [
 	self setUpAppBar2.
 	self setDetailWithIndex: 1.
 
-]
-
-{ #category : 'accessing' }
-SlmdDemoAccountingApp >> login [
-
-	^ login
-]
-
-{ #category : 'accessing' }
-SlmdDemoAccountingApp >> login: anObject [
-
-	login := anObject
 ]
 
 { #category : 'model' }
@@ -272,6 +272,8 @@ SlmdDemoAccountingApp >> navItems [
 
 	^ OrderedCollection new
 		add: (self nativeEventSpecAt: #settingsOpen);
+		add: (self nativeEventSpecAt: #login);
+		add: (self nativeEventSpecAt: #logout);
 		addAll: self navItemsSpecs;
 		yourself.
 ]
