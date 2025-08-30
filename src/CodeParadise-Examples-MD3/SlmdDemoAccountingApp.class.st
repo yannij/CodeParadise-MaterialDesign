@@ -214,6 +214,14 @@ SlmdDemoAccountingApp >> doLogout [
 
 ]
 
+{ #category : 'events' }
+SlmdDemoAccountingApp >> handleLoginRequested: anObject [
+
+	self traceCr: 'handleLoginRequested:'.
+	self username: 'foobar'.
+
+]
+
 { #category : 'initialization' }
 SlmdDemoAccountingApp >> initialize [
 	| pane1Model pane2Model pane1Content |

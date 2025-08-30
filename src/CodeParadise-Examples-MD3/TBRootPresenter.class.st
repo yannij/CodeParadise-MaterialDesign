@@ -1,6 +1,6 @@
 Class {
 	#name : 'TBRootPresenter',
-	#superclass : 'SlmdPresenter',
+	#superclass : 'SlmdWebPresenter',
 	#category : 'CodeParadise-Examples-MD3-TinyBlog',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'TinyBlog'

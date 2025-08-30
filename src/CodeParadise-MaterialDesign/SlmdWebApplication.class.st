@@ -56,6 +56,13 @@ SlmdWebApplication >> doLogout [
 
 ]
 
+{ #category : 'events' }
+SlmdWebApplication >> handleLoginRequested: anObject [
+
+	self traceCr: 'handleLoginRequested:'.
+
+]
+
 { #category : 'initialization' }
 SlmdWebApplication >> initialize [
 

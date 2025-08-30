@@ -9,6 +9,12 @@ Class {
 	#tag : 'ShoelaceBase'
 }
 
+{ #category : 'testing' }
+SlmdPresenter class >> isAbstract [
+
+	^ self == SlmdPresenter
+]
+
 { #category : 'accessing' }
 SlmdPresenter class >> traceLevel [
 

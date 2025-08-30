@@ -1,13 +1,13 @@
 Class {
-	#name : 'MD3ExampleApplicationView',
-	#superclass : 'CpView',
+	#name : 'MD3ExampleAppView',
+	#superclass : 'SlmdView',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'SimpleDemo'
 }
 
 { #category : 'web resources' }
-MD3ExampleApplicationView class >> globalStyle [
+MD3ExampleAppView class >> globalStyle [
 
 	<webResource: #css>
 
@@ -23,7 +23,7 @@ body {
 ]
 
 { #category : 'web resources' }
-MD3ExampleApplicationView class >> style [
+MD3ExampleAppView class >> style [
 
 	<webResource: #css>
 
@@ -31,7 +31,7 @@ MD3ExampleApplicationView class >> style [
 ]
 
 { #category : 'web resources' }
-MD3ExampleApplicationView class >> template [
+MD3ExampleAppView class >> template [
 
 	<webResource: #html>
 

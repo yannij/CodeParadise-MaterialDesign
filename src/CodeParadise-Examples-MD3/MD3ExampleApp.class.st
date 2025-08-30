@@ -3,7 +3,7 @@ I am a simple WebApplication based on Model-View-Presenter pattern.
 I only live in the ServerEnvironment.
 "
 Class {
-	#name : 'MD3ExampleApplication',
+	#name : 'MD3ExampleApp',
 	#superclass : 'SlmdWebApplication',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'accessing' }
-MD3ExampleApplication class >> allowedPackages [
+MD3ExampleApp class >> allowedPackages [
 
 	"Answer a collection of Packages which are allowed to contain classes to install in the receiver.
 
@@ -23,27 +23,33 @@ MD3ExampleApplication class >> allowedPackages [
 ]
 
 { #category : 'accessing' }
-MD3ExampleApplication class >> app [
+MD3ExampleApp class >> app [
 	"self register"
 
 	^ #'Shoelace-MD3'
 ]
 
 { #category : 'accessing' }
-MD3ExampleApplication class >> appName [
+MD3ExampleApp class >> appName [
 	"Answer name to be shown in AppBar headline"
 
 	^ #'MD3 Example - CodeParadise'
 ]
 
 { #category : 'accessing' }
-MD3ExampleApplication >> applicationPresenterClass [
+MD3ExampleApp >> applicationPresenterClass [
 
-	^ MD3ExampleApplicationPresenter
+	^ MD3ExampleAppPresenter
+]
+
+{ #category : 'presenter' }
+MD3ExampleApp >> clientBehaviorClass [
+
+	^ MD3ExampleAppClientBehavior
 ]
 
 { #category : 'initialization' }
-MD3ExampleApplication >> initialize [
+MD3ExampleApp >> initialize [
 	| pane1Model pane2Model |
 
 	super initialize.
@@ -58,7 +64,7 @@ MD3ExampleApplication >> initialize [
 ]
 
 { #category : 'actions' }
-MD3ExampleApplication >> load [
+MD3ExampleApp >> load [
 
 	super load.
 
@@ -67,16 +73,17 @@ MD3ExampleApplication >> load [
 ]
 
 { #category : 'initialization' }
-MD3ExampleApplication >> navItems [
+MD3ExampleApp >> navItems [
 
 	^ OrderedCollection new
 		add: (self nativeEventSpecAt: #settingsOpen);
+		add: (self nativeEventSpecAt: #login);
 		addAll: self navItemsSpecs;
 		yourself.
 ]
 
 { #category : 'initialization' }
-MD3ExampleApplication >> setUpCustomEvents [
+MD3ExampleApp >> setUpCustomEvents [
 
 	super setUpCustomEvents.
 
