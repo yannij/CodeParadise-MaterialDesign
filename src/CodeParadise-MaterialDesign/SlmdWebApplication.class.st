@@ -51,6 +51,12 @@ SlmdWebApplication >> applicationModel [
 	^ self
 ]
 
+{ #category : 'accessing' }
+SlmdWebApplication >> customColorTheme [
+
+	^ nil
+]
+
 { #category : 'actions - toolbar' }
 SlmdWebApplication >> doLogout [
 
@@ -60,6 +66,15 @@ SlmdWebApplication >> doLogout [
 SlmdWebApplication >> handleLoginRequested: anObject [
 
 	self traceCr: 'handleLoginRequested:'.
+
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> handleSetDetail: anObject [
+
+	self traceCr: 'handleSetDetail:'.
+
+	self setDetailWithIndex: (anObject parameterAt: #index).
 
 ]
 
@@ -192,12 +207,22 @@ SlmdWebApplication >> setDetailAddNew [
 ]
 
 { #category : 'model' }
+SlmdWebApplication >> setDetailNone [
+
+	self layout pane1 paneContent detail: nil.
+	self layout pane2 setPaneContent: nil.
+
+]
+
+{ #category : 'model' }
 SlmdWebApplication >> setDetailWithIndex: index [
 	| list detail |
 
 	list := self layout pane1 paneContent list.
-	detail := list at: index.
+	list isEmpty ifTrue: [
+		^ self setDetailNone ].
 
+	detail := list at: index.
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail.
 

@@ -57,7 +57,7 @@ SlmdLayoutSettingsModel >> colorThemeName: anObject [
 { #category : 'color theme' }
 SlmdLayoutSettingsModel >> defaultColorThemeName [
 
-	^ #blue
+	^ nil
 ]
 
 { #category : 'typography' }

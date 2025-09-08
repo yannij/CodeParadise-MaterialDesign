@@ -369,6 +369,12 @@ SlmdResponsiveLayoutView >> bodySplitPanelAdapt [
 
 ]
 
+{ #category : 'accessing - settings' }
+SlmdResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
+
+	self customPropertyAt: customPropertyName put: rgb
+]
+
 { #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 
@@ -396,6 +402,16 @@ SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 SlmdResponsiveLayoutView >> colorThemeName [
 
 	^ self layoutSettingsView colorThemeName
+]
+
+{ #category : 'accessing - settings' }
+SlmdResponsiveLayoutView >> colorThemePut: theme [
+	| element |
+
+	element := CpHtmlElement documentBody.
+	theme do: [ :each |
+		element customPropertyAt: each key put: each value ]
+
 ]
 
 { #category : 'layout' }
@@ -1083,6 +1099,7 @@ SlmdResponsiveLayoutView >> triggerUserEvent: aUserEventSpec [
 SlmdResponsiveLayoutView >> updateGlobalStyle [
 
 	self logTrace5: 'colorThemeName = ', self colorThemeName printString method: 'updateGlobalStyle'.
+	self colorThemeName ifNil: [ ^ self ].
 	CpHtmlElement documentAddStyle: self themeUpdate.
 
 ]

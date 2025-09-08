@@ -77,6 +77,9 @@ SlmdPaneModel >> paneContent: anObject [
 { #category : 'accessing' }
 SlmdPaneModel >> setPaneContent: anObject [
 
+	"self paneContent: anObject."
+	"self paneContent setContent: anObject."
+	"self paneContent ifNotNil: [ :value | value setContent: anObject ]."
 	self paneContent: anObject.
 	self valueChanged.
 

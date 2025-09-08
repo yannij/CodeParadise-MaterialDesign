@@ -113,6 +113,11 @@ SlmdItemWrapperModel >> isUpdating [
 	^ self crudState = #updating
 ]
 
+{ #category : 'todo' }
+SlmdItemWrapperModel >> setContent: anObject [
+	"TODO"
+]
+
 { #category : 'accessing' }
 SlmdItemWrapperModel >> wrappedModel [
 

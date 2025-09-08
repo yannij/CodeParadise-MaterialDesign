@@ -110,7 +110,7 @@ SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
 	self logTrace: anObject printString method: 'doSetDetail:'.
 
 	self view secondaryPaneOnly.
-	self application setDetailWithIndex: (anObject parameterAt: #index).
+	self application handleSetDetail: anObject.
 
 ]
 
@@ -225,5 +225,6 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 	super viewCreated.
 
 	self subscribeToUserEvent.
-
+	self application customColorTheme ifNotNil: [ :value |
+		self view colorThemePut: value ].
 ]

@@ -239,7 +239,7 @@ SlmdDemoAccountingApp >> initialize [
 	"layout := SlmdResponsiveLayoutModel new."
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
+	layout layoutSettings colorThemeName: #green; fontFamily: #'var(--sl-font-serif)'.
 	self setUpAppBar2.
 	self setDetailWithIndex: 1.
 
