@@ -60,42 +60,6 @@ SlmdResponsiveLayoutPresenter >> doDelete: anObject [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doLayoutSettings: anObject [
-	| aspect aspectValue |
-
-	self logTrace5: anObject printString method: 'handleViewAction:'.
-	aspect := anObject parameterAt: #aspect.
-	aspectValue := anObject parameterAt: #value.
-
-	aspect = #layoutUpdate ifTrue: [
-		self layoutUpdate: aspectValue.
-		^ self ].
-
-	self logTrace5: aspect asString, ' BEFORE: ', (self model layoutSettings perform: aspect) printString.
-	self model layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
-	self logTrace5: aspect asString, '  AFTER: ', (self model layoutSettings perform: aspect) printString.
-
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doNavTo: anObject [
-
-	self application navTo: (anObject parameterAt: #data).
-
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doRefresh: anObject [
-
-	self logTrace: anObject printString method: 'doRefresh:'.
-
-	self application refresh.
-	"self model pane1 paneContent valueChanged.
-	self model pane1 valueChanged."
-
-]
-
-{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doSave: anObject [
 
 	self application listDetailAdd: anObject.
@@ -108,6 +72,9 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
 
 	self logTrace: anObject printString method: 'doSetDetail:'.
+
+	anObject isMXSystem ifTrue: [
+		self logTrace: 'anObject is MXSystem' ].
 
 	self view secondaryPaneOnly.
 	self application handleSetDetail: anObject.
@@ -134,20 +101,11 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	subtype = #back ifTrue: [
 		^ self view primaryPaneOnly ].
 
-	subtype = #navTo ifTrue: [
-		^ self doNavTo: anObject ].
-
 	subtype = #setDetail ifTrue: [
 		^ self doSetDetail: anObject ].
 
-	subtype = #layoutSettingChange ifTrue: [
-		^ self doLayoutSettings: anObject ].
-
-	subtype = #refresh ifTrue: [
-		^ self doRefresh: anObject ].
-
-	subtype = #logout ifTrue: [
-		^ self application doLogout ].
+	subtype = #update ifTrue: [
+		^ self doUpdate: anObject ].
 
 	subtype = #save ifTrue: [
 		^ self doSave: anObject].
@@ -155,37 +113,20 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	subtype = #cancel ifTrue: [
 		^ self doCancel: anObject ].
 
-	subtype = #update ifTrue: [
-		^ self doUpdate: anObject ].
-
 	subtype = #delete ifTrue: [
 		^ self doDelete: anObject ].
 
 	subtype = #create ifTrue: [
 		^ self doCreate: anObject ].
 
-	self model pane1 handleUserEvent: anObject; valueChanged.
+	self application handleUserEvent: anObject.
 
 ]
 
-{ #category : 'events' }
-SlmdResponsiveLayoutPresenter >> layoutUpdate: props [
-	| m |
+{ #category : 'accessing - model' }
+SlmdResponsiveLayoutPresenter >> layout [
 
-	self logTrace5: props printString method: 'layoutUpdate:'.
-
-	m := self model layoutSettings.
-	props keysAndValuesDo: [ :k :v | | setAccessor |
-		setAccessor := (k, ':') asSymbol.
-		self logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
-		m perform: setAccessor with: v.
-		self logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
-		].
-
-	"The appbar leading action might depend on two pane mode"
-	self model appBar1 valueChanged.
-	self model appBar2 valueChanged.
-
+	^ self model
 ]
 
 { #category : 'rendering' }

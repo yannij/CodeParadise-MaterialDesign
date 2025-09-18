@@ -7,22 +7,19 @@ Class {
 }
 
 { #category : 'initialization' }
-SlmdToolbarPresenter >> actionGroupToUse [
+SlmdToolbarPresenter >> clearAllSlots [
 
-	self subclassResponsibility
+	self removeAllChildPresentersAtSlotNamed: #toolbar.
+	self view removeChildrenAtSlotNamed: #toolbar.
+
+	self removeAllChildPresentersAtSlotNamed: #fab.
+	self view removeChildrenAtSlotNamed: #fab.
+
 ]
 
-{ #category : 'view' }
-SlmdToolbarPresenter >> actionItemFabOrNil [
+{ #category : 'model' }
+SlmdToolbarPresenter >> modelChanged: aValueChanged [
 
-	^ self application userEventSpecFAB
-]
+	self clearAllSlots.
 
-{ #category : 'view' }
-SlmdToolbarPresenter >> actionItemsToUse [
-	| list groupName |
-
-	list := self application actionItems.
-	groupName := self actionGroupToUse.
-	^ list select: [ :each | each groupTag = groupName ]
 ]

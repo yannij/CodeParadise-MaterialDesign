@@ -6,16 +6,10 @@ Class {
 	#tag : 'ShoelaceComponents'
 }
 
-{ #category : 'initialization' }
-SlmdFabPresenter >> actionGroupToUse [
-
-	^ #fab
-]
-
 { #category : 'rendering' }
 SlmdFabPresenter >> renderView [
 
-	self actionItemFabOrNil ifNotNil: [ :value |
+	self model fab ifNotNil: [ :value |
 		self view renderFab: value asDictionary ].
 
 ]

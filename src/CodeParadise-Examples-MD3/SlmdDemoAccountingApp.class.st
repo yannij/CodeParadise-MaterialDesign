@@ -346,12 +346,6 @@ SlmdDemoAccountingApp >> setUpCustomEvents [
 ]
 
 { #category : 'accessing' }
-SlmdDemoAccountingApp >> userEventSpecFAB [
-
-	^ self nativeEventSpecs detect: [ :each | each groupTag = #fab ] ifNone: []
-]
-
-{ #category : 'accessing' }
 SlmdDemoAccountingApp >> username [
 
 	^ username

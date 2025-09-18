@@ -128,7 +128,7 @@ SlmdPaneLayoutView >> primaryPaneOnly [
 	self layoutViewLazy
 		showNavBar: true;
 		showNavBarAdapt: true;
-		floatingToolbarOff;
+		"floatingToolbarOff;"
 		adjustBodyHeight.
 	self primaryPaneDisplay: true.
 	self secondaryPaneDisplay: false.
@@ -153,7 +153,7 @@ SlmdPaneLayoutView >> secondaryPaneOnly [
 	self layoutViewLazy
 		showNavBar: false;
 		showNavBarAdapt: false;
-		floatingToolbarOn;
+		"floatingToolbarOn;"
 		adjustBodyHeight.
 	self primaryPaneDisplay: false.
 	self secondaryPaneDisplay: true.
@@ -187,7 +187,7 @@ SlmdPaneLayoutView >> useTwoPaneLayout [
 	self moveChildrenFromSlot: 'singlePaneLayoutP2' to: 'twoPaneLayoutP2'.
 	self shadowElementId: 'smdTwoPaneLayout' show: true.
 	self layoutViewLazy
-		floatingToolbarOn;
+		"floatingToolbarOn;"
 		"appBar2Display: false;"
 		"appBar2LeadingButtonDisplay: false;"
 		yourself.

@@ -15,16 +15,36 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdUserEventSpec class >> type: type subtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel [
+SlmdUserEventSpec class >> newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
-	^ self type: type subtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: nil
+	^ self new
+		eventType: #action;
+		eventSubtype: subtype;
+		groupTag: groupTag;
+		iconName: iconName;
+		iconLabel: iconLabel;
+		data: data;
+		yourself
 ]
 
 { #category : 'instance creation' }
-SlmdUserEventSpec class >> type: type subtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+SlmdUserEventSpec class >> newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
-		eventType: type;
+		eventType: #native;
+		eventSubtype: subtype;
+		groupTag: groupTag;
+		iconName: iconName;
+		iconLabel: iconLabel;
+		data: data;
+		yourself
+]
+
+{ #category : 'instance creation' }
+SlmdUserEventSpec class >> newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+
+	^ self new
+		eventType: #nav;
 		eventSubtype: subtype;
 		groupTag: groupTag;
 		iconName: iconName;

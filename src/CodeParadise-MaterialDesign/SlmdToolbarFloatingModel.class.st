@@ -5,3 +5,9 @@ Class {
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'ShoelaceComponents'
 }
+
+{ #category : 'initialization' }
+SlmdToolbarFloatingModel >> actionGroupToUse [
+
+	^ #float
+]

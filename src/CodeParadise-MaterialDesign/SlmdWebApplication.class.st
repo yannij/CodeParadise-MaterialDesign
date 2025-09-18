@@ -12,6 +12,12 @@ Class {
 }
 
 { #category : 'accessing' }
+SlmdWebApplication class >> traceLevel [
+
+	^ 3
+]
+
+{ #category : 'accessing' }
 SlmdWebApplication >> actionItems [
 
 	^ self userEventSpecs select: [ :each | each isActionType ]
@@ -20,21 +26,21 @@ SlmdWebApplication >> actionItems [
 { #category : 'events' }
 SlmdWebApplication >> addActionSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self userEventSpecs add: (SlmdUserEventSpec type: #action subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel).
+	self userEventSpecs add: (SlmdUserEventSpec newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
 
 ]
 
 { #category : 'events' }
 SlmdWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self nativeEventSpecs at: subtype put: (SlmdUserEventSpec type: #native subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel).
+	self nativeEventSpecs at: subtype put: (SlmdUserEventSpec newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
 
 ]
 
 { #category : 'events' }
 SlmdWebApplication >> addNavSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data [
 
-	self userEventSpecs add: (SlmdUserEventSpec type: #nav subtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
+	self userEventSpecs add: (SlmdUserEventSpec newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
 ]
 
 { #category : 'model' }
@@ -57,8 +63,44 @@ SlmdWebApplication >> customColorTheme [
 	^ nil
 ]
 
+{ #category : 'events' }
+SlmdWebApplication >> doLayoutSettings: anObject [
+	| aspect aspectValue |
+
+	self logTrace5: anObject printString method: 'handleViewAction:'.
+	aspect := anObject parameterAt: #aspect.
+	aspectValue := anObject parameterAt: #value.
+
+	aspect = #layoutUpdate ifTrue: [
+		self layoutUpdate: aspectValue.
+		^ self ].
+
+	self logTrace5: aspect asString, ' BEFORE: ', (self model layoutSettings perform: aspect) printString.
+	self model layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
+	self logTrace5: aspect asString, '  AFTER: ', (self model layoutSettings perform: aspect) printString.
+
+]
+
 { #category : 'actions - toolbar' }
 SlmdWebApplication >> doLogout [
+
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> doNavTo: anObject [
+
+	self navTo: (anObject parameterAt: #data).
+
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> doRefresh: anObject [
+
+	"self logTrace: anObject printString method: 'doRefresh:'."
+
+	self refresh.
+	"self model pane1 paneContent valueChanged.
+	self model pane1 valueChanged."
 
 ]
 
@@ -75,6 +117,46 @@ SlmdWebApplication >> handleSetDetail: anObject [
 	self traceCr: 'handleSetDetail:'.
 
 	self setDetailWithIndex: (anObject parameterAt: #index).
+
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> handleUserEvent: anObject [
+	| subtype |
+
+	subtype := anObject parameterAt: #subtype.
+
+	subtype = #navTo ifTrue: [
+		^ self doNavTo: anObject ].
+
+	subtype = #setDetail ifTrue: [
+		^ self doSetDetail: anObject ].
+
+	subtype = #layoutSettingChange ifTrue: [
+		^ self doLayoutSettings: anObject ].
+
+	subtype = #refresh ifTrue: [
+		^ self doRefresh: anObject ].
+
+	subtype = #logout ifTrue: [
+		^ self doLogout ].
+
+	subtype = #save ifTrue: [
+		^ self doSave: anObject].
+
+	subtype = #cancel ifTrue: [
+		^ self doCancel: anObject ].
+
+	subtype = #update ifTrue: [
+		^ self doUpdate: anObject ].
+
+	subtype = #delete ifTrue: [
+		^ self doDelete: anObject ].
+
+	subtype = #create ifTrue: [
+		^ self doCreate: anObject ].
+
+	self layout pane1 handleUserEvent: anObject; valueChanged.
 
 ]
 
@@ -100,6 +182,26 @@ SlmdWebApplication >> layout [
 SlmdWebApplication >> layout: anObject [
 
 	layout := anObject
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> layoutUpdate: props [
+	| m |
+
+	self logTrace5: props printString method: 'layoutUpdate:'.
+
+	m := self layout layoutSettings.
+	props keysAndValuesDo: [ :k :v | | setAccessor |
+		setAccessor := (k, ':') asSymbol.
+		self logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
+		m perform: setAccessor with: v.
+		self logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
+		].
+
+	"The appbar leading action might depend on two pane mode"
+	self layout appBar1 valueChanged.
+	self layout appBar2 valueChanged.
+
 ]
 
 { #category : 'model' }
@@ -131,6 +233,47 @@ SlmdWebApplication >> listDetailRemove: ignored [
 	listDetail listSet: self allModels.
 	self setDetailWithIndex: 1.
 
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> log: aString [
+
+	self traceCr: aString
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> logTrace5: aString [
+
+	self logTrace: aString aspect: nil level: 5
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> logTrace5: aString method: methodName [
+
+	self logTrace: aString aspect: self class name, '>>', methodName level: 5
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> logTrace: aString aspect: aspect [
+
+	self logTrace: aString aspect: aspect level: 3
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> logTrace: aString aspect: aspect level: level [
+
+	self class traceLevel < level ifTrue: [
+		^ self ].
+
+	aspect
+		ifNil: [ self log: aString ]
+		ifNotNil: [ self log: '[', aspect, '] ', aString ]
+]
+
+{ #category : 'logging' }
+SlmdWebApplication >> logTrace: aString method: methodName [
+
+	self logTrace: aString aspect: self class name, '>>', methodName
 ]
 
 { #category : 'model' }
@@ -189,6 +332,26 @@ SlmdWebApplication >> navItemsSpecs [
 
 { #category : 'events' }
 SlmdWebApplication >> navTo: data [
+]
+
+{ #category : 'actions' }
+SlmdWebApplication >> postLoad [
+	| toolbar |
+
+	super postLoad.
+
+	self layout fab fab: self userEventSpecFAB; valueChanged.
+
+	toolbar := self layout floatingToolbar.
+	(self userEventSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+		toolbar addItem: each ].
+	toolbar valueChanged.
+
+	toolbar := self layout dockedToolbar.
+	(self userEventSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+		toolbar addItem: each ].
+	toolbar valueChanged.
+
 ]
 
 { #category : 'events' }
@@ -259,9 +422,8 @@ SlmdWebApplication >> setUpNativeEvents [
 
 { #category : 'accessing' }
 SlmdWebApplication >> userEventSpecFAB [
-	"Subclasses may override"
 
-	^ nil
+	^ self nativeEventSpecs detect: [ :each | each groupTag = #fab ] ifNone: []
 ]
 
 { #category : 'accessing' }
@@ -274,4 +436,10 @@ SlmdWebApplication >> userEventSpecs [
 SlmdWebApplication >> userEventSpecs: anObject [
 
 	userEventSpecs := anObject
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> userEventSpecsInGroup: aGroupName [
+
+	^ self actionItems select: [ :each | each groupTag = aGroupName ]
 ]

@@ -10,34 +10,41 @@ Class {
 	#tag : 'ShoelaceComponents'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
+SlmdNavBarModel >> clearItems [
+
+	self iconButtons: OrderedCollection new.
+
+]
+
+{ #category : 'accessing' }
 SlmdNavBarModel >> iconButtons [
 
 	^ iconButtons
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SlmdNavBarModel >> iconButtons: anObject [
 
 	iconButtons := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 SlmdNavBarModel >> initialize [
 
 	super initialize.
 
-	self iconButtons: {'1-circle'. '2-circle' . '3-circle'. '4-circle'}.
+	self clearItems.
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SlmdNavBarModel >> isVisible [
 
 	^ isVisible
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SlmdNavBarModel >> isVisible: anObject [
 
 	isVisible := anObject

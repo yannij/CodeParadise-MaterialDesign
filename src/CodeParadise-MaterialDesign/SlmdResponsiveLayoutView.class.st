@@ -576,8 +576,8 @@ SlmdResponsiveLayoutView >> layoutProfileCompact [
 		#useTwoPaneBody -> false.
 		#showSidesheet -> false.
 		#showAppBar -> true.
-		#showDockedToolbar -> false.
-		#showFloatingToolba -> false
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
 	} asDictionary
 
 ]
@@ -593,8 +593,8 @@ SlmdResponsiveLayoutView >> layoutProfileExpanded [
 		#useTwoPaneBody -> true.
 		#showSidesheet -> false.
 		#showAppBar -> true.
-		#showDockedToolbar -> false.
-		#showFloatingToolba -> false
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
 	} asDictionary
 
 ]
@@ -610,8 +610,8 @@ SlmdResponsiveLayoutView >> layoutProfileExtraLarge [
 		#useTwoPaneBody -> true.
 		#showSidesheet -> true.
 		#showAppBar -> true.
-		#showDockedToolbar -> false.
-		#showFloatingToolba -> false
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
 	} asDictionary
 
 ]
@@ -627,8 +627,8 @@ SlmdResponsiveLayoutView >> layoutProfileLarge [
 		#useTwoPaneBody -> true.
 		#showSidesheet -> false.
 		#showAppBar -> true.
-		#showDockedToolbar -> false.
-		#showFloatingToolba -> false
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
 	} asDictionary
 
 ]
@@ -644,8 +644,8 @@ SlmdResponsiveLayoutView >> layoutProfileMedium [
 		#useTwoPaneBody -> true.
 		#showSidesheet -> false.
 		#showAppBar -> true.
-		#showDockedToolbar -> false.
-		#showFloatingToolba -> false
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
 	} asDictionary
 
 ]
@@ -889,8 +889,8 @@ SlmdResponsiveLayoutView >> setLayoutSettings: props [
 	self useTwoPaneBody: (props at: #useTwoPaneBody ifAbsent: [ false ]).
 	self showSidesheet: (props at: #showSidesheet ifAbsent: [ false ]).
 	self showAppBar: (props at: #showAppBar ifAbsent: [ false ]).
-	self showDockedToolbar: (props at: #showDockedToolbar ifAbsent: [ false ]).
-	self showFloatingToolbar: (props at: #showFloatingToolbar ifAbsent: [ false ]).
+	"self showDockedToolbar: (props at: #showDockedToolbar ifAbsent: [ false ]).
+	self showFloatingToolbar: (props at: #showFloatingToolbar ifAbsent: [ false ])."
 
 ]
 

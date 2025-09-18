@@ -40,8 +40,6 @@ SlmdToolbarView >> fabCssClass [
 SlmdToolbarView >> renderButtons: buttons [
 	| div iconButton |
 
-	self removeChildrenAtSlotNamed: 'toolbar'.
-
 	buttons ifNotEmpty: [
 		div := '' inHtmlTag: #div.
 		div addClass: self buttonCssClass.
@@ -56,7 +54,6 @@ SlmdToolbarView >> renderButtons: buttons [
 SlmdToolbarView >> renderFab: fab [
 	| div iconButton |
 
-	self removeChildrenAtSlotNamed: 'fab'.
 	div := '' inHtmlTag: #div.
 	div addClass: self fabCssClass.
 	iconButton := self iconButtonForAction: fab css: nil.

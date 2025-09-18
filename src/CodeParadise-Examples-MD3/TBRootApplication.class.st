@@ -119,9 +119,3 @@ TBRootApplication >> setUpAppBar2 [
 		yourself.
 
 ]
-
-{ #category : 'accessing' }
-TBRootApplication >> userEventSpecFAB [
-
-	^ self nativeEventSpecs detect: [ :each | each groupTag = #fab ] ifNone: []
-]

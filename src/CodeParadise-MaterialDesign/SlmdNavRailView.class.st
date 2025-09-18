@@ -257,6 +257,9 @@ SlmdNavRailView >> navrailNarrowBuildItem: aNavAction [
 
 	iconName := aNavAction at: #iconName.
 
+	(aNavAction at: #data) = #menu ifTrue: [
+		^ self renderMenu: aNavAction ].
+
 	^ #div asHtmlTag
 		addClass: 'smd-navrail-item';
 		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
@@ -272,6 +275,13 @@ SlmdNavRailView >> navrailNarrowBuildItem: aNavAction [
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself
+]
+
+{ #category : 'nav' }
+SlmdNavRailView >> renderMenu: aNavAction [
+
+	^ self dropdownMenu: (Array with: aNavAction) css: nil.
+
 ]
 
 { #category : 'nav' }

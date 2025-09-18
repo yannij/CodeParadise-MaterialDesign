@@ -81,3 +81,17 @@ SlmdToolbarFloatingView >> fabCssClass [
 
 	^ 'smd-toolbar-floating-fab'
 ]
+
+{ #category : 'nav' }
+SlmdToolbarFloatingView >> renderButtons: buttons [
+	| div iconButton |
+
+	buttons ifNotEmpty: [
+		div := '' inHtmlTag: #div.
+		div addClass: self buttonCssClass.
+		buttons withIndexDo: [ :eachItem :index |
+			iconButton := self pillButtonForAction: eachItem css: 'smd-toolbar-item'.
+			div appendChild: iconButton ].
+		self appendChild: div atSlotNamed: 'toolbar' ].
+
+]

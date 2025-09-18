@@ -92,6 +92,10 @@ MD3ExampleApp >> setUpCustomEvents [
 		addActionSubtype: #'2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle';
 		addActionSubtype: #'3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' ;
 		addActionSubtype: #'4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' ;
+		addActionSubtype: #'1-square' groupTag: #float iconName: '1-square' iconLabel: 'Square1';
+		addActionSubtype: #'2-square' groupTag: #float iconName: '2-square' iconLabel: 'Square2';
+		addActionSubtype: #'3-square' groupTag: #docked iconName: '3-square' iconLabel: 'Square3';
+		addActionSubtype: #'1-square' groupTag: #docked iconName: '1-square' iconLabel: 'Square1';
 		yourself.
 
 	self
@@ -99,9 +103,13 @@ MD3ExampleApp >> setUpCustomEvents [
 		addNavSubtype: #'suit-diamond' groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond' data: 'Diamond Page';
 		addNavSubtype: #'suit-heart' groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart' data: 'Heart Page';
 		addNavSubtype: #'suit-spade' groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade' data: 'Spade Page';
-		addNavSubtype: #'1-square' groupTag: #primary iconName: '1-square' iconLabel: 'Square1' data: 'Square-1';
-		addNavSubtype: #'2-square' groupTag: #primary iconName: '2-square' iconLabel: 'Square2' data: 'Square-2';
-		addNavSubtype: #'3-square' groupTag: #primary iconName: '3-square' iconLabel: 'Square3' data: 'Square-3';
 		yourself.
 
+]
+
+{ #category : 'as yet unclassified' }
+MD3ExampleApp >> userEventSpecFAB [
+	"Subclasses may override"
+
+	^ nil
 ]

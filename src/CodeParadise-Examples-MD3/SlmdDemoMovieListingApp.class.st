@@ -326,3 +326,10 @@ SlmdDemoMovieListingApp >> setUpCustomEvents [
 		yourself.
 
 ]
+
+{ #category : 'accessing' }
+SlmdDemoMovieListingApp >> userEventSpecFAB [
+	"Subclasses may override"
+
+	^ nil
+]

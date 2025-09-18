@@ -320,6 +320,32 @@ SlmdView >> moveChildrenFromSlot: fromSlot to: toSlot [
 ]
 
 { #category : 'utilities' }
+SlmdView >> pillButtonForAction: aNavAction css: cssClass [
+	| iconName iconLabel tag |
+
+	iconName := aNavAction at: #iconName.
+	iconLabel := aNavAction at: #iconLabel.
+
+	tag := #div asHtmlTag
+		appendChild: (self pillButtonLabel: iconLabel class: 'smd-toolbar-icon' navAction: aNavAction);
+		yourself.
+
+	cssClass ifNotNil: [ tag addClass: cssClass ].
+
+	^ tag
+]
+
+{ #category : 'utilities' }
+SlmdView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
+
+	^ (SlButton label: buttonLabal)
+		bePill;
+		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
+		addClass: cssClass;
+		yourself
+]
+
+{ #category : 'utilities' }
 SlmdView >> shadowElementId: elementId display: aBoolean [
 	| element |
 
