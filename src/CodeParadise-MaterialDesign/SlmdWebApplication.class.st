@@ -26,21 +26,21 @@ SlmdWebApplication >> actionItems [
 { #category : 'events' }
 SlmdWebApplication >> addActionSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self userEventSpecs add: (SlmdUserEventSpec newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
+	self userEventSpecs add: (SlmdNavActionModel newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
 
 ]
 
 { #category : 'events' }
 SlmdWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self nativeEventSpecs at: subtype put: (SlmdUserEventSpec newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
+	self nativeEventSpecs at: subtype put: (SlmdNavActionModel newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
 
 ]
 
 { #category : 'events' }
 SlmdWebApplication >> addNavSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data [
 
-	self userEventSpecs add: (SlmdUserEventSpec newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
+	self userEventSpecs add: (SlmdNavActionModel newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
 ]
 
 { #category : 'model' }

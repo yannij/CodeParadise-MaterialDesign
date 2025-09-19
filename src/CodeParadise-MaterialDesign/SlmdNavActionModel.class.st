@@ -1,6 +1,6 @@
 Class {
-	#name : 'SlmdUserEventSpec',
-	#superclass : 'Object',
+	#name : 'SlmdNavActionModel',
+	#superclass : 'SlmdModel',
 	#instVars : [
 		'eventType',
 		'eventSubtype',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdUserEventSpec class >> newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+SlmdNavActionModel class >> newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
 		eventType: #action;
@@ -28,7 +28,7 @@ SlmdUserEventSpec class >> newActionSubtype: subtype groupTag: groupTag iconName
 ]
 
 { #category : 'instance creation' }
-SlmdUserEventSpec class >> newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+SlmdNavActionModel class >> newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
 		eventType: #native;
@@ -41,7 +41,7 @@ SlmdUserEventSpec class >> newNativeSubtype: subtype groupTag: groupTag iconName
 ]
 
 { #category : 'instance creation' }
-SlmdUserEventSpec class >> newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+SlmdNavActionModel class >> newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
 		eventType: #nav;
@@ -54,7 +54,7 @@ SlmdUserEventSpec class >> newNavSubtype: subtype groupTag: groupTag iconName: i
 ]
 
 { #category : 'converting' }
-SlmdUserEventSpec >> asDictionary [
+SlmdNavActionModel >> asDictionary [
 
 	^ Dictionary new
 		at: #type put: eventType;
@@ -67,103 +67,103 @@ SlmdUserEventSpec >> asDictionary [
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> data [
+SlmdNavActionModel >> data [
 
 	^ data
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> data: anObject [
+SlmdNavActionModel >> data: anObject [
 
 	data := anObject
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> eventSubtype [
+SlmdNavActionModel >> eventSubtype [
 
 	^ eventSubtype
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> eventSubtype: anObject [
+SlmdNavActionModel >> eventSubtype: anObject [
 
 	eventSubtype := anObject
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> eventType [
+SlmdNavActionModel >> eventType [
 
 	^ eventType
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> eventType: anObject [
+SlmdNavActionModel >> eventType: anObject [
 
 	eventType := anObject
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> groupTag [
+SlmdNavActionModel >> groupTag [
 
 	^ groupTag
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> groupTag: anObject [
+SlmdNavActionModel >> groupTag: anObject [
 
 	groupTag := anObject
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> iconLabel [
+SlmdNavActionModel >> iconLabel [
 
 	^ iconLabel
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> iconLabel: anObject [
+SlmdNavActionModel >> iconLabel: anObject [
 
 	iconLabel := anObject
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> iconName [
+SlmdNavActionModel >> iconName [
 
 	^ iconName
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> iconName: anObject [
+SlmdNavActionModel >> iconName: anObject [
 
 	iconName := anObject
 ]
 
 { #category : 'testing' }
-SlmdUserEventSpec >> isActionType [
+SlmdNavActionModel >> isActionType [
 
 	^ self eventType = #action
 ]
 
 { #category : 'testing' }
-SlmdUserEventSpec >> isNativeType [
+SlmdNavActionModel >> isNativeType [
 
 	^ self eventType = #native
 ]
 
 { #category : 'testing' }
-SlmdUserEventSpec >> isNavType [
+SlmdNavActionModel >> isNavType [
 
 	^ self eventType = #nav
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> itemName [
+SlmdNavActionModel >> itemName [
 
 	^ eventSubtype
 ]
 
 { #category : 'accessing' }
-SlmdUserEventSpec >> itemName: anObject [
+SlmdNavActionModel >> itemName: anObject [
 
 	eventSubtype := anObject
 ]
