@@ -86,7 +86,7 @@ SlmdAppBarView >> appBarLeadingButtonDisplay: aBoolean [
 	| element |
 
 	element := self appBarMenuFind.
-	element ifNil: [ self logError: '**** appBarMenuFind answered nil' ].
+	element ifNil: [ self systemLog logError: '**** appBarMenuFind answered nil' ].
 	element ifNotNil: [
 		aBoolean
 			ifTrue: [ element removeStyleAt: 'display' ]

@@ -120,7 +120,7 @@ SlmdPaneLayoutView >> primaryPaneDisplay: aBoolean [
 { #category : 'actions' }
 SlmdPaneLayoutView >> primaryPaneOnly [
 
-	self logTrace5Method: 'primaryPaneOnly'.
+	self systemLog logTrace5: '' method: 'primaryPaneOnly'.
 
 	self isUsingSinglePaneLayout not ifTrue: [
 		^ self ].
@@ -145,7 +145,7 @@ SlmdPaneLayoutView >> secondaryPaneDisplay: aBoolean [
 { #category : 'actions' }
 SlmdPaneLayoutView >> secondaryPaneOnly [
 
-	self logTrace5Method: 'secondaryPaneOnly'.
+	self systemLog logTrace5: '' method: 'secondaryPaneOnly'.
 
 	self isUsingSinglePaneLayout not ifTrue: [
 		^ self ].

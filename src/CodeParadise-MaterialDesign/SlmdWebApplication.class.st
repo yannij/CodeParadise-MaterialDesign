@@ -11,10 +11,10 @@ Class {
 	#tag : 'ShoelaceBase'
 }
 
-{ #category : 'accessing' }
-SlmdWebApplication class >> traceLevel [
+{ #category : 'class initialization' }
+SlmdWebApplication class >> beLoaded [
 
-	^ 3
+	SlmdLog beLoaded
 ]
 
 { #category : 'accessing' }
@@ -67,7 +67,7 @@ SlmdWebApplication >> customColorTheme [
 SlmdWebApplication >> doLayoutSettings: anObject [
 	| aspect aspectValue |
 
-	self logTrace5: anObject printString method: 'handleViewAction:'.
+	self systemLog logTrace5: anObject printString method: 'handleViewAction:'.
 	aspect := anObject parameterAt: #aspect.
 	aspectValue := anObject parameterAt: #value.
 
@@ -188,14 +188,14 @@ SlmdWebApplication >> layout: anObject [
 SlmdWebApplication >> layoutUpdate: props [
 	| m |
 
-	self logTrace5: props printString method: 'layoutUpdate:'.
+	self systemLog logTrace5: props printString method: 'layoutUpdate:'.
 
 	m := self layout layoutSettings.
 	props keysAndValuesDo: [ :k :v | | setAccessor |
 		setAccessor := (k, ':') asSymbol.
-		self logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
+		self systemLog logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
 		m perform: setAccessor with: v.
-		self logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
+		self systemLog logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
 		].
 
 	"The appbar leading action might depend on two pane mode"
@@ -236,44 +236,9 @@ SlmdWebApplication >> listDetailRemove: ignored [
 ]
 
 { #category : 'logging' }
-SlmdWebApplication >> log: aString [
-
-	self traceCr: aString
-]
-
-{ #category : 'logging' }
-SlmdWebApplication >> logTrace5: aString [
-
-	self logTrace: aString aspect: nil level: 5
-]
-
-{ #category : 'logging' }
 SlmdWebApplication >> logTrace5: aString method: methodName [
 
 	self logTrace: aString aspect: self class name, '>>', methodName level: 5
-]
-
-{ #category : 'logging' }
-SlmdWebApplication >> logTrace: aString aspect: aspect [
-
-	self logTrace: aString aspect: aspect level: 3
-]
-
-{ #category : 'logging' }
-SlmdWebApplication >> logTrace: aString aspect: aspect level: level [
-
-	self class traceLevel < level ifTrue: [
-		^ self ].
-
-	aspect
-		ifNil: [ self log: aString ]
-		ifNotNil: [ self log: '[', aspect, '] ', aString ]
-]
-
-{ #category : 'logging' }
-SlmdWebApplication >> logTrace: aString method: methodName [
-
-	self logTrace: aString aspect: self class name, '>>', methodName
 ]
 
 { #category : 'model' }
@@ -418,6 +383,12 @@ SlmdWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #logout groupTag: #primary iconName: 'box-arrow-left' iconLabel: 'Logout';
 		yourself.
 
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> systemLog [
+
+	^ SlmdLog
 ]
 
 { #category : 'accessing' }

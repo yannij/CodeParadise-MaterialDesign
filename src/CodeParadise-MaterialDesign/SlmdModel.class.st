@@ -10,3 +10,9 @@ Class {
 SlmdModel >> handleUserEvent: aBasicEvent [
 	"Hook to receive UI events for handling"
 ]
+
+{ #category : 'accessing' }
+SlmdModel >> systemLog [
+
+	^ SlmdLog
+]

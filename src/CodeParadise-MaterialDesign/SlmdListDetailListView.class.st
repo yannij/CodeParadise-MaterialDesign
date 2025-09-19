@@ -69,7 +69,7 @@ SlmdListDetailListView >> renderTextSlot: slotName value: aString index: index [
 { #category : 'rendering' }
 SlmdListDetailListView >> setDetail: index [
 
-	self logTrace5: index printString method: 'setDetail:'.
+	self systemLog logTrace5: index printString method: 'setDetail:'.
 
 	self layoutViewFind announceActionSubtype: #setDetail key: #index value: index.
 

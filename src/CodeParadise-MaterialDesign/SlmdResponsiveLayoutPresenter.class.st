@@ -71,7 +71,7 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
 
-	self logTrace: anObject printString method: 'doSetDetail:'.
+	self systemLog logTrace: anObject printString method: 'doSetDetail:'.
 
 	anObject isMXSystem ifTrue: [
 		self logTrace: 'anObject is MXSystem' ].
@@ -94,7 +94,7 @@ SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	| subtype |
 
-	self logTrace: anObject printString method: 'handleUserEvent:'.
+	self systemLog logTrace: anObject printString method: 'handleUserEvent:'.
 
 	subtype := anObject parameterAt: #subtype.
 

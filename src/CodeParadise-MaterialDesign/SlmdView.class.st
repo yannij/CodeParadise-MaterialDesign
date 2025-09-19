@@ -1,9 +1,6 @@
 Class {
 	#name : 'SlmdView',
 	#superclass : 'CpView',
-	#classVars : [
-		'TraceLevel'
-	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'ShoelaceBase'
@@ -13,18 +10,6 @@ Class {
 SlmdView class >> eventAspectCrud [
 
 	^ #crud
-]
-
-{ #category : 'accessing' }
-SlmdView class >> traceLevel [
-
-	^ TraceLevel ifNil: [ TraceLevel := 3 ]
-]
-
-{ #category : 'accessing' }
-SlmdView class >> traceLevel: anObject [
-
-	^ TraceLevel := anObject
 ]
 
 { #category : 'events' }
@@ -222,68 +207,11 @@ SlmdView >> layoutViewLazy [
 ]
 
 { #category : 'logging' }
-SlmdView >> log: aString [
-
-	self traceCr: aString
-]
-
-{ #category : 'logging' }
-SlmdView >> logError: aString [
-
-	self log: '[Error] ', aString
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace5: aString [
-
-	self logTrace: aString aspect: nil level: 5
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace5: aString method: methodName [
-
-	self logTrace: aString aspect: self class name, '>>', methodName level: 5
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace5Method: methodName [
-
-	self logTrace5: '' method: methodName
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace: aString [
-
-	self logTrace: aString aspect: nil
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace: aString aspect: aspect [
-
-	self logTrace: aString aspect: aspect level: 3
-]
-
-{ #category : 'logging' }
-SlmdView >> logTrace: aString aspect: aspect level: level [
-
-	self class traceLevel < level ifTrue: [
-		^ self ].
-
-	aspect
-		ifNil: [ self log: aString ]
-		ifNotNil: [ self log: '[', aspect, '] ', aString ]
-]
-
-{ #category : 'logging' }
 SlmdView >> logTrace: aString method: methodName [
 
-	self logTrace: aString aspect: self class name, '>>', methodName
-]
-
-{ #category : 'logging' }
-SlmdView >> logTraceMethod: methodName [
-
-	self logTrace: self class name, '>>', methodName
+	"Invoked by presenter via view proxy,
+	so extra definition here, else the method reported DNU."
+	self systemLog logTrace: aString method: methodName
 ]
 
 { #category : 'find element' }
@@ -370,4 +298,10 @@ SlmdView >> shadowFirstDescendantMatching: cssSelectorString show: aBoolean [
 	element := self shadowedFirstDescendantMatching: cssSelectorString.
 	self element: element show: aBoolean.
 
+]
+
+{ #category : 'accessing' }
+SlmdView >> systemLog [
+
+	^ SlmdLog
 ]
