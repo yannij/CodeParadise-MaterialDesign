@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdItemWrapperView',
 	#superclass : 'SlmdLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceListDetail',
+	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceListDetail'
+	#tag : 'ListDetail'
 }
 
 { #category : 'web resources' }

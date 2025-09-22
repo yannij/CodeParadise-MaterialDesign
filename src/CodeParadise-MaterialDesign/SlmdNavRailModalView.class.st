@@ -1,9 +1,12 @@
 Class {
 	#name : 'SlmdNavRailModalView',
 	#superclass : 'SlmdNavRailView',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#instVars : [
+		'drawer'
+	],
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'NavAction'
 }
 
 { #category : 'web resources' }

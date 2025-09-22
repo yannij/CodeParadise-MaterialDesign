@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdToolbarView',
 	#superclass : 'SlmdLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'NavAction'
 }
 
 { #category : 'web resources' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdNavActionView',
 	#superclass : 'SlmdLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'NavAction'
 }
 
 { #category : 'web resources' }
@@ -16,10 +16,19 @@ SlmdNavActionView class >> template [
 </div>'
 ]
 
-{ #category : 'nav' }
+{ #category : 'rendering' }
 SlmdNavActionView >> buttonCssClass [
 
 	^ 'smd-toolbar-buttons'
+]
+
+{ #category : 'actions' }
+SlmdNavActionView >> handleNavAction: aNavAction [
+
+	self layoutViewLazy 
+		triggerUserEvent: aNavAction;
+		hideNavModal
+
 ]
 
 { #category : 'rendering' }
@@ -31,8 +40,7 @@ SlmdNavActionView >> navrailExpandedBuildItem: aNavAction [
 	^ #div asHtmlTag
 		addClass: 'smd-navrailx-item';
 		addClass: 'smd-nav-font';
-		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
-		"when: CpClickEvent basicPrimary send: #hide to: drawer;"
+		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
 		appendChild: ((SlIconButton named: iconName) addClass: 'smd-navrailx-icon'; yourself);
 		appendChild: (#div asHtmlTag
 			addClass: 'smd-navrailx-labelText';
@@ -52,8 +60,7 @@ SlmdNavActionView >> navrailNarrowBuildItem: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'smd-navrail-item';
-		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
-		"when: CpClickEvent basicPrimary send: #hide to: drawer;"
+		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-icon';
@@ -65,6 +72,13 @@ SlmdNavActionView >> navrailNarrowBuildItem: aNavAction [
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself
+]
+
+{ #category : 'rendering' }
+SlmdNavActionView >> renderMenu: aNavAction [
+
+	^ self dropdownMenu: (Array with: aNavAction) css: nil.
+
 ]
 
 { #category : 'rendering' }

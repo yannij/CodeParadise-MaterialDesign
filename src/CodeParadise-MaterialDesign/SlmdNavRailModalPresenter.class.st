@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdNavRailModalPresenter',
 	#superclass : 'SlmdNavRailPresenter',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'NavAction'
 }
 
 { #category : 'view' }

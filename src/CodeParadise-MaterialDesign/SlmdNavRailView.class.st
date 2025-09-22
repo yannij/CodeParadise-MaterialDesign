@@ -1,12 +1,9 @@
 Class {
 	#name : 'SlmdNavRailView',
 	#superclass : 'SlmdNavView',
-	#instVars : [
-		'drawer'
-	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'NavAction'
 }
 
 { #category : 'class initialization' }
@@ -121,14 +118,6 @@ SlmdNavRailView class >> template [
 ]
 
 { #category : 'nav' }
-SlmdNavRailView >> navContent: items [
-
-	^ self navRailExpanded
-		ifTrue: [ self navrailExpandedBuild: items ]
-		ifFalse: [ self navrailNarrowBuild: items ]
-]
-
-{ #category : 'nav' }
 SlmdNavRailView >> navrailExpandedBuild: list [
 	| element |
 
@@ -148,25 +137,6 @@ SlmdNavRailView >> navrailExpandedBuild: list [
 ]
 
 { #category : 'nav' }
-SlmdNavRailView >> navrailExpandedBuildItem: aNavAction [
-	| iconName |
-
-	iconName := aNavAction at: #iconName.
-
-	^ #div asHtmlTag
-		addClass: 'smd-navrailx-item';
-		addClass: 'smd-nav-font';
-		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
-		when: CpClickEvent basicPrimary send: #hide to: drawer;
-		appendChild: ((SlIconButton named: iconName) addClass: 'smd-navrailx-icon'; yourself);
-		appendChild: (#div asHtmlTag
-			addClass: 'smd-navrailx-labelText';
-			textContent: (aNavAction at: #iconLabel);
-			yourself);
-		yourself
-]
-
-{ #category : 'nav' }
 SlmdNavRailView >> navrailNarrowBuild: list [
 	| element |
 
@@ -179,37 +149,4 @@ SlmdNavRailView >> navrailNarrowBuild: list [
 		styleAt: 'height' put: '100%';
 		appendChild: element;
 		yourself
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navrailNarrowBuildItem: aNavAction [
-	| iconName |
-
-	iconName := aNavAction at: #iconName.
-
-	(aNavAction at: #data) = #menu ifTrue: [
-		^ self renderMenu: aNavAction ].
-
-	^ #div asHtmlTag
-		addClass: 'smd-navrail-item';
-		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
-		when: CpClickEvent basicPrimary send: #hide to: drawer;
-		appendChild: (
-			#div asHtmlTag
-				addClass: 'smd-navrail-icon';
-				appendChild: (SlIconButton named: iconName);
-				yourself);
-		appendChild: (
-			#div asHtmlTag
-				addClass: 'smd-navrail-labelText';
-				textContent: (aNavAction at: #iconLabel);
-				yourself);
-		yourself
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> renderMenu: aNavAction [
-
-	^ self dropdownMenu: (Array with: aNavAction) css: nil.
-
 ]

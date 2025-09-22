@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdModel',
 	#superclass : 'CpModel',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'Base'
 }
 
 { #category : 'actions' }

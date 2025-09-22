@@ -10,9 +10,9 @@ Class {
 		'activeToolbarFloating',
 		'activeFab'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'Layout'
 }
 
 { #category : 'class initialization' }
@@ -516,6 +516,15 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 		^ self ].
 
 	self layoutAdaptToWidth
+]
+
+{ #category : 'actions - nav' }
+SlmdResponsiveLayoutView >> hideNavModal [
+	| modalElement |
+
+	modalElement := self modalNavElementOrNil.
+	modalElement ifNotNil: [
+		modalElement hide ].
 ]
 
 { #category : 'initialization' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdColorTokenGenerator',
 	#superclass : 'Object',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'Base'
 }
 
 { #category : 'utilities' }

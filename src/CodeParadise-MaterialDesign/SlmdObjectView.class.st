@@ -5,9 +5,9 @@ Class {
 		'fieldElements',
 		'memento'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'Base'
 }
 
 { #category : 'class initialization' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdListDetailListPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceListDetail',
+	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceListDetail'
+	#tag : 'ListDetail'
 }
 
 { #category : 'rendering' }

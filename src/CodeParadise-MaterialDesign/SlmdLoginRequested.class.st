@@ -1,7 +1,7 @@
 Class {
 	#name : 'SlmdLoginRequested',
 	#superclass : 'Announcement',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'Base'
 }

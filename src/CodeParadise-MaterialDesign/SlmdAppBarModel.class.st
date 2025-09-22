@@ -6,9 +6,9 @@ Class {
 		'actionItems',
 		'actionGroupToUse'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'NavAction'
 }
 
 { #category : 'accessing' }

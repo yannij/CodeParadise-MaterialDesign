@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdToolbarDockedModel',
 	#superclass : 'SlmdToolbarModel',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'NavAction'
 }
 
 { #category : 'initialization' }

@@ -13,9 +13,9 @@ Class {
 		'floatingToolbar',
 		'fab'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'Layout'
 }
 
 { #category : 'accessing - derived' }

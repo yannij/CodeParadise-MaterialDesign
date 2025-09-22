@@ -8,9 +8,9 @@ Class {
 		'appBarModel',
 		'appBarDisplayed'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
+	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceComponents'
+	#tag : 'Layout'
 }
 
 { #category : 'instance creation' }

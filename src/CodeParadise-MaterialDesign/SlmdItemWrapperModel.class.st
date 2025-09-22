@@ -6,9 +6,9 @@ Class {
 		'wrappedModel',
 		'crudState'
 	],
-	#category : 'CodeParadise-MaterialDesign-ShoelaceListDetail',
+	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceListDetail'
+	#tag : 'ListDetail'
 }
 
 { #category : 'instance creation' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdNavActionPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-ShoelaceBase',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ShoelaceBase'
+	#tag : 'NavAction'
 }
 
 { #category : 'rendering' }
