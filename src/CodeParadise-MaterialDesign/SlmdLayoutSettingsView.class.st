@@ -34,6 +34,18 @@ SlmdLayoutSettingsView >> addAttributeContainerStyle: element [
 	^ element styleAt: 'padding-bottom' put: '12px'; yourself
 ]
 
+{ #category : 'actions' }
+SlmdLayoutSettingsView >> announceSetting: aspect value: anObject [
+
+	self layoutViewLazy serverAnnounce: (SlmdUserEvent eventParameter: {
+		#type -> #action.
+		#subtype -> #layoutSettingChange.
+		#aspect -> aspect.
+		#value -> anObject
+	} asDictionary).
+
+]
+
 { #category : 'settings - choosers' }
 SlmdLayoutSettingsView >> colorThemeBuildChooser: props [
 	| chooser selectedItem |
@@ -232,7 +244,7 @@ SlmdLayoutSettingsView >> layoutUpdate [
 		#useModalNav -> self useModalNav.
 	} asDictionary.
 
-	self layoutViewLazy announceSetting: #layoutUpdate value: props
+	self announceSetting: #layoutUpdate value: props
 ]
 
 { #category : 'initalize' }

@@ -6,7 +6,7 @@ Class {
 	#tag : 'ShoelaceComponents'
 }
 
-{ #category : 'view' }
+{ #category : 'rendering' }
 SlmdToolbarDockedPresenter >> renderView [
 	| list |
 

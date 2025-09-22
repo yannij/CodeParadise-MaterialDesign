@@ -75,9 +75,9 @@ SlmdWebApplication >> doLayoutSettings: anObject [
 		self layoutUpdate: aspectValue.
 		^ self ].
 
-	self logTrace5: aspect asString, ' BEFORE: ', (self model layoutSettings perform: aspect) printString.
-	self model layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
-	self logTrace5: aspect asString, '  AFTER: ', (self model layoutSettings perform: aspect) printString.
+	self systemLog logTrace5: aspect asString, ' BEFORE: ', (self layout layoutSettings perform: aspect) printString.
+	self layout layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
+	self systemLog logTrace5: aspect asString, '  AFTER: ', (self layout layoutSettings perform: aspect) printString.
 
 ]
 
@@ -202,6 +202,9 @@ SlmdWebApplication >> layoutUpdate: props [
 	self layout appBar1 valueChanged.
 	self layout appBar2 valueChanged.
 
+	self layout navRail valueChanged.
+	self layout navRailModal valueChanged.
+
 ]
 
 { #category : 'model' }
@@ -304,6 +307,10 @@ SlmdWebApplication >> postLoad [
 	| toolbar |
 
 	super postLoad.
+
+	self layout navBar navItems: self navItems; valueChanged.
+	self layout navRail navItems: self navItems; valueChanged.
+	self layout navRailModal navItems: self navItems; valueChanged.
 
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 

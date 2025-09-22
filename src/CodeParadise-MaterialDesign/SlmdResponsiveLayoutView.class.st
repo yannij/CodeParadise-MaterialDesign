@@ -5,6 +5,7 @@ Class {
 		'debounceTransition',
 		'layoutSettingsView',
 		'layoutWidthCached',
+		'navRailExpanded',
 		'activeToolbarDocked',
 		'activeToolbarFloating',
 		'activeFab'
@@ -184,8 +185,7 @@ SlmdResponsiveLayoutView class >> template [
   <div style="display: flex; flex-direction: column">
     <div style="height: 100%; flex: 1; display: flex; flex-direction: row">
       <div id="smdNavRegion" class="smd-navRegion">
-        <slot name="navRegion">
-        </slot>
+        <slot name="navRail"></slot>
       </div>
       <div id="smdBodyRegion" class="smd-body-region">
         <div style="flex: 100%">
@@ -207,7 +207,9 @@ SlmdResponsiveLayoutView class >> template [
     </div>
     <slot name="fab"></slot>
   </div>
-  <div id="smdModalDiv"></div>
+  <div id="smdModalDiv">
+    <slot name="navRailModal"></slot>
+  </div>
 </div>
 '
 ]
@@ -522,6 +524,7 @@ SlmdResponsiveLayoutView >> initialize [
 	super initialize.
 
 	layoutWidthCached := 0.
+	navRailExpanded := false.
 	activeToolbarDocked := false.
 	activeToolbarFloating := false.
 	activeFab := false.
@@ -757,24 +760,22 @@ SlmdResponsiveLayoutView >> navBarDisplay: aBoolean [
 { #category : 'accessing - settings' }
 SlmdResponsiveLayoutView >> navRailExpanded [
 
-	^ self layoutSettingsView navRailExpanded
+	^ navRailExpanded
 ]
 
 { #category : 'accessing - settings' }
 SlmdResponsiveLayoutView >> navRailExpanded: anObject [
 
-	self layoutSettingsView navRailExpanded: anObject
+	navRailExpanded := anObject
 ]
 
 { #category : 'navrail' }
 SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
-	| modalElement navComponent |
+	| modalElement |
 
 	self systemLog logTrace5: aBoolean printString method: 'navRailExpandedAdapt:'.
 
-	"Set type in nav view"
-	navComponent := SlmdNavRailView first.
-	navComponent ifNotNil: [ navComponent navRailExpanded: aBoolean ].
+	self navRailExpanded: aBoolean.
 
 	self navRegionFind
 		styleAt: 'flex'
@@ -782,8 +783,7 @@ SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 
 	modalElement := self modalNavElementOrNil.
 	modalElement ifNotNil: [
-		modalElement customPropertyAt: 'size' put: self navRailWidth printString, 'px'.
-		"SlmdNavRailView first navSetUp" ].
+		modalElement customPropertyAt: 'size' put: self navRailWidth printString, 'px' ].
 
 	self bodySplitPanelAdapt.
 
@@ -792,7 +792,7 @@ SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 { #category : 'navrail' }
 SlmdResponsiveLayoutView >> navRailWidth [
 
-	^ SlmdNavRailView first navRailWidth
+	^ self navRailExpanded ifTrue: [ 220 ] ifFalse: [ 96 ]
 ]
 
 { #category : 'navrail' }

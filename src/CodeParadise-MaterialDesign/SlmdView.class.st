@@ -55,18 +55,6 @@ SlmdView >> announceNavSubtype: subtype navTo: value [
 
 ]
 
-{ #category : 'events' }
-SlmdView >> announceSetting: aspect value: anObject [
-
-	self serverAnnounce: (SlmdUserEvent eventParameter: {
-		#type -> #action.
-		#subtype -> #layoutSettingChange.
-		#aspect -> aspect.
-		#value -> anObject
-	} asDictionary).
-
-]
-
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 	| menu trigger dropdown |
@@ -226,7 +214,7 @@ SlmdView >> modalDivFind [
 SlmdView >> modalNavElementOrNil [
 	| component |
 
-	component := SlmdNavRailView first.
+	component := SlmdNavRailModalView first.
 	^ component ifNil: [ nil ] ifNotNil: [ component drawer ].
 ]
 

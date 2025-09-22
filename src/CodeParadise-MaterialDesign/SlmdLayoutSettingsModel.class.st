@@ -138,7 +138,11 @@ SlmdLayoutSettingsModel >> navRailExpanded [
 { #category : 'accessing' }
 SlmdLayoutSettingsModel >> navRailExpanded: anObject [
 
-	navRailExpanded := anObject
+	navRailExpanded := anObject.
+	"self application layout navRail valueChanged."
+	self application layout navRail navItems do: [ :each | each valueChanged ].
+	"self application layout navRailModal valueChanged."
+
 ]
 
 { #category : 'accessing' }

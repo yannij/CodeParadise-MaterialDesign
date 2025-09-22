@@ -2,8 +2,7 @@ Class {
 	#name : 'SlmdNavRailView',
 	#superclass : 'SlmdNavView',
 	#instVars : [
-		'drawer',
-		'navRailExpanded'
+		'drawer'
 	],
 	#category : 'CodeParadise-MaterialDesign-ShoelaceComponents',
 	#package : 'CodeParadise-MaterialDesign',
@@ -116,30 +115,9 @@ SlmdNavRailView class >> template [
 
 	^ '
 <nav id="container">
-  <slot name="navRegion"></slot>
+  <slot name="content"></slot>
 </nav>
 '
-]
-
-{ #category : 'accessing' }
-SlmdNavRailView >> drawer [
-
-	^ drawer
-]
-
-{ #category : 'accessing' }
-SlmdNavRailView >> drawer: anObject [
-
-	drawer := anObject
-]
-
-{ #category : 'initialization' }
-SlmdNavRailView >> initialize [
-
-	super initialize.
-
-	navRailExpanded := false.
-
 ]
 
 { #category : 'nav' }
@@ -148,54 +126,6 @@ SlmdNavRailView >> navContent: items [
 	^ self navRailExpanded
 		ifTrue: [ self navrailExpandedBuild: items ]
 		ifFalse: [ self navrailNarrowBuild: items ]
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navModalPaneBuild [
-
-	drawer := SlDrawer new
-		id: 'smdNavModalPane';
-		placement: 'left';
-		beNoHeader;
-		customPropertyAt: 'size' put: self navRailWidth printString, 'px';
-		customPropertyAt: 'body-spacing' put: '0';
-		customPropertyAt: 'header-spacing' put: '0';
-		customPropertyAt: 'footer-spacing' put: '0';
-		yourself.
-	
-	"drawer footer: (
-		(SlButton label: 'Close')
-			when: CpClickEvent basicPrimary send: #hide to: drawer;
-			yourself)."
-
-	^ drawer
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navModalPaneSetUp [
-	"Add modal nav element as sibling of layout's navRegion"
-
-	"SlmdLayoutView first navRegionFind parent"
-	self modalDivFind
-		appendChild: self navModalPaneBuild
-]
-
-{ #category : 'accessing' }
-SlmdNavRailView >> navRailExpanded [
-
-	^ navRailExpanded
-]
-
-{ #category : 'accessing' }
-SlmdNavRailView >> navRailExpanded: anObject [
-
-	navRailExpanded := anObject
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navRailWidth [
-
-	^ self navRailExpanded ifTrue: [ 220 ] ifFalse: [ 96 ]
 ]
 
 { #category : 'nav' }
@@ -281,13 +211,5 @@ SlmdNavRailView >> navrailNarrowBuildItem: aNavAction [
 SlmdNavRailView >> renderMenu: aNavAction [
 
 	^ self dropdownMenu: (Array with: aNavAction) css: nil.
-
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> renderNavContent: items [
-
-	self modalNavElementOrNil replaceAllChildrenWith: (self navContent: items) atSlotNamed: nil.
-	self replaceAllChildrenWith: (self navContent: items) atSlotNamed: 'navRegion'.
 
 ]

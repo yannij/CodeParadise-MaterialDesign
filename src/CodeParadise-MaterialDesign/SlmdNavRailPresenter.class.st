@@ -6,11 +6,13 @@ Class {
 	#tag : 'ShoelaceComponents'
 }
 
-{ #category : 'view' }
-SlmdNavRailPresenter >> viewInitialized [
+{ #category : 'rendering' }
+SlmdNavRailPresenter >> renderView [
 
-	super viewInitialized.
-
-	self view navModalPaneSetUp.
-
+	"self removeAllChildPresentersAtSlotNamed: #content.
+	self view removeChildrenAtSlotNamed: #content.
+"
+	self
+		renderAllChildViewsForModels: self model navItems
+		atSlotNamed:  #content
 ]
