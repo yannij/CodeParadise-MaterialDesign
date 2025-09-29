@@ -8,6 +8,7 @@ Class {
 		'navRail',
 		'navRailModal',
 		'navBar',
+		'navPopups',
 		'sidesheet',
 		'dockedToolbar',
 		'floatingToolbar',
@@ -77,6 +78,7 @@ SlmdResponsiveLayoutModel >> initialize [
 	navRail := SlmdNavRailModel new.
 	navRailModal := SlmdNavRailModalModel new.
 	navBar := SlmdNavBarModel new.
+	navPopups := SlmdPopupsModel new.
 	sidesheet := SlmdSidesheetModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.
 	floatingToolbar := SlmdToolbarFloatingModel new.
@@ -106,6 +108,18 @@ SlmdResponsiveLayoutModel >> navBar [
 SlmdResponsiveLayoutModel >> navBar: anObject [
 
 	navBar := anObject
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutModel >> navPopups [
+
+	^ navPopups
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutModel >> navPopups: anObject [
+
+	navPopups := anObject
 ]
 
 { #category : 'accessing' }

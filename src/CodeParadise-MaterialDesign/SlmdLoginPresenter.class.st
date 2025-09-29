@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdLoginPresenter',
 	#superclass : 'SlmdObjectPresenter',
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Login',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Login'
 }
 
 { #category : 'actions' }

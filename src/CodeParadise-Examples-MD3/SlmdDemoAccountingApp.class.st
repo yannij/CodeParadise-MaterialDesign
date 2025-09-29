@@ -276,13 +276,13 @@ SlmdDemoAccountingApp >> modelUpdate: aModel [
 ]
 
 { #category : 'accessing' }
-SlmdDemoAccountingApp >> navItems [
+SlmdDemoAccountingApp >> navItemsToUse [ 
 
 	^ OrderedCollection new
 		add: (self nativeEventSpecAt: #settingsOpen);
 		add: (self nativeEventSpecAt: #login);
 		add: (self nativeEventSpecAt: #logout);
-		addAll: self navItemsSpecs;
+		addAll: super navItemsToUse;
 		yourself.
 ]
 

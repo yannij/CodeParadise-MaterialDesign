@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'navItems'
 	],
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Nav'
 }
 
 { #category : 'initialization' }

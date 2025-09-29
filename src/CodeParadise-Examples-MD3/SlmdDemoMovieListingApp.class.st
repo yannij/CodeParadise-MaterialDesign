@@ -263,11 +263,11 @@ SlmdDemoMovieListingApp >> modelView: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdDemoMovieListingApp >> navItems [
+SlmdDemoMovieListingApp >> navItemsToUse [
 
 	^ OrderedCollection new
 		add: (self nativeEventSpecAt: #settingsOpen);
-		addAll: self navItemsSpecs;
+		addAll: super navItemsToUse;
 		yourself.
 ]
 

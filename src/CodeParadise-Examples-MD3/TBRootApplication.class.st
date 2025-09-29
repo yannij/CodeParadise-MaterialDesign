@@ -86,7 +86,7 @@ TBRootApplication >> modelRemove: aModel [
 ]
 
 { #category : 'accessing' }
-TBRootApplication >> navItems [
+TBRootApplication >> navItemsToUse [
 
 	^ OrderedCollection new
 		add: (self nativeEventSpecAt: #home);

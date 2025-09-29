@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdToolbarDockedView',
 	#superclass : 'SlmdToolbarView',
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Toolbar'
 }
 
 { #category : 'web resources' }

@@ -143,6 +143,9 @@ SlmdResponsiveLayoutPresenter >> renderView [
 	self model navBar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #navBar ].
 
+	self model navPopups ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #popups ].
+
 	self model paneLayout ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #paneLayout ].
 
@@ -169,6 +172,9 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 	super viewCreated.
 
 	self subscribeToUserEvent.
+
 	self application customColorTheme ifNotNil: [ :value |
 		self view colorThemePut: value ].
+
+	"self view popupSetUp"
 ]

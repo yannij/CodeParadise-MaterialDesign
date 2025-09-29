@@ -9,6 +9,8 @@ Class {
 { #category : 'rendering' }
 SlmdNavActionPresenter >> renderView [
 
-	self view
-		renderNavItem: self model asDictionary expanded: self application layout layoutSettings navRailExpanded
+	self application layout layoutSettings navRailExpanded
+		ifTrue: [ self view renderNavExpanded: self model asDictionary ]
+		ifFalse: [ self view renderNavNarrow: self model asDictionary ].
+
 ]

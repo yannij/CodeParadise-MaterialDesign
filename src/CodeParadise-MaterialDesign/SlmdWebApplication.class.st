@@ -287,15 +287,21 @@ SlmdWebApplication >> nativeEventSpecs: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdWebApplication >> navItems [
+SlmdWebApplication >> navItemSpecsInGroup: aGroupName [
 
-	^ OrderedCollection new
+	^ self navItemsSpecs select: [ :each | each groupTag = aGroupName ]
 ]
 
 { #category : 'accessing' }
 SlmdWebApplication >> navItemsSpecs [
 
 	^ self userEventSpecs select: [ :each | each isNavType ]
+]
+
+{ #category : 'accessing' }
+SlmdWebApplication >> navItemsToUse [
+
+	^ self navItemSpecsInGroup: #primary
 ]
 
 { #category : 'events' }
@@ -308,9 +314,9 @@ SlmdWebApplication >> postLoad [
 
 	super postLoad.
 
-	self layout navBar navItems: self navItems; valueChanged.
-	self layout navRail navItems: self navItems; valueChanged.
-	self layout navRailModal navItems: self navItems; valueChanged.
+	self layout navBar navItems: self navItemsToUse; valueChanged.
+	self layout navRail navItems: self navItemsToUse; valueChanged.
+	self layout navRailModal navItems: self navItemsToUse; valueChanged.
 
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 

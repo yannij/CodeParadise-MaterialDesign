@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdLoginView',
 	#superclass : 'SlmdObjectView',
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Login',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Login'
 }
 
 { #category : 'web resources' }

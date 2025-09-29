@@ -7,41 +7,113 @@ Class {
 }
 
 { #category : 'web resources' }
+SlmdNavActionView class >> globalStyle [
+	<webResource: #css>
+
+	^ '
+.smd-nav-font {
+  line-height: var(--sl-line-height-normal);
+  font-size: var(--sl-font-size-medium);
+  font-weight: var(--sl-font-weight-bold);
+}
+
+.smd-navrail-item {
+  display: flex;
+  flex-flow: column;
+  height: 56px;
+  width: 96px;
+  padding-top: 12px;
+}
+
+.smd-navrail-icon {
+  font-size: 24px;
+  padding-left: 28px;
+}
+
+.smd-navrail-labelText {
+  padding: 0;
+  line-height: 16px;
+  font-size: var(--sl-font-size-x-small);
+  align-items: center;
+  text-align: center;
+  overflow-x: clip;
+}
+
+.smd-navrailx {
+  height: 100%;
+  padding-left: 20px;
+  margin: 0;
+  background: var(--sl-color-primary-100);
+  flow-direction: row;
+}
+
+.smd-navrailx-item {
+  display: flex;
+  border-radius: 28px;
+  height: 56px;
+  width: 220px;
+  background: var(--sl-color-primary-100);
+  align-items: center;
+}
+
+.smd-navrailx-icon {
+  padding-left: 8px;
+  font-size: 24px;
+}
+
+.smd-navrailx-labelText {
+  padding-left: 16px;
+  font-size: 16px;
+}
+'
+]
+
+{ #category : 'web resources' }
+SlmdNavActionView class >> style [
+	<webResource: #css>
+
+	^ '
+.smd-navrail-item {
+  display: flex;
+  flex-flow: column;
+  height: 56px;
+  width: 96px;
+  padding-top: 12px;
+}
+
+.smd-navrail-icon {
+  font-size: 24px;
+  padding-left: 28px;
+}
+
+.smd-navrail-labelText {
+  padding: 0;
+  line-height: 16px;
+  font-size: var(--sl-font-size-x-small);
+  align-items: center;
+  text-align: center;
+  overflow-x: clip;
+}
+'
+]
+
+{ #category : 'web resources' }
 SlmdNavActionView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container">
-  <slot name="content"></slot>
-</div>'
+	^ '<slot name="content"></slot>'
 ]
 
 { #category : 'rendering' }
-SlmdNavActionView >> buttonCssClass [
-
-	^ 'smd-toolbar-buttons'
-]
-
-{ #category : 'actions' }
-SlmdNavActionView >> handleNavAction: aNavAction [
-
-	self layoutViewLazy 
-		triggerUserEvent: aNavAction;
-		hideNavModal
-
-]
-
-{ #category : 'rendering' }
-SlmdNavActionView >> navrailExpandedBuildItem: aNavAction [
-	| iconName |
-
-	iconName := aNavAction at: #iconName.
+SlmdNavActionView >> divExpanded: aNavAction [
 
 	^ #div asHtmlTag
+		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
 		addClass: 'smd-navrailx-item';
 		addClass: 'smd-nav-font';
-		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
-		appendChild: ((SlIconButton named: iconName) addClass: 'smd-navrailx-icon'; yourself);
+		appendChild: (
+			(SlIconButton named: (aNavAction at: #iconName)) addClass: 'smd-navrailx-icon'; yourself);
 		appendChild: (#div asHtmlTag
 			addClass: 'smd-navrailx-labelText';
 			textContent: (aNavAction at: #iconLabel);
@@ -50,45 +122,50 @@ SlmdNavActionView >> navrailExpandedBuildItem: aNavAction [
 ]
 
 { #category : 'rendering' }
-SlmdNavActionView >> navrailNarrowBuildItem: aNavAction [
-	| iconName |
-
-	iconName := aNavAction at: #iconName.
-
-	"(aNavAction at: #data) = #menu ifTrue: [
-		^ self renderMenu: aNavAction ]."
+SlmdNavActionView >> divNarrow: aNavAction [
 
 	^ #div asHtmlTag
-		addClass: 'smd-navrail-item';
 		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
+		addClass: 'smd-navrail-item';
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-icon';
-				appendChild: (SlIconButton named: iconName);
+				appendChild: (SlIconButton named: (aNavAction at: #iconName));
 				yourself);
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-labelText';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
-		yourself
-]
-
-{ #category : 'rendering' }
-SlmdNavActionView >> renderMenu: aNavAction [
-
-	^ self dropdownMenu: (Array with: aNavAction) css: nil.
+		yourself.
 
 ]
 
+{ #category : 'actions' }
+SlmdNavActionView >> handleNavAction: aNavAction [
+
+	(aNavAction at: #data) = #menu
+		ifTrue: [
+			self layoutViewLazy popupToggleActive: (aNavAction at: #subtype); hideNavModal ]
+		ifFalse: [
+			self layoutViewLazy triggerUserEvent: aNavAction; hideNavModal ].
+
+]
+
 { #category : 'rendering' }
-SlmdNavActionView >> renderNavItem: anItem expanded: aBoolean [
+SlmdNavActionView >> renderNavExpanded: anItem [
 	| element |
 
-	element := aBoolean
-		ifTrue: [ self navrailExpandedBuildItem: anItem ]
-		ifFalse: [ self navrailNarrowBuildItem: anItem ].
+	element := self divExpanded: anItem.
+	self replaceAllChildrenWith: element atSlotNamed: #content.
 
+]
+
+{ #category : 'rendering' }
+SlmdNavActionView >> renderNavNarrow: anItem [
+	| element |
+
+	element := self divNarrow: anItem.
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]

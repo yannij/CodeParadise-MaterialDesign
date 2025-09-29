@@ -8,7 +8,8 @@ Class {
 		'navRailExpanded',
 		'activeToolbarDocked',
 		'activeToolbarFloating',
-		'activeFab'
+		'activeFab',
+		'popups'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -142,6 +143,13 @@ SlmdResponsiveLayoutView class >> style [
   overflow-y: auto;
 }
 
+.smd-navRegion {
+  flex: 0 0 96px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 .smd-body-region {
   flex: auto;
   display: flex;  
@@ -149,7 +157,6 @@ SlmdResponsiveLayoutView class >> style [
   background: var(--sl-color-primary-100);
 }
 '
-, SlmdNavRailView styleNav
 
 ]
 
@@ -209,6 +216,7 @@ SlmdResponsiveLayoutView class >> template [
   </div>
   <div id="smdModalDiv">
     <slot name="navRailModal"></slot>
+    <slot name="popups"></slot>
   </div>
 </div>
 '
@@ -333,7 +341,7 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 
 ]
 
-{ #category : 'actions - nav' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> beEditablePane2 [
 	| wrappers |
 
@@ -453,7 +461,7 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 
 ]
 
-{ #category : 'actions - toolbar' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> findLoginDialog [
 
 	^ CpHtmlElement documentBody firstDescendantMatching: '#login-dialog'
@@ -518,7 +526,7 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	self layoutAdaptToWidth
 ]
 
-{ #category : 'actions - nav' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> hideNavModal [
 	| modalElement |
 
@@ -537,6 +545,7 @@ SlmdResponsiveLayoutView >> initialize [
 	activeToolbarDocked := false.
 	activeToolbarFloating := false.
 	activeFab := false.
+	popups := IdentityDictionary new.
 
 ]
 
@@ -733,7 +742,7 @@ SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
 	layoutWidthCached := anObject
 ]
 
-{ #category : 'actions - toolbar' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> loginOpen [
 
 	self systemLog logTrace: 'loginOpen'.
@@ -741,7 +750,7 @@ SlmdResponsiveLayoutView >> loginOpen [
 
 ]
 
-{ #category : 'actions - toolbar' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> modalNavOpen [
 	| drawer |
 
@@ -751,7 +760,7 @@ SlmdResponsiveLayoutView >> modalNavOpen [
 		ifNotNil: [ drawer show ]
 ]
 
-{ #category : 'actions - toolbar' }
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> modalSettingsOpen [
 
 	self systemLog logTrace: 'modalSettingsOpen'.
@@ -857,7 +866,64 @@ SlmdResponsiveLayoutView >> paneLayoutView [
 	^ self firstChildAtSlotNamed: 'paneLayout'
 ]
 
-{ #category : 'actions - nav' }
+{ #category : 'navpopup' }
+SlmdResponsiveLayoutView >> popupBeActive: aSymbol [
+
+	(self popupNamed: aSymbol) beActive
+]
+
+{ #category : 'navpopup' }
+SlmdResponsiveLayoutView >> popupBeNotActive: aSymbol [
+
+	(self popupNamed: aSymbol) beNotActive
+]
+
+{ #category : 'navpopup' }
+SlmdResponsiveLayoutView >> popupNamed: aSymbol [
+	| p |
+
+	p := self firstChildAtSlotNamed: #popups.
+	self traceCr: '1: ', p printString.
+	p := p childrenAtSlotNamed: #content.
+	self traceCr: '2: ', p printString.
+	p := p detect: [ :each |
+			self traceCr: '3: ', each printString.
+			self traceCr: '3a: ', each popupElement printString.
+			(each popupElement attributeAt: 'popupName') = aSymbol ] ifNone: [ nil ].
+	p ifNil: [
+		self systemLog logError: 'Popup not found by name: ', aSymbol printString.
+		^ nil ].
+	self traceCr: '4: ', p printString.
+	p := p popupElement.
+	^ p
+
+]
+
+{ #category : 'navpopup' }
+SlmdResponsiveLayoutView >> popupToggleActive: aSymbol [
+	| p |
+
+	p := self popupNamed: aSymbol.
+	p ifNil: [
+		self systemLog logError: 'Popup not found: ', aSymbol printString.
+		^ self ].
+	p active: p isActive not
+
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutView >> popups [
+
+	^ popups
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutView >> popups: anObject [
+
+	popups := anObject
+]
+
+{ #category : 'actions' }
 SlmdResponsiveLayoutView >> primaryPaneOnly [
 
 	self paneLayoutView primaryPaneOnly

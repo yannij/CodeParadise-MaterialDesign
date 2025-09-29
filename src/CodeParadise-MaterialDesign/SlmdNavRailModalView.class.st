@@ -4,16 +4,16 @@ Class {
 	#instVars : [
 		'drawer'
 	],
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Nav'
 }
 
 { #category : 'web resources' }
 SlmdNavRailModalView class >> template [
 	<webResource: #html>
 
-	^ '<sl-drawer id="smdNavRailModal">
+	^ '<sl-drawer id="smdNavRailModal" class="navrail">
   <slot name="content"></slot>
 </sl-drawer>'
 ]

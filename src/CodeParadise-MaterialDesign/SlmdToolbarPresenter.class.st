@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdToolbarPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Toolbar'
 }
 
 { #category : 'initialization' }

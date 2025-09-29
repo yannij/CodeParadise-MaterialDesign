@@ -1,7 +1,7 @@
 Class {
 	#name : 'SlmdNavPresenter',
 	#superclass : 'SlmdPresenter',
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Nav'
 }

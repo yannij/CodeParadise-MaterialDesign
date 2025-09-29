@@ -57,6 +57,12 @@ SlmdView >> announceNavSubtype: subtype navTo: value [
 
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
+
+	^ self dropdownMenu: actionList icon: 'three-dots-vertical' css: cssClass
+]
+
+{ #category : 'utilities' }
+SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 	| menu trigger dropdown |
 
 	menu := SlMenu new.
@@ -71,7 +77,7 @@ SlmdView >> dropdownMenu: actionList css: cssClass [
 			yourself) ].
 
 	trigger := #div asHtmlTag
-		appendChild: ((SlIconButton named: 'three-dots-vertical') addClass: 'smd-toolbar-icon'; yourself);
+		appendChild: ((SlIconButton named: iconName) addClass: 'smd-toolbar-icon'; yourself);
 		yourself.
 	cssClass ifNotNil: [ trigger addClass: cssClass ].
 

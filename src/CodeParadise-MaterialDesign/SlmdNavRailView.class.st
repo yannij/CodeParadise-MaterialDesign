@@ -1,9 +1,9 @@
 Class {
 	#name : 'SlmdNavRailView',
 	#superclass : 'SlmdNavView',
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Nav'
 }
 
 { #category : 'class initialization' }
@@ -13,37 +13,10 @@ SlmdNavRailView class >> beLoaded [
 ]
 
 { #category : 'web resources' }
-SlmdNavRailView class >> globalStyle [
+SlmdNavRailView class >> style [
 	<webResource: #css>
 
-	^ '
-.smd-navRegion {
-  flex: 0 0 96px;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-'
-, self styleNav
-
-]
-
-{ #category : 'web resources' }
-SlmdNavRailView class >> styleNav [
-	"These style definitions should be added to the layout component style
-	to be visible the modal nav content.
-	They must also be included in the navrail component style."
-
-	<webResource: #css>
-
-	^ '
-.smd-nav-font {
-  line-height: var(--sl-line-height-normal);
-  font-size: var(--sl-font-size-medium);
-  font-weight: var(--sl-font-weight-bold);
-}
-
-.smd-navrail {
+	^ '.navrail {
   height: 100%;
   overflow-y: auto;
   padding: 0;
@@ -51,59 +24,9 @@ SlmdNavRailView class >> styleNav [
   background: var(--sl-color-primary-100);
 }
 
-.smd-navrail-item {
-  display: flex;
-  flex-flow: column;
-  height: 56px;
-  width: 96px;
-  padding-top: 12px;
-}
-
-.smd-navrail-icon {
-  font-size: 24px;
-  padding-left: 28px;
-}
-
-.smd-navrail-labelText {
-  padding: 0;
-  line-height: 16px;
-  font-size: var(--sl-font-size-x-small);
-  align-items: center;
-  text-align: center;
-  overflow-x: clip;
-}
-
-.smd-navrailx {
-  height: 100%;
-  padding-left: 20px;
-  margin: 0;
+.navrail::part(panel) {
   background: var(--sl-color-primary-100);
-  flow-direction: row;
-}
-
-.smd-navrailx::part(panel) {
-  background: var(--sl-color-primary-100);
-}
-
-.smd-navrailx-item {
-  display: flex;
-  border-radius: 28px;
-  height: 56px;
-  width: 220px;
-  background: var(--sl-color-primary-100);
-  align-items: center;
-}
-
-.smd-navrailx-icon {
-  padding-left: 8px;
-  font-size: 24px;
-}
-
-.smd-navrailx-labelText {
-  padding-left: 16px;
-  font-size: 16px;
-}
-'
+}'
 ]
 
 { #category : 'web resources' }
@@ -111,7 +34,7 @@ SlmdNavRailView class >> template [
 	<webResource: #html>
 
 	^ '
-<nav id="container">
+<nav id="container" class="navrail">
   <slot name="content"></slot>
 </nav>
 '
