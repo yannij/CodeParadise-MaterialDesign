@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdNavPopupView',
-	#superclass : 'SlmdNavView',
+	#superclass : 'SlmdLayoutComponentView',
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Nav'
@@ -12,7 +12,7 @@ SlmdNavPopupView class >> style [
 
 	^ '.navpopup::part(popup) {
   width: 200px;
-  background: var(--sl-color-primary-200);
+  background: var(--sl-color-primary-300);
 }'
 ]
 

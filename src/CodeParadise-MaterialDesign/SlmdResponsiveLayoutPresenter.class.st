@@ -135,13 +135,9 @@ SlmdResponsiveLayoutPresenter >> renderView [
 	self model navRail ifNotNil: [ :value |
 		"Render the navRail before the panes, so AppBar can find
 		the modal navRail pane for menu button to open"
-		self renderChildViewForModel: value atSlotNamed: #navRail ].
-
-	self model navRailModal ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #navRailModal ].
-
-	self model navBar ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #navBar ].
+		self renderChildViewForModel: value usingPresenter: SlmdNavRailPresenter atSlotNamed: #navRail.
+		self renderChildViewForModel: value usingPresenter: SlmdNavRailModalPresenter atSlotNamed: #navRailModal.
+		self renderChildViewForModel: value usingPresenter: SlmdNavBarPresenter atSlotNamed: #navBar ].
 
 	self model navPopups ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #popups ].

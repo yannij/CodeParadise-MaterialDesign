@@ -1,7 +1,8 @@
 Class {
 	#name : 'SlmdNavPopupModel',
-	#superclass : 'SlmdNavModel',
+	#superclass : 'SlmdModel',
 	#instVars : [
+		'navItems',
 		'popupName'
 	],
 	#category : 'CodeParadise-MaterialDesign-Nav',
@@ -13,6 +14,34 @@ Class {
 SlmdNavPopupModel class >> named: aSymbol [
 
 	^ self new popupName: aSymbol; yourself
+]
+
+{ #category : 'initialization' }
+SlmdNavPopupModel >> initialize [
+
+	super initialize.
+
+	self navItemsClear.
+
+]
+
+{ #category : 'accessing' }
+SlmdNavPopupModel >> navItems [
+
+	^ navItems
+]
+
+{ #category : 'accessing' }
+SlmdNavPopupModel >> navItems: anObject [
+
+	navItems := anObject
+]
+
+{ #category : 'initialization' }
+SlmdNavPopupModel >> navItemsClear [
+
+	self navItems: OrderedCollection new.
+
 ]
 
 { #category : 'accessing' }

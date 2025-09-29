@@ -6,8 +6,6 @@ Class {
 		'paneLayout',
 		'twoPaneSplitPosition',
 		'navRail',
-		'navRailModal',
-		'navBar',
 		'navPopups',
 		'sidesheet',
 		'dockedToolbar',
@@ -75,9 +73,7 @@ SlmdResponsiveLayoutModel >> initialize [
 	layoutSettings := SlmdLayoutSettingsModel new.
 	twoPaneSplitPosition := 300.
 	paneLayout := SlmdPaneLayoutModel new.
-	navRail := SlmdNavRailModel new.
-	navRailModal := SlmdNavRailModalModel new.
-	navBar := SlmdNavBarModel new.
+	navRail := SlmdNavModel new.
 	navPopups := SlmdPopupsModel new.
 	sidesheet := SlmdSidesheetModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.
@@ -96,18 +92,6 @@ SlmdResponsiveLayoutModel >> layoutSettings [
 SlmdResponsiveLayoutModel >> layoutSettings: anObject [
 
 	layoutSettings := anObject
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutModel >> navBar [
-
-	^ navBar
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutModel >> navBar: anObject [
-
-	navBar := anObject
 ]
 
 { #category : 'accessing' }
@@ -132,18 +116,6 @@ SlmdResponsiveLayoutModel >> navRail [
 SlmdResponsiveLayoutModel >> navRail: anObject [
 
 	navRail := anObject
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutModel >> navRailModal [
-
-	^ navRailModal
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutModel >> navRailModal: anObject [
-
-	navRailModal := anObject
 ]
 
 { #category : 'accessing - derived' }
