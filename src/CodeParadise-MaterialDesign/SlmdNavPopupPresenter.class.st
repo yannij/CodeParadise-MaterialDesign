@@ -20,6 +20,9 @@ SlmdNavPopupPresenter >> viewInitialized [
 
 	super viewInitialized.
 
+self traceCr: self class name, ': ', self id printString.
+self traceCr: '1: ', self model popupName printString.
+self traceCr: '2: ', self model hash printString.
 	self view setUpWithName: self model popupName.
 
 ]

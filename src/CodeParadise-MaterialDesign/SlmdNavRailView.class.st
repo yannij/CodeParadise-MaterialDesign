@@ -26,7 +26,16 @@ SlmdNavRailView class >> style [
 
 .navrail::part(panel) {
   background: var(--sl-color-primary-100);
-}'
+}
+
+.smd-navrailx {
+  height: 100%;
+  padding-left: 20px;
+  margin: 0;
+  background: var(--sl-color-primary-100);
+  flow-direction: row;
+}
+'
 ]
 
 { #category : 'web resources' }
@@ -38,38 +47,4 @@ SlmdNavRailView class >> template [
   <slot name="content"></slot>
 </nav>
 '
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navrailExpandedBuild: list [
-	| element |
-
-	element := #div asHtmlTag
-		addClass: 'smd-navrailx';
-		yourself.
-
-	list do: [ :eachItem | | navItem |
-		navItem := self navrailExpandedBuildItem: eachItem.
-		element appendChild: navItem ].
-
-	^ #nav asHtmlTag
-		styleAt: 'height' put: '100%';
-		"styleAt: 'overflow-y' put: 'auto';"
-		appendChild: element;
-		yourself
-]
-
-{ #category : 'nav' }
-SlmdNavRailView >> navrailNarrowBuild: list [
-	| element |
-
-	element := #div asHtmlTag addClass: 'smd-navrail'; yourself.
-	list do: [ :eachItem | | navItem |
-		navItem := self navrailNarrowBuildItem: eachItem.
-		element appendChild: navItem ].
-
-	^ #nav asHtmlTag
-		styleAt: 'height' put: '100%';
-		appendChild: element;
-		yourself
 ]

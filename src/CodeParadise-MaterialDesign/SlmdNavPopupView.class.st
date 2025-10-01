@@ -35,24 +35,9 @@ SlmdNavPopupView >> popupElement [
 ]
 
 { #category : 'initialization' }
-SlmdNavPopupView >> popupSetUp: anId [
-	| p |
-
-	p := (SlPopup new id: anId; placementRight; "propertyAt: 'anchor' put: 'smdNavRegion';" yourself)
-		propertyAt: 'anchor' put: self navRegionFind;
-		appendChild: ('Popup ', anId) asHtmlElement;
-		yourself.
-]
-
-{ #category : 'initialization' }
-SlmdNavPopupView >> setAnchor [
-
-	self popupElement propertyAt: 'anchor' put: self layoutViewLazy navRegionFind
-]
-
-{ #category : 'initialization' }
 SlmdNavPopupView >> setUpWithName: aSymbol [
 
+	self traceCr: 'setUpWithName: ', aSymbol printString.
 	self popupElement
 		attributeAt: 'popupName' put: aSymbol;
 		propertyAt: 'anchor' put: self layoutViewLazy navRegionFind

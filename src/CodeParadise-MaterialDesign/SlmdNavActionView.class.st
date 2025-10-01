@@ -39,14 +39,6 @@ SlmdNavActionView class >> globalStyle [
   overflow-x: clip;
 }
 
-.smd-navrailx {
-  height: 100%;
-  padding-left: 20px;
-  margin: 0;
-  background: var(--sl-color-primary-100);
-  flow-direction: row;
-}
-
 .smd-navrailx-item {
   display: flex;
   border-radius: 28px;
@@ -65,34 +57,18 @@ SlmdNavActionView class >> globalStyle [
   padding-left: 16px;
   font-size: 16px;
 }
-'
-]
 
-{ #category : 'web resources' }
-SlmdNavActionView class >> style [
-	<webResource: #css>
-
-	^ '
-.smd-navrail-item {
+.smd-navsubmenu-item {
   display: flex;
-  flex-flow: column;
   height: 56px;
-  width: 96px;
-  padding-top: 12px;
-}
-
-.smd-navrail-icon {
-  font-size: 24px;
-  padding-left: 28px;
-}
-
-.smd-navrail-labelText {
-  padding: 0;
-  line-height: 16px;
-  font-size: var(--sl-font-size-x-small);
+  width: 220px;
+  background: var(--sl-color-primary-100);
   align-items: center;
-  text-align: center;
-  overflow-x: clip;
+}
+
+.smd-navsubmenu-labelText {
+  padding-left: 16px;
+  font-size: 16px;
 }
 '
 ]

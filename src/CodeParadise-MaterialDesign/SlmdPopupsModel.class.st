@@ -14,7 +14,7 @@ SlmdPopupsModel >> initialize [
 
 	super initialize.
 
-	popups := IdentityDictionary new.
+	popups := OrderedIdentityDictionary new.
 
 ]
 
@@ -31,7 +31,19 @@ SlmdPopupsModel >> popups: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdPopupsModel >> popupsAt: aSymbol [
+
+	^ self popups at: aSymbol
+]
+
+{ #category : 'accessing' }
 SlmdPopupsModel >> popupsAt: aSymbol put: aNavPopop [
 
 	self popups at: aSymbol put: aNavPopop
+]
+
+{ #category : 'accessing' }
+SlmdPopupsModel >> popupsHasKey: aSymbol [
+
+	^ self popups hasKey: aSymbol
 ]

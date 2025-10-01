@@ -11,7 +11,7 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 	| div |
 
 	div := #div asHtmlTag
-		addClass: 'smd-navrail-item';
+		addClass: 'smd-navsubmenu-item';
 		"appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-icon';
@@ -19,7 +19,7 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 				yourself);"
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrail-labelText';
+				addClass: 'smd-navsubmenu-labelText';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself.
