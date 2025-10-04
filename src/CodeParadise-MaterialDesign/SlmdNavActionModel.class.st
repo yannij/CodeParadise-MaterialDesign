@@ -167,3 +167,12 @@ SlmdNavActionModel >> itemName: anObject [
 
 	eventSubtype := anObject
 ]
+
+{ #category : 'presenter' }
+SlmdNavActionModel >> preferredPresenterClass [
+
+	self data = #menu ifTrue: [
+		^ SlmdNavActionDropdownPresenter ].
+
+	^ super preferredPresenterClass
+]

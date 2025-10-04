@@ -72,7 +72,7 @@ MD3ExampleApp >> load [
 	"self addViewInspector"
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 MD3ExampleApp >> navItemsToUse [
 
 	^ OrderedCollection new
@@ -93,12 +93,12 @@ MD3ExampleApp >> navPopup1Items [
 { #category : 'actions' }
 MD3ExampleApp >> postLoad [
 
-	super postLoad.
-
 	self layout navPopups
 		popupsAt: #popup1 put: ((SlmdNavPopupModel named: #popup1) navItems: self navPopup1Items; yourself);
 		valueChanged.
 	self setUpPopup2.
+
+	super postLoad.
 
 ]
 

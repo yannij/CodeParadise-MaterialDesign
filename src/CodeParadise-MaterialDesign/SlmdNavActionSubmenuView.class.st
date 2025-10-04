@@ -12,11 +12,11 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 
 	div := #div asHtmlTag
 		addClass: 'smd-navsubmenu-item';
-		"appendChild: (
+		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrail-icon';
+				addClass: 'smd-navsubmenu-icon';
 				appendChild: (SlIconButton named: (aNavAction at: #iconName));
-				yourself);"
+				yourself);
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navsubmenu-labelText';
@@ -27,15 +27,6 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 	div when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self.
 
 	^ div
-
-]
-
-{ #category : 'actions' }
-SlmdNavActionSubmenuView >> handleNavAction: aNavAction [
-
-	self layoutViewLazy popupBeNotActive: (aNavAction at: #groupTag).
-
-	super handleNavAction: aNavAction.
 
 ]
 

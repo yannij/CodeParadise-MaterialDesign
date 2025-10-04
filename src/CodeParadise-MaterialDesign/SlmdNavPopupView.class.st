@@ -31,7 +31,8 @@ SlmdNavPopupView class >> template [
 { #category : 'initialization' }
 SlmdNavPopupView >> popupElement [
 
-	^ (self shadowedElementWithId: 'container') firstDescendantMatching: SlPopup asCssSelector
+	"^ (self shadowedElementWithId: 'container') firstDescendantMatching: SlPopup asCssSelector"
+	^ (self shadowedElementWithId: 'container') firstDescendantMatching: SlDropdown asCssSelector
 ]
 
 { #category : 'initialization' }
@@ -39,6 +40,7 @@ SlmdNavPopupView >> setUpWithName: aSymbol [
 
 	self traceCr: 'setUpWithName: ', aSymbol printString.
 	self popupElement
+		"appendChild: (SlButton label: 'Tags') atSlotNamed: #trigger;"
 		attributeAt: 'popupName' put: aSymbol;
 		propertyAt: 'anchor' put: self layoutViewLazy navRegionFind
 ]

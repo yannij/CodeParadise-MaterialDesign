@@ -37,6 +37,12 @@ SlmdPopupsModel >> popupsAt: aSymbol [
 ]
 
 { #category : 'accessing' }
+SlmdPopupsModel >> popupsAt: aSymbol ifAbsent: aBlock [
+
+	^ self popups at: aSymbol ifAbsent: aBlock
+]
+
+{ #category : 'accessing' }
 SlmdPopupsModel >> popupsAt: aSymbol put: aNavPopop [
 
 	self popups at: aSymbol put: aNavPopop

@@ -66,6 +66,11 @@ SlmdNavActionView class >> globalStyle [
   align-items: center;
 }
 
+.smd-navsubmenu-icon {
+  padding-left: 8px;
+  font-size: 24px;
+}
+
 .smd-navsubmenu-labelText {
   padding-left: 16px;
   font-size: 16px;
@@ -85,7 +90,6 @@ SlmdNavActionView class >> template [
 SlmdNavActionView >> divExpanded: aNavAction [
 
 	^ #div asHtmlTag
-		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
 		addClass: 'smd-navrailx-item';
 		addClass: 'smd-nav-font';
 		appendChild: (
@@ -101,7 +105,6 @@ SlmdNavActionView >> divExpanded: aNavAction [
 SlmdNavActionView >> divNarrow: aNavAction [
 
 	^ #div asHtmlTag
-		when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self;
 		addClass: 'smd-navrail-item';
 		appendChild: (
 			#div asHtmlTag
@@ -121,8 +124,10 @@ SlmdNavActionView >> divNarrow: aNavAction [
 SlmdNavActionView >> handleNavAction: aNavAction [
 
 	(aNavAction at: #data) = #menu
+		"ifTrue: [
+			self layoutViewLazy popupToggleActive: (aNavAction at: #subtype); hideNavModal ]"
 		ifTrue: [
-			self layoutViewLazy popupToggleActive: (aNavAction at: #subtype); hideNavModal ]
+			self layoutViewLazy "dropdownOpen: (aNavAction at: #subtype);" hideNavModal ]
 		ifFalse: [
 			self layoutViewLazy triggerUserEvent: aNavAction; hideNavModal ].
 
@@ -133,6 +138,7 @@ SlmdNavActionView >> renderNavExpanded: anItem [
 	| element |
 
 	element := self divExpanded: anItem.
+	element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]
@@ -142,6 +148,17 @@ SlmdNavActionView >> renderNavNarrow: anItem [
 	| element |
 
 	element := self divNarrow: anItem.
+
+	"(anItem at: #data) = #menu" false
+		ifTrue: [
+			element := SlDropdown new
+				placementRightStart;
+				appendChild: element atSlotNamed: #trigger;
+				appendChild: ('HELLO' asHtmlElement);
+				yourself ]
+		ifFalse: [
+			element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self ].
+
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]

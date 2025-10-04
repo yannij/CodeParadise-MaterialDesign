@@ -866,51 +866,6 @@ SlmdResponsiveLayoutView >> paneLayoutView [
 	^ self firstChildAtSlotNamed: 'paneLayout'
 ]
 
-{ #category : 'navpopup' }
-SlmdResponsiveLayoutView >> popupBeActive: aSymbol [
-
-	(self popupNamed: aSymbol) beActive
-]
-
-{ #category : 'navpopup' }
-SlmdResponsiveLayoutView >> popupBeNotActive: aSymbol [
-
-	(self popupNamed: aSymbol) beNotActive
-]
-
-{ #category : 'navpopup' }
-SlmdResponsiveLayoutView >> popupNamed: aSymbol [
-	| p |
-
-	p := self firstChildAtSlotNamed: #popups.
-	self traceCr: '1: ', p printString.
-	p := p childrenAtSlotNamed: #content.
-	self traceCr: '2: ', p printString.
-	p := p detect: [ :each |
-			self traceCr: '3: ', each printString.
-			self traceCr: '3a: ', each popupElement printString.
-			(each popupElement attributeAt: 'popupName') = aSymbol ] ifNone: [ nil ].
-	p ifNil: [
-		self systemLog logError: 'Popup not found by name: ', aSymbol printString.
-		^ nil ].
-	self traceCr: '4: ', p printString.
-	p := p popupElement.
-	^ p
-
-]
-
-{ #category : 'navpopup' }
-SlmdResponsiveLayoutView >> popupToggleActive: aSymbol [
-	| p |
-
-	p := self popupNamed: aSymbol.
-	p ifNil: [
-		self systemLog logError: 'Popup not found: ', aSymbol printString.
-		^ self ].
-	p active: p isActive not
-
-]
-
 { #category : 'accessing' }
 SlmdResponsiveLayoutView >> popups [
 
