@@ -6,11 +6,17 @@ Class {
 	#tag : 'NavAction'
 }
 
+{ #category : 'actions' }
+SlmdNavActionSubmenuView >> closeSubmenu [
+
+	self dropdownElement open: false.
+
+]
+
 { #category : 'rendering' }
 SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
-	| div |
 
-	div := #div asHtmlTag
+	^ #div asHtmlTag
 		addClass: 'smd-navsubmenu-item';
 		appendChild: (
 			#div asHtmlTag
@@ -24,9 +30,19 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 				yourself);
 		yourself.
 
-	div when: CpClickEvent basicPrimary do: [ self handleNavAction: aNavAction ] for: self.
+]
 
-	^ div
+{ #category : 'rendering' }
+SlmdNavActionSubmenuView >> dropdownElement [
+
+	^ self parent dropdownElement
+]
+
+{ #category : 'actions' }
+SlmdNavActionSubmenuView >> handleNavAction: aNavAction [
+
+	self closeSubmenu.
+	super handleNavAction: aNavAction.
 
 ]
 
@@ -35,6 +51,7 @@ SlmdNavActionSubmenuView >> renderNavSubmenu: anItem [
 	| element |
 
 	element := self divSubmenu: anItem.
+	element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]

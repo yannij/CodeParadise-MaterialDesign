@@ -70,11 +70,11 @@ SlmdResponsiveLayoutModel >> initialize [
 
 	super initialize.
 
+	navPopups := OrderedIdentityDictionary new.
 	layoutSettings := SlmdLayoutSettingsModel new.
 	twoPaneSplitPosition := 300.
 	paneLayout := SlmdPaneLayoutModel new.
 	navRail := SlmdNavModel new.
-	navPopups := SlmdPopupsModel new.
 	sidesheet := SlmdSidesheetModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.
 	floatingToolbar := SlmdToolbarFloatingModel new.
@@ -140,6 +140,36 @@ SlmdResponsiveLayoutModel >> paneLayout [
 SlmdResponsiveLayoutModel >> paneLayout: anObject [
 
 	paneLayout := anObject
+]
+
+{ #category : 'accessing - popups' }
+SlmdResponsiveLayoutModel >> popupsAt: aSymbol [
+
+	^ self navPopups at: aSymbol
+]
+
+{ #category : 'accessing - popups' }
+SlmdResponsiveLayoutModel >> popupsAt: aSymbol ifAbsent: aBlock [
+
+	^ self navPopups at: aSymbol ifAbsent: aBlock
+]
+
+{ #category : 'accessing - popups' }
+SlmdResponsiveLayoutModel >> popupsAt: aSymbol ifAbsentPut: aBlock [
+
+	^ self navPopups at: aSymbol ifAbsentPut: aBlock
+]
+
+{ #category : 'accessing - popups' }
+SlmdResponsiveLayoutModel >> popupsAt: aSymbol put: aNavPopop [
+
+	self navPopups at: aSymbol put: aNavPopop
+]
+
+{ #category : 'accessing - popups' }
+SlmdResponsiveLayoutModel >> popupsHasKey: aSymbol [
+
+	^ self navPopups hasKey: aSymbol
 ]
 
 { #category : 'accessing' }

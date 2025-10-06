@@ -90,15 +90,23 @@ MD3ExampleApp >> navPopup1Items [
 		yourself.
 ]
 
+{ #category : 'initialization' }
+MD3ExampleApp >> navPopup2Items [
+
+	^ OrderedCollection new
+		add: (SlmdNavActionModel newNavSubtype: #'1-circle' groupTag: #popup2 iconName: '1-circle' iconLabel: 'Circle1 popup' data: 'Circle1 popup');
+		add: (SlmdNavActionModel newNavSubtype: #'2-circle' groupTag: #popup2 iconName: '2-circle' iconLabel: 'Circle2 popup' data: 'Circle2 popup');
+		yourself.
+
+]
+
 { #category : 'actions' }
 MD3ExampleApp >> postLoad [
 
-	self layout navPopups
-		popupsAt: #popup1 put: ((SlmdNavPopupModel named: #popup1) navItems: self navPopup1Items; yourself);
-		valueChanged.
-	self setUpPopup2.
-
 	super postLoad.
+
+	self setUpPopup1.
+	self setUpPopup2.
 
 ]
 
@@ -131,23 +139,22 @@ MD3ExampleApp >> setUpCustomEvents [
 
 ]
 
+{ #category : 'actions' }
+MD3ExampleApp >> setUpPopup1 [
+
+	self layout popupsAt: #popup1 put: (SlmdNavPopup new navItems: self navPopup1Items; yourself).
+	self layout navRail valueChanged.
+
+]
+
 { #category : 'initialization' }
 MD3ExampleApp >> setUpPopup2 [
-	| items |
-
-	items := OrderedCollection new
-		add: (SlmdNavActionModel newNavSubtype: #'1-circle' groupTag: #popup2 iconName: '1-circle' iconLabel: 'Circle1 popup' data: 'Circle1 popup');
-		add: (SlmdNavActionModel newNavSubtype: #'2-circle' groupTag: #popup2 iconName: '2-circle' iconLabel: 'Circle2 popup' data: 'Circle2 popup');
-		yourself.
 
 	self layout navRail navItems
 		add: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-2' data: #menu).
-	self layout navRail
-		valueChanged.
 
-	self layout navPopups
-		popupsAt: #popup2 put: ((SlmdNavPopupModel named: #popup2) navItems: items; yourself);
-		valueChanged.
+	self layout popupsAt: #popup2 put: (SlmdNavPopup new navItems: self navPopup2Items; yourself).
+	self layout navRail valueChanged.
 
 ]
 

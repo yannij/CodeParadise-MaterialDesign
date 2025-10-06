@@ -12,7 +12,7 @@ SlmdNavActionDropdownPresenter >> renderView [
 
 	self view renderNavDropdown: self model asDictionary.
 
-	popup := self layout navPopups
+	popup := self layout
 		popupsAt: self model eventSubtype
 		ifAbsent: [ ^ self traceCr: 'ERROR missing popup: ', self model groupTag printString ].
 

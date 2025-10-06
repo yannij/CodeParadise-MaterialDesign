@@ -123,13 +123,7 @@ SlmdNavActionView >> divNarrow: aNavAction [
 { #category : 'actions' }
 SlmdNavActionView >> handleNavAction: aNavAction [
 
-	(aNavAction at: #data) = #menu
-		"ifTrue: [
-			self layoutViewLazy popupToggleActive: (aNavAction at: #subtype); hideNavModal ]"
-		ifTrue: [
-			self layoutViewLazy "dropdownOpen: (aNavAction at: #subtype);" hideNavModal ]
-		ifFalse: [
-			self layoutViewLazy triggerUserEvent: aNavAction; hideNavModal ].
+	self layoutViewLazy triggerUserEvent: aNavAction; hideNavModal.
 
 ]
 
@@ -148,16 +142,7 @@ SlmdNavActionView >> renderNavNarrow: anItem [
 	| element |
 
 	element := self divNarrow: anItem.
-
-	"(anItem at: #data) = #menu" false
-		ifTrue: [
-			element := SlDropdown new
-				placementRightStart;
-				appendChild: element atSlotNamed: #trigger;
-				appendChild: ('HELLO' asHtmlElement);
-				yourself ]
-		ifFalse: [
-			element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self ].
+	element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self.
 
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
