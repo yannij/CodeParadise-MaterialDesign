@@ -14,8 +14,20 @@ SlmdNavModel >> initialize [
 
 	super initialize.
 
-	self navItemsClear.
+	navItems := OrderedCollection new.
 
+]
+
+{ #category : 'accessing' }
+SlmdNavModel >> navActionAdd: aNavAction [
+
+	self navItems add: aNavAction
+]
+
+{ #category : 'accessing' }
+SlmdNavModel >> navActionDetect: aBlock ifNone: noneBlock [
+
+	^ self navItems detect: aBlock ifNone: noneBlock
 ]
 
 { #category : 'accessing' }
@@ -31,8 +43,8 @@ SlmdNavModel >> navItems: anObject [
 ]
 
 { #category : 'initialization' }
-SlmdNavModel >> navItemsClear [
+SlmdNavModel >> removeAllSuchThat: aBlock [
 
-	self navItems: OrderedCollection new.
+	self navItems removeAllSuchThat: aBlock
 
 ]

@@ -17,7 +17,7 @@ SlmdNavActionDropdownPresenter >> renderView [
 		ifAbsent: [ ^ self traceCr: 'ERROR missing popup: ', self model groupTag printString ].
 
 	self
-		renderAllChildViewsForModels: popup navItems
+		renderAllChildViewsForModels: popup popupItems
 		usingPresenter: SlmdNavActionSubmenuPresenter
 		atSlotNamed: #content
 

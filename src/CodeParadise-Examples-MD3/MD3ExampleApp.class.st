@@ -142,7 +142,7 @@ MD3ExampleApp >> setUpCustomEvents [
 { #category : 'actions' }
 MD3ExampleApp >> setUpPopup1 [
 
-	self layout popupsAt: #popup1 put: (SlmdNavPopup new navItems: self navPopup1Items; yourself).
+	self layout popupsAt: #popup1 put: (SlmdNavPopup new popupItems: self navPopup1Items; yourself).
 	self layout navRail valueChanged.
 
 ]
@@ -150,10 +150,10 @@ MD3ExampleApp >> setUpPopup1 [
 { #category : 'initialization' }
 MD3ExampleApp >> setUpPopup2 [
 
-	self layout navRail navItems
-		add: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-2' data: #menu).
+	self layout navRail
+		navActionAdd: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-2' data: #menu).
 
-	self layout popupsAt: #popup2 put: (SlmdNavPopup new navItems: self navPopup2Items; yourself).
+	self layout popupsAt: #popup2 put: (SlmdNavPopup new popupItems: self navPopup2Items; yourself).
 	self layout navRail valueChanged.
 
 ]

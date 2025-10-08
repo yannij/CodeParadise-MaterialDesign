@@ -315,8 +315,6 @@ SlmdWebApplication >> postLoad [
 	super postLoad.
 
 	self layout navRail navItems: self navItemsToUse; valueChanged.
-	"self layout navBar navItems: self navItemsToUse; valueChanged.
-	self layout navRailModal navItems: self navItemsToUse; valueChanged."
 
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 

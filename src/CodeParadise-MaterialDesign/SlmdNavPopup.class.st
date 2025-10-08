@@ -2,7 +2,7 @@ Class {
 	#name : 'SlmdNavPopup',
 	#superclass : 'Object',
 	#instVars : [
-		'navItems'
+		'popupItems'
 	],
 	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
@@ -14,25 +14,18 @@ SlmdNavPopup >> initialize [
 
 	super initialize.
 
-	self navItemsClear.
+	popupItems := OrderedCollection new.
 
 ]
 
 { #category : 'accessing' }
-SlmdNavPopup >> navItems [
+SlmdNavPopup >> popupItems [
 
-	^ navItems
+	^ popupItems
 ]
 
 { #category : 'accessing' }
-SlmdNavPopup >> navItems: anObject [
+SlmdNavPopup >> popupItems: anObject [
 
-	navItems := anObject
-]
-
-{ #category : 'initialization' }
-SlmdNavPopup >> navItemsClear [
-
-	self navItems: OrderedCollection new.
-
+	popupItems := anObject
 ]

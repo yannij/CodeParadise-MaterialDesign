@@ -139,9 +139,6 @@ SlmdResponsiveLayoutPresenter >> renderView [
 		self renderChildViewForModel: value usingPresenter: SlmdNavRailModalPresenter atSlotNamed: #navRailModal.
 		self renderChildViewForModel: value usingPresenter: SlmdNavBarPresenter atSlotNamed: #navBar ].
 
-	"self model navPopups ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #popups ]."
-
 	self model paneLayout ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #paneLayout ].
 
