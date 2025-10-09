@@ -3,6 +3,7 @@ Class {
 	#superclass : 'SlmdToolbarModel',
 	#instVars : [
 		'primary',
+		'headline',
 		'actionItems',
 		'actionGroupToUse'
 	],
@@ -64,11 +65,24 @@ SlmdAppBarModel >> beSecondary [
 
 ]
 
+{ #category : 'accessing' }
+SlmdAppBarModel >> headline [
+
+	^ headline
+]
+
+{ #category : 'accessing' }
+SlmdAppBarModel >> headline: anObject [
+
+	headline := anObject
+]
+
 { #category : 'initialization' }
 SlmdAppBarModel >> initialize [
 
 	super initialize.
 
+	headline := ''.
 	actionItems := OrderedCollection new.
 	self bePrimary.
 

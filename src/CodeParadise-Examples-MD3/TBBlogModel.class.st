@@ -14,7 +14,7 @@ Class {
 
 { #category : 'initialization' }
 TBBlogModel class >> createDemoPosts [
-   "TBBlog createDemoPosts"
+   "TBBlogModel createDemoPosts"
    self current 
       writeBlogPost: ((TBPostModel title: 'Welcome in TinyBlog' text: 'TinyBlog is a small blog engine made with Pharo.' category: 'TinyBlog') visible: true);
       writeBlogPost: ((TBPostModel title: 'Report Pharo Sprint' text: 'Friday, June 12 there was a Pharo sprint / Moose dojo. It was a nice event with more than 15 motivated sprinters. With the help of candies, cakes and chocolate, huge work has been done' category: 'Pharo') visible: true);

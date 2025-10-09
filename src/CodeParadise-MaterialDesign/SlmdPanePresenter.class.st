@@ -10,7 +10,12 @@ Class {
 SlmdPanePresenter >> renderView [
 
 	self model appBarModel ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #appBar ].
+		self model appBarDisplayed
+			ifTrue: [
+				self renderChildViewForModel: value atSlotNamed: #appBar ]
+			ifFalse: [
+				self view removeChildrenAtSlotNamed: #appBar.
+				self removeAllChildPresentersAtSlotNamed: #appBar ] ].
 
 	self model paneContent
 		ifNil: [

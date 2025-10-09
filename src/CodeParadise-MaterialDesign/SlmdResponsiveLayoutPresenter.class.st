@@ -166,6 +166,13 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 
 	self subscribeToUserEvent.
 
+]
+
+{ #category : 'view' }
+SlmdResponsiveLayoutPresenter >> viewInitialized [
+
+	super viewInitialized.
+
 	self application customColorTheme ifNotNil: [ :value |
 		self view colorThemePut: value ].
 

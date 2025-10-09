@@ -22,6 +22,12 @@ SlmdLog class >> logError: aString [
 ]
 
 { #category : 'logging' }
+SlmdLog class >> logInfo: aString [
+
+	self log: '[Info] ', aString
+]
+
+{ #category : 'logging' }
 SlmdLog class >> logTrace5: aString [
 
 	self logTrace: aString aspect: nil level: 5
@@ -60,6 +66,12 @@ SlmdLog class >> logTrace: aString aspect: aspect level: level [
 SlmdLog class >> logTrace: aString method: methodName [
 
 	self logTrace: aString aspect: self class name, '>>', methodName
+]
+
+{ #category : 'logging' }
+SlmdLog class >> logWarn: aString [
+
+	self log: '[Warn] ', aString
 ]
 
 { #category : 'accessing' }

@@ -35,7 +35,7 @@ SlmdAppBarPresenter >> renderView [
 		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ].
 
 	self model isPrimary ifTrue: [
-		self view renderHeadline: self application class appName ].
+		self view renderHeadline: self model headline ].
 
 	list := self actionItemsToUse collect: [ :each | each asDictionary ].
 	list isEmpty ifTrue: [ ^ self ].
