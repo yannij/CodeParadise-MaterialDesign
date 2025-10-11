@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdListDetailView',
-	#superclass : 'SlmdView',
+	#superclass : 'SlmdLayoutComponentView',
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'ListDetail'
@@ -29,6 +29,6 @@ SlmdListDetailView class >> template [
 	<webResource: #html>
 
 	^ '<div id="container">
-  <slot name="posts"></slot>
+  <slot name="list"></slot>
 </div>'
 ]

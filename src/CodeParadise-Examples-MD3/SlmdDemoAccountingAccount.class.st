@@ -117,6 +117,12 @@ SlmdDemoAccountingAccount >> makeExampleTransactions: aCount in: aRepo [
 		aRepo save: (SlmdDemoAccountingTransaction randomOnAccount: self in: aRepo) ]
 ]
 
+{ #category : 'printing' }
+SlmdDemoAccountingAccount >> mdPrimaryString [
+
+	^ self name, ' ', self number asString
+]
+
 { #category : 'accessing' }
 SlmdDemoAccountingAccount >> name [
 
@@ -151,12 +157,6 @@ SlmdDemoAccountingAccount >> openingBalance [
 SlmdDemoAccountingAccount >> openingBalance: anObject [
 
 	openingBalance := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoAccountingAccount >> slmdShortSummary [
-
-	^ self name, ' ', self number asString
 ]
 
 { #category : 'accessing' }

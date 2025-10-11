@@ -61,6 +61,7 @@ TBRootApplication >> initialize [
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
 	self setUpAppBar1.
 	self setUpAppBar2.
+	self layout appBar1 headline: self class appName.
 	self setDetailWithIndex: 1.
 
 ]

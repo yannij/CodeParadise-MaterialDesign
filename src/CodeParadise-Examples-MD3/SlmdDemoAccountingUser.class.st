@@ -75,6 +75,12 @@ SlmdDemoAccountingUser >> locale: anObject [
 	locale := anObject
 ]
 
+{ #category : 'printing' }
+SlmdDemoAccountingUser >> mdPrimaryString [
+
+	^ self name
+]
+
 { #category : 'accessing' }
 SlmdDemoAccountingUser >> name [
 
@@ -85,10 +91,4 @@ SlmdDemoAccountingUser >> name [
 SlmdDemoAccountingUser >> name: anObject [
 
 	name := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoAccountingUser >> slmdShortSummary [
-
-	^ self name
 ]

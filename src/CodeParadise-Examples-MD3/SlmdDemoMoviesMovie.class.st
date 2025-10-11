@@ -62,6 +62,12 @@ SlmdDemoMoviesMovie >> id: anObject [
 	id := anObject
 ]
 
+{ #category : 'printing' }
+SlmdDemoMoviesMovie >> mdPrimaryString [
+
+	^ self name
+]
+
 { #category : 'accessing' }
 SlmdDemoMoviesMovie >> name [
 
@@ -84,12 +90,6 @@ SlmdDemoMoviesMovie >> rating [
 SlmdDemoMoviesMovie >> rating: anObject [
 
 	rating := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoMoviesMovie >> slmdShortSummary [
-
-	^ self name
 ]
 
 { #category : 'accessing' }

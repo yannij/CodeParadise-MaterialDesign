@@ -106,6 +106,12 @@ SlmdDemoAccountingTransaction >> id: anObject [
 	id := anObject
 ]
 
+{ #category : 'printing' }
+SlmdDemoAccountingTransaction >> mdPrimaryString [
+
+	^ self summaryString
+]
+
 { #category : 'accessing' }
 SlmdDemoAccountingTransaction >> number [
 
@@ -116,10 +122,4 @@ SlmdDemoAccountingTransaction >> number [
 SlmdDemoAccountingTransaction >> number: anObject [
 
 	number := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoAccountingTransaction >> slmdShortSummary [
-
-	^ self summaryString
 ]

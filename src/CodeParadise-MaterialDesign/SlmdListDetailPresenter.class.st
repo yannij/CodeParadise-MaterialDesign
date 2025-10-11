@@ -13,6 +13,6 @@ SlmdListDetailPresenter >> renderView [
 
 	self
 		renderAllChildViewsForModels: self model list
-		usingPresenter: SlmdListDetailListPresenter
-		atSlotNamed: #posts
+		usingPresenter: SlmdListItemPresenter
+		atSlotNamed: #list
 ]

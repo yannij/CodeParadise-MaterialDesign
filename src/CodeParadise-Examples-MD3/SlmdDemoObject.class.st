@@ -32,7 +32,7 @@ SlmdDemoObject >> applyChanges: changes [
 SlmdDemoObject >> asMap [
 	| map |
 
-	map := Dictionary new.
+	map := super asMap.
 
 	self class attributeNames do: [ :each |
 		map at: each put: (self perform: each asSymbol) asString ].

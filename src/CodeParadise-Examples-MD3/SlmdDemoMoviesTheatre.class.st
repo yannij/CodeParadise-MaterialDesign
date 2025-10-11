@@ -48,6 +48,12 @@ SlmdDemoMoviesTheatre >> id: anObject [
 	id := anObject
 ]
 
+{ #category : 'printing' }
+SlmdDemoMoviesTheatre >> mdPrimaryString [
+
+	^ self name
+]
+
 { #category : 'accessing' }
 SlmdDemoMoviesTheatre >> name [
 
@@ -70,10 +76,4 @@ SlmdDemoMoviesTheatre >> phone [
 SlmdDemoMoviesTheatre >> phone: anObject [
 
 	phone := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoMoviesTheatre >> slmdShortSummary [
-
-	^ self name
 ]

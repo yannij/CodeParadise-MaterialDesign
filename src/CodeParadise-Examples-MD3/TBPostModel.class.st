@@ -52,7 +52,7 @@ TBPostModel >> applyChanges: changes [
 { #category : 'converting' }
 TBPostModel >> asMap [
 
-	^ Dictionary new
+	^ super asMap
 		at: 'title' put: self title;
 		at: 'text' put: self text;
 		at: 'date' put: self date asString;
@@ -117,15 +117,15 @@ TBPostModel >> isVisible [
    ^ self visible
 ]
 
+{ #category : 'printing' }
+TBPostModel >> mdPrimaryString [
+
+	^ self title
+]
+
 { #category : 'blinking' }
 TBPostModel >> notVisible [
    self visible: false
-]
-
-{ #category : 'printing' }
-TBPostModel >> slmdShortSummary [
-
-	^ self title
 ]
 
 { #category : 'accessing' }

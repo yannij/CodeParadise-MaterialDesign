@@ -60,6 +60,7 @@ MD3ExampleApp >> initialize [
 	layout := SlmdResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
+	self layout appBar1 headline: self class appName.
 
 ]
 

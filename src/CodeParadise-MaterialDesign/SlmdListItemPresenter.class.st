@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdListDetailListPresenter',
+	#name : 'SlmdListItemPresenter',
 	#superclass : 'SlmdPresenter',
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,10 +7,10 @@ Class {
 }
 
 { #category : 'rendering' }
-SlmdListDetailListPresenter >> renderView [
+SlmdListItemPresenter >> renderView [
 
 	self view
-		renderTextSlot: 'listItem'
-		value: self model wrappedModel slmdShortSummary
-		index: self model index
+		renderListItemMap: self model wrappedModel asListItemMap
+		index: self model index.
+
 ]

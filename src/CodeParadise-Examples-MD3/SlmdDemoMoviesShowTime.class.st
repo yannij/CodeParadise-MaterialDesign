@@ -37,6 +37,12 @@ SlmdDemoMoviesShowTime >> id: anObject [
 	id := anObject
 ]
 
+{ #category : 'printing' }
+SlmdDemoMoviesShowTime >> mdPrimaryString [
+
+	^ self summaryString
+]
+
 { #category : 'accessing' }
 SlmdDemoMoviesShowTime >> movieId [
 
@@ -85,12 +91,6 @@ SlmdDemoMoviesShowTime >> showStartTime [
 SlmdDemoMoviesShowTime >> showStartTime: anObject [
 
 	showStartTime := anObject
-]
-
-{ #category : 'printing' }
-SlmdDemoMoviesShowTime >> slmdShortSummary [
-
-	^ self summaryString
 ]
 
 { #category : 'accessing' }

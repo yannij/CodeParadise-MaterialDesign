@@ -19,6 +19,15 @@ SlmdObjectModel >> applyChanges: changes [
 ]
 
 { #category : 'converting' }
+SlmdObjectModel >> asListItemMap [
+	"Subclasses may override"
+
+	^ Dictionary new
+		at: #headline put: self mdPrimaryString;
+		yourself
+]
+
+{ #category : 'converting' }
 SlmdObjectModel >> asMap [
 	"Subclasses may override"
 
@@ -59,16 +68,7 @@ SlmdObjectModel >> handleUpdate: anObject [
 ]
 
 { #category : 'printing' }
-SlmdObjectModel >> shortSummary [
-	"Answer a short descriptive string of the receiver.
-	Typically used for display in a list.
-	Subclasses should provide better string"
-
-	^ self printString
-]
-
-{ #category : 'printing' }
-SlmdObjectModel >> slmdShortSummary [
+SlmdObjectModel >> mdPrimaryString [
 	"Answer a short descriptive string of the receiver.
 	Typically used for display in a list.
 	Subclasses should provide better string"

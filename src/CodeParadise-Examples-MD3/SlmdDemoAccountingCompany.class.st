@@ -84,6 +84,12 @@ SlmdDemoAccountingCompany >> id: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdDemoAccountingCompany >> mdPrimaryString [
+
+	^ self name
+]
+
+{ #category : 'accessing' }
 SlmdDemoAccountingCompany >> name [
 
 	^ name
@@ -93,12 +99,6 @@ SlmdDemoAccountingCompany >> name [
 SlmdDemoAccountingCompany >> name: anObject [
 
 	name := anObject
-]
-
-{ #category : 'accessing' }
-SlmdDemoAccountingCompany >> slmdShortSummary [
-
-	^ self name
 ]
 
 { #category : 'accessing' }
