@@ -46,59 +46,60 @@ SlmdListItemView class >> globalStyle [
 ]
 
 { #category : 'web resources' }
+SlmdListItemView class >> style [
+	<webResource: #css>
+
+	^ '
+.container {
+  display: flex;
+  height: 40px;
+  padding: 8px 16px;
+  background: var(--sl-color-primary-200);
+  border-top: 1px solid var(--sl-color-neutral-400);
+}
+
+.leadingIcon {
+  padding: 8px 16px 8px 0;
+  font-size: 24px;
+}
+
+.headline {
+  line-height: 40px;
+  font-size: 16px;
+  text-align: left;
+  overflow-x: clip;
+  margin-right: auto;
+}
+
+.trailingIcon {
+  padding: 8px 0 8px 16px;
+  font-size: 24px;
+}
+'
+]
+
+{ #category : 'web resources' }
 SlmdListItemView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container">
-  <slot name="listItem"></slot>
+	^ '<div class="container">
+<div class="leadingIcon"><slot name="leadingIcon"></slot></div>
+<div class="headline"><slot name="headline"></slot></div>
+<div class="trailingIcon"><slot name="trailingIcon"></slot></div>
 </div>'
 ]
 
 { #category : 'rendering' }
-SlmdListItemView >> renderLeadingIconOn: div map: aMap [
-	| iconName |
-
-	iconName := (aMap at: #leadingIcon ifAbsent: [ ^ self ]).
-
-	div
-		appendChild: (#div asHtmlTag
-			addClass: 'smd-item-leadingIcon';
-			appendChild: (SlIcon named: iconName);
-			yourself);
-		yourself.
-
-]
-
-{ #category : 'rendering' }
 SlmdListItemView >> renderListItemMap: aMap index: index [
-	| div |
 
-	div := #div asHtmlTag addClass: 'smd-item'; yourself.
-	self renderLeadingIconOn: div map: aMap.
-	div
-		appendChild: (#div asHtmlTag
-			addClass: 'smd-item-headline';
-			textContent: (aMap at: #headline ifAbsent: ['']);
-			yourself);
-		yourself.
-	self renderTrailingIconOn: div map: aMap.
-	div when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self.
-	self replaceAllChildrenWith: div atSlotNamed: #listItem.
-]
-
-{ #category : 'rendering' }
-SlmdListItemView >> renderTrailingIconOn: div map: aMap [
-	| iconName |
-
-	iconName := (aMap at: #trailingIcon ifAbsent: [ ^ self ]).
-
-	div
-		appendChild: (#div asHtmlTag
-			addClass: 'smd-item-trailingIcon';
-			appendChild: (SlIcon named: iconName);
-			yourself);
-		yourself.
+	aMap at: #leadingIcon ifPresent: [ :value | | element |
+		self replaceAllChildrenWith: (element := SlIcon named: value) atSlotNamed: #leadingIcon.
+		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
+	aMap at: #headline ifPresent: [ :value |
+		self replaceAllChildrenWith: value asHtmlElement atSlotNamed: #headline ].
+	aMap at: #trailingIcon ifPresent: [ :value |
+		self replaceAllChildrenWith: (SlIcon named: value) atSlotNamed: #trailingIcon ].
 
 ]
 
