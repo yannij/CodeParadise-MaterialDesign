@@ -83,6 +83,18 @@ WaIcon >> fullName: aString [
 ]
 
 { #category : 'accessing' }
+WaIcon >> label [
+
+	^ self attributeAt: #label
+]
+
+{ #category : 'accessing' }
+WaIcon >> label: aString [
+
+	self attributeAt: #label put: aString
+]
+
+{ #category : 'accessing' }
 WaIcon >> library [
 
 	^ self propertyAt: #library

@@ -22,7 +22,7 @@ WaWrapperSpec class >> generateAllWrappers [
 	"
 
 	{
-	self waTestSpec.
+	"self waTestSpec."
 	self waButtonSpec.
 	self waButtonGroupSpec.
 	} do: [ :eachSpec | eachSpec generate ]
@@ -121,7 +121,7 @@ WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ (self attributeAt: ', symbolString, ') notNil';
 				yourself ])
-		classified: 'accessing attribute'.
+		classified: 'accessing boolean'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -131,7 +131,32 @@ WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 				cr; tab; tab; nextPutAll: 'ifTrue: [ self attributeAdd: ', symbolString, ' ]';
 				cr; tab; tab; nextPutAll: 'ifFalse: [ self removeAttributeAt: ', symbolString, ' ]';
 				yourself ])
-		classified: 'accessing attribute'.
+		classified: 'accessing boolean'.
+
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec >> compileBooleanConvenience: aKebabCaseName in: aClass [
+	| accessorString symbolString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	symbolString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'BeOn';
+				cr; cr; tab; nextPutAll: 'self ', accessorString, ': true';
+				yourself ])
+		classified: 'accessing boolean'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'BeOff';
+				cr; cr; tab; nextPutAll: 'self ', accessorString, ': false';
+				yourself ])
+		classified: 'accessing boolean'.
 
 ]
 
@@ -203,7 +228,7 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
 				yourself ])
-		classified: 'accessing property'.
+		classified: 'accessing string'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -211,7 +236,7 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString; nextPutAll: ': anObject';
 				cr; cr; tab; nextPutAll: 'self propertyAt: ', symbolString, ' put: anObject';
 				yourself ])
-		classified: 'accessing property'.
+		classified: 'accessing string'.
 
 ]
 
@@ -232,7 +257,7 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName types: specString in: aCl
 					nextPutAll: accessorString, 'Be', eachType asCamelCase capitalized;
 					cr; cr; tab; nextPutAll: 'self ', accessorString, ': ', eachType printString;
 					yourself ])
-			classified: 'accessing property' ].
+			classified: 'accessing string' ].
 
 ]
 
@@ -264,7 +289,8 @@ WaWrapperSpec >> generate [
 		self compileSlot: each in: theClass ].
 
 	self booleanProperties keysAndValuesDo: [ :key :value |
-		self compileBooleanAttribute: key in: theClass ].
+		self compileBooleanAttribute: key in: theClass.
+		self compileBooleanConvenience: key in: theClass ].
 
 	self stringProperties keysAndValuesDo: [ :key :value |
 		self compileStringProperty: key in: theClass.

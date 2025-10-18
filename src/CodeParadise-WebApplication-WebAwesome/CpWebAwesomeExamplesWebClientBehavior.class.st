@@ -19,15 +19,14 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
 
 	outputElement appendChild: (WaButton label: 'Button').
 
-	outputElement appendChild: (CpHtmlElement newWithTag: #p).
-
+	self subheading: 'Variants' on: outputElement.
 	outputElement appendChild: (WaButton new variantBeNeutral ; label: 'Neutral' ; yourself).
 	outputElement appendChild: (WaButton new variantBeBrand ; label: 'Brand' ; yourself).
 	outputElement appendChild: (WaButton new variantBeSuccess ; label: 'Success' ; yourself).
 	outputElement appendChild: (WaButton new variantBeWarning ; label: 'Warning' ; yourself).
 	outputElement appendChild: (WaButton new variantBeDanger ; label: 'Danger' ; yourself).
  
-	outputElement appendChild: (CpHtmlElement newWithTag: #p).
+	self subheading: 'Appearance' on: outputElement.
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeAccent; label: 'Accent'; yourself).
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; label: 'Filled'; yourself).
@@ -58,20 +57,71 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBePlain; label: 'Plain'; yourself).
 
-	outputElement appendChild: (CpHtmlElement newWithTag: #p).
+	self subheading: 'Sizes' on: outputElement.
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Small'; yourself).
+	outputElement appendChild: (WaButton new sizeBeMedium; label: 'Medium'; yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Large'; yourself).
 
-	outputElement appendChild: (WaButton new sizeBeSmall ; label: 'Small' ; yourself).
-	outputElement appendChild: (WaButton new sizeBeMedium ; label: 'Medium' ; yourself).
-	outputElement appendChild: (WaButton new sizeBeLarge ; label: 'Large' ; yourself).
+	self subheading: 'Pill Buttons' on: outputElement.
+	outputElement appendChild: (WaButton new pill: true; sizeBeSmall; label: 'Small'; yourself).
+	outputElement appendChild: (WaButton new pill: true; sizeBeMedium; label: 'Medium'; yourself).
+	outputElement appendChild: (WaButton new pill: true; sizeBeLarge; label: 'Large'; yourself).
 
-	outputElement appendChild: (CpHtmlElement newWithTag: #p).
+	self subheading: 'Link Buttons' on: outputElement.
+	self todoOn: outputElement.
 
-	outputElement appendChild: (WaButton new pill: true ; sizeBeSmall ; label: 'Small' ; yourself).
-	outputElement appendChild: (WaButton new pill: true ; sizeBeMedium ; label: 'Medium' ; yourself).
-	outputElement appendChild: (WaButton new pill: true ; sizeBeLarge ; label: 'Large' ; yourself).
+	self subheading: 'Icon Buttons' on: outputElement.
+	outputElement appendChild: (
+		#div asHtmlTag
+			addClass: #'wa-cluster';
+			appendChild: (WaButton new variantBeNeutral; appearanceBeAccent; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBeOutlined; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBePlain; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
+			yourself).
 
-	outputElement appendChild: (CpHtmlElement newWithTag: #p).
+	self subheading: 'Setting a Custom Width' on: outputElement.
+	outputElement appendChild: (WaButton new sizeBeSmall ; label: 'Small'; styleAt: 'width' put: '100%'; styleAt: 'margin-bottom' put: '1rem'; yourself).
+	outputElement appendChild: (WaButton new sizeBeMedium ; label: 'Medium'; styleAt: 'width' put: '100%'; styleAt: 'margin-bottom' put: '1rem'; yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge ; label: 'Large'; styleAt: 'width' put: '100%'; yourself).
 
+	self subheading: 'Start & End Decorations' on: outputElement.
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButton new label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
+	outputElement appendChild: (WaButton new label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
+	outputElement appendChild: (WaButton new label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+
+	self subheading: 'Caret' on: outputElement.
+	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeSmall; label: ((WaIcon named: 'gear') label: 'Settings'; yourself); yourself).
+	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeSmall; label: 'Small'; yourself).
+	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeMedium; label: 'Medium'; yourself).
+	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeLarge; label: 'Large'; yourself).
+
+	self subheading: 'Loading' on: outputElement.
+	outputElement appendChild: (WaButton new loadingBeOn; variantBeBrand; label: 'Brand'; yourself).
+	outputElement appendChild: (WaButton new loadingBeOn; variantBeSuccess; label: 'Success'; yourself).
+	outputElement appendChild: (WaButton new loadingBeOn; variantBeNeutral; label: 'Neutral'; yourself).
+	outputElement appendChild: (WaButton new loadingBeOn; variantBeWarning; label: 'Warning'; yourself).
+	outputElement appendChild: (WaButton new loadingBeOn; variantBeDanger; label: 'Danger'; yourself).
+
+	self subheading: 'Disabled' on: outputElement.
+	outputElement appendChild: (WaButton new disabledBeOn; variantBeBrand; label: 'Brand'; yourself).
+	outputElement appendChild: (WaButton new disabledBeOn; variantBeSuccess; label: 'Success'; yourself).
+	outputElement appendChild: (WaButton new disabledBeOn; variantBeNeutral; label: 'Neutral'; yourself).
+	outputElement appendChild: (WaButton new disabledBeOn; variantBeWarning; label: 'Warning'; yourself).
+	outputElement appendChild: (WaButton new disabledBeOn; variantBeDanger; label: 'Danger'; yourself).
+
+	self subheading: 'Styling Buttons' on: outputElement.
+	self todoOn: outputElement.
+
+	self subheading: 'Misc' on: outputElement.
 	button := outputElement appendChild: (WaButton label: 'Hello world').
 	button variantBeBrand.
 	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
@@ -532,4 +582,18 @@ CpWebAwesomeExamplesWebClientBehavior >> showIndex [
 
 		"Register interest in events on the list item"
 		example when: CpClickEvent basicPrimary send: item key to: self ]
+]
+
+{ #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> subheading: aString on: outputElement [
+
+	outputElement
+		appendChild: #p asHtmlTag;
+		appendChild: (#h2 asHtmlTag textContent: aString; yourself).
+]
+
+{ #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> todoOn: outputElement [
+
+	outputElement appendChild: (#p asHtmlTag textContent: 'TODO'; yourself).
 ]
