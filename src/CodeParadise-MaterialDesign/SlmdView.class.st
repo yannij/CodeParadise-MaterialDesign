@@ -65,7 +65,7 @@ SlmdView >> dropdownMenu: actionList css: cssClass [
 SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 	| menu trigger dropdown |
 
-	menu := SlMenu new.
+	menu := #div asHtmlTag.
 	menu addClass: 'smd-menu'.
 	actionList do: [ :each | | icon |
 		icon := (SlIcon named: (each at: #iconName)) addClass: 'smd-menu-icon'; yourself.

@@ -11,6 +11,7 @@ BaselineOfMaterialDesign >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			package: 'CodeParadise-MaterialDesign';
+			package: 'CodeParadise-WebApplication-WebAwesome';
 			package: 'CodeParadise-Examples-MD3'.
 
 		spec 
