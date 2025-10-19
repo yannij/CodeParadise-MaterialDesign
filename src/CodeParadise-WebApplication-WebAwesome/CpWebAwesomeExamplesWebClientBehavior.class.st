@@ -147,10 +147,101 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButtonGroup [
 	outputElement textContent: ''.
 
 	outputElement appendChild: (WaButtonGroup new
-		appendChild: (WaButton new label: 'First' ; yourself) ;
-		appendChild: (WaButton new label: 'Second' ; yourself) ;
-		appendChild: (WaButton new label: 'Third' ; yourself) ;
-		yourself)
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+
+	self subheading: 'Vertical Button Groups' on: outputElement.
+	outputElement appendChild: (WaButtonGroup new
+		label: 'Options';
+		appendChild: (WaButton new start: (WaIcon named: 'plus'); label: 'New'; yourself);
+		appendChild: (WaButton new start: (WaIcon named: 'folder-open'); label: 'Open'; yourself);
+		appendChild: (WaButton new start: (WaIcon named: 'save'); label: 'Save'; yourself);
+		appendChild: (WaButton new start: (WaIcon named: 'print'); label: 'Print'; yourself);
+		yourself).
+
+	self subheading: 'Theme Buttons' on: outputElement.
+	outputElement appendChild: (WaButtonGroup new
+		variantBeBrand;
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		variantBeSuccess;
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		variantBeWarning;
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		variantBeDanger;
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		variantBeBrand;
+		label: 'Alignment';
+		appendChild: (WaButton new label: 'Left'; yourself);
+		appendChild: (WaButton new label: 'Center'; yourself);
+		appendChild: (WaButton new variantBeWarning; label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+
+	self subheading: 'Pill Buttons' on: outputElement.
+	outputElement appendChild: (WaButtonGroup new
+		label: 'Alignment';
+		appendChild: (WaButton new pillBeOn; sizeBeSmall; label: 'Left'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeSmall; label: 'Center'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeSmall; label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		label: 'Alignment';
+		appendChild: (WaButton new pillBeOn; sizeBeMedium; label: 'Left'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeMedium; label: 'Center'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeMedium; label: 'Right'; yourself);
+		yourself).
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: (WaButtonGroup new
+		label: 'Alignment';
+		appendChild: (WaButton new pillBeOn; sizeBeLarge; label: 'Left'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeLarge; label: 'Center'; yourself);
+		appendChild: (WaButton new pillBeOn; sizeBeLarge; label: 'Right'; yourself);
+		yourself).
+
+	self subheading: 'Dropdowns in Button Groups' on: outputElement.
+	self todoOn: outputElement.
+
+	self subheading: 'Split Buttons' on: outputElement.
+	self todoOn: outputElement.
+
+	self subheading: 'Tooltips in Button Groups' on: outputElement.
+	self todoOn: outputElement.
 
 ]
 
@@ -296,11 +387,11 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDrawer [
 	"Add buttons to the example, these open the dialog in different ways"
 	outputElement
 		appendChild: ((WaButton label: 'Open left')
-			bePrimary ;
+			variantBeBrand ;
 			when: CpClickEvent basicPrimary send: #beOpen to: drawer1 ;
 			yourself) ;
 		appendChild: ((WaButton label: 'Open right')
-			beWarning ;
+			variantBeWarning ;
 			when: CpClickEvent basicPrimary send: #showModal to: drawer2 ;
 			yourself) ;
 		appendChild: drawer1 ;

@@ -6,6 +6,12 @@ Class {
 	#tag : 'Events'
 }
 
+{ #category : 'accessing' }
+WaInputEvent class >> type [
+
+	^ 'input'
+]
+
 { #category : 'event handling' }
 WaInputEvent >> handleEventForField: aSymbol inView: aView [
 

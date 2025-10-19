@@ -1,5 +1,5 @@
 Class {
-	#name : 'WaRequestCloseEvent',
+	#name : 'WaAfterShowEvent',
 	#superclass : 'WaEvent',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Events',
 	#package : 'CodeParadise-WebApplication-WebAwesome',

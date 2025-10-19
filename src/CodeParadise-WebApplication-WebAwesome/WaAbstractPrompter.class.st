@@ -177,9 +177,6 @@ WaAbstractPrompter >> initialize [
 
 	self beNotModal.
 
-	self
-		"when: WaRequestCloseEvent send: #onModalRequestClose: to: self ;"
-		when: WaInitialFocusEvent send: #onInitialFocus: to: self
 ]
 
 { #category : 'testing' }

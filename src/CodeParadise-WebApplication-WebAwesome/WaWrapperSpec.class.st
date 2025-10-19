@@ -44,6 +44,9 @@ WaWrapperSpec class >> waButtonGroupSpec [
 
 	^ self new
 		wrapperClassName: #WaButtonGroup;
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'orientation' put: '*horizontal|vertical';
+		stringPropertyAt: 'variant' put: '*neutral|brand|success|warning|danger';
 		yourself
 ]
 

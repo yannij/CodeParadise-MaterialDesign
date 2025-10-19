@@ -1,5 +1,5 @@
 Class {
-	#name : 'WaInitialFocusEvent',
+	#name : 'WaAfterHideEvent',
 	#superclass : 'WaEvent',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Events',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
