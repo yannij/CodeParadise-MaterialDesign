@@ -22,19 +22,19 @@ SlmdNavActionDropdownView class >> style [
   flex-flow: column;
   height: 56px;
   width: 96px;
-  padding-top: 12px;
 }
 
 .smd-navrail-icon {
   font-size: 24px;
-  padding-left: 28px;
+  line-height: 28px;
+  padding-left: 33px;
+  padding-top: 4px;
 }
 
 .smd-navrail-labelText {
-  padding: 0;
-  line-height: 16px;
-  font-size: var(--sl-font-size-x-small);
-  align-items: center;
+  height: 24px;
+  line-height: 18px;
+  font-size: 14px;
   text-align: center;
   overflow-x: clip;
 }
@@ -65,15 +65,15 @@ SlmdNavActionDropdownView class >> template [
 
 	<webResource: #html>
 
-	^ '<sl-dropdown placement="right-start">
+	^ '<wa-dropdown placement="right-start">
   <slot name="content"></slot>
-</sl-dropdown>'
+</wa-dropdown>'
 ]
 
 { #category : 'rendering' }
 SlmdNavActionDropdownView >> dropdownElement [
 
-	^ self shadowRoot firstDescendantMatching: SlDropdown asCssSelector
+	^ self shadowRoot firstDescendantMatching: WaDropdown asCssSelector
 ]
 
 { #category : 'actions' }

@@ -283,6 +283,13 @@ WaAbstractPrompter >> resetDefaultFocusElement [
 ]
 
 { #category : 'actions' }
+WaAbstractPrompter >> show [
+
+	self apply: #show withArguments: #()
+
+]
+
+{ #category : 'actions' }
 WaAbstractPrompter >> showFocusing: anElement [
 
 	"Show the receiver and set focus on the specified Element"

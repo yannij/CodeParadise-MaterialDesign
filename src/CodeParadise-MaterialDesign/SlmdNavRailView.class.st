@@ -9,7 +9,7 @@ Class {
 { #category : 'class initialization' }
 SlmdNavRailView class >> beLoaded [
 
-	SlDrawer beLoaded
+	WaDrawer beLoaded
 ]
 
 { #category : 'web resources' }

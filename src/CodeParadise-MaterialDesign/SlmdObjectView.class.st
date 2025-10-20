@@ -13,7 +13,7 @@ Class {
 { #category : 'class initialization' }
 SlmdObjectView class >> beLoaded [
 
-	SlCard beLoaded
+	WaCard beLoaded
 ]
 
 { #category : 'web resources' }
@@ -211,7 +211,7 @@ SlmdObjectView >> changeMap [
 SlmdObjectView >> fieldAt: key label: aLabel switch: aBoolean [
 	| element |
 
-	element := SlSwitch new
+	element := WaSwitch new
 		name: key;
 		addClass: 'slmd-switch';
 		checked: aBoolean;
@@ -229,12 +229,12 @@ SlmdObjectView >> fieldAt: key label: aLabel switch: aBoolean [
 SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 	| element |
 
-	element := SlInput new
+	element := WaInput new
 		name: key;
 		addClass: 'slmd-input';
 		labelText: aLabel;
 		value: aText;
-		helpText: 'Help text...', aLabel;
+		hintText: 'Help text...', aLabel;
 		"attributeAdd: #readonly;"
 		disabled: true;
 		attributeAdd: #filled;
@@ -249,13 +249,13 @@ SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 SlmdObjectView >> fieldAt: key label: aLabel textarea: aText [
 	| element |
 
-	element := SlTextarea new
+	element := WaTextarea new
 		name: key;
 		addClass: 'slmd-textarea';
 		rows: 4;
 		labelText: aLabel;
 		value: aText;
-		helpText: 'Help text...', aLabel;
+		hintText: 'Help text...', aLabel;
 		"attributeAdd: #readonly;"
 		disabled: true;
 		attributeAdd: #filled;
@@ -342,7 +342,7 @@ SlmdObjectView >> fieldsInExpansion: list map: map summary: summary open: aBoole
 
 	element := self fields: list map: map.
 
-	expansion := SlDetails new
+	expansion := WaDetails new
 		addClass: 'slmd-details';
 		propertyAt: 'summary' put: summary;
 		propertyAt: 'open' put: aBoolean;

@@ -33,7 +33,7 @@ SlmdDemoObjectView >> renderModelTable: aList columns: columns title: aTitleStri
 		tbody appendChild: tr ].
 	table appendChild: tbody.
 
-	details := SlDetails new.
+	details := WaDetails new.
 	details addClass: 'slmd-details'.
 	details propertyAt: 'summary' put: aTitleString.
 	details propertyAt: 'open' put: true.

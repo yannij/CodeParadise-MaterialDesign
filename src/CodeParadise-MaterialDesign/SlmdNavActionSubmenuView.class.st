@@ -15,13 +15,16 @@ SlmdNavActionSubmenuView >> closeSubmenu [
 
 { #category : 'rendering' }
 SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
+	| iconName |
+
+	iconName := aNavAction at: #iconName.
 
 	^ #div asHtmlTag
 		addClass: 'smd-navsubmenu-item';
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navsubmenu-icon';
-				appendChild: (SlIconButton named: (aNavAction at: #iconName));
+				appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag

@@ -19,7 +19,7 @@ SlmdWebClientBehavior >> addLoginButton [
 
 	dialog := self findLoginDialog.
 	outputElement
-		appendChild: ((SlButton label: 'Login')
+		appendChild: ((WaButton label: 'Login')
 			when: CpClickEvent basicPrimary send: #show to: dialog;
 			yourself).
 
@@ -35,15 +35,15 @@ SlmdWebClientBehavior >> addLoginDialog: label [
 		appendChild: (self fieldAt: #loginPassword label: 'Password' text: '');
 		yourself.
 
-	dialog := SlDialog new
+	dialog := WaDialog new
 		id: 'login-dialog';
 		label: label;
 		appendChild: fields;
-		appendChild: (self buttonLabel: 'Login' icon: 'box-arrow-in-left' send: #requestLogin);
+		appendChild: (self buttonLabel: 'Login' icon: 'bootstrap:box-arrow-in-left' send: #requestLogin);
 		yourself.
 
 	"Do separately, so dialog is not nil"
-	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'x' send: #hide receiver: dialog).
+	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'bootstrap:x' send: #beNotOpen receiver: dialog).
 
 	CpHtmlElement documentBody appendChild: dialog.
 
@@ -93,9 +93,9 @@ SlmdWebClientBehavior >> buttonLabel: label icon: icon send: selector [
 { #category : 'login' }
 SlmdWebClientBehavior >> buttonLabel: label icon: icon send: selector receiver: receiver [
 
-	^ SlButton new
+	^ WaButton new
 		label: label;
-		prefix: (SlIcon named: icon);
+		start: (WaIcon fullyNamed: icon);
 		when: CpClickEvent basicPrimary send: selector to: receiver;
 		styleAt: 'width' put: '100%';
 		styleAt: 'padding' put: '0 8px 8px 8px';
@@ -105,7 +105,7 @@ SlmdWebClientBehavior >> buttonLabel: label icon: icon send: selector receiver: 
 { #category : 'login' }
 SlmdWebClientBehavior >> fieldAt: key label: aLabel text: aText [
 
-	^ SlInput new
+	^ WaInput new
 		name: key;
 		addClass: 'slmd-input';
 		labelText: aLabel;
@@ -142,6 +142,6 @@ SlmdWebClientBehavior >> requestLogin [
 		viewId: self appViewId;
 		announcement: SlmdLoginRequested new;
 		yourself).
-	self findLoginDialog hide.
+	self findLoginDialog beNotOpen.
 
 ]

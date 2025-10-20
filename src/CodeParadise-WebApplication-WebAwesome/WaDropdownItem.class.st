@@ -1,5 +1,5 @@
 Class {
-	#name : 'WaMenuItem',
+	#name : 'WaDropdownItem',
 	#superclass : 'WaElement',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-WaMenuItem class >> value: aSymbol label: aStringOrElement [
+WaDropdownItem class >> value: aSymbol label: aStringOrElement [
 
 	^ self new
 		value: aSymbol ;
@@ -16,7 +16,7 @@ WaMenuItem class >> value: aSymbol label: aStringOrElement [
 ]
 
 { #category : 'instance creation' }
-WaMenuItem class >> value: aSymbol labelText: aString [
+WaDropdownItem class >> value: aSymbol labelText: aString [
 
 	^ self new
 		value: aSymbol ;
@@ -25,19 +25,19 @@ WaMenuItem class >> value: aSymbol labelText: aString [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> beChecked [
+WaDropdownItem >> beChecked [
 
 	self checked: true
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> beDisabled [
+WaDropdownItem >> beDisabled [
 
 	self disabled: true
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> beEnabled [
+WaDropdownItem >> beEnabled [
 
 	"Convenience method to make receiver enabled"
 
@@ -45,19 +45,19 @@ WaMenuItem >> beEnabled [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> beNotChecked [
+WaDropdownItem >> beNotChecked [
 
 	self checked: false
 ]
 
 { #category : 'accessing style' }
-WaMenuItem >> beNotDisabled [
+WaDropdownItem >> beNotDisabled [
 
 	self disabled: false
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> beNotEnabled [
+WaDropdownItem >> beNotEnabled [
 
 	"Convenience method to clear the enabled state of the receiver"
 
@@ -65,13 +65,13 @@ WaMenuItem >> beNotEnabled [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> checked: aBoolean [
+WaDropdownItem >> checked: aBoolean [
 
 	self propertyAt: #checked put: aBoolean
 ]
 
 { #category : 'copying' }
-WaMenuItem >> clone [
+WaDropdownItem >> clone [
 
 	"Deep clone the receiver.
 
@@ -85,13 +85,13 @@ WaMenuItem >> clone [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> disabled: aBoolean [
+WaDropdownItem >> disabled: aBoolean [
 
 	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> enabled: aBoolean [
+WaDropdownItem >> enabled: aBoolean [
 
 	"Convenience method to set receiver's enabled state"
 
@@ -99,7 +99,7 @@ WaMenuItem >> enabled: aBoolean [
 ]
 
 { #category : 'text input' }
-WaMenuItem >> focus [
+WaDropdownItem >> focus [
 
 	"Set focus to the receiver.
 
@@ -112,27 +112,39 @@ WaMenuItem >> focus [
 
 	super focus.
 
-	menu := self firstAncestorMatching: SlMenu asCssSelector.
+	"menu := self firstAncestorMatching: WaMenu asCssSelector.
 	(menu allDescendantsMatching: self class asCssSelector) do: [ :each |
 		each attributeAt: #tabindex put: (each == self
 			ifTrue: [ '0' ]
-			ifFalse: [ '-1' ]) ]
+			ifFalse: [ '-1' ]) ]"
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> isChecked [
+WaDropdownItem >> icon [
+
+	^ self firstChildAtSlotNamed: #icon
+]
+
+{ #category : 'accessing' }
+WaDropdownItem >> icon: anElement [
+
+	self replaceAllChildrenWith: anElement atSlotNamed: #icon
+]
+
+{ #category : 'accessing' }
+WaDropdownItem >> isChecked [
 
 	^ self propertyAt: #checked
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> isDisabled [
+WaDropdownItem >> isDisabled [
 
 	^ self propertyAt: #disabled
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> isEnabled [
+WaDropdownItem >> isEnabled [
 
 	"Convenience method to test if receiver is enabled"
 
@@ -140,7 +152,7 @@ WaMenuItem >> isEnabled [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> label [
+WaDropdownItem >> label [
 
 	"Answer the label HTML element of the receiver.
 	For a simple String value use #labelText instead."
@@ -149,7 +161,7 @@ WaMenuItem >> label [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> label: aStringOrElement [
+WaDropdownItem >> label: aStringOrElement [
 
 	"Set the label to the specified Element.
 	For a simple String value use #labelText: instead."
@@ -158,7 +170,7 @@ WaMenuItem >> label: aStringOrElement [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> labelText [
+WaDropdownItem >> labelText [
 
 	"Answer the label text (a String) of the receiver.
 	For richer HTML element use #label instead."
@@ -167,7 +179,7 @@ WaMenuItem >> labelText [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> labelText: aString [
+WaDropdownItem >> labelText: aString [
 
 	"Set the label text to the specified String value.
 	For richer HTML element use #label: instead."
@@ -176,37 +188,37 @@ WaMenuItem >> labelText: aString [
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> prefix [
+WaDropdownItem >> prefix [
 
 	^ self firstChildAtSlotNamed: #prefix
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> prefix: anElement [
+WaDropdownItem >> prefix: anElement [
 
 	self replaceAllChildrenWith: anElement atSlotNamed: #prefix
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> suffix [
+WaDropdownItem >> suffix [
 
 	^ self firstChildAtSlotNamed: #suffix
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> suffix: anElement [
+WaDropdownItem >> suffix: anElement [
 
 	self replaceAllChildrenWith: anElement atSlotNamed: #suffix
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> value [
+WaDropdownItem >> value [
 
 	^ self propertyAt: #value
 ]
 
 { #category : 'accessing' }
-WaMenuItem >> value: aString [
+WaDropdownItem >> value: aString [
 
 	self propertyAt: #value put: aString asString
 ]

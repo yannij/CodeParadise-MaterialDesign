@@ -532,7 +532,7 @@ SlmdResponsiveLayoutView >> hideNavModal [
 
 	modalElement := self modalNavElementOrNil.
 	modalElement ifNotNil: [
-		modalElement hide ].
+		modalElement beNotOpen ].
 ]
 
 { #category : 'initialization' }
@@ -757,7 +757,7 @@ SlmdResponsiveLayoutView >> modalNavOpen [
 	drawer := self modalNavElementOrNil.
 	drawer
 		ifNil: [ self systemLog logError: 'modal nav element is nil' ]
-		ifNotNil: [ drawer show ]
+		ifNotNil: [ drawer beOpen ]
 ]
 
 { #category : 'actions' }
@@ -890,8 +890,8 @@ SlmdResponsiveLayoutView >> resizeSetUp [
 	| target div resize |
 	target := self shadowedElementWithId: 'container'.
 	div := target firstChild.
-	resize := SlResizeObserver new.
-	resize when: SlResizeEvent send: #debounceResizeEvent: to: self.
+	resize := WaResizeObserver new.
+	resize when: WaResizeEvent send: #debounceResizeEvent: to: self.
 	target replaceChild: div with: resize.
 	resize appendChild: div
 ]

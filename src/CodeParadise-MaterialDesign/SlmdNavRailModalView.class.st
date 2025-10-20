@@ -13,9 +13,9 @@ Class {
 SlmdNavRailModalView class >> template [
 	<webResource: #html>
 
-	^ '<sl-drawer id="smdNavRailModal" class="navrail">
+	^ '<wa-drawer id="smdNavRailModal" class="navrail">
   <slot name="content"></slot>
-</sl-drawer>'
+</wa-drawer>'
 ]
 
 { #category : 'accessing' }

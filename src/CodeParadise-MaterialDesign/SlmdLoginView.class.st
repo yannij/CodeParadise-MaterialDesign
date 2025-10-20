@@ -53,18 +53,20 @@ SlmdLoginView class >> template [
 SlmdLoginView >> addButtons [
 	| element |
 
-	element := SlButton new
+	element := WaButton new
+		variantBeBrand;
 		label: 'Login';
-		prefix: (SlIcon named: 'box-arrow-in-left');
+		"start: (WaIcon fullyNamed: 'bootstrap:box-arrow-in-left');"
 		when: CpClickEvent basicPrimary send: #login to: self;
 		styleAt: 'width' put: '100%';
 		styleAt: 'padding' put: '0 8px 8px 8px';
 		yourself.
 	self appendChild: element atSlotNamed: #buttons.
 
-	element := SlButton new
+	element := WaButton new
+		variantBeNeutral;
 		label: 'Cancel';
-		prefix: (SlIcon named: 'x');
+		"start: (WaIcon fullyNamed: 'bootstrap:x');"
 		when: CpClickEvent basicPrimary send: #cancel to: self;
 		styleAt: 'width' put: '100%';
 		styleAt: 'padding' put: '0 8px 8px 8px';

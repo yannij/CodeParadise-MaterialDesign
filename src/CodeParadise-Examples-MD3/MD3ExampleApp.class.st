@@ -19,14 +19,14 @@ MD3ExampleApp class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { SlElement package. SlmdView package }
+	^ super allowedPackages, { WaElement package. SlmdView package }
 ]
 
 { #category : 'accessing' }
 MD3ExampleApp class >> app [
 	"self register"
 
-	^ #'Shoelace-MD3'
+	^ #'MD3-Example'
 ]
 
 { #category : 'accessing' }
@@ -95,8 +95,8 @@ MD3ExampleApp >> navPopup1Items [
 MD3ExampleApp >> navPopup2Items [
 
 	^ OrderedCollection new
-		add: (SlmdNavActionModel newNavSubtype: #'1-circle' groupTag: #popup2 iconName: '1-circle' iconLabel: 'Circle1 popup' data: 'Circle1 popup');
-		add: (SlmdNavActionModel newNavSubtype: #'2-circle' groupTag: #popup2 iconName: '2-circle' iconLabel: 'Circle2 popup' data: 'Circle2 popup');
+		add: (SlmdNavActionModel newNavSubtype: #'1-circle' groupTag: #popup2 iconName: 'bootstrap:1-circle' iconLabel: 'Circle1 popup' data: 'Circle1 popup');
+		add: (SlmdNavActionModel newNavSubtype: #'2-circle' groupTag: #popup2 iconName: 'bootstrap:2-circle' iconLabel: 'Circle2 popup' data: 'Circle2 popup');
 		yourself.
 
 ]
@@ -117,25 +117,25 @@ MD3ExampleApp >> setUpCustomEvents [
 	super setUpCustomEvents.
 
 	self
-		addActionSubtype: #'1-circle' groupTag: #primary iconName: '1-circle' iconLabel: '1-circle';
-		addActionSubtype: #'2-circle' groupTag: #primary  iconName: '2-circle' iconLabel: '2-circle';
-		addActionSubtype: #'3-circle' groupTag: #primary  iconName: '3-circle' iconLabel: '3-circle' ;
-		addActionSubtype: #'4-circle' groupTag: #primary  iconName: '4-circle' iconLabel: '4-circle' ;
-		addActionSubtype: #'1-square' groupTag: #float iconName: '1-square' iconLabel: 'Square1';
-		addActionSubtype: #'2-square' groupTag: #float iconName: '2-square' iconLabel: 'Square2';
-		addActionSubtype: #'3-square' groupTag: #docked iconName: '3-square' iconLabel: 'Square3';
-		addActionSubtype: #'1-square' groupTag: #docked iconName: '1-square' iconLabel: 'Square1';
+		addActionSubtype: #'1-circle' groupTag: #primary iconName: 'bootstrap:1-circle' iconLabel: '1-circle';
+		addActionSubtype: #'2-circle' groupTag: #primary  iconName: 'bootstrap:2-circle' iconLabel: '2-circle';
+		addActionSubtype: #'3-circle' groupTag: #primary  iconName: 'bootstrap:3-circle' iconLabel: '3-circle' ;
+		addActionSubtype: #'4-circle' groupTag: #primary  iconName: 'bootstrap:4-circle' iconLabel: '4-circle' ;
+		addActionSubtype: #'1-square' groupTag: #float iconName: 'bootstrap:1-square' iconLabel: 'Square1';
+		addActionSubtype: #'2-square' groupTag: #float iconName: 'bootstrap:2-square' iconLabel: 'Square2';
+		addActionSubtype: #'3-square' groupTag: #docked iconName: 'bootstrap:3-square' iconLabel: 'Square3';
+		addActionSubtype: #'1-square' groupTag: #docked iconName: 'bootstrap:1-square' iconLabel: 'Square1';
 		yourself.
 
 	self
-		addNavSubtype: #'suit-club' groupTag: #primary iconName: 'suit-club' iconLabel: 'Club' data: 'Club Page';
-		addNavSubtype: #'suit-diamond' groupTag: #primary iconName: 'suit-diamond' iconLabel: 'Diamond' data: 'Diamond Page';
-		addNavSubtype: #'suit-heart' groupTag: #primary iconName: 'suit-heart' iconLabel: 'Heart' data: 'Heart Page';
-		addNavSubtype: #'suit-spade' groupTag: #primary iconName: 'suit-spade' iconLabel: 'Spade' data: 'Spade Page';
-		addNavSubtype: #'popup1' groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-1' data: #menu;
-		addNavSubtype: #'1-square' groupTag: #popup1 iconName: '1-square' iconLabel: 'Square1 popup' data: 'Square1 popup';
-		addNavSubtype: #'2-square' groupTag: #popup1 iconName: '2-square' iconLabel: 'Square2 popup' data: 'Square2 popup';
-		addNavSubtype: #'3-square' groupTag: #popup1 iconName: '3-square' iconLabel: 'Square3 popup' data: 'Square3 popup';
+		addNavSubtype: #'suit-club' groupTag: #primary iconName: 'bootstrap:suit-club' iconLabel: 'Club' data: 'Club Page';
+		addNavSubtype: #'suit-diamond' groupTag: #primary iconName: 'bootstrap:suit-diamond' iconLabel: 'Diamond' data: 'Diamond Page';
+		addNavSubtype: #'suit-heart' groupTag: #primary iconName: 'bootstrap:suit-heart' iconLabel: 'Heart' data: 'Heart Page';
+		addNavSubtype: #'suit-spade' groupTag: #primary iconName: 'bootstrap:suit-spade' iconLabel: 'Spade' data: 'Spade Page';
+		addNavSubtype: #'popup1' groupTag: #primary iconName: 'bootstrap:hexagon' iconLabel: 'Popup-1' data: #menu;
+		addNavSubtype: #'1-square' groupTag: #popup1 iconName: 'bootstrap:1-square' iconLabel: 'Square1 popup' data: 'Square1 popup';
+		addNavSubtype: #'2-square' groupTag: #popup1 iconName: 'bootstrap:2-square' iconLabel: 'Square2 popup' data: 'Square2 popup';
+		addNavSubtype: #'3-square' groupTag: #popup1 iconName: 'bootstrap:3-square' iconLabel: 'Square3 popup' data: 'Square3 popup';
 		yourself.
 
 ]
@@ -152,7 +152,7 @@ MD3ExampleApp >> setUpPopup1 [
 MD3ExampleApp >> setUpPopup2 [
 
 	self layout navRail
-		navActionAdd: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-2' data: #menu).
+		navActionAdd: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'bootstrap:hexagon' iconLabel: 'Popup-2' data: #menu).
 
 	self layout popupsAt: #popup2 put: (SlmdNavPopup new popupItems: self navPopup2Items; yourself).
 	self layout navRail valueChanged.

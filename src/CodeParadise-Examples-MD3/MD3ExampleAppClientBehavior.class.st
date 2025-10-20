@@ -22,3 +22,12 @@ MD3ExampleAppClientBehavior >> appTagName [
 
 	^ 'md3example-app'
 ]
+
+{ #category : 'initialization' }
+MD3ExampleAppClientBehavior >> initialize [
+
+	super initialize.
+
+	WaIcon registerBootstrapIcons.
+
+]

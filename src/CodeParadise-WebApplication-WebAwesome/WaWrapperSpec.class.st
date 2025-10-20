@@ -25,6 +25,7 @@ WaWrapperSpec class >> generateAllWrappers [
 	"self waTestSpec."
 	self waButtonSpec.
 	self waButtonGroupSpec.
+	self waSplitPanelSpec.
 	} do: [ :eachSpec | eachSpec generate ]
 
 ]
@@ -76,6 +77,18 @@ WaWrapperSpec class >> waButtonSpec [
 		stringPropertyAt: 'formmethod' put: #string;
 		booleanPropertyAt: 'formnovalidate' put: nil;
 		stringPropertyAt: 'formtarget' put: #string;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waSplitPanelSpec [
+
+	^ self new
+		wrapperClassName: #WaSplitPanel;
+		slotAdd: 'start'; slotAdd: 'end'; slotAdd: 'divider';
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'orientation' put: '*horizontal|vertical';
+		stringPropertyAt: 'variant' put: '*neutral|brand|success|warning|danger';
 		yourself
 ]
 

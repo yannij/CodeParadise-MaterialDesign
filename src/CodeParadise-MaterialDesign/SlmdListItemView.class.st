@@ -94,12 +94,12 @@ SlmdListItemView class >> template [
 SlmdListItemView >> renderListItemMap: aMap index: index [
 
 	aMap at: #leadingIcon ifPresent: [ :value | | element |
-		self replaceAllChildrenWith: (element := SlIcon named: value) atSlotNamed: #leadingIcon.
+		self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #leadingIcon.
 		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
 	aMap at: #headline ifPresent: [ :value |
 		self replaceAllChildrenWith: value asHtmlElement atSlotNamed: #headline ].
 	aMap at: #trailingIcon ifPresent: [ :value |
-		self replaceAllChildrenWith: (SlIcon named: value) atSlotNamed: #trailingIcon ].
+		self replaceAllChildrenWith: (WaIcon fullyNamed: value) atSlotNamed: #trailingIcon ].
 
 ]
 

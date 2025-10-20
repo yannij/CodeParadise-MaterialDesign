@@ -14,7 +14,7 @@ Class {
 { #category : 'class initialization' }
 SlmdLayoutSettingsView class >> beLoaded [
 
-	SlDrawer beLoaded
+	WaDrawer beLoaded
 ]
 
 { #category : 'web resources' }
@@ -51,19 +51,19 @@ SlmdLayoutSettingsView >> colorThemeBuildChooser: props [
 	| chooser selectedItem |
 
 	selectedItem := props at: #colorThemeName ifAbsent: [].
-	chooser := SlSelect new
+	chooser := WaSelect new
 		id: 'smdColorThemeChooser';
 		labelText: 'Use color theme:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 	self colorThemeName: selectedItem.
 
-	chooser when: SlChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
+	chooser when: WaChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
 
 	#(
 gray red orange amber yellow lime green emerald teal cyan sky blue indigo violet purple fuchsia pink rose
 	) do: [ :each |
-		chooser appendChild: (SlOption new value: each; textContent: each capitalized; yourself) ].
+		chooser appendChild: (WaOption new value: each; textContent: each capitalized; yourself) ].
 
 	^ self addAttributeContainerStyle: chooser
 ]
@@ -151,13 +151,13 @@ SlmdLayoutSettingsView >> fontFamilyChooser: props [
 	| chooser selectedItem |
 
 	selectedItem := props at: #fontFamily ifAbsent: [].
-	chooser := SlSelect new
+	chooser := WaSelect new
 		id: 'smdFontFamilyChooser';
 		labelText: 'Use font family:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 
-	chooser when: SlChangeEvent do: [ self fontFamilySet: chooser value ] for: self.
+	chooser when: WaChangeEvent do: [ self fontFamilySet: chooser value ] for: self.
 
 	{
 nil -> 'Default'.
@@ -165,7 +165,7 @@ nil -> 'Default'.
 #'var(--sl-font-serif)' -> 'Serif'.
 #'var(--sl-font-mono)' -> 'Mono'
 	} do: [ :each |
-		chooser appendChild: (SlOption new value: each key; textContent: each value capitalized; yourself) ].
+		chooser appendChild: (WaOption new value: each key; textContent: each value capitalized; yourself) ].
 
 	^ self addAttributeContainerStyle: chooser
 ]
@@ -207,16 +207,16 @@ SlmdLayoutSettingsView >> layoutTypeBuildChooser: props [
 
 	selectedItem := props at: #layoutType ifAbsent: [].
 
-	radioGroup := SlRadioGroup new
+	radioGroup := WaRadioGroup new
 		id: 'smdLayoutTypeChooser';
 		propertyAt: 'label' put: 'Use layout style:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 
-	radioGroup when: SlChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
+	radioGroup when: WaChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
 
 	SlmdResponsiveLayoutView layoutTypeList do: [ :each |
-		radioGroup appendChild: (SlRadio new value: each key; textContent: each value; yourself) ].
+		radioGroup appendChild: (WaRadio new value: each key; textContent: each value; yourself) ].
 
 	^ self addAttributeContainerStyle: radioGroup
 ]
@@ -274,7 +274,7 @@ SlmdLayoutSettingsView >> modalDivContentWith: props [
 { #category : 'initalize' }
 SlmdLayoutSettingsView >> modalDivSetUp: aDictionary [
 
-	drawer := SlDrawer new
+	drawer := WaDrawer new
 		id: 'smdSettings';
 		label: 'Layout settings';
 		customPropertyAt: 'size' put: '50vw';
@@ -584,11 +584,11 @@ SlmdLayoutSettingsView >> switchId: id put: value ifMissing: aBlock [
 SlmdLayoutSettingsView >> switchNewWithId: id label: label checked: checked do: aBlock [
 	| toggle |
 
-	toggle := SlSwitch new
+	toggle := WaSwitch new
 		id: id;
 		label: label;
 		checked: checked;
-		when: SlChangeEvent do: aBlock for: self;
+		when: WaChangeEvent do: aBlock for: self;
 		yourself.
 
 	^ (CpHtmlElement newWithTag: #div)

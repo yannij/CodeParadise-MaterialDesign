@@ -22,19 +22,20 @@ SlmdNavActionView class >> globalStyle [
   flex-flow: column;
   height: 56px;
   width: 96px;
-  padding-top: 12px;
+  background: var(--wa-color-brand-95);
 }
 
 .smd-navrail-icon {
   font-size: 24px;
-  padding-left: 28px;
+  line-height: 28px;
+  padding-left: 33px;
+  padding-top: 4px;
 }
 
 .smd-navrail-labelText {
-  padding: 0;
-  line-height: 16px;
-  font-size: var(--sl-font-size-x-small);
-  align-items: center;
+  height: 24px;
+  line-height: 18px;
+  font-size: 14px;
   text-align: center;
   overflow-x: clip;
 }
@@ -44,7 +45,7 @@ SlmdNavActionView class >> globalStyle [
   border-radius: 28px;
   height: 56px;
   width: 220px;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-95);
   align-items: center;
 }
 
@@ -93,23 +94,31 @@ SlmdNavActionView >> divExpanded: aNavAction [
 		addClass: 'smd-navrailx-item';
 		addClass: 'smd-nav-font';
 		appendChild: (
-			(SlIconButton named: (aNavAction at: #iconName)) addClass: 'smd-navrailx-icon'; yourself);
-		appendChild: (#div asHtmlTag
-			addClass: 'smd-navrailx-labelText';
-			textContent: (aNavAction at: #iconLabel);
-			yourself);
+			#div asHtmlTag
+				addClass: 'smd-navrailx-icon';
+				appendChild: (
+					(WaIcon fullyNamed: (aNavAction at: #iconName)) label: (aNavAction at: #iconName); yourself);
+				yourself);
+		appendChild: (
+			#div asHtmlTag
+				addClass: 'smd-navrailx-labelText';
+				textContent: (aNavAction at: #iconLabel);
+				yourself);
 		yourself
 ]
 
 { #category : 'rendering' }
 SlmdNavActionView >> divNarrow: aNavAction [
+	| iconName |
+
+	iconName := aNavAction at: #iconName.
 
 	^ #div asHtmlTag
 		addClass: 'smd-navrail-item';
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-icon';
-				appendChild: (SlIconButton named: (aNavAction at: #iconName));
+				appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag

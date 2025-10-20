@@ -58,7 +58,7 @@ SlmdView >> announceNavSubtype: subtype navTo: value [
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 
-	^ self dropdownMenu: actionList icon: 'three-dots-vertical' css: cssClass
+	^ self dropdownMenu: actionList icon: 'bootstrap:three-dots-vertical' css: cssClass
 ]
 
 { #category : 'utilities' }
@@ -68,20 +68,24 @@ SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 	menu := #div asHtmlTag.
 	menu addClass: 'smd-menu'.
 	actionList do: [ :each | | icon |
-		icon := (SlIcon named: (each at: #iconName)) addClass: 'smd-menu-icon'; yourself.
-		menu appendChild: (SlMenuItem new
+		icon := (WaIcon fullyNamed: (each at: #iconName))
+			label: (each at: #iconName);
+			addClass: 'smd-menu-icon';
+			yourself.
+		menu appendChild: (WaDropdownItem new
 			addClass: 'smd-menu-item';
 			when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: each ] for: self;
-			prefix: icon;
+			icon: icon;
 			textContent: (each at: #iconLabel);
 			yourself) ].
 
 	trigger := #div asHtmlTag
-		appendChild: ((SlIconButton named: iconName) addClass: 'smd-toolbar-icon'; yourself);
-		yourself.
+		appendChild: (WaButton new label: ((WaIcon fullyNamed: iconName) label: iconName; yourself); yourself
+		"addClass: 'smd-toolbar-icon';"
+		).
 	cssClass ifNotNil: [ trigger addClass: cssClass ].
 
-	dropdown := SlDropdown new
+	dropdown := WaDropdown new
 		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
 		appendChild: menu;
 		yourself.
@@ -182,9 +186,10 @@ SlmdView >> iconButtonForAction: aNavAction css: cssClass [
 { #category : 'utilities' }
 SlmdView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 
-	^ (SlIconButton named: iconName)
-		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
+	^ #div asHtmlTag
 		addClass: cssClass;
+		appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
+		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
 		yourself
 ]
 
@@ -249,10 +254,11 @@ SlmdView >> pillButtonForAction: aNavAction css: cssClass [
 	iconLabel := aNavAction at: #iconLabel.
 
 	tag := #div asHtmlTag
-		appendChild: (self pillButtonLabel: iconLabel class: 'smd-toolbar-icon' navAction: aNavAction);
+		"addClass: 'smd-toolbar-icon';"
+		appendChild: (self pillButtonLabel: iconLabel class: '' navAction: aNavAction);
 		yourself.
 
-	cssClass ifNotNil: [ tag addClass: cssClass ].
+	"cssClass ifNotNil: [ tag addClass: cssClass ]."
 
 	^ tag
 ]
@@ -260,10 +266,10 @@ SlmdView >> pillButtonForAction: aNavAction css: cssClass [
 { #category : 'utilities' }
 SlmdView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
 
-	^ (SlButton label: buttonLabal)
-		bePill;
+	^ (WaButton label: buttonLabal)
+		pillBeOn;
 		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
-		addClass: cssClass;
+		"addClass: cssClass;"
 		yourself
 ]
 

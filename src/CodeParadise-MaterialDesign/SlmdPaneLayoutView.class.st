@@ -12,8 +12,8 @@ Class {
 { #category : 'class initialization' }
 SlmdPaneLayoutView class >> beLoaded [
 
-	SlIcon beLoaded.
-	SlSplitPanel beLoaded
+	WaIcon beLoaded.
+	WaSplitPanel beLoaded
 ]
 
 { #category : 'web resources' }
@@ -65,10 +65,10 @@ SlmdPaneLayoutView class >> template [
     </div>
   </div>
   <div id="smdTwoPaneLayout">
-    <sl-split-panel
+    <wa-split-panel
         id="smdBodySplitPanel" class="smd-body-split-panel"
         primary="start" style="--min: 300px; --divider-width: 24px;">
-      <sl-icon slot="divider" name="grip-vertical"></sl-icon>
+      <wa-icon slot="divider" library="bootstrap" name="grip-vertical"></wa-icon>
       <div slot="start">
         <div id="smdTwoPaneLayoutP1" class="smd-pane">
           <slot name="twoPaneLayoutP1"></slot>
@@ -79,7 +79,7 @@ SlmdPaneLayoutView class >> template [
           <slot name="twoPaneLayoutP2"></slot>
         </div>
       </div>
-    </sl-split-panel>
+    </wa-split-panel>
   </div>
 </div>
 '
