@@ -17,20 +17,20 @@ SlmdLoginView class >> style [
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--sl-font-sans);
+  font-family: sans-serif;
 }
 .slmd-login {
   min-width: 300px;
   max-width: 400px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 .slmd-login-header {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
-  background: var(--sl-color-primary-200);
-  font-size: var(--sl-font-size-x-large);
+  background: var(--wa-color-brand-80);
+  font-size: var(--wa-font-size-x-large);
  }
 '
 ]

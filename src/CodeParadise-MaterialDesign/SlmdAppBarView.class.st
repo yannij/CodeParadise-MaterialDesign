@@ -20,7 +20,7 @@ SlmdAppBarView class >> style [
   flex-flow: row nowrap;
   height: 64px;
   padding: 0 4px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 
 .smd-appBar-leadingAction {

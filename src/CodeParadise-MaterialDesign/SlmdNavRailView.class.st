@@ -21,18 +21,18 @@ SlmdNavRailView class >> style [
   overflow-y: auto;
   padding: 0;
   margin: 0;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
 }
 
 .navrail::part(panel) {
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
 }
 
 .smd-navrailx {
   height: 100%;
   padding-left: 20px;
   margin: 0;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
   flow-direction: row;
 }
 '

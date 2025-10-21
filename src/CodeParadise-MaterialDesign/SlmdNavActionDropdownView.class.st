@@ -12,9 +12,13 @@ SlmdNavActionDropdownView class >> style [
 
 	^ '
 .smd-nav-font {
-  line-height: var(--sl-line-height-normal);
-  font-size: var(--sl-font-size-medium);
-  font-weight: var(--sl-font-weight-bold);
+  line-height: var(--wa-line-height-normal);
+  font-size: var(--wa-font-size-medium);
+  font-weight: var(--wa-font-weight-bold);
+}
+
+.smd-nav-dropdown::part(menu) {
+  padding: 0;
 }
 
 .smd-navrail-item {
@@ -22,6 +26,7 @@ SlmdNavActionDropdownView class >> style [
   flex-flow: column;
   height: 56px;
   width: 96px;
+  background: var(--wa-color-brand-80);
 }
 
 .smd-navrail-icon {
@@ -44,7 +49,6 @@ SlmdNavActionDropdownView class >> style [
   border-radius: 28px;
   height: 56px;
   width: 220px;
-  background: var(--sl-color-primary-100);
   align-items: center;
 }
 
@@ -65,7 +69,7 @@ SlmdNavActionDropdownView class >> template [
 
 	<webResource: #html>
 
-	^ '<wa-dropdown placement="right-start">
+	^ '<wa-dropdown placement="right-start" class="smd-nav-dropdown">
   <slot name="content"></slot>
 </wa-dropdown>'
 ]

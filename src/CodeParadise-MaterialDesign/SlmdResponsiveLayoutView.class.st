@@ -63,17 +63,17 @@ SlmdResponsiveLayoutView class >> globalStyle [
 
 .slmd-details::part(base) {
   padding: 0;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 
 .slmd-details::part(summary) {
   padding: 0;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 
 .slmd-details::part(content) {
   padding: 0;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 , self styleTable
@@ -135,7 +135,7 @@ SlmdResponsiveLayoutView class >> style [
 }
 
 .smd-layout {
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
 }
 
 .smd-settings-pane {
@@ -154,7 +154,7 @@ SlmdResponsiveLayoutView class >> style [
   flex: auto;
   display: flex;  
   flex-direction: row;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
 }
 '
 
@@ -397,11 +397,11 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 { #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 
-	#('50' '100' '200' '300' '400' '500' '600' '700' '800' '900' '950') do: [ :each |
+	#('05' '10' '20' '30' '40' '50' '60' '70' '80' '90' '95') do: [ :each |
 		aStream
-			nextPutAll: '--sl-color-primary-';
+			nextPutAll: '--wa-color-brand-';
 			nextPutAll: each;
-			nextPutAll: ': var(--sl-color-', base, '-';
+			nextPutAll: ': var(--wa-color-', base, '-';
 			nextPutAll: each;
 			nextPutAll: ');';
 			yourself ].
@@ -426,6 +426,8 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 
 { #category : 'layout' }
 SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
+
+self traceCr: 'debounceResizeEvent:'.
 
 	"If a running debounce transition is available, we're done"
 	(debounceTransition isNotNil and: [ debounceTransition isRunning ])
@@ -518,11 +520,13 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	layoutWidthCached = newWidth ifTrue: [
 		^ self ].
 
-	layoutWidthCached := newWidth.
-	self bodySplitPanelAdapt.
-	self useAutoLayout not ifTrue: [
+	(self useAutoLayout not and: [ layoutWidthCached > 0 ]) ifTrue: [
+		layoutWidthCached := newWidth.
+		self bodySplitPanelAdapt.
 		^ self ].
 
+	layoutWidthCached := newWidth.
+	self bodySplitPanelAdapt.
 	self layoutAdaptToWidth
 ]
 

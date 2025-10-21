@@ -6,128 +6,208 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing style' }
-WaSplitPanel >> beDisabled [
+{ #category : 'accessing boolean' }
+WaSplitPanel >> disabled [
 
-	self disabled: true
+	^ (self attributeAt: #disabled) notNil
 ]
 
-{ #category : 'accessing style' }
-WaSplitPanel >> beEnabled [
-
-	"Convenience method to make receiver enabled"
-
-	self disabled: false
-]
-
-{ #category : 'accessing style' }
-WaSplitPanel >> beNotDisabled [
-
-	self disabled: false
-]
-
-{ #category : 'accessing style' }
-WaSplitPanel >> beNotEnabled [
-
-	"Convenience method to clear the enabled state of the receiver"
-
-	self disabled: true
-]
-
-{ #category : 'accessing style' }
-WaSplitPanel >> beNotVertical [
-
-	self vertical: false
-]
-
-{ #category : 'accessing style' }
-WaSplitPanel >> beVertical [
-
-	self vertical: true
-]
-
-{ #category : 'accessing' }
+{ #category : 'accessing boolean' }
 WaSplitPanel >> disabled: aBoolean [
 
-	"Disables resizing. Note that the position may still change as a result of resizing the host element."
-
-	self propertyAt: #disabled put: aBoolean
+	aBoolean
+		ifTrue: [ self attributeAdd: #disabled ]
+		ifFalse: [ self removeAttributeAt: #disabled ]
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> enabled: aBoolean [
+{ #category : 'accessing boolean' }
+WaSplitPanel >> disabledBeOff [
 
-	"Convenience method to set receiver's enabled state"
-
-	self disabled: aBoolean not
+	self disabled: false
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> isDisabled [
+{ #category : 'accessing boolean' }
+WaSplitPanel >> disabledBeOn [
 
-	^ self propertyAt: #disabled
+	self disabled: true
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> isEnabled [
+{ #category : 'accessing slot' }
+WaSplitPanel >> divider [
 
-	"Convenience method to test if receiver is enabled"
-
-	^ self isDisabled not
+	^ self firstChildAtSlotNamed: #divider
 ]
 
-{ #category : 'accessing style' }
-WaSplitPanel >> isVertical [
+{ #category : 'accessing slot' }
+WaSplitPanel >> divider: aStringOrElement [
 
-	^ self propertyAt: #vertical
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #divider
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing css property' }
+WaSplitPanel >> dividerHitArea [
+
+	^ self customPropertyAt: #'divider-hit-area'
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> dividerHitArea: aString [
+
+	self customPropertyAt: #'divider-hit-area' put: aString
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> dividerWidth [
+
+	^ self customPropertyAt: #'divider-width'
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> dividerWidth: aString [
+
+	self customPropertyAt: #'divider-width' put: aString
+]
+
+{ #category : 'accessing slot' }
+WaSplitPanel >> end [
+
+	^ self firstChildAtSlotNamed: #end
+]
+
+{ #category : 'accessing slot' }
+WaSplitPanel >> end: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> max [
+
+	^ self customPropertyAt: #max
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> max: aString [
+
+	self customPropertyAt: #max put: aString
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> min [
+
+	^ self customPropertyAt: #min
+]
+
+{ #category : 'accessing css property' }
+WaSplitPanel >> min: aString [
+
+	self customPropertyAt: #min put: aString
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> orientation [
+
+	^ self propertyAt: #orientation
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> orientation: anObject [
+
+	self propertyAt: #orientation put: anObject
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> orientationBeHorizontal [
+
+	self orientation: 'horizontal'
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> orientationBeVertical [
+
+	self orientation: 'vertical'
+]
+
+{ #category : 'accessing number' }
 WaSplitPanel >> position [
 
 	^ self propertyAt: #position
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> position: aNumber [
+{ #category : 'accessing number' }
+WaSplitPanel >> position: anObject [
 
-	"The current position of the divider from the primary panel’s edge as a percentage 0–100. Defaults to 50% of the container’s initial size."
-
-	self propertyAt: #position put: aNumber
+	self propertyAt: #position put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing number' }
+WaSplitPanel >> positionInPixels [
+
+	^ self propertyAt: #'position-in-pixels'
+]
+
+{ #category : 'accessing number' }
+WaSplitPanel >> positionInPixels: anObject [
+
+	self propertyAt: #'position-in-pixels' put: anObject
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> primary [
+
+	^ self propertyAt: #primary
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> primary: anObject [
+
+	self propertyAt: #primary put: anObject
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> primaryBeEnd [
+
+	self primary: 'end'
+]
+
+{ #category : 'accessing string' }
+WaSplitPanel >> primaryBeStart [
+
+	self primary: 'start'
+]
+
+{ #category : 'accessing string' }
 WaSplitPanel >> snap [
 
 	^ self propertyAt: #snap
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> snap: aString [
+{ #category : 'accessing string' }
+WaSplitPanel >> snap: anObject [
 
-	"One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g. '100px 50%'."
-
-	self propertyAt: #snap put: aString
+	self propertyAt: #snap put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing number' }
 WaSplitPanel >> snapThreshold [
 
-	^ self propertyAt: #snapThreshold
+	^ self propertyAt: #'snap-threshold'
 ]
 
-{ #category : 'accessing' }
-WaSplitPanel >> snapThreshold: aNumber [
+{ #category : 'accessing number' }
+WaSplitPanel >> snapThreshold: anObject [
 
-	"How close the divider must be to a snap point until snapping occurs."
-
-	self propertyAt: #snapThreshold put: aNumber
+	self propertyAt: #'snap-threshold' put: anObject
 ]
 
-{ #category : 'accessing style' }
-WaSplitPanel >> vertical: aBoolean [
+{ #category : 'accessing slot' }
+WaSplitPanel >> start [
 
-	"Draws the split panel in a vertical orientation with the start and end panels stacked."
+	^ self firstChildAtSlotNamed: #start
+]
 
-	self propertyAt: #vertical put: aBoolean
+{ #category : 'accessing slot' }
+WaSplitPanel >> start: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start
 ]

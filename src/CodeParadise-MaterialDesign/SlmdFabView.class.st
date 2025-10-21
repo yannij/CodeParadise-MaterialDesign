@@ -18,7 +18,7 @@ SlmdFabView class >> globalStyle [
   height: 48px;
   width: 48px;
   border-radius: 16px;
-  background: var(--sl-color-primary-400);
+  background: var(--wa-color-brand-60);
 }
 '
 ]

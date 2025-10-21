@@ -63,7 +63,7 @@ SlmdLayoutSettingsModel >> defaultColorThemeName [
 { #category : 'typography' }
 SlmdLayoutSettingsModel >> defaultFontFamily [
 
-	^ #'var(--sl-font-mono)'
+	^ #'monospace'
 ]
 
 { #category : 'accessing' }

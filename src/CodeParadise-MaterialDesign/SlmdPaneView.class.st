@@ -13,7 +13,7 @@ SlmdPaneView class >> style [
 
 	^ '
 .smd-pane-content {
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
   overflow-x: auto;
   overflow-y: auto;
 }

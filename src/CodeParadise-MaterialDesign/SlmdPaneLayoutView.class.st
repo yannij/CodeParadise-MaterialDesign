@@ -44,8 +44,8 @@ SlmdPaneLayoutView class >> style [
   height: 100%;
 }
 
-.smd-pane-layout sl-split-panel::part(divider) {
-  background-color: var(--sl-color-primary-100);
+.smd-pane-layout wa-split-panel::part(divider) {
+  background-color: var(--wa-color-brand-90);
 }
 '
 ]

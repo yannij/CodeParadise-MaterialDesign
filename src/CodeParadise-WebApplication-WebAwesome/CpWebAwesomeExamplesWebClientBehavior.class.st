@@ -507,6 +507,39 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleSelect [
 ]
 
 { #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> exampleSplitPanel [
+
+	<example: 'SplitPanel' order: 100>
+
+	| outputElement splitPanelElement |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	splitPanelElement := WaSplitPanel new.
+	splitPanelElement
+		start: (#div asHtmlTag
+			styleAt: 'height' put: '200px';
+			styleAt: 'background' put: 'var(--wa-color-surface-lowered)';
+			styleAt: 'display' put: 'flex';
+			styleAt: 'align-items' put: 'center';
+			styleAt: 'justify-content' put: 'center';
+			styleAt: 'overflow' put: 'hidden';
+			yourself);
+		end: (#div asHtmlTag
+			styleAt: 'height' put: '200px';
+			styleAt: 'background' put: 'var(--wa-color-surface-lowered)';
+			styleAt: 'display' put: 'flex';
+			styleAt: 'align-items' put: 'center';
+			styleAt: 'justify-content' put: 'center';
+			styleAt: 'overflow' put: 'hidden';
+			yourself);
+		yourself.
+	outputElement appendChild: splitPanelElement
+]
+
+{ #category : 'examples' }
 CpWebAwesomeExamplesWebClientBehavior >> exampleSwitch [
 
 	<example: 'Switch' order: 100>

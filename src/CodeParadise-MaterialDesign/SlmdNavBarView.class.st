@@ -12,9 +12,9 @@ SlmdNavBarView class >> globalStyle [
 
 	^ '
 .smd-navbar-font {
-  line-height: var(--sl-line-height-normal);
-  font-size: var(--sl-font-size-small);
-  font-weight: var(--sl-font-weight-normal);
+  line-height: var(--wa-line-height-normal);
+  font-size: var(--wa-font-size-small);
+  font-weight: var(--wa-font-weight-normal);
 }
 
 .smd-navbar-item {
@@ -23,7 +23,7 @@ SlmdNavBarView class >> globalStyle [
   padding: 0 4px;
   border-radius: 20px;
   height: 40px;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-90);
 }
 
 .smd-navbar-icon {
@@ -52,7 +52,7 @@ SlmdNavBarView class >> style [
   justify-content: space-between;
   flex-flow: row nowrap;
   padding: 12px 4px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 ]

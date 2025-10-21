@@ -7,7 +7,8 @@ Class {
 		'slots',
 		'cssProperties',
 		'booleanProperties',
-		'stringProperties'
+		'stringProperties',
+		'numberProperties'
 	],
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
@@ -86,9 +87,17 @@ WaWrapperSpec class >> waSplitPanelSpec [
 	^ self new
 		wrapperClassName: #WaSplitPanel;
 		slotAdd: 'start'; slotAdd: 'end'; slotAdd: 'divider';
-		stringPropertyAt: 'label' put: #string;
+		numberPropertyAt: 'position' put: 50;
+		numberPropertyAt: 'position-in-pixels' put: #number;
 		stringPropertyAt: 'orientation' put: '*horizontal|vertical';
-		stringPropertyAt: 'variant' put: '*neutral|brand|success|warning|danger';
+		booleanPropertyAt: 'disabled' put: false;
+		stringPropertyAt: 'primary' put: 'start|end';
+		stringPropertyAt: 'snap' put: #string;
+		numberPropertyAt: 'snap-threshold' put: 12;
+		cssPropertieAdd: 'divider-width';
+		cssPropertieAdd: 'divider-hit-area';
+		cssPropertieAdd: 'min';
+		cssPropertieAdd: 'max';
 		yourself
 ]
 
@@ -198,6 +207,31 @@ WaWrapperSpec >> compileCssProperty: aKebabCaseName in: aClass [
 				cr; cr; tab; nextPutAll: 'self customPropertyAt: ', symbolString, ' put: aString';
 				yourself ])
 		classified: 'accessing css property'.
+
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec >> compileNumberProperty: aKebabCaseName in: aClass [
+	| accessorString symbolString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	symbolString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString;
+				cr; cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
+				yourself ])
+		classified: 'accessing number'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; nextPutAll: ': anObject';
+				cr; cr; tab; nextPutAll: 'self propertyAt: ', symbolString, ' put: anObject';
+				yourself ])
+		classified: 'accessing number'.
 
 ]
 
@@ -312,6 +346,9 @@ WaWrapperSpec >> generate [
 		self compileStringProperty: key in: theClass.
 		self compileStringProperty: key types: value in: theClass ].
 
+	self numberProperties keysAndValuesDo: [ :key :value |
+		self compileNumberProperty: key in: theClass ].
+
 	self cssProperties do: [ :each |
 		self compileCssProperty: each in: theClass ].
 
@@ -325,6 +362,7 @@ WaWrapperSpec >> initialize [
 	wrapperSuperclass := WaElement.
 	booleanProperties := IdentityDictionary new.
 	stringProperties := IdentityDictionary new.
+	numberProperties := IdentityDictionary new.
 	cssProperties := OrderedCollection new.
 	slots := OrderedCollection new.
 
@@ -348,6 +386,24 @@ WaWrapperSpec >> makeClassNamed: aClassName asSubclassOf: aClass [
 			tag: 'Elements';
 			package: 'CodeParadise-WebApplication-WebAwesome' ].
 	^ elementClass
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> numberProperties [
+
+	^ numberProperties
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> numberProperties: anObject [
+
+	numberProperties := anObject
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> numberPropertyAt: key put: anObject [
+
+	self numberProperties at: key put: anObject
 ]
 
 { #category : 'accessing' }

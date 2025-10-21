@@ -46,7 +46,7 @@ sl-input {
   flex-direction: column;
   gap: 16px;
   padding: 8px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 , self globalStyleInput
@@ -64,7 +64,7 @@ SlmdObjectView class >> globalStyleInput [
   position: relative;
   width: 100%;
   padding: 0;
-  background: var(--sl-color-neutral-100);
+  background: var(--wa-color-neutral-90);
 }
 
 .slmd-input::part(form-control) {
@@ -89,7 +89,7 @@ SlmdObjectView class >> globalStyleInput [
   height: 56px;
   width: 100%;
   font-size: 16px;
-  background: var(--sl-color-neutral-100);
+  background: var(--wa-color-neutral-90);
 }
 
 .slmd-input::part(form-control-help-text) {
@@ -98,7 +98,7 @@ SlmdObjectView class >> globalStyleInput [
   width: calc(100% - 32px);
   font-size: 12px;
   padding: 4px 16px 0 16px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 ]
@@ -119,7 +119,7 @@ SlmdObjectView class >> globalStyleSwitch [
   width: 100%;
   font-size: 12px;
   padding: 4px 16px 0 16px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 ]
@@ -134,7 +134,7 @@ SlmdObjectView class >> globalStyleTextarea [
   position: relative;
   width: 100%;
   padding: 0;
-  background: var(--sl-color-neutral-100);
+  background: var(--wa-color-neutral-90);
 }
 
 .slmd-textarea::part(form-control) {
@@ -157,7 +157,7 @@ SlmdObjectView class >> globalStyleTextarea [
 .slmd-textarea::part(form-control-input) {
   width: 100%;
   font-size: 16px;
-  background: var(--sl-color-neutral-100);
+  background: var(--wa-color-neutral-90);
 }
 
 .slmd-textarea::part(form-control-help-text) {
@@ -165,7 +165,7 @@ SlmdObjectView class >> globalStyleTextarea [
   width: calc(100% - 32px);
   font-size: 12px;
   padding: 4px 16px 0 16px;
-  background: var(--sl-color-primary-200);
+  background: var(--wa-color-brand-80);
 }
 '
 ]

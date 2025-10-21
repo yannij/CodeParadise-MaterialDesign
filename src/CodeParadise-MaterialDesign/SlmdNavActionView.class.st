@@ -12,9 +12,9 @@ SlmdNavActionView class >> globalStyle [
 
 	^ '
 .smd-nav-font {
-  line-height: var(--sl-line-height-normal);
-  font-size: var(--sl-font-size-medium);
-  font-weight: var(--sl-font-weight-bold);
+  line-height: var(--wa-line-height-normal);
+  font-size: var(--wa-font-size-medium);
+  font-weight: var(--wa-font-weight-bold);
 }
 
 .smd-navrail-item {
@@ -22,7 +22,7 @@ SlmdNavActionView class >> globalStyle [
   flex-flow: column;
   height: 56px;
   width: 96px;
-  background: var(--wa-color-brand-95);
+  background: var(--wa-color-brand-80);
 }
 
 .smd-navrail-icon {
@@ -45,7 +45,6 @@ SlmdNavActionView class >> globalStyle [
   border-radius: 28px;
   height: 56px;
   width: 220px;
-  background: var(--wa-color-brand-95);
   align-items: center;
 }
 
@@ -63,7 +62,7 @@ SlmdNavActionView class >> globalStyle [
   display: flex;
   height: 56px;
   width: 220px;
-  background: var(--sl-color-primary-100);
+  background: var(--wa-color-brand-80);
   align-items: center;
 }
 

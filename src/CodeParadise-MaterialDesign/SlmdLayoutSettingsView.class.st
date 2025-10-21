@@ -61,7 +61,7 @@ SlmdLayoutSettingsView >> colorThemeBuildChooser: props [
 	chooser when: WaChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
 
 	#(
-gray red orange amber yellow lime green emerald teal cyan sky blue indigo violet purple fuchsia pink rose
+red orange yellow green cyan blue indigo purple pink gray
 	) do: [ :each |
 		chooser appendChild: (WaOption new value: each; textContent: each capitalized; yourself) ].
 
@@ -161,9 +161,9 @@ SlmdLayoutSettingsView >> fontFamilyChooser: props [
 
 	{
 nil -> 'Default'.
-#'var(--sl-font-sans)' -> 'Sans'.
-#'var(--sl-font-serif)' -> 'Serif'.
-#'var(--sl-font-mono)' -> 'Mono'
+#'sans-serif' -> 'Sans'.
+#'serif' -> 'Serif'.
+#'monospace' -> 'Mono'
 	} do: [ :each |
 		chooser appendChild: (WaOption new value: each key; textContent: each value capitalized; yourself) ].
 

@@ -15,7 +15,7 @@ TBRootApplication class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { SlElement package. SlmdView package }
+	^ super allowedPackages, { WaElement package. SlmdView package }
 ]
 
 { #category : 'accessing' }
@@ -58,7 +58,7 @@ TBRootApplication >> initialize [
 	layout := SlmdResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings colorThemeName: #cyan; fontFamily: #'var(--sl-font-serif)'.
+	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
 	self setUpAppBar1.
 	self setUpAppBar2.
 	self layout appBar1 headline: self class appName.

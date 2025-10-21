@@ -11,18 +11,12 @@ SlmdListItemView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-item-font {
-  line-height: var(--sl-line-height-normal);
-  font-size: var(--sl-font-size-medium);
-  font-weight: var(--sl-font-weight-normal);
-}
-
 .smd-item {
   display: flex;
   height: 40px;
   padding: 8px 16px;
-  background: var(--sl-color-primary-200);
-  border-top: 1px solid var(--sl-color-neutral-400);
+  background: var(--wa-color-brand-80);
+  border-top: 1px solid var(--wa-color-neutral-60);
 }
 
 .smd-item-leadingIcon {
@@ -54,8 +48,8 @@ SlmdListItemView class >> style [
   display: flex;
   height: 40px;
   padding: 8px 16px;
-  background: var(--sl-color-primary-200);
-  border-top: 1px solid var(--sl-color-neutral-400);
+  background: var(--wa-color-brand-80);
+  border-top: 1px solid var(--wa-color-neutral-60);
 }
 
 .leadingIcon {
