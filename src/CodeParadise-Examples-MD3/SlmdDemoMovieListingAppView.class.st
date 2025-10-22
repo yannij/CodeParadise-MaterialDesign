@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoMovieListingAppView',
-	#superclass : 'SlmdView',
+	#superclass : 'SlmdWebView',
 	#category : 'CodeParadise-Examples-MD3-Movies',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Movies'

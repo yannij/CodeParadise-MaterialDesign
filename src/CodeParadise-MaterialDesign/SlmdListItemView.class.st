@@ -90,8 +90,9 @@ SlmdListItemView >> renderListItemMap: aMap index: index [
 	aMap at: #leadingIcon ifPresent: [ :value | | element |
 		self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #leadingIcon.
 		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
-	aMap at: #headline ifPresent: [ :value |
-		self replaceAllChildrenWith: value asHtmlElement atSlotNamed: #headline ].
+	aMap at: #headline ifPresent: [ :value | | element |
+		self replaceAllChildrenWith: (element := value asHtmlElement) atSlotNamed: #headline.
+		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
 	aMap at: #trailingIcon ifPresent: [ :value |
 		self replaceAllChildrenWith: (WaIcon fullyNamed: value) atSlotNamed: #trailingIcon ].
 

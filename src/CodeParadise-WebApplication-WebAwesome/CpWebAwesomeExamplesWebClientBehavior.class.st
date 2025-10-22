@@ -602,8 +602,6 @@ CpWebAwesomeExamplesWebClientBehavior >> initialize [
 
 	super initialize.
 
-	WaIcon registerBootstrapIcons.
-
 	self showIndex
 ]
 

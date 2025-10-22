@@ -390,8 +390,23 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 
 	self systemLog logTrace5: aColorName printString method: 'colorThemeAdapt:'.
 	aColorName ifNil: [ ^ self ].
-	self updateGlobalStyle.
+	"self updateGlobalStyle."
+	CpHtmlElement documentHtml
+		addClass: 'wa-theme-default';
+		addClass: 'wa-palette-default';
+		addClass: ('wa-brand-', aColorName).
+]
 
+{ #category : 'color theme' }
+SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
+
+	self systemLog logTrace5: aColorName printString method: 'colorThemeAdapt:'.
+	aColorName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml
+		removeClass: ('wa-brand-', oldColorName);
+		addClass: ('wa-brand-', aColorName).
 ]
 
 { #category : 'color theme' }
@@ -406,6 +421,19 @@ SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 			nextPutAll: ');';
 			yourself ].
 
+]
+
+{ #category : 'color theme' }
+SlmdResponsiveLayoutView >> colorThemeInitial: aColorName [
+
+	self systemLog logTrace5: aColorName printString method: 'colorThemeInitial:'.
+	aColorName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml
+		addClass: 'wa-theme-default';
+		addClass: 'wa-palette-default';
+		addClass: ('wa-brand-', aColorName).
 ]
 
 { #category : 'accessing - settings' }
@@ -579,8 +607,8 @@ SlmdResponsiveLayoutView >> layoutInitialSetUp: props [
 	self systemLog logTrace5: props printString method: 'layoutInitialSetUp:'.
 	self resizeSetUp.
 
-	self colorThemeAdapt: (props at: #colorThemeName ifAbsent: []).
-	self fontFamilyAdapt: (props at: #fontFamily ifAbsent: []).
+	props at: #colorThemeName ifPresent: [ :value | self colorThemeInitial: value ].
+	props at: #fontFamily ifPresent: [ :value | self fontFamilyAdapt: value ].
 
 	(props at: #useAutoLayout ifAbsent: [ true ]) ifTrue: [
 		self layoutAdaptToWidth.

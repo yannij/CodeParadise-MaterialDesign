@@ -86,8 +86,8 @@ SlmdLayoutSettingsView >> colorThemeNameSet: anObject [
 	self colorThemeName = anObject ifTrue: [
 		^ self ].
 
+	self layoutViewLazy colorThemeAdapt: anObject from: self colorThemeName.
 	self colorThemeName: anObject.
-	self layoutViewLazy colorThemeAdapt: anObject.
 	self announceSetting: #colorThemeName value: anObject.
 
 ]

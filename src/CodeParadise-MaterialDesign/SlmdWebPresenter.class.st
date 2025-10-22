@@ -14,3 +14,12 @@ SlmdWebPresenter >> viewCreated [
 	self view
 		when: SlmdLoginRequested send: #handleLoginRequested: to: self application
 ]
+
+{ #category : 'view' }
+SlmdWebPresenter >> viewInitialized [
+
+	super viewInitialized.
+
+	self view registerIcons.
+
+]
