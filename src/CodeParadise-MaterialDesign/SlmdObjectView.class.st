@@ -60,23 +60,16 @@ SlmdObjectView class >> globalStyleInput [
 	<webResource: #css>
 
 	^ '
-.slmd-input::part(form-control) {
+.slmd-input::part(input) {
   position: relative;
   width: 100%;
   padding: 0;
   background: var(--wa-color-neutral-90);
-}
-
-.slmd-input::part(form-control) {
   height: 64px;
-}
-
-.slmd-input::part(base) {
   padding-top: 4px;
 }
 
-.slmd-input::part(form-control-label) {
-  position: absolute; top: 0; left: 0;
+.slmd-input::part(label) {
   height: 16px;
   font-size: 12px;
   padding: 4px 16px 0 16px;
@@ -84,16 +77,14 @@ SlmdObjectView class >> globalStyleInput [
   background-color: rgb(0 0 0 / 0);
 }
 
-.slmd-input::part(form-control-input) {
-  position: absolute; top: 0; left: 0;
+.slmd-input::part(base) {
   height: 56px;
   width: 100%;
   font-size: 16px;
   background: var(--wa-color-neutral-90);
 }
 
-.slmd-input::part(form-control-help-text) {
-  position: absolute; bottom: 0; left: 0;
+.slmd-input::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
@@ -114,7 +105,7 @@ SlmdObjectView class >> globalStyleSwitch [
   padding-left: 16px;
 }
 
-.slmd-switch::part(form-control-help-text) {
+.slmd-switch::part(hint) {
   height: 16px;
   width: 100%;
   font-size: 12px;
@@ -130,23 +121,16 @@ SlmdObjectView class >> globalStyleTextarea [
 	<webResource: #css>
 
 	^ '
-.slmd-textarea::part(form-control) {
+.slmd-textarea::part(base) {
   position: relative;
   width: 100%;
   padding: 0;
   background: var(--wa-color-neutral-90);
-}
-
-.slmd-textarea::part(form-control) {
   height: 100%;
-}
-
-.slmd-textarea::part(base) {
   padding-top: 12px;
 }
 
-.slmd-textarea::part(form-control-label) {
-  position: absolute; top: 0; left: 0;
+.slmd-textarea::part(label) {
   height: 16px;
   font-size: 12px;
   padding: 4px 16px 0 16px;
@@ -154,13 +138,13 @@ SlmdObjectView class >> globalStyleTextarea [
   background-color: rgb(0 0 0 / 0);
 }
 
-.slmd-textarea::part(form-control-input) {
+.slmd-textarea::part(textarea) {
   width: 100%;
   font-size: 16px;
   background: var(--wa-color-neutral-90);
 }
 
-.slmd-textarea::part(form-control-help-text) {
+.slmd-textarea::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
@@ -230,14 +214,13 @@ SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 	| element |
 
 	element := WaInput new
+		appearanceBeFilled;
 		name: key;
 		addClass: 'slmd-input';
-		labelText: aLabel;
+		label: aLabel;
 		value: aText;
-		hintText: 'Help text...', aLabel;
-		"attributeAdd: #readonly;"
+		hint: 'Help text...', aLabel;
 		disabled: true;
-		attributeAdd: #filled;
 		yourself.
 
 	self mementoAt: key put: aText.
@@ -250,15 +233,14 @@ SlmdObjectView >> fieldAt: key label: aLabel textarea: aText [
 	| element |
 
 	element := WaTextarea new
+		appearanceBeFilled;
 		name: key;
 		addClass: 'slmd-textarea';
 		rows: 4;
 		labelText: aLabel;
 		value: aText;
 		hintText: 'Help text...', aLabel;
-		"attributeAdd: #readonly;"
 		disabled: true;
-		attributeAdd: #filled;
 		yourself.
 
 	self mementoAt: key put: aText.

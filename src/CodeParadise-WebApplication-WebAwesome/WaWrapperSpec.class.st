@@ -26,7 +26,9 @@ WaWrapperSpec class >> generateAllWrappers [
 	"self waTestSpec."
 	self waButtonSpec.
 	self waButtonGroupSpec.
+	self waInputSpec.
 	self waSplitPanelSpec.
+	self waTextareaSpec.
 	} do: [ :eachSpec | eachSpec generate ]
 
 ]
@@ -82,6 +84,20 @@ WaWrapperSpec class >> waButtonSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waInputSpec [
+
+	^ self new
+		wrapperClassName: #WaInput;
+		wrapperSuperclass: WaTextControl;
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'hint' put: #string;
+		stringPropertyAt: 'appearance' put: 'filled|*outlined';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'pill' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waSplitPanelSpec [
 
 	^ self new
@@ -112,6 +128,21 @@ WaWrapperSpec class >> waTestSpec [
 		stringPropertyAt: 'prop1' put: #todo;
 		stringPropertyAt: 'prop2' put: #todo;
 		cssPropertieAdd: 'css1'; cssPropertieAdd: 'css2';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTextareaSpec [
+
+	^ self new
+		wrapperClassName: #WaTextarea;
+		wrapperSuperclass: WaTextControl;
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'hint' put: #string;
+		stringPropertyAt: 'appearance' put: 'filled|*outlined';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'pill' put: false;
+		numberPropertyAt: 'rows' put: 4;
 		yourself
 ]
 

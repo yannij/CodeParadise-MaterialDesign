@@ -6,61 +6,118 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing' }
-WaTextarea >> resize [
+{ #category : 'accessing string' }
+WaTextarea >> appearance [
 
-	^ self propertyAt: #resize
+	^ self propertyAt: #appearance
 ]
 
-{ #category : 'accessing' }
-WaTextarea >> resize: aString [
+{ #category : 'accessing string' }
+WaTextarea >> appearance: anObject [
 
-	self propertyAt: #resize put: aString
+	self propertyAt: #appearance put: anObject
 ]
 
-{ #category : 'accessing style' }
-WaTextarea >> resizeAuto [
+{ #category : 'accessing string' }
+WaTextarea >> appearanceBeFilled [
 
-	self resize: #auto
+	self appearance: 'filled'
 ]
 
-{ #category : 'accessing style' }
-WaTextarea >> resizeNone [
+{ #category : 'accessing string' }
+WaTextarea >> appearanceBeOutlined [
 
-	self resize: #none
+	self appearance: 'outlined'
 ]
 
-{ #category : 'accessing style' }
-WaTextarea >> resizeVertical [
+{ #category : 'accessing string' }
+WaTextarea >> hint [
 
-	self resize: #vertical
+	^ self propertyAt: #hint
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing string' }
+WaTextarea >> hint: anObject [
+
+	self propertyAt: #hint put: anObject
+]
+
+{ #category : 'accessing string' }
+WaTextarea >> label [
+
+	^ self propertyAt: #label
+]
+
+{ #category : 'accessing string' }
+WaTextarea >> label: anObject [
+
+	self propertyAt: #label put: anObject
+]
+
+{ #category : 'accessing boolean' }
+WaTextarea >> pill [
+
+	^ (self attributeAt: #pill) notNil
+]
+
+{ #category : 'accessing boolean' }
+WaTextarea >> pill: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #pill ]
+		ifFalse: [ self removeAttributeAt: #pill ]
+]
+
+{ #category : 'accessing boolean' }
+WaTextarea >> pillBeOff [
+
+	self pill: false
+]
+
+{ #category : 'accessing boolean' }
+WaTextarea >> pillBeOn [
+
+	self pill: true
+]
+
+{ #category : 'accessing number' }
 WaTextarea >> rows [
 
 	^ self propertyAt: #rows
 ]
 
-{ #category : 'accessing' }
-WaTextarea >> rows: anInteger [
+{ #category : 'accessing number' }
+WaTextarea >> rows: anObject [
 
-	self propertyAt: #rows put: anInteger
+	self propertyAt: #rows put: anObject
 ]
 
-{ #category : 'accessing style' }
-WaTextarea >> scrollPosition [
+{ #category : 'accessing string' }
+WaTextarea >> size [
 
-	"Gets the textarea's scroll position.
-	Answer will be a dictionaty with keys 'top' and 'left', both being Numbers."
-
-	^ self apply: #scrollPosition withArguments: #()
+	^ self propertyAt: #size
 ]
 
-{ #category : 'accessing style' }
-WaTextarea >> scrollPositionTop: topNumber left: leftNumber [
+{ #category : 'accessing string' }
+WaTextarea >> size: anObject [
 
-	"Sets the textarea's scroll position"
+	self propertyAt: #size put: anObject
+]
 
-	^ self apply: #scrollPosition withArguments: { topNumber . leftNumber }
+{ #category : 'accessing string' }
+WaTextarea >> sizeBeLarge [
+
+	self size: 'large'
+]
+
+{ #category : 'accessing string' }
+WaTextarea >> sizeBeMedium [
+
+	self size: 'medium'
+]
+
+{ #category : 'accessing string' }
+WaTextarea >> sizeBeSmall [
+
+	self size: 'small'
 ]
