@@ -26,8 +26,10 @@ WaWrapperSpec class >> generateAllWrappers [
 	"self waTestSpec."
 	self waButtonSpec.
 	self waButtonGroupSpec.
+	self waCheckboxSpec.
 	self waInputSpec.
 	self waSplitPanelSpec.
+	self waSwitchSpec.
 	self waTextareaSpec.
 	} do: [ :eachSpec | eachSpec generate ]
 
@@ -84,6 +86,25 @@ WaWrapperSpec class >> waButtonSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waCheckboxSpec [
+
+	^ self new
+		wrapperClassName: #WaCheckbox;
+		wrapperSuperclass: WaCheckControl;
+		slotAdd: '*label'; slotAdd: 'hint';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'indeterminate' put: false;
+		booleanPropertyAt: 'checked' put: false;
+		booleanPropertyAt: 'required' put: false;
+		stringPropertyAt: 'hint' put: #string;
+		cssPropertieAdd: 'width';
+		cssPropertieAdd: 'height';
+		cssPropertieAdd: 'thumb-size';
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waInputSpec [
 
 	^ self new
@@ -123,6 +144,23 @@ WaWrapperSpec class >> waSplitPanelSpec [
 		cssPropertieAdd: 'divider-hit-area';
 		cssPropertieAdd: 'min';
 		cssPropertieAdd: 'max';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waSwitchSpec [
+
+	^ self new
+		wrapperClassName: #WaSwitch;
+		wrapperSuperclass: WaCheckControl;
+		slotAdd: '*label'; slotAdd: 'hint';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'checked' put: false;
+		booleanPropertyAt: 'required' put: false;
+		stringPropertyAt: 'hint' put: #string;
+		cssPropertieAdd: 'checked-icon-color';
+		cssPropertieAdd: 'checked-icon-scale';
 		yourself
 ]
 
@@ -380,7 +418,7 @@ WaWrapperSpec >> cssProperties: anObject [
 WaWrapperSpec >> generate [
 	| theClass |
 
-	theClass := self makeClassNamed: self wrapperClassName asSubclassOf: WaElement.
+	theClass := self makeClassNamed: self wrapperClassName asSubclassOf: self wrapperSuperclass.
 
 	self slots do: [ :each |
 		self compileSlot: each in: theClass ].

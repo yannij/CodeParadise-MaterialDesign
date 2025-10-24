@@ -261,10 +261,10 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleCheckbox [
 			appendChild: (WaCheckbox label: 'Works') ;
 			yourself) ;
 		appendChild: ((CpHtmlElement newWithTag: #div)
-			appendChild: ((WaCheckbox label: 'Amazing') beIndeterminate ; yourself) ;
+			appendChild: ((WaCheckbox label: 'Amazing') indeterminateBeOn ; yourself) ;
 			yourself) ;
 		appendChild: ((CpHtmlElement newWithTag: #div)
-			appendChild: ((WaCheckbox label: 'Not me') beDisabled ; yourself) ;
+			appendChild: ((WaCheckbox label: 'Not me') disabledBeOn ; yourself) ;
 			yourself)
 ]
 
@@ -561,9 +561,9 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleSwitch [
 	outputElement
 		appendChild: ('Some switches' inHtmlTag: #p) ;
 		appendChild: WaSwitch new ;
-		appendChild: (WaSwitch new beChecked ; yourself) ;
-		appendChild: (WaSwitch new beDisabled ; yourself) ;
-		appendChild: (WaSwitch new beDisabled ; beChecked ; yourself)
+		appendChild: (WaSwitch new checkedBeOn ; yourself) ;
+		appendChild: (WaSwitch new disabledBeOn ; yourself) ;
+		appendChild: (WaSwitch new disabledBeOn ; checkedBeOn ; yourself)
 ]
 
 { #category : 'examples' }
