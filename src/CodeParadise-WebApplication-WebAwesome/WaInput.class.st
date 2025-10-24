@@ -6,61 +6,175 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> appearance [
 
 	^ self propertyAt: #appearance
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> appearance: anObject [
 
 	self propertyAt: #appearance put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> appearanceBeFilled [
 
-	self appearance: 'filled'
+	self appearance: #filled
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> appearanceBeOutlined [
 
-	self appearance: 'outlined'
+	self appearance: #outlined
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
+WaInput >> autofocus [
+
+	^ (self attributeAt: #autofocus) notNil
+]
+
+{ #category : 'properties' }
+WaInput >> autofocus: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #autofocus ]
+		ifFalse: [ self removeAttributeAt: #autofocus ]
+]
+
+{ #category : 'properties' }
+WaInput >> autofocusBeOff [
+
+	self autofocus: false
+]
+
+{ #category : 'properties' }
+WaInput >> autofocusBeOn [
+
+	self autofocus: true
+]
+
+{ #category : 'slots' }
+WaInput >> clearIcon [
+
+	^ self firstChildAtSlotNamed: #'clear-icon'
+]
+
+{ #category : 'slots' }
+WaInput >> clearIcon: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'clear-icon'
+]
+
+{ #category : 'slots' }
+WaInput >> end [
+
+	^ self firstChildAtSlotNamed: #end
+]
+
+{ #category : 'slots' }
+WaInput >> end: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
+]
+
+{ #category : 'slots' }
+WaInput >> hidePasswordIcon [
+
+	^ self firstChildAtSlotNamed: #'hide-password-icon'
+]
+
+{ #category : 'slots' }
+WaInput >> hidePasswordIcon: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'hide-password-icon'
+]
+
+{ #category : 'properties' }
 WaInput >> hint [
 
 	^ self propertyAt: #hint
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> hint: anObject [
 
 	self propertyAt: #hint put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> label [
 
 	^ self propertyAt: #label
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> label: anObject [
 
 	self propertyAt: #label put: anObject
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
+WaInput >> passwordToggle [
+
+	^ (self attributeAt: #'password-toggle') notNil
+]
+
+{ #category : 'properties' }
+WaInput >> passwordToggle: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'password-toggle' ]
+		ifFalse: [ self removeAttributeAt: #'password-toggle' ]
+]
+
+{ #category : 'properties' }
+WaInput >> passwordToggleBeOff [
+
+	self passwordToggle: false
+]
+
+{ #category : 'properties' }
+WaInput >> passwordToggleBeOn [
+
+	self passwordToggle: true
+]
+
+{ #category : 'properties' }
+WaInput >> passwordVisible [
+
+	^ (self attributeAt: #'password-visible') notNil
+]
+
+{ #category : 'properties' }
+WaInput >> passwordVisible: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'password-visible' ]
+		ifFalse: [ self removeAttributeAt: #'password-visible' ]
+]
+
+{ #category : 'properties' }
+WaInput >> passwordVisibleBeOff [
+
+	self passwordVisible: false
+]
+
+{ #category : 'properties' }
+WaInput >> passwordVisibleBeOn [
+
+	self passwordVisible: true
+]
+
+{ #category : 'properties' }
 WaInput >> pill [
 
 	^ (self attributeAt: #pill) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaInput >> pill: aBoolean [
 
 	aBoolean
@@ -68,44 +182,230 @@ WaInput >> pill: aBoolean [
 		ifFalse: [ self removeAttributeAt: #pill ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaInput >> pillBeOff [
 
 	self pill: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaInput >> pillBeOn [
 
 	self pill: true
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
+WaInput >> placeholder [
+
+	^ self propertyAt: #placeholder
+]
+
+{ #category : 'properties' }
+WaInput >> placeholder: anObject [
+
+	self propertyAt: #placeholder put: anObject
+]
+
+{ #category : 'properties' }
+WaInput >> readonly [
+
+	^ (self attributeAt: #readonly) notNil
+]
+
+{ #category : 'properties' }
+WaInput >> readonly: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #readonly ]
+		ifFalse: [ self removeAttributeAt: #readonly ]
+]
+
+{ #category : 'properties' }
+WaInput >> readonlyBeOff [
+
+	self readonly: false
+]
+
+{ #category : 'properties' }
+WaInput >> readonlyBeOn [
+
+	self readonly: true
+]
+
+{ #category : 'properties' }
+WaInput >> required [
+
+	^ (self attributeAt: #required) notNil
+]
+
+{ #category : 'properties' }
+WaInput >> required: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #required ]
+		ifFalse: [ self removeAttributeAt: #required ]
+]
+
+{ #category : 'properties' }
+WaInput >> requiredBeOff [
+
+	self required: false
+]
+
+{ #category : 'properties' }
+WaInput >> requiredBeOn [
+
+	self required: true
+]
+
+{ #category : 'slots' }
+WaInput >> showPasswordIcon [
+
+	^ self firstChildAtSlotNamed: #'show-password-icon'
+]
+
+{ #category : 'slots' }
+WaInput >> showPasswordIcon: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'show-password-icon'
+]
+
+{ #category : 'properties' }
 WaInput >> size [
 
 	^ self propertyAt: #size
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> size: anObject [
 
 	self propertyAt: #size put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> sizeBeLarge [
 
-	self size: 'large'
+	self size: #large
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> sizeBeMedium [
 
-	self size: 'medium'
+	self size: #medium
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaInput >> sizeBeSmall [
 
-	self size: 'small'
+	self size: #small
+]
+
+{ #category : 'slots' }
+WaInput >> start [
+
+	^ self firstChildAtSlotNamed: #start
+]
+
+{ #category : 'slots' }
+WaInput >> start: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start
+]
+
+{ #category : 'properties' }
+WaInput >> type [
+
+	^ self propertyAt: #type
+]
+
+{ #category : 'properties' }
+WaInput >> type: anObject [
+
+	self propertyAt: #type put: anObject
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeDate [
+
+	self type: #date
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeDatetimeLocal [
+
+	self type: #'datetime local'
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeEmail [
+
+	self type: #email
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeNumber [
+
+	self type: #number
+]
+
+{ #category : 'properties' }
+WaInput >> typeBePassword [
+
+	self type: #password
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeSearch [
+
+	self type: #search
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeTel [
+
+	self type: #tel
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeText [
+
+	self type: #text
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeTime [
+
+	self type: #time
+]
+
+{ #category : 'properties' }
+WaInput >> typeBeUrl [
+
+	self type: #url
+]
+
+{ #category : 'properties' }
+WaInput >> withClear [
+
+	^ (self attributeAt: #'with-clear') notNil
+]
+
+{ #category : 'properties' }
+WaInput >> withClear: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'with-clear' ]
+		ifFalse: [ self removeAttributeAt: #'with-clear' ]
+]
+
+{ #category : 'properties' }
+WaInput >> withClearBeOff [
+
+	self withClear: false
+]
+
+{ #category : 'properties' }
+WaInput >> withClearBeOn [
+
+	self withClear: true
 ]

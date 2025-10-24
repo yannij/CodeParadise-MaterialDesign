@@ -23,49 +23,49 @@ WaButton class >> label: aStringOrElement end: endElement [
 		yourself
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearance [
 
 	^ self propertyAt: #appearance
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearance: anObject [
 
 	self propertyAt: #appearance put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearanceBeAccent [
 
-	self appearance: 'accent'
+	self appearance: #accent
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearanceBeFilled [
 
-	self appearance: 'filled'
+	self appearance: #filled
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearanceBeOutlined [
 
-	self appearance: 'outlined'
+	self appearance: #outlined
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> appearanceBePlain [
 
-	self appearance: 'plain'
+	self appearance: #plain
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> disabled [
 
 	^ (self attributeAt: #disabled) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> disabled: aBoolean [
 
 	aBoolean
@@ -73,97 +73,97 @@ WaButton >> disabled: aBoolean [
 		ifFalse: [ self removeAttributeAt: #disabled ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> disabledBeOff [
 
 	self disabled: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> disabledBeOn [
 
 	self disabled: true
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> download [
 
 	^ self propertyAt: #download
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> download: anObject [
 
 	self propertyAt: #download put: anObject
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> end [
 
 	^ self firstChildAtSlotNamed: #end
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> end: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> form [
 
 	^ self propertyAt: #form
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> form: anObject [
 
 	self propertyAt: #form put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formaction [
 
 	^ self propertyAt: #formaction
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formaction: anObject [
 
 	self propertyAt: #formaction put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formenctype [
 
 	^ self propertyAt: #formenctype
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formenctype: anObject [
 
 	self propertyAt: #formenctype put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formmethod [
 
 	^ self propertyAt: #formmethod
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formmethod: anObject [
 
 	self propertyAt: #formmethod put: anObject
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> formnovalidate [
 
 	^ (self attributeAt: #formnovalidate) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> formnovalidate: aBoolean [
 
 	aBoolean
@@ -171,61 +171,61 @@ WaButton >> formnovalidate: aBoolean [
 		ifFalse: [ self removeAttributeAt: #formnovalidate ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> formnovalidateBeOff [
 
 	self formnovalidate: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> formnovalidateBeOn [
 
 	self formnovalidate: true
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formtarget [
 
 	^ self propertyAt: #formtarget
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> formtarget: anObject [
 
 	self propertyAt: #formtarget put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> href [
 
 	^ self propertyAt: #href
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> href: anObject [
 
 	self propertyAt: #href put: anObject
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> label [
 
 	^ self firstChildAtSlotNamed: nil
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> label: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: nil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> loading [
 
 	^ (self attributeAt: #loading) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> loading: aBoolean [
 
 	aBoolean
@@ -233,37 +233,37 @@ WaButton >> loading: aBoolean [
 		ifFalse: [ self removeAttributeAt: #loading ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> loadingBeOff [
 
 	self loading: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> loadingBeOn [
 
 	self loading: true
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> name [
 
 	^ self propertyAt: #name
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> name: anObject [
 
 	self propertyAt: #name put: anObject
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> pill [
 
 	^ (self attributeAt: #pill) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> pill: aBoolean [
 
 	aBoolean
@@ -271,175 +271,175 @@ WaButton >> pill: aBoolean [
 		ifFalse: [ self removeAttributeAt: #pill ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> pillBeOff [
 
 	self pill: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> pillBeOn [
 
 	self pill: true
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> rel [
 
 	^ self propertyAt: #rel
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> rel: anObject [
 
 	self propertyAt: #rel put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> size [
 
 	^ self propertyAt: #size
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> size: anObject [
 
 	self propertyAt: #size put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> sizeBeLarge [
 
-	self size: 'large'
+	self size: #large
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> sizeBeMedium [
 
-	self size: 'medium'
+	self size: #medium
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> sizeBeSmall [
 
-	self size: 'small'
+	self size: #small
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> start [
 
 	^ self firstChildAtSlotNamed: #start
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaButton >> start: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> target [
 
 	^ self propertyAt: #target
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> target: anObject [
 
 	self propertyAt: #target put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> type [
 
 	^ self propertyAt: #type
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> type: anObject [
 
 	self propertyAt: #type put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> typeBeButton [
 
-	self type: 'button'
+	self type: #button
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> typeBeReset [
 
-	self type: 'reset'
+	self type: #reset
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> typeBeSubmit [
 
-	self type: 'submit'
+	self type: #submit
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> value [
 
 	^ self propertyAt: #value
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> value: anObject [
 
 	self propertyAt: #value put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variant [
 
 	^ self propertyAt: #variant
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variant: anObject [
 
 	self propertyAt: #variant put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variantBeBrand [
 
-	self variant: 'brand'
+	self variant: #brand
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variantBeDanger [
 
-	self variant: 'danger'
+	self variant: #danger
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variantBeNeutral [
 
-	self variant: 'neutral'
+	self variant: #neutral
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variantBeSuccess [
 
-	self variant: 'success'
+	self variant: #success
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButton >> variantBeWarning [
 
-	self variant: 'warning'
+	self variant: #warning
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> withCaret [
 
 	^ (self attributeAt: #'with-caret') notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> withCaret: aBoolean [
 
 	aBoolean
@@ -447,13 +447,13 @@ WaButton >> withCaret: aBoolean [
 		ifFalse: [ self removeAttributeAt: #'with-caret' ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> withCaretBeOff [
 
 	self withCaret: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaButton >> withCaretBeOn [
 
 	self withCaret: true

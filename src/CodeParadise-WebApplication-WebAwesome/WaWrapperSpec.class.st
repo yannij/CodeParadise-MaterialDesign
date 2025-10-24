@@ -89,11 +89,20 @@ WaWrapperSpec class >> waInputSpec [
 	^ self new
 		wrapperClassName: #WaInput;
 		wrapperSuperclass: WaTextControl;
+		slotsAddAll: #('label' 'start' 'end'	 'clear-icon' 'show-password-icon' 'hide-password-icon' 'hint');
+		booleanPropertyAt: 'readonly' put: false;
+		booleanPropertyAt: 'required' put: false;
+		stringPropertyAt: 'type' put: 'date|datetime-local|email|number|password|search|tel|*text|time|url';
 		stringPropertyAt: 'label' put: #string;
 		stringPropertyAt: 'hint' put: #string;
+		booleanPropertyAt: 'with-clear' put: false;
+		stringPropertyAt: 'placeholder' put: #string;
 		stringPropertyAt: 'appearance' put: 'filled|*outlined';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'pill' put: false;
+		booleanPropertyAt: 'password-toggle' put: false;
+		booleanPropertyAt: 'password-visible' put: false;
+		booleanPropertyAt: 'autofocus' put: nil;
 		yourself
 ]
 
@@ -137,12 +146,18 @@ WaWrapperSpec class >> waTextareaSpec [
 	^ self new
 		wrapperClassName: #WaTextarea;
 		wrapperSuperclass: WaTextControl;
+		slotAdd: 'label'; slotAdd: 'hint';
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'readonly' put: false;
+		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'label' put: #string;
 		stringPropertyAt: 'hint' put: #string;
+		stringPropertyAt: 'placeholder' put: #string;
 		stringPropertyAt: 'appearance' put: 'filled|*outlined';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'pill' put: false;
 		numberPropertyAt: 'rows' put: 4;
+		stringPropertyAt: 'resize' put: 'none|*vertical|horizontal|both|auto';
 		yourself
 ]
 
@@ -177,7 +192,7 @@ WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ (self attributeAt: ', symbolString, ') notNil';
 				yourself ])
-		classified: 'accessing boolean'.
+		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -187,7 +202,7 @@ WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 				cr; tab; tab; nextPutAll: 'ifTrue: [ self attributeAdd: ', symbolString, ' ]';
 				cr; tab; tab; nextPutAll: 'ifFalse: [ self removeAttributeAt: ', symbolString, ' ]';
 				yourself ])
-		classified: 'accessing boolean'.
+		classified: 'properties'.
 
 ]
 
@@ -204,7 +219,7 @@ WaWrapperSpec >> compileBooleanConvenience: aKebabCaseName in: aClass [
 				nextPutAll: accessorString, 'BeOn';
 				cr; cr; tab; nextPutAll: 'self ', accessorString, ': true';
 				yourself ])
-		classified: 'accessing boolean'.
+		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -212,7 +227,7 @@ WaWrapperSpec >> compileBooleanConvenience: aKebabCaseName in: aClass [
 				nextPutAll: accessorString, 'BeOff';
 				cr; cr; tab; nextPutAll: 'self ', accessorString, ': false';
 				yourself ])
-		classified: 'accessing boolean'.
+		classified: 'properties'.
 
 ]
 
@@ -229,7 +244,7 @@ WaWrapperSpec >> compileCssProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ self customPropertyAt: ', symbolString;
 				yourself ])
-		classified: 'accessing css property'.
+		classified: 'css custom properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -237,7 +252,7 @@ WaWrapperSpec >> compileCssProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString; nextPutAll: ': aString';
 				cr; cr; tab; nextPutAll: 'self customPropertyAt: ', symbolString, ' put: aString';
 				yourself ])
-		classified: 'accessing css property'.
+		classified: 'css custom properties'.
 
 ]
 
@@ -254,7 +269,7 @@ WaWrapperSpec >> compileNumberProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
 				yourself ])
-		classified: 'accessing number'.
+		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -262,7 +277,7 @@ WaWrapperSpec >> compileNumberProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString; nextPutAll: ': anObject';
 				cr; cr; tab; nextPutAll: 'self propertyAt: ', symbolString, ' put: anObject';
 				yourself ])
-		classified: 'accessing number'.
+		classified: 'properties'.
 
 ]
 
@@ -284,7 +299,7 @@ WaWrapperSpec >> compileSlot: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ self firstChildAtSlotNamed: ', slotNameString;
 				yourself ])
-		classified: 'accessing slot'.
+		classified: 'slots'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -292,7 +307,7 @@ WaWrapperSpec >> compileSlot: aKebabCaseName in: aClass [
 				nextPutAll: accessorString; nextPutAll: ': aStringOrElement';
 				cr; cr; tab; nextPutAll: 'self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: ', slotNameString;
 				yourself ])
-		classified: 'accessing slot'.
+		classified: 'slots'.
 
 ]
 
@@ -309,7 +324,7 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString;
 				cr; cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
 				yourself ])
-		classified: 'accessing string'.
+		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
@@ -317,7 +332,7 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName in: aClass [
 				nextPutAll: accessorString; nextPutAll: ': anObject';
 				cr; cr; tab; nextPutAll: 'self propertyAt: ', symbolString, ' put: anObject';
 				yourself ])
-		classified: 'accessing string'.
+		classified: 'properties'.
 
 ]
 
@@ -329,16 +344,17 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName types: specString in: aCl
 		^ self ].
 
 	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
-	types := (specString substrings: '|') collect: [ :each | self valueWithoutDefaultIndicator: each ].
+	types := (specString substrings: '|') collect: [ :each |
+		(self valueWithoutDefaultIndicator: each) copyReplaceAll: '-' with: ' ' ].
 
 	types do: [ :eachType |
 		aClass
 			compile: (String streamContents: [ :stream |
 				stream
 					nextPutAll: accessorString, 'Be', eachType asCamelCase capitalized;
-					cr; cr; tab; nextPutAll: 'self ', accessorString, ': ', eachType printString;
+					cr; cr; tab; nextPutAll: 'self ', accessorString, ': ', eachType asSymbol printString;
 					yourself ])
-			classified: 'accessing string' ].
+			classified: 'properties' ].
 
 ]
 
@@ -453,6 +469,12 @@ WaWrapperSpec >> slots [
 WaWrapperSpec >> slots: anObject [
 
 	slots := anObject
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> slotsAddAll: aCollection [
+
+	self slots addAll: aCollection
 ]
 
 { #category : 'accessing' }

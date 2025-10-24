@@ -6,80 +6,80 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> label [
 
 	^ self propertyAt: #label
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> label: anObject [
 
 	self propertyAt: #label put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> orientation [
 
 	^ self propertyAt: #orientation
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> orientation: anObject [
 
 	self propertyAt: #orientation put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> orientationBeHorizontal [
 
-	self orientation: 'horizontal'
+	self orientation: #horizontal
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> orientationBeVertical [
 
-	self orientation: 'vertical'
+	self orientation: #vertical
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variant [
 
 	^ self propertyAt: #variant
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variant: anObject [
 
 	self propertyAt: #variant put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variantBeBrand [
 
-	self variant: 'brand'
+	self variant: #brand
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variantBeDanger [
 
-	self variant: 'danger'
+	self variant: #danger
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variantBeNeutral [
 
-	self variant: 'neutral'
+	self variant: #neutral
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variantBeSuccess [
 
-	self variant: 'success'
+	self variant: #success
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaButtonGroup >> variantBeWarning [
 
-	self variant: 'warning'
+	self variant: #warning
 ]

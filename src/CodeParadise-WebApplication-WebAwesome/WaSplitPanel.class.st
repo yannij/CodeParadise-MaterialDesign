@@ -6,13 +6,13 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaSplitPanel >> disabled [
 
 	^ (self attributeAt: #disabled) notNil
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaSplitPanel >> disabled: aBoolean [
 
 	aBoolean
@@ -20,193 +20,193 @@ WaSplitPanel >> disabled: aBoolean [
 		ifFalse: [ self removeAttributeAt: #disabled ]
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaSplitPanel >> disabledBeOff [
 
 	self disabled: false
 ]
 
-{ #category : 'accessing boolean' }
+{ #category : 'properties' }
 WaSplitPanel >> disabledBeOn [
 
 	self disabled: true
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> divider [
 
 	^ self firstChildAtSlotNamed: #divider
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> divider: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #divider
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> dividerHitArea [
 
 	^ self customPropertyAt: #'divider-hit-area'
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> dividerHitArea: aString [
 
 	self customPropertyAt: #'divider-hit-area' put: aString
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> dividerWidth [
 
 	^ self customPropertyAt: #'divider-width'
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> dividerWidth: aString [
 
 	self customPropertyAt: #'divider-width' put: aString
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> end [
 
 	^ self firstChildAtSlotNamed: #end
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> end: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> max [
 
 	^ self customPropertyAt: #max
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> max: aString [
 
 	self customPropertyAt: #max put: aString
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> min [
 
 	^ self customPropertyAt: #min
 ]
 
-{ #category : 'accessing css property' }
+{ #category : 'css custom properties' }
 WaSplitPanel >> min: aString [
 
 	self customPropertyAt: #min put: aString
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> orientation [
 
 	^ self propertyAt: #orientation
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> orientation: anObject [
 
 	self propertyAt: #orientation put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> orientationBeHorizontal [
 
-	self orientation: 'horizontal'
+	self orientation: #horizontal
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> orientationBeVertical [
 
-	self orientation: 'vertical'
+	self orientation: #vertical
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> position [
 
 	^ self propertyAt: #position
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> position: anObject [
 
 	self propertyAt: #position put: anObject
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> positionInPixels [
 
 	^ self propertyAt: #'position-in-pixels'
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> positionInPixels: anObject [
 
 	self propertyAt: #'position-in-pixels' put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> primary [
 
 	^ self propertyAt: #primary
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> primary: anObject [
 
 	self propertyAt: #primary put: anObject
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> primaryBeEnd [
 
-	self primary: 'end'
+	self primary: #end
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> primaryBeStart [
 
-	self primary: 'start'
+	self primary: #start
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> snap [
 
 	^ self propertyAt: #snap
 ]
 
-{ #category : 'accessing string' }
+{ #category : 'properties' }
 WaSplitPanel >> snap: anObject [
 
 	self propertyAt: #snap put: anObject
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> snapThreshold [
 
 	^ self propertyAt: #'snap-threshold'
 ]
 
-{ #category : 'accessing number' }
+{ #category : 'properties' }
 WaSplitPanel >> snapThreshold: anObject [
 
 	self propertyAt: #'snap-threshold' put: anObject
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> start [
 
 	^ self firstChildAtSlotNamed: #start
 ]
 
-{ #category : 'accessing slot' }
+{ #category : 'slots' }
 WaSplitPanel >> start: aStringOrElement [
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start

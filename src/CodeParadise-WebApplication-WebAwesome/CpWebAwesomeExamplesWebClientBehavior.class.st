@@ -316,7 +316,7 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 	focusDialog := WaDialog new
 		label: 'Focus dialog' ;
 		appendChild: ('This is a focus dialog. It is used to show the focus can be set on a specific element inside the dialog when showing it. Have fun!' inHtmlTag: #p) ;
-		appendChild: ((WaInput label: 'First') id: #first ; beAutofocus ; hintText: 'I am default but that can be overriden' ; yourself) ;
+		appendChild: ((WaInput label: 'First') id: #first ; autofocusBeOn ; hintText: 'I am default but that can be overriden' ; yourself) ;
 		appendChild: ((WaInput label: 'Second') id: #second ; yourself) ;
 		appendChild: ((WaInput label: 'Third') id: #third ; yourself) ;
 		yourself.
@@ -344,7 +344,15 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 		appendChild: (focusCheckbox := WaCheckbox label: 'focus 3rd input field') ;
 		appendChild: (' ' inHtmlTag: #span) ;
 		appendChild: ((WaButton label: 'Focus dialog')
-			when: CpClickEvent basicPrimary do: [ focusCheckbox isChecked ifTrue: [ focusDialog showFocusing: (focusDialog firstDescendantMatching: '#third') ] ifFalse: [ focusDialog resetDefaultFocusElement ; beOpen ] ] for: self ;
+			when: CpClickEvent basicPrimary do: [
+				focusCheckbox isChecked
+					ifTrue: [
+						(focusDialog firstDescendantMatching: '#first') autofocusBeOff.
+						(focusDialog firstDescendantMatching: '#third') autofocusBeOn ]
+					ifFalse: [
+						(focusDialog firstDescendantMatching: '#first') autofocusBeOn.
+						(focusDialog firstDescendantMatching: '#third') autofocusBeOff ].
+					focusDialog beOpen ] for: self ;
 			yourself) ;
 		appendChild: regularDialog ;
 		appendChild: modalDialog ;
@@ -437,7 +445,7 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleInput [
 
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 
-	outputElement appendChild: (WaInput new bePassword ; beTogglePassword ; label: 'Your password' ; yourself).
+	outputElement appendChild: (WaInput new typeBePassword ; passwordToggleBeOn ; label: 'Your password' ; yourself).
 
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 
@@ -459,9 +467,9 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleInput [
 	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
 	outputElement appendChild: (pillState := WaCheckbox label: 'Pill').
 	outputElement appendChild: (clearableState := WaCheckbox label: 'Clearable').
-	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input beDisabled ] ifFalse: [ input beNotDisabled ] ] for: self.
-	pillState when: WaChangeEvent do: [ pillState isChecked ifTrue: [ input bePill ] ifFalse: [ input beNotPill ] ] for: self.
-	clearableState when: WaChangeEvent do: [ clearableState isChecked ifTrue: [ input beClearable ] ifFalse: [ input beNotClearable ] ] for: self.
+	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input readonlyBeOn ] ifFalse: [ input readonlyBeOff ] ] for: self.
+	pillState when: WaChangeEvent do: [ pillState isChecked ifTrue: [ input pillBeOn ] ifFalse: [ input pillBeOff ] ] for: self.
+	clearableState when: WaChangeEvent do: [ clearableState isChecked ifTrue: [ input withClearBeOn ] ifFalse: [ input withClearBeOff ] ] for: self.
 
 ]
 
@@ -592,8 +600,8 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleTextarea [
 	input := outputElement appendChild: (WaTextarea new label: 'Need more input').
 	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
 	outputElement appendChild: (resizeableState := WaCheckbox label: 'Resizeable').
-	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input beDisabled ] ifFalse: [ input beNotDisabled ] ] for: self.
-	resizeableState when: WaChangeEvent do: [ resizeableState isChecked ifTrue: [ input resizeAuto ] ifFalse: [ input resizeNone ] ] for: self.
+	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input disabledBeOn ] ifFalse: [ input disabledBeOff ] ] for: self.
+	resizeableState when: WaChangeEvent do: [ resizeableState isChecked ifTrue: [ input resizeBeVertical ] ifFalse: [ input resizeBeNone ] ] for: self.
 
 ]
 
