@@ -9,5 +9,5 @@ Class {
 { #category : 'examples' }
 SlmdWebView >> registerIcons [
 
-	WaIcon registerBootstrapIcons.
+	WaElement registerBootstrapIcons.
 ]

@@ -7,165 +7,131 @@ Class {
 }
 
 { #category : 'instance creation' }
-WaOption class >> value: aSymbol label: aStringOrElement [
+WaOption class >> value: object1 label: object2 [ 
 
-	^ self new
-		value: aSymbol ;
-		label: aStringOrElement ;
+	^ self new 
+		value: object1;
+		label: object2;
 		yourself
 ]
 
 { #category : 'instance creation' }
-WaOption class >> value: aSymbol labelText: aString [
+WaOption class >> value: object1 labelText: object2 [ 
 
-	^ self new
-		value: aSymbol ;
-		labelText: aString ;
+	^ self new 
+		value: object1;
+		labelText: object2;
 		yourself
 ]
 
-{ #category : 'accessing' }
-WaOption >> beDisabled [
+{ #category : 'properties' }
+WaOption >> disabled [
 
-	self disabled: true
+	^ (self attributeAt: #disabled) notNil
 ]
 
-{ #category : 'accessing' }
-WaOption >> beEnabled [
-
-	"Convenience method to make receiver enabled"
-
-	self disabled: false
-]
-
-{ #category : 'accessing style' }
-WaOption >> beNotDisabled [
-
-	self disabled: false
-]
-
-{ #category : 'accessing' }
-WaOption >> beNotEnabled [
-
-	"Convenience method to clear the enabled state of the receiver"
-
-	self disabled: true
-]
-
-{ #category : 'copying' }
-WaOption >> clone [
-
-	"Deep clone the receiver.
-
-	Implementation:
-	Set the (non reflecting properties explicitly)."
-
-	^ super clone
-		value: self value ;
-		yourself
-
-]
-
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaOption >> disabled: aBoolean [
 
-	self propertyAt: #disabled put: aBoolean
+	aBoolean
+		ifTrue: [ self attributeAdd: #disabled ]
+		ifFalse: [ self removeAttributeAt: #disabled ]
 ]
 
-{ #category : 'accessing' }
-WaOption >> enabled: aBoolean [
+{ #category : 'properties' }
+WaOption >> disabledBeOff [
 
-	"Convenience method to set receiver's enabled state"
-
-	self disabled: aBoolean not
+	self disabled: false
 ]
 
-{ #category : 'accessing' }
-WaOption >> isDisabled [
+{ #category : 'properties' }
+WaOption >> disabledBeOn [
 
-	^ self propertyAt: #disabled
+	self disabled: true
 ]
 
-{ #category : 'accessing' }
-WaOption >> isEnabled [
+{ #category : 'slots' }
+WaOption >> end [
 
-	"Convenience method to test if receiver is enabled"
-
-	^ self isDisabled not
+	^ self firstChildAtSlotNamed: #end
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
+WaOption >> end: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
+]
+
+{ #category : 'slots' }
 WaOption >> label [
 
-	"Answer the label HTML element of the receiver.
-	For a simple String value use #labelText instead."
-
-	^ self firstChildAtSlotNamed: nil
+	^ self firstChildAtSlotNamed: #label
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaOption >> label: aStringOrElement [
 
-	"Set the label to the specified Element.
-	For a simple String value use #labelText: instead."
-
-	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: nil
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #label
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaOption >> labelText [
-
-	"Answer the label text (a String) of the receiver.
-	For richer HTML element use #label instead."
 
 	^ self textContent
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaOption >> labelText: aString [
-
-	"Set the label text to the specified String value.
-	For richer HTML element use #label: instead."
 
 	self textContent: aString
 ]
 
-{ #category : 'accessing' }
-WaOption >> prefix [
+{ #category : 'properties' }
+WaOption >> selected [
 
-	^ self firstChildAtSlotNamed: #prefix
+	^ (self attributeAt: #selected) notNil
 ]
 
-{ #category : 'accessing' }
-WaOption >> prefix: anElement [
+{ #category : 'properties' }
+WaOption >> selected: aBoolean [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #prefix
+	aBoolean
+		ifTrue: [ self attributeAdd: #selected ]
+		ifFalse: [ self removeAttributeAt: #selected ]
 ]
 
-{ #category : 'accessing' }
-WaOption >> suffix [
+{ #category : 'properties' }
+WaOption >> selectedBeOff [
 
-	^ self firstChildAtSlotNamed: #suffix
+	self selected: false
 ]
 
-{ #category : 'accessing' }
-WaOption >> suffix: anElement [
+{ #category : 'properties' }
+WaOption >> selectedBeOn [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #suffix
+	self selected: true
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
+WaOption >> start [
+
+	^ self firstChildAtSlotNamed: #start
+]
+
+{ #category : 'slots' }
+WaOption >> start: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start
+]
+
+{ #category : 'properties' }
 WaOption >> value [
 
-	self flag: #todo. "Temporary fix for values with spaces in them (replace by non-breakable space)."
-
-	^ (self propertyAt: #value) replaceAll: (Character value: 160) with: Character space
+	^ self propertyAt: #value
 ]
 
-{ #category : 'accessing' }
-WaOption >> value: aString [
+{ #category : 'properties' }
+WaOption >> value: anObject [
 
-	self flag: #todo. "Temporary fix for values with spaces in them (replace by non-breakable space)."
-
-	self propertyAt: #value put: (aString asString replaceAll: Character space with: (Character value: 160))
+	self propertyAt: #value put: anObject
 ]

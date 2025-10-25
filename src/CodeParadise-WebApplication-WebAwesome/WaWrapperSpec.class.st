@@ -8,7 +8,9 @@ Class {
 		'cssProperties',
 		'booleanProperties',
 		'stringProperties',
-		'numberProperties'
+		'numberProperties',
+		'textContent',
+		'instanceCreators'
 	],
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
@@ -22,16 +24,17 @@ WaWrapperSpec class >> generateAllWrappers [
 	self generateAllWrappers
 	"
 
-	{
-	"self waTestSpec."
-	self waButtonSpec.
-	self waButtonGroupSpec.
-	self waCheckboxSpec.
-	self waInputSpec.
-	self waSplitPanelSpec.
-	self waSwitchSpec.
-	self waTextareaSpec.
-	} do: [ :eachSpec | eachSpec generate ]
+	"self waTestSpec generate."
+	self waButtonSpec generate.
+	self waButtonGroupSpec generate.
+	self waCheckboxSpec generate.
+	self waIconSpec generate.
+	self waInputSpec generate.
+	self waOptionSpec generate.
+	self waSelectSpec generate.
+	self waSplitPanelSpec generate.
+	self waSwitchSpec generate.
+	self waTextareaSpec generate.
 
 ]
 
@@ -105,12 +108,32 @@ WaWrapperSpec class >> waCheckboxSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waIconSpec [
+
+	^ self new
+		wrapperClassName: #WaIcon;
+		stringPropertyAt: 'name' put: #string;
+		stringPropertyAt: 'family' put: #string;
+		stringPropertyAt: 'variant' put: #string;
+		booleanPropertyAt: 'auto-width' put: false;
+		booleanPropertyAt: 'swap-opacity' put: false;
+		stringPropertyAt: 'src' put: #string;
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'library' put: #string;
+		cssPropertieAdd: 'primary-color';
+		cssPropertieAdd: 'primary-opacity';
+		cssPropertieAdd: 'secondary-color';
+		cssPropertieAdd: 'secondary-opacity';
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waInputSpec [
 
 	^ self new
 		wrapperClassName: #WaInput;
 		wrapperSuperclass: WaTextControl;
-		slotsAddAll: #('label' 'start' 'end'	 'clear-icon' 'show-password-icon' 'hide-password-icon' 'hint');
+		slotsAddAll: #('label' 'start' 'end'	'clear-icon' 'show-password-icon' 'hide-password-icon' 'hint');
 		booleanPropertyAt: 'readonly' put: false;
 		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'type' put: 'date|datetime-local|email|number|password|search|tel|*text|time|url';
@@ -124,6 +147,50 @@ WaWrapperSpec class >> waInputSpec [
 		booleanPropertyAt: 'password-toggle' put: false;
 		booleanPropertyAt: 'password-visible' put: false;
 		booleanPropertyAt: 'autofocus' put: nil;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waOptionSpec [
+
+	^ self new
+		wrapperClassName: #WaOption;
+		slotsAddAll: #('label' 'start' 'end');
+		instanceCreatorAdd: #'value:label:';
+		instanceCreatorAdd: #'value:labelText:';
+		textContent: 'label-text';
+		stringPropertyAt: 'value' put: #string;
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'selected' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waSelectSpec [
+
+	^ self new
+		wrapperClassName: #WaSelect;
+		wrapperSuperclass: WaFormControl;
+		slotsAddAll: #('label' 'start' 'end'	'clear-icon' 'expand-icon' 'hint');
+		stringPropertyAt: 'name' put: #string;
+		stringPropertyAt: 'value' put: #string;
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		stringPropertyAt: 'placeholder' put: #string;
+		booleanPropertyAt: 'multiple' put: false;
+		numberPropertyAt: 'max-options-visible' put: 3;
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'with-clear' put: false;
+		booleanPropertyAt: 'open' put: false;
+		stringPropertyAt: 'appearance' put: 'filled|*outlined';
+		booleanPropertyAt: 'pill' put: false;
+		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: 'placement' put: 'top|*bottom';
+		booleanPropertyAt: 'with-label' put: false;
+		booleanPropertyAt: 'with-hint' put: false;
+		booleanPropertyAt: 'required' put: false;
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
+		cssPropertieAdd: 'tag-max-size';
 		yourself
 ]
 
@@ -159,8 +226,9 @@ WaWrapperSpec class >> waSwitchSpec [
 		booleanPropertyAt: 'checked' put: false;
 		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'hint' put: #string;
-		cssPropertieAdd: 'checked-icon-color';
-		cssPropertieAdd: 'checked-icon-scale';
+		cssPropertieAdd: 'width';
+		cssPropertieAdd: 'height';
+		cssPropertieAdd: 'thumb-size';
 		yourself
 ]
 
@@ -295,6 +363,29 @@ WaWrapperSpec >> compileCssProperty: aKebabCaseName in: aClass [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec >> compileInstanceCreator: aMethodSelector in: aClass [
+	| parts |
+
+	parts := aMethodSelector asString substrings: ':'.
+
+	aClass class
+		compile: (String streamContents: [ :stream |
+			parts withIndexDo: [ :eachPart :i |
+				stream
+					nextPutAll: eachPart; nextPut: $:; space; nextPutAll: 'object'; nextPutAll: i printString; space;
+					yourself ].
+			stream cr; cr; tab; nextPutAll: '^ self new '.
+			parts withIndexDo: [ :eachPart :i |
+				stream
+					cr; tab; tab; nextPutAll: eachPart; nextPut: $:; space; nextPutAll: 'object'; nextPutAll: i printString; nextPut: $;
+					yourself ].
+			stream
+				cr; tab; tab; nextPutAll: 'yourself' ])
+		classified: 'instance creation'.
+
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec >> compileNumberProperty: aKebabCaseName in: aClass [
 	| accessorString symbolString |
 
@@ -396,6 +487,31 @@ WaWrapperSpec >> compileStringProperty: aKebabCaseName types: specString in: aCl
 
 ]
 
+{ #category : 'code generation' }
+WaWrapperSpec >> compileTextContent: aKebabCaseName in: aClass [
+	| accessorString slotNameString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	slotNameString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; cr;
+				cr; tab; nextPutAll: '^ self textContent';
+				yourself ])
+		classified: 'slots'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; nextPutAll: ': aString'; cr;
+				cr; tab; nextPutAll: 'self textContent: aString';
+				yourself ])
+		classified: 'slots'.
+
+]
+
 { #category : 'accessing' }
 WaWrapperSpec >> cssPropertieAdd: anObject [
 
@@ -437,6 +553,12 @@ WaWrapperSpec >> generate [
 	self cssProperties do: [ :each |
 		self compileCssProperty: each in: theClass ].
 
+	self instanceCreators do: [ :each |
+		self compileInstanceCreator: each in: theClass ].
+
+	self textContent ifNotNil: [ :value |
+		self compileTextContent: value in: theClass ]
+
 ]
 
 { #category : 'initialization' }
@@ -450,7 +572,32 @@ WaWrapperSpec >> initialize [
 	numberProperties := IdentityDictionary new.
 	cssProperties := OrderedCollection new.
 	slots := OrderedCollection new.
+	instanceCreators := OrderedCollection new.
 
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> instanceCreatorAdd: anObject [
+
+	self instanceCreators add: anObject
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> instanceCreators [
+
+	^ instanceCreators
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> instanceCreators: anObject [
+
+	instanceCreators := anObject
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> instanceCreatorsAddAll: aCollection [
+
+	self instanceCreators addAll: aCollection
 ]
 
 { #category : 'code generation' }
@@ -531,6 +678,18 @@ WaWrapperSpec >> stringProperties: anObject [
 WaWrapperSpec >> stringPropertyAt: key put: anObject [
 
 	self stringProperties at: key put: anObject
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> textContent [
+
+	^ textContent
+]
+
+{ #category : 'accessing' }
+WaWrapperSpec >> textContent: anObject [
+
+	textContent := anObject
 ]
 
 { #category : 'code generation' }

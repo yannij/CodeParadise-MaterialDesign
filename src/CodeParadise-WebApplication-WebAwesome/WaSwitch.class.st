@@ -32,30 +32,6 @@ WaSwitch >> checkedBeOn [
 	self checked: true
 ]
 
-{ #category : 'css custom properties' }
-WaSwitch >> checkedIconColor [
-
-	^ self customPropertyAt: #'checked-icon-color'
-]
-
-{ #category : 'css custom properties' }
-WaSwitch >> checkedIconColor: aString [
-
-	self customPropertyAt: #'checked-icon-color' put: aString
-]
-
-{ #category : 'css custom properties' }
-WaSwitch >> checkedIconScale [
-
-	^ self customPropertyAt: #'checked-icon-scale'
-]
-
-{ #category : 'css custom properties' }
-WaSwitch >> checkedIconScale: aString [
-
-	self customPropertyAt: #'checked-icon-scale' put: aString
-]
-
 { #category : 'properties' }
 WaSwitch >> disabled [
 
@@ -80,6 +56,18 @@ WaSwitch >> disabledBeOff [
 WaSwitch >> disabledBeOn [
 
 	self disabled: true
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> height [
+
+	^ self customPropertyAt: #height
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> height: aString [
+
+	self customPropertyAt: #height put: aString
 ]
 
 { #category : 'properties' }
@@ -160,4 +148,28 @@ WaSwitch >> sizeBeMedium [
 WaSwitch >> sizeBeSmall [
 
 	self size: #small
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> thumbSize [
+
+	^ self customPropertyAt: #'thumb-size'
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> thumbSize: aString [
+
+	self customPropertyAt: #'thumb-size' put: aString
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> width [
+
+	^ self customPropertyAt: #width
+]
+
+{ #category : 'css custom properties' }
+WaSwitch >> width: aString [
+
+	self customPropertyAt: #width put: aString
 ]

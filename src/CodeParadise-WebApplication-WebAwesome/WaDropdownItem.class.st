@@ -70,20 +70,6 @@ WaDropdownItem >> checked: aBoolean [
 	self propertyAt: #checked put: aBoolean
 ]
 
-{ #category : 'copying' }
-WaDropdownItem >> clone [
-
-	"Deep clone the receiver.
-
-	Implementation:
-	Set the (non reflecting properties explicitly)."
-
-	^ super clone
-		value: self value ;
-		yourself
-
-]
-
 { #category : 'accessing' }
 WaDropdownItem >> disabled: aBoolean [
 

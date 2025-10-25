@@ -6,326 +6,444 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing' }
-WaSelect >> beClearable [
+{ #category : 'properties' }
+WaSelect >> appearance [
 
-	self clearable: true
+	^ self propertyAt: #appearance
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beFilled [
+{ #category : 'properties' }
+WaSelect >> appearance: anObject [
 
-	self filled: true
+	self propertyAt: #appearance put: anObject
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beHoist [
+{ #category : 'properties' }
+WaSelect >> appearanceBeFilled [
 
-	self hoist: true
+	self appearance: #filled
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beLarge [
+{ #category : 'properties' }
+WaSelect >> appearanceBeOutlined [
 
-	self size: #large
+	self appearance: #outlined
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beMedium [
+{ #category : 'slots' }
+WaSelect >> clearIcon [
 
-	self size: #medium
+	^ self firstChildAtSlotNamed: #'clear-icon'
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beMultiple [
+{ #category : 'slots' }
+WaSelect >> clearIcon: aStringOrElement [
 
-	self multiple: true
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'clear-icon'
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beNotClearable [
+{ #category : 'properties' }
+WaSelect >> disabled [
 
-	self clearable: false
+	^ (self attributeAt: #disabled) notNil
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beNotFilled [
+{ #category : 'properties' }
+WaSelect >> disabled: aBoolean [
 
-	self filled: false
+	aBoolean
+		ifTrue: [ self attributeAdd: #disabled ]
+		ifFalse: [ self removeAttributeAt: #disabled ]
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beNotHoist [
+{ #category : 'properties' }
+WaSelect >> disabledBeOff [
 
-	self hoist: false
+	self disabled: false
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beNotMultiple [
+{ #category : 'properties' }
+WaSelect >> disabledBeOn [
+
+	self disabled: true
+]
+
+{ #category : 'slots' }
+WaSelect >> end [
+
+	^ self firstChildAtSlotNamed: #end
+]
+
+{ #category : 'slots' }
+WaSelect >> end: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #end
+]
+
+{ #category : 'slots' }
+WaSelect >> expandIcon [
+
+	^ self firstChildAtSlotNamed: #'expand-icon'
+]
+
+{ #category : 'slots' }
+WaSelect >> expandIcon: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'expand-icon'
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> hideDuration [
+
+	^ self customPropertyAt: #'hide-duration'
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> hideDuration: aString [
+
+	self customPropertyAt: #'hide-duration' put: aString
+]
+
+{ #category : 'slots' }
+WaSelect >> hint [
+
+	^ self firstChildAtSlotNamed: #hint
+]
+
+{ #category : 'slots' }
+WaSelect >> hint: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #hint
+]
+
+{ #category : 'properties' }
+WaSelect >> label [
+
+	^ self propertyAt: #label
+]
+
+{ #category : 'properties' }
+WaSelect >> label: anObject [
+
+	self propertyAt: #label put: anObject
+]
+
+{ #category : 'properties' }
+WaSelect >> maxOptionsVisible [
+
+	^ self propertyAt: #'max-options-visible'
+]
+
+{ #category : 'properties' }
+WaSelect >> maxOptionsVisible: anObject [
+
+	self propertyAt: #'max-options-visible' put: anObject
+]
+
+{ #category : 'properties' }
+WaSelect >> multiple [
+
+	^ (self attributeAt: #multiple) notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> multiple: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #multiple ]
+		ifFalse: [ self removeAttributeAt: #multiple ]
+]
+
+{ #category : 'properties' }
+WaSelect >> multipleBeOff [
 
 	self multiple: false
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beNotPill [
+{ #category : 'properties' }
+WaSelect >> multipleBeOn [
+
+	self multiple: true
+]
+
+{ #category : 'properties' }
+WaSelect >> name [
+
+	^ self propertyAt: #name
+]
+
+{ #category : 'properties' }
+WaSelect >> name: anObject [
+
+	self propertyAt: #name put: anObject
+]
+
+{ #category : 'properties' }
+WaSelect >> open [
+
+	^ (self attributeAt: #open) notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> open: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #open ]
+		ifFalse: [ self removeAttributeAt: #open ]
+]
+
+{ #category : 'properties' }
+WaSelect >> openBeOff [
+
+	self open: false
+]
+
+{ #category : 'properties' }
+WaSelect >> openBeOn [
+
+	self open: true
+]
+
+{ #category : 'properties' }
+WaSelect >> pill [
+
+	^ (self attributeAt: #pill) notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> pill: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #pill ]
+		ifFalse: [ self removeAttributeAt: #pill ]
+]
+
+{ #category : 'properties' }
+WaSelect >> pillBeOff [
 
 	self pill: false
 ]
 
-{ #category : 'accessing' }
-WaSelect >> bePill [
+{ #category : 'properties' }
+WaSelect >> pillBeOn [
 
 	self pill: true
 ]
 
-{ #category : 'accessing' }
-WaSelect >> beSmall [
-
-	self size: #small
-]
-
-{ #category : 'accessing' }
-WaSelect >> clearIcon [
-
-	self firstChildAtSlotNamed: #'clear-icon'
-]
-
-{ #category : 'accessing' }
-WaSelect >> clearIcon: anElement [
-
-	self replaceAllChildrenWith: anElement atSlotNamed: #'clear-icon'
-]
-
-{ #category : 'accessing' }
-WaSelect >> clearable: aBoolean [
-
-	self propertyAt: #clearable put: aBoolean
-]
-
-{ #category : 'accessing' }
-WaSelect >> clone [
-
-	"Deep clone the receiver.
-
-	Implementation:
-	Set the (non reflecting properties explicitly)."
-
-	^ super clone
-		size: self size ;
-		placeholder: self placeholder ;
-		clearable: self isClearable ;
-		yourself
-
-]
-
-{ #category : 'accessing' }
-WaSelect >> filled: aBoolean [
-
-	self propertyAt: #filled put: aBoolean
-]
-
-{ #category : 'testing' }
-WaSelect >> hasFocus [
-
-	"Answer whether the receiver or one of its options has focus"
-
-	^ super hasFocus or: [ self = CpHtmlElement activeElement parent ]
-]
-
-{ #category : 'accessing' }
-WaSelect >> help [
-
-	"Answer the help HTML element of the receiver.
-	For a simple String value use #helpText instead."
-
-	^ self firstChildAtSlotNamed: #'help-text'
-]
-
-{ #category : 'accessing' }
-WaSelect >> help: aStringOrElement [
-
-	"Set the help text to the specified Element.
-	For a simple String value use #helpText: instead."
-
-	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'help-text'
-]
-
-{ #category : 'accessing' }
-WaSelect >> helpText [
-
-	"Answer the help text (a String) of the receiver.
-	For richer HTML element use #help instead."
-
-	^ self help textContent
-]
-
-{ #category : 'accessing' }
-WaSelect >> helpText: aString [
-
-	"Set the help text to the specified String value.
-	For richer HTML element use #help: instead."
-
-	self help: aString asHtmlElement
-]
-
-{ #category : 'accessing' }
-WaSelect >> hoist: aBoolean [
-
-	self propertyAt: #hoist put: aBoolean
-]
-
-{ #category : 'accessing' }
-WaSelect >> isClearable [
-
-	^ self propertyAt: #clearable
-]
-
-{ #category : 'accessing' }
-WaSelect >> isFilled [
-
-	^ self propertyAt: #filled
-]
-
-{ #category : 'accessing' }
-WaSelect >> isHoist [
-
-	^ self propertyAt: #hoist
-]
-
-{ #category : 'accessing' }
-WaSelect >> isMultiple [
-
-	^ self propertyAt: #multiple
-]
-
-{ #category : 'accessing' }
-WaSelect >> isPill [
-
-	^ self propertyAt: #pill
-]
-
-{ #category : 'accessing' }
-WaSelect >> label [
-
-	"Answer the label HTML element of the receiver.
-	For a simple String value use #labelText instead."
-
-	^ self firstChildAtSlotNamed: #label
-]
-
-{ #category : 'accessing' }
-WaSelect >> label: aStringOrElement [
-
-	"Set the label to the specified Element.
-	For a simple String value use #labelText: instead."
-
-	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #label
-]
-
-{ #category : 'accessing' }
-WaSelect >> labelText [
-
-	"Answer the label text (a String) of the receiver.
-	For richer HTML element use #label instead."
-
-	^ self label
-		ifNotNil: [ :label | label textContent ]
-		ifNil: [ '' ]
-]
-
-{ #category : 'accessing' }
-WaSelect >> labelText: aString [
-
-	"Set the label text to the specified String value.
-	For richer HTML element use #label: instead."
-
-	self label: aString asHtmlElement
-]
-
-{ #category : 'accessing' }
-WaSelect >> maxTagsVisible [
-
-	^ self propertyAt: #maxTagsVisible
-]
-
-{ #category : 'accessing' }
-WaSelect >> maxTagsVisible: aNumber [
-
-	self propertyAt: #maxTagsVisible put: aNumber
-]
-
-{ #category : 'accessing' }
-WaSelect >> multiple: aBoolean [
-
-	self propertyAt: #multiple put: aBoolean
-]
-
-{ #category : 'accessing' }
-WaSelect >> pill: aBoolean [
-
-	self propertyAt: #pill put: aBoolean
-]
-
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaSelect >> placeholder [
 
 	^ self propertyAt: #placeholder
 ]
 
-{ #category : 'accessing' }
-WaSelect >> placeholder: aString [
+{ #category : 'properties' }
+WaSelect >> placeholder: anObject [
 
-	self propertyAt: #placeholder put: aString
+	self propertyAt: #placeholder put: anObject
 ]
 
-{ #category : 'accessing' }
-WaSelect >> prefix [
+{ #category : 'properties' }
+WaSelect >> placement [
 
-	^ self firstChildAtSlotNamed: #prefix
+	^ self propertyAt: #placement
 ]
 
-{ #category : 'accessing' }
-WaSelect >> prefix: anElement [
+{ #category : 'properties' }
+WaSelect >> placement: anObject [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #prefix
+	self propertyAt: #placement put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
+WaSelect >> placementBeBottom [
+
+	self placement: #bottom
+]
+
+{ #category : 'properties' }
+WaSelect >> placementBeTop [
+
+	self placement: #top
+]
+
+{ #category : 'properties' }
+WaSelect >> required [
+
+	^ (self attributeAt: #required) notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> required: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #required ]
+		ifFalse: [ self removeAttributeAt: #required ]
+]
+
+{ #category : 'properties' }
+WaSelect >> requiredBeOff [
+
+	self required: false
+]
+
+{ #category : 'properties' }
+WaSelect >> requiredBeOn [
+
+	self required: true
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> showDuration [
+
+	^ self customPropertyAt: #'show-duration'
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> showDuration: aString [
+
+	self customPropertyAt: #'show-duration' put: aString
+]
+
+{ #category : 'properties' }
 WaSelect >> size [
 
 	^ self propertyAt: #size
 ]
 
-{ #category : 'accessing' }
-WaSelect >> size: aString [
+{ #category : 'properties' }
+WaSelect >> size: anObject [
 
-	self propertyAt: #size put: aString
+	self propertyAt: #size put: anObject
 ]
 
-{ #category : 'accessing' }
-WaSelect >> suffix [
+{ #category : 'properties' }
+WaSelect >> sizeBeLarge [
 
-	^ self firstChildAtSlotNamed: #suffix
+	self size: #large
 ]
 
-{ #category : 'accessing' }
-WaSelect >> suffix: anElement [
+{ #category : 'properties' }
+WaSelect >> sizeBeMedium [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #suffix
+	self size: #medium
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
+WaSelect >> sizeBeSmall [
+
+	self size: #small
+]
+
+{ #category : 'slots' }
+WaSelect >> start [
+
+	^ self firstChildAtSlotNamed: #start
+]
+
+{ #category : 'slots' }
+WaSelect >> start: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #start
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> tagMaxSize [
+
+	^ self customPropertyAt: #'tag-max-size'
+]
+
+{ #category : 'css custom properties' }
+WaSelect >> tagMaxSize: aString [
+
+	self customPropertyAt: #'tag-max-size' put: aString
+]
+
+{ #category : 'properties' }
 WaSelect >> value [
 
-	self flag: #todo. "Temporary fix for values with spaces in them (replace by non-breakable space)."
-
-	^ super value replaceAll: (Character value: 160) with: Character space
+	^ self propertyAt: #value
 ]
 
-{ #category : 'accessing' }
-WaSelect >> value: aString [
+{ #category : 'properties' }
+WaSelect >> value: anObject [
 
-	self flag: #todo. "Temporary fix for values with spaces in them (replace by non-breakable space)."
+	self propertyAt: #value put: anObject
+]
 
-	^ super value: (aString asString replaceAll: Character space with: (Character value: 160))
+{ #category : 'properties' }
+WaSelect >> withClear [
+
+	^ (self attributeAt: #'with-clear') notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> withClear: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'with-clear' ]
+		ifFalse: [ self removeAttributeAt: #'with-clear' ]
+]
+
+{ #category : 'properties' }
+WaSelect >> withClearBeOff [
+
+	self withClear: false
+]
+
+{ #category : 'properties' }
+WaSelect >> withClearBeOn [
+
+	self withClear: true
+]
+
+{ #category : 'properties' }
+WaSelect >> withHint [
+
+	^ (self attributeAt: #'with-hint') notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> withHint: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'with-hint' ]
+		ifFalse: [ self removeAttributeAt: #'with-hint' ]
+]
+
+{ #category : 'properties' }
+WaSelect >> withHintBeOff [
+
+	self withHint: false
+]
+
+{ #category : 'properties' }
+WaSelect >> withHintBeOn [
+
+	self withHint: true
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabel [
+
+	^ (self attributeAt: #'with-label') notNil
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabel: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'with-label' ]
+		ifFalse: [ self removeAttributeAt: #'with-label' ]
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabelBeOff [
+
+	self withLabel: false
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabelBeOn [
+
+	self withLabel: true
 ]

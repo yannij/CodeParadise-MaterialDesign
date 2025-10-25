@@ -493,21 +493,21 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleSelect [
 			yourself) ;
 		appendChild: ('Multiple select' inHtmlTag: #p) ;
 		appendChild: (WaSelect new
-			beMultiple ;
+			multipleBeOn ;
 			appendChild: (WaOption value: #first labelText: 'First' ) ;
 			appendChild: (WaOption value: #second labelText: 'Second' ) ;
 			appendChild: (WaOption value: #third labelText: 'Third' ) ;
 			yourself) ;
 		appendChild: ('Disabled select' inHtmlTag: #p) ;
 		appendChild: (WaSelect new
-			beDisabled ;
+			disabledBeOn ;
 			appendChild: (WaOption value: #first labelText: 'First' ) ;
 			appendChild: (WaOption value: #second labelText: 'Second' ) ;
 			appendChild: (WaOption value: #third labelText: 'Third' ) ;
 			yourself) ;
 		appendChild: ('Pilled select' inHtmlTag: #p) ;
 		appendChild: (WaSelect new
-			bePill ;
+			pillBeOn ;
 			appendChild: (WaOption value: #first labelText: 'First' ) ;
 			appendChild: (WaOption value: #second labelText: 'Second' ) ;
 			appendChild: (WaOption value: #third labelText: 'Third' ) ;
@@ -609,6 +609,8 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleTextarea [
 CpWebAwesomeExamplesWebClientBehavior >> initialize [
 
 	super initialize.
+
+	WaElement registerBootstrapIcons.
 
 	self showIndex
 ]

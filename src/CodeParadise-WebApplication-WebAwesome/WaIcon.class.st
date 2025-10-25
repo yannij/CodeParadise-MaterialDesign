@@ -22,46 +22,42 @@ WaIcon class >> named: aString [
 		yourself
 ]
 
-{ #category : 'class initialization' }
-WaIcon class >> registerBootstrapIcons [
+{ #category : 'properties' }
+WaIcon >> autoWidth [
 
-	"Register Bootstrap as icon library to load icons from CDN"
-
-	CpHtmlElement documentAddModuleScript: self registerBootstrapIconsCode
+	^ (self attributeAt: #'auto-width') notNil
 ]
 
-{ #category : 'class initialization' }
-WaIcon class >> registerBootstrapIconsCode [
+{ #category : 'properties' }
+WaIcon >> autoWidth: aBoolean [
 
-	^ String streamContents: [ :stream |
-
-		stream
-			nextPutAll: 'import { registerIconLibrary } from "' ;
-			nextPutAll: self importBasePath ;
-			nextPutAll: 'webawesome.js";' ;
-
-			nextPutAll: 'registerIconLibrary("bootstrap", {' ;
-			nextPutAll: '  resolver: function(name, family) {' ;
-			nextPutAll: '    const suffix = family === "filled" ? "-fill" : "";' ;
-			nextPutAll: '    return `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/${name}${suffix}.svg`;' ;
-			nextPutAll: '  },' ;
-			nextPutAll: '});' ]
-
+	aBoolean
+		ifTrue: [ self attributeAdd: #'auto-width' ]
+		ifFalse: [ self removeAttributeAt: #'auto-width' ]
 ]
 
-{ #category : 'copying' }
-WaIcon >> clone [
+{ #category : 'properties' }
+WaIcon >> autoWidthBeOff [
 
-	"Deep clone the receiver.
+	self autoWidth: false
+]
 
-	Implementation:
-	Set the (non reflecting properties explicitly)."
+{ #category : 'properties' }
+WaIcon >> autoWidthBeOn [
 
-	^ super clone
-		name: self name ;
-		library: self library ;
-		yourself
+	self autoWidth: true
+]
 
+{ #category : 'properties' }
+WaIcon >> family [
+
+	^ self propertyAt: #family
+]
+
+{ #category : 'properties' }
+WaIcon >> family: anObject [
+
+	self propertyAt: #family put: anObject
 ]
 
 { #category : 'accessing' }
@@ -82,50 +78,136 @@ WaIcon >> fullName: aString [
 				name: (aString allButFirst: separatorIndex) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaIcon >> label [
 
-	^ self attributeAt: #label
+	^ self propertyAt: #label
 ]
 
-{ #category : 'accessing' }
-WaIcon >> label: aString [
+{ #category : 'properties' }
+WaIcon >> label: anObject [
 
-	self attributeAt: #label put: aString
+	self propertyAt: #label put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaIcon >> library [
 
 	^ self propertyAt: #library
 ]
 
-{ #category : 'accessing' }
-WaIcon >> library: aString [
+{ #category : 'properties' }
+WaIcon >> library: anObject [
 
-	self propertyAt: #library put: aString
+	self propertyAt: #library put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaIcon >> name [
 
 	^ self propertyAt: #name
 ]
 
-{ #category : 'accessing' }
-WaIcon >> name: aString [
+{ #category : 'properties' }
+WaIcon >> name: anObject [
 
-	self propertyAt: #name put: aString
+	self propertyAt: #name put: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : 'css custom properties' }
+WaIcon >> primaryColor [
+
+	^ self customPropertyAt: #'primary-color'
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> primaryColor: aString [
+
+	self customPropertyAt: #'primary-color' put: aString
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> primaryOpacity [
+
+	^ self customPropertyAt: #'primary-opacity'
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> primaryOpacity: aString [
+
+	self customPropertyAt: #'primary-opacity' put: aString
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> secondaryColor [
+
+	^ self customPropertyAt: #'secondary-color'
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> secondaryColor: aString [
+
+	self customPropertyAt: #'secondary-color' put: aString
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> secondaryOpacity [
+
+	^ self customPropertyAt: #'secondary-opacity'
+]
+
+{ #category : 'css custom properties' }
+WaIcon >> secondaryOpacity: aString [
+
+	self customPropertyAt: #'secondary-opacity' put: aString
+]
+
+{ #category : 'properties' }
 WaIcon >> src [
 
 	^ self propertyAt: #src
 ]
 
-{ #category : 'accessing' }
-WaIcon >> src: aString [
+{ #category : 'properties' }
+WaIcon >> src: anObject [
 
-	self propertyAt: #src put: aString
+	self propertyAt: #src put: anObject
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacity [
+
+	^ (self attributeAt: #'swap-opacity') notNil
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacity: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #'swap-opacity' ]
+		ifFalse: [ self removeAttributeAt: #'swap-opacity' ]
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacityBeOff [
+
+	self swapOpacity: false
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacityBeOn [
+
+	self swapOpacity: true
+]
+
+{ #category : 'properties' }
+WaIcon >> variant [
+
+	^ self propertyAt: #variant
+]
+
+{ #category : 'properties' }
+WaIcon >> variant: anObject [
+
+	self propertyAt: #variant put: anObject
 ]

@@ -74,20 +74,6 @@ WaFormControl >> blur [
 ]
 
 { #category : 'accessing' }
-WaFormControl >> clone [
-
-	"Deep clone the receiver.
-
-	Implementation:
-	Set the (non reflecting properties explicitly)."
-
-	^ super clone
-		value: self value ;
-		yourself
-
-]
-
-{ #category : 'accessing' }
 WaFormControl >> defaultValue [
 
 	^ self propertyAt: #defaultValue
@@ -115,12 +101,6 @@ WaFormControl >> enabled: aBoolean [
 	"Convenience method to set receiver's enabled state"
 
 	self disabled: aBoolean not
-]
-
-{ #category : 'testing' }
-WaFormControl >> hasFocus [
-
-	^ self = CpHtmlElement activeElement
 ]
 
 { #category : 'accessing' }
