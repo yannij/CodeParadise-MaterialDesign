@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'defaultFocusElement'
 	],
-	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
+	#category : 'CodeParadise-WebApplication-WebAwesome-Abstract',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
-	#tag : 'Elements'
+	#tag : 'Abstract'
 }
 
 { #category : 'tags' }

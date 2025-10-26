@@ -1,10 +1,18 @@
 Class {
 	#name : 'WaInput',
-	#superclass : 'WaTextControl',
+	#superclass : 'WaFormControl',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
 	#tag : 'Elements'
 }
+
+{ #category : 'instance creation' }
+WaInput class >> label: object1 [ 
+
+	^ self new 
+		label: object1;
+		yourself
+]
 
 { #category : 'properties' }
 WaInput >> appearance [
@@ -54,6 +62,18 @@ WaInput >> autofocusBeOff [
 WaInput >> autofocusBeOn [
 
 	self autofocus: true
+]
+
+{ #category : 'properties' }
+WaInput >> autofocusIsOff [
+
+	^ (self propertyAt: #autofocus) not
+]
+
+{ #category : 'properties' }
+WaInput >> autofocusIsOn [
+
+	^ self propertyAt: #autofocus
 ]
 
 { #category : 'slots' }
@@ -143,6 +163,18 @@ WaInput >> passwordToggleBeOn [
 ]
 
 { #category : 'properties' }
+WaInput >> passwordToggleIsOff [
+
+	^ (self propertyAt: #'password-toggle') not
+]
+
+{ #category : 'properties' }
+WaInput >> passwordToggleIsOn [
+
+	^ self propertyAt: #'password-toggle'
+]
+
+{ #category : 'properties' }
 WaInput >> passwordVisible [
 
 	^ (self attributeAt: #'password-visible') notNil
@@ -169,6 +201,18 @@ WaInput >> passwordVisibleBeOn [
 ]
 
 { #category : 'properties' }
+WaInput >> passwordVisibleIsOff [
+
+	^ (self propertyAt: #'password-visible') not
+]
+
+{ #category : 'properties' }
+WaInput >> passwordVisibleIsOn [
+
+	^ self propertyAt: #'password-visible'
+]
+
+{ #category : 'properties' }
 WaInput >> pill [
 
 	^ (self attributeAt: #pill) notNil
@@ -192,6 +236,18 @@ WaInput >> pillBeOff [
 WaInput >> pillBeOn [
 
 	self pill: true
+]
+
+{ #category : 'properties' }
+WaInput >> pillIsOff [
+
+	^ (self propertyAt: #pill) not
+]
+
+{ #category : 'properties' }
+WaInput >> pillIsOn [
+
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -233,6 +289,18 @@ WaInput >> readonlyBeOn [
 ]
 
 { #category : 'properties' }
+WaInput >> readonlyIsOff [
+
+	^ (self propertyAt: #readonly) not
+]
+
+{ #category : 'properties' }
+WaInput >> readonlyIsOn [
+
+	^ self propertyAt: #readonly
+]
+
+{ #category : 'properties' }
 WaInput >> required [
 
 	^ (self attributeAt: #required) notNil
@@ -256,6 +324,18 @@ WaInput >> requiredBeOff [
 WaInput >> requiredBeOn [
 
 	self required: true
+]
+
+{ #category : 'properties' }
+WaInput >> requiredIsOff [
+
+	^ (self propertyAt: #required) not
+]
+
+{ #category : 'properties' }
+WaInput >> requiredIsOn [
+
+	^ self propertyAt: #required
 ]
 
 { #category : 'slots' }
@@ -408,4 +488,16 @@ WaInput >> withClearBeOff [
 WaInput >> withClearBeOn [
 
 	self withClear: true
+]
+
+{ #category : 'properties' }
+WaInput >> withClearIsOff [
+
+	^ (self propertyAt: #'with-clear') not
+]
+
+{ #category : 'properties' }
+WaInput >> withClearIsOn [
+
+	^ self propertyAt: #'with-clear'
 ]

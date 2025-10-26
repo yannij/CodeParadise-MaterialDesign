@@ -68,6 +68,18 @@ WaSelect >> disabledBeOn [
 	self disabled: true
 ]
 
+{ #category : 'properties' }
+WaSelect >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaSelect >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
 { #category : 'slots' }
 WaSelect >> end [
 
@@ -167,6 +179,18 @@ WaSelect >> multipleBeOn [
 ]
 
 { #category : 'properties' }
+WaSelect >> multipleIsOff [
+
+	^ (self propertyAt: #multiple) not
+]
+
+{ #category : 'properties' }
+WaSelect >> multipleIsOn [
+
+	^ self propertyAt: #multiple
+]
+
+{ #category : 'properties' }
 WaSelect >> name [
 
 	^ self propertyAt: #name
@@ -205,6 +229,18 @@ WaSelect >> openBeOn [
 ]
 
 { #category : 'properties' }
+WaSelect >> openIsOff [
+
+	^ (self propertyAt: #open) not
+]
+
+{ #category : 'properties' }
+WaSelect >> openIsOn [
+
+	^ self propertyAt: #open
+]
+
+{ #category : 'properties' }
 WaSelect >> pill [
 
 	^ (self attributeAt: #pill) notNil
@@ -228,6 +264,18 @@ WaSelect >> pillBeOff [
 WaSelect >> pillBeOn [
 
 	self pill: true
+]
+
+{ #category : 'properties' }
+WaSelect >> pillIsOff [
+
+	^ (self propertyAt: #pill) not
+]
+
+{ #category : 'properties' }
+WaSelect >> pillIsOn [
+
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -290,6 +338,18 @@ WaSelect >> requiredBeOff [
 WaSelect >> requiredBeOn [
 
 	self required: true
+]
+
+{ #category : 'properties' }
+WaSelect >> requiredIsOff [
+
+	^ (self propertyAt: #required) not
+]
+
+{ #category : 'properties' }
+WaSelect >> requiredIsOn [
+
+	^ self propertyAt: #required
 ]
 
 { #category : 'css custom properties' }
@@ -397,6 +457,18 @@ WaSelect >> withClearBeOn [
 ]
 
 { #category : 'properties' }
+WaSelect >> withClearIsOff [
+
+	^ (self propertyAt: #'with-clear') not
+]
+
+{ #category : 'properties' }
+WaSelect >> withClearIsOn [
+
+	^ self propertyAt: #'with-clear'
+]
+
+{ #category : 'properties' }
 WaSelect >> withHint [
 
 	^ (self attributeAt: #'with-hint') notNil
@@ -423,6 +495,18 @@ WaSelect >> withHintBeOn [
 ]
 
 { #category : 'properties' }
+WaSelect >> withHintIsOff [
+
+	^ (self propertyAt: #'with-hint') not
+]
+
+{ #category : 'properties' }
+WaSelect >> withHintIsOn [
+
+	^ self propertyAt: #'with-hint'
+]
+
+{ #category : 'properties' }
 WaSelect >> withLabel [
 
 	^ (self attributeAt: #'with-label') notNil
@@ -446,4 +530,16 @@ WaSelect >> withLabelBeOff [
 WaSelect >> withLabelBeOn [
 
 	self withLabel: true
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabelIsOff [
+
+	^ (self propertyAt: #'with-label') not
+]
+
+{ #category : 'properties' }
+WaSelect >> withLabelIsOn [
+
+	^ self propertyAt: #'with-label'
 ]

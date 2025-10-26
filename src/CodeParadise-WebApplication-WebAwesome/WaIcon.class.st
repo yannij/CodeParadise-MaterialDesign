@@ -6,19 +6,30 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing' }
-WaIcon class >> fullyNamed: aString [
+{ #category : 'instance creation' }
+WaIcon class >> name: object1 [ 
 
-	^ self new
-		fullName: aString ;
+	^ self new 
+		name: object1;
 		yourself
 ]
 
-{ #category : 'accessing' }
-WaIcon class >> named: aString [
+{ #category : 'instance creation' }
+WaIcon class >> name: object1 label: object2 [ 
 
-	^ self new
-		name: aString ;
+	^ self new 
+		name: object1;
+		label: object2;
+		yourself
+]
+
+{ #category : 'instance creation' }
+WaIcon class >> name: object1 label: object2 library: object3 [ 
+
+	^ self new 
+		name: object1;
+		label: object2;
+		library: object3;
 		yourself
 ]
 
@@ -49,6 +60,18 @@ WaIcon >> autoWidthBeOn [
 ]
 
 { #category : 'properties' }
+WaIcon >> autoWidthIsOff [
+
+	^ (self propertyAt: #'auto-width') not
+]
+
+{ #category : 'properties' }
+WaIcon >> autoWidthIsOn [
+
+	^ self propertyAt: #'auto-width'
+]
+
+{ #category : 'properties' }
 WaIcon >> family [
 
 	^ self propertyAt: #family
@@ -58,24 +81,6 @@ WaIcon >> family [
 WaIcon >> family: anObject [
 
 	self propertyAt: #family put: anObject
-]
-
-{ #category : 'accessing' }
-WaIcon >> fullName: aString [
-
-	"Set the name and optionally the library for the receiver specified on the given full name.
-	The full name should take the form: <library>:<name>
-	If no colon ($:) is specified, only the name is assumed."
-
-	| separatorIndex |
-
-	separatorIndex := aString indexOf: $:.
-	separatorIndex = 0
-		ifTrue: [ self name: aString ]
-		ifFalse: [
-			self
-				library: (aString first: separatorIndex - 1) ;
-				name: (aString allButFirst: separatorIndex) ]
 ]
 
 { #category : 'properties' }
@@ -198,6 +203,18 @@ WaIcon >> swapOpacityBeOff [
 WaIcon >> swapOpacityBeOn [
 
 	self swapOpacity: true
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacityIsOff [
+
+	^ (self propertyAt: #'swap-opacity') not
+]
+
+{ #category : 'properties' }
+WaIcon >> swapOpacityIsOn [
+
+	^ self propertyAt: #'swap-opacity'
 ]
 
 { #category : 'properties' }

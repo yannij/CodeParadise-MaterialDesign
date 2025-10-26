@@ -1,10 +1,18 @@
 Class {
 	#name : 'WaCheckbox',
-	#superclass : 'WaCheckControl',
+	#superclass : 'WaFormControl',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
 	#tag : 'Elements'
 }
+
+{ #category : 'instance creation' }
+WaCheckbox class >> label: object1 [ 
+
+	^ self new 
+		label: object1;
+		yourself
+]
 
 { #category : 'properties' }
 WaCheckbox >> checked [
@@ -33,6 +41,18 @@ WaCheckbox >> checkedBeOn [
 ]
 
 { #category : 'properties' }
+WaCheckbox >> checkedIsOff [
+
+	^ (self propertyAt: #checked) not
+]
+
+{ #category : 'properties' }
+WaCheckbox >> checkedIsOn [
+
+	^ self propertyAt: #checked
+]
+
+{ #category : 'properties' }
 WaCheckbox >> disabled [
 
 	^ (self attributeAt: #disabled) notNil
@@ -56,6 +76,18 @@ WaCheckbox >> disabledBeOff [
 WaCheckbox >> disabledBeOn [
 
 	self disabled: true
+]
+
+{ #category : 'properties' }
+WaCheckbox >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaCheckbox >> disabledIsOn [
+
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'css custom properties' }
@@ -108,6 +140,18 @@ WaCheckbox >> indeterminateBeOn [
 	self indeterminate: true
 ]
 
+{ #category : 'properties' }
+WaCheckbox >> indeterminateIsOff [
+
+	^ (self propertyAt: #indeterminate) not
+]
+
+{ #category : 'properties' }
+WaCheckbox >> indeterminateIsOn [
+
+	^ self propertyAt: #indeterminate
+]
+
 { #category : 'slots' }
 WaCheckbox >> label [
 
@@ -144,6 +188,18 @@ WaCheckbox >> requiredBeOff [
 WaCheckbox >> requiredBeOn [
 
 	self required: true
+]
+
+{ #category : 'properties' }
+WaCheckbox >> requiredIsOff [
+
+	^ (self propertyAt: #required) not
+]
+
+{ #category : 'properties' }
+WaCheckbox >> requiredIsOn [
+
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

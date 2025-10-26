@@ -1,10 +1,18 @@
 Class {
 	#name : 'WaSwitch',
-	#superclass : 'WaCheckControl',
+	#superclass : 'WaFormControl',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
 	#tag : 'Elements'
 }
+
+{ #category : 'instance creation' }
+WaSwitch class >> label: object1 [ 
+
+	^ self new 
+		label: object1;
+		yourself
+]
 
 { #category : 'properties' }
 WaSwitch >> checked [
@@ -33,6 +41,18 @@ WaSwitch >> checkedBeOn [
 ]
 
 { #category : 'properties' }
+WaSwitch >> checkedIsOff [
+
+	^ (self propertyAt: #checked) not
+]
+
+{ #category : 'properties' }
+WaSwitch >> checkedIsOn [
+
+	^ self propertyAt: #checked
+]
+
+{ #category : 'properties' }
 WaSwitch >> disabled [
 
 	^ (self attributeAt: #disabled) notNil
@@ -56,6 +76,18 @@ WaSwitch >> disabledBeOff [
 WaSwitch >> disabledBeOn [
 
 	self disabled: true
+]
+
+{ #category : 'properties' }
+WaSwitch >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaSwitch >> disabledIsOn [
+
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'css custom properties' }
@@ -118,6 +150,18 @@ WaSwitch >> requiredBeOff [
 WaSwitch >> requiredBeOn [
 
 	self required: true
+]
+
+{ #category : 'properties' }
+WaSwitch >> requiredIsOff [
+
+	^ (self propertyAt: #required) not
+]
+
+{ #category : 'properties' }
+WaSwitch >> requiredIsOn [
+
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

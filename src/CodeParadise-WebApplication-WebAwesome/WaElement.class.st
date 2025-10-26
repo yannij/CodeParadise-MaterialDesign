@@ -36,9 +36,9 @@ postInstallOnce
 Class {
 	#name : 'WaElement',
 	#superclass : 'CpWebComponent',
-	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
+	#category : 'CodeParadise-WebApplication-WebAwesome-Abstract',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
-	#tag : 'Elements'
+	#tag : 'Abstract'
 }
 
 { #category : 'accessing' }
@@ -51,6 +51,32 @@ WaElement class >> componentLoaderName [
 WaElement class >> componentName [
 
 	^ self nameWithoutPrefix asKebabCase
+]
+
+{ #category : 'instance creation' }
+WaElement class >> fullyNamed: aString [
+	"Answer a new icon instance using the given full name string.
+
+	The full name should take the form: <library>:<name>
+	If no colon ($:) is specified, only the name is assumed."
+
+	| separatorIndex |
+
+	self name = #WaIcon ifFalse: [
+		self error: '#fullyNamed: should only be used for WaIcon' ].
+
+	separatorIndex := aString indexOf: $:.
+	^ separatorIndex = 0
+		ifTrue: [
+			self new
+				name: aString;
+				yourself ]
+		ifFalse: [
+			self new
+				library: (aString first: separatorIndex - 1) ;
+				name: (aString allButFirst: separatorIndex)
+				yourself ]
+
 ]
 
 { #category : 'accessing' }

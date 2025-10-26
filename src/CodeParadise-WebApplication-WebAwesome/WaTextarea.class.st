@@ -1,10 +1,18 @@
 Class {
 	#name : 'WaTextarea',
-	#superclass : 'WaTextControl',
+	#superclass : 'WaFormControl',
 	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
 	#tag : 'Elements'
 }
+
+{ #category : 'instance creation' }
+WaTextarea class >> label: object1 [ 
+
+	^ self new 
+		label: object1;
+		yourself
+]
 
 { #category : 'properties' }
 WaTextarea >> appearance [
@@ -54,6 +62,18 @@ WaTextarea >> disabledBeOff [
 WaTextarea >> disabledBeOn [
 
 	self disabled: true
+]
+
+{ #category : 'properties' }
+WaTextarea >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaTextarea >> disabledIsOn [
+
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -107,6 +127,18 @@ WaTextarea >> pillBeOn [
 ]
 
 { #category : 'properties' }
+WaTextarea >> pillIsOff [
+
+	^ (self propertyAt: #pill) not
+]
+
+{ #category : 'properties' }
+WaTextarea >> pillIsOn [
+
+	^ self propertyAt: #pill
+]
+
+{ #category : 'properties' }
 WaTextarea >> placeholder [
 
 	^ self propertyAt: #placeholder
@@ -145,6 +177,18 @@ WaTextarea >> readonlyBeOn [
 ]
 
 { #category : 'properties' }
+WaTextarea >> readonlyIsOff [
+
+	^ (self propertyAt: #readonly) not
+]
+
+{ #category : 'properties' }
+WaTextarea >> readonlyIsOn [
+
+	^ self propertyAt: #readonly
+]
+
+{ #category : 'properties' }
 WaTextarea >> required [
 
 	^ (self attributeAt: #required) notNil
@@ -168,6 +212,18 @@ WaTextarea >> requiredBeOff [
 WaTextarea >> requiredBeOn [
 
 	self required: true
+]
+
+{ #category : 'properties' }
+WaTextarea >> requiredIsOff [
+
+	^ (self propertyAt: #required) not
+]
+
+{ #category : 'properties' }
+WaTextarea >> requiredIsOn [
+
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

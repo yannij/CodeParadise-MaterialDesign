@@ -86,6 +86,18 @@ WaButton >> disabledBeOn [
 ]
 
 { #category : 'properties' }
+WaButton >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaButton >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
+{ #category : 'properties' }
 WaButton >> download [
 
 	^ self propertyAt: #download
@@ -184,6 +196,18 @@ WaButton >> formnovalidateBeOn [
 ]
 
 { #category : 'properties' }
+WaButton >> formnovalidateIsOff [
+
+	^ (self propertyAt: #formnovalidate) not
+]
+
+{ #category : 'properties' }
+WaButton >> formnovalidateIsOn [
+
+	^ self propertyAt: #formnovalidate
+]
+
+{ #category : 'properties' }
 WaButton >> formtarget [
 
 	^ self propertyAt: #formtarget
@@ -246,6 +270,18 @@ WaButton >> loadingBeOn [
 ]
 
 { #category : 'properties' }
+WaButton >> loadingIsOff [
+
+	^ (self propertyAt: #loading) not
+]
+
+{ #category : 'properties' }
+WaButton >> loadingIsOn [
+
+	^ self propertyAt: #loading
+]
+
+{ #category : 'properties' }
 WaButton >> name [
 
 	^ self propertyAt: #name
@@ -281,6 +317,18 @@ WaButton >> pillBeOff [
 WaButton >> pillBeOn [
 
 	self pill: true
+]
+
+{ #category : 'properties' }
+WaButton >> pillIsOff [
+
+	^ (self propertyAt: #pill) not
+]
+
+{ #category : 'properties' }
+WaButton >> pillIsOn [
+
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -457,4 +505,16 @@ WaButton >> withCaretBeOff [
 WaButton >> withCaretBeOn [
 
 	self withCaret: true
+]
+
+{ #category : 'properties' }
+WaButton >> withCaretIsOff [
+
+	^ (self propertyAt: #'with-caret') not
+]
+
+{ #category : 'properties' }
+WaButton >> withCaretIsOn [
+
+	^ self propertyAt: #'with-caret'
 ]

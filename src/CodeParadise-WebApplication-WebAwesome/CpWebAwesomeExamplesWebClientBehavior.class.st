@@ -74,10 +74,10 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
 	outputElement appendChild: (
 		#div asHtmlTag
 			addClass: #'wa-cluster';
-			appendChild: (WaButton new variantBeNeutral; appearanceBeAccent; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
-			appendChild: (WaButton new variantBeNeutral; appearanceBeOutlined; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
-			appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
-			appendChild: (WaButton new variantBeNeutral; appearanceBePlain; label: ((WaIcon named: 'house') label: 'Home'; yourself); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBeAccent; label: (WaIcon name: 'house' label: 'Home'); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBeOutlined; label: (WaIcon name: 'house' label: 'Home'); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; label: (WaIcon name: 'house' label: 'Home'); yourself);
+			appendChild: (WaButton new variantBeNeutral; appearanceBePlain; label: (WaIcon name: 'house' label: 'Home'); yourself);
 			yourself).
 
 	self subheading: 'Setting a Custom Width' on: outputElement.
@@ -86,20 +86,20 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
 	outputElement appendChild: (WaButton new sizeBeLarge ; label: 'Large'; styleAt: 'width' put: '100%'; yourself).
 
 	self subheading: 'Start & End Decorations' on: outputElement.
-	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
-	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
-	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Settings'; start: (WaIcon name: 'gear'); yourself).
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Refresh'; end: (WaIcon name: 'undo'); yourself).
+	outputElement appendChild: (WaButton new sizeBeSmall; label: 'Open'; start: (WaIcon name: 'link'); end: (WaIcon name: 'arrow-up-right-from-square'); yourself).
 	outputElement appendChild: #br asHtmlTag.
-	outputElement appendChild: (WaButton new label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
-	outputElement appendChild: (WaButton new label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
-	outputElement appendChild: (WaButton new label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+	outputElement appendChild: (WaButton new label: 'Settings'; start: (WaIcon name: 'gear'); yourself).
+	outputElement appendChild: (WaButton new label: 'Refresh'; end: (WaIcon name: 'undo'); yourself).
+	outputElement appendChild: (WaButton new label: 'Open'; start: (WaIcon name: 'link'); end: (WaIcon name: 'arrow-up-right-from-square'); yourself).
 	outputElement appendChild: #br asHtmlTag.
-	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Settings'; start: (WaIcon named: 'gear'); yourself).
-	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Refresh'; end: (WaIcon named: 'undo'); yourself).
-	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Open'; start: (WaIcon named: 'link'); end: (WaIcon named: 'arrow-up-right-from-square'); yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Settings'; start: (WaIcon name: 'gear'); yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Refresh'; end: (WaIcon name: 'undo'); yourself).
+	outputElement appendChild: (WaButton new sizeBeLarge; label: 'Open'; start: (WaIcon name: 'link'); end: (WaIcon name: 'arrow-up-right-from-square'); yourself).
 
 	self subheading: 'Caret' on: outputElement.
-	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeSmall; label: ((WaIcon named: 'gear') label: 'Settings'; yourself); yourself).
+	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeSmall; label: (WaIcon name: 'gear' label: 'Settings'); yourself).
 	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeSmall; label: 'Small'; yourself).
 	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeMedium; label: 'Medium'; yourself).
 	outputElement appendChild: (WaButton new withCaretBeOn; sizeBeLarge; label: 'Large'; yourself).
@@ -128,10 +128,10 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
 	outputElement appendChild: (loadingState := WaCheckbox label: 'Loading').
 	outputElement appendChild: (pillState := WaCheckbox label: 'Pill').
 	outputElement appendChild: (outlineState := WaCheckbox label: 'Outline').
-	disabledState when: WaChangeEvent do: [ self traceCr: 'disabledState'. disabledState isChecked ifTrue: [ button disabled: true ] ifFalse: [ button disabled: false ] ] for: self.
-	loadingState when: WaChangeEvent do: [ loadingState isChecked ifTrue: [ button loading: true ] ifFalse: [ button loading: false ] ] for: self.
-	pillState when: WaChangeEvent do: [ pillState isChecked ifTrue: [ button pill: true ] ifFalse: [ button pill: false ] ] for: self.
-	outlineState when: WaChangeEvent do: [ outlineState isChecked ifTrue: [ button appearanceBeOutlined ] ifFalse: [ button appearanceBePlain ] ] for: self.
+	disabledState when: WaChangeEvent do: [ disabledState checkedIsOn ifTrue: [ button disabled: true ] ifFalse: [ button disabled: false ] ] for: self.
+	loadingState when: WaChangeEvent do: [ loadingState checkedIsOn ifTrue: [ button loading: true ] ifFalse: [ button loading: false ] ] for: self.
+	pillState when: WaChangeEvent do: [ pillState checkedIsOn ifTrue: [ button pill: true ] ifFalse: [ button pill: false ] ] for: self.
+	outlineState when: WaChangeEvent do: [ outlineState checkedIsOn ifTrue: [ button appearanceBeOutlined ] ifFalse: [ button appearanceBePlain ] ] for: self.
 
 ]
 
@@ -156,10 +156,10 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButtonGroup [
 	self subheading: 'Vertical Button Groups' on: outputElement.
 	outputElement appendChild: (WaButtonGroup new
 		label: 'Options';
-		appendChild: (WaButton new start: (WaIcon named: 'plus'); label: 'New'; yourself);
-		appendChild: (WaButton new start: (WaIcon named: 'folder-open'); label: 'Open'; yourself);
-		appendChild: (WaButton new start: (WaIcon named: 'save'); label: 'Save'; yourself);
-		appendChild: (WaButton new start: (WaIcon named: 'print'); label: 'Print'; yourself);
+		appendChild: (WaButton new start: (WaIcon name: 'plus'); label: 'New'; yourself);
+		appendChild: (WaButton new start: (WaIcon name: 'folder-open'); label: 'Open'; yourself);
+		appendChild: (WaButton new start: (WaIcon name: 'save'); label: 'Save'; yourself);
+		appendChild: (WaButton new start: (WaIcon name: 'print'); label: 'Print'; yourself);
 		yourself).
 
 	self subheading: 'Theme Buttons' on: outputElement.
@@ -338,14 +338,14 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 		appendChild: (modalCheckbox := WaCheckbox label: 'modal') ;
 		appendChild: (' ' inHtmlTag: #span) ;
 		appendChild: ((WaButton label: 'Mixed dialog')
-			when: CpClickEvent basicPrimary do: [ modalCheckbox isChecked ifTrue: [ mixedDialog showModal ] ifFalse: [ mixedDialog showNonModal ] ] for: self ;
+			when: CpClickEvent basicPrimary do: [ modalCheckbox checkedIsOn ifTrue: [ mixedDialog showModal ] ifFalse: [ mixedDialog showNonModal ] ] for: self ;
 			yourself) ;
 		appendChild: ('' inHtmlTag: #p) ;
 		appendChild: (focusCheckbox := WaCheckbox label: 'focus 3rd input field') ;
 		appendChild: (' ' inHtmlTag: #span) ;
 		appendChild: ((WaButton label: 'Focus dialog')
 			when: CpClickEvent basicPrimary do: [
-				focusCheckbox isChecked
+				focusCheckbox checkedIsOn
 					ifTrue: [
 						(focusDialog firstDescendantMatching: '#first') autofocusBeOff.
 						(focusDialog firstDescendantMatching: '#third') autofocusBeOn ]
@@ -467,9 +467,31 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleInput [
 	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
 	outputElement appendChild: (pillState := WaCheckbox label: 'Pill').
 	outputElement appendChild: (clearableState := WaCheckbox label: 'Clearable').
-	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input readonlyBeOn ] ifFalse: [ input readonlyBeOff ] ] for: self.
-	pillState when: WaChangeEvent do: [ pillState isChecked ifTrue: [ input pillBeOn ] ifFalse: [ input pillBeOff ] ] for: self.
-	clearableState when: WaChangeEvent do: [ clearableState isChecked ifTrue: [ input withClearBeOn ] ifFalse: [ input withClearBeOff ] ] for: self.
+	disabledState when: WaChangeEvent do: [ disabledState checkedIsOn ifTrue: [ input readonlyBeOn ] ifFalse: [ input readonlyBeOff ] ] for: self.
+	pillState when: WaChangeEvent do: [ pillState checkedIsOn ifTrue: [ input pillBeOn ] ifFalse: [ input pillBeOff ] ] for: self.
+	clearableState when: WaChangeEvent do: [ clearableState checkedIsOn ifTrue: [ input withClearBeOn ] ifFalse: [ input withClearBeOff ] ] for: self.
+
+]
+
+{ #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> exampleRadioGroup [
+
+	<example: 'RadioGroup' order: 100>
+
+	| outputElement |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	outputElement appendChild: (WaRadioGroup new
+		label: 'Select an option';
+		name: 'a';
+		value: '1';
+		appendChild: (WaRadio new label: 'Option 1'; value: '1'; yourself);
+		appendChild: (WaRadio new label: 'Option 2'; value: '2'; yourself);
+		appendChild: (WaRadio new label: 'Option 3'; value: '3'; yourself);
+		yourself).
 
 ]
 
@@ -600,8 +622,8 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleTextarea [
 	input := outputElement appendChild: (WaTextarea new label: 'Need more input').
 	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
 	outputElement appendChild: (resizeableState := WaCheckbox label: 'Resizeable').
-	disabledState when: WaChangeEvent do: [ disabledState isChecked ifTrue: [ input disabledBeOn ] ifFalse: [ input disabledBeOff ] ] for: self.
-	resizeableState when: WaChangeEvent do: [ resizeableState isChecked ifTrue: [ input resizeBeVertical ] ifFalse: [ input resizeBeNone ] ] for: self.
+	disabledState when: WaChangeEvent do: [ disabledState checkedIsOn ifTrue: [ input disabledBeOn ] ifFalse: [ input disabledBeOff ] ] for: self.
+	resizeableState when: WaChangeEvent do: [ resizeableState checkedIsOn ifTrue: [ input resizeBeVertical ] ifFalse: [ input resizeBeNone ] ] for: self.
 
 ]
 

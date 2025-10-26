@@ -50,6 +50,18 @@ WaOption >> disabledBeOn [
 	self disabled: true
 ]
 
+{ #category : 'properties' }
+WaOption >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaOption >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
 { #category : 'slots' }
 WaOption >> end [
 
@@ -110,6 +122,18 @@ WaOption >> selectedBeOff [
 WaOption >> selectedBeOn [
 
 	self selected: true
+]
+
+{ #category : 'properties' }
+WaOption >> selectedIsOff [
+
+	^ (self propertyAt: #selected) not
+]
+
+{ #category : 'properties' }
+WaOption >> selectedIsOn [
+
+	^ self propertyAt: #selected
 ]
 
 { #category : 'slots' }

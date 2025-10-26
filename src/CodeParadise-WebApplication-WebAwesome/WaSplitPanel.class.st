@@ -32,6 +32,18 @@ WaSplitPanel >> disabledBeOn [
 	self disabled: true
 ]
 
+{ #category : 'properties' }
+WaSplitPanel >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaSplitPanel >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
 { #category : 'slots' }
 WaSplitPanel >> divider [
 

@@ -12,9 +12,9 @@ Class {
 		'textContent',
 		'instanceCreators'
 	],
-	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
+	#category : 'CodeParadise-WebApplication-WebAwesome-Abstract',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
-	#tag : 'Elements'
+	#tag : 'Abstract'
 }
 
 { #category : 'code generation' }
@@ -24,13 +24,17 @@ WaWrapperSpec class >> generateAllWrappers [
 	self generateAllWrappers
 	"
 
-	"self waTestSpec generate."
 	self waButtonSpec generate.
 	self waButtonGroupSpec generate.
+	self waCardSpec generate.
 	self waCheckboxSpec generate.
+	self waDetailsSpec generate.
 	self waIconSpec generate.
 	self waInputSpec generate.
 	self waOptionSpec generate.
+	self waRadioSpec generate.
+	self waRadioGroupSpec generate.
+	self waResizeObserverSpec generate.
 	self waSelectSpec generate.
 	self waSplitPanelSpec generate.
 	self waSwitchSpec generate.
@@ -89,12 +93,21 @@ WaWrapperSpec class >> waButtonSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waCardSpec [
+
+	^ self new
+		wrapperClassName: #WaCard;
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waCheckboxSpec [
 
 	^ self new
 		wrapperClassName: #WaCheckbox;
-		wrapperSuperclass: WaCheckControl;
+		wrapperSuperclass: WaFormControl;
 		slotAdd: '*label'; slotAdd: 'hint';
+		instanceCreatorAdd: #'label:';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'indeterminate' put: false;
@@ -108,10 +121,21 @@ WaWrapperSpec class >> waCheckboxSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waDetailsSpec [
+
+	^ self new
+		wrapperClassName: #WaDetails;
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waIconSpec [
 
 	^ self new
 		wrapperClassName: #WaIcon;
+		instanceCreatorAdd: #'name:';
+		instanceCreatorAdd: #'name:label:';
+		instanceCreatorAdd: #'name:label:library:';
 		stringPropertyAt: 'name' put: #string;
 		stringPropertyAt: 'family' put: #string;
 		stringPropertyAt: 'variant' put: #string;
@@ -132,8 +156,9 @@ WaWrapperSpec class >> waInputSpec [
 
 	^ self new
 		wrapperClassName: #WaInput;
-		wrapperSuperclass: WaTextControl;
+		wrapperSuperclass: WaFormControl;
 		slotsAddAll: #('label' 'start' 'end'	'clear-icon' 'show-password-icon' 'hide-password-icon' 'hint');
+		instanceCreatorAdd: #'label:';
 		booleanPropertyAt: 'readonly' put: false;
 		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'type' put: 'date|datetime-local|email|number|password|search|tel|*text|time|url';
@@ -162,6 +187,45 @@ WaWrapperSpec class >> waOptionSpec [
 		stringPropertyAt: 'value' put: #string;
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'selected' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waRadioGroupSpec [
+
+	^ self new
+		wrapperClassName: #WaRadioGroup;
+		slotsAddAll: #('label' 'hint');
+		stringPropertyAt: 'name' put: #string;
+		stringPropertyAt: 'value' put: #string;
+		booleanPropertyAt: 'disabled' put: 'false';
+		stringPropertyAt: 'orientation' put: 'horizontal|*vertical';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'required' put: 'false';
+		booleanPropertyAt: 'with-label' put: 'false';
+		booleanPropertyAt: 'with-hint' put: 'false';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waRadioSpec [
+
+	^ self new
+		wrapperClassName: #WaRadio;
+		slotAdd: '*label';
+		stringPropertyAt: 'form' put: #string;
+		stringPropertyAt: 'value' put: #string;
+		stringPropertyAt: 'appearance' put: '*default|button';
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		booleanPropertyAt: 'disabled' put: 'false';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waResizeObserverSpec [
+
+	^ self new
+		wrapperClassName: #WaResizeObserver;
 		yourself
 ]
 
@@ -219,8 +283,9 @@ WaWrapperSpec class >> waSwitchSpec [
 
 	^ self new
 		wrapperClassName: #WaSwitch;
-		wrapperSuperclass: WaCheckControl;
+		wrapperSuperclass: WaFormControl;
 		slotAdd: '*label'; slotAdd: 'hint';
+		instanceCreatorAdd: #'label:';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'checked' put: false;
@@ -233,26 +298,13 @@ WaWrapperSpec class >> waSwitchSpec [
 ]
 
 { #category : 'code generation' }
-WaWrapperSpec class >> waTestSpec [
-
-	^ self new
-		wrapperClassName: #WaTest;
-		slotAdd: 'slot1'; slotAdd: 'slot2';
-		booleanPropertyAt: 'attr1' put: #todo;
-		booleanPropertyAt: 'attr2' put: #todo;
-		stringPropertyAt: 'prop1' put: #todo;
-		stringPropertyAt: 'prop2' put: #todo;
-		cssPropertieAdd: 'css1'; cssPropertieAdd: 'css2';
-		yourself
-]
-
-{ #category : 'code generation' }
 WaWrapperSpec class >> waTextareaSpec [
 
 	^ self new
 		wrapperClassName: #WaTextarea;
-		wrapperSuperclass: WaTextControl;
+		wrapperSuperclass: WaFormControl;
 		slotAdd: 'label'; slotAdd: 'hint';
+		instanceCreatorAdd: #'label:';
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'readonly' put: false;
 		booleanPropertyAt: 'required' put: false;
@@ -332,6 +384,39 @@ WaWrapperSpec >> compileBooleanConvenience: aKebabCaseName in: aClass [
 			stream
 				nextPutAll: accessorString, 'BeOff';
 				cr; cr; tab; nextPutAll: 'self ', accessorString, ': false';
+				yourself ])
+		classified: 'properties'.
+
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec >> compileBooleanProperty: aKebabCaseName in: aClass [
+	| accessorString symbolString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	symbolString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'IsOn'; cr;
+				cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'IsOff'; cr;
+				cr; tab; nextPutAll: '^ (self propertyAt: ', symbolString, ') not';
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; nextPutAll: ': aBoolean'; cr;
+				cr; tab; nextPutAll: 'self propertyAt: ', symbolString, ' put: aBoolean';
 				yourself ])
 		classified: 'properties'.
 
@@ -606,7 +691,8 @@ WaWrapperSpec >> makeClassNamed: aClassName asSubclassOf: aClass [
 
 	elementClass := SmalltalkImage current classNamed: aClassName.
 	elementClass ifNotNil: [ :value |
-		^ value ].
+		value superclass = aClass ifTrue: [
+			^ value ] ].
 
 	self traceCr: 'Creating: ', aClassName asString.
 

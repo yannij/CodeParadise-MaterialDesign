@@ -1,9 +1,9 @@
 Class {
 	#name : 'WaFormControl',
 	#superclass : 'WaElement',
-	#category : 'CodeParadise-WebApplication-WebAwesome-Elements',
+	#category : 'CodeParadise-WebApplication-WebAwesome-Abstract',
 	#package : 'CodeParadise-WebApplication-WebAwesome',
-	#tag : 'Elements'
+	#tag : 'Abstract'
 }
 
 { #category : 'tags' }
@@ -104,6 +104,26 @@ WaFormControl >> enabled: aBoolean [
 ]
 
 { #category : 'accessing' }
+WaFormControl >> hintText [
+
+	"Answer the help text (a String) of the receiver.
+	For richer HTML element use #help instead."
+
+	^ self hint
+		ifNotNil: [ :hint | hint textContent ]
+		ifNil: [ '' ]
+]
+
+{ #category : 'accessing' }
+WaFormControl >> hintText: aString [
+
+	"Set the help text to the specified String value.
+	For richer HTML element use #help: instead."
+
+	self hint: aString asHtmlElement
+]
+
+{ #category : 'accessing' }
 WaFormControl >> invalid: aBoolean [
 
 	self propertyAt: #invalid put: aBoolean
@@ -133,6 +153,26 @@ WaFormControl >> isInvalid [
 WaFormControl >> isRequired [
 
 	^ self propertyAt: #required
+]
+
+{ #category : 'accessing' }
+WaFormControl >> labelText [
+
+	"Answer the label text (a String) of the receiver.
+	For richer HTML element use #label instead."
+
+	^ self label
+		ifNotNil: [ :label | label textContent ]
+		ifNil: [ '' ]
+]
+
+{ #category : 'accessing' }
+WaFormControl >> labelText: aString [
+
+	"Set the label text to the specified String value.
+	For richer HTML element use #label: instead."
+
+	self label: aString asHtmlElement
 ]
 
 { #category : 'accessing' }
