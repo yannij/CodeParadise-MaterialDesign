@@ -564,7 +564,7 @@ SlmdResponsiveLayoutView >> hideNavModal [
 
 	modalElement := self modalNavElementOrNil.
 	modalElement ifNotNil: [
-		modalElement beNotOpen ].
+		modalElement openBeOff ].
 ]
 
 { #category : 'initialization' }
@@ -778,7 +778,7 @@ SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
 SlmdResponsiveLayoutView >> loginOpen [
 
 	self systemLog logTrace: 'loginOpen'.
-	self findLoginDialog show
+	self findLoginDialog openBeOn
 
 ]
 
@@ -789,14 +789,14 @@ SlmdResponsiveLayoutView >> modalNavOpen [
 	drawer := self modalNavElementOrNil.
 	drawer
 		ifNil: [ self systemLog logError: 'modal nav element is nil' ]
-		ifNotNil: [ drawer beOpen ]
+		ifNotNil: [ drawer openBeOn ]
 ]
 
 { #category : 'actions' }
 SlmdResponsiveLayoutView >> modalSettingsOpen [
 
 	self systemLog logTrace: 'modalSettingsOpen'.
-	self modalSettingsElement beOpen
+	self modalSettingsElement openBeOn
 
 ]
 

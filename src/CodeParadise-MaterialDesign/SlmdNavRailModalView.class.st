@@ -43,7 +43,7 @@ SlmdNavRailModalView >> navModalPaneSetUp [
 	drawer := self findByIdInShadowDom: #smdNavRailModal.
 	drawer
 		placement: 'left';
-		beNoHeader;
+		withoutHeaderBeOn;
 		customPropertyAt: 'size' put: self layoutViewLazy navRailWidth printString, 'px';
 		customPropertyAt: 'body-spacing' put: '0';
 		customPropertyAt: 'header-spacing' put: '0';

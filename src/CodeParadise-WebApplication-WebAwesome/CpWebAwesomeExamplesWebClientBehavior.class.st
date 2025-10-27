@@ -281,35 +281,38 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 
 	"Create a simple dialog with a paragraph of text"
 	regularDialog := WaDialog new
+		lightDismissBeOn;
 		label: 'First dialog' ;
 		appendChild: ('Hello world' inHtmlTag: #p) ;
 		yourself.
 
 	"Add a close button in the dialog footer"
 	regularDialog footer: ((WaButton label: 'Close')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: regularDialog ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: regularDialog ;
 		yourself).
 
 	"Create a simple dialog with a paragraph of text"
 	modalDialog := WaDialog new
+		lightDismissBeOff;
 		label: 'Modal dialog' ;
 		appendChild: ('You have to click the close button to close this dialog. Clicking outside the dialog will not close it (in contrast to regular dialog).' inHtmlTag: #p) ;
 		yourself.
 
 	"Add a close button in the dialog footer"
 	modalDialog footer: ((WaButton label: 'Close please!')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: modalDialog ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: modalDialog ;
 		yourself).
 
 	"Create a mixed dialog with a paragraph of text"
 	mixedDialog := WaDialog new
+		lightDismissBeOff;
 		label: 'Mixed dialog' ;
 		appendChild: ('This is a mixed dialog. It can either be opened modal or regular. This allows for the same dialog to be reused for different purposes or different levels of ''requiredness''. Have fun!' inHtmlTag: #p) ;
 		yourself.
 
 	"Add a close button in the dialog footer"
 	mixedDialog footer: ((WaButton label: 'Bye!')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: mixedDialog ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: mixedDialog ;
 		yourself).
 
 	"Create a focus dialog with a paragraph of text and 3 input fields"
@@ -323,22 +326,24 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 
 	"Add a close button in the dialog footer"
 	focusDialog footer: ((WaButton label: 'Ciao!')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: focusDialog ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: focusDialog ;
 		yourself).
 
 	"Add buttons to the example, these open the dialog in different ways"
 	outputElement
 		appendChild: ((WaButton label: 'Open regular')
-			when: CpClickEvent basicPrimary send: #beOpen to: regularDialog ;
+			when: CpClickEvent basicPrimary send: #openBeOn to: regularDialog ;
 			yourself) ;
 		appendChild: ((WaButton label: 'Open modal')
-			when: CpClickEvent basicPrimary send: #showModal to: modalDialog ;
+			when: CpClickEvent basicPrimary send: #openBeOn to: modalDialog ;
 			yourself) ;
 		appendChild: ('' inHtmlTag: #p) ;
 		appendChild: (modalCheckbox := WaCheckbox label: 'modal') ;
 		appendChild: (' ' inHtmlTag: #span) ;
 		appendChild: ((WaButton label: 'Mixed dialog')
-			when: CpClickEvent basicPrimary do: [ modalCheckbox checkedIsOn ifTrue: [ mixedDialog showModal ] ifFalse: [ mixedDialog showNonModal ] ] for: self ;
+			when: CpClickEvent basicPrimary do: [
+				modalCheckbox checkedIsOn ifTrue: [ mixedDialog lightDismissBeOff ] ifFalse: [ mixedDialog lightDismissBeOn ].
+				mixedDialog openBeOn ] for: self ;
 			yourself) ;
 		appendChild: ('' inHtmlTag: #p) ;
 		appendChild: (focusCheckbox := WaCheckbox label: 'focus 3rd input field') ;
@@ -352,7 +357,7 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDialog [
 					ifFalse: [
 						(focusDialog firstDescendantMatching: '#first') autofocusBeOn.
 						(focusDialog firstDescendantMatching: '#third') autofocusBeOff ].
-					focusDialog beOpen ] for: self ;
+					focusDialog openBeOn ] for: self ;
 			yourself) ;
 		appendChild: regularDialog ;
 		appendChild: modalDialog ;
@@ -374,33 +379,35 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDrawer [
 
 	"Create some simple drawers with a paragraph of text"
 	drawer1 := (WaDrawer label: 'First drawer')
-		beStart ;
+		lightDismissBeOn;
+		placementBeStart ;
 		appendChild: ('Hello y''all. This is a paragraph in a regular drawer. It became visible because you pushed the blue button. The drawer can be closed by clicking outside the drawer.' inHtmlTag: #p) ;
 		yourself.
 	drawer2 := (WaDrawer label: 'First drwaer')
-		beEnd ;
+		lightDismissBeOn;
+		placementBeEnd ;
 		appendChild: ('Hello there. This is a paragraph in a modal drawer. It became visible because you pushed the red button. The drawer must be closed by the button inside the drawer.' inHtmlTag: #p) ;
 		yourself.
 
 	"Add a close button in the drawer footer"
 	drawer1 footer: ((WaButton label: 'Close')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: drawer1 ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: drawer1 ;
 		yourself).
 
 	"Add a close button in the drawer footer"
 	drawer2 footer: ((WaButton label: 'Close')
-		when: CpClickEvent basicPrimary send: #beNotOpen to: drawer2 ;
+		when: CpClickEvent basicPrimary send: #openBeOff to: drawer2 ;
 		yourself).
 
 	"Add buttons to the example, these open the dialog in different ways"
 	outputElement
 		appendChild: ((WaButton label: 'Open left')
 			variantBeBrand ;
-			when: CpClickEvent basicPrimary send: #beOpen to: drawer1 ;
+			when: CpClickEvent basicPrimary send: #openBeOn to: drawer1 ;
 			yourself) ;
 		appendChild: ((WaButton label: 'Open right')
 			variantBeWarning ;
-			when: CpClickEvent basicPrimary send: #showModal to: drawer2 ;
+			when: CpClickEvent basicPrimary do: [ drawer2 withoutHeaderBeOn; lightDismissBeOff; openBeOn ] for: self ;
 			yourself) ;
 		appendChild: drawer1 ;
 		appendChild: drawer2

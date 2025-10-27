@@ -29,6 +29,8 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waCardSpec generate.
 	self waCheckboxSpec generate.
 	self waDetailsSpec generate.
+	self waDialogSpec generate.
+	self waDrawerSpec generate.
 	self waIconSpec generate.
 	self waInputSpec generate.
 	self waOptionSpec generate.
@@ -125,6 +127,41 @@ WaWrapperSpec class >> waDetailsSpec [
 
 	^ self new
 		wrapperClassName: #WaDetails;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waDialogSpec [
+
+	^ self new
+		wrapperClassName: #WaDialog;
+		instanceCreatorAdd: #'label:';
+		slotsAddAll: #('*body' 'label' 'header-actions' 'footer');
+		booleanPropertyAt: 'open' put: false;
+		booleanPropertyAt: '=without-header' put: false;
+		booleanPropertyAt: '=light-dismiss' put: true;
+		cssPropertieAdd: 'spacing';
+		cssPropertieAdd: 'width';
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waDrawerSpec [
+
+	^ self new
+		wrapperClassName: #WaDrawer;
+		instanceCreatorAdd: #'label:';
+		slotsAddAll: #('*body' 'label' 'header-actions' 'footer');
+		booleanPropertyAt: 'open' put: false;
+		booleanPropertyAt: '=without-header' put: false;
+		booleanPropertyAt: '=light-dismiss' put: true;
+		stringPropertyAt: 'placement' put: 'top|*end|bottom|start';
+		cssPropertieAdd: 'spacing';
+		cssPropertieAdd: 'size';
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
 		yourself
 ]
 

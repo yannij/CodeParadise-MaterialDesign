@@ -43,7 +43,7 @@ SlmdWebClientBehavior >> addLoginDialog: label [
 		yourself.
 
 	"Do separately, so dialog is not nil"
-	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'bootstrap:x' send: #beNotOpen receiver: dialog).
+	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'bootstrap:x' send: #openBeOff receiver: dialog).
 
 	CpHtmlElement documentBody appendChild: dialog.
 
@@ -142,6 +142,6 @@ SlmdWebClientBehavior >> requestLogin [
 		viewId: self appViewId;
 		announcement: SlmdLoginRequested new;
 		yourself).
-	self findLoginDialog beNotOpen.
+	self findLoginDialog openBeOff.
 
 ]
