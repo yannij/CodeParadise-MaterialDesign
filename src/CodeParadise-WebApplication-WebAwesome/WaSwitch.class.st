@@ -17,15 +17,13 @@ WaSwitch class >> label: object1 [
 { #category : 'properties' }
 WaSwitch >> checked [
 
-	^ (self attributeAt: #checked) notNil
+	self propertyAt: #checked
 ]
 
 { #category : 'properties' }
 WaSwitch >> checked: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #checked ]
-		ifFalse: [ self removeAttributeAt: #checked ]
+	self propertyAt: #checked put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -55,15 +53,13 @@ WaSwitch >> checkedIsOn [
 { #category : 'properties' }
 WaSwitch >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaSwitch >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -129,15 +125,13 @@ WaSwitch >> label: aStringOrElement [
 { #category : 'properties' }
 WaSwitch >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaSwitch >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }

@@ -142,7 +142,7 @@ WaWrapperSpec class >> waIconSpec [
 		booleanPropertyAt: 'auto-width' put: false;
 		booleanPropertyAt: 'swap-opacity' put: false;
 		stringPropertyAt: 'src' put: #string;
-		stringPropertyAt: 'label' put: #string;
+		stringPropertyAt: '=label' put: #string;
 		stringPropertyAt: 'library' put: #string;
 		cssPropertieAdd: 'primary-color';
 		cssPropertieAdd: 'primary-opacity';
@@ -164,7 +164,7 @@ WaWrapperSpec class >> waInputSpec [
 		stringPropertyAt: 'type' put: 'date|datetime-local|email|number|password|search|tel|*text|time|url';
 		stringPropertyAt: 'label' put: #string;
 		stringPropertyAt: 'hint' put: #string;
-		booleanPropertyAt: 'with-clear' put: false;
+		booleanPropertyAt: '=with-clear' put: false;
 		stringPropertyAt: 'placeholder' put: #string;
 		stringPropertyAt: 'appearance' put: 'filled|*outlined';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
@@ -338,6 +338,23 @@ WaWrapperSpec >> booleanPropertyAt: key put: anObject [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec >> compileBoolean: aKebabCaseName in: aClass [
+	| isAttribute propertyName |
+
+	isAttribute := (aKebabCaseName first: 1) = '='.
+	propertyName := isAttribute
+		ifTrue: [ aKebabCaseName allButFirst: 1 ]
+		ifFalse: [ aKebabCaseName ].
+
+	isAttribute
+		ifTrue: [ self compileBooleanAttribute: propertyName in: aClass ]
+		ifFalse: [ self compileBooleanProperty: propertyName in: aClass ].
+
+	self compileBooleanConvenience: propertyName in: aClass
+
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 	| accessorString symbolString |
 
@@ -347,16 +364,16 @@ WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
 	aClass
 		compile: (String streamContents: [ :stream |
 			stream
-				nextPutAll: accessorString;
-				cr; cr; tab; nextPutAll: '^ (self attributeAt: ', symbolString, ') notNil';
+				nextPutAll: accessorString; cr;
+				cr; tab; nextPutAll: '^ (self attributeAt: ', symbolString, ') notNil';
 				yourself ])
 		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
 			stream
-				nextPutAll: accessorString; nextPutAll: ': aBoolean';
-				cr; cr; tab; nextPutAll: 'aBoolean';
+				nextPutAll: accessorString; nextPutAll: ': aBoolean'; cr;
+				cr; tab; nextPutAll: 'aBoolean';
 				cr; tab; tab; nextPutAll: 'ifTrue: [ self attributeAdd: ', symbolString, ' ]';
 				cr; tab; tab; nextPutAll: 'ifFalse: [ self removeAttributeAt: ', symbolString, ' ]';
 				yourself ])
@@ -374,16 +391,32 @@ WaWrapperSpec >> compileBooleanConvenience: aKebabCaseName in: aClass [
 	aClass
 		compile: (String streamContents: [ :stream |
 			stream
-				nextPutAll: accessorString, 'BeOn';
-				cr; cr; tab; nextPutAll: 'self ', accessorString, ': true';
+				nextPutAll: accessorString, 'BeOn'; cr;
+				cr; tab; nextPutAll: 'self ', accessorString, ': true';
 				yourself ])
 		classified: 'properties'.
 
 	aClass
 		compile: (String streamContents: [ :stream |
 			stream
-				nextPutAll: accessorString, 'BeOff';
-				cr; cr; tab; nextPutAll: 'self ', accessorString, ': false';
+				nextPutAll: accessorString, 'BeOff'; cr;
+				cr; tab; nextPutAll: 'self ', accessorString, ': false';
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'IsOn'; cr;
+				cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString, 'IsOff'; cr;
+				cr; tab; nextPutAll: '^ (self propertyAt: ', symbolString, ') not';
 				yourself ])
 		classified: 'properties'.
 
@@ -399,16 +432,8 @@ WaWrapperSpec >> compileBooleanProperty: aKebabCaseName in: aClass [
 	aClass
 		compile: (String streamContents: [ :stream |
 			stream
-				nextPutAll: accessorString, 'IsOn'; cr;
-				cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
-				yourself ])
-		classified: 'properties'.
-
-	aClass
-		compile: (String streamContents: [ :stream |
-			stream
-				nextPutAll: accessorString, 'IsOff'; cr;
-				cr; tab; nextPutAll: '^ (self propertyAt: ', symbolString, ') not';
+				nextPutAll: accessorString; cr; 
+				cr; tab; nextPutAll: 'self propertyAt: ', symbolString;
 				yourself ])
 		classified: 'properties'.
 
@@ -526,6 +551,48 @@ WaWrapperSpec >> compileSlot: aKebabCaseName in: aClass [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec >> compileString: aKebabCaseName types: specString in: aClass [
+	| isAttribute propertyName |
+
+	isAttribute := (aKebabCaseName first: 1) = '='.
+	propertyName := isAttribute
+		ifTrue: [ aKebabCaseName allButFirst: 1 ]
+		ifFalse: [ aKebabCaseName ].
+
+	isAttribute
+		ifTrue: [ self compileStringAttribute: propertyName in: aClass ]
+		ifFalse: [ self compileStringProperty: propertyName in: aClass ].
+
+	self compileStringProperty: propertyName types: specString in: aClass
+
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec >> compileStringAttribute: aKebabCaseName in: aClass [
+	| accessorString symbolString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	symbolString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString;
+				cr; cr; tab; nextPutAll: '^ self attributeAt: ', symbolString;
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; nextPutAll: ': anObject';
+				cr; cr; tab; nextPutAll: 'self attributeAt: ', symbolString, ' put: anObject';
+				yourself ])
+		classified: 'properties'.
+
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec >> compileStringProperty: aKebabCaseName in: aClass [
 	| accessorString symbolString |
 
@@ -625,12 +692,10 @@ WaWrapperSpec >> generate [
 		self compileSlot: each in: theClass ].
 
 	self booleanProperties keysAndValuesDo: [ :key :value |
-		self compileBooleanAttribute: key in: theClass.
-		self compileBooleanConvenience: key in: theClass ].
+		self compileBoolean: key in: theClass ].
 
 	self stringProperties keysAndValuesDo: [ :key :value |
-		self compileStringProperty: key in: theClass.
-		self compileStringProperty: key types: value in: theClass ].
+		self compileString: key types: value in: theClass ].
 
 	self numberProperties keysAndValuesDo: [ :key :value |
 		self compileNumberProperty: key in: theClass ].

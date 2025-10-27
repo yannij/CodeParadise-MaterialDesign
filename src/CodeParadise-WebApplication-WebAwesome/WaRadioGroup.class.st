@@ -9,15 +9,13 @@ Class {
 { #category : 'properties' }
 WaRadioGroup >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaRadioGroup >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -107,15 +105,13 @@ WaRadioGroup >> orientationBeVertical [
 { #category : 'properties' }
 WaRadioGroup >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaRadioGroup >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -187,15 +183,13 @@ WaRadioGroup >> value: anObject [
 { #category : 'properties' }
 WaRadioGroup >> withHint [
 
-	^ (self attributeAt: #'with-hint') notNil
+	self propertyAt: #'with-hint'
 ]
 
 { #category : 'properties' }
 WaRadioGroup >> withHint: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-hint' ]
-		ifFalse: [ self removeAttributeAt: #'with-hint' ]
+	self propertyAt: #'with-hint' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -225,15 +219,13 @@ WaRadioGroup >> withHintIsOn [
 { #category : 'properties' }
 WaRadioGroup >> withLabel [
 
-	^ (self attributeAt: #'with-label') notNil
+	self propertyAt: #'with-label'
 ]
 
 { #category : 'properties' }
 WaRadioGroup >> withLabel: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-label' ]
-		ifFalse: [ self removeAttributeAt: #'with-label' ]
+	self propertyAt: #'with-label' put: aBoolean
 ]
 
 { #category : 'properties' }

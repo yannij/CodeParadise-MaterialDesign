@@ -17,15 +17,13 @@ WaCheckbox class >> label: object1 [
 { #category : 'properties' }
 WaCheckbox >> checked [
 
-	^ (self attributeAt: #checked) notNil
+	self propertyAt: #checked
 ]
 
 { #category : 'properties' }
 WaCheckbox >> checked: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #checked ]
-		ifFalse: [ self removeAttributeAt: #checked ]
+	self propertyAt: #checked put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -55,15 +53,13 @@ WaCheckbox >> checkedIsOn [
 { #category : 'properties' }
 WaCheckbox >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaCheckbox >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -117,15 +113,13 @@ WaCheckbox >> hint: anObject [
 { #category : 'properties' }
 WaCheckbox >> indeterminate [
 
-	^ (self attributeAt: #indeterminate) notNil
+	self propertyAt: #indeterminate
 ]
 
 { #category : 'properties' }
 WaCheckbox >> indeterminate: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #indeterminate ]
-		ifFalse: [ self removeAttributeAt: #indeterminate ]
+	self propertyAt: #indeterminate put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -167,15 +161,13 @@ WaCheckbox >> label: aStringOrElement [
 { #category : 'properties' }
 WaCheckbox >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaCheckbox >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }

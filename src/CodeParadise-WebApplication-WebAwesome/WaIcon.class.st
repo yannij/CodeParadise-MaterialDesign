@@ -36,15 +36,13 @@ WaIcon class >> name: object1 label: object2 library: object3 [
 { #category : 'properties' }
 WaIcon >> autoWidth [
 
-	^ (self attributeAt: #'auto-width') notNil
+	self propertyAt: #'auto-width'
 ]
 
 { #category : 'properties' }
 WaIcon >> autoWidth: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'auto-width' ]
-		ifFalse: [ self removeAttributeAt: #'auto-width' ]
+	self propertyAt: #'auto-width' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -86,13 +84,13 @@ WaIcon >> family: anObject [
 { #category : 'properties' }
 WaIcon >> label [
 
-	^ self propertyAt: #label
+	^ self attributeAt: #label
 ]
 
 { #category : 'properties' }
 WaIcon >> label: anObject [
 
-	self propertyAt: #label put: anObject
+	self attributeAt: #label put: anObject
 ]
 
 { #category : 'properties' }
@@ -182,15 +180,13 @@ WaIcon >> src: anObject [
 { #category : 'properties' }
 WaIcon >> swapOpacity [
 
-	^ (self attributeAt: #'swap-opacity') notNil
+	self propertyAt: #'swap-opacity'
 ]
 
 { #category : 'properties' }
 WaIcon >> swapOpacity: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'swap-opacity' ]
-		ifFalse: [ self removeAttributeAt: #'swap-opacity' ]
+	self propertyAt: #'swap-opacity' put: aBoolean
 ]
 
 { #category : 'properties' }

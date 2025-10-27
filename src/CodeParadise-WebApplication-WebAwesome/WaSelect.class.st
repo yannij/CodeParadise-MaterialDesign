@@ -45,15 +45,13 @@ WaSelect >> clearIcon: aStringOrElement [
 { #category : 'properties' }
 WaSelect >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaSelect >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -155,15 +153,13 @@ WaSelect >> maxOptionsVisible: anObject [
 { #category : 'properties' }
 WaSelect >> multiple [
 
-	^ (self attributeAt: #multiple) notNil
+	self propertyAt: #multiple
 ]
 
 { #category : 'properties' }
 WaSelect >> multiple: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #multiple ]
-		ifFalse: [ self removeAttributeAt: #multiple ]
+	self propertyAt: #multiple put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -205,15 +201,13 @@ WaSelect >> name: anObject [
 { #category : 'properties' }
 WaSelect >> open [
 
-	^ (self attributeAt: #open) notNil
+	self propertyAt: #open
 ]
 
 { #category : 'properties' }
 WaSelect >> open: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #open ]
-		ifFalse: [ self removeAttributeAt: #open ]
+	self propertyAt: #open put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -243,15 +237,13 @@ WaSelect >> openIsOn [
 { #category : 'properties' }
 WaSelect >> pill [
 
-	^ (self attributeAt: #pill) notNil
+	self propertyAt: #pill
 ]
 
 { #category : 'properties' }
 WaSelect >> pill: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #pill ]
-		ifFalse: [ self removeAttributeAt: #pill ]
+	self propertyAt: #pill put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -317,15 +309,13 @@ WaSelect >> placementBeTop [
 { #category : 'properties' }
 WaSelect >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaSelect >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -433,15 +423,13 @@ WaSelect >> value: anObject [
 { #category : 'properties' }
 WaSelect >> withClear [
 
-	^ (self attributeAt: #'with-clear') notNil
+	self propertyAt: #'with-clear'
 ]
 
 { #category : 'properties' }
 WaSelect >> withClear: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-clear' ]
-		ifFalse: [ self removeAttributeAt: #'with-clear' ]
+	self propertyAt: #'with-clear' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -471,15 +459,13 @@ WaSelect >> withClearIsOn [
 { #category : 'properties' }
 WaSelect >> withHint [
 
-	^ (self attributeAt: #'with-hint') notNil
+	self propertyAt: #'with-hint'
 ]
 
 { #category : 'properties' }
 WaSelect >> withHint: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-hint' ]
-		ifFalse: [ self removeAttributeAt: #'with-hint' ]
+	self propertyAt: #'with-hint' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -509,15 +495,13 @@ WaSelect >> withHintIsOn [
 { #category : 'properties' }
 WaSelect >> withLabel [
 
-	^ (self attributeAt: #'with-label') notNil
+	self propertyAt: #'with-label'
 ]
 
 { #category : 'properties' }
 WaSelect >> withLabel: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-label' ]
-		ifFalse: [ self removeAttributeAt: #'with-label' ]
+	self propertyAt: #'with-label' put: aBoolean
 ]
 
 { #category : 'properties' }

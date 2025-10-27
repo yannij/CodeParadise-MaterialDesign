@@ -33,15 +33,13 @@ WaRadio >> appearanceBeDefault [
 { #category : 'properties' }
 WaRadio >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaRadio >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }

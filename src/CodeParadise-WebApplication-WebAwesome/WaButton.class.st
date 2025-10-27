@@ -62,15 +62,13 @@ WaButton >> appearanceBePlain [
 { #category : 'properties' }
 WaButton >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaButton >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -172,15 +170,13 @@ WaButton >> formmethod: anObject [
 { #category : 'properties' }
 WaButton >> formnovalidate [
 
-	^ (self attributeAt: #formnovalidate) notNil
+	self propertyAt: #formnovalidate
 ]
 
 { #category : 'properties' }
 WaButton >> formnovalidate: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #formnovalidate ]
-		ifFalse: [ self removeAttributeAt: #formnovalidate ]
+	self propertyAt: #formnovalidate put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -246,15 +242,13 @@ WaButton >> label: aStringOrElement [
 { #category : 'properties' }
 WaButton >> loading [
 
-	^ (self attributeAt: #loading) notNil
+	self propertyAt: #loading
 ]
 
 { #category : 'properties' }
 WaButton >> loading: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #loading ]
-		ifFalse: [ self removeAttributeAt: #loading ]
+	self propertyAt: #loading put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -296,15 +290,13 @@ WaButton >> name: anObject [
 { #category : 'properties' }
 WaButton >> pill [
 
-	^ (self attributeAt: #pill) notNil
+	self propertyAt: #pill
 ]
 
 { #category : 'properties' }
 WaButton >> pill: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #pill ]
-		ifFalse: [ self removeAttributeAt: #pill ]
+	self propertyAt: #pill put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -484,15 +476,13 @@ WaButton >> variantBeWarning [
 { #category : 'properties' }
 WaButton >> withCaret [
 
-	^ (self attributeAt: #'with-caret') notNil
+	self propertyAt: #'with-caret'
 ]
 
 { #category : 'properties' }
 WaButton >> withCaret: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'with-caret' ]
-		ifFalse: [ self removeAttributeAt: #'with-caret' ]
+	self propertyAt: #'with-caret' put: aBoolean
 ]
 
 { #category : 'properties' }

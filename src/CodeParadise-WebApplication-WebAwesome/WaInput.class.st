@@ -41,15 +41,13 @@ WaInput >> appearanceBeOutlined [
 { #category : 'properties' }
 WaInput >> autofocus [
 
-	^ (self attributeAt: #autofocus) notNil
+	self propertyAt: #autofocus
 ]
 
 { #category : 'properties' }
 WaInput >> autofocus: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #autofocus ]
-		ifFalse: [ self removeAttributeAt: #autofocus ]
+	self propertyAt: #autofocus put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -139,15 +137,13 @@ WaInput >> label: anObject [
 { #category : 'properties' }
 WaInput >> passwordToggle [
 
-	^ (self attributeAt: #'password-toggle') notNil
+	self propertyAt: #'password-toggle'
 ]
 
 { #category : 'properties' }
 WaInput >> passwordToggle: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'password-toggle' ]
-		ifFalse: [ self removeAttributeAt: #'password-toggle' ]
+	self propertyAt: #'password-toggle' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -177,15 +173,13 @@ WaInput >> passwordToggleIsOn [
 { #category : 'properties' }
 WaInput >> passwordVisible [
 
-	^ (self attributeAt: #'password-visible') notNil
+	self propertyAt: #'password-visible'
 ]
 
 { #category : 'properties' }
 WaInput >> passwordVisible: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #'password-visible' ]
-		ifFalse: [ self removeAttributeAt: #'password-visible' ]
+	self propertyAt: #'password-visible' put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -215,15 +209,13 @@ WaInput >> passwordVisibleIsOn [
 { #category : 'properties' }
 WaInput >> pill [
 
-	^ (self attributeAt: #pill) notNil
+	self propertyAt: #pill
 ]
 
 { #category : 'properties' }
 WaInput >> pill: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #pill ]
-		ifFalse: [ self removeAttributeAt: #pill ]
+	self propertyAt: #pill put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -265,15 +257,13 @@ WaInput >> placeholder: anObject [
 { #category : 'properties' }
 WaInput >> readonly [
 
-	^ (self attributeAt: #readonly) notNil
+	self propertyAt: #readonly
 ]
 
 { #category : 'properties' }
 WaInput >> readonly: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #readonly ]
-		ifFalse: [ self removeAttributeAt: #readonly ]
+	self propertyAt: #readonly put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -303,15 +293,13 @@ WaInput >> readonlyIsOn [
 { #category : 'properties' }
 WaInput >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaInput >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }

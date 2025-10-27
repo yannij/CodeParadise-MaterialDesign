@@ -41,15 +41,13 @@ WaTextarea >> appearanceBeOutlined [
 { #category : 'properties' }
 WaTextarea >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaTextarea >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -103,15 +101,13 @@ WaTextarea >> label: anObject [
 { #category : 'properties' }
 WaTextarea >> pill [
 
-	^ (self attributeAt: #pill) notNil
+	self propertyAt: #pill
 ]
 
 { #category : 'properties' }
 WaTextarea >> pill: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #pill ]
-		ifFalse: [ self removeAttributeAt: #pill ]
+	self propertyAt: #pill put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -153,15 +149,13 @@ WaTextarea >> placeholder: anObject [
 { #category : 'properties' }
 WaTextarea >> readonly [
 
-	^ (self attributeAt: #readonly) notNil
+	self propertyAt: #readonly
 ]
 
 { #category : 'properties' }
 WaTextarea >> readonly: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #readonly ]
-		ifFalse: [ self removeAttributeAt: #readonly ]
+	self propertyAt: #readonly put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -191,15 +185,13 @@ WaTextarea >> readonlyIsOn [
 { #category : 'properties' }
 WaTextarea >> required [
 
-	^ (self attributeAt: #required) notNil
+	self propertyAt: #required
 ]
 
 { #category : 'properties' }
 WaTextarea >> required: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #required ]
-		ifFalse: [ self removeAttributeAt: #required ]
+	self propertyAt: #required put: aBoolean
 ]
 
 { #category : 'properties' }

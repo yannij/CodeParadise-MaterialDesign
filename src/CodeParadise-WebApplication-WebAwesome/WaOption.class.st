@@ -27,15 +27,13 @@ WaOption class >> value: object1 labelText: object2 [
 { #category : 'properties' }
 WaOption >> disabled [
 
-	^ (self attributeAt: #disabled) notNil
+	self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
 WaOption >> disabled: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #disabled ]
-		ifFalse: [ self removeAttributeAt: #disabled ]
+	self propertyAt: #disabled put: aBoolean
 ]
 
 { #category : 'properties' }
@@ -101,15 +99,13 @@ WaOption >> labelText: aString [
 { #category : 'properties' }
 WaOption >> selected [
 
-	^ (self attributeAt: #selected) notNil
+	self propertyAt: #selected
 ]
 
 { #category : 'properties' }
 WaOption >> selected: aBoolean [
 
-	aBoolean
-		ifTrue: [ self attributeAdd: #selected ]
-		ifFalse: [ self removeAttributeAt: #selected ]
+	self propertyAt: #selected put: aBoolean
 ]
 
 { #category : 'properties' }
