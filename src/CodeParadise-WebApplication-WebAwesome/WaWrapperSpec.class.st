@@ -31,6 +31,8 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waDetailsSpec generate.
 	self waDialogSpec generate.
 	self waDrawerSpec generate.
+	self waDropdownSpec generate.
+	self waDropdownItemSpec generate.
 	self waIconSpec generate.
 	self waInputSpec generate.
 	self waOptionSpec generate.
@@ -166,6 +168,38 @@ WaWrapperSpec class >> waDrawerSpec [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec class >> waDropdownItemSpec [
+
+	^ self new
+		wrapperClassName: #WaDropdownItem;
+		slotsAddAll: #('*label' 'icon' 'details' 'submenu');
+		textContent: 'labelText';
+		stringPropertyAt: 'variant' put: 'danger|*default';
+		stringPropertyAt: 'value' put: #string;
+		stringPropertyAt: 'placement' put: '*normal|checkbox';
+		booleanPropertyAt: 'checked' put: false;
+		booleanPropertyAt: 'disabled' put: false;
+		booleanPropertyAt: 'submenuOpen' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waDropdownSpec [
+
+	^ self new
+		wrapperClassName: #WaDropdown;
+		slotsAddAll: #('trigger');
+		booleanPropertyAt: 'open' put: false;
+		stringPropertyAt: 'size' put: 'small|*medium|large';
+		stringPropertyAt: 'placement' put: 'top|top-start|top-end|bottom|*bottom-start|bottom-end|right|right-start|right-end|left|left-start|left-end';
+		numberPropertyAt: 'distance' put: 0;
+		numberPropertyAt: 'skidding' put: 0;
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
+		yourself
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec class >> waIconSpec [
 
 	^ self new
@@ -273,8 +307,6 @@ WaWrapperSpec class >> waSelectSpec [
 		wrapperClassName: #WaSelect;
 		wrapperSuperclass: WaFormControl;
 		slotsAddAll: #('label' 'start' 'end'	'clear-icon' 'expand-icon' 'hint');
-		stringPropertyAt: 'name' put: #string;
-		stringPropertyAt: 'value' put: #string;
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		stringPropertyAt: 'placeholder' put: #string;
 		booleanPropertyAt: 'multiple' put: false;

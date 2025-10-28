@@ -6,212 +6,212 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing style' }
-WaDropdown >> beDisabled [
-
-	self disabled: true
-]
-
-{ #category : 'accessing style' }
-WaDropdown >> beEnabled [
-
-	"Convenience method to make receiver enabled"
-
-	self disabled: false
-]
-
-{ #category : 'accessing style' }
-WaDropdown >> beHoist [
-
-	self hoist: true
-]
-
-{ #category : 'accessing style' }
-WaDropdown >> beOpen [
-
-	self open: true
-]
-
-{ #category : 'accessing style' }
-WaDropdown >> beStayOpenOnSelect [
-
-	self stayOpenOnSelect: true
-]
-
-{ #category : 'accessing' }
-WaDropdown >> containingElement [
-
-	^ self propertyAt: #containingElement
-]
-
-{ #category : 'accessing' }
-WaDropdown >> disabled: aBoolean [
-
-	self propertyAt: #disabled put: aBoolean
-]
-
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaDropdown >> distance [
 
 	^ self propertyAt: #distance
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> distance: aNumber [
+{ #category : 'properties' }
+WaDropdown >> distance: anObject [
 
-	self propertyAt: #distance put: aNumber
+	self propertyAt: #distance put: anObject
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> enabled: aBoolean [
+{ #category : 'css custom properties' }
+WaDropdown >> hideDuration [
 
-	"Convenience method to set receiver's enabled state"
-
-	self disabled: aBoolean not
+	^ self customPropertyAt: #'hide-duration'
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> hoist: aBoolean [
+{ #category : 'css custom properties' }
+WaDropdown >> hideDuration: aString [
 
-	self propertyAt: #hoist put: aBoolean
+	self customPropertyAt: #'hide-duration' put: aString
 ]
 
-{ #category : 'testing' }
-WaDropdown >> isDisabled [
+{ #category : 'properties' }
+WaDropdown >> open [
 
-	^ self propertyAt: #disabled
+	self propertyAt: #open
 ]
 
-{ #category : 'testing' }
-WaDropdown >> isEnabled [
-
-	"Convenience method to test if receiver is enabled"
-
-	^ self isDisabled not
-]
-
-{ #category : 'testing' }
-WaDropdown >> isHoist [
-
-	^ self propertyAt: #hoist
-]
-
-{ #category : 'testing' }
-WaDropdown >> isOpen [
-
-	^ self propertyAt: #open
-]
-
-{ #category : 'testing' }
-WaDropdown >> isStayOpenOnSelect [
-
-	^ self propertyAt: #stayOpenOnSelect
-]
-
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaDropdown >> open: aBoolean [
 
 	self propertyAt: #open put: aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
+WaDropdown >> openBeOff [
+
+	self open: false
+]
+
+{ #category : 'properties' }
+WaDropdown >> openBeOn [
+
+	self open: true
+]
+
+{ #category : 'properties' }
+WaDropdown >> openIsOff [
+
+	^ (self propertyAt: #open) not
+]
+
+{ #category : 'properties' }
+WaDropdown >> openIsOn [
+
+	^ self propertyAt: #open
+]
+
+{ #category : 'properties' }
 WaDropdown >> placement [
 
 	^ self propertyAt: #placement
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> placement: aString [
+{ #category : 'properties' }
+WaDropdown >> placement: anObject [
 
-	self propertyAt: #placement put: aString
+	self propertyAt: #placement put: anObject
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementBottom [
+{ #category : 'properties' }
+WaDropdown >> placementBeBottom [
 
 	self placement: #bottom
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementBottomEnd [
+{ #category : 'properties' }
+WaDropdown >> placementBeBottomEnd [
 
-	self placement: #'bottom-end'
+	self placement: #'bottom end'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementBottomStart [
+{ #category : 'properties' }
+WaDropdown >> placementBeBottomStart [
 
-	self placement: #'bottom-start'
+	self placement: #'bottom start'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementLeft [
+{ #category : 'properties' }
+WaDropdown >> placementBeLeft [
 
-	self placement: #'left'
+	self placement: #left
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementLeftEnd [
+{ #category : 'properties' }
+WaDropdown >> placementBeLeftEnd [
 
-	self placement: #'left-end'
+	self placement: #'left end'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementLeftStart [
+{ #category : 'properties' }
+WaDropdown >> placementBeLeftStart [
 
-	self placement: #'left-start'
+	self placement: #'left start'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementRight [
+{ #category : 'properties' }
+WaDropdown >> placementBeRight [
 
-	self placement: #'right'
+	self placement: #right
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementRightEnd [
+{ #category : 'properties' }
+WaDropdown >> placementBeRightEnd [
 
-	self placement: #'right-end'
+	self placement: #'right end'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementRightStart [
+{ #category : 'properties' }
+WaDropdown >> placementBeRightStart [
 
-	self placement: #'right-start'
+	self placement: #'right start'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementTop [
+{ #category : 'properties' }
+WaDropdown >> placementBeTop [
 
 	self placement: #top
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementTopEnd [
+{ #category : 'properties' }
+WaDropdown >> placementBeTopEnd [
 
-	self placement: #'top-end'
+	self placement: #'top end'
 ]
 
-{ #category : 'accessing placement' }
-WaDropdown >> placementTopStart [
+{ #category : 'properties' }
+WaDropdown >> placementBeTopStart [
 
-	self placement: #'top-start'
+	self placement: #'top start'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'css custom properties' }
+WaDropdown >> showDuration [
+
+	^ self customPropertyAt: #'show-duration'
+]
+
+{ #category : 'css custom properties' }
+WaDropdown >> showDuration: aString [
+
+	self customPropertyAt: #'show-duration' put: aString
+]
+
+{ #category : 'properties' }
+WaDropdown >> size [
+
+	^ self propertyAt: #size
+]
+
+{ #category : 'properties' }
+WaDropdown >> size: anObject [
+
+	self propertyAt: #size put: anObject
+]
+
+{ #category : 'properties' }
+WaDropdown >> sizeBeLarge [
+
+	self size: #large
+]
+
+{ #category : 'properties' }
+WaDropdown >> sizeBeMedium [
+
+	self size: #medium
+]
+
+{ #category : 'properties' }
+WaDropdown >> sizeBeSmall [
+
+	self size: #small
+]
+
+{ #category : 'properties' }
 WaDropdown >> skidding [
 
 	^ self propertyAt: #skidding
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> skidding: aNumber [
+{ #category : 'properties' }
+WaDropdown >> skidding: anObject [
 
-	self propertyAt: #skidding put: aNumber
+	self propertyAt: #skidding put: anObject
 ]
 
-{ #category : 'accessing' }
-WaDropdown >> stayOpenOnSelect: aBoolean [
+{ #category : 'slots' }
+WaDropdown >> trigger [
 
-	self propertyAt: #stayOpenOnSelect put: aBoolean
+	^ self firstChildAtSlotNamed: #trigger
+]
+
+{ #category : 'slots' }
+WaDropdown >> trigger: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #trigger
 ]

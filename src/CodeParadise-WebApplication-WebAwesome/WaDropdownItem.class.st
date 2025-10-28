@@ -24,187 +24,230 @@ WaDropdownItem class >> value: aSymbol labelText: aString [
 		yourself
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> beChecked [
+{ #category : 'properties' }
+WaDropdownItem >> checked [
 
-	self checked: true
+	self propertyAt: #checked
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> beDisabled [
-
-	self disabled: true
-]
-
-{ #category : 'accessing' }
-WaDropdownItem >> beEnabled [
-
-	"Convenience method to make receiver enabled"
-
-	self disabled: false
-]
-
-{ #category : 'accessing' }
-WaDropdownItem >> beNotChecked [
-
-	self checked: false
-]
-
-{ #category : 'accessing style' }
-WaDropdownItem >> beNotDisabled [
-
-	self disabled: false
-]
-
-{ #category : 'accessing' }
-WaDropdownItem >> beNotEnabled [
-
-	"Convenience method to clear the enabled state of the receiver"
-
-	self disabled: true
-]
-
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaDropdownItem >> checked: aBoolean [
 
 	self propertyAt: #checked put: aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
+WaDropdownItem >> checkedBeOff [
+
+	self checked: false
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> checkedBeOn [
+
+	self checked: true
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> checkedIsOff [
+
+	^ (self propertyAt: #checked) not
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> checkedIsOn [
+
+	^ self propertyAt: #checked
+]
+
+{ #category : 'slots' }
+WaDropdownItem >> details [
+
+	^ self firstChildAtSlotNamed: #details
+]
+
+{ #category : 'slots' }
+WaDropdownItem >> details: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #details
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> disabled [
+
+	self propertyAt: #disabled
+]
+
+{ #category : 'properties' }
 WaDropdownItem >> disabled: aBoolean [
 
 	self propertyAt: #disabled put: aBoolean
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> enabled: aBoolean [
+{ #category : 'properties' }
+WaDropdownItem >> disabledBeOff [
 
-	"Convenience method to set receiver's enabled state"
-
-	self disabled: aBoolean not
+	self disabled: false
 ]
 
-{ #category : 'text input' }
-WaDropdownItem >> focus [
+{ #category : 'properties' }
+WaDropdownItem >> disabledBeOn [
 
-	"Set focus to the receiver.
-
-	Implementation:
-	Since Shoelace uses tabindex attributes to indicate the currently
-	selected item for tabbing/cursor movement, update all sibligs to
-	properly indicate the receiver has focus/is active."
-
-	| menu |
-
-	super focus.
-
-	"menu := self firstAncestorMatching: WaMenu asCssSelector.
-	(menu allDescendantsMatching: self class asCssSelector) do: [ :each |
-		each attributeAt: #tabindex put: (each == self
-			ifTrue: [ '0' ]
-			ifFalse: [ '-1' ]) ]"
+	self disabled: true
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
+WaDropdownItem >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
+{ #category : 'slots' }
 WaDropdownItem >> icon [
 
 	^ self firstChildAtSlotNamed: #icon
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> icon: anElement [
+{ #category : 'slots' }
+WaDropdownItem >> icon: aStringOrElement [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #icon
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #icon
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> isChecked [
-
-	^ self propertyAt: #checked
-]
-
-{ #category : 'accessing' }
-WaDropdownItem >> isDisabled [
-
-	^ self propertyAt: #disabled
-]
-
-{ #category : 'accessing' }
-WaDropdownItem >> isEnabled [
-
-	"Convenience method to test if receiver is enabled"
-
-	^ self isDisabled not
-]
-
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaDropdownItem >> label [
-
-	"Answer the label HTML element of the receiver.
-	For a simple String value use #labelText instead."
 
 	^ self firstChildAtSlotNamed: nil
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaDropdownItem >> label: aStringOrElement [
-
-	"Set the label to the specified Element.
-	For a simple String value use #labelText: instead."
 
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: nil
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaDropdownItem >> labelText [
-
-	"Answer the label text (a String) of the receiver.
-	For richer HTML element use #label instead."
 
 	^ self textContent
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
 WaDropdownItem >> labelText: aString [
-
-	"Set the label text to the specified String value.
-	For richer HTML element use #label: instead."
 
 	self textContent: aString
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> prefix [
+{ #category : 'properties' }
+WaDropdownItem >> placement [
 
-	^ self firstChildAtSlotNamed: #prefix
+	^ self propertyAt: #placement
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> prefix: anElement [
+{ #category : 'properties' }
+WaDropdownItem >> placement: anObject [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #prefix
+	self propertyAt: #placement put: anObject
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> suffix [
+{ #category : 'properties' }
+WaDropdownItem >> placementBeCheckbox [
 
-	^ self firstChildAtSlotNamed: #suffix
+	self placement: #checkbox
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> suffix: anElement [
+{ #category : 'properties' }
+WaDropdownItem >> placementBeNormal [
 
-	self replaceAllChildrenWith: anElement atSlotNamed: #suffix
+	self placement: #normal
 ]
 
-{ #category : 'accessing' }
+{ #category : 'slots' }
+WaDropdownItem >> submenu [
+
+	^ self firstChildAtSlotNamed: #submenu
+]
+
+{ #category : 'slots' }
+WaDropdownItem >> submenu: aStringOrElement [
+
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #submenu
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpen [
+
+	self propertyAt: #submenuOpen
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpen: aBoolean [
+
+	self propertyAt: #submenuOpen put: aBoolean
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpenBeOff [
+
+	self submenuOpen: false
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpenBeOn [
+
+	self submenuOpen: true
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpenIsOff [
+
+	^ (self propertyAt: #submenuOpen) not
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> submenuOpenIsOn [
+
+	^ self propertyAt: #submenuOpen
+]
+
+{ #category : 'properties' }
 WaDropdownItem >> value [
 
 	^ self propertyAt: #value
 ]
 
-{ #category : 'accessing' }
-WaDropdownItem >> value: aString [
+{ #category : 'properties' }
+WaDropdownItem >> value: anObject [
 
-	self propertyAt: #value put: aString asString
+	self propertyAt: #value put: anObject
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> variant [
+
+	^ self propertyAt: #variant
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> variant: anObject [
+
+	self propertyAt: #variant put: anObject
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> variantBeDanger [
+
+	self variant: #danger
+]
+
+{ #category : 'properties' }
+WaDropdownItem >> variantBeDefault [
+
+	self variant: #default
 ]

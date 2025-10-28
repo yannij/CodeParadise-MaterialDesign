@@ -220,7 +220,7 @@ SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 		label: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
-		disabled: true;
+		readonly: true;
 		yourself.
 
 	self mementoAt: key put: aText.

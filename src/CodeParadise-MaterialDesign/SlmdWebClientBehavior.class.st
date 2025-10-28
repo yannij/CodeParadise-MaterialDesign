@@ -110,8 +110,8 @@ SlmdWebClientBehavior >> fieldAt: key label: aLabel text: aText [
 		addClass: 'slmd-input';
 		labelText: aLabel;
 		value: aText;
-		"helpText: 'Help text...', aLabel;"
-		disabled: false;
+		hint: 'Help text...', aLabel;
+		readonly: false;
 		attributeAdd: #filled;
 		yourself.
 

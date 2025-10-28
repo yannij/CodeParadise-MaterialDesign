@@ -187,18 +187,6 @@ WaSelect >> multipleIsOn [
 ]
 
 { #category : 'properties' }
-WaSelect >> name [
-
-	^ self propertyAt: #name
-]
-
-{ #category : 'properties' }
-WaSelect >> name: anObject [
-
-	self propertyAt: #name put: anObject
-]
-
-{ #category : 'properties' }
 WaSelect >> open [
 
 	self propertyAt: #open
@@ -406,18 +394,6 @@ WaSelect >> tagMaxSize [
 WaSelect >> tagMaxSize: aString [
 
 	self customPropertyAt: #'tag-max-size' put: aString
-]
-
-{ #category : 'properties' }
-WaSelect >> value [
-
-	^ self propertyAt: #value
-]
-
-{ #category : 'properties' }
-WaSelect >> value: anObject [
-
-	self propertyAt: #value put: anObject
 ]
 
 { #category : 'properties' }
