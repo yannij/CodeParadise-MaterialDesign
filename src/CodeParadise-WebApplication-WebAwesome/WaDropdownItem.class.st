@@ -7,20 +7,20 @@ Class {
 }
 
 { #category : 'instance creation' }
-WaDropdownItem class >> value: aSymbol label: aStringOrElement [
+WaDropdownItem class >> value: object1 label: object2 [ 
 
-	^ self new
-		value: aSymbol ;
-		label: aStringOrElement ;
+	^ self new 
+		value: object1;
+		label: object2;
 		yourself
 ]
 
 { #category : 'instance creation' }
-WaDropdownItem class >> value: aSymbol labelText: aString [
+WaDropdownItem class >> value: object1 labelText: object2 [ 
 
-	^ self new
-		value: aSymbol ;
-		labelText: aString ;
+	^ self new 
+		value: object1;
+		labelText: object2;
 		yourself
 ]
 

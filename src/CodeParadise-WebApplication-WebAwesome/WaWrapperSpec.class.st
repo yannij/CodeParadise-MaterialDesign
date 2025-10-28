@@ -72,6 +72,7 @@ WaWrapperSpec class >> waButtonSpec [
 
 	^ self new
 		wrapperClassName: #WaButton;
+		instanceCreatorsAddAll: #('label:' 'label:end:' 'start:label:' 'start:label:end:');
 		slotAdd: '*label'; slotAdd: 'start'; slotAdd: 'end';
 		stringPropertyAt: 'variant' put: '*neutral|brand|success|warning|danger';
 		stringPropertyAt: 'appearance' put: '*accent|filled|outlined|plain';
@@ -172,6 +173,7 @@ WaWrapperSpec class >> waDropdownItemSpec [
 
 	^ self new
 		wrapperClassName: #WaDropdownItem;
+		instanceCreatorsAddAll: #('value:label:' 'value:labelText:');
 		slotsAddAll: #('*label' 'icon' 'details' 'submenu');
 		textContent: 'labelText';
 		stringPropertyAt: 'variant' put: 'danger|*default';

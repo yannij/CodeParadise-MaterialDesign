@@ -1,8 +1,3 @@
-"
-Dialogs, sometimes called ""modals"", appear above the page and require the user's immediate attention.
-
-By design, a dialog's height will never exceed that of the viewport. As such, dialogs will not scroll with the page ensuring the dialog header and footer are always accessible to the user.
-"
 Class {
 	#name : 'WaDialog',
 	#superclass : 'WaElement',
@@ -192,13 +187,15 @@ WaDialog >> width: aString [
 { #category : 'properties' }
 WaDialog >> withoutHeader [
 
-	self propertyAt: #'without-header'
+	^ (self attributeAt: #'without-header') notNil
 ]
 
 { #category : 'properties' }
 WaDialog >> withoutHeader: aBoolean [
 
-	self propertyAt: #'without-header' put: aBoolean
+	aBoolean
+		ifTrue: [ self attributeAdd: #'without-header' ]
+		ifFalse: [ self removeAttributeAt: #'without-header' ]
 ]
 
 { #category : 'properties' }

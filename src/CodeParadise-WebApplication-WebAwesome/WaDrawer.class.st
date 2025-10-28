@@ -1,8 +1,3 @@
-"
-Drawers slide in from a container to expose additional options and information.
-
-
-"
 Class {
 	#name : 'WaDrawer',
 	#superclass : 'WaElement',

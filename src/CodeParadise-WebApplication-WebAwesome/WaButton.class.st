@@ -6,20 +6,39 @@ Class {
 	#tag : 'Elements'
 }
 
-{ #category : 'accessing' }
-WaButton class >> label: aStringOrElement [
+{ #category : 'instance creation' }
+WaButton class >> label: object1 [ 
 
-	^ self new
-		label: aStringOrElement ;
+	^ self new 
+		label: object1;
 		yourself
 ]
 
-{ #category : 'accessing' }
-WaButton class >> label: aStringOrElement end: endElement [
+{ #category : 'instance creation' }
+WaButton class >> label: object1 end: object2 [ 
 
-	^ self new
-		label: aStringOrElement ;
-		end: endElement ;
+	^ self new 
+		label: object1;
+		end: object2;
+		yourself
+]
+
+{ #category : 'instance creation' }
+WaButton class >> start: object1 label: object2 [ 
+
+	^ self new 
+		start: object1;
+		label: object2;
+		yourself
+]
+
+{ #category : 'instance creation' }
+WaButton class >> start: object1 label: object2 end: object3 [ 
+
+	^ self new 
+		start: object1;
+		label: object2;
+		end: object3;
 		yourself
 ]
 
