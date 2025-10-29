@@ -15,13 +15,13 @@ BaselineOfMaterialDesign >> baseline: spec [
 		spec
 			package: 'CodeParadise-WebApplication-WebAwesome' with: [ spec requires: #('CodeParadise') ];
 			package: 'CodeParadise-MaterialDesign' with: [ spec requires: #('CodeParadise-WebApplication-WebAwesome') ];
-			package: 'CodeParadise-Examples-MD3'.
+			package: 'CodeParadise-Examples-MD3' with: [ spec requires: #('CodeParadise-MaterialDesign') ].
 
 		spec
-			group: 'default' with: #('Core' 'Tests' 'Examples');
 			group: 'Core' with: #('CodeParadise-MaterialDesign');
 			group: 'Tests' with: #();
-			group: 'Examples' with: #('CodeParadise-Examples-MD3') ]
+			group: 'Examples' with: #('CodeParadise-Examples-MD3');
+			group: 'default' with: #('Core' 'Tests' 'Examples') ]
 ]
 
 { #category : 'baselines - dependencies' }
@@ -29,5 +29,6 @@ BaselineOfMaterialDesign >> codeparadise: spec [
 
 	spec
 		baseline: 'CodeParadise'
-		with: [ spec repository: 'github://yannij/CodeParadise' ]
+		with: [ spec repository: 'github://yannij/CodeParadise';
+			loads: #('Core' 'Development') ]
 ]
