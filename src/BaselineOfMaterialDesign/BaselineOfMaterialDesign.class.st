@@ -13,13 +13,13 @@ BaselineOfMaterialDesign >> baseline: spec [
 		self codeparadise: spec.
 
 		spec
-			package: 'CodeParadise-WebApplication-WebAwesome';
-			package: 'CodeParadise-MaterialDesign';
+			package: 'CodeParadise-WebApplication-WebAwesome' with: [ spec requires: #('CodeParadise') ];
+			package: 'CodeParadise-MaterialDesign' with: [ spec requires: #('CodeParadise-WebApplication-WebAwesome') ];
 			package: 'CodeParadise-Examples-MD3'.
 
 		spec
 			group: 'default' with: #('Core' 'Tests' 'Examples');
-			group: 'Core' with: #('CodeParadise-WebApplication-WebAwesome' 'CodeParadise-MaterialDesign');
+			group: 'Core' with: #('CodeParadise-MaterialDesign');
 			group: 'Tests' with: #();
 			group: 'Examples' with: #('CodeParadise-Examples-MD3') ]
 ]
