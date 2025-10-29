@@ -41,7 +41,7 @@ WaInput >> appearanceBeOutlined [
 { #category : 'properties' }
 WaInput >> autofocus [
 
-	self propertyAt: #autofocus
+	^ self propertyAt: #autofocus
 ]
 
 { #category : 'properties' }
@@ -175,7 +175,7 @@ WaInput >> label: anObject [
 { #category : 'properties' }
 WaInput >> passwordToggle [
 
-	self propertyAt: #'password-toggle'
+	^ self propertyAt: #'password-toggle'
 ]
 
 { #category : 'properties' }
@@ -211,7 +211,7 @@ WaInput >> passwordToggleIsOn [
 { #category : 'properties' }
 WaInput >> passwordVisible [
 
-	self propertyAt: #'password-visible'
+	^ self propertyAt: #'password-visible'
 ]
 
 { #category : 'properties' }
@@ -247,7 +247,7 @@ WaInput >> passwordVisibleIsOn [
 { #category : 'properties' }
 WaInput >> pill [
 
-	self propertyAt: #pill
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -295,7 +295,7 @@ WaInput >> placeholder: anObject [
 { #category : 'properties' }
 WaInput >> readonly [
 
-	self propertyAt: #readonly
+	^ self propertyAt: #readonly
 ]
 
 { #category : 'properties' }
@@ -331,7 +331,7 @@ WaInput >> readonlyIsOn [
 { #category : 'properties' }
 WaInput >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

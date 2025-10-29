@@ -73,9 +73,6 @@ SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
 
 	self systemLog logTrace: anObject printString method: 'doSetDetail:'.
 
-	anObject isMXSystem ifTrue: [
-		self logTrace: 'anObject is MXSystem' ].
-
 	self view secondaryPaneOnly.
 	self application handleSetDetail: anObject.
 

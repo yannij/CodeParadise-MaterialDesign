@@ -36,7 +36,7 @@ WaIcon class >> name: object1 label: object2 library: object3 [
 { #category : 'properties' }
 WaIcon >> autoWidth [
 
-	self propertyAt: #'auto-width'
+	^ self propertyAt: #'auto-width'
 ]
 
 { #category : 'properties' }
@@ -180,7 +180,7 @@ WaIcon >> src: anObject [
 { #category : 'properties' }
 WaIcon >> swapOpacity [
 
-	self propertyAt: #'swap-opacity'
+	^ self propertyAt: #'swap-opacity'
 ]
 
 { #category : 'properties' }

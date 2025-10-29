@@ -27,7 +27,7 @@ WaOption class >> value: object1 labelText: object2 [
 { #category : 'properties' }
 WaOption >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -99,7 +99,7 @@ WaOption >> labelText: aString [
 { #category : 'properties' }
 WaOption >> selected [
 
-	self propertyAt: #selected
+	^ self propertyAt: #selected
 ]
 
 { #category : 'properties' }

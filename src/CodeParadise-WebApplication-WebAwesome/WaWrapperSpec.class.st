@@ -360,7 +360,7 @@ WaWrapperSpec class >> waSwitchSpec [
 		instanceCreatorAdd: #'label:';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'disabled' put: false;
-		booleanPropertyAt: 'checked' put: false;
+		booleanPropertyAt: '=checked' put: false;
 		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'hint' put: #string;
 		cssPropertieAdd: 'width';
@@ -511,7 +511,7 @@ WaWrapperSpec >> compileBooleanProperty: aKebabCaseName in: aClass [
 		compile: (String streamContents: [ :stream |
 			stream
 				nextPutAll: accessorString; cr; 
-				cr; tab; nextPutAll: 'self propertyAt: ', symbolString;
+				cr; tab; nextPutAll: '^ self propertyAt: ', symbolString;
 				yourself ])
 		classified: 'properties'.
 

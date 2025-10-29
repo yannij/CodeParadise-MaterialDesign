@@ -33,7 +33,7 @@ WaDropdown >> hideDuration: aString [
 { #category : 'properties' }
 WaDropdown >> open [
 
-	self propertyAt: #open
+	^ self propertyAt: #open
 ]
 
 { #category : 'properties' }

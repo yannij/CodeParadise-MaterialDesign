@@ -115,7 +115,7 @@ WaDrawer >> lightDismissIsOn [
 { #category : 'properties' }
 WaDrawer >> open [
 
-	self propertyAt: #open
+	^ self propertyAt: #open
 ]
 
 { #category : 'properties' }

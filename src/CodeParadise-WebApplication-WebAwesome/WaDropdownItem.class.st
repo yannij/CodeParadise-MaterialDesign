@@ -27,7 +27,7 @@ WaDropdownItem class >> value: object1 labelText: object2 [
 { #category : 'properties' }
 WaDropdownItem >> checked [
 
-	self propertyAt: #checked
+	^ self propertyAt: #checked
 ]
 
 { #category : 'properties' }
@@ -75,7 +75,7 @@ WaDropdownItem >> details: aStringOrElement [
 { #category : 'properties' }
 WaDropdownItem >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -183,7 +183,7 @@ WaDropdownItem >> submenu: aStringOrElement [
 { #category : 'properties' }
 WaDropdownItem >> submenuOpen [
 
-	self propertyAt: #submenuOpen
+	^ self propertyAt: #submenuOpen
 ]
 
 { #category : 'properties' }

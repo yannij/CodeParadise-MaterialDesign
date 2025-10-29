@@ -45,7 +45,7 @@ WaSelect >> clearIcon: aStringOrElement [
 { #category : 'properties' }
 WaSelect >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -153,7 +153,7 @@ WaSelect >> maxOptionsVisible: anObject [
 { #category : 'properties' }
 WaSelect >> multiple [
 
-	self propertyAt: #multiple
+	^ self propertyAt: #multiple
 ]
 
 { #category : 'properties' }
@@ -189,7 +189,7 @@ WaSelect >> multipleIsOn [
 { #category : 'properties' }
 WaSelect >> open [
 
-	self propertyAt: #open
+	^ self propertyAt: #open
 ]
 
 { #category : 'properties' }
@@ -225,7 +225,7 @@ WaSelect >> openIsOn [
 { #category : 'properties' }
 WaSelect >> pill [
 
-	self propertyAt: #pill
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -297,7 +297,7 @@ WaSelect >> placementBeTop [
 { #category : 'properties' }
 WaSelect >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }
@@ -399,7 +399,7 @@ WaSelect >> tagMaxSize: aString [
 { #category : 'properties' }
 WaSelect >> withClear [
 
-	self propertyAt: #'with-clear'
+	^ self propertyAt: #'with-clear'
 ]
 
 { #category : 'properties' }
@@ -435,7 +435,7 @@ WaSelect >> withClearIsOn [
 { #category : 'properties' }
 WaSelect >> withHint [
 
-	self propertyAt: #'with-hint'
+	^ self propertyAt: #'with-hint'
 ]
 
 { #category : 'properties' }
@@ -471,7 +471,7 @@ WaSelect >> withHintIsOn [
 { #category : 'properties' }
 WaSelect >> withLabel [
 
-	self propertyAt: #'with-label'
+	^ self propertyAt: #'with-label'
 ]
 
 { #category : 'properties' }

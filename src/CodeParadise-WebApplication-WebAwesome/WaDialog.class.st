@@ -115,7 +115,7 @@ WaDialog >> lightDismissIsOn [
 { #category : 'properties' }
 WaDialog >> open [
 
-	self propertyAt: #open
+	^ self propertyAt: #open
 ]
 
 { #category : 'properties' }

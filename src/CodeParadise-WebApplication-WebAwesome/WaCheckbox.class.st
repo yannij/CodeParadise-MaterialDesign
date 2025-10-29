@@ -17,7 +17,7 @@ WaCheckbox class >> label: object1 [
 { #category : 'properties' }
 WaCheckbox >> checked [
 
-	self propertyAt: #checked
+	^ self propertyAt: #checked
 ]
 
 { #category : 'properties' }
@@ -53,7 +53,7 @@ WaCheckbox >> checkedIsOn [
 { #category : 'properties' }
 WaCheckbox >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -113,7 +113,7 @@ WaCheckbox >> hint: anObject [
 { #category : 'properties' }
 WaCheckbox >> indeterminate [
 
-	self propertyAt: #indeterminate
+	^ self propertyAt: #indeterminate
 ]
 
 { #category : 'properties' }
@@ -161,7 +161,7 @@ WaCheckbox >> label: aStringOrElement [
 { #category : 'properties' }
 WaCheckbox >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

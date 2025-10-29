@@ -9,7 +9,7 @@ Class {
 { #category : 'properties' }
 WaSplitPanel >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }

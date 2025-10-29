@@ -9,7 +9,7 @@ Class {
 { #category : 'properties' }
 WaRadioGroup >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -105,7 +105,7 @@ WaRadioGroup >> orientationBeVertical [
 { #category : 'properties' }
 WaRadioGroup >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }
@@ -183,7 +183,7 @@ WaRadioGroup >> value: anObject [
 { #category : 'properties' }
 WaRadioGroup >> withHint [
 
-	self propertyAt: #'with-hint'
+	^ self propertyAt: #'with-hint'
 ]
 
 { #category : 'properties' }
@@ -219,7 +219,7 @@ WaRadioGroup >> withHintIsOn [
 { #category : 'properties' }
 WaRadioGroup >> withLabel [
 
-	self propertyAt: #'with-label'
+	^ self propertyAt: #'with-label'
 ]
 
 { #category : 'properties' }

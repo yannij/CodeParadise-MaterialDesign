@@ -17,13 +17,15 @@ WaSwitch class >> label: object1 [
 { #category : 'properties' }
 WaSwitch >> checked [
 
-	self propertyAt: #checked
+	^ (self attributeAt: #checked) notNil
 ]
 
 { #category : 'properties' }
 WaSwitch >> checked: aBoolean [
 
-	self propertyAt: #checked put: aBoolean
+	aBoolean
+		ifTrue: [ self attributeAdd: #checked ]
+		ifFalse: [ self removeAttributeAt: #checked ]
 ]
 
 { #category : 'properties' }
@@ -53,7 +55,7 @@ WaSwitch >> checkedIsOn [
 { #category : 'properties' }
 WaSwitch >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -125,7 +127,7 @@ WaSwitch >> label: aStringOrElement [
 { #category : 'properties' }
 WaSwitch >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }
@@ -198,6 +200,13 @@ WaSwitch >> thumbSize [
 WaSwitch >> thumbSize: aString [
 
 	self customPropertyAt: #'thumb-size' put: aString
+]
+
+{ #category : 'properties' }
+WaSwitch >> value [
+
+self traceCr: 'switch value = ', self checkedIsOn printString.
+	^ self checkedIsOn
 ]
 
 { #category : 'css custom properties' }

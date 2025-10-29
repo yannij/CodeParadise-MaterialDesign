@@ -87,7 +87,7 @@ WaButton >> appearanceBePlain [
 { #category : 'properties' }
 WaButton >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -195,7 +195,7 @@ WaButton >> formmethod: anObject [
 { #category : 'properties' }
 WaButton >> formnovalidate [
 
-	self propertyAt: #formnovalidate
+	^ self propertyAt: #formnovalidate
 ]
 
 { #category : 'properties' }
@@ -267,7 +267,7 @@ WaButton >> label: aStringOrElement [
 { #category : 'properties' }
 WaButton >> loading [
 
-	self propertyAt: #loading
+	^ self propertyAt: #loading
 ]
 
 { #category : 'properties' }
@@ -315,7 +315,7 @@ WaButton >> name: anObject [
 { #category : 'properties' }
 WaButton >> pill [
 
-	self propertyAt: #pill
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -501,7 +501,7 @@ WaButton >> variantBeWarning [
 { #category : 'properties' }
 WaButton >> withCaret [
 
-	self propertyAt: #'with-caret'
+	^ self propertyAt: #'with-caret'
 ]
 
 { #category : 'properties' }

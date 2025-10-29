@@ -41,7 +41,7 @@ WaTextarea >> appearanceBeOutlined [
 { #category : 'properties' }
 WaTextarea >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
@@ -101,7 +101,7 @@ WaTextarea >> label: anObject [
 { #category : 'properties' }
 WaTextarea >> pill [
 
-	self propertyAt: #pill
+	^ self propertyAt: #pill
 ]
 
 { #category : 'properties' }
@@ -149,7 +149,7 @@ WaTextarea >> placeholder: anObject [
 { #category : 'properties' }
 WaTextarea >> readonly [
 
-	self propertyAt: #readonly
+	^ self propertyAt: #readonly
 ]
 
 { #category : 'properties' }
@@ -185,7 +185,7 @@ WaTextarea >> readonlyIsOn [
 { #category : 'properties' }
 WaTextarea >> required [
 
-	self propertyAt: #required
+	^ self propertyAt: #required
 ]
 
 { #category : 'properties' }

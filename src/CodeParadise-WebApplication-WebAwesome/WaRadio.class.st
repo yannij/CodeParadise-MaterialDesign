@@ -33,7 +33,7 @@ WaRadio >> appearanceBeDefault [
 { #category : 'properties' }
 WaRadio >> disabled [
 
-	self propertyAt: #disabled
+	^ self propertyAt: #disabled
 ]
 
 { #category : 'properties' }
