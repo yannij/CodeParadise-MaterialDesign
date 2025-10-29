@@ -28,31 +28,31 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleButton [
  
 	self subheading: 'Appearance' on: outputElement.
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeAccent; label: 'Accent'; yourself).
-	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
+	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeFilledOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeFilled; label: 'Filled'; yourself).
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeNeutral; appearanceBePlain; label: 'Plain'; yourself).
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 	outputElement appendChild: (WaButton new variantBeBrand; appearanceBeAccent; label: 'Accent'; yourself).
-	outputElement appendChild: (WaButton new variantBeBrand; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
+	outputElement appendChild: (WaButton new variantBeBrand; appearanceBeFilledOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeBrand; appearanceBeFilled; label: 'Filled'; yourself).
 	outputElement appendChild: (WaButton new variantBeBrand; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeBrand; appearanceBePlain; label: 'Plain'; yourself).
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 	outputElement appendChild: (WaButton new variantBeSuccess ; appearanceBeAccent; label: 'Accent'; yourself).
-	outputElement appendChild: (WaButton new variantBeSuccess; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
+	outputElement appendChild: (WaButton new variantBeSuccess; appearanceBeFilledOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeSuccess; appearanceBeFilled; label: 'Filled'; yourself).
 	outputElement appendChild: (WaButton new variantBeSuccess; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeSuccess; appearanceBePlain; label: 'Plain'; yourself).
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 	outputElement appendChild: (WaButton new variantBeWarning; appearanceBeAccent; label: 'Accent'; yourself).
-	outputElement appendChild: (WaButton new variantBeWarning; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
+	outputElement appendChild: (WaButton new variantBeWarning; appearanceBeFilledOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeWarning; appearanceBeFilled; label: 'Filled'; yourself).
 	outputElement appendChild: (WaButton new variantBeWarning; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeWarning; appearanceBePlain; label: 'Plain'; yourself).
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeAccent; label: 'Accent'; yourself).
-	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeFilled; appearanceBeOutlined; label: 'Filled + Outlined'; yourself).
+	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeFilledOutlined; label: 'Filled + Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeFilled; label: 'Filled'; yourself).
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBeOutlined; label: 'Outlined'; yourself).
 	outputElement appendChild: (WaButton new variantBeDanger; appearanceBePlain; label: 'Plain'; yourself).
@@ -471,7 +471,7 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleInput [
 	outputElement appendChild: (CpHtmlElement newWithTag: #p).
 
 	input := outputElement appendChild: (WaInput new label: 'Need more input').
-	outputElement appendChild: (disabledState := WaCheckbox label: 'Disabled').
+	outputElement appendChild: (disabledState := WaCheckbox label: 'Readonly').
 	outputElement appendChild: (pillState := WaCheckbox label: 'Pill').
 	outputElement appendChild: (clearableState := WaCheckbox label: 'Clearable').
 	disabledState when: WaChangeEvent do: [ disabledState checkedIsOn ifTrue: [ input readonlyBeOn ] ifFalse: [ input readonlyBeOff ] ] for: self.

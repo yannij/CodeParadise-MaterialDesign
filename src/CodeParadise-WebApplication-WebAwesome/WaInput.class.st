@@ -86,6 +86,44 @@ WaInput >> clearIcon: aStringOrElement [
 	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #'clear-icon'
 ]
 
+{ #category : 'properties' }
+WaInput >> disabled [
+
+	^ (self attributeAt: #disabled) notNil
+]
+
+{ #category : 'properties' }
+WaInput >> disabled: aBoolean [
+
+	aBoolean
+		ifTrue: [ self attributeAdd: #disabled ]
+		ifFalse: [ self removeAttributeAt: #disabled ]
+]
+
+{ #category : 'properties' }
+WaInput >> disabledBeOff [
+
+	self disabled: false
+]
+
+{ #category : 'properties' }
+WaInput >> disabledBeOn [
+
+	self disabled: true
+]
+
+{ #category : 'properties' }
+WaInput >> disabledIsOff [
+
+	^ (self propertyAt: #disabled) not
+]
+
+{ #category : 'properties' }
+WaInput >> disabledIsOn [
+
+	^ self propertyAt: #disabled
+]
+
 { #category : 'slots' }
 WaInput >> end [
 

@@ -67,6 +67,12 @@ WaButton >> appearanceBeFilled [
 ]
 
 { #category : 'properties' }
+WaButton >> appearanceBeFilledOutlined [
+
+	self appearance: #'filled outlined'
+]
+
+{ #category : 'properties' }
 WaButton >> appearanceBeOutlined [
 
 	self appearance: #outlined

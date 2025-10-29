@@ -185,9 +185,9 @@ SlmdObjectView >> changeMap [
 	map := Dictionary new.
 	self fieldElements valuesDo: [ :each | | oldValue newValue |
 		oldValue := self mementoAt: each name.
-		newValue := each slmdValue.
+		newValue := each value.
 		oldValue ~= newValue ifTrue: [
-			map at: each name put: each slmdValue ] ].
+			map at: each name put: newValue ] ].
 	^ map
 ]
 
@@ -201,7 +201,6 @@ SlmdObjectView >> fieldAt: key label: aLabel switch: aBoolean [
 		checked: aBoolean;
 		replaceAllChildrenWith: aLabel asHtmlElement atSlotNamed: nil;
 		replaceAllChildrenWith: ('Help text...' , aLabel) asHtmlElement atSlotNamed: #'help-text';
-		"attributeAdd: #readonly;"
 		disabled: true;
 		yourself.
 
@@ -220,7 +219,7 @@ SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 		label: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
-		readonly: true;
+		disabled: true;
 		yourself.
 
 	self mementoAt: key put: aText.

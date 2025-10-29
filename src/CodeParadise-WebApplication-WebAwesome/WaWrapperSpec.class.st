@@ -75,7 +75,7 @@ WaWrapperSpec class >> waButtonSpec [
 		instanceCreatorsAddAll: #('label:' 'label:end:' 'start:label:' 'start:label:end:');
 		slotAdd: '*label'; slotAdd: 'start'; slotAdd: 'end';
 		stringPropertyAt: 'variant' put: '*neutral|brand|success|warning|danger';
-		stringPropertyAt: 'appearance' put: '*accent|filled|outlined|plain';
+		stringPropertyAt: 'appearance' put: '*accent|filled|outlined|filled-outlined|plain';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
 		booleanPropertyAt: 'with-caret' put: false;
 		booleanPropertyAt: 'disabled' put: false;
@@ -232,6 +232,7 @@ WaWrapperSpec class >> waInputSpec [
 		wrapperSuperclass: WaFormControl;
 		slotsAddAll: #('label' 'start' 'end'	'clear-icon' 'show-password-icon' 'hide-password-icon' 'hint');
 		instanceCreatorAdd: #'label:';
+		booleanPropertyAt: '=disabled' put: false;
 		booleanPropertyAt: 'readonly' put: false;
 		booleanPropertyAt: 'required' put: false;
 		stringPropertyAt: 'type' put: 'date|datetime-local|email|number|password|search|tel|*text|time|url';
@@ -427,6 +428,12 @@ WaWrapperSpec >> compileBoolean: aKebabCaseName in: aClass [
 
 { #category : 'code generation' }
 WaWrapperSpec >> compileBooleanAttribute: aKebabCaseName in: aClass [
+	"Compile get/set methods for a boolean property that adds/removes a markup tag attribute.
+	
+	Some boolean properties work with propertyAt:put: code, but some don't, and require
+	that the tag attribute be used. In such cases, prefix the property name with '=',
+	so the code generation below is used."
+
 	| accessorString symbolString |
 
 	accessorString := self class kebabCaseToAccessor: aKebabCaseName.

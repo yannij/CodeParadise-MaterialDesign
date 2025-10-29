@@ -13,19 +13,19 @@ WaFormControl class >> isAbstractTag [
 	This method will NOT be evaluated to decide if the receiver is abstract."
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> hint [
 
 	^ nil
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> hint: ignored [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> hintText [
 
 	"Answer the hint text (a String) of the receiver.
@@ -36,7 +36,7 @@ WaFormControl >> hintText [
 		ifNil: [ '' ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> hintText: aString [
 
 	"Set the hint text to the specified String value.
@@ -45,19 +45,19 @@ WaFormControl >> hintText: aString [
 	self hint: aString asHtmlElement
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> label [
 
 	^ nil
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> label: ignored [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> labelText [
 
 	"Answer the label text (a String) of the receiver.
@@ -68,7 +68,7 @@ WaFormControl >> labelText [
 		ifNil: [ '' ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'properties' }
 WaFormControl >> labelText: aString [
 
 	"Set the label text to the specified String value.

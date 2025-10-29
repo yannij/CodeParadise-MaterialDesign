@@ -111,7 +111,7 @@ SlmdWebClientBehavior >> fieldAt: key label: aLabel text: aText [
 		labelText: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
-		readonly: false;
+		disabled: false;
 		attributeAdd: #filled;
 		yourself.
 
