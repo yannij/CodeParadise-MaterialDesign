@@ -212,7 +212,7 @@ WaWrapperSpec class >> waIconSpec [
 		stringPropertyAt: 'name' put: #string;
 		stringPropertyAt: 'family' put: #string;
 		stringPropertyAt: 'variant' put: #string;
-		booleanPropertyAt: 'auto-width' put: false;
+		booleanPropertyAt: '=auto-width' put: false;
 		booleanPropertyAt: 'swap-opacity' put: false;
 		stringPropertyAt: 'src' put: #string;
 		stringPropertyAt: '=label' put: #string;

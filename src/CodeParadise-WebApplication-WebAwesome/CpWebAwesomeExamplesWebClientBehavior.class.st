@@ -416,8 +416,88 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleDrawer [
 
 { #category : 'examples' }
 CpWebAwesomeExamplesWebClientBehavior >> exampleIcon [
+	"FontAwesome Free"
 
-	<example: 'Icon' order: 100>
+	<example: 'Icon FA Free' order: 100>
+
+	| outputElement stack flank cluster div |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	outputElement appendChild: ((WaIcon name: 'font-awesome') "variant: 'light';" label: 'Awesome'; styleAt: 'font-size' put: '2em'; yourself).
+
+	self subheading: 'Families & Variants' on: outputElement.
+	stack := #div asHtmlElement addClass: 'wa-stack'; addClass: 'wa-gap-xl'; yourself.
+
+	flank := #div asHtmlElement addClass: 'wa-flank'; styleAt: 'flank-size' put: '12ch'; yourself.
+	cluster := #div asHtmlElement addClass: 'wa-cluster'; styleAt: 'font-size' put: '1.5em'; yourself.
+	cluster
+		appendChild: (WaIcon name: 'house');
+		appendChild: ((WaIcon name: 'house') variant: 'regular'; yourself);
+		"appendChild: ((WaIcon name: 'house') variant: 'light'; yourself);"
+		"appendChild: ((WaIcon name: 'house') variant: 'dark'; yourself);"
+		yourself.
+	stack appendChild: (flank appendChild: 'Classic' asHtmlElement; appendChild: cluster; yourself).
+
+	flank := #div asHtmlElement addClass: 'wa-flank'; styleAt: 'flank-size' put: '12ch'; yourself.
+	cluster := #div asHtmlElement addClass: 'wa-cluster'; styleAt: 'font-size' put: '1.5em'; yourself.
+	cluster
+		appendChild: ((WaIcon name: 'font-awesome') family: 'brands'; yourself);
+		appendChild: ((WaIcon name: 'web-awesome') family: 'brands'; yourself);
+		appendChild: ((WaIcon name: 'github') family: 'brands'; yourself);
+		appendChild: ((WaIcon name: 'discord') family: 'brands'; yourself);
+		yourself.
+	stack appendChild: (flank appendChild: 'Brands' asHtmlElement; appendChild: cluster; yourself).
+
+	outputElement appendChild: stack.
+
+	self subheading: 'Sizing' on: outputElement.
+	cluster := #div asHtmlElement addClass: 'wa-cluster'; styleAt: 'font-size' put: '44px'; yourself.
+	cluster
+		appendChild: (WaIcon name: 'bell');
+		appendChild: (WaIcon name: 'heart');
+		appendChild: (WaIcon name: 'image');
+		appendChild: (WaIcon name: 'microphone');
+		appendChild: (WaIcon name: 'search');
+		appendChild: (WaIcon name: 'star');
+		yourself.
+	outputElement appendChild: cluster.
+
+	self subheading: 'Auto Width' on: outputElement.
+	div := #div asHtmlElement styleAt: 'font-size' put: '1.5em'; styleAt: 'color' put: '#193154'; yourself.
+	#('exclamation' 'circle-check' 'ruler-vertical' 'ruler-horizontal')
+		do: [ :each | | icon |
+			icon := (WaIcon name: each) family: 'solid'; styleAt: 'background' put: 'lightsalmon'; yourself.
+			div appendChild: icon ].
+	outputElement appendChild: 'With auto-width' asHtmlElement; appendChild: #br asHtmlTag; appendChild: div.
+	div := #div asHtmlElement styleAt: 'font-size' put: '1.5em'; styleAt: 'color' put: '#193154'; yourself.
+	#('exclamation' 'circle-check' 'ruler-vertical' 'ruler-horizontal')
+		do: [ :each | | icon |
+			icon := (WaIcon name: each) autoWidthBeOn; family: 'solid'; styleAt: 'background' put: 'lightsalmon'; yourself.
+			div appendChild: icon ].
+	outputElement appendChild: #br asHtmlTag.
+	outputElement appendChild: 'Without auto-width' asHtmlElement; appendChild: #br asHtmlTag; appendChild: div.
+
+	self subheading: 'Colors' on: outputElement.
+	cluster := #div asHtmlElement addClass: 'wa-cluster'; styleAt: 'font-size' put: '1.5em'; yourself.
+	cluster
+		"appendChild: ((WaIcon name: 'strawberry') styleAt: 'color' put: 'salmon'; yourself);
+		appendChild: ((WaIcon name: 'crab') styleAt: 'color' put: 'coral'; yourself);"
+		appendChild: ((WaIcon name: 'sun') styleAt: 'color' put: 'gold'; yourself);
+		appendChild: ((WaIcon name: 'leaf') styleAt: 'color' put: 'mediumseagreen'; yourself);
+		appendChild: ((WaIcon name: 'cloud-showers-heavy') styleAt: 'color' put: 'steelblue'; yourself);
+		"appendChild: ((WaIcon name: 'cat-space') styleAt: 'color' put: 'mediumpurple'; yourself);"
+		yourself.
+	outputElement appendChild: cluster.
+
+]
+
+{ #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> exampleIconBootstrap [
+
+	<example: 'Icon Bootstrap' order: 100>
 
 	| outputElement |
 

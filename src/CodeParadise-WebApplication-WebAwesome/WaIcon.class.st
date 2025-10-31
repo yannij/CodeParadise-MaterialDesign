@@ -36,13 +36,15 @@ WaIcon class >> name: object1 label: object2 library: object3 [
 { #category : 'properties' }
 WaIcon >> autoWidth [
 
-	^ self propertyAt: #'auto-width'
+	^ (self attributeAt: #'auto-width') notNil
 ]
 
 { #category : 'properties' }
 WaIcon >> autoWidth: aBoolean [
 
-	self propertyAt: #'auto-width' put: aBoolean
+	aBoolean
+		ifTrue: [ self attributeAdd: #'auto-width' ]
+		ifFalse: [ self removeAttributeAt: #'auto-width' ]
 ]
 
 { #category : 'properties' }
