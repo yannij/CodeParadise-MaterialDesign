@@ -68,7 +68,7 @@ SlmdPaneLayoutView class >> template [
     <wa-split-panel
         id="smdBodySplitPanel" class="smd-body-split-panel"
         primary="start" style="--min: 300px; --divider-width: 24px;">
-      <wa-icon slot="divider" library="bootstrap" name="grip-vertical"></wa-icon>
+      <wa-icon slot="divider" name="grip-vertical"></wa-icon>
       <div slot="start">
         <div id="smdTwoPaneLayoutP1" class="smd-pane">
           <slot name="twoPaneLayoutP1"></slot>

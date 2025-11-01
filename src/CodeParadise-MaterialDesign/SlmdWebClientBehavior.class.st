@@ -39,11 +39,11 @@ SlmdWebClientBehavior >> addLoginDialog: label [
 		id: 'login-dialog';
 		label: label;
 		appendChild: fields;
-		appendChild: (self buttonLabel: 'Login' icon: 'bootstrap:box-arrow-in-left' send: #requestLogin);
+		appendChild: (self buttonLabel: 'Login' icon: 'right-to-bracket' send: #requestLogin);
 		yourself.
 
 	"Do separately, so dialog is not nil"
-	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'bootstrap:x' send: #openBeOff receiver: dialog).
+	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'xmark' send: #openBeOff receiver: dialog).
 
 	CpHtmlElement documentBody appendChild: dialog.
 

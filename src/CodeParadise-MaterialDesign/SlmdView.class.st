@@ -58,7 +58,7 @@ SlmdView >> announceNavSubtype: subtype navTo: value [
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 
-	^ self dropdownMenu: actionList icon: 'bootstrap:three-dots-vertical' css: cssClass
+	^ self dropdownMenu: actionList icon: 'ellipsis-vertical' css: cssClass
 ]
 
 { #category : 'utilities' }

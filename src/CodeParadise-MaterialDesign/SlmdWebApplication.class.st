@@ -379,19 +379,19 @@ SlmdWebApplication >> setUpNativeEvents [
 
 	nativeEventSpecs := IdentityDictionary new.
 	self
-		addNativeSubtype: #create groupTag: #fab iconName: 'bootstrap:plus' iconLabel: 'Add';
-		addNativeSubtype: #read groupTag: #toolbar iconName: 'bootstrap:file-ruled' iconLabel: 'View';
-		addNativeSubtype: #update groupTag: #toolbar iconName: 'bootstrap:pencil' iconLabel: 'Edit';
-		addNativeSubtype: #delete groupTag: #toolbar iconName: 'bootstrap:trash' iconLabel: 'Delete';
-		addNativeSubtype: #save groupTag: #toolbar iconName: 'bootstrap:check' iconLabel: 'Save';
-		addNativeSubtype: #cancel groupTag: #toolbar iconName: 'bootstrap:x' iconLabel: 'Cancel';
-		addNativeSubtype: #refresh groupTag: #primary iconName: 'bootstrap:arrow-clockwise' iconLabel: 'Refresh';
-		addNativeSubtype: #home groupTag: #primary iconName: 'bootstrap:house' iconLabel: 'Home';
-		addNativeSubtype: #back groupTag: #primary iconName: 'bootstrap:arrow-left' iconLabel: 'Back';
-		addNativeSubtype: #modalNav groupTag: #primary iconName: 'bootstrap:list' iconLabel: 'Menu';
-		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'bootstrap:gear' iconLabel: 'Settings';
-		addNativeSubtype: #login groupTag: #primary iconName: 'bootstrap:box-arrow-in-right' iconLabel: 'Login';
-		addNativeSubtype: #logout groupTag: #primary iconName: 'bootstrap:box-arrow-left' iconLabel: 'Logout';
+		addNativeSubtype: #create groupTag: #fab iconName: 'plus' iconLabel: 'Add';
+		addNativeSubtype: #read groupTag: #toolbar iconName: 'file-lines' iconLabel: 'View';
+		addNativeSubtype: #update groupTag: #toolbar iconName: 'pencil' iconLabel: 'Edit';
+		addNativeSubtype: #delete groupTag: #toolbar iconName: 'trash' iconLabel: 'Delete';
+		addNativeSubtype: #save groupTag: #toolbar iconName: 'check' iconLabel: 'Save';
+		addNativeSubtype: #cancel groupTag: #toolbar iconName: 'xmark' iconLabel: 'Cancel';
+		addNativeSubtype: #refresh groupTag: #primary iconName: 'rotate-right' iconLabel: 'Refresh';
+		addNativeSubtype: #home groupTag: #primary iconName: 'house' iconLabel: 'Home';
+		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
+		addNativeSubtype: #modalNav groupTag: #primary iconName: 'bars' iconLabel: 'Menu';
+		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings';
+		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';
+		addNativeSubtype: #logout groupTag: #primary iconName: 'right-from-bracket' iconLabel: 'Logout';
 		yourself.
 
 ]
