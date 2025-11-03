@@ -278,7 +278,6 @@ SlmdLayoutSettingsView >> modalDivSetUp: aDictionary [
 		id: 'smdSettings';
 		label: 'Layout settings';
 		customPropertyAt: 'size' put: '50vw';
-		"placement: 'top';"
 		appendChild: (self modalDivContentWith: aDictionary);
 		yourself.
 

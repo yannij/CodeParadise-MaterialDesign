@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdNavRailPresenter',
-	#superclass : 'SlmdNavPresenter',
+	#superclass : 'SlmdNavAbstractPresenter',
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Nav'
@@ -11,5 +11,5 @@ SlmdNavRailPresenter >> renderView [
 
 	self
 		renderAllChildViewsForModels: self model navItems
-		atSlotNamed:  #content
+		atSlotNamed: #content
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdNavBarPresenter',
-	#superclass : 'SlmdNavPresenter',
+	#superclass : 'SlmdNavAbstractPresenter',
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Nav'

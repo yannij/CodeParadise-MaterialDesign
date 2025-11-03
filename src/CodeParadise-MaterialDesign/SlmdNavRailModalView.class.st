@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdNavRailModalView',
-	#superclass : 'SlmdNavRailView',
+	#superclass : 'SlmdNavAbstractView',
 	#instVars : [
 		'drawer'
 	],
@@ -9,13 +9,17 @@ Class {
 	#tag : 'Nav'
 }
 
+{ #category : 'class initialization' }
+SlmdNavRailModalView class >> beLoaded [
+
+	WaDrawer beLoaded
+]
+
 { #category : 'web resources' }
 SlmdNavRailModalView class >> template [
 	<webResource: #html>
 
-	^ '<wa-drawer id="smdNavRailModal" class="navrail">
-  <slot name="content"></slot>
-</wa-drawer>'
+	^ '<slot></slot>'
 ]
 
 { #category : 'accessing' }
@@ -32,22 +36,36 @@ SlmdNavRailModalView >> drawer: anObject [
 
 { #category : 'nav' }
 SlmdNavRailModalView >> navModalPaneSetUp [
-	"Add modal nav element as sibling of layout's navRegion"
-
-	"self modalDivFind
-		appendChild: self navModalPaneBuild"
 
 	drawer ifNotNil: [ 
 		^ self ].
 
-	drawer := self findByIdInShadowDom: #smdNavRailModal.
-	drawer
-		placement: 'left';
+	drawer := WaDrawer new
+		addClass: 'navrailx';
+		placementBeStart;
 		withoutHeaderBeOn;
 		customPropertyAt: 'size' put: self layoutViewLazy navRailWidth printString, 'px';
 		customPropertyAt: 'body-spacing' put: '0';
 		customPropertyAt: 'header-spacing' put: '0';
 		customPropertyAt: 'footer-spacing' put: '0';
 		yourself.
+
+	self modalDivFind
+		appendChild: drawer
+
+]
+
+{ #category : 'rendering' }
+SlmdNavRailModalView >> renderNavContent: buttons [
+	| nav |
+
+	drawer makeEmpty.
+	drawer customPropertyAt: 'size' put: "self layoutViewLazy navRailWidth printString," '220px'.
+	nav := #nav asHtmlTag addClass: 'smd-navrailx'; yourself.
+	buttons do: [ :each | | element |
+		element := self divExpanded: each.
+		element when: CpClickEvent basicPrimary do: [ self handleNavAction: each ] for: self.
+		nav appendChild: element ].
+	drawer appendChild: nav
 
 ]

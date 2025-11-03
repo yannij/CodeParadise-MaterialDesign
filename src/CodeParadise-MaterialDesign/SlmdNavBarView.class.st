@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdNavBarView',
-	#superclass : 'SlmdNavView',
+	#superclass : 'SlmdNavAbstractView',
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Nav'

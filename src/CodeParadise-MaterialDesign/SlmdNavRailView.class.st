@@ -1,39 +1,21 @@
 Class {
 	#name : 'SlmdNavRailView',
-	#superclass : 'SlmdNavView',
+	#superclass : 'SlmdNavAbstractView',
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Nav'
 }
 
-{ #category : 'class initialization' }
-SlmdNavRailView class >> beLoaded [
-
-	WaDrawer beLoaded
-]
-
 { #category : 'web resources' }
 SlmdNavRailView class >> style [
 	<webResource: #css>
 
-	^ '.navrail {
+	^ '
+.navrail {
   height: 100%;
   overflow-y: auto;
-  padding: 0;
-  margin: 0;
-  background: var(--wa-color-brand-90);
-}
-
-.navrail::part(panel) {
-  background: var(--wa-color-brand-90);
-}
-
-.smd-navrailx {
-  height: 100%;
-  padding-left: 20px;
-  margin: 0;
-  background: var(--wa-color-brand-90);
-  flow-direction: row;
+  padding: 8px 0;
+  background: var(--wa-color-brand-80);
 }
 '
 ]
@@ -42,8 +24,7 @@ SlmdNavRailView class >> style [
 SlmdNavRailView class >> template [
 	<webResource: #html>
 
-	^ '
-<nav id="container" class="navrail">
+	^ '<nav id="container" class="navrail">
   <slot name="content"></slot>
 </nav>
 '

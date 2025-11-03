@@ -1,7 +1,0 @@
-Class {
-	#name : 'SlmdNavView',
-	#superclass : 'SlmdLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
-}
