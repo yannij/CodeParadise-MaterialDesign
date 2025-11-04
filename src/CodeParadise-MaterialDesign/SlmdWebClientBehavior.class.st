@@ -10,22 +10,6 @@ Class {
 }
 
 { #category : 'login' }
-SlmdWebClientBehavior >> addLoginButton [
-	| dialog |
-
-	CpHtmlElement documentBody appendChild: (#div asHtmlTag id: 'output'; yourself).
-	outputElement := CpHtmlElement documentBody firstDescendantMatching: '#output'.
-	outputElement textContent: ''.
-
-	dialog := self findLoginDialog.
-	outputElement
-		appendChild: ((WaButton label: 'Login')
-			when: CpClickEvent basicPrimary send: #show to: dialog;
-			yourself).
-
-]
-
-{ #category : 'login' }
 SlmdWebClientBehavior >> addLoginDialog: label [
 	| dialog fields |
 
@@ -129,8 +113,7 @@ SlmdWebClientBehavior >> initialize [
 
 	super initialize.
 
-	self addLoginDialog: self appName.
-	"self addLoginButton."
+	"self addLoginDialog: self appName."
 
 ]
 

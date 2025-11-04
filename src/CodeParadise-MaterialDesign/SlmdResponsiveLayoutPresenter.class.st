@@ -161,6 +161,7 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 
 	super viewCreated.
 
+	self view addLoginDialog: self application class appName.
 	self subscribeToUserEvent.
 
 ]
@@ -174,4 +175,5 @@ SlmdResponsiveLayoutPresenter >> viewInitialized [
 		self view colorThemePut: value ].
 
 	"self view popupSetUp"
+
 ]

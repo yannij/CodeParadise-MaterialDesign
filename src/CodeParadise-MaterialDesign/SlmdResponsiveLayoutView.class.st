@@ -235,7 +235,7 @@ SlmdResponsiveLayoutView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-layout">
+<div id="container" class="smd-layout" class="wa-cloak">
   <div style="display: flex; flex-direction: column">
     <div style="height: 100%; flex: 1; display: flex; flex-direction: row">
       <div id="smdNavRegion" class="smd-navRegion">
@@ -303,6 +303,30 @@ SlmdResponsiveLayoutView >> activeToolbarFloating [
 SlmdResponsiveLayoutView >> activeToolbarFloating: anObject [
 
 	activeToolbarFloating := anObject
+]
+
+{ #category : 'login' }
+SlmdResponsiveLayoutView >> addLoginDialog: label [
+	| dialog fields |
+
+	fields := 'div' asHtmlTag
+		addClass: 'slmd-fields';
+		appendChild: (self fieldAt: #loginUsername label: 'Username' text: '');
+		appendChild: (self fieldAt: #loginPassword label: 'Password' text: '');
+		yourself.
+
+	dialog := WaDialog new
+		id: 'login-dialog';
+		label: label;
+		appendChild: fields;
+		appendChild: (self buttonLabel: 'Login' icon: 'right-to-bracket' send: #requestLogin);
+		yourself.
+
+	"Do separately, so dialog is not nil"
+	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'xmark' send: #openBeOff receiver: dialog).
+
+	CpHtmlElement documentBody appendChild: dialog.
+
 ]
 
 { #category : 'body' }
@@ -426,6 +450,24 @@ SlmdResponsiveLayoutView >> bodySplitPanelAdapt [
 
 ]
 
+{ #category : 'login' }
+SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector [
+
+	^ self buttonLabel: label icon: icon send: selector receiver: self
+]
+
+{ #category : 'login' }
+SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector receiver: receiver [
+
+	^ WaButton new
+		label: label;
+		start: (WaIcon fullyNamed: icon);
+		when: CpClickEvent basicPrimary send: selector to: receiver;
+		styleAt: 'width' put: '100%';
+		styleAt: 'padding' put: '0 8px 8px 8px';
+		yourself.
+]
+
 { #category : 'accessing - settings' }
 SlmdResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
 
@@ -538,7 +580,22 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 
 ]
 
-{ #category : 'actions' }
+{ #category : 'login' }
+SlmdResponsiveLayoutView >> fieldAt: key label: aLabel text: aText [
+
+	^ WaInput new
+		name: key;
+		addClass: 'slmd-input';
+		labelText: aLabel;
+		value: aText;
+		hint: 'Help text...', aLabel;
+		disabled: false;
+		attributeAdd: #filled;
+		yourself.
+
+]
+
+{ #category : 'login' }
 SlmdResponsiveLayoutView >> findLoginDialog [
 
 	^ CpHtmlElement documentBody firstDescendantMatching: '#login-dialog'
@@ -961,6 +1018,15 @@ SlmdResponsiveLayoutView >> popups: anObject [
 SlmdResponsiveLayoutView >> primaryPaneOnly [
 
 	self paneLayoutView primaryPaneOnly
+]
+
+{ #category : 'login' }
+SlmdResponsiveLayoutView >> requestLogin [
+
+	self traceCr: '==== request login'.
+	self serverAnnounce: (SlmdLoginRequested new).
+	self findLoginDialog openBeOff.
+
 ]
 
 { #category : 'layout' }
