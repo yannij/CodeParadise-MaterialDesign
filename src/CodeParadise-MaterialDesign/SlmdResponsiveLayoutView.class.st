@@ -311,8 +311,8 @@ SlmdResponsiveLayoutView >> addLoginDialog: label [
 
 	fields := 'div' asHtmlTag
 		addClass: 'slmd-fields';
-		appendChild: (self fieldAt: #loginUsername label: 'Username' text: '');
-		appendChild: (self fieldAt: #loginPassword label: 'Password' text: '');
+		appendChild: (self fieldAt: #loginUsername label: 'Username' input: '');
+		appendChild: (self fieldAt: #loginPassword label: 'Password' input: '');
 		yourself.
 
 	dialog := WaDialog new
@@ -581,7 +581,7 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> fieldAt: key label: aLabel text: aText [
+SlmdResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
 
 	^ WaInput new
 		name: key;

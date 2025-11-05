@@ -193,24 +193,7 @@ SlmdObjectView >> changeMap [
 ]
 
 { #category : 'rendering' }
-SlmdObjectView >> fieldAt: key label: aLabel switch: aBoolean [
-	| element |
-
-	element := WaSwitch new
-		name: key;
-		addClass: 'slmd-switch';
-		checked: aBoolean;
-		replaceAllChildrenWith: aLabel asHtmlElement atSlotNamed: nil;
-		replaceAllChildrenWith: ('Help text...' , aLabel) asHtmlElement atSlotNamed: #'help-text';
-		disabled: true;
-		yourself.
-
-	self mementoAt: key put: aBoolean.
-	^ self fieldElementsAt: key put: element
-]
-
-{ #category : 'rendering' }
-SlmdObjectView >> fieldAt: key label: aLabel text: aText [
+SlmdObjectView >> fieldAt: key label: aLabel input: aText [
 	| element |
 
 	element := WaInput new
@@ -226,6 +209,23 @@ SlmdObjectView >> fieldAt: key label: aLabel text: aText [
 	self mementoAt: key put: aText.
 	^ self fieldElementsAt: key put: element
 
+]
+
+{ #category : 'rendering' }
+SlmdObjectView >> fieldAt: key label: aLabel switch: aBoolean [
+	| element |
+
+	element := WaSwitch new
+		name: key;
+		addClass: 'slmd-switch';
+		checked: aBoolean;
+		replaceAllChildrenWith: aLabel asHtmlElement atSlotNamed: nil;
+		replaceAllChildrenWith: ('Help text...' , aLabel) asHtmlElement atSlotNamed: #'help-text';
+		disabled: true;
+		yourself.
+
+	self mementoAt: key put: aBoolean.
+	^ self fieldElementsAt: key put: element
 ]
 
 { #category : 'rendering' }
@@ -282,7 +282,7 @@ SlmdObjectView >> fieldFor: fieldInfo map: map [
 	fieldValue := (map at: fieldName).
 
 	fieldType = #string ifTrue: [
-		^ self fieldAt: fieldName label: fieldName capitalized text: fieldValue ].
+		^ self fieldAt: fieldName label: fieldName capitalized input: fieldValue ].
 
 	fieldType = #textarea ifTrue: [
 		^ self fieldAt: fieldName label: fieldName capitalized textarea: fieldValue ].
@@ -291,7 +291,7 @@ SlmdObjectView >> fieldFor: fieldInfo map: map [
 		^ self fieldAt: fieldName label: fieldName capitalized switch: fieldValue ].
 
 	fieldType = #date ifTrue: [
-		^ self fieldAt: fieldName label: fieldName capitalized text: fieldValue asString ].
+		^ self fieldAt: fieldName label: fieldName capitalized input: fieldValue asString ].
 
 ]
 

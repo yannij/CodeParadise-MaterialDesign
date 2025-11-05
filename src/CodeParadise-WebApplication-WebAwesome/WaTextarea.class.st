@@ -74,28 +74,28 @@ WaTextarea >> disabledIsOn [
 	^ self propertyAt: #disabled
 ]
 
-{ #category : 'properties' }
+{ #category : 'slots' }
 WaTextarea >> hint [
 
-	^ self propertyAt: #hint
+	^ self firstChildAtSlotNamed: #hint
 ]
 
-{ #category : 'properties' }
-WaTextarea >> hint: anObject [
+{ #category : 'slots' }
+WaTextarea >> hint: aStringOrElement [
 
-	self propertyAt: #hint put: anObject
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #hint
 ]
 
-{ #category : 'properties' }
+{ #category : 'slots' }
 WaTextarea >> label [
 
-	^ self propertyAt: #label
+	^ self firstChildAtSlotNamed: #label
 ]
 
-{ #category : 'properties' }
-WaTextarea >> label: anObject [
+{ #category : 'slots' }
+WaTextarea >> label: aStringOrElement [
 
-	self propertyAt: #label put: anObject
+	self replaceAllChildrenWith: aStringOrElement asHtmlElement atSlotNamed: #label
 ]
 
 { #category : 'properties' }

@@ -380,8 +380,6 @@ WaWrapperSpec class >> waTextareaSpec [
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'readonly' put: false;
 		booleanPropertyAt: 'required' put: false;
-		stringPropertyAt: 'label' put: #string;
-		stringPropertyAt: 'hint' put: #string;
 		stringPropertyAt: 'placeholder' put: #string;
 		stringPropertyAt: 'appearance' put: 'filled|*outlined';
 		stringPropertyAt: 'size' put: 'small|*medium|large';
