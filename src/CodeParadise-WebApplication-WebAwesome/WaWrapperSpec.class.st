@@ -28,6 +28,7 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waButtonGroupSpec generate.
 	self waCardSpec generate.
 	self waCheckboxSpec generate.
+	self waColorPickerSpec generate.
 	self waDetailsSpec generate.
 	self waDialogSpec generate.
 	self waDrawerSpec generate.
@@ -122,6 +123,17 @@ WaWrapperSpec class >> waCheckboxSpec [
 		cssPropertieAdd: 'width';
 		cssPropertieAdd: 'height';
 		cssPropertieAdd: 'thumb-size';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waColorPickerSpec [
+
+	^ self new
+		wrapperClassName: #WaColorPicker;
+		wrapperSuperclass: WaFormControl;
+		slotsAddAll: #('label' 'hint');
+		booleanPropertyAt: 'disabled' put: false;
 		yourself
 ]
 
