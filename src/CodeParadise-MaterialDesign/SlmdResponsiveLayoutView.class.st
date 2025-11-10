@@ -425,6 +425,19 @@ SlmdResponsiveLayoutView >> beEditablePane2 [
 
 ]
 
+{ #category : 'actions' }
+SlmdResponsiveLayoutView >> beNotEditable [
+	| wrappers |
+
+	wrappers := SlmdItemWrapperView all.
+	wrappers do: [ :each |
+		each wrappedView
+			setEditable: false;
+			"setFocus;"
+			yourself ]
+
+]
+
 { #category : 'body' }
 SlmdResponsiveLayoutView >> bodyFind [
 

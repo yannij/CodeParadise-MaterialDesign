@@ -35,7 +35,8 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doCancel: anObject [
 
-	self appBar2ButtonsSetEditDelete
+	self appBar2ButtonsSetEditDelete.
+	self view beNotEditable.
 
 ]
 

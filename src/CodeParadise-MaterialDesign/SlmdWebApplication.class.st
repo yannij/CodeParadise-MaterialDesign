@@ -129,9 +129,6 @@ SlmdWebApplication >> handleUserEvent: anObject [
 	subtype = #navTo ifTrue: [
 		^ self doNavTo: anObject ].
 
-	subtype = #setDetail ifTrue: [
-		^ self doSetDetail: anObject ].
-
 	subtype = #layoutSettingChange ifTrue: [
 		^ self doLayoutSettings: anObject ].
 
@@ -140,21 +137,6 @@ SlmdWebApplication >> handleUserEvent: anObject [
 
 	subtype = #logout ifTrue: [
 		^ self doLogout ].
-
-	subtype = #save ifTrue: [
-		^ self doSave: anObject].
-
-	subtype = #cancel ifTrue: [
-		^ self doCancel: anObject ].
-
-	subtype = #update ifTrue: [
-		^ self doUpdate: anObject ].
-
-	subtype = #delete ifTrue: [
-		^ self doDelete: anObject ].
-
-	subtype = #create ifTrue: [
-		^ self doCreate: anObject ].
 
 	self layout pane1 handleUserEvent: anObject; valueChanged.
 
