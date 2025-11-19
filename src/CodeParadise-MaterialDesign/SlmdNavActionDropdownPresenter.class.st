@@ -7,10 +7,8 @@ Class {
 }
 
 { #category : 'rendering' }
-SlmdNavActionDropdownPresenter >> renderView [
+SlmdNavActionDropdownPresenter >> renderPopup [
 	| popup |
-
-	self view renderNavDropdown: self model asDictionary.
 
 	popup := self layout
 		popupsAt: self model eventSubtype
@@ -20,5 +18,16 @@ SlmdNavActionDropdownPresenter >> renderView [
 		renderAllChildViewsForModels: popup popupItems
 		usingPresenter: SlmdNavActionSubmenuPresenter
 		atSlotNamed: #content
+
+]
+
+{ #category : 'rendering' }
+SlmdNavActionDropdownPresenter >> renderView [
+
+	self application layout layoutSettings navRailExpanded
+		ifTrue: [ self view renderNavExpandedDropdown: self model asDictionary ]
+		ifFalse: [ self view renderNavNarrowDropdown: self model asDictionary ].
+
+	self renderPopup.
 
 ]

@@ -665,13 +665,12 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	layoutWidthCached = newWidth ifTrue: [
 		^ self ].
 
-	(self useAutoLayout not and: [ layoutWidthCached > 0 ]) ifTrue: [
-		layoutWidthCached := newWidth.
-		self bodySplitPanelAdapt.
-		^ self ].
-
 	layoutWidthCached := newWidth.
 	self bodySplitPanelAdapt.
+
+	(self useAutoLayout not and: [ layoutWidthCached > 0 ]) ifTrue: [
+		^ self ].
+
 	self layoutAdaptToWidth
 ]
 

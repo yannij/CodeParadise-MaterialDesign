@@ -153,13 +153,13 @@ WaSplitPanel >> position: anObject [
 { #category : 'properties' }
 WaSplitPanel >> positionInPixels [
 
-	^ self propertyAt: #'position-in-pixels'
+	^ self attributeAt: #'position-in-pixels'
 ]
 
 { #category : 'properties' }
 WaSplitPanel >> positionInPixels: anObject [
 
-	self propertyAt: #'position-in-pixels' put: anObject
+	self attributeAt: #'position-in-pixels' put: anObject
 ]
 
 { #category : 'properties' }

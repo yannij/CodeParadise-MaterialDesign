@@ -65,9 +65,7 @@ SlmdPaneLayoutView class >> template [
     </div>
   </div>
   <div id="smdTwoPaneLayout">
-    <wa-split-panel
-        id="smdBodySplitPanel" class="smd-body-split-panel"
-        primary="start" style="--min: 300px; --divider-width: 24px;">
+    <wa-split-panel id="smdBodySplitPanel" class="smd-body-split-panel">
       <wa-icon slot="divider" name="grip-vertical"></wa-icon>
       <div slot="start">
         <div id="smdTwoPaneLayoutP1" class="smd-pane">
@@ -106,7 +104,12 @@ SlmdPaneLayoutView >> pane1WidthSet: anInteger [
 
 	split := self findByIdInShadowDom: 'smdBodySplitPanel'.
 	split ifNotNil: [
-		split attributeAt: 'position-in-pixels' put: anInteger printString ].
+		split
+			primaryBeStart;
+			positionInPixels: anInteger printString;
+			dividerWidth: '24px';
+			snap: (anInteger printString), 'px 50%';
+			snapThreshold: 24 ].
 
 ]
 

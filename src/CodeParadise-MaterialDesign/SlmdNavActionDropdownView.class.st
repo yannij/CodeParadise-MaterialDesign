@@ -53,7 +53,7 @@ SlmdNavActionDropdownView class >> style [
 }
 
 .smd-navrailx-icon {
-  padding-left: 8px;
+  padding-left: 20px;
   font-size: 24px;
 }
 
@@ -94,7 +94,18 @@ SlmdNavActionDropdownView >> handleNavAction: aNavAction [
 ]
 
 { #category : 'rendering' }
-SlmdNavActionDropdownView >> renderNavDropdown: anItem [
+SlmdNavActionDropdownView >> renderNavExpandedDropdown: anItem [
+	| div |
+
+	div := self divExpanded: anItem.
+	div when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self.
+	"div when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self."
+	self dropdownElement replaceAllChildrenWith: div atSlotNamed: #trigger.
+
+]
+
+{ #category : 'rendering' }
+SlmdNavActionDropdownView >> renderNavNarrowDropdown: anItem [
 	| div |
 
 	div := self divNarrow: anItem.

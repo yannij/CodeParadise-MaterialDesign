@@ -349,7 +349,7 @@ WaWrapperSpec class >> waSplitPanelSpec [
 		wrapperClassName: #WaSplitPanel;
 		slotAdd: 'start'; slotAdd: 'end'; slotAdd: 'divider';
 		numberPropertyAt: 'position' put: 50;
-		numberPropertyAt: 'position-in-pixels' put: #number;
+		numberPropertyAt: '=position-in-pixels' put: #number;
 		stringPropertyAt: 'orientation' put: '*horizontal|vertical';
 		booleanPropertyAt: 'disabled' put: false;
 		stringPropertyAt: 'primary' put: 'start|end';
@@ -584,6 +584,46 @@ WaWrapperSpec >> compileInstanceCreator: aMethodSelector in: aClass [
 ]
 
 { #category : 'code generation' }
+WaWrapperSpec >> compileNumber: aKebabCaseName in: aClass [
+	| isAttribute propertyName |
+
+	isAttribute := (aKebabCaseName first: 1) = '='.
+	propertyName := isAttribute
+		ifTrue: [ aKebabCaseName allButFirst: 1 ]
+		ifFalse: [ aKebabCaseName ].
+
+	isAttribute
+		ifTrue: [ self compileNumberAttribute: propertyName in: aClass ]
+		ifFalse: [ self compileNumberProperty: propertyName in: aClass ].
+
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec >> compileNumberAttribute: aKebabCaseName in: aClass [
+	| accessorString symbolString |
+
+	accessorString := self class kebabCaseToAccessor: aKebabCaseName.
+	symbolString := aKebabCaseName asSymbol printString.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString;
+				cr; cr; tab; nextPutAll: '^ self attributeAt: ', symbolString;
+				yourself ])
+		classified: 'properties'.
+
+	aClass
+		compile: (String streamContents: [ :stream |
+			stream
+				nextPutAll: accessorString; nextPutAll: ': anObject';
+				cr; cr; tab; nextPutAll: 'self attributeAt: ', symbolString, ' put: anObject';
+				yourself ])
+		classified: 'properties'.
+
+]
+
+{ #category : 'code generation' }
 WaWrapperSpec >> compileNumberProperty: aKebabCaseName in: aClass [
 	| accessorString symbolString |
 
@@ -786,7 +826,7 @@ WaWrapperSpec >> generate [
 		self compileString: key types: value in: theClass ].
 
 	self numberProperties keysAndValuesDo: [ :key :value |
-		self compileNumberProperty: key in: theClass ].
+		self compileNumber: key in: theClass ].
 
 	self cssProperties do: [ :each |
 		self compileCssProperty: each in: theClass ].
