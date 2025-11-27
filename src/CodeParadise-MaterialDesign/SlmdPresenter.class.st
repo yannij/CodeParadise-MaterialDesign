@@ -13,12 +13,6 @@ SlmdPresenter class >> isAbstract [
 ]
 
 { #category : 'events' }
-SlmdPresenter >> dispatchUserEvent: anObject [
-
-	self handleUserEvent: anObject
-]
-
-{ #category : 'events' }
 SlmdPresenter >> handleUserEvent: anObject [
 
 	"self logTrace5: anObject printString method: 'handleAction:'."
@@ -34,7 +28,7 @@ SlmdPresenter >> layout [
 { #category : 'events' }
 SlmdPresenter >> subscribeToUserEvent [
 
-	self view when: SlmdUserEvent send: #dispatchUserEvent: to: self
+	self view when: SlmdUserEvent send: #handleUserEvent: to: self
 ]
 
 { #category : 'accessing' }

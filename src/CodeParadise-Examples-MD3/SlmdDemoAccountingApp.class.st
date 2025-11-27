@@ -287,7 +287,10 @@ SlmdDemoAccountingApp >> navItemsToUse [
 ]
 
 { #category : 'events' }
-SlmdDemoAccountingApp >> navTo: data [
+SlmdDemoAccountingApp >> navTo: aNavActionEvent [
+	| data |
+
+	data := aNavActionEvent data.
 
 	data = #company ifTrue: [
 		modelClass := SlmdDemoAccountingCompany ].

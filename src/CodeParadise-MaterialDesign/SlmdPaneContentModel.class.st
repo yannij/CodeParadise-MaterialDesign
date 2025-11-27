@@ -33,10 +33,9 @@ SlmdPaneContentModel >> content: anObject [
 SlmdPaneContentModel >> handleUserEvent: aBasicEvent [
 	| newContent |
 
-	newContent := aBasicEvent parameterAt: #data.
-	newContent ifNil: [
-		"TODO: got here via dispatch of an action"
-		newContent := aBasicEvent parameterAt: #subtype ].
+	newContent := (aBasicEvent eventType = #nav)
+		ifTrue: [ aBasicEvent data ]
+		ifFalse: [ aBasicEvent eventSubtype ].
 	self setContent: newContent.
 
 ]

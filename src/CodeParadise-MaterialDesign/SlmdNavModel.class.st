@@ -26,8 +26,16 @@ SlmdNavModel >> navActionAdd: aNavAction [
 
 { #category : 'accessing' }
 SlmdNavModel >> navActionDetect: aBlock ifNone: noneBlock [
+	| item |
 
-	^ self navItems detect: aBlock ifNone: noneBlock
+	self navItems do: [ :eachNavItem |
+		eachNavItem data = #menu ifTrue: [
+			| popup |
+			popup := self application layout popupsAt: (eachNavItem eventSubtype) ifAbsent: [].
+			item := popup popupItems detect: aBlock ifNone: [].
+			item ifNotNil: [ :value | ^ value ] ].
+		(aBlock value: eachNavItem) ifTrue: [ ^ eachNavItem ] ].
+	^ noneBlock value
 ]
 
 { #category : 'accessing' }

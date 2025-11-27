@@ -23,6 +23,12 @@ SlmdWebApplication >> actionItems [
 	^ self userEventSpecs select: [ :each | each isActionType ]
 ]
 
+{ #category : 'accessing' }
+SlmdWebApplication >> actionItemsInGroup: aGroupName [
+
+	^ self actionItems select: [ :each | each groupTag = aGroupName ]
+]
+
 { #category : 'events' }
 SlmdWebApplication >> addActionSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
@@ -87,9 +93,14 @@ SlmdWebApplication >> doLogout [
 ]
 
 { #category : 'events' }
-SlmdWebApplication >> doNavTo: anObject [
+SlmdWebApplication >> doNavToItemNamed: aNavName [
+	| item |
 
-	self navTo: (anObject parameterAt: #data).
+	item := self navItemNamed: aNavName.
+	item ifNil: [
+		self traceCr: 'Not found: doNavToItemNamed:', aNavName.
+		^ self ].
+	self navTo: item.
 
 ]
 
@@ -125,9 +136,6 @@ SlmdWebApplication >> handleUserEvent: anObject [
 	| subtype |
 
 	subtype := anObject parameterAt: #subtype.
-
-	subtype = #navTo ifTrue: [
-		^ self doNavTo: anObject ].
 
 	subtype = #layoutSettingChange ifTrue: [
 		^ self doLayoutSettings: anObject ].
@@ -269,6 +277,18 @@ SlmdWebApplication >> nativeEventSpecs: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdWebApplication >> navItemNamed: aNavName [
+	"Look at layout's nav model for a nav item that matches aNavName,
+	and answer it, or nil"
+	| navAction |
+
+	navAction := self layout navRail navActionDetect: [ :each | each "itemName" iconLabel = aNavName ] ifNone: [].
+	navAction ifNotNil: [ :value | ^ value ].
+
+	^ nil
+]
+
+{ #category : 'accessing' }
 SlmdWebApplication >> navItemSpecsInGroup: aGroupName [
 
 	^ self navItemsSpecs select: [ :each | each groupTag = aGroupName ]
@@ -287,12 +307,14 @@ SlmdWebApplication >> navItemsToUse [
 ]
 
 { #category : 'events' }
-SlmdWebApplication >> navTo: data [
+SlmdWebApplication >> navTo: aNavActionEvent [
+
+	self layout pane1 handleUserEvent: aNavActionEvent; valueChanged.
 ]
 
 { #category : 'actions' }
 SlmdWebApplication >> postLoad [
-	| toolbar |
+	| toolbar appBar leadingAction |
 
 	super postLoad.
 
@@ -301,14 +323,22 @@ SlmdWebApplication >> postLoad [
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 
 	toolbar := self layout floatingToolbar.
-	(self userEventSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+	(self actionItemsInGroup: toolbar actionGroupToUse) do: [ :each |
 		toolbar addItem: each ].
 	toolbar valueChanged.
 
 	toolbar := self layout dockedToolbar.
-	(self userEventSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+	(self actionItemsInGroup: toolbar actionGroupToUse) do: [ :each |
 		toolbar addItem: each ].
 	toolbar valueChanged.
+
+	appBar := self layout appBar1.
+	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
+	appBar leadingAction: leadingAction.
+
+	appBar := self layout appBar2.
+	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
+	appBar leadingAction: leadingAction.
 
 ]
 
@@ -400,10 +430,4 @@ SlmdWebApplication >> userEventSpecs [
 SlmdWebApplication >> userEventSpecs: anObject [
 
 	userEventSpecs := anObject
-]
-
-{ #category : 'accessing' }
-SlmdWebApplication >> userEventSpecsInGroup: aGroupName [
-
-	^ self actionItems select: [ :each | each groupTag = aGroupName ]
 ]

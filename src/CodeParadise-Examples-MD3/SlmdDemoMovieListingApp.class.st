@@ -272,7 +272,10 @@ SlmdDemoMovieListingApp >> navItemsToUse [
 ]
 
 { #category : 'events' }
-SlmdDemoMovieListingApp >> navTo: data [
+SlmdDemoMovieListingApp >> navTo: aNavActionEvent [
+	| data |
+
+	data := aNavActionEvent data.
 
 	data = #movie ifTrue: [
 		modelClass := SlmdDemoMoviesMovie ].

@@ -15,10 +15,7 @@ SlmdView class >> eventAspectCrud [
 { #category : 'events' }
 SlmdView >> announceActionSubtype: subtype [
 
-	self serverAnnounce: (SlmdUserEvent eventParameter: {
-		#type -> #action.
-		#subtype -> subtype
-	} asDictionary).
+	self serverAnnounce: (WamNavActionEvent id: subtype).
 
 ]
 
@@ -34,24 +31,9 @@ SlmdView >> announceActionSubtype: subtype key: key value: value [
 ]
 
 { #category : 'events' }
-SlmdView >> announceNavKey: key value: value [
-
-	self serverAnnounce: (SlmdUserEvent eventParameter: {
-		#type -> #nav.
-		#subtype -> #nav.
-		key -> value
-	} asDictionary).
-
-]
-
-{ #category : 'events' }
 SlmdView >> announceNavSubtype: subtype navTo: value [
 
-	self serverAnnounce: (SlmdUserEvent eventParameter: {
-		#type -> #nav.
-		#subtype -> subtype.
-		#data -> value
-	} asDictionary).
+	self serverAnnounce: (WamNavActionEvent id: subtype).
 
 ]
 
@@ -74,7 +56,7 @@ SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 			yourself.
 		menu appendChild: (WaDropdownItem new
 			addClass: 'smd-menu-item';
-			when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: each ] for: self;
+			when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self;
 			icon: icon;
 			textContent: (each at: #iconLabel);
 			yourself) ].
@@ -189,7 +171,7 @@ SlmdView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 	^ #div asHtmlTag
 		addClass: cssClass;
 		appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
-		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
+		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
 		yourself
 ]
 
@@ -268,7 +250,7 @@ SlmdView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
 
 	^ (WaButton label: buttonLabal)
 		pillBeOn;
-		when: CpClickEvent primary do: [ :event | self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
+		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
 		"addClass: cssClass;"
 		yourself
 ]
@@ -304,4 +286,13 @@ SlmdView >> shadowFirstDescendantMatching: cssSelectorString show: aBoolean [
 SlmdView >> systemLog [
 
 	^ SlmdLog
+]
+
+{ #category : 'events' }
+SlmdView >> triggerUserEvent: aUserEventSpec [
+	"Announce user event to presenter.
+	Subclasses may override.
+	Default is to route event through layout view"
+
+	self layoutViewLazy triggerUserEvent: aUserEventSpec
 ]

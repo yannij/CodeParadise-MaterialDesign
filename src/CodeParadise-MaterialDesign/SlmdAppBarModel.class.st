@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'primary',
 		'headline',
-		'actionItems',
-		'actionGroupToUse'
+		'actionGroupToUse',
+		'leadingAction'
 	],
 	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
@@ -25,28 +25,15 @@ SlmdAppBarModel >> actionGroupToUse: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdAppBarModel >> actionItems [
-
-	^ actionItems
-]
-
-{ #category : 'accessing' }
-SlmdAppBarModel >> actionItems: anObject [
-
-	actionItems := anObject
-]
-
-{ #category : 'accessing' }
 SlmdAppBarModel >> actionItemsAdd: anObject [
 
-	self actionItems add: anObject
+	self navActionItems add: anObject
 ]
 
 { #category : 'accessing' }
-SlmdAppBarModel >> actionItemsClear [
+SlmdAppBarModel >> actionItemsAddAll: anObject [
 
-	self actionItems: OrderedCollection new.
-
+	self navActionItems addAll: anObject
 ]
 
 { #category : 'accessing' }
@@ -83,7 +70,6 @@ SlmdAppBarModel >> initialize [
 	super initialize.
 
 	headline := ''.
-	actionItems := OrderedCollection new.
 	self bePrimary.
 
 ]
@@ -98,6 +84,29 @@ SlmdAppBarModel >> isPrimary [
 SlmdAppBarModel >> isSecondary [
 
 	^ self isPrimary not
+]
+
+{ #category : 'accessing' }
+SlmdAppBarModel >> leadingAction [
+
+	^ leadingAction
+]
+
+{ #category : 'accessing' }
+SlmdAppBarModel >> leadingAction: anObject [
+
+	leadingAction := anObject
+]
+
+{ #category : 'events' }
+SlmdAppBarModel >> navActionFind: anObject [
+
+	self leadingAction ifNotNil: [ :value |
+		value eventSubtype = anObject ifTrue: [
+			^ anObject = #back ifTrue: [ #back ] ifFalse: [ value ] ] ].
+
+	^ self navActionItems detect: [ :each | each eventSubtype = anObject ] ifNone: [].
+
 ]
 
 { #category : 'accessing' }

@@ -78,7 +78,7 @@ SlmdNavBarView >> navbarBuildItem: aNavAction [
 	^ #div asHtmlTag
 		addClass: 'smd-navbar-item';
 		addClass: 'smd-navbar-font';
-		when: CpClickEvent basicPrimary do: [ self layoutViewLazy triggerUserEvent: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
 		appendChild: (#div asHtmlTag
 			addClass: 'smd-navbar-icon';
 			appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);

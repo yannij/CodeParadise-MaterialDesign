@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fab',
 		'isVisible',
-		'iconButtons'
+		'navActionItems'
 	],
 	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
@@ -25,24 +25,14 @@ SlmdToolbarModel >> actionItemFabOrNil [
 
 { #category : 'view' }
 SlmdToolbarModel >> actionItemsToUse [
-	| list groupName |
 
-	list := self application actionItems.
-	groupName := self actionGroupToUse.
-	^ list select: [ :each | each groupTag = groupName ]
+	^ self application actionItemsInGroup: self actionGroupToUse
 ]
 
 { #category : 'accessing' }
 SlmdToolbarModel >> addItem: anObject [
 
-	self iconButtons add: anObject
-]
-
-{ #category : 'accessing' }
-SlmdToolbarModel >> clearItems [
-
-	self iconButtons: OrderedCollection new.
-
+	self navActionItems add: anObject
 ]
 
 { #category : 'accessing' }
@@ -57,24 +47,12 @@ SlmdToolbarModel >> fab: anObject [
 	fab := anObject
 ]
 
-{ #category : 'accessing' }
-SlmdToolbarModel >> iconButtons [
-
-	^ iconButtons
-]
-
-{ #category : 'accessing' }
-SlmdToolbarModel >> iconButtons: anObject [
-
-	iconButtons := anObject
-]
-
 { #category : 'initialization' }
 SlmdToolbarModel >> initialize [
 
 	super initialize.
 
-	self clearItems.
+	self navActionItemsClear.
 
 ]
 
@@ -88,4 +66,30 @@ SlmdToolbarModel >> isVisible [
 SlmdToolbarModel >> isVisible: anObject [
 
 	isVisible := anObject
+]
+
+{ #category : 'events' }
+SlmdToolbarModel >> navActionFind: anObject [
+
+	^ self navActionItems detect: [ :each | each itemName = anObject ] ifNone: [].
+
+]
+
+{ #category : 'accessing' }
+SlmdToolbarModel >> navActionItems [
+
+	^ navActionItems
+]
+
+{ #category : 'accessing' }
+SlmdToolbarModel >> navActionItems: anObject [
+
+	navActionItems := anObject
+]
+
+{ #category : 'accessing' }
+SlmdToolbarModel >> navActionItemsClear [
+
+	self navActionItems: OrderedCollection new.
+
 ]

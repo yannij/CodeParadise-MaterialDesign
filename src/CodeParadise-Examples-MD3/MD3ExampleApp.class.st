@@ -50,7 +50,7 @@ MD3ExampleApp >> clientBehaviorClass [
 
 { #category : 'initialization' }
 MD3ExampleApp >> initialize [
-	| pane1Model pane2Model |
+	| pane1Model pane2Model appBar1 |
 
 	super initialize.
 
@@ -60,7 +60,9 @@ MD3ExampleApp >> initialize [
 	layout := SlmdResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	self layout appBar1 headline: self class appName.
+	appBar1 := self layout appBar1.
+	appBar1 headline: self class appName.
+	appBar1 actionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 
 
 ]
 

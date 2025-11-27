@@ -12,7 +12,7 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetEditDelete [
 
 	app := self application.
 	app layout appBar2
-		actionItemsClear;
+		navActionItemsClear;
 		actionItemsAdd: (app nativeEventSpecAt: #delete);
 		actionItemsAdd: (app nativeEventSpecAt: #update);
 		valueChanged;
@@ -25,7 +25,7 @@ SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
 
 	app := self application.
 	app layout appBar2
-		actionItemsClear;
+		navActionItemsClear;
 		actionItemsAdd: (app nativeEventSpecAt: #save);
 		actionItemsAdd: (app nativeEventSpecAt: #cancel);
 		valueChanged;
@@ -95,9 +95,6 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	self systemLog logTrace: anObject printString method: 'handleUserEvent:'.
 
 	subtype := anObject parameterAt: #subtype.
-
-	subtype = #back ifTrue: [
-		^ self view primaryPaneOnly ].
 
 	subtype = #setDetail ifTrue: [
 		^ self doSetDetail: anObject ].

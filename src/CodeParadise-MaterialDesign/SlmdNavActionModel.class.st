@@ -9,9 +9,9 @@ Class {
 		'iconLabel',
 		'groupTag'
 	],
-	#category : 'CodeParadise-MaterialDesign-NavAction',
+	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'NavAction'
+	#tag : 'Nav'
 }
 
 { #category : 'instance creation' }
@@ -166,6 +166,12 @@ SlmdNavActionModel >> itemName [
 SlmdNavActionModel >> itemName: anObject [
 
 	eventSubtype := anObject
+]
+
+{ #category : 'events' }
+SlmdNavActionModel >> navActionFind: anObject [
+
+	^ self
 ]
 
 { #category : 'presenter' }

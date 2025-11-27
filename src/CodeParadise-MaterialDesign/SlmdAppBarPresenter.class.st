@@ -14,25 +14,27 @@ SlmdAppBarPresenter >> actionGroupToUse [
 
 { #category : 'view' }
 SlmdAppBarPresenter >> actionItemsToUse [
-	| list groupName |
+	"| list groupName |
 
-	self model actionItems ifNotEmpty: [ :value |
+	self model navActionItems ifNotEmpty: [ :value |
 		^ value ].
 
-	list := self application actionItems.
+	list := self application navActionItems.
 	groupName := self actionGroupToUse.
-	^ list select: [ :each | each groupTag = groupName ]
+	^ list select: [ :each | each groupTag = groupName ]"
+
+	^ self model navActionItems
 ]
 
 { #category : 'view' }
 SlmdAppBarPresenter >> renderView [
-	| list leadingActionName leadingAction |
+	| list leadingAction |
 
-	leadingActionName := self model isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ].
-	leadingAction := self application nativeEventSpecAt: leadingActionName.
-	(self application layout layoutSettings useTwoPaneBody and: [ leadingActionName = #back ])
+	leadingAction := self model leadingAction.
+	leadingAction ifNotNil: [
+	(self application layout layoutSettings useTwoPaneBody and: [ leadingAction eventSubtype = #back ])
 		ifTrue: [ self view renderLeadingAction: nil ]
-		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ].
+		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ] ].
 
 	self model isPrimary ifTrue: [
 		self view renderHeadline: self model headline ].
