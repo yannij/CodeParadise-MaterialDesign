@@ -73,7 +73,7 @@ SlmdWebApplication >> customColorTheme [
 SlmdWebApplication >> doLayoutSettings: anObject [
 	| aspect aspectValue |
 
-	self systemLog logTrace5: anObject printString method: 'handleViewAction:'.
+	self systemLog logTrace: anObject printString level: 5.
 	aspect := anObject parameterAt: #aspect.
 	aspectValue := anObject parameterAt: #value.
 
@@ -81,9 +81,9 @@ SlmdWebApplication >> doLayoutSettings: anObject [
 		self layoutUpdate: aspectValue.
 		^ self ].
 
-	self systemLog logTrace5: aspect asString, ' BEFORE: ', (self layout layoutSettings perform: aspect) printString.
+	self systemLog logTrace: aspect asString, ' BEFORE: ', (self layout layoutSettings perform: aspect) printString level: 5.
 	self layout layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
-	self systemLog logTrace5: aspect asString, '  AFTER: ', (self layout layoutSettings perform: aspect) printString.
+	self systemLog logTrace: aspect asString, '  AFTER: ', (self layout layoutSettings perform: aspect) printString level: 5.
 
 ]
 
@@ -98,7 +98,7 @@ SlmdWebApplication >> doNavToItemNamed: aNavName [
 
 	item := self navItemNamed: aNavName.
 	item ifNil: [
-		self traceCr: 'Not found: doNavToItemNamed:', aNavName.
+		self systemLog logError: 'Not found: doNavToItemNamed:', aNavName.
 		^ self ].
 	self navTo: item.
 
@@ -118,35 +118,16 @@ SlmdWebApplication >> doRefresh: anObject [
 { #category : 'events' }
 SlmdWebApplication >> handleLoginRequested: anObject [
 
-	self traceCr: 'handleLoginRequested:'.
+	self systemLog logTrace: ' Login Requested'.
 
 ]
 
 { #category : 'events' }
 SlmdWebApplication >> handleSetDetail: anObject [
 
-	self traceCr: 'handleSetDetail:'.
+	self systemLog logTrace: 'handleSetDetail:'.
 
 	self setDetailWithIndex: (anObject parameterAt: #index).
-
-]
-
-{ #category : 'events' }
-SlmdWebApplication >> handleUserEvent: anObject [
-	| subtype |
-
-	subtype := anObject parameterAt: #subtype.
-
-	subtype = #layoutSettingChange ifTrue: [
-		^ self doLayoutSettings: anObject ].
-
-	subtype = #refresh ifTrue: [
-		^ self doRefresh: anObject ].
-
-	subtype = #logout ifTrue: [
-		^ self doLogout ].
-
-	self layout pane1 handleUserEvent: anObject; valueChanged.
 
 ]
 
@@ -178,14 +159,14 @@ SlmdWebApplication >> layout: anObject [
 SlmdWebApplication >> layoutUpdate: props [
 	| m |
 
-	self systemLog logTrace5: props printString method: 'layoutUpdate:'.
+	self systemLog logTrace: props printString level: 5.
 
 	m := self layout layoutSettings.
 	props keysAndValuesDo: [ :k :v | | setAccessor |
 		setAccessor := (k, ':') asSymbol.
-		self systemLog logTrace5: k asString, ' BEFORE: ', (m perform: k) printString.
+		self systemLog logTrace: k asString, ' BEFORE: ', (m perform: k) printString level: 5.
 		m perform: setAccessor with: v.
-		self systemLog logTrace5: k asString, '  AFTER: ', (m perform: k) printString.
+		self systemLog logTrace: k asString, '  AFTER: ', (m perform: k) printString level: 5.
 		].
 
 	"The appbar leading action might depend on two pane mode"
@@ -226,12 +207,6 @@ SlmdWebApplication >> listDetailRemove: ignored [
 	listDetail listSet: self allModels.
 	self setDetailWithIndex: 1.
 
-]
-
-{ #category : 'logging' }
-SlmdWebApplication >> logTrace5: aString method: methodName [
-
-	self logTrace: aString aspect: self class name, '>>', methodName level: 5
 ]
 
 { #category : 'model' }
@@ -309,7 +284,7 @@ SlmdWebApplication >> navItemsToUse [
 { #category : 'events' }
 SlmdWebApplication >> navTo: aNavActionEvent [
 
-	self layout pane1 handleUserEvent: aNavActionEvent; valueChanged.
+	self layout pane1 processNavActionEvent: aNavActionEvent; valueChanged.
 ]
 
 { #category : 'actions' }
@@ -339,6 +314,25 @@ SlmdWebApplication >> postLoad [
 	appBar := self layout appBar2.
 	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
 	appBar leadingAction: leadingAction.
+
+]
+
+{ #category : 'events' }
+SlmdWebApplication >> processNavActionEvent: anObject [
+	| subtype |
+
+	subtype := anObject parameterAt: #subtype.
+
+	subtype = #layoutSettingChange ifTrue: [
+		^ self doLayoutSettings: anObject ].
+
+	subtype = #refresh ifTrue: [
+		^ self doRefresh: anObject ].
+
+	subtype = #logout ifTrue: [
+		^ self doLogout ].
+
+	self layout pane1 processNavActionEvent: anObject; valueChanged.
 
 ]
 

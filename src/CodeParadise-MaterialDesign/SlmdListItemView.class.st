@@ -101,7 +101,7 @@ SlmdListItemView >> renderListItemMap: aMap index: index [
 { #category : 'rendering' }
 SlmdListItemView >> setDetail: index [
 
-	self systemLog logTrace5: index printString method: 'setDetail:'.
+	self systemLog logTrace: index printString level: 5.
 
 	self layoutViewFind announceActionSubtype: #setDetail key: #index value: index.
 

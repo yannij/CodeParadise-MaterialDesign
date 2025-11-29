@@ -30,7 +30,7 @@ SlmdPaneContentModel >> content: anObject [
 ]
 
 { #category : 'actions' }
-SlmdPaneContentModel >> handleUserEvent: aBasicEvent [
+SlmdPaneContentModel >> processNavActionEvent: aBasicEvent [
 	| newContent |
 
 	newContent := (aBasicEvent eventType = #nav)

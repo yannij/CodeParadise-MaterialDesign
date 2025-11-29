@@ -17,20 +17,6 @@ SlmdToolbarPresenter >> clearAllSlots [
 
 ]
 
-{ #category : 'events' }
-SlmdToolbarPresenter >> handleNavEvent: aNavEvent [
-	| item |
-
-	item := self model navActionFind: aNavEvent id.
-	item ifNil: [
-		self systemLog logTrace: 'Not found: ', aNavEvent id printString method: 'handleNavEvent:'.
-		^ self ].
-	item = #back ifTrue: [
-		^ self view primaryPaneOnly ].
-	self application navTo: item.
-
-]
-
 { #category : 'model' }
 SlmdToolbarPresenter >> modelChanged: aValueChanged [
 
@@ -43,6 +29,6 @@ SlmdToolbarPresenter >> viewCreated [
 
 	super viewCreated.
 
-	self view when: WamNavActionEvent send: #handleNavEvent: to: self
+	self subscribeToNavActionEvent
 
 ]

@@ -72,7 +72,7 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
 
-	self systemLog logTrace: anObject printString method: 'doSetDetail:'.
+	self systemLog logTrace: anObject printString.
 
 	self view secondaryPaneOnly.
 	self application handleSetDetail: anObject.
@@ -92,7 +92,7 @@ SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	| subtype |
 
-	self systemLog logTrace: anObject printString method: 'handleUserEvent:'.
+	self systemLog logTrace: anObject printString.
 
 	subtype := anObject parameterAt: #subtype.
 
@@ -114,7 +114,7 @@ SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
 	subtype = #create ifTrue: [
 		^ self doCreate: anObject ].
 
-	self application handleUserEvent: anObject.
+	self application processNavActionEvent: anObject.
 
 ]
 

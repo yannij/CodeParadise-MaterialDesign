@@ -61,9 +61,3 @@ SlmdToolbarView >> renderFab: fab [
 	self appendChild: div atSlotNamed: 'fab'.
 
 ]
-
-{ #category : 'events' }
-SlmdToolbarView >> triggerNavEvent: aUserEventSpec [
-
-	self serverAnnounce: (WamNavActionEvent id: (aUserEventSpec at: #subtype)).
-]

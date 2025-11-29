@@ -64,7 +64,7 @@ SlmdNavRailModalView >> renderNavContent: buttons [
 	nav := #nav asHtmlTag addClass: 'smd-navrailx'; yourself.
 	buttons do: [ :each | | element |
 		element := self divExpanded: each.
-		element when: CpClickEvent basicPrimary do: [ self handleNavAction: each ] for: self.
+		element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self.
 		nav appendChild: element ].
 	drawer appendChild: nav
 

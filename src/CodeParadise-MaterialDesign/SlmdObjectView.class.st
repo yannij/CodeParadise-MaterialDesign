@@ -186,7 +186,7 @@ SlmdObjectView >> changeMap [
 	self fieldElements valuesDo: [ :each | | oldValue newValue |
 		oldValue := self mementoAt: each name.
 		newValue := each value.
-		self traceCr: 'old: ', oldValue printString, ', new: ', newValue printString.
+		self systemLog logTrace: 'old: ', oldValue printString, ', new: ', newValue printString.
 		oldValue ~= newValue ifTrue: [
 			map at: each name put: newValue ] ].
 	^ map

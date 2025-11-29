@@ -45,13 +45,6 @@ SlmdPaneModel >> appBarModel: anObject [
 	appBarModel := anObject
 ]
 
-{ #category : 'actions' }
-SlmdPaneModel >> handleUserEvent: aBasicEvent [
-
-	self paneContent handleUserEvent: aBasicEvent.
-
-]
-
 { #category : 'initialization' }
 SlmdPaneModel >> initialize [
 
@@ -72,6 +65,13 @@ SlmdPaneModel >> paneContent [
 SlmdPaneModel >> paneContent: anObject [
 
 	paneContent := anObject
+]
+
+{ #category : 'actions' }
+SlmdPaneModel >> processNavActionEvent: aBasicEvent [
+
+	self paneContent processNavActionEvent: aBasicEvent.
+
 ]
 
 { #category : 'accessing' }

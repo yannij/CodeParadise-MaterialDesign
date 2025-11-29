@@ -43,8 +43,7 @@ SlmdObjectModel >> fieldsData [
 { #category : 'rendering' }
 SlmdObjectModel >> handleDelete: anObject [
 
-	"self logTrace: anObject printString method: 'handleDelete:'."
-	self traceCr: anObject printString.
+	self systemLog logTrace: anObject printString.
 	^ self.
 
 ]
@@ -53,9 +52,9 @@ SlmdObjectModel >> handleDelete: anObject [
 SlmdObjectModel >> handleSave: anObject [
 	| changes |
 
-	self traceCr: anObject printString.
+	self systemLog logTrace: anObject printString.
 
-	changes := anObject parameters at: #changes ifAbsent: [ ^ self traceCr: 'Missing "changes" value on "save" event'].
+	changes := anObject parameters at: #changes ifAbsent: [ ^ self systemLog logError: 'Missing "changes" value on "save" event'].
 	self applyChanges: changes.
 
 ]
@@ -63,7 +62,7 @@ SlmdObjectModel >> handleSave: anObject [
 { #category : 'rendering' }
 SlmdObjectModel >> handleUpdate: anObject [
 
-	self traceCr: anObject printString.
+	self systemLog logTrace: anObject printString.
 
 ]
 

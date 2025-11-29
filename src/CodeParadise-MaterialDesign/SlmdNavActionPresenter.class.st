@@ -20,6 +20,6 @@ SlmdNavActionPresenter >> viewCreated [
 
 	super viewCreated.
 
-	self view when: WamNavActionEvent send: #handleNavEvent: to: self
+	self subscribeToNavActionEvent
 
 ]

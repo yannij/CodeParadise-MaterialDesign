@@ -6,8 +6,14 @@ Class {
 	#tag : 'Base'
 }
 
+{ #category : 'events' }
+SlmdModel >> navActionFind: anObject [
+
+	^ nil
+]
+
 { #category : 'actions' }
-SlmdModel >> handleUserEvent: aBasicEvent [
+SlmdModel >> processNavActionEvent: aBasicEvent [
 	"Hook to receive UI events for handling"
 ]
 

@@ -12,7 +12,16 @@ Class {
 { #category : 'logging' }
 SlmdLog class >> log: aString [
 
-	self crTrace: aString
+	self traceCr: aString
+]
+
+{ #category : 'logging' }
+SlmdLog class >> log: aString level: level [
+
+	self traceLevel < level ifTrue: [
+		^ self ].
+
+	self traceCr: aString
 ]
 
 { #category : 'logging' }
@@ -28,44 +37,35 @@ SlmdLog class >> logInfo: aString [
 ]
 
 { #category : 'logging' }
-SlmdLog class >> logTrace5: aString [
-
-	self logTrace: aString aspect: nil level: 5
-]
-
-{ #category : 'logging' }
-SlmdLog class >> logTrace5: aString method: methodName [
-
-	self logTrace: aString aspect: self class name, '>>', methodName level: 5
-]
-
-{ #category : 'logging' }
 SlmdLog class >> logTrace: aString [
+	| senderString index methodString |
 
-	self logTrace: aString aspect: nil
+	self traceLevel < 3 ifTrue: [
+		^ self ].
+
+	"On client side, the sender printString includes the stack trace, so trim it off."
+	senderString := thisContext sender printString.
+	index := senderString indexOf: Character lf.
+	index := index = 0 ifTrue: [ senderString size ] ifFalse: [ index - 1 ].
+	methodString := senderString copyFrom: 1 to: index.
+
+	self log: aString, ' [', methodString, ']'
 ]
 
 { #category : 'logging' }
-SlmdLog class >> logTrace: aString aspect: aspect [
-
-	self logTrace: aString aspect: aspect level: 3
-]
-
-{ #category : 'logging' }
-SlmdLog class >> logTrace: aString aspect: aspect level: level [
+SlmdLog class >> logTrace: aString level: level [
+	| senderString index methodString |
 
 	self traceLevel < level ifTrue: [
 		^ self ].
 
-	aspect
-		ifNil: [ self log: aString ]
-		ifNotNil: [ self log: '[', aspect, '] ', aString ]
-]
+	"On client side, the sender printString includes the stack trace, so trim it off."
+	senderString := thisContext sender printString.
+	index := senderString indexOf: Character lf.
+	index := index = 0 ifTrue: [ senderString size ] ifFalse: [ index - 1 ].
+	methodString := senderString copyFrom: 1 to: index.
 
-{ #category : 'logging' }
-SlmdLog class >> logTrace: aString method: methodName [
-
-	self logTrace: aString aspect: self class name, '>>', methodName
+	self log: aString, ' [', methodString, ']'
 ]
 
 { #category : 'logging' }

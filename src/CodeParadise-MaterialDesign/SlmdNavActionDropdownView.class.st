@@ -86,13 +86,6 @@ SlmdNavActionDropdownView >> dropdownOpen: aBoolean [
 	self dropdownElement open: aBoolean
 ]
 
-{ #category : 'actions' }
-SlmdNavActionDropdownView >> handleNavAction: aNavAction [
-
-	self layoutViewLazy hideNavModal
-
-]
-
 { #category : 'rendering' }
 SlmdNavActionDropdownView >> renderNavExpandedDropdown: anItem [
 	| div |
@@ -112,5 +105,12 @@ SlmdNavActionDropdownView >> renderNavNarrowDropdown: anItem [
 	div when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self.
 	"div when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self."
 	self dropdownElement replaceAllChildrenWith: div atSlotNamed: #trigger.
+
+]
+
+{ #category : 'actions' }
+SlmdNavActionDropdownView >> triggerNavEvent: aNavAction [
+
+	self layoutViewLazy hideNavModal
 
 ]

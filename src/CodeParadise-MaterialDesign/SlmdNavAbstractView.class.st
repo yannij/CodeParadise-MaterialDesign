@@ -98,25 +98,9 @@ SlmdNavAbstractView >> divNarrow: aNavAction [
 ]
 
 { #category : 'actions' }
-SlmdNavAbstractView >> handleNavAction: aNavAction [
-
-	"self layoutViewLazy triggerUserEvent: aNavAction; hideNavModal."
-	self triggerNavEvent: aNavAction.
-	self layoutViewLazy hideNavModal.
-]
-
-{ #category : 'actions' }
 SlmdNavAbstractView >> triggerNavEvent: aNavAction [
-	| subtype |
 
-	subtype := aNavAction at: #subtype.
+	super triggerNavEvent: aNavAction.
 
-	subtype = #modalNav ifTrue: [
-		^ self layoutViewLazy modalNavOpen ].
-	subtype = #settingsOpen ifTrue: [
-		^ self layoutViewLazy modalSettingsOpen ].
-	subtype = #login ifTrue: [
-		^ self layoutViewLazy loginOpen ].
-
-	self serverAnnounce: (WamNavActionEvent id: subtype).
+	self layoutViewLazy hideNavModal.
 ]

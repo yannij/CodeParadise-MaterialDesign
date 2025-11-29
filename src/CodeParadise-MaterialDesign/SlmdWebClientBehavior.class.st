@@ -120,7 +120,7 @@ SlmdWebClientBehavior >> initialize [
 { #category : 'login' }
 SlmdWebClientBehavior >> requestLogin [
 
-	self traceCr: '==== request login'.
+	SlmdLog logTrace: '==== request login'.
 	self clientEnvironment serverAnnounce: (CpViewAnnouncement new
 		viewId: self appViewId;
 		announcement: SlmdLoginRequested new;

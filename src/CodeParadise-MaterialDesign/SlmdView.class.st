@@ -30,13 +30,6 @@ SlmdView >> announceActionSubtype: subtype key: key value: value [
 
 ]
 
-{ #category : 'events' }
-SlmdView >> announceNavSubtype: subtype navTo: value [
-
-	self serverAnnounce: (WamNavActionEvent id: subtype).
-
-]
-
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 
@@ -187,14 +180,6 @@ SlmdView >> layoutViewLazy [
 	self subclassResponsibility
 ]
 
-{ #category : 'logging' }
-SlmdView >> logTrace: aString method: methodName [
-
-	"Invoked by presenter via view proxy,
-	so extra definition here, else the method reported DNU."
-	self systemLog logTrace: aString method: methodName
-]
-
 { #category : 'find element' }
 SlmdView >> modalDivFind [
 	"Locate the div where modal components can attach"
@@ -286,6 +271,22 @@ SlmdView >> shadowFirstDescendantMatching: cssSelectorString show: aBoolean [
 SlmdView >> systemLog [
 
 	^ SlmdLog
+]
+
+{ #category : 'actions' }
+SlmdView >> triggerNavEvent: aNavAction [
+	| subtype |
+
+	subtype := aNavAction at: #subtype.
+
+	subtype = #modalNav ifTrue: [
+		^ self layoutViewLazy modalNavOpen ].
+	subtype = #settingsOpen ifTrue: [
+		^ self layoutViewLazy modalSettingsOpen ].
+	subtype = #login ifTrue: [
+		^ self layoutViewLazy loginOpen ].
+
+	self serverAnnounce: (WamNavActionEvent id: subtype).
 ]
 
 { #category : 'events' }

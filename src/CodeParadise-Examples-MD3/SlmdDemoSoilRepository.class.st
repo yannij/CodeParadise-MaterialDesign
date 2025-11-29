@@ -128,7 +128,7 @@ SlmdDemoSoilRepository >> list: aClass transaction: tx [
 	list := tx root at: (self collectionNameFor: aClass) ifAbsentPut: [ self collectionNewFor: aClass ].
 
 	list ifNil: [
-		self crTrace: 'list not found for: ', aClass printString ].
+		self traceCr: 'list not found for: ', aClass printString ].
 
 	^ list
 ]

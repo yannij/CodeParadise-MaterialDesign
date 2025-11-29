@@ -19,7 +19,7 @@ SlmdNavActionView >> renderNavExpanded: anItem [
 	| element |
 
 	element := self divExpanded: anItem.
-	element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self.
+	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]
@@ -29,7 +29,7 @@ SlmdNavActionView >> renderNavNarrow: anItem [
 	| element |
 
 	element := self divNarrow: anItem.
-	element when: CpClickEvent basicPrimary do: [ self handleNavAction: anItem ] for: self.
+	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: #content.
 
 ]

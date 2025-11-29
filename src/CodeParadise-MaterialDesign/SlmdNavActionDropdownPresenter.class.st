@@ -12,7 +12,7 @@ SlmdNavActionDropdownPresenter >> renderPopup [
 
 	popup := self layout
 		popupsAt: self model eventSubtype
-		ifAbsent: [ ^ self traceCr: 'ERROR missing popup: ', self model groupTag printString ].
+		ifAbsent: [ ^ self systemLog logError: 'Missing popup: ', self model groupTag printString ].
 
 	self
 		renderAllChildViewsForModels: popup popupItems

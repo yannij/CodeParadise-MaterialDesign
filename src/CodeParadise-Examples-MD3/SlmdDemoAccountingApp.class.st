@@ -209,7 +209,7 @@ SlmdDemoAccountingApp >> clientBehaviorClass [
 { #category : 'actions - toolbar' }
 SlmdDemoAccountingApp >> doLogout [
 
-	self traceCr: 'doLogout'.
+	self systemLog logTrace: 'doLogout'.
 	self username: nil.
 
 ]
@@ -217,7 +217,7 @@ SlmdDemoAccountingApp >> doLogout [
 { #category : 'events' }
 SlmdDemoAccountingApp >> handleLoginRequested: anObject [
 
-	self traceCr: 'handleLoginRequested:'.
+	self systemLog logTrace: 'handleLoginRequested:'.
 	self username: 'foobar'.
 
 ]
