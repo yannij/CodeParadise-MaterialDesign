@@ -26,6 +26,30 @@ SlmdAppBarPresenter >> actionItemsToUse [
 	^ self model navActionItems
 ]
 
+{ #category : 'events' }
+SlmdAppBarPresenter >> handleNavEvent: aNavEvent [
+	| item |
+
+	self systemLog logTrace: aNavEvent printString.
+
+	item := self model navActionFind: aNavEvent id.
+	item ifNil: [
+		self systemLog logError: 'Not found: ', aNavEvent id printString.
+		^ self ].
+	item = #back ifTrue: [
+		^ self view primaryPaneOnly ].
+	item eventSubtype = #update ifTrue: [
+		^ self doUpdate: aNavEvent ].
+	item eventSubtype = #save ifTrue: [
+		^ self doSave: aNavEvent ].
+	item eventSubtype = #cancel ifTrue: [
+		^ self doCancel: aNavEvent ].
+	item eventSubtype = #delete ifTrue: [
+		^ self doDelete: aNavEvent ].
+	self systemLog logError: 'No handler for: ', item eventSubtype printString.
+
+]
+
 { #category : 'view' }
 SlmdAppBarPresenter >> renderView [
 	| list leadingAction |

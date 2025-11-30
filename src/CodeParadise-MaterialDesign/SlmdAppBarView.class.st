@@ -188,3 +188,23 @@ SlmdAppBarView >> renderTrailingActions: buttons [
 	self appendChild: (self dropdownMenu: overflowList css: 'smd-toolbar-item') atSlotNamed: 'trailingActions'.
 
 ]
+
+{ #category : 'actions' }
+SlmdAppBarView >> triggerNavEvent: aNavAction [
+	| subtype data event |
+
+	subtype := aNavAction at: #subtype.
+	data := aNavAction at: #data.
+	event := WamNavActionEvent id: subtype parameter: data.
+
+	subtype = #modalNav ifTrue: [
+		^ self layoutViewLazy modalNavOpen ].
+
+	subtype = 'save' ifTrue: [ | changes paneContentView |
+		paneContentView := self layoutViewLazy pane2View paneContentView.
+		paneContentView ifNil: [ ^ self ].
+		changes := paneContentView wrappedView changeMap.
+		event parameters at: #changes put: changes ].
+
+	self serverAnnounce: event
+]

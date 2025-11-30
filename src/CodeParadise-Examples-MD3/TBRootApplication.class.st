@@ -106,7 +106,7 @@ TBRootApplication >> refresh [
 TBRootApplication >> setUpAppBar1 [
 
 	self layout pane1 appBarModel
-		actionItemsAdd: (self nativeEventSpecAt: #refresh);
+		navActionItemsAdd: (self nativeEventSpecAt: #refresh);
 		yourself.
 
 ]
@@ -115,8 +115,8 @@ TBRootApplication >> setUpAppBar1 [
 TBRootApplication >> setUpAppBar2 [
 
 	self layout pane2 appBarModel
-		actionItemsAdd: (self nativeEventSpecAt: #delete);
-		actionItemsAdd: (self nativeEventSpecAt: #update);
+		navActionItemsAdd: (self nativeEventSpecAt: #delete);
+		navActionItemsAdd: (self nativeEventSpecAt: #update);
 		yourself.
 
 ]

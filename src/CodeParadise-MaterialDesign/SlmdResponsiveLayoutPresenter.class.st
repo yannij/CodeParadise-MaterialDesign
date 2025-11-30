@@ -7,32 +7,6 @@ Class {
 }
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetEditDelete [
-	| app |
-
-	app := self application.
-	app layout appBar2
-		navActionItemsClear;
-		actionItemsAdd: (app nativeEventSpecAt: #delete);
-		actionItemsAdd: (app nativeEventSpecAt: #update);
-		valueChanged;
-		yourself
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutPresenter >> appBar2ButtonsSetSaveCancel [
-	| app |
-
-	app := self application.
-	app layout appBar2
-		navActionItemsClear;
-		actionItemsAdd: (app nativeEventSpecAt: #save);
-		actionItemsAdd: (app nativeEventSpecAt: #cancel);
-		valueChanged;
-		yourself
-]
-
-{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doCancel: anObject [
 
 	self appBar2ButtonsSetEditDelete.

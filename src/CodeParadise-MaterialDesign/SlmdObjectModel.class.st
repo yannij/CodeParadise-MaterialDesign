@@ -54,7 +54,9 @@ SlmdObjectModel >> handleSave: anObject [
 
 	self systemLog logTrace: anObject printString.
 
-	changes := anObject parameters at: #changes ifAbsent: [ ^ self systemLog logError: 'Missing "changes" value on "save" event'].
+	changes := anObject parameterAt: #changes.
+	changes ifNil: [
+		^ self systemLog logError: 'Missing "changes" value on "save" event'].
 	self applyChanges: changes.
 
 ]

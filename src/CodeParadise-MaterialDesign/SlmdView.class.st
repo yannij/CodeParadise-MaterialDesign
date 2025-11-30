@@ -31,6 +31,18 @@ SlmdView >> announceActionSubtype: subtype key: key value: value [
 ]
 
 { #category : 'utilities' }
+SlmdView >> beEditablePane2 [
+
+	self layoutViewLazy beEditablePane2
+]
+
+{ #category : 'utilities' }
+SlmdView >> beNotEditable [
+
+	self layoutViewLazy beNotEditable
+]
+
+{ #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList css: cssClass [
 
 	^ self dropdownMenu: actionList icon: 'ellipsis-vertical' css: cssClass
@@ -240,6 +252,18 @@ SlmdView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
 		yourself
 ]
 
+{ #category : 'actions' }
+SlmdView >> primaryPaneOnly [
+
+	self layoutViewLazy paneLayoutView primaryPaneOnly
+]
+
+{ #category : 'utilities' }
+SlmdView >> secondaryPaneOnly [
+
+	self layoutViewLazy secondaryPaneOnly
+]
+
 { #category : 'utilities' }
 SlmdView >> shadowElementId: elementId display: aBoolean [
 	| element |
@@ -275,9 +299,10 @@ SlmdView >> systemLog [
 
 { #category : 'actions' }
 SlmdView >> triggerNavEvent: aNavAction [
-	| subtype |
+	| subtype data |
 
 	subtype := aNavAction at: #subtype.
+	data := aNavAction at: #data.
 
 	subtype = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
@@ -286,7 +311,7 @@ SlmdView >> triggerNavEvent: aNavAction [
 	subtype = #login ifTrue: [
 		^ self layoutViewLazy loginOpen ].
 
-	self serverAnnounce: (WamNavActionEvent id: subtype).
+	self serverAnnounce: (WamNavActionEvent id: subtype parameter: data).
 ]
 
 { #category : 'events' }

@@ -11,3 +11,12 @@ SlmdFabModel >> actionGroupToUse [
 
 	^ #fab
 ]
+
+{ #category : 'events' }
+SlmdFabModel >> navActionFind: anObject [
+
+	self fab ifNotNil: [ :value |
+		value eventSubtype = anObject ifTrue: [
+			^ value ] ].
+	^ nil
+]

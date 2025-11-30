@@ -88,6 +88,18 @@ SlmdToolbarModel >> navActionItems: anObject [
 ]
 
 { #category : 'accessing' }
+SlmdToolbarModel >> navActionItemsAdd: anObject [
+
+	self navActionItems add: anObject
+]
+
+{ #category : 'accessing' }
+SlmdToolbarModel >> navActionItemsAddAll: anObject [
+
+	self navActionItems addAll: anObject
+]
+
+{ #category : 'accessing' }
 SlmdToolbarModel >> navActionItemsClear [
 
 	self navActionItems: OrderedCollection new.

@@ -26,8 +26,10 @@ SlmdLog class >> log: aString level: level [
 
 { #category : 'logging' }
 SlmdLog class >> logError: aString [
+	| methodString |
 
-	self log: '[Error] ', aString
+	methodString := self trimSenderString: thisContext sender printString.
+	self log: '[Error] ', aString, ' [', methodString, ']'
 ]
 
 { #category : 'logging' }
@@ -38,33 +40,29 @@ SlmdLog class >> logInfo: aString [
 
 { #category : 'logging' }
 SlmdLog class >> logTrace: aString [
-	| senderString index methodString |
+	"Emit aString to log.
+
+	This code is equivalent to #logTrace:level:, but is coded here
+	so that 'thisCotext sender' will answer the correct sender
+	from the stack for logging."
+
+	| methodString |
 
 	self traceLevel < 3 ifTrue: [
 		^ self ].
 
-	"On client side, the sender printString includes the stack trace, so trim it off."
-	senderString := thisContext sender printString.
-	index := senderString indexOf: Character lf.
-	index := index = 0 ifTrue: [ senderString size ] ifFalse: [ index - 1 ].
-	methodString := senderString copyFrom: 1 to: index.
-
+	methodString := self trimSenderString: thisContext sender printString.
 	self log: aString, ' [', methodString, ']'
 ]
 
 { #category : 'logging' }
 SlmdLog class >> logTrace: aString level: level [
-	| senderString index methodString |
+	| methodString |
 
 	self traceLevel < level ifTrue: [
 		^ self ].
 
-	"On client side, the sender printString includes the stack trace, so trim it off."
-	senderString := thisContext sender printString.
-	index := senderString indexOf: Character lf.
-	index := index = 0 ifTrue: [ senderString size ] ifFalse: [ index - 1 ].
-	methodString := senderString copyFrom: 1 to: index.
-
+	methodString := self trimSenderString: thisContext sender printString.
 	self log: aString, ' [', methodString, ']'
 ]
 
@@ -91,4 +89,18 @@ SlmdLog class >> traceLevel: anObject [
 	"
 
 	^ TraceLevel := anObject
+]
+
+{ #category : 'logging' }
+SlmdLog class >> trimSenderString: senderString [
+	"Answer the sender string with the stack trace trimmed off.
+	
+	On client side, the sender printString includes the stack trace, so trim it off."
+	| index methodString |
+
+	index := senderString indexOf: Character lf.
+	index := index = 0 ifTrue: [ senderString size ] ifFalse: [ index - 1 ].
+	methodString := senderString copyFrom: 1 to: index.
+
+	^ methodString
 ]

@@ -328,8 +328,8 @@ SlmdDemoAccountingApp >> repositorySetup [
 SlmdDemoAccountingApp >> setUpAppBar2 [
 
 	self layout pane2 appBarModel
-		actionItemsAdd: (self nativeEventSpecAt: #delete);
-		actionItemsAdd: (self nativeEventSpecAt: #update);
+		navActionItemsAdd: (self nativeEventSpecAt: #delete);
+		navActionItemsAdd: (self nativeEventSpecAt: #update);
 		yourself.
 
 ]

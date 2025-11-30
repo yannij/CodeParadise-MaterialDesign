@@ -29,9 +29,3 @@ SlmdLayoutComponentView >> layoutViewLazy [
 
 	^ layoutView
 ]
-
-{ #category : 'actions' }
-SlmdLayoutComponentView >> primaryPaneOnly [
-
-	self layoutViewLazy paneLayoutView primaryPaneOnly
-]

@@ -62,7 +62,7 @@ MD3ExampleApp >> initialize [
 	layout paneLayout pane2: pane2Model.
 	appBar1 := self layout appBar1.
 	appBar1 headline: self class appName.
-	appBar1 actionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 
+	appBar1 navActionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 
 
 ]
 

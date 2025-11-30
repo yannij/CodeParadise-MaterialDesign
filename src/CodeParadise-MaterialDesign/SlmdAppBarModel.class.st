@@ -25,18 +25,6 @@ SlmdAppBarModel >> actionGroupToUse: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdAppBarModel >> actionItemsAdd: anObject [
-
-	self navActionItems add: anObject
-]
-
-{ #category : 'accessing' }
-SlmdAppBarModel >> actionItemsAddAll: anObject [
-
-	self navActionItems addAll: anObject
-]
-
-{ #category : 'accessing' }
 SlmdAppBarModel >> bePrimary [
 
 	self primary: true.
