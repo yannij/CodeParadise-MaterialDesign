@@ -26,10 +26,8 @@ SlmdLog class >> log: aString level: level [
 
 { #category : 'logging' }
 SlmdLog class >> logError: aString [
-	| methodString |
 
-	methodString := self trimSenderString: thisContext sender printString.
-	self log: '[Error] ', aString, ' [', methodString, ']'
+	self log: '[Error] ', aString, ' [', (self trimSenderString: thisContext sender printString), ']'
 ]
 
 { #category : 'logging' }
@@ -39,20 +37,31 @@ SlmdLog class >> logInfo: aString [
 ]
 
 { #category : 'logging' }
+SlmdLog class >> logTrace5: aString [
+	"Emit aString to log.
+
+	This code is equivalent to #logTrace:level:, but is coded here
+	so that 'thisContext sender' will answer the correct sender
+	from the stack for logging."
+
+	self traceLevel < 5 ifTrue: [
+		^ self ].
+
+	self log: aString, ' [', (self trimSenderString: thisContext sender printString), ']'
+]
+
+{ #category : 'logging' }
 SlmdLog class >> logTrace: aString [
 	"Emit aString to log.
 
 	This code is equivalent to #logTrace:level:, but is coded here
-	so that 'thisCotext sender' will answer the correct sender
+	so that 'thisContext sender' will answer the correct sender
 	from the stack for logging."
-
-	| methodString |
 
 	self traceLevel < 3 ifTrue: [
 		^ self ].
 
-	methodString := self trimSenderString: thisContext sender printString.
-	self log: aString, ' [', methodString, ']'
+	self log: aString, ' [', (self trimSenderString: thisContext sender printString), ']'
 ]
 
 { #category : 'logging' }

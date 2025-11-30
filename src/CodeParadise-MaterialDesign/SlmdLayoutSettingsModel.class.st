@@ -66,6 +66,24 @@ SlmdLayoutSettingsModel >> defaultFontFamily [
 	^ #'monospace'
 ]
 
+{ #category : 'events' }
+SlmdLayoutSettingsModel >> doLayoutSettings: anObject [
+	| aspect aspectValue |
+
+	self systemLog logTrace: anObject printString level: 5.
+	aspect := anObject parameterAt: #aspect.
+	aspectValue := anObject parameterAt: #value.
+
+	aspect = #layoutUpdate ifTrue: [
+		self layoutUpdate: aspectValue.
+		^ self ].
+
+	self systemLog logTrace: aspect asString, ' BEFORE: ', (self perform: aspect) printString level: 5.
+	self perform: (aspect, ':') asSymbol with: aspectValue.
+	self systemLog logTrace: aspect asString, '  AFTER: ', (self perform: aspect) printString level: 5.
+
+]
+
 { #category : 'accessing' }
 SlmdLayoutSettingsModel >> fontFamily [
 
@@ -115,6 +133,26 @@ SlmdLayoutSettingsModel >> layoutType: anObject [
 SlmdLayoutSettingsModel >> layoutTypeDefault [
 
 	^ SlmdResponsiveLayoutView layoutTypeExpanded
+]
+
+{ #category : 'events' }
+SlmdLayoutSettingsModel >> layoutUpdate: props [
+
+	self systemLog logTrace: props printString level: 5.
+
+	props keysAndValuesDo: [ :k :v | | setAccessor |
+		setAccessor := (k, ':') asSymbol.
+		self systemLog logTrace: k asString, ' BEFORE: ', (self perform: k) printString level: 5.
+		self perform: setAccessor with: v.
+		self systemLog logTrace: k asString, '  AFTER: ', (self perform: k) printString level: 5.
+		].
+
+	self application layout navRail valueChanged.
+
+	"The appbar leading action might depend on two pane mode"
+	self application layout appBar1 valueChanged.
+	self application layout appBar2 valueChanged.
+
 ]
 
 { #category : 'accessing' }

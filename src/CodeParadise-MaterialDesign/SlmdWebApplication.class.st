@@ -69,24 +69,6 @@ SlmdWebApplication >> customColorTheme [
 	^ nil
 ]
 
-{ #category : 'events' }
-SlmdWebApplication >> doLayoutSettings: anObject [
-	| aspect aspectValue |
-
-	self systemLog logTrace: anObject printString level: 5.
-	aspect := anObject parameterAt: #aspect.
-	aspectValue := anObject parameterAt: #value.
-
-	aspect = #layoutUpdate ifTrue: [
-		self layoutUpdate: aspectValue.
-		^ self ].
-
-	self systemLog logTrace: aspect asString, ' BEFORE: ', (self layout layoutSettings perform: aspect) printString level: 5.
-	self layout layoutSettings perform: (aspect, ':') asSymbol with: aspectValue.
-	self systemLog logTrace: aspect asString, '  AFTER: ', (self layout layoutSettings perform: aspect) printString level: 5.
-
-]
-
 { #category : 'actions - toolbar' }
 SlmdWebApplication >> doLogout [
 
@@ -153,29 +135,6 @@ SlmdWebApplication >> layout [
 SlmdWebApplication >> layout: anObject [
 
 	layout := anObject
-]
-
-{ #category : 'events' }
-SlmdWebApplication >> layoutUpdate: props [
-	| m |
-
-	self systemLog logTrace: props printString level: 5.
-
-	m := self layout layoutSettings.
-	props keysAndValuesDo: [ :k :v | | setAccessor |
-		setAccessor := (k, ':') asSymbol.
-		self systemLog logTrace: k asString, ' BEFORE: ', (m perform: k) printString level: 5.
-		m perform: setAccessor with: v.
-		self systemLog logTrace: k asString, '  AFTER: ', (m perform: k) printString level: 5.
-		].
-
-	"The appbar leading action might depend on two pane mode"
-	self layout appBar1 valueChanged.
-	self layout appBar2 valueChanged.
-
-	self layout navRail valueChanged.
-	"self layout navRailModal valueChanged."
-
 ]
 
 { #category : 'model' }
@@ -322,9 +281,6 @@ SlmdWebApplication >> processNavActionEvent: anObject [
 	| subtype |
 
 	subtype := anObject parameterAt: #subtype.
-
-	subtype = #layoutSettingChange ifTrue: [
-		^ self doLayoutSettings: anObject ].
 
 	subtype = #refresh ifTrue: [
 		^ self doRefresh: anObject ].

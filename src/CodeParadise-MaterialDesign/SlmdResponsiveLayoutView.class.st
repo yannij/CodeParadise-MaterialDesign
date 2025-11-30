@@ -1252,26 +1252,6 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 
 ]
 
-{ #category : 'events' }
-SlmdResponsiveLayoutView >> triggerUserEvent: aUserEventSpec [
-	| type subtype |
-
-	self systemLog logTrace: aUserEventSpec printString.
-
-	type := aUserEventSpec at: #type.
-	subtype := aUserEventSpec at: #subtype.
-
-	subtype = 'save' ifTrue: [ | changes paneContentView |
-		paneContentView := self layoutViewLazy pane2View paneContentView.
-		paneContentView ifNil: [ ^ self ].
-		changes := paneContentView wrappedView changeMap.
-		self announceActionSubtype: subtype key: #changes value: changes.
-		^ self ].
-
-	self announceActionSubtype: subtype.
-
-]
-
 { #category : 'initialization' }
 SlmdResponsiveLayoutView >> updateGlobalStyle [
 

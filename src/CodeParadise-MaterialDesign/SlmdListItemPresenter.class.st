@@ -6,6 +6,19 @@ Class {
 	#tag : 'ListDetail'
 }
 
+{ #category : 'events' }
+SlmdListItemPresenter >> handleNavEvent: aNavEvent [
+
+	self systemLog logTrace: aNavEvent printString.
+
+	aNavEvent id = #setDetail ifFalse: [
+		self systemLog logError: 'Expected #setDetail' ].
+
+	self view secondaryPaneOnly.
+	self application handleSetDetail: aNavEvent.
+
+]
+
 { #category : 'rendering' }
 SlmdListItemPresenter >> renderView [
 
@@ -13,4 +26,12 @@ SlmdListItemPresenter >> renderView [
 		renderListItemMap: self model wrappedModel asListItemMap
 		index: self model index.
 
+]
+
+{ #category : 'view' }
+SlmdListItemPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self subscribeToNavActionEvent
 ]

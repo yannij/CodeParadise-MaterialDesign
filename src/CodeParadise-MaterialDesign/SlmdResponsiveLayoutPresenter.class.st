@@ -44,51 +44,11 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doSetDetail: anObject [
-
-	self systemLog logTrace: anObject printString.
-
-	self view secondaryPaneOnly.
-	self application handleSetDetail: anObject.
-
-]
-
-{ #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 
 	self layout pane2 valueChanged.
 	self appBar2ButtonsSetSaveCancel.
 	self view beEditablePane2.
-
-]
-
-{ #category : 'events' }
-SlmdResponsiveLayoutPresenter >> handleUserEvent: anObject [
-	| subtype |
-
-	self systemLog logTrace: anObject printString.
-
-	subtype := anObject parameterAt: #subtype.
-
-	subtype = #setDetail ifTrue: [
-		^ self doSetDetail: anObject ].
-
-	subtype = #update ifTrue: [
-		^ self doUpdate: anObject ].
-
-	subtype = #save ifTrue: [
-		^ self doSave: anObject].
-
-	subtype = #cancel ifTrue: [
-		^ self doCancel: anObject ].
-
-	subtype = #delete ifTrue: [
-		^ self doDelete: anObject ].
-
-	subtype = #create ifTrue: [
-		^ self doCreate: anObject ].
-
-	self application processNavActionEvent: anObject.
 
 ]
 
@@ -134,7 +94,6 @@ SlmdResponsiveLayoutPresenter >> viewCreated [
 	super viewCreated.
 
 	self view addLoginDialog: self application class appName.
-	self subscribeToUserEvent.
 
 ]
 

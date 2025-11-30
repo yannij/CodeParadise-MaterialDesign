@@ -19,17 +19,6 @@ SlmdView >> announceActionSubtype: subtype [
 
 ]
 
-{ #category : 'events' }
-SlmdView >> announceActionSubtype: subtype key: key value: value [
-
-	self serverAnnounce: (SlmdUserEvent eventParameter: {
-		#type -> #action.
-		#subtype -> subtype.
-		key -> value.
-	} asDictionary).
-
-]
-
 { #category : 'utilities' }
 SlmdView >> beEditablePane2 [
 
@@ -312,13 +301,4 @@ SlmdView >> triggerNavEvent: aNavAction [
 		^ self layoutViewLazy loginOpen ].
 
 	self serverAnnounce: (WamNavActionEvent id: subtype parameter: data).
-]
-
-{ #category : 'events' }
-SlmdView >> triggerUserEvent: aUserEventSpec [
-	"Announce user event to presenter.
-	Subclasses may override.
-	Default is to route event through layout view"
-
-	self layoutViewLazy triggerUserEvent: aUserEventSpec
 ]

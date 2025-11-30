@@ -53,8 +53,7 @@ SlmdPresenter >> handleNavEvent: aNavEvent [
 { #category : 'events' }
 SlmdPresenter >> handleUserEvent: anObject [
 
-	"self logTrace5: anObject printString method: 'handleAction:'."
-
+	self systemLog logTrace5: 'Subclass should provide code to handle: ', anObject printString
 ]
 
 { #category : 'accessing - model' }
@@ -67,12 +66,6 @@ SlmdPresenter >> layout [
 SlmdPresenter >> subscribeToNavActionEvent [
 
 	self view when: WamNavActionEvent send: #handleNavEvent: to: self
-]
-
-{ #category : 'events' }
-SlmdPresenter >> subscribeToUserEvent [
-
-	self view when: SlmdUserEvent send: #handleUserEvent: to: self
 ]
 
 { #category : 'accessing' }
