@@ -347,7 +347,7 @@ SlmdResponsiveLayoutView >> adjustBodyHeight [
 SlmdResponsiveLayoutView >> appBar2Display: anObject [
 	| components |
 
-	self systemLog logTrace: anObject printString level: 5.
+	self systemLog logTrace5: anObject printString.
 	components := SlmdAppBarView all.
 
 	components do: [ :each |
@@ -373,7 +373,7 @@ SlmdResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
 SlmdResponsiveLayoutView >> appBarDisplay: anObject [
 	| components |
 
-	self systemLog logTrace: anObject printString level: 5.
+	self systemLog logTrace5: anObject printString.
 	components := SlmdAppBarView all.
 
 	components do: [ :each |
@@ -490,7 +490,7 @@ SlmdResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
 { #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 
-	self systemLog logTrace: aColorName printString level: 5.
+	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [ ^ self ].
 	"self updateGlobalStyle."
 	CpHtmlElement documentHtml
@@ -502,7 +502,7 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 { #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
 
-	self systemLog logTrace: aColorName printString level: 5.
+	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [
 		^ self ].
 
@@ -528,7 +528,7 @@ SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 { #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemeInitial: aColorName [
 
-	self systemLog logTrace: aColorName printString level: 5.
+	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [
 		^ self ].
 
@@ -720,7 +720,7 @@ SlmdResponsiveLayoutView >> layoutAdaptToWidth [
 SlmdResponsiveLayoutView >> layoutInitialSetUp: props [
 	"Invoked by presenter's viewCreated"
 
-	self systemLog logTrace: props printString level: 5.
+	self systemLog logTrace5: props printString.
 	self resizeSetUp.
 
 	props at: #colorThemeName ifPresent: [ :value | self colorThemeInitial: value ].
@@ -851,7 +851,7 @@ SlmdResponsiveLayoutView >> layoutType: anObject [
 SlmdResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
 	| props |
 
-	self systemLog logTrace: aLayoutType printString level: 5.
+	self systemLog logTrace5: aLayoutType printString.
 
 	aLayoutType = self class layoutTypeCompact ifTrue: [
 		props := self layoutProfileCompact ].
@@ -939,7 +939,7 @@ SlmdResponsiveLayoutView >> navRailExpanded: anObject [
 SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 	| modalElement |
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self navRailExpanded: aBoolean.
 
@@ -1057,7 +1057,7 @@ SlmdResponsiveLayoutView >> resizeSetUp [
 SlmdResponsiveLayoutView >> secondaryPaneOnly [
 	| component |
 
-	self systemLog logTrace: 'secondaryPaneOnly' level: 5.
+	self systemLog logTrace5: 'secondaryPaneOnly'.
 
 	component := self paneLayoutView.
 	component ifNil: [
@@ -1096,7 +1096,7 @@ SlmdResponsiveLayoutView >> showAppBar: anObject [
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> showAppBarAdapt: aBoolean [
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self appBarDisplay: aBoolean.
 
@@ -1117,7 +1117,7 @@ SlmdResponsiveLayoutView >> showDockedToolbar: anObject [
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> showDockedToolbarAdapt: aBoolean [
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self toolbarDockedDisplay: aBoolean.
 
@@ -1138,7 +1138,7 @@ SlmdResponsiveLayoutView >> showFloatingToolbar: anObject [
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> showFloatingToolbarAdapt: aBoolean [
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self toolbarFloatingDisplay: aBoolean.
 
@@ -1160,7 +1160,7 @@ SlmdResponsiveLayoutView >> showNavBar: anObject [
 SlmdResponsiveLayoutView >> showNavBarAdapt: aBoolean [
 	| fabView |
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self navBarDisplay: aBoolean.
 
@@ -1197,7 +1197,7 @@ SlmdResponsiveLayoutView >> showSidesheet: anObject [
 { #category : 'sidesheet' }
 SlmdResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self sidesheetDisplay: aBoolean.
 
@@ -1255,7 +1255,7 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 { #category : 'initialization' }
 SlmdResponsiveLayoutView >> updateGlobalStyle [
 
-	self systemLog logTrace: 'colorThemeName = ', self colorThemeName printString level: 5.
+	self systemLog logTrace5: 'colorThemeName = ', self colorThemeName printString.
 	self colorThemeName ifNil: [ ^ self ].
 	CpHtmlElement documentAddStyle: self themeUpdate.
 
@@ -1288,7 +1288,7 @@ SlmdResponsiveLayoutView >> useModalNav: anObject [
 { #category : 'navrail' }
 SlmdResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	self navRegionDisplay: aBoolean not.
 	self bodySplitPanelAdapt.
@@ -1311,7 +1311,7 @@ SlmdResponsiveLayoutView >> useTwoPaneBody: anObject [
 SlmdResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 	| component |
 
-	self systemLog logTrace: aBoolean printString level: 5.
+	self systemLog logTrace5: aBoolean printString.
 
 	component := SlmdPaneLayoutView first.
 	component ifNotNil: [

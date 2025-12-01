@@ -101,8 +101,8 @@ SlmdListItemView >> renderListItemMap: aMap index: index [
 { #category : 'rendering' }
 SlmdListItemView >> setDetail: index [
 
-	self systemLog logTrace: index printString level: 5.
+	self systemLog logTrace5: index printString.
 
-	self serverAnnounce: (WamNavActionEvent id: #setDetail parameter: { #index -> index } asDictionary)
+	self serverAnnounce: (WamNavActionEvent id: #setDetail)
 
 ]

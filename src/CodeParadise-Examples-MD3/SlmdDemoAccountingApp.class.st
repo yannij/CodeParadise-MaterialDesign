@@ -241,7 +241,7 @@ SlmdDemoAccountingApp >> initialize [
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #green; fontFamily: #'serif'.
 	self setUpAppBar2.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 
@@ -302,7 +302,7 @@ SlmdDemoAccountingApp >> navTo: aNavActionEvent [
 		modelClass := SlmdDemoAccountingUser ].
 
 	self layout pane1 paneContent listSet: self allModels.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 

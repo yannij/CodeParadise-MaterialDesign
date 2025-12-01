@@ -203,7 +203,7 @@ SlmdDemoMovieListingApp >> initialize [
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
 	self setUpAppBar2.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 
@@ -285,7 +285,7 @@ SlmdDemoMovieListingApp >> navTo: aNavActionEvent [
 		modelClass := SlmdDemoMoviesShowTime ].
 
 	self layout pane1 paneContent listSet: self allModels.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 

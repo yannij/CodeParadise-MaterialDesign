@@ -70,7 +70,7 @@ SlmdLayoutSettingsModel >> defaultFontFamily [
 SlmdLayoutSettingsModel >> doLayoutSettings: anObject [
 	| aspect aspectValue |
 
-	self systemLog logTrace: anObject printString level: 5.
+	self systemLog logTrace5: anObject printString.
 	aspect := anObject parameterAt: #aspect.
 	aspectValue := anObject parameterAt: #value.
 
@@ -78,9 +78,9 @@ SlmdLayoutSettingsModel >> doLayoutSettings: anObject [
 		self layoutUpdate: aspectValue.
 		^ self ].
 
-	self systemLog logTrace: aspect asString, ' BEFORE: ', (self perform: aspect) printString level: 5.
+	self systemLog logTrace5: aspect asString, ' BEFORE: ', (self perform: aspect) printString.
 	self perform: (aspect, ':') asSymbol with: aspectValue.
-	self systemLog logTrace: aspect asString, '  AFTER: ', (self perform: aspect) printString level: 5.
+	self systemLog logTrace5: aspect asString, '  AFTER: ', (self perform: aspect) printString.
 
 ]
 
@@ -138,13 +138,13 @@ SlmdLayoutSettingsModel >> layoutTypeDefault [
 { #category : 'events' }
 SlmdLayoutSettingsModel >> layoutUpdate: props [
 
-	self systemLog logTrace: props printString level: 5.
+	self systemLog logTrace5: props printString.
 
 	props keysAndValuesDo: [ :k :v | | setAccessor |
 		setAccessor := (k, ':') asSymbol.
-		self systemLog logTrace: k asString, ' BEFORE: ', (self perform: k) printString level: 5.
+		self systemLog logTrace5: k asString, ' BEFORE: ', (self perform: k) printString.
 		self perform: setAccessor with: v.
-		self systemLog logTrace: k asString, '  AFTER: ', (self perform: k) printString level: 5.
+		self systemLog logTrace5: k asString, '  AFTER: ', (self perform: k) printString.
 		].
 
 	self application layout navRail valueChanged.

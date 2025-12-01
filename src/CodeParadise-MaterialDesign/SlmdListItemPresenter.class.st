@@ -15,7 +15,7 @@ SlmdListItemPresenter >> handleNavEvent: aNavEvent [
 		self systemLog logError: 'Expected #setDetail' ].
 
 	self view secondaryPaneOnly.
-	self application handleSetDetail: aNavEvent.
+	self application handleSetDetail: self model.
 
 ]
 

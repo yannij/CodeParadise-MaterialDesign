@@ -62,7 +62,7 @@ TBRootApplication >> initialize [
 	self setUpAppBar1.
 	self setUpAppBar2.
 	self layout appBar1 headline: self class appName.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 
@@ -98,7 +98,7 @@ TBRootApplication >> navItemsToUse [
 { #category : 'events' }
 TBRootApplication >> refresh [
 
-	self setDetailWithIndex: 1.
+	self listDetailReset.
 
 ]
 

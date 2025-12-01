@@ -105,11 +105,13 @@ SlmdWebApplication >> handleLoginRequested: anObject [
 ]
 
 { #category : 'events' }
-SlmdWebApplication >> handleSetDetail: anObject [
+SlmdWebApplication >> handleSetDetail: detail [
 
 	self systemLog logTrace: 'handleSetDetail:'.
 
-	self setDetailWithIndex: (anObject parameterAt: #index).
+	"self setDetailWithIndex: (anObject parameterAt: #index)."
+	self layout pane1 paneContent detail: detail.
+	self layout pane2 setPaneContent: detail.
 
 ]
 
@@ -150,7 +152,7 @@ SlmdWebApplication >> listDetailAdd: anObject [
 		ifTrue: [
 			self modelAdd: listDetail detail wrappedModel.
 			listDetail listSet: self allModels.
-			self setDetailWithIndex: 1 ]
+			self listDetailReset ]
 		ifFalse: [
 			self modelUpdate: listDetail detail wrappedModel ].
 .
@@ -164,7 +166,21 @@ SlmdWebApplication >> listDetailRemove: ignored [
 	listDetail := self layout pane1 paneContent.
 	self modelRemove: listDetail detail wrappedModel.
 	listDetail listSet: self allModels.
-	self setDetailWithIndex: 1.
+	self listDetailReset.
+
+]
+
+{ #category : 'model' }
+SlmdWebApplication >> listDetailReset [
+	| list detail |
+
+	list := self layout pane1 paneContent list.
+	list isEmpty ifTrue: [
+		^ self setDetailNone ].
+
+	detail := list first.
+	self layout pane1 paneContent detail: detail.
+	self layout pane2 setPaneContent: detail.
 
 ]
 
@@ -314,20 +330,6 @@ SlmdWebApplication >> setDetailNone [
 
 	self layout pane1 paneContent detail: nil.
 	self layout pane2 setPaneContent: nil.
-
-]
-
-{ #category : 'model' }
-SlmdWebApplication >> setDetailWithIndex: index [
-	| list detail |
-
-	list := self layout pane1 paneContent list.
-	list isEmpty ifTrue: [
-		^ self setDetailNone ].
-
-	detail := list at: index.
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
 
 ]
 
