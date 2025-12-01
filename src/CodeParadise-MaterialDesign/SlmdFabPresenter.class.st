@@ -16,9 +16,9 @@ SlmdFabPresenter >> handleNavEvent: aNavEvent [
 	item ifNil: [
 		self systemLog logError: 'Not found: ', aNavEvent id printString.
 		^ self ].
-	item eventSubtype = #create ifTrue: [
+	item eventId = #create ifTrue: [
 		^ self doCreate: aNavEvent ].
-	self systemLog logError: 'No handler for: ', item eventSubtype printString.
+	self systemLog logError: 'No handler for: ', item eventId printString.
 
 ]
 

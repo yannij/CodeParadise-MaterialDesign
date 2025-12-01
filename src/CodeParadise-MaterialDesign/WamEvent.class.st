@@ -16,7 +16,5 @@ WamEvent >> printOn: aStream [
 		nextPutAll: 'EVENT id: '; print: id;
 		"nextPutAll: ', parameters: ';
 		print: parameters;"
-		nextPutAll: ', subtype: ';
-		print: (parameters at: #subtype ifAbsent: []);
 		yourself
 ]

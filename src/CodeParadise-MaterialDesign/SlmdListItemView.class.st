@@ -103,8 +103,6 @@ SlmdListItemView >> setDetail: index [
 
 	self systemLog logTrace: index printString level: 5.
 
-	"self triggerNavEvent: (Dictionary new at: #type put: #event; at: #subtype put: #setDetail; yourself)."
 	self serverAnnounce: (WamNavActionEvent id: #setDetail parameter: { #index -> index } asDictionary)
-	"self layoutViewFind announceActionSubtype: #setDetail key: #index value: index."
 
 ]

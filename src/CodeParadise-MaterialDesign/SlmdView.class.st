@@ -12,13 +12,6 @@ SlmdView class >> eventAspectCrud [
 	^ #crud
 ]
 
-{ #category : 'events' }
-SlmdView >> announceActionSubtype: subtype [
-
-	self serverAnnounce: (WamNavActionEvent id: subtype).
-
-]
-
 { #category : 'utilities' }
 SlmdView >> beEditablePane2 [
 
@@ -288,17 +281,17 @@ SlmdView >> systemLog [
 
 { #category : 'actions' }
 SlmdView >> triggerNavEvent: aNavAction [
-	| subtype data |
+	| eventId data |
 
-	subtype := aNavAction at: #subtype.
+	eventId := aNavAction at: #eventId.
 	data := aNavAction at: #data.
 
-	subtype = #modalNav ifTrue: [
+	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
-	subtype = #settingsOpen ifTrue: [
+	eventId = #settingsOpen ifTrue: [
 		^ self layoutViewLazy modalSettingsOpen ].
-	subtype = #login ifTrue: [
+	eventId = #login ifTrue: [
 		^ self layoutViewLazy loginOpen ].
 
-	self serverAnnounce: (WamNavActionEvent id: subtype parameter: data).
+	self serverAnnounce: (WamNavActionEvent id: eventId parameter: data).
 ]

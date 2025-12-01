@@ -38,15 +38,15 @@ SlmdAppBarPresenter >> handleNavEvent: aNavEvent [
 		^ self ].
 	item = #back ifTrue: [
 		^ self view primaryPaneOnly ].
-	item eventSubtype = #update ifTrue: [
+	item eventId = #update ifTrue: [
 		^ self doUpdate: aNavEvent ].
-	item eventSubtype = #save ifTrue: [
+	item eventId = #save ifTrue: [
 		^ self doSave: aNavEvent ].
-	item eventSubtype = #cancel ifTrue: [
+	item eventId = #cancel ifTrue: [
 		^ self doCancel: aNavEvent ].
-	item eventSubtype = #delete ifTrue: [
+	item eventId = #delete ifTrue: [
 		^ self doDelete: aNavEvent ].
-	self systemLog logError: 'No handler for: ', item eventSubtype printString.
+	self systemLog logError: 'No handler for: ', item eventId printString.
 
 ]
 
@@ -56,7 +56,7 @@ SlmdAppBarPresenter >> renderView [
 
 	leadingAction := self model leadingAction.
 	leadingAction ifNotNil: [
-	(self application layout layoutSettings useTwoPaneBody and: [ leadingAction eventSubtype = #back ])
+	(self application layout layoutSettings useTwoPaneBody and: [ leadingAction eventId = #back ])
 		ifTrue: [ self view renderLeadingAction: nil ]
 		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ] ].
 

@@ -2,12 +2,12 @@ Class {
 	#name : 'SlmdNavActionModel',
 	#superclass : 'SlmdModel',
 	#instVars : [
+		'eventId',
 		'eventType',
-		'eventSubtype',
-		'data',
+		'groupTag',
 		'iconName',
 		'iconLabel',
-		'groupTag'
+		'data'
 	],
 	#category : 'CodeParadise-MaterialDesign-Nav',
 	#package : 'CodeParadise-MaterialDesign',
@@ -19,7 +19,7 @@ SlmdNavActionModel class >> newActionSubtype: subtype groupTag: groupTag iconNam
 
 	^ self new
 		eventType: #action;
-		eventSubtype: subtype;
+		eventId: subtype;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
@@ -32,7 +32,7 @@ SlmdNavActionModel class >> newNativeSubtype: subtype groupTag: groupTag iconNam
 
 	^ self new
 		eventType: #native;
-		eventSubtype: subtype;
+		eventId: subtype;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
@@ -45,7 +45,7 @@ SlmdNavActionModel class >> newNavSubtype: subtype groupTag: groupTag iconName: 
 
 	^ self new
 		eventType: #nav;
-		eventSubtype: subtype;
+		eventId: subtype;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;
@@ -58,7 +58,7 @@ SlmdNavActionModel >> asDictionary [
 
 	^ Dictionary new
 		at: #type put: eventType;
-		at: #subtype put: eventSubtype;
+		at: #eventId put: eventId;
 		at: #data put: data;
 		at: #groupTag put: groupTag;
 		at: #iconName put: iconName;
@@ -79,15 +79,15 @@ SlmdNavActionModel >> data: anObject [
 ]
 
 { #category : 'accessing' }
-SlmdNavActionModel >> eventSubtype [
+SlmdNavActionModel >> eventId [
 
-	^ eventSubtype
+	^ eventId
 ]
 
 { #category : 'accessing' }
-SlmdNavActionModel >> eventSubtype: anObject [
+SlmdNavActionModel >> eventId: anObject [
 
-	eventSubtype := anObject
+	eventId := anObject
 ]
 
 { #category : 'accessing' }
@@ -159,13 +159,13 @@ SlmdNavActionModel >> isNavType [
 { #category : 'accessing' }
 SlmdNavActionModel >> itemName [
 
-	^ eventSubtype
+	^ eventId
 ]
 
 { #category : 'accessing' }
 SlmdNavActionModel >> itemName: anObject [
 
-	eventSubtype := anObject
+	eventId := anObject
 ]
 
 { #category : 'events' }

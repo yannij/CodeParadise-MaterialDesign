@@ -90,10 +90,10 @@ SlmdAppBarModel >> leadingAction: anObject [
 SlmdAppBarModel >> navActionFind: anObject [
 
 	self leadingAction ifNotNil: [ :value |
-		value eventSubtype = anObject ifTrue: [
+		value eventId = anObject ifTrue: [
 			^ anObject = #back ifTrue: [ #back ] ifFalse: [ value ] ] ].
 
-	^ self navActionItems detect: [ :each | each eventSubtype = anObject ] ifNone: [].
+	^ self navActionItems detect: [ :each | each eventId = anObject ] ifNone: [].
 
 ]
 

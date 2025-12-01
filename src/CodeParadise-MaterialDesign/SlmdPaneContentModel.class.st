@@ -35,7 +35,7 @@ SlmdPaneContentModel >> processNavActionEvent: aBasicEvent [
 
 	newContent := (aBasicEvent eventType = #nav)
 		ifTrue: [ aBasicEvent data ]
-		ifFalse: [ aBasicEvent eventSubtype ].
+		ifFalse: [ aBasicEvent eventId ].
 	self setContent: newContent.
 
 ]

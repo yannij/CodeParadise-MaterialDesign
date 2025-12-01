@@ -37,9 +37,8 @@ SlmdLayoutSettingsView >> addAttributeContainerStyle: element [
 { #category : 'actions' }
 SlmdLayoutSettingsView >> announceSetting: aspect value: anObject [
 
-	self serverAnnounce: (WamNavActionEvent id: #event parameter: {
+	self serverAnnounce: (WamNavActionEvent id: #layoutSettingChange parameter: {
 		#type -> #action.
-		#subtype -> #layoutSettingChange.
 		#aspect -> aspect.
 		#value -> anObject
 	} asDictionary).

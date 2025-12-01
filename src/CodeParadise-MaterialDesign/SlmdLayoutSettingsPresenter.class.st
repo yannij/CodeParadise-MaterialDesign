@@ -8,16 +8,16 @@ Class {
 
 { #category : 'events' }
 SlmdLayoutSettingsPresenter >> handleNavEvent: anObject [
-	| subtype |
+	| eventId |
 
 	self systemLog logTrace: anObject printString.
 
-	subtype := anObject parameterAt: #subtype.
+	eventId := anObject id.
 
-	subtype = #layoutSettingChange ifTrue: [
+	eventId = #layoutSettingChange ifTrue: [
 		^ self model doLayoutSettings: anObject ].
 
-	self systemLog logError: 'Unhandled event: ', subtype printString.
+	self systemLog logError: 'Unhandled event: ', eventId printString.
 
 ]
 

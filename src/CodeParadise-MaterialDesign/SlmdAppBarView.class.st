@@ -191,16 +191,16 @@ SlmdAppBarView >> renderTrailingActions: buttons [
 
 { #category : 'actions' }
 SlmdAppBarView >> triggerNavEvent: aNavAction [
-	| subtype data event |
+	| eventId data event |
 
-	subtype := aNavAction at: #subtype.
+	eventId := aNavAction at: #eventId.
 	data := aNavAction at: #data.
-	event := WamNavActionEvent id: subtype parameter: data.
+	event := WamNavActionEvent id: eventId parameter: data.
 
-	subtype = #modalNav ifTrue: [
+	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
 
-	subtype = 'save' ifTrue: [ | changes paneContentView |
+	eventId = 'save' ifTrue: [ | changes paneContentView |
 		paneContentView := self layoutViewLazy pane2View paneContentView.
 		paneContentView ifNil: [ ^ self ].
 		changes := paneContentView wrappedView changeMap.

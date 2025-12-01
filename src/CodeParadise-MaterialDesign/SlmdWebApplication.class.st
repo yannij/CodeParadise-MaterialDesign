@@ -278,14 +278,16 @@ SlmdWebApplication >> postLoad [
 
 { #category : 'events' }
 SlmdWebApplication >> processNavActionEvent: anObject [
-	| subtype |
+	| eventId |
 
-	subtype := anObject parameterAt: #subtype.
+	self systemLog logTrace: anObject printString.
 
-	subtype = #refresh ifTrue: [
+	eventId := anObject id.
+
+	eventId = #refresh ifTrue: [
 		^ self doRefresh: anObject ].
 
-	subtype = #logout ifTrue: [
+	eventId = #logout ifTrue: [
 		^ self doLogout ].
 
 	self layout pane1 processNavActionEvent: anObject; valueChanged.

@@ -16,7 +16,7 @@ SlmdFabModel >> actionGroupToUse [
 SlmdFabModel >> navActionFind: anObject [
 
 	self fab ifNotNil: [ :value |
-		value eventSubtype = anObject ifTrue: [
+		value eventId = anObject ifTrue: [
 			^ value ] ].
 	^ nil
 ]
