@@ -16,6 +16,7 @@ SlmdListItemPresenter >> handleNavEvent: aNavEvent [
 
 	self view secondaryPaneOnly.
 	self application handleSetDetail: self model.
+	self appBar2ButtonsSetEditDelete.
 
 ]
 

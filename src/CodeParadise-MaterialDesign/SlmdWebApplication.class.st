@@ -181,6 +181,7 @@ SlmdWebApplication >> listDetailReset [
 	detail := list first.
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail.
+	self layout appBar2 setEditDelete.
 
 ]
 

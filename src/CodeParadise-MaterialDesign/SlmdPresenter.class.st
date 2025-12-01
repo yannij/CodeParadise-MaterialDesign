@@ -14,28 +14,15 @@ SlmdPresenter class >> isAbstract [
 
 { #category : 'events' }
 SlmdPresenter >> appBar2ButtonsSetEditDelete [
-	| app |
 
-	app := self application.
-	app layout appBar2
-		navActionItemsClear;
-		navActionItemsAdd: (app nativeEventSpecAt: #delete);
-		navActionItemsAdd: (app nativeEventSpecAt: #update);
-		valueChanged;
-		yourself
+	self layout appBar2 setEditDelete.
+
 ]
 
 { #category : 'events' }
 SlmdPresenter >> appBar2ButtonsSetSaveCancel [
-	| app |
 
-	app := self application.
-	app layout appBar2
-		navActionItemsClear;
-		navActionItemsAdd: (app nativeEventSpecAt: #save);
-		navActionItemsAdd: (app nativeEventSpecAt: #cancel);
-		valueChanged;
-		yourself
+	self application layout appBar2 setSaveCancel
 ]
 
 { #category : 'events' }
