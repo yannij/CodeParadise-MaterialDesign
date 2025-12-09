@@ -13,19 +13,6 @@ SlmdPresenter class >> isAbstract [
 ]
 
 { #category : 'events' }
-SlmdPresenter >> appBar2ButtonsSetEditDelete [
-
-	self layout appBar2 setEditDelete.
-
-]
-
-{ #category : 'events' }
-SlmdPresenter >> appBar2ButtonsSetSaveCancel [
-
-	self application layout appBar2 setSaveCancel
-]
-
-{ #category : 'events' }
 SlmdPresenter >> handleNavEvent: aNavEvent [
 	| item |
 

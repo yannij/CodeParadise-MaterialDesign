@@ -44,6 +44,8 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waSplitPanelSpec generate.
 	self waSwitchSpec generate.
 	self waTextareaSpec generate.
+	self waTreeSpec generate.
+	self waTreeItemSpec generate.
 
 ]
 
@@ -398,6 +400,38 @@ WaWrapperSpec class >> waTextareaSpec [
 		booleanPropertyAt: 'pill' put: false;
 		numberPropertyAt: 'rows' put: 4;
 		stringPropertyAt: 'resize' put: 'none|*vertical|horizontal|both|auto';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTreeItemSpec [
+
+	^ self new
+		wrapperClassName: #WaTreeItem;
+		instanceCreatorAdd: 'label:';
+		slotsAddAll: #('*label' 'expand-icon' 'collapse-icon');
+		booleanPropertyAt: '=expanded' put: false;
+		booleanPropertyAt: '=selected' put: false;
+		booleanPropertyAt: '=disabled' put: false;
+		booleanPropertyAt: '=lazy' put: false;
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTreeSpec [
+
+	^ self new
+		wrapperClassName: #WaTree;
+		instanceCreatorAdd: 'label:';
+		slotsAddAll: #('*label' 'expand-icon' 'collapse-icon');
+		stringPropertyAt: 'selection' put: '*single|multiple|leaf';
+		cssPropertieAdd: 'indent-size';
+		cssPropertieAdd: 'indent-guide-color';
+		cssPropertieAdd: 'indent-guide-offset';
+		cssPropertieAdd: 'indent-guide-style';
+		cssPropertieAdd: 'indent-guide-width';
 		yourself
 ]
 

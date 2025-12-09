@@ -12,9 +12,7 @@ Class {
 { #category : 'printing' }
 WamEvent >> printOn: aStream [
 
-	aStream
-		nextPutAll: 'EVENT id: '; print: id;
-		"nextPutAll: ', parameters: ';
-		print: parameters;"
-		yourself
+	aStream nextPutAll: 'EVENT id: '; print: id.
+	parameters ifNotNil: [
+		aStream nextPutAll: ', parameters: '; print: parameters ]
 ]

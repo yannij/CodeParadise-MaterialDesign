@@ -108,29 +108,3 @@ SlmdAppBarModel >> primary: anObject [
 
 	primary := anObject
 ]
-
-{ #category : 'events' }
-SlmdAppBarModel >> setEditDelete [
-	| app |
-
-	app := self application.
-	self
-		navActionItemsClear;
-		navActionItemsAdd: (app nativeEventSpecAt: #delete);
-		navActionItemsAdd: (app nativeEventSpecAt: #update);
-		valueChanged;
-		yourself
-]
-
-{ #category : 'events' }
-SlmdAppBarModel >> setSaveCancel [
-	| app |
-
-	app := self application.
-	self
-		navActionItemsClear;
-		navActionItemsAdd: (app nativeEventSpecAt: #save);
-		navActionItemsAdd: (app nativeEventSpecAt: #cancel);
-		valueChanged;
-		yourself
-]

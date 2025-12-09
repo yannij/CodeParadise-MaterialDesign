@@ -97,21 +97,16 @@ SlmdWebApplication >> doRefresh: anObject [
 
 ]
 
+{ #category : 'accessing' }
+SlmdWebApplication >> eventSpecMeta [
+
+	^ self nativeEventSpecAt: #meta
+]
+
 { #category : 'events' }
 SlmdWebApplication >> handleLoginRequested: anObject [
 
 	self systemLog logTrace: ' Login Requested'.
-
-]
-
-{ #category : 'events' }
-SlmdWebApplication >> handleSetDetail: detail [
-
-	self systemLog logTrace: 'handleSetDetail:'.
-
-	"self setDetailWithIndex: (anObject parameterAt: #index)."
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
 
 ]
 
@@ -181,7 +176,7 @@ SlmdWebApplication >> listDetailReset [
 	detail := list first.
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail.
-	self layout appBar2 setEditDelete.
+	self setAppBar2EditDelete.
 
 ]
 
@@ -294,6 +289,17 @@ SlmdWebApplication >> postLoad [
 ]
 
 { #category : 'events' }
+SlmdWebApplication >> processListDetail: detail event: aNavEvent [
+
+	self systemLog logTrace: aNavEvent printString.
+
+	"self setDetailWithIndex: (anObject parameterAt: #index)."
+	self layout pane1 paneContent detail: detail.
+	self layout pane2 setPaneContent: detail.
+
+]
+
+{ #category : 'events' }
 SlmdWebApplication >> processNavActionEvent: anObject [
 	| eventId |
 
@@ -313,6 +319,30 @@ SlmdWebApplication >> processNavActionEvent: anObject [
 
 { #category : 'events' }
 SlmdWebApplication >> refresh [
+]
+
+{ #category : 'model' }
+SlmdWebApplication >> setAppBar2EditDelete [
+
+	self layout appBar2
+		navActionItemsClear;
+		navActionItemsAdd: (self nativeEventSpecAt: #delete);
+		navActionItemsAdd: (self nativeEventSpecAt: #update);
+		valueChanged;
+		yourself.
+
+]
+
+{ #category : 'model' }
+SlmdWebApplication >> setAppBar2SaveCancel [
+
+	self layout appBar2
+		navActionItemsClear;
+		navActionItemsAdd: (self nativeEventSpecAt: #save);
+		navActionItemsAdd: (self nativeEventSpecAt: #cancel);
+		valueChanged;
+		yourself.
+
 ]
 
 { #category : 'model' }
@@ -355,6 +385,7 @@ SlmdWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #refresh groupTag: #primary iconName: 'rotate-right' iconLabel: 'Refresh';
 		addNativeSubtype: #home groupTag: #primary iconName: 'house' iconLabel: 'Home';
 		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
+		addNativeSubtype: #meta groupTag: #toolbar iconName: 'star' iconLabel: 'Meta';
 		addNativeSubtype: #modalNav groupTag: #primary iconName: 'bars' iconLabel: 'Menu';
 		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings';
 		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';

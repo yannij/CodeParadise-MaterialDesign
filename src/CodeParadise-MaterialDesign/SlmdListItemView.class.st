@@ -33,7 +33,7 @@ SlmdListItemView class >> globalStyle [
   line-height: 40px;
   font-size: 16px;
   text-align: left;
-  overflow-x: clip;
+  text-overflow: ellipsis;
   margin-right: auto;
 }
 '
@@ -46,6 +46,7 @@ SlmdListItemView class >> style [
 	^ '
 .container {
   display: flex;
+  flex-wrap: no-wrap;
   height: 40px;
   padding: 8px 16px;
   background: var(--wa-color-brand-80);
@@ -57,12 +58,17 @@ SlmdListItemView class >> style [
   font-size: 24px;
 }
 
+.list-text {
+  margin-right: auto;
+}
+
 .headline {
   line-height: 40px;
   font-size: 16px;
   text-align: left;
-  overflow-x: clip;
-  margin-right: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .trailingIcon {
@@ -79,30 +85,75 @@ SlmdListItemView class >> template [
 
 	^ '<div class="container">
 <div class="leadingIcon"><slot name="leadingIcon"></slot></div>
-<div class="headline"><slot name="headline"></slot></div>
+<div class="list-text">
+  <div class="headline"><slot name="headline"></slot></div>
+</div>
 <div class="trailingIcon"><slot name="trailingIcon"></slot></div>
 </div>'
 ]
 
 { #category : 'rendering' }
-SlmdListItemView >> renderListItemMap: aMap index: index [
+SlmdListItemView >> renderLeadingIcon: aMap [
+	| icon action |
 
-	aMap at: #leadingIcon ifPresent: [ :value | | element |
-		self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #leadingIcon.
-		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
-	aMap at: #headline ifPresent: [ :value | | element |
-		self replaceAllChildrenWith: (element := value asHtmlElement) atSlotNamed: #headline.
-		element when: CpClickEvent basicPrimary do: [ self setDetail: index ] for: self ].
-	aMap at: #trailingIcon ifPresent: [ :value |
-		self replaceAllChildrenWith: (WaIcon fullyNamed: value) atSlotNamed: #trailingIcon ].
+	icon := aMap at: #leadingIcon ifAbsent: [].
+	action := aMap at: #leadingAction ifAbsent: [ #setDetail ].
+
+	icon
+		ifNil: [
+			self removeChildrenAtSlotNamed: #leadingIcon ]
+		ifNotNil: [ :value | | element |
+			self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #leadingIcon.
+			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
 
 ]
 
 { #category : 'rendering' }
-SlmdListItemView >> setDetail: index [
+SlmdListItemView >> renderListItemMap: aMap [
 
-	self systemLog logTrace5: index printString.
+	self renderLeadingIcon: aMap.
+	self renderText: aMap.
+	self renderTrailingIcon: aMap.
 
-	self serverAnnounce: (WamNavActionEvent id: #setDetail)
+]
+
+{ #category : 'rendering' }
+SlmdListItemView >> renderText: aMap [
+	| headline action |
+
+	headline := aMap at: #headline ifAbsent: [].
+	action := aMap at: #leadingAction ifAbsent: [ #setDetail ].
+
+	headline
+		ifNil: [
+			self removeChildrenAtSlotNamed: #headline ]
+		ifNotNil: [ :value | | element |
+			self replaceAllChildrenWith: (element := value asHtmlElement) atSlotNamed: #headline.
+			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
+
+]
+
+{ #category : 'rendering' }
+SlmdListItemView >> renderTrailingIcon: aMap [
+	| icon action |
+
+	icon := aMap at: #trailingIcon ifAbsent: [].
+	action := aMap at: #trailingAction ifAbsent: [ #setDetail ].
+
+	icon
+		ifNil: [
+			self removeChildrenAtSlotNamed: #trailingIcon ]
+		ifNotNil: [ :value | | element |
+			self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #trailingIcon.
+			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
+
+]
+
+{ #category : 'rendering' }
+SlmdListItemView >> triggerAction: action [
+
+	self systemLog logTrace5: action printString.
+
+	self serverAnnounce: (WamNavActionEvent id: action)
 
 ]

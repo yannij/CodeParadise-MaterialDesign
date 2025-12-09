@@ -9,7 +9,7 @@ Class {
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doCancel: anObject [
 
-	self appBar2ButtonsSetEditDelete.
+	self application setAppBar2EditDelete.
 	self view beNotEditable.
 
 ]
@@ -21,7 +21,7 @@ SlmdResponsiveLayoutPresenter >> doCreate: anObject [
 	self layout pane2 valueChanged.
 	self view beEditablePane2.
 	self view secondaryPaneOnly.
-	self appBar2ButtonsSetSaveCancel.
+	self application setAppBar2SaveCancel.
 
 
 ]
@@ -39,7 +39,7 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 
 	self application listDetailAdd: anObject.
 	self layout pane2 valueChanged.
-	self appBar2ButtonsSetEditDelete.
+	self application setAppBar2EditDelete.
 
 ]
 
@@ -47,7 +47,7 @@ SlmdResponsiveLayoutPresenter >> doSave: anObject [
 SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
 
 	self layout pane2 valueChanged.
-	self appBar2ButtonsSetSaveCancel.
+	self application setAppBar2SaveCancel.
 	self view beEditablePane2.
 
 ]
