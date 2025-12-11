@@ -31,7 +31,7 @@ SlmdListItemPresenter >> handleNavEvent: aNavEvent [
 { #category : 'rendering' }
 SlmdListItemPresenter >> renderView [
 
-	self view renderListItemMap: self model wrappedModel asListItemMap.
+	self view renderListItem: self model wrappedModel asListItemMap.
 
 ]
 

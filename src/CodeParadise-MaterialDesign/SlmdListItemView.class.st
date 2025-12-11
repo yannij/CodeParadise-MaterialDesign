@@ -12,68 +12,37 @@ SlmdListItemView class >> globalStyle [
 
 	^ '
 .smd-item {
+  margin-inline-start: 0;
   display: flex;
-  height: 40px;
-  padding: 8px 16px;
+  min-height: 40px;
+  padding: 8px 0;
   background: var(--wa-color-brand-80);
   border-top: 1px solid var(--wa-color-neutral-60);
 }
 
+.smd-item-span1 {
+  padding: 0 8px;
+  min-height: 24px;
+}
+
+.smd-item-span2 {
+  padding: 0 8px;
+}
+
 .smd-item-leadingIcon {
-  padding: 8px 16px 8px 0;
+  margin-top: 4px;
   font-size: 24px;
 }
 
 .smd-item-trailingIcon {
-  padding: 8px 0 8px 16px;
   font-size: 24px;
 }
 
 .smd-item-headline {
-  line-height: 40px;
+  padding-left: 16px;
   font-size: 16px;
   text-align: left;
   text-overflow: ellipsis;
-  margin-right: auto;
-}
-'
-]
-
-{ #category : 'web resources' }
-SlmdListItemView class >> style [
-	<webResource: #css>
-
-	^ '
-.container {
-  display: flex;
-  flex-wrap: no-wrap;
-  height: 40px;
-  padding: 8px 16px;
-  background: var(--wa-color-brand-80);
-  border-top: 1px solid var(--wa-color-neutral-60);
-}
-
-.leadingIcon {
-  padding: 8px 16px 8px 0;
-  font-size: 24px;
-}
-
-.list-text {
-  margin-right: auto;
-}
-
-.headline {
-  line-height: 40px;
-  font-size: 16px;
-  text-align: left;
-  overflow-x: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.trailingIcon {
-  padding: 8px 0 8px 16px;
-  font-size: 24px;
 }
 '
 ]
@@ -83,69 +52,45 @@ SlmdListItemView class >> template [
 
 	<webResource: #html>
 
-	^ '<div class="container">
-<div class="leadingIcon"><slot name="leadingIcon"></slot></div>
-<div class="list-text">
-  <div class="headline"><slot name="headline"></slot></div>
-</div>
-<div class="trailingIcon"><slot name="trailingIcon"></slot></div>
-</div>'
+	^ '<slot name="listItem"></slot>'
 ]
 
 { #category : 'rendering' }
-SlmdListItemView >> renderLeadingIcon: aMap [
-	| icon action |
+SlmdListItemView >> renderListItem: aMap [
+	| headline leadingIcon leadingAction leadingIconTag trailingIcon trailingAction trailingIconTag listItemTag elSpan1 elSpan2 |
 
-	icon := aMap at: #leadingIcon ifAbsent: [].
-	action := aMap at: #leadingAction ifAbsent: [ #setDetail ].
-
-	icon
-		ifNil: [
-			self removeChildrenAtSlotNamed: #leadingIcon ]
-		ifNotNil: [ :value | | element |
-			self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #leadingIcon.
-			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
-
-]
-
-{ #category : 'rendering' }
-SlmdListItemView >> renderListItemMap: aMap [
-
-	self renderLeadingIcon: aMap.
-	self renderText: aMap.
-	self renderTrailingIcon: aMap.
-
-]
-
-{ #category : 'rendering' }
-SlmdListItemView >> renderText: aMap [
-	| headline action |
-
+	leadingIcon := aMap at: #leadingIcon ifAbsent: [].
+	leadingAction := aMap at: #leadingAction ifAbsent: [ #setDetail ].
 	headline := aMap at: #headline ifAbsent: [].
-	action := aMap at: #leadingAction ifAbsent: [ #setDetail ].
+	trailingIcon := aMap at: #trailingIcon ifAbsent: [].
+	trailingAction := aMap at: #trailingAction ifAbsent: [ #setDetail ].
+	elSpan1 := #span asHtmlTag "addClass: 'wa-flank';" addClass: 'smd-item-span1'; yourself.
+	elSpan2 := #span asHtmlTag addClass: 'wa-cluster'; addClass: 'smd-item-span2'; yourself.
+	listItemTag := #li asHtmlTag addClass: 'wa-split'; addClass: 'wa-align-items-center'; addClass: 'smd-item'; appendChild: elSpan1; appendChild: elSpan2; yourself.
+
+	leadingIcon ifNotNil: [ :value |
+		leadingIconTag := WaIcon fullyNamed: value.
+		leadingIconTag addClass: 'smd-item-leadingIcon'.
+		leadingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+		elSpan1 appendChild: leadingIconTag. ].
+
+	headline ifNotNil: [ :value | | tag |
+		tag := value asHtmlElement.
+		tag addClass: 'smd-item-headline'.
+		tag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+		elSpan1 appendChild: tag ].
+
+	trailingIcon ifNotNil: [ :value |
+		trailingIconTag := WaIcon fullyNamed: value.
+		trailingIconTag addClass: 'smd-item-trailingIcon'.
+		trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: trailingAction ] for: self.
+		elSpan2 appendChild: trailingIconTag. ].
 
 	headline
 		ifNil: [
-			self removeChildrenAtSlotNamed: #headline ]
-		ifNotNil: [ :value | | element |
-			self replaceAllChildrenWith: (element := value asHtmlElement) atSlotNamed: #headline.
-			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
-
-]
-
-{ #category : 'rendering' }
-SlmdListItemView >> renderTrailingIcon: aMap [
-	| icon action |
-
-	icon := aMap at: #trailingIcon ifAbsent: [].
-	action := aMap at: #trailingAction ifAbsent: [ #setDetail ].
-
-	icon
-		ifNil: [
-			self removeChildrenAtSlotNamed: #trailingIcon ]
-		ifNotNil: [ :value | | element |
-			self replaceAllChildrenWith: (element := WaIcon fullyNamed: value) atSlotNamed: #trailingIcon.
-			element when: CpClickEvent basicPrimary do: [ self triggerAction: action ] for: self ].
+			self removeChildrenAtSlotNamed: #listItem ]
+		ifNotNil: [ :value |
+			self replaceAllChildrenWith: listItemTag atSlotNamed: #listItem ].
 
 ]
 
