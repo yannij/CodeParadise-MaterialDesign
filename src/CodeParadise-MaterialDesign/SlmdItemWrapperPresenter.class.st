@@ -9,8 +9,6 @@ Class {
 { #category : 'rendering' }
 SlmdItemWrapperPresenter >> renderView [
 
-	"self view renderButtons."
-
 	self
 		renderChildViewForModel: self model wrappedModel
 		atSlotNamed: #wrapped

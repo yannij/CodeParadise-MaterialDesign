@@ -11,20 +11,8 @@ SlmdListItemPresenter >> handleNavEvent: aNavEvent [
 
 	self systemLog logTrace: aNavEvent printString.
 
-	aNavEvent id = #setDetail ifTrue: [
-		self view secondaryPaneOnly.
-		self application processListDetail: self model event: aNavEvent.
-		self application ifNotNil: [ :value | value setAppBar2EditDelete ].
-		^ self ].
-
-	aNavEvent id = #metaDetail ifTrue: [
-		self view secondaryPaneOnly.
-		self application processListMetaDetail: self model event: aNavEvent.
-		self application ifNotNil: [ :value | value setAppBar2EditDelete ].
-		^ self ].
-
-	"self systemLog logError: 'No handler for: ', aNavEvent printString."
-	self application processNavActionEvent: aNavEvent.
+	self view secondaryPaneOnly.
+	self application processNavActionEvent: aNavEvent model: self model.
 
 ]
 

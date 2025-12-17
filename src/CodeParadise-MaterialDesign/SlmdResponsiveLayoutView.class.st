@@ -166,7 +166,7 @@ SlmdResponsiveLayoutView class >> style [
   height: 100%;
   padding: 0;
   margin: 0;
-  background: var(--wa-color-brand-90);
+  background: var(--wa-color-brand-70);
 }
 
 .smd-body-region {

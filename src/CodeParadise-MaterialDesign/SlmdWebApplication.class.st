@@ -258,6 +258,13 @@ SlmdWebApplication >> navTo: aNavActionEvent [
 	self layout pane1 processNavActionEvent: aNavActionEvent; valueChanged.
 ]
 
+{ #category : 'model' }
+SlmdWebApplication >> newModelInstance [
+
+	^ self modelClass new
+
+]
+
 { #category : 'actions' }
 SlmdWebApplication >> postLoad [
 	| toolbar appBar leadingAction |
@@ -289,31 +296,26 @@ SlmdWebApplication >> postLoad [
 ]
 
 { #category : 'events' }
-SlmdWebApplication >> processListDetail: detail event: aNavEvent [
+SlmdWebApplication >> processNavActionEvent: aNavEvent model: aModel [
+	| eventId |
 
 	self systemLog logTrace: aNavEvent printString.
 
-	"self setDetailWithIndex: (anObject parameterAt: #index)."
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
+	eventId := aNavEvent id.
 
-]
-
-{ #category : 'events' }
-SlmdWebApplication >> processNavActionEvent: anObject [
-	| eventId |
-
-	self systemLog logTrace: anObject printString.
-
-	eventId := anObject id.
+	aNavEvent id = #setDetail ifTrue: [
+		self layout pane1 paneContent detail: aModel.
+		self layout pane2 setPaneContent: aModel.
+		self setAppBar2EditDelete.
+		^ self ].
 
 	eventId = #refresh ifTrue: [
-		^ self doRefresh: anObject ].
+		^ self doRefresh: aNavEvent ].
 
 	eventId = #logout ifTrue: [
 		^ self doLogout ].
 
-	self layout pane1 processNavActionEvent: anObject; valueChanged.
+	self layout pane1 processNavActionEvent: aNavEvent; valueChanged.
 
 ]
 
@@ -349,7 +351,7 @@ SlmdWebApplication >> setAppBar2SaveCancel [
 SlmdWebApplication >> setDetailAddNew [
 	| detail |
 
-	detail := SlmdItemWrapperModel onNewModel: self modelClass new.
+	detail := SlmdItemWrapperModel onNewModel: self newModelInstance.
 
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail.
