@@ -32,7 +32,7 @@ SlmdView >> dropdownMenu: actionList css: cssClass [
 
 { #category : 'utilities' }
 SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
-	| menu trigger dropdown |
+	| menu trigger dropdown div |
 
 	menu := #div asHtmlTag.
 	menu addClass: 'smd-menu'.
@@ -49,17 +49,17 @@ SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 			yourself) ].
 
 	trigger := #div asHtmlTag
-		appendChild: (WaButton new label: ((WaIcon fullyNamed: iconName) label: iconName; yourself); yourself
-		"addClass: 'smd-toolbar-icon';"
-		).
-	cssClass ifNotNil: [ trigger addClass: cssClass ].
+		appendChild: (WaButton new label: ((WaIcon fullyNamed: iconName) label: iconName; yourself); yourself).
 
 	dropdown := WaDropdown new
 		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
 		appendChild: menu;
 		yourself.
 
-	^ dropdown
+	div := #div asHtmlTag appendChild: dropdown; yourself.
+	cssClass ifNotNil: [ div addClass: cssClass ].
+
+	^ div
 
 ]
 
@@ -144,7 +144,11 @@ SlmdView >> iconButtonForAction: aNavAction css: cssClass [
 	iconName := aNavAction at: #iconName.
 
 	tag := #div asHtmlTag
-		appendChild: (self iconButtonNamed: iconName class: 'smd-toolbar-icon' navAction: aNavAction);
+		appendChild: ((WaIcon fullyNamed: iconName)
+			label: iconName;
+			addClass: 'smd-toolbar-icon';
+			when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
+			yourself);
 		yourself.
 
 	cssClass ifNotNil: [ tag addClass: cssClass ].
@@ -155,9 +159,14 @@ SlmdView >> iconButtonForAction: aNavAction css: cssClass [
 { #category : 'utilities' }
 SlmdView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 
-	^ #div asHtmlTag
+	"^ #div asHtmlTag
 		addClass: cssClass;
 		appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
+		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
+		yourself"
+	^ (WaIcon fullyNamed: iconName)
+		label: iconName;
+		addClass: cssClass;
 		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
 		yourself
 ]

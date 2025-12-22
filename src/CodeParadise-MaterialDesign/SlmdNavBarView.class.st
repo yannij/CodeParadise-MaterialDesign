@@ -52,7 +52,7 @@ SlmdNavBarView class >> style [
   justify-content: space-between;
   flex-flow: row nowrap;
   padding: 12px 4px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-70);
 }
 '
 ]

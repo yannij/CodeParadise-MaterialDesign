@@ -13,9 +13,12 @@ SlmdToolbarView class >> globalStyle [
 
 	^ '
 .smd-toolbar-item {
+  display: flex;
   padding: 8px 0;
   height: 48px;
   width: 48px;
+  align-items: center;
+  justify-content: center;
 }
 
 .smd-toolbar-icon {
@@ -52,12 +55,9 @@ SlmdToolbarView >> renderButtons: buttons [
 
 { #category : 'nav' }
 SlmdToolbarView >> renderFab: fab [
-	| div iconButton |
+	| iconButton |
 
-	div := '' inHtmlTag: #div.
-	div addClass: self fabCssClass.
-	iconButton := self iconButtonForAction: fab css: nil.
-	div appendChild: iconButton.
-	self appendChild: div atSlotNamed: 'fab'.
+	iconButton := self iconButtonForAction: fab css: self fabCssClass.
+	self appendChild: iconButton atSlotNamed: 'fab'.
 
 ]

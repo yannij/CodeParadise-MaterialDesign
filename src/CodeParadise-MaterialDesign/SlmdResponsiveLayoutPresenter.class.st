@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doCancel: anObject [
+SlmdResponsiveLayoutPresenter >> doCancel: aNavActionEvent [
 
 	self application setAppBar2EditDelete.
 	self view beNotEditable.
@@ -15,7 +15,7 @@ SlmdResponsiveLayoutPresenter >> doCancel: anObject [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doCreate: anObject [
+SlmdResponsiveLayoutPresenter >> doCreate: aNavActionEvent [
 
 	self application setDetailAddNew.
 	self layout pane2 valueChanged.
@@ -27,24 +27,24 @@ SlmdResponsiveLayoutPresenter >> doCreate: anObject [
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doDelete: anObject [
+SlmdResponsiveLayoutPresenter >> doDelete: aNavActionEvent [
 
 	self view primaryPaneOnly.
-	self application listDetailRemove: anObject.
+	self application listDetailRemove: aNavActionEvent.
 
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doSave: anObject [
+SlmdResponsiveLayoutPresenter >> doSave: aNavActionEvent [
 
-	self application listDetailAdd: anObject.
+	self application listDetailAdd: aNavActionEvent.
 	self layout pane2 valueChanged.
 	self application setAppBar2EditDelete.
 
 ]
 
 { #category : 'events' }
-SlmdResponsiveLayoutPresenter >> doUpdate: anObject [
+SlmdResponsiveLayoutPresenter >> doUpdate: aNavActionEvent [
 
 	self layout pane2 valueChanged.
 	self application setAppBar2SaveCancel.

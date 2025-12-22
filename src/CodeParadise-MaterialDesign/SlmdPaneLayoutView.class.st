@@ -29,7 +29,6 @@ SlmdPaneLayoutView class >> style [
 
 .smd-pane-layout {
   height: 100%;
-  overflow-y: auto;
 }
 
 .smd-pane {

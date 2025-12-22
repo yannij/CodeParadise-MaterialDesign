@@ -16,6 +16,7 @@ SlmdPaneView class >> style [
   background: var(--wa-color-brand-90);
   overflow-x: auto;
   overflow-y: auto;
+  max-height: calc(100vh - 64px);
 }
 '
 ]

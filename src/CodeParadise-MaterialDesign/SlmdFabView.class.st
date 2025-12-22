@@ -13,10 +13,12 @@ SlmdFabView class >> globalStyle [
 
 	^ '
 .smd-fab-fab {
-  margin-left: 8px;
-  padding: 8px;
-  height: 48px;
-  width: 48px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  width: 56px;
   border-radius: 16px;
   background: var(--wa-color-brand-60);
 }
@@ -71,7 +73,7 @@ SlmdFabView >> fabCssClass [
 
 { #category : 'rendering' }
 SlmdFabView >> setExtraOffset: aBoolean [
-	"Increase the offset from bottom, to accomodate an nav bar"
+	"Increase the offset from bottom, to accomodate a nav bar"
 	| container |
 
 	container := self shadowedElementWithId: 'container'.

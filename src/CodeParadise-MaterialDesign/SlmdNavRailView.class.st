@@ -15,7 +15,7 @@ SlmdNavRailView class >> style [
   height: 100%;
   overflow-y: auto;
   padding: 8px 0;
-  background: var(--wa-color-brand-780);
+  background: var(--wa-color-brand-70);
 }
 '
 ]

@@ -18,7 +18,7 @@ SlmdToolbarPresenter >> clearAllSlots [
 ]
 
 { #category : 'events' }
-SlmdToolbarPresenter >> doCancel: anObject [
+SlmdToolbarPresenter >> doCancel: aNavActionEvent [
 
 	self application setAppBar2EditDelete.
 	self view beNotEditable.
@@ -26,7 +26,7 @@ SlmdToolbarPresenter >> doCancel: anObject [
 ]
 
 { #category : 'events' }
-SlmdToolbarPresenter >> doCreate: anObject [
+SlmdToolbarPresenter >> doCreate: aNavActionEvent [
 
 	self application setDetailAddNew.
 	self layout pane2 valueChanged.
@@ -38,24 +38,24 @@ SlmdToolbarPresenter >> doCreate: anObject [
 ]
 
 { #category : 'events' }
-SlmdToolbarPresenter >> doDelete: anObject [
+SlmdToolbarPresenter >> doDelete: aNavActionEvent [
 
 	self view primaryPaneOnly.
-	self application listDetailRemove: anObject.
+	self application listDetailRemove: aNavActionEvent.
 
 ]
 
 { #category : 'events' }
-SlmdToolbarPresenter >> doSave: anObject [
+SlmdToolbarPresenter >> doSave: aNavActionEvent [
 
-	self application listDetailAdd: anObject.
+	self application listDetailAdd: aNavActionEvent.
 	self layout pane2 valueChanged.
 	self application setAppBar2EditDelete.
 
 ]
 
 { #category : 'events' }
-SlmdToolbarPresenter >> doUpdate: anObject [
+SlmdToolbarPresenter >> doUpdate: aNavActionEvent [
 
 	self layout pane2 valueChanged.
 	self application setAppBar2SaveCancel.
