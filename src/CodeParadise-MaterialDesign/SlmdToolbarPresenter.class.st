@@ -21,7 +21,7 @@ SlmdToolbarPresenter >> clearAllSlots [
 SlmdToolbarPresenter >> doCancel: aNavActionEvent [
 
 	self application setAppBar2EditDelete.
-	self view beNotEditable.
+	self view beNotEditablePane2.
 
 ]
 
@@ -48,9 +48,13 @@ SlmdToolbarPresenter >> doDelete: aNavActionEvent [
 { #category : 'events' }
 SlmdToolbarPresenter >> doSave: aNavActionEvent [
 
-	self application listDetailAdd: aNavActionEvent.
+	| result |
+
+	result := self application listDetailAdd: aNavActionEvent.
 	self layout pane2 valueChanged.
 	self application setAppBar2EditDelete.
+	result = true ifTrue: [
+		self view beNotEditablePane2 ].
 
 ]
 

@@ -10,7 +10,7 @@ Class {
 SlmdResponsiveLayoutPresenter >> doCancel: aNavActionEvent [
 
 	self application setAppBar2EditDelete.
-	self view beNotEditable.
+	self view beNotEditablePane2.
 
 ]
 
@@ -36,10 +36,13 @@ SlmdResponsiveLayoutPresenter >> doDelete: aNavActionEvent [
 
 { #category : 'events' }
 SlmdResponsiveLayoutPresenter >> doSave: aNavActionEvent [
+	| result |
 
-	self application listDetailAdd: aNavActionEvent.
+	result := self application listDetailAdd: aNavActionEvent.
 	self layout pane2 valueChanged.
 	self application setAppBar2EditDelete.
+	result = true ifTrue: [
+		self view beNotEditablePane2 ].
 
 ]
 

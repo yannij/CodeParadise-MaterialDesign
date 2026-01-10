@@ -136,21 +136,22 @@ SlmdWebApplication >> layout: anObject [
 
 { #category : 'model' }
 SlmdWebApplication >> listDetailAdd: anObject [
-	| theModel listDetail |
+	| theModel listDetail result |
 
 	theModel := self layout pane2 paneContent.
 	theModel wrappedModel handleSave: anObject.
 	theModel valueChanged.
 
 	listDetail := self layout pane1 paneContent.
-	theModel isNew
+	theModel isCreating
 		ifTrue: [
-			self modelAdd: listDetail detail wrappedModel.
+			result := self modelAdd: listDetail detail wrappedModel.
 			listDetail listSet: self allModels.
 			self listDetailReset ]
 		ifFalse: [
-			self modelUpdate: listDetail detail wrappedModel ].
-.
+			result := self modelUpdate: listDetail detail wrappedModel ].
+
+	^ result
 
 ]
 
@@ -161,7 +162,7 @@ SlmdWebApplication >> listDetailRemove: ignored [
 	listDetail := self layout pane1 paneContent.
 	self modelRemove: listDetail detail wrappedModel.
 	listDetail listSet: self allModels.
-	self listDetailReset.
+	self setDetailNone.
 
 ]
 

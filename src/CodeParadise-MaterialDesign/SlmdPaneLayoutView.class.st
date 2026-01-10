@@ -104,6 +104,7 @@ SlmdPaneLayoutView >> pane1WidthSet: anInteger [
 	split := self findByIdInShadowDom: 'smdBodySplitPanel'.
 	split ifNotNil: [
 		split
+			min: '300px';
 			primaryBeStart;
 			positionInPixels: anInteger printString;
 			dividerWidth: '24px';

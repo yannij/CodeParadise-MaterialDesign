@@ -85,6 +85,7 @@ SlmdNavBarView >> navbarBuildItem: aNavAction [
 			yourself);
 		appendChild: (#div asHtmlTag
 			addClass: 'smd-navbar-labelText';
+			addClass: 'wa-text-truncate';
 			textContent: (aNavAction at: #iconLabel);
 			yourself);
 		yourself

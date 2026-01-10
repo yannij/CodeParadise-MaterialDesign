@@ -73,6 +73,7 @@ SlmdNavAbstractView >> divExpanded: aNavAction [
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrailx-labelText';
+				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself
@@ -91,6 +92,7 @@ SlmdNavAbstractView >> divNarrow: aNavAction [
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navrail-labelText';
+				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself.

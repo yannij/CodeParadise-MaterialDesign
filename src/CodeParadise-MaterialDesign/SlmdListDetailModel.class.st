@@ -38,8 +38,7 @@ SlmdListDetailModel >> list: anObject [
 SlmdListDetailModel >> listSet: aCollection [
 
 	list := OrderedCollection new.
-	aCollection withIndexDo: [ :each :index |
-		list add: (SlmdItemWrapperModel on: each atIndex: index) ].
+	aCollection do: [ :each | list add: (SlmdItemWrapperModel on: each) ].
 	self valueChanged.
 
 ]

@@ -2,7 +2,6 @@ Class {
 	#name : 'SlmdItemWrapperModel',
 	#superclass : 'SlmdModel',
 	#instVars : [
-		'index',
 		'wrappedModel',
 		'crudState'
 	],
@@ -12,18 +11,19 @@ Class {
 }
 
 { #category : 'instance creation' }
-SlmdItemWrapperModel class >> on: aModel atIndex: anIndex [
+SlmdItemWrapperModel class >> on: aModel [
 
 	^ self new
 		wrappedModel: aModel;
-		index: anIndex;
 		yourself
 ]
 
 { #category : 'instance creation' }
 SlmdItemWrapperModel class >> onNewModel: aModel [
 
-	^ self on: aModel atIndex: nil
+	^ (self on: aModel)
+		beCreating;
+		yourself
 ]
 
 { #category : 'states' }
@@ -62,18 +62,6 @@ SlmdItemWrapperModel >> crudState: anObject [
 	crudState := anObject
 ]
 
-{ #category : 'accessing' }
-SlmdItemWrapperModel >> index [
-
-	^ index
-]
-
-{ #category : 'accessing' }
-SlmdItemWrapperModel >> index: anObject [
-
-	index := anObject
-]
-
 { #category : 'initialization' }
 SlmdItemWrapperModel >> initialize [
 
@@ -93,12 +81,6 @@ SlmdItemWrapperModel >> isCreating [
 SlmdItemWrapperModel >> isDeleting [
 
 	^ self crudState = #deleting
-]
-
-{ #category : 'testing' }
-SlmdItemWrapperModel >> isNew [
-
-	^ self index isNil
 ]
 
 { #category : 'testing' }

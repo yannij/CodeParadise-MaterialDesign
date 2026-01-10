@@ -259,7 +259,9 @@ SlmdResponsiveLayoutView class >> template [
     <div id="smdFloatingToolbar">
       <slot name="floatingToolbar"></slot>
     </div>
-    <slot name="fab"></slot>
+    <div id="smdFab">
+      <slot name="fab"></slot>
+    </div>
   </div>
   <div id="smdModalDiv">
     <slot name="navRailModal"></slot>
@@ -416,6 +418,7 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 SlmdResponsiveLayoutView >> beEditablePane2 [
 	| wrappers |
 
+	self fabDisplay: false.
 	wrappers := SlmdItemWrapperView all.
 	wrappers do: [ :each |
 		each wrappedView
@@ -426,9 +429,10 @@ SlmdResponsiveLayoutView >> beEditablePane2 [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> beNotEditable [
+SlmdResponsiveLayoutView >> beNotEditablePane2 [
 	| wrappers |
 
+	self fabDisplay: true.
 	wrappers := SlmdItemWrapperView all.
 	wrappers do: [ :each |
 		each wrappedView
@@ -590,6 +594,17 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 
 	self showDockedToolbar: true.
 	self showDockedToolbarAdapt: true.
+
+]
+
+{ #category : 'toolbar' }
+SlmdResponsiveLayoutView >> fabDisplay: aBoolean [
+	| element |
+
+	"The fab CSS uses fixed position, so use display none"
+	element := self firstChildAtSlotNamed: 'fab'.
+	element ifNil: [ ^ self ].
+	self element: element display: aBoolean.
 
 ]
 
@@ -1120,6 +1135,15 @@ SlmdResponsiveLayoutView >> showDockedToolbarAdapt: aBoolean [
 	self systemLog logTrace5: aBoolean printString.
 
 	self toolbarDockedDisplay: aBoolean.
+
+]
+
+{ #category : 'toolbar' }
+SlmdResponsiveLayoutView >> showFabAdapt: aBoolean [
+
+	self systemLog logTrace5: aBoolean printString.
+
+	self fabDisplay: aBoolean.
 
 ]
 

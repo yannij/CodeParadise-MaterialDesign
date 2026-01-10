@@ -19,9 +19,9 @@ SlmdView >> beEditablePane2 [
 ]
 
 { #category : 'utilities' }
-SlmdView >> beNotEditable [
+SlmdView >> beNotEditablePane2 [
 
-	self layoutViewLazy beNotEditable
+	self layoutViewLazy beNotEditablePane2
 ]
 
 { #category : 'utilities' }

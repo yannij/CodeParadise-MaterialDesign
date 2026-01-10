@@ -29,6 +29,7 @@ SlmdNavActionSubmenuView >> divSubmenu: aNavAction [
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'smd-navsubmenu-labelText';
+				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself.
