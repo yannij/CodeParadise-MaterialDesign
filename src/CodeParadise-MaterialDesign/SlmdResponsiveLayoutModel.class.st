@@ -8,6 +8,7 @@ Class {
 		'navRail',
 		'navPopups',
 		'sidesheet',
+		'dialog',
 		'dockedToolbar',
 		'floatingToolbar',
 		'fab'
@@ -27,6 +28,18 @@ SlmdResponsiveLayoutModel >> appBar1 [
 SlmdResponsiveLayoutModel >> appBar2 [
 
 	^ self pane2 appBarModel
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutModel >> dialog [
+
+	^ dialog
+]
+
+{ #category : 'accessing' }
+SlmdResponsiveLayoutModel >> dialog: anObject [
+
+	dialog := anObject
 ]
 
 { #category : 'accessing' }
@@ -76,6 +89,7 @@ SlmdResponsiveLayoutModel >> initialize [
 	paneLayout := SlmdPaneLayoutModel new.
 	navRail := SlmdNavModel new.
 	sidesheet := SlmdSidesheetModel new.
+	dialog := SlmdDialogModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.
 	floatingToolbar := SlmdToolbarFloatingModel new.
 	fab := SlmdFabModel new.

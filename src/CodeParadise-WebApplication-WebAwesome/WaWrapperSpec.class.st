@@ -144,6 +144,16 @@ WaWrapperSpec class >> waDetailsSpec [
 
 	^ self new
 		wrapperClassName: #WaDetails;
+		slotsAddAll: #('summary' 'expand-icon' 'collapse-icon');
+		booleanPropertyAt: 'open' put: false;
+		"stringPropertyAt: 'summary' put: #string;"
+		stringPropertyAt: 'name' put: #string;
+		booleanPropertyAt: 'disabled' put: false;
+		stringPropertyAt: 'appearance' put: 'filled|*outlined|filled-outlined|plain';
+		stringPropertyAt: 'icon-placement' put: 'start|*end';
+		cssPropertieAdd: 'spacing';
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
 		yourself
 ]
 

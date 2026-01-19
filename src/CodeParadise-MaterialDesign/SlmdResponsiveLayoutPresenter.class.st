@@ -77,6 +77,9 @@ SlmdResponsiveLayoutPresenter >> renderView [
 	self model sidesheet ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
 
+	self model dialog ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #dialog ].
+
 	self model dockedToolbar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #dockedToolbar ].
 

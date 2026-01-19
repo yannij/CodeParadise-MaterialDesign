@@ -266,6 +266,7 @@ SlmdResponsiveLayoutView class >> template [
   <div id="smdModalDiv">
     <slot name="navRailModal"></slot>
     <slot name="popups"></slot>
+    <slot name="dialog"></slot>
   </div>
 </div>
 '
