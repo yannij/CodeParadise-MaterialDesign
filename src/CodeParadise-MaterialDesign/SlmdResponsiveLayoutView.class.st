@@ -579,6 +579,12 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 	debounceTransition startDelayedBy: 50.
 ]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> dialogView [
+
+	^ self firstChildAtSlotNamed: 'dialog'
+]
+
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> dockedToolbarOff [
 

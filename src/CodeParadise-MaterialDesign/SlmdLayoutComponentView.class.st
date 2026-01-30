@@ -9,6 +9,12 @@ Class {
 	#tag : 'Base'
 }
 
+{ #category : 'actions' }
+SlmdLayoutComponentView >> closeDialog [
+
+	self layoutViewLazy dialogView closeDialog
+]
+
 { #category : 'accessing' }
 SlmdLayoutComponentView >> layoutView [
 

@@ -249,6 +249,14 @@ SlmdView >> primaryPaneOnly [
 	self layoutViewLazy paneLayoutView primaryPaneOnly
 ]
 
+{ #category : 'rendering' }
+SlmdView >> renderString: aString [
+	"Render aString to default slot.
+	Useful when developing new code"
+
+	self replaceAllChildrenWith: aString asHtmlElement
+]
+
 { #category : 'utilities' }
 SlmdView >> secondaryPaneOnly [
 
@@ -290,10 +298,9 @@ SlmdView >> systemLog [
 
 { #category : 'actions' }
 SlmdView >> triggerNavEvent: aNavAction [
-	| eventId data |
+	| eventId data navActionEvent |
 
 	eventId := aNavAction at: #eventId.
-	data := aNavAction at: #data.
 
 	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
@@ -302,5 +309,9 @@ SlmdView >> triggerNavEvent: aNavAction [
 	eventId = #login ifTrue: [
 		^ self layoutViewLazy loginOpen ].
 
-	self serverAnnounce: (WamNavActionEvent id: eventId parameter: data).
+	data := aNavAction at: #data.
+	navActionEvent := data
+		ifNil: [ WamNavActionEvent id: eventId ]
+		ifNotNil: [ :value | WamNavActionEvent id: eventId parameter: value ].
+	self serverAnnounce: navActionEvent.
 ]

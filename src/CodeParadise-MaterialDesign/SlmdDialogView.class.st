@@ -17,6 +17,13 @@ SlmdDialogView class >> template [
 ]
 
 { #category : 'rendering' }
+SlmdDialogView >> closeDialog [
+
+	self dialogComponent openBeOff
+
+]
+
+{ #category : 'rendering' }
 SlmdDialogView >> dialogComponent [
 
 	^ self shadowRoot elementWithId: #sharedDialog

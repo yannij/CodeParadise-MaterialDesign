@@ -13,6 +13,6 @@ Class {
 WamEvent >> printOn: aStream [
 
 	aStream nextPutAll: 'EVENT id: '; print: id.
-	parameters ifNotNil: [
+	(self hasParameters and: [ parameters ~~ #UndefinedObject ]) ifTrue: [
 		aStream nextPutAll: ', parameters: '; print: parameters ]
 ]

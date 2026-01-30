@@ -36,9 +36,18 @@ SlmdListDetailModel >> list: anObject [
 
 { #category : 'accessing' }
 SlmdListDetailModel >> listSet: aCollection [
+	| wrapperClass |
 
+	wrapperClass := self modelWrapperClass.
 	list := OrderedCollection new.
-	aCollection do: [ :each | list add: (SlmdItemWrapperModel on: each) ].
+	aCollection do: [ :each | list add: (wrapperClass on: each) ].
 	self valueChanged.
+
+]
+
+{ #category : 'accessing' }
+SlmdListDetailModel >> modelWrapperClass [
+
+	^ SlmdItemWrapperModel
 
 ]

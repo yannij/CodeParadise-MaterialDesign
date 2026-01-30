@@ -99,6 +99,6 @@ SlmdListItemView >> triggerAction: action [
 
 	self systemLog logTrace5: action printString.
 
-	self serverAnnounce: (WamNavActionEvent id: action)
+	self serverAnnounce: (WamNavActionEvent id: action parameters: UndefinedObject)
 
 ]
