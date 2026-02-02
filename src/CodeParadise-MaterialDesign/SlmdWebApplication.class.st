@@ -352,7 +352,7 @@ SlmdWebApplication >> setAppBar2SaveCancel [
 SlmdWebApplication >> setDetailAddNew [
 	| detail |
 
-	detail := SlmdItemWrapperModel onNewModel: self newModelInstance.
+	detail := self layout pane1 paneContent modelWrapperClass onNewModel: self newModelInstance.
 
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail.

@@ -203,7 +203,7 @@ SlmdAppBarView >> triggerNavEvent: aNavAction [
 	eventId = 'save' ifTrue: [ | changes paneContentView |
 		paneContentView := self layoutViewLazy pane2View paneContentView.
 		paneContentView ifNil: [ ^ self ].
-		changes := paneContentView wrappedView changeMap.
+		changes := paneContentView "wrappedView" changeMap.
 		event parameters at: #changes put: changes ].
 
 	self serverAnnounce: event

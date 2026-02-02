@@ -417,29 +417,19 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 
 { #category : 'actions' }
 SlmdResponsiveLayoutView >> beEditablePane2 [
-	| wrappers |
 
 	self fabDisplay: false.
-	wrappers := SlmdItemWrapperView all.
-	wrappers do: [ :each |
-		each wrappedView
-			setEditable: true;
-			"setFocus;"
-			yourself ]
+	"self pane2Content wrappedView do: [ :each | each setEditable: true ]."
+	self pane2Content setEditable: true.
 
 ]
 
 { #category : 'actions' }
 SlmdResponsiveLayoutView >> beNotEditablePane2 [
-	| wrappers |
 
 	self fabDisplay: true.
-	wrappers := SlmdItemWrapperView all.
-	wrappers do: [ :each |
-		each wrappedView
-			setEditable: false;
-			"setFocus;"
-			yourself ]
+	"self pane2Content wrappedView do: [ :each | each setEditable: false ]."
+	self pane2Content setEditable: false.
 
 ]
 
@@ -1016,6 +1006,18 @@ SlmdResponsiveLayoutView >> pane1WidthCompute [
 SlmdResponsiveLayoutView >> pane1WidthMin [
 
 	^ 300
+]
+
+{ #category : 'actions' }
+SlmdResponsiveLayoutView >> pane2Content [
+	| view |
+
+	view := self paneLayoutView firstChildAtSlotNamed: #twoPaneLayoutP2.
+	view := view firstChildAtSlotNamed: #paneContent.
+	self systemLog logTrace: view printString.
+
+	"^ SlmdItemWrapperView all"
+	^ view
 ]
 
 { #category : 'accessing - components' }

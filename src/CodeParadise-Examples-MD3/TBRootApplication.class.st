@@ -51,7 +51,6 @@ TBRootApplication >> initialize [
 	super initialize.
 
 	pane1Content := SlmdListDetailModel new.
-	pane1Content listSet: self allModels.
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
@@ -62,6 +61,8 @@ TBRootApplication >> initialize [
 	self setUpAppBar1.
 	self setUpAppBar2.
 	self layout appBar1 headline: self class appName.
+
+	pane1Content listSet: self allModels.
 	self listDetailReset.
 
 ]
@@ -93,6 +94,16 @@ TBRootApplication >> navItemsToUse [
 		add: (self nativeEventSpecAt: #home);
 		add: (self nativeEventSpecAt: #settingsOpen);
 		yourself.
+]
+
+{ #category : 'initialization' }
+TBRootApplication >> postLoad [
+
+	super postLoad.
+
+	"self layout pane1 paneContent listSet: self allModels."
+	self listDetailReset.
+
 ]
 
 { #category : 'events' }

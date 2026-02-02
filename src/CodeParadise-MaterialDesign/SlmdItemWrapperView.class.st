@@ -45,8 +45,24 @@ SlmdItemWrapperView class >> template [
 </div>'
 ]
 
+{ #category : 'rendering' }
+SlmdItemWrapperView >> changeMap [
+
+	^ self wrappedView first changeMap
+]
+
+{ #category : 'finding' }
+SlmdItemWrapperView >> setEditable: aBoolean [
+
+	self systemLog logTrace: 'setEditable: ', aBoolean printString.
+
+	(self childrenAtSlotNamed: #wrapped) do: [ :eachAttribute |
+		eachAttribute setEditable: aBoolean ]
+
+]
+
 { #category : 'finding' }
 SlmdItemWrapperView >> wrappedView [
 
-	^ self firstChildAtSlotNamed: #wrapped
+	^ self childrenAtSlotNamed: #wrapped
 ]

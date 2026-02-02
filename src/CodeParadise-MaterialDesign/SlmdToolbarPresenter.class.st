@@ -47,11 +47,11 @@ SlmdToolbarPresenter >> doDelete: aNavActionEvent [
 
 { #category : 'events' }
 SlmdToolbarPresenter >> doSave: aNavActionEvent [
-
 	| result |
 
 	result := self application listDetailAdd: aNavActionEvent.
 	self layout pane2 valueChanged.
+	self layout pane2 paneContent valueChanged.
 	self application setAppBar2EditDelete.
 	result = true ifTrue: [
 		self view beNotEditablePane2 ].

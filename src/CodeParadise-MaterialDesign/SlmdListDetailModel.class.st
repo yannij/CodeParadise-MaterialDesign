@@ -22,6 +22,13 @@ SlmdListDetailModel >> detail: anObject [
 	detail := anObject
 ]
 
+{ #category : 'initialization' }
+SlmdListDetailModel >> initialize [
+
+	list := OrderedCollection new.
+
+]
+
 { #category : 'accessing' }
 SlmdListDetailModel >> list [
 
