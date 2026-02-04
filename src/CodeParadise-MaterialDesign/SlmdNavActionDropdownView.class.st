@@ -26,7 +26,7 @@ SlmdNavActionDropdownView class >> style [
   flex-flow: column;
   height: 56px;
   width: 96px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-navrail-icon {

@@ -16,7 +16,7 @@ SlmdListItemView class >> globalStyle [
   display: flex;
   min-height: 40px;
   padding: 8px 0;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-normal);
   border-top: 1px solid var(--wa-color-neutral-60);
 }
 

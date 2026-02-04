@@ -23,7 +23,7 @@ SlmdNavBarView class >> globalStyle [
   padding: 0 4px;
   border-radius: 20px;
   height: 40px;
-  background: var(--wa-color-brand-90);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-navbar-icon {
@@ -52,7 +52,7 @@ SlmdNavBarView class >> style [
   justify-content: space-between;
   flex-flow: row nowrap;
   padding: 12px 4px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 '
 ]

@@ -22,7 +22,7 @@ SlmdNavAbstractView class >> globalStyle [
   flex-flow: column;
   height: 56px;
   width: 96px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-navrail-icon {
@@ -44,7 +44,7 @@ SlmdNavAbstractView class >> globalStyle [
   display: flex;
   height: 56px;
   width: 220px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-quiet);
   align-items: center;
 }
 

@@ -22,14 +22,14 @@ SlmdLoginView class >> style [
 .slmd-login {
   min-width: 300px;
   max-width: 400px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-normal);
 }
 .slmd-login-header {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-normal);
   font-size: var(--wa-font-size-x-large);
  }
 '

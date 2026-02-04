@@ -35,7 +35,7 @@ SlmdPaneLayoutView class >> style [
   flex: 100%;
   display: flex;  
   flex-direction: column;
-  padding: 0;
+  padding: 0 4px;
   margin: 0;
 }
 
@@ -44,7 +44,7 @@ SlmdPaneLayoutView class >> style [
 }
 
 .smd-pane-layout wa-split-panel::part(divider) {
-  background-color: var(--wa-color-brand-90);
+  background-color: var(--wa-color-brand-fill-quiet);
 }
 '
 ]
@@ -107,7 +107,7 @@ SlmdPaneLayoutView >> pane1WidthSet: anInteger [
 			min: '300px';
 			primaryBeStart;
 			positionInPixels: anInteger printString;
-			dividerWidth: '24px';
+			dividerWidth: '16px';
 			snap: (anInteger printString), 'px 50%';
 			snapThreshold: 24 ].
 

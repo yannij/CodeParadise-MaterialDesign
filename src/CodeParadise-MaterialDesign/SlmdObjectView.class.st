@@ -46,7 +46,7 @@ sl-input {
   flex-direction: column;
   gap: 16px;
   padding: 8px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-light);
 }
 '
 , self globalStyleInput
@@ -64,7 +64,7 @@ SlmdObjectView class >> globalStyleInput [
   position: relative;
   width: 100%;
   padding: 0;
-  background: var(--wa-color-neutral-90);
+  background: var(--wa-color-brand-fill-light);
   height: 64px;
   padding-top: 4px;
 }
@@ -72,6 +72,7 @@ SlmdObjectView class >> globalStyleInput [
 .slmd-input::part(label) {
   height: 16px;
   font-size: 12px;
+  margin-bottom: -16px;
   padding: 4px 16px 0 16px;
   z-index: 10;
   background-color: rgb(0 0 0 / 0);
@@ -81,15 +82,15 @@ SlmdObjectView class >> globalStyleInput [
   height: 56px;
   width: 100%;
   font-size: 16px;
-  background: var(--wa-color-neutral-90);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .slmd-input::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
-  padding: 4px 16px 0 16px;
-  background: var(--wa-color-brand-80);
+  padding: 0 16px;
+  background: var(--wa-color-brand-fill-light);
 }
 '
 ]
@@ -110,7 +111,7 @@ SlmdObjectView class >> globalStyleSwitch [
   width: 100%;
   font-size: 12px;
   padding: 4px 16px 0 16px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-light);
 }
 '
 ]
@@ -125,15 +126,16 @@ SlmdObjectView class >> globalStyleTextarea [
   position: relative;
   width: 100%;
   padding: 0;
-  background: var(--wa-color-neutral-90);
+  background: var(--wa-color-brand-fill-normal);
   height: 100%;
-  padding-top: 12px;
+  padding-top: 16px;
 }
 
 .slmd-textarea::part(label) {
   height: 16px;
   font-size: 12px;
   padding: 4px 16px 0 16px;
+  margin-bottom: -16px;
   z-index: 10;
   background-color: rgb(0 0 0 / 0);
 }
@@ -141,15 +143,15 @@ SlmdObjectView class >> globalStyleTextarea [
 .slmd-textarea::part(textarea) {
   width: 100%;
   font-size: 16px;
-  background: var(--wa-color-neutral-90);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .slmd-textarea::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
-  padding: 4px 16px 0 16px;
-  background: var(--wa-color-brand-80);
+  padding: 0 16px;
+  background: var(--wa-color-brand-fill-light);
 }
 '
 ]

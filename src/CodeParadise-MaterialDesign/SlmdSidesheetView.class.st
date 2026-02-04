@@ -16,7 +16,6 @@ SlmdSidesheetView class >> style [
   padding: 0;
   margin-left: auto;
   max-width: 400px;
-  background: var(--wa-color-brand-90);
 }
 
 .smd-sidesheet-container {
@@ -25,16 +24,15 @@ SlmdSidesheetView class >> style [
 }
 
 .smd-sidesheet-content {
-  padding: 8px;
+  padding: 0;
   width: 300px;
   height: 100%;
-  background: var(--wa-color-brand-90);
 }
 
 .smd-sidesheet-card {
   border-radius: 8px;
   padding: 8px;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-normal);
 }
 '
 ]

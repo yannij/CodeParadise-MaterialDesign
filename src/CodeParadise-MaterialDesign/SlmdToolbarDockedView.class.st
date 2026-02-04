@@ -17,7 +17,7 @@ SlmdToolbarDockedView class >> globalStyle [
   gap: 32px;
   padding: 0 8px;
   height: 64px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-toolbar-docked-fab {
@@ -26,7 +26,7 @@ SlmdToolbarDockedView class >> globalStyle [
   height: 48px;
   width: 48px;
   border-radius: 16px;
-  background: var(--wa-color-brand-60);
+  background: var(--wa-color-brand-fill-normal);
 }
 '
 ]
@@ -43,7 +43,7 @@ SlmdToolbarDockedView class >> style [
   flex-flow: row wrap;
   padding: 0 16px;
   height: 64px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 '
 ]

@@ -19,7 +19,7 @@ SlmdToolbarFloatingView class >> globalStyle [
   padding: 0 8px;
   border-radius: 32px;
   height: 64px;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-toolbar-floating-fab {
@@ -28,7 +28,7 @@ SlmdToolbarFloatingView class >> globalStyle [
   height: 48px;
   width: 48px;
   border-radius: 16px;
-  background: var(--wa-color-brand-60);
+  background: var(--wa-color-brand-fill-normal);
 }
 '
 ]
@@ -87,10 +87,11 @@ SlmdToolbarFloatingView >> renderButtons: buttons [
 	| element iconButton |
 
 	buttons ifNotEmpty: [
-		element := WaButtonGroup new.
+		element := #div asHtmlTag.
 		element addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
-			iconButton := self pillButtonForAction: eachItem css: 'smd-toolbar-item'.
+			iconButton := self iconButtonForAction: eachItem.
+			iconButton addClass: 'smd-toolbar-item'.
 			element appendChild: iconButton ].
 		self appendChild: element atSlotNamed: 'toolbar' ].
 

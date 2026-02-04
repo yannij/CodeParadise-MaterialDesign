@@ -14,8 +14,8 @@ SlmdNavRailView class >> style [
 .navrail {
   height: 100%;
   overflow-y: auto;
-  padding: 8px 0;
-  background: var(--wa-color-brand-70);
+  padding: 0;
+  background: var(--wa-color-brand-fill-quiet);
 }
 '
 ]

@@ -28,7 +28,6 @@ SlmdItemWrapperView class >> style [
 	^ '
 #container {
   display: flex;
-  background: var(--wa-color-brand-80);
 }
 '
 ]

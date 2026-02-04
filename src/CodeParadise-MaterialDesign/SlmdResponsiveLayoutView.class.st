@@ -153,7 +153,7 @@ SlmdResponsiveLayoutView class >> style [
 }
 
 .smd-layout {
-  background: var(--wa-color-brand-90);
+  background: var(--wa-color-brand-fill-quiet);
 }
 
 .smd-settings-pane {
@@ -166,14 +166,14 @@ SlmdResponsiveLayoutView class >> style [
   height: 100%;
   padding: 0;
   margin: 0;
-  background: var(--wa-color-brand-70);
+  background: var(--wa-color-brand-fill-quiet);
 }
 
 .smd-body-region {
   flex: auto;
   display: flex;  
   flex-direction: row;
-  background: var(--wa-color-brand-90);
+  background: var(--wa-color-brand-fill-quiet);
 }
 
 .smd-navrailx {
@@ -183,7 +183,7 @@ SlmdResponsiveLayoutView class >> style [
 
 .navrailx::part(body) {
   padding: 8px 0;
-  background: var(--wa-color-brand-80);
+  background: var(--wa-color-brand-fill-normal);
 }
 
 .smd-navrailx-item {
@@ -492,6 +492,9 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 		addClass: 'wa-theme-default';
 		addClass: 'wa-palette-default';
 		addClass: ('wa-brand-', aColorName).
+	CpHtmlElement documentBody
+		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
+		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
 ]
 
 { #category : 'color theme' }
@@ -545,7 +548,10 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 
 	element := CpHtmlElement documentBody.
 	theme do: [ :each |
-		element customPropertyAt: each key put: each value ]
+		element customPropertyAt: each key put: each value ].
+	CpHtmlElement documentBody
+		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
+		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
 
 ]
 

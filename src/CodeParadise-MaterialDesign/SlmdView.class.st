@@ -138,6 +138,23 @@ SlmdView >> findFirstDescendantInShadowDom: anId ifNone: aBlock [
 ]
 
 { #category : 'utilities' }
+SlmdView >> iconButton: iconName navAction: aNavAction [
+
+	^ WaButton new
+		appendChild: (WaIcon fullyNamed: iconName);
+		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
+		yourself
+]
+
+{ #category : 'utilities' }
+SlmdView >> iconButtonForAction: aNavAction [
+	| iconName |
+
+	iconName := aNavAction at: #iconName.
+	^ self iconButton: iconName navAction: aNavAction
+]
+
+{ #category : 'utilities' }
 SlmdView >> iconButtonForAction: aNavAction css: cssClass [
 	| iconName tag |
 
