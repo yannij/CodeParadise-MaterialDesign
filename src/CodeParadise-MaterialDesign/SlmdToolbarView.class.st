@@ -21,8 +21,17 @@ SlmdToolbarView class >> globalStyle [
   justify-content: center;
 }
 
+.smd-toolbar-floating-item {
+  display: flex;
+  padding: 8px 0;
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  justify-content: center;
+}
+
 .smd-toolbar-icon {
-  font-size: 32px;
+  font-size: 24px;
 }
 '
 ]

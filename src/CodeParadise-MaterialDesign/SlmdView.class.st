@@ -25,14 +25,30 @@ SlmdView >> beNotEditablePane2 [
 ]
 
 { #category : 'utilities' }
-SlmdView >> dropdownMenu: actionList css: cssClass [
+SlmdView >> dropdownAppbar: actionList [
+	| menu iconName trigger dropdown div |
 
-	^ self dropdownMenu: actionList icon: 'ellipsis-vertical' css: cssClass
+	menu := self dropdownMenuItems: actionList.
+	iconName := 'ellipsis-vertical'.
+
+	trigger := #div asHtmlTag
+		appendChild: (WaIcon fullyNamed: iconName).
+	trigger addClass: 'smd-toolbar-icon'.
+
+	dropdown := WaDropdown new
+		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
+		appendChild: menu;
+		yourself.
+
+	div := #div asHtmlTag appendChild: dropdown; addClass: 'smd-toolbar-item'; yourself.
+
+	^ div
+
 ]
 
 { #category : 'utilities' }
-SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
-	| menu trigger dropdown div |
+SlmdView >> dropdownMenuItems: actionList [
+	| menu |
 
 	menu := #div asHtmlTag.
 	menu addClass: 'smd-menu'.
@@ -48,16 +64,27 @@ SlmdView >> dropdownMenu: actionList icon: iconName css: cssClass [
 			textContent: (each at: #iconLabel);
 			yourself) ].
 
+	^ menu
+
+]
+
+{ #category : 'utilities' }
+SlmdView >> dropdownNavbar: actionList [
+	| menu iconName trigger dropdown div |
+
+	menu := self dropdownMenuItems: actionList.
+	iconName := 'ellipsis-vertical'.
+
 	trigger := #div asHtmlTag
-		appendChild: (WaButton new label: ((WaIcon fullyNamed: iconName) label: iconName; yourself); yourself).
+		appendChild: (WaIcon fullyNamed: iconName).
+	trigger addClass: 'smd-navbar-dropdown'.
 
 	dropdown := WaDropdown new
 		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
 		appendChild: menu;
 		yourself.
 
-	div := #div asHtmlTag appendChild: dropdown; yourself.
-	cssClass ifNotNil: [ div addClass: cssClass ].
+	div := #div asHtmlTag appendChild: dropdown; addClass: 'smd-navbar-item'; yourself.
 
 	^ div
 

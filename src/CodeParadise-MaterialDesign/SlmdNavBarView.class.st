@@ -37,6 +37,11 @@ SlmdNavBarView class >> globalStyle [
   padding-left: 4px;
   padding-right: 16px;
 }
+
+.smd-navbar-dropdown {
+  height: 40px;
+  font-size: 24px;
+}
 '
 ]
 
@@ -107,6 +112,6 @@ SlmdNavBarView >> renderNavContent: buttons [
 		self appendChild: (self navbarBuildItem: each) atSlotNamed: 'navBar' ].
 
 	overflowList := buttons copyFrom: 4 to: buttons size.
-	self appendChild: (self dropdownMenu: overflowList css: nil) atSlotNamed: 'navBar'.
+	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: 'navBar'.
 
 ]

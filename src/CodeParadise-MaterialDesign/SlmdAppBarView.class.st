@@ -24,7 +24,6 @@ SlmdAppBarView class >> style [
 }
 
 .smd-appBar-leadingAction {
-  padding: 8px 0;
   height: 48px;
   width: 48px;
 }
@@ -161,7 +160,7 @@ SlmdAppBarView >> renderLeadingAction: leadingAction [
 	self removeChildrenAtSlotNamed: 'leadingAction'.
 	leadingAction ifNil: [ ^ self ].
 
-	actionItem := self iconButtonForAction: leadingAction css: nil.
+	actionItem := self iconButtonForAction: leadingAction css: 'smd-toolbar-item'.
 	self appendChild: actionItem atSlotNamed: 'leadingAction'.
 
 ]
@@ -185,7 +184,7 @@ SlmdAppBarView >> renderTrailingActions: buttons [
 		self appendChild: actionItem atSlotNamed: 'trailingActions' ].
 
 	overflowList := buttons copyFrom: overflowThreshold to: buttons size.
-	self appendChild: (self dropdownMenu: overflowList css: 'smd-toolbar-item') atSlotNamed: 'trailingActions'.
+	self appendChild: (self dropdownAppbar: overflowList) atSlotNamed: 'trailingActions'.
 
 ]
 

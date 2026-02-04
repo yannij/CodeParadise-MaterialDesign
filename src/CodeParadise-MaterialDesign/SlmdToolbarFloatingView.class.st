@@ -90,9 +90,9 @@ SlmdToolbarFloatingView >> renderButtons: buttons [
 		element := #div asHtmlTag.
 		element addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
-			iconButton := self iconButtonForAction: eachItem.
-			iconButton addClass: 'smd-toolbar-item'.
-			element appendChild: iconButton ].
+			"iconButton := self iconButtonForAction: eachItem."
+			iconButton := self iconButtonNamed: (eachItem at: #iconName) class: 'smd-toolbar-icon' navAction: eachItem.
+			element appendChild: (#div asHtmlTag addClass: 'smd-toolbar-floating-item'; appendChild: iconButton; yourself) ].
 		self appendChild: element atSlotNamed: 'toolbar' ].
 
 ]
