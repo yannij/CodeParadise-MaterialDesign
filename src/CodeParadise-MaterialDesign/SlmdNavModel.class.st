@@ -38,6 +38,12 @@ SlmdNavModel >> navActionDetect: aBlock ifNone: noneBlock [
 	^ noneBlock value
 ]
 
+{ #category : 'rendering' }
+SlmdNavModel >> navActionFind: anObject [
+
+	^ self navItems detect: [ :each | each itemName = anObject ] ifNone: []
+]
+
 { #category : 'accessing' }
 SlmdNavModel >> navItems [
 

@@ -14,3 +14,12 @@ SlmdNavBarPresenter >> renderView [
 	list isEmpty ifTrue: [ ^ self ].
 	self view renderNavContent: list asArray.
 ]
+
+{ #category : 'view' }
+SlmdNavBarPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self subscribeToNavActionEvent
+
+]

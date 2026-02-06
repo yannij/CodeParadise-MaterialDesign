@@ -16,6 +16,15 @@ SlmdNavRailModalPresenter >> renderView [
 ]
 
 { #category : 'view' }
+SlmdNavRailModalPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self subscribeToNavActionEvent
+
+]
+
+{ #category : 'view' }
 SlmdNavRailModalPresenter >> viewInitialized [
 
 	super viewInitialized.
