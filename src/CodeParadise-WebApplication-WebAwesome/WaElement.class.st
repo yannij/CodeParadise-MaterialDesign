@@ -82,7 +82,7 @@ WaElement class >> fullyNamed: aString [
 { #category : 'accessing' }
 WaElement class >> importBasePath [
 
-	^ 'https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.0.0/dist-cdn/'
+	^ 'https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.2.0/dist-cdn/'
 ]
 
 { #category : 'accessing' }

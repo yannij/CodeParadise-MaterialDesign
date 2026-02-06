@@ -25,6 +25,10 @@ SlmdNavAbstractView class >> globalStyle [
   background: var(--wa-color-brand-fill-normal);
 }
 
+.smd-navrail-item:hover {
+  background: var(--wa-color-brand-fill-light);
+}
+
 .smd-navrail-icon {
   font-size: 24px;
   line-height: 28px;

@@ -304,15 +304,12 @@ SlmdLayoutSettingsView >> navRailExpandedId [
 
 { #category : 'settings - switches' }
 SlmdLayoutSettingsView >> navRailExpandedNewSwitch: props [
-	| element |
 
-	element := self
+	^ self
 		switchNewWithId: self navRailExpandedId
 		label: 'Nav rail expanded'
 		checked: (props at: #navRailExpanded ifAbsent: [ false ])
 		do: [ self navRailExpandedSet: self navRailExpanded ].
-
-	^ self addAttributeContainerStyle: element
 
 ]
 

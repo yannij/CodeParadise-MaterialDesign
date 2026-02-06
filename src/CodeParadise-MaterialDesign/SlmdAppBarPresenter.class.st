@@ -46,7 +46,8 @@ SlmdAppBarPresenter >> handleNavEvent: aNavEvent [
 		^ self doCancel: aNavEvent ].
 	item eventId = #delete ifTrue: [
 		^ self doDelete: aNavEvent ].
-	self systemLog logError: 'No handler for: ', item eventId printString.
+
+	super handleNavEvent: aNavEvent.
 
 ]
 

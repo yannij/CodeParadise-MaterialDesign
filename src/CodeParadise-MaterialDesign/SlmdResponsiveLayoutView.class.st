@@ -5,7 +5,6 @@ Class {
 		'debounceTransition',
 		'layoutSettingsView',
 		'layoutWidthCached',
-		'navRailExpanded',
 		'activeToolbarDocked',
 		'activeToolbarFloating',
 		'activeFab',
@@ -409,7 +408,7 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 	self showSidesheetAdapt: (props at: #showSidesheet ifAbsent: [ false ]).
 	self showAppBarAdapt: (props at: #showAppBar ifAbsent: [ false ]).
 	self showDockedToolbarAdapt: (props at: #showDockedToolbar ifAbsent: [ false ]).
-	"self showFloatingToolbarAdapt: (props at: #showFloatingToolbar ifAbsent: [ false ])."
+	self showFloatingToolbarAdapt: (props at: #showFloatingToolbar ifAbsent: [ false ]).
 
 	self adjustBodyHeight.
 
@@ -707,7 +706,6 @@ SlmdResponsiveLayoutView >> initialize [
 	super initialize.
 
 	layoutWidthCached := 0.
-	navRailExpanded := false.
 	activeToolbarDocked := false.
 	activeToolbarFloating := false.
 	activeFab := false.
@@ -944,13 +942,15 @@ SlmdResponsiveLayoutView >> navBarDisplay: aBoolean [
 { #category : 'accessing - settings' }
 SlmdResponsiveLayoutView >> navRailExpanded [
 
-	^ navRailExpanded
+	^ self layoutSettingsView
+		ifNil: [ false ]
+		ifNotNil: [ :value | value navRailExpanded ]
 ]
 
 { #category : 'accessing - settings' }
 SlmdResponsiveLayoutView >> navRailExpanded: anObject [
 
-	navRailExpanded := anObject
+	^ self layoutSettingsView navRailExpanded: anObject
 ]
 
 { #category : 'navrail' }
@@ -1285,7 +1285,9 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 	"The floating toolbar CSS uses fixed position,
 	so the toolbar div itself must apply smd-hidden"
 	element := self firstChildAtSlotNamed: 'floatingToolbar'.
-	element ifNil: [ ^ self ].
+	element ifNil: [
+		self systemLog logTrace: 'floating toolbar element was nil'.
+		^ self ].
 	element := element shadowedFirstDescendantMatching: '#container'.
 	self element: element show: aBoolean.
 
