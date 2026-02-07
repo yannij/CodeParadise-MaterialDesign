@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdResponsiveLayoutView',
+	#name : 'WamResponsiveLayoutView',
 	#superclass : 'SlmdView',
 	#instVars : [
 		'debounceTransition',
@@ -10,20 +10,20 @@ Class {
 		'activeFab',
 		'popups'
 	],
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-WAM',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'WAM'
 }
 
 { #category : 'class initialization' }
-SlmdResponsiveLayoutView class >> beLoaded [
+WamResponsiveLayoutView class >> beLoaded [
 
 	CpTransition beLoaded.
 
 ]
 
 { #category : 'web resources' }
-SlmdResponsiveLayoutView class >> globalStyle [
+WamResponsiveLayoutView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
@@ -97,38 +97,8 @@ SlmdResponsiveLayoutView class >> globalStyle [
 
 ]
 
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeCompact [
-
-	^ #compact
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeExpanded [
-
-	^ #expanded
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeExtraLarge [
-
-	^ #'extra-large'
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeLarge [
-
-	^ #large
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeMedium [
-
-	^ #medium
-]
-
 { #category : 'web resources' }
-SlmdResponsiveLayoutView class >> style [
+WamResponsiveLayoutView class >> style [
 
 	<webResource: #css>
 
@@ -195,7 +165,7 @@ SlmdResponsiveLayoutView class >> style [
 ]
 
 { #category : 'web resources' }
-SlmdResponsiveLayoutView class >> styleTable [
+WamResponsiveLayoutView class >> styleTable [
 	<webResource: #css>
 
 	^ '
@@ -217,7 +187,7 @@ caption {
 ]
 
 { #category : 'web resources' }
-SlmdResponsiveLayoutView class >> template [
+WamResponsiveLayoutView class >> template [
 
 	<webResource: #html>
 
@@ -260,43 +230,43 @@ SlmdResponsiveLayoutView class >> template [
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeFab [
+WamResponsiveLayoutView >> activeFab [
 
 	^ activeFab
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeFab: anObject [
+WamResponsiveLayoutView >> activeFab: anObject [
 
 	activeFab := anObject
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarDocked [
+WamResponsiveLayoutView >> activeToolbarDocked [
 
 	^ activeToolbarDocked
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarDocked: anObject [
+WamResponsiveLayoutView >> activeToolbarDocked: anObject [
 
 	activeToolbarDocked := anObject
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarFloating [
+WamResponsiveLayoutView >> activeToolbarFloating [
 
 	^ activeToolbarFloating
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarFloating: anObject [
+WamResponsiveLayoutView >> activeToolbarFloating: anObject [
 
 	activeToolbarFloating := anObject
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> addLoginDialog: label [
+WamResponsiveLayoutView >> addLoginDialog: label [
 	| dialog fields |
 
 	fields := 'div' asHtmlTag
@@ -320,7 +290,7 @@ SlmdResponsiveLayoutView >> addLoginDialog: label [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> adjustBodyHeight [
+WamResponsiveLayoutView >> adjustBodyHeight [
 	| bodyRegion bodyHeight |
 
 	bodyRegion := self bodyRegionFind.
@@ -334,7 +304,7 @@ SlmdResponsiveLayoutView >> adjustBodyHeight [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> appBar2Display: anObject [
+WamResponsiveLayoutView >> appBar2Display: anObject [
 	| components |
 
 	self systemLog logTrace5: anObject printString.
@@ -347,7 +317,7 @@ SlmdResponsiveLayoutView >> appBar2Display: anObject [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
+WamResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
 	| components |
 
 	components := SlmdAppBarView all.
@@ -360,7 +330,7 @@ SlmdResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> appBarDisplay: anObject [
+WamResponsiveLayoutView >> appBarDisplay: anObject [
 	| components |
 
 	self systemLog logTrace5: anObject printString.
@@ -373,7 +343,7 @@ SlmdResponsiveLayoutView >> appBarDisplay: anObject [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
+WamResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
 	| components |
 
 	components := SlmdAppBarView all.
@@ -386,7 +356,7 @@ SlmdResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> applyLayoutProfile: props [
+WamResponsiveLayoutView >> applyLayoutProfile: props [
 
 	self navRailExpandedAdapt: (props at: #navRailExpanded ifAbsent: [ false ]).
 	self showNavMenuButtonAdapt: (props at: #showNavMenuButton ifAbsent: [ false ]).
@@ -403,7 +373,7 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> beEditablePane2 [
+WamResponsiveLayoutView >> beEditablePane2 [
 
 	self fabDisplay: false.
 	"self pane2Content wrappedView do: [ :each | each setEditable: true ]."
@@ -412,7 +382,7 @@ SlmdResponsiveLayoutView >> beEditablePane2 [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> beNotEditablePane2 [
+WamResponsiveLayoutView >> beNotEditablePane2 [
 
 	self fabDisplay: true.
 	"self pane2Content wrappedView do: [ :each | each setEditable: false ]."
@@ -421,20 +391,20 @@ SlmdResponsiveLayoutView >> beNotEditablePane2 [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> bodyFind [
+WamResponsiveLayoutView >> bodyFind [
 
 	"^ self lastAncestorMatching: 'body'"
 	^ CpHtmlElement documentBody
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> bodyRegionFind [
+WamResponsiveLayoutView >> bodyRegionFind [
 
 	^ self findByIdInShadowDom: 'smdBodyRegion'
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> bodySplitPanelAdapt [
+WamResponsiveLayoutView >> bodySplitPanelAdapt [
 	| paneLayout w |
 
 	paneLayout := SlmdPaneLayoutView first.
@@ -446,13 +416,13 @@ SlmdResponsiveLayoutView >> bodySplitPanelAdapt [
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector [
+WamResponsiveLayoutView >> buttonLabel: label icon: icon send: selector [
 
 	^ self buttonLabel: label icon: icon send: selector receiver: self
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector receiver: receiver [
+WamResponsiveLayoutView >> buttonLabel: label icon: icon send: selector receiver: receiver [
 
 	^ WaButton new
 		label: label;
@@ -464,13 +434,13 @@ SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector receive
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
+WamResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
 
 	self customPropertyAt: customPropertyName put: rgb
 ]
 
 { #category : 'color theme' }
-SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
+WamResponsiveLayoutView >> colorThemeAdapt: aColorName [
 
 	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [ ^ self ].
@@ -485,7 +455,7 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName [
 ]
 
 { #category : 'color theme' }
-SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
+WamResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
 
 	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [
@@ -497,7 +467,7 @@ SlmdResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
 ]
 
 { #category : 'color theme' }
-SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
+WamResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 
 	#('05' '10' '20' '30' '40' '50' '60' '70' '80' '90' '95') do: [ :each |
 		aStream
@@ -511,7 +481,7 @@ SlmdResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 ]
 
 { #category : 'color theme' }
-SlmdResponsiveLayoutView >> colorThemeInitial: aColorName [
+WamResponsiveLayoutView >> colorThemeInitial: aColorName [
 
 	self systemLog logTrace5: aColorName printString.
 	aColorName ifNil: [
@@ -524,13 +494,13 @@ SlmdResponsiveLayoutView >> colorThemeInitial: aColorName [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> colorThemeName [
+WamResponsiveLayoutView >> colorThemeName [
 
 	^ self layoutSettingsView colorThemeName
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> colorThemePut: theme [
+WamResponsiveLayoutView >> colorThemePut: theme [
 	| element |
 
 	element := CpHtmlElement documentBody.
@@ -543,7 +513,7 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
+WamResponsiveLayoutView >> debounceResizeEvent: anEvent [
 
 	self systemLog logTrace: 'debounceResizeEvent:'.
 
@@ -563,13 +533,13 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 ]
 
 { #category : 'accessing - components' }
-SlmdResponsiveLayoutView >> dialogView [
+WamResponsiveLayoutView >> dialogView [
 
 	^ self firstChildAtSlotNamed: 'dialog'
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> dockedToolbarOff [
+WamResponsiveLayoutView >> dockedToolbarOff [
 
 	self showDockedToolbar: false.
 	self showDockedToolbarAdapt: false.
@@ -577,7 +547,7 @@ SlmdResponsiveLayoutView >> dockedToolbarOff [
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> dockedToolbarOn [
+WamResponsiveLayoutView >> dockedToolbarOn [
 
 	self activeToolbarDocked ifFalse: [
 		^ self ].
@@ -588,7 +558,7 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> fabDisplay: aBoolean [
+WamResponsiveLayoutView >> fabDisplay: aBoolean [
 	| element |
 
 	"The fab CSS uses fixed position, so use display none"
@@ -599,7 +569,7 @@ SlmdResponsiveLayoutView >> fabDisplay: aBoolean [
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
+WamResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
 
 	^ WaInput new
 		name: key;
@@ -614,14 +584,14 @@ SlmdResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> findLoginDialog [
+WamResponsiveLayoutView >> findLoginDialog [
 
 	^ CpHtmlElement documentBody firstDescendantMatching: '#login-dialog'
 
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> floatingToolbarOff [
+WamResponsiveLayoutView >> floatingToolbarOff [
 
 	self showFloatingToolbar: false.
 	self showFloatingToolbarAdapt: false.
@@ -629,7 +599,7 @@ SlmdResponsiveLayoutView >> floatingToolbarOff [
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> floatingToolbarOn [
+WamResponsiveLayoutView >> floatingToolbarOn [
 
 	self activeToolbarFloating ifFalse: [
 		^ self ].
@@ -640,7 +610,7 @@ SlmdResponsiveLayoutView >> floatingToolbarOn [
 ]
 
 { #category : 'typography' }
-SlmdResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
+WamResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 	| element |
 
 	aFontFamily ifNil: [ ^ self ].
@@ -654,7 +624,7 @@ SlmdResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
+WamResponsiveLayoutView >> handleResizeEvent: anEvent [
 	| newWidth |
 
 	debounceTransition := nil.
@@ -680,7 +650,7 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> hideNavModal [
+WamResponsiveLayoutView >> hideNavModal [
 	| modalElement |
 
 	modalElement := self modalNavElementOrNil.
@@ -689,7 +659,7 @@ SlmdResponsiveLayoutView >> hideNavModal [
 ]
 
 { #category : 'initialization' }
-SlmdResponsiveLayoutView >> initialize [
+WamResponsiveLayoutView >> initialize [
 
 	super initialize.
 
@@ -702,7 +672,7 @@ SlmdResponsiveLayoutView >> initialize [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutAdaptToWidth [
+WamResponsiveLayoutView >> layoutAdaptToWidth [
 
 	layoutWidthCached < 600 ifTrue: [
 		^ self layoutTypeAdapt: WamLayoutType layoutTypeCompact ].
@@ -721,7 +691,7 @@ SlmdResponsiveLayoutView >> layoutAdaptToWidth [
 ]
 
 { #category : 'initialization' }
-SlmdResponsiveLayoutView >> layoutInitialSetUp: props [
+WamResponsiveLayoutView >> layoutInitialSetUp: props [
 	"Invoked by presenter's viewCreated"
 
 	self systemLog logTrace5: props printString.
@@ -739,7 +709,7 @@ SlmdResponsiveLayoutView >> layoutInitialSetUp: props [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileCompact [
+WamResponsiveLayoutView >> layoutProfileCompact [
 
 	^ {
 		#navRailExpanded -> false.
@@ -756,7 +726,7 @@ SlmdResponsiveLayoutView >> layoutProfileCompact [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileExpanded [
+WamResponsiveLayoutView >> layoutProfileExpanded [
 
 	^ {
 		#navRailExpanded -> false.
@@ -773,7 +743,7 @@ SlmdResponsiveLayoutView >> layoutProfileExpanded [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileExtraLarge [
+WamResponsiveLayoutView >> layoutProfileExtraLarge [
 
 	^ {
 		#navRailExpanded -> true.
@@ -790,7 +760,7 @@ SlmdResponsiveLayoutView >> layoutProfileExtraLarge [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileLarge [
+WamResponsiveLayoutView >> layoutProfileLarge [
 
 	^ {
 		#navRailExpanded -> false.
@@ -807,7 +777,7 @@ SlmdResponsiveLayoutView >> layoutProfileLarge [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileMedium [
+WamResponsiveLayoutView >> layoutProfileMedium [
 
 	^ {
 		#navRailExpanded -> true.
@@ -824,7 +794,7 @@ SlmdResponsiveLayoutView >> layoutProfileMedium [
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutSettingsView [
+WamResponsiveLayoutView >> layoutSettingsView [
 
 	layoutSettingsView ifNil: [
 		layoutSettingsView := SlmdLayoutSettingsView first ]
@@ -833,26 +803,26 @@ SlmdResponsiveLayoutView >> layoutSettingsView [
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutSettingsView: anObject [
+WamResponsiveLayoutView >> layoutSettingsView: anObject [
 
 	layoutSettingsView := anObject
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> layoutType [
+WamResponsiveLayoutView >> layoutType [
 
 	^ self layoutSettingsView layoutType
 
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> layoutType: anObject [
+WamResponsiveLayoutView >> layoutType: anObject [
 
 	self layoutSettingsView layoutType: anObject
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
+WamResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
 	| props |
 
 	self systemLog logTrace5: aLayoutType printString.
@@ -877,25 +847,25 @@ SlmdResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutViewLazy [
+WamResponsiveLayoutView >> layoutViewLazy [
 
 	^ self
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutWidthCached [
+WamResponsiveLayoutView >> layoutWidthCached [
 
 	^ layoutWidthCached
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutWidthCached: anObject [
+WamResponsiveLayoutView >> layoutWidthCached: anObject [
 
 	layoutWidthCached := anObject
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> loginOpen [
+WamResponsiveLayoutView >> loginOpen [
 
 	self systemLog logTrace: 'loginOpen'.
 	self findLoginDialog openBeOn
@@ -903,7 +873,7 @@ SlmdResponsiveLayoutView >> loginOpen [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> modalNavOpen [
+WamResponsiveLayoutView >> modalNavOpen [
 	| drawer |
 
 	drawer := self modalNavElementOrNil.
@@ -913,7 +883,7 @@ SlmdResponsiveLayoutView >> modalNavOpen [
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> modalSettingsOpen [
+WamResponsiveLayoutView >> modalSettingsOpen [
 
 	self systemLog logTrace: 'modalSettingsOpen'.
 	self modalSettingsElement openBeOn
@@ -921,14 +891,14 @@ SlmdResponsiveLayoutView >> modalSettingsOpen [
 ]
 
 { #category : 'navbar' }
-SlmdResponsiveLayoutView >> navBarDisplay: aBoolean [
+WamResponsiveLayoutView >> navBarDisplay: aBoolean [
 
 	self shadowElementId: 'smdNavBar' display: aBoolean
 
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> navRailExpanded [
+WamResponsiveLayoutView >> navRailExpanded [
 
 	^ self layoutSettingsView
 		ifNil: [ false ]
@@ -936,13 +906,13 @@ SlmdResponsiveLayoutView >> navRailExpanded [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> navRailExpanded: anObject [
+WamResponsiveLayoutView >> navRailExpanded: anObject [
 
 	^ self layoutSettingsView navRailExpanded: anObject
 ]
 
 { #category : 'navrail' }
-SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
+WamResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 	| modalElement |
 
 	self systemLog logTrace5: aBoolean printString.
@@ -962,13 +932,13 @@ SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 ]
 
 { #category : 'navrail' }
-SlmdResponsiveLayoutView >> navRailWidth [
+WamResponsiveLayoutView >> navRailWidth [
 
 	^ self navRailExpanded ifTrue: [ 220 ] ifFalse: [ 96 ]
 ]
 
 { #category : 'navrail' }
-SlmdResponsiveLayoutView >> navRegionDisplay: aBoolean [
+WamResponsiveLayoutView >> navRegionDisplay: aBoolean [
 	| element |
 
 	element := self navRegionFind.
@@ -980,14 +950,14 @@ SlmdResponsiveLayoutView >> navRegionDisplay: aBoolean [
 ]
 
 { #category : 'navrail' }
-SlmdResponsiveLayoutView >> navRegionFind [
+WamResponsiveLayoutView >> navRegionFind [
 
 	"^ CpHtmlElement documentBody firstDescendantMatching: '#smdNavRegion'"
 	^ self shadowedElementWithId: 'smdNavRegion'
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> pane1WidthCompute [
+WamResponsiveLayoutView >> pane1WidthCompute [
 	| w |
 
 	w := (self layoutWidthCached / 2) asInteger.
@@ -997,13 +967,13 @@ SlmdResponsiveLayoutView >> pane1WidthCompute [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> pane1WidthMin [
+WamResponsiveLayoutView >> pane1WidthMin [
 
 	^ 300
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> pane2Content [
+WamResponsiveLayoutView >> pane2Content [
 	| view |
 
 	view := self paneLayoutView firstChildAtSlotNamed: #twoPaneLayoutP2.
@@ -1015,7 +985,7 @@ SlmdResponsiveLayoutView >> pane2Content [
 ]
 
 { #category : 'accessing - components' }
-SlmdResponsiveLayoutView >> pane2View [
+WamResponsiveLayoutView >> pane2View [
 	| paneLayoutView pane2SlotName |
 
 	paneLayoutView := self paneLayoutView.
@@ -1027,31 +997,31 @@ SlmdResponsiveLayoutView >> pane2View [
 ]
 
 { #category : 'accessing - components' }
-SlmdResponsiveLayoutView >> paneLayoutView [
+WamResponsiveLayoutView >> paneLayoutView [
 
 	^ self firstChildAtSlotNamed: 'paneLayout'
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> popups [
+WamResponsiveLayoutView >> popups [
 
 	^ popups
 ]
 
 { #category : 'accessing' }
-SlmdResponsiveLayoutView >> popups: anObject [
+WamResponsiveLayoutView >> popups: anObject [
 
 	popups := anObject
 ]
 
 { #category : 'actions' }
-SlmdResponsiveLayoutView >> primaryPaneOnly [
+WamResponsiveLayoutView >> primaryPaneOnly [
 
 	self paneLayoutView primaryPaneOnly
 ]
 
 { #category : 'login' }
-SlmdResponsiveLayoutView >> requestLogin [
+WamResponsiveLayoutView >> requestLogin [
 
 	self systemLog logTrace: '==== request login'.
 	self serverAnnounce: (SlmdLoginRequested new).
@@ -1060,7 +1030,7 @@ SlmdResponsiveLayoutView >> requestLogin [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> resizeSetUp [
+WamResponsiveLayoutView >> resizeSetUp [
 
 	| target div resize |
 	target := self shadowedElementWithId: 'container'.
@@ -1072,7 +1042,7 @@ SlmdResponsiveLayoutView >> resizeSetUp [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> secondaryPaneOnly [
+WamResponsiveLayoutView >> secondaryPaneOnly [
 	| component |
 
 	self systemLog logTrace5: 'secondaryPaneOnly'.
@@ -1085,7 +1055,7 @@ SlmdResponsiveLayoutView >> secondaryPaneOnly [
 ]
 
 { #category : 'layout' }
-SlmdResponsiveLayoutView >> setLayoutSettings: props [
+WamResponsiveLayoutView >> setLayoutSettings: props [
 
 	self navRailExpanded: (props at: #navRailExpanded ifAbsent: [ false ]).
 	self showNavMenuButton: (props at: #showNavMenuButton ifAbsent: [ false ]).
@@ -1100,19 +1070,19 @@ SlmdResponsiveLayoutView >> setLayoutSettings: props [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showAppBar [
+WamResponsiveLayoutView >> showAppBar [
 
 	^ self layoutSettingsView showAppBar
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showAppBar: anObject [
+WamResponsiveLayoutView >> showAppBar: anObject [
 
 	self layoutSettingsView showAppBar: anObject
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> showAppBarAdapt: aBoolean [
+WamResponsiveLayoutView >> showAppBarAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1121,19 +1091,19 @@ SlmdResponsiveLayoutView >> showAppBarAdapt: aBoolean [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showDockedToolbar [
+WamResponsiveLayoutView >> showDockedToolbar [
 
 	^ self layoutSettingsView showDockedToolbar
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showDockedToolbar: anObject [
+WamResponsiveLayoutView >> showDockedToolbar: anObject [
 
 	self layoutSettingsView showDockedToolbar: anObject
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> showDockedToolbarAdapt: aBoolean [
+WamResponsiveLayoutView >> showDockedToolbarAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1142,7 +1112,7 @@ SlmdResponsiveLayoutView >> showDockedToolbarAdapt: aBoolean [
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> showFabAdapt: aBoolean [
+WamResponsiveLayoutView >> showFabAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1151,19 +1121,19 @@ SlmdResponsiveLayoutView >> showFabAdapt: aBoolean [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showFloatingToolbar [
+WamResponsiveLayoutView >> showFloatingToolbar [
 
 	^ self layoutSettingsView showFloatingToolbar
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showFloatingToolbar: anObject [
+WamResponsiveLayoutView >> showFloatingToolbar: anObject [
 
 	self layoutSettingsView showFloatingToolbar: anObject
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> showFloatingToolbarAdapt: aBoolean [
+WamResponsiveLayoutView >> showFloatingToolbarAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1172,19 +1142,19 @@ SlmdResponsiveLayoutView >> showFloatingToolbarAdapt: aBoolean [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showNavBar [
+WamResponsiveLayoutView >> showNavBar [
 
 	^ self layoutSettingsView showNavBar
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showNavBar: anObject [
+WamResponsiveLayoutView >> showNavBar: anObject [
 
 	self layoutSettingsView showNavBar: anObject
 ]
 
 { #category : 'navbar' }
-SlmdResponsiveLayoutView >> showNavBarAdapt: aBoolean [
+WamResponsiveLayoutView >> showNavBarAdapt: aBoolean [
 	| fabView |
 
 	self systemLog logTrace5: aBoolean printString.
@@ -1197,32 +1167,32 @@ SlmdResponsiveLayoutView >> showNavBarAdapt: aBoolean [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showNavMenuButton: anObject [
+WamResponsiveLayoutView >> showNavMenuButton: anObject [
 
 	self layoutSettingsView showNavMenuButton: anObject
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> showNavMenuButtonAdapt: aBoolean [
+WamResponsiveLayoutView >> showNavMenuButtonAdapt: aBoolean [
 
 	self appBarLeadingButtonDisplay: aBoolean.
 
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showSidesheet [
+WamResponsiveLayoutView >> showSidesheet [
 
 	^ self layoutSettingsView showSidesheet
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> showSidesheet: anObject [
+WamResponsiveLayoutView >> showSidesheet: anObject [
 
 	self layoutSettingsView showSidesheet: anObject
 ]
 
 { #category : 'sidesheet' }
-SlmdResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
+WamResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1231,14 +1201,14 @@ SlmdResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 ]
 
 { #category : 'sidesheet' }
-SlmdResponsiveLayoutView >> sidesheetDisplay: aBoolean [
+WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 
 	self shadowElementId: 'smdSidesheet' show: aBoolean
 
 ]
 
 { #category : 'initialization' }
-SlmdResponsiveLayoutView >> themeUpdate [
+WamResponsiveLayoutView >> themeUpdate [
 
 	^ String streamContents: [:s |
 		s nextPutAll: '
@@ -1260,14 +1230,14 @@ SlmdResponsiveLayoutView >> themeUpdate [
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> toolbarDockedDisplay: aBoolean [
+WamResponsiveLayoutView >> toolbarDockedDisplay: aBoolean [
 
 	self shadowElementId: 'smdDockedToolbar' show: aBoolean
 
 ]
 
 { #category : 'toolbar' }
-SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
+WamResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 	| element |
 
 	"The floating toolbar CSS uses fixed position,
@@ -1282,7 +1252,7 @@ SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 ]
 
 { #category : 'initialization' }
-SlmdResponsiveLayoutView >> updateGlobalStyle [
+WamResponsiveLayoutView >> updateGlobalStyle [
 
 	self systemLog logTrace5: 'colorThemeName = ', self colorThemeName printString.
 	self colorThemeName ifNil: [ ^ self ].
@@ -1291,31 +1261,31 @@ SlmdResponsiveLayoutView >> updateGlobalStyle [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useAutoLayout [
+WamResponsiveLayoutView >> useAutoLayout [
 
 	^ self layoutSettingsView useAutoLayout
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useAutoLayout: anObject [
+WamResponsiveLayoutView >> useAutoLayout: anObject [
 
 	self layoutSettingsView useAutoLayout: anObject
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useModalNav [
+WamResponsiveLayoutView >> useModalNav [
 
 	^ self layoutSettingsView useModalNav
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useModalNav: anObject [
+WamResponsiveLayoutView >> useModalNav: anObject [
 
 	self layoutSettingsView useModalNav: anObject
 ]
 
 { #category : 'navrail' }
-SlmdResponsiveLayoutView >> useModalNavAdapt: aBoolean [
+WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
@@ -1325,19 +1295,19 @@ SlmdResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useTwoPaneBody [
+WamResponsiveLayoutView >> useTwoPaneBody [
 
 	^ self layoutSettingsView useTwoPaneBody
 ]
 
 { #category : 'accessing - settings' }
-SlmdResponsiveLayoutView >> useTwoPaneBody: anObject [
+WamResponsiveLayoutView >> useTwoPaneBody: anObject [
 
 	self layoutSettingsView useTwoPaneBody: anObject
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
+WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 	| component |
 
 	self systemLog logTrace5: aBoolean printString.

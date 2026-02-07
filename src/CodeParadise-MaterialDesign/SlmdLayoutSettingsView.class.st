@@ -214,7 +214,7 @@ SlmdLayoutSettingsView >> layoutTypeBuildChooser: props [
 
 	radioGroup when: WaChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
 
-	SlmdResponsiveLayoutView layoutTypeList do: [ :each |
+	WamLayoutType layoutTypeList do: [ :each |
 		radioGroup appendChild: (WaRadio new value: each key; textContent: each value; yourself) ].
 
 	^ self addAttributeContainerStyle: radioGroup

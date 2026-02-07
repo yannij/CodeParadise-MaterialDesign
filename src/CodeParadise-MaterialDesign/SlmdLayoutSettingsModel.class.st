@@ -103,7 +103,7 @@ SlmdLayoutSettingsModel >> initialize [
 
 	colorThemeName := self defaultColorThemeName.
 	fontFamily := self defaultFontFamily.
-	layoutType := self layoutTypeDefault.
+	layoutType := nil.
 	useAutoLayout := true.
 	useModalNav := false.
 	useTwoPaneBody := true.
@@ -127,12 +127,6 @@ SlmdLayoutSettingsModel >> layoutType [
 SlmdLayoutSettingsModel >> layoutType: anObject [
 
 	layoutType := anObject
-]
-
-{ #category : 'accessing' }
-SlmdLayoutSettingsModel >> layoutTypeDefault [
-
-	^ SlmdResponsiveLayoutView layoutTypeExpanded
 ]
 
 { #category : 'events' }
