@@ -82,7 +82,7 @@ WaElement class >> fullyNamed: aString [
 { #category : 'accessing' }
 WaElement class >> importBasePath [
 
-	^ 'https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.2.0/dist-cdn/'
+	^ 'https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.2.1/dist-cdn/'
 ]
 
 { #category : 'accessing' }
@@ -145,6 +145,12 @@ WaElement class >> isThirdPartyElement [
 	"Answer the fact that the receiver is a third party WebComponent"
 
 	^ true
+]
+
+{ #category : 'accessing' }
+WaElement class >> linkUtilitiesCss [
+
+	^ '<link rel="stylesheet" href="', self importBasePath, 'styles/utilities.css"></link>'
 ]
 
 { #category : 'class initialization' }

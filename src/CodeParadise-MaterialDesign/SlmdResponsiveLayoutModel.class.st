@@ -88,7 +88,6 @@ SlmdResponsiveLayoutModel >> initialize [
 	twoPaneSplitPosition := 300.
 	paneLayout := SlmdPaneLayoutModel new.
 	navRail := SlmdNavModel new.
-	sidesheet := SlmdSidesheetModel new.
 	dialog := SlmdDialogModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.
 	floatingToolbar := SlmdToolbarFloatingModel new.

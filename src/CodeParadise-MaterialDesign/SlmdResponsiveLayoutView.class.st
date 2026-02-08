@@ -97,36 +97,6 @@ SlmdResponsiveLayoutView class >> globalStyle [
 
 ]
 
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeCompact [
-
-	^ #compact
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeExpanded [
-
-	^ #expanded
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeExtraLarge [
-
-	^ #'extra-large'
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeLarge [
-
-	^ #large
-]
-
-{ #category : 'as yet unclassified' }
-SlmdResponsiveLayoutView class >> layoutTypeMedium [
-
-	^ #medium
-]
-
 { #category : 'web resources' }
 SlmdResponsiveLayoutView class >> style [
 
@@ -146,21 +116,6 @@ SlmdResponsiveLayoutView class >> style [
 .smd-settings-pane {
   padding: 0;
   overflow-y: auto;
-}
-
-.smd-navRegion {
-  flex: 0 0 96px;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background: var(--wa-color-brand-fill-quiet);
-}
-
-.smd-body-region {
-  flex: auto;
-  display: flex;  
-  flex-direction: row;
-  background: var(--wa-color-brand-fill-quiet);
 }
 
 .smd-navrailx {
@@ -221,34 +176,17 @@ SlmdResponsiveLayoutView class >> template [
 
 	<webResource: #html>
 
-	^ '
+	^ WaElement linkUtilitiesCss, '
 <div id="container" class="smd-layout" class="wa-cloak">
-  <div style="display: flex; flex-direction: column">
-    <div style="height: 100%; flex: 1; display: flex; flex-direction: row">
-      <div id="smdNavRegion" class="smd-navRegion">
-        <slot name="navRail"></slot>
-      </div>
-      <div id="smdBodyRegion" class="smd-body-region">
-        <div style="flex: 100%">
-          <slot name="paneLayout"></slot>
-        </div>
-      </div>
-      <div id="smdSidesheet">
-        <slot name="sidesheet"></slot>
-      </div>
+  <div class="wa-stack wa-gap-0 wa-align-items-stretch">
+    <div class="wa-flank wa-gap-0 wa-align-items-stretch">
+      <slot name="navRail"></slot>
+      <slot name="paneLayout"></slot>
     </div>
-    <footer id="smdNavBar">
-      <slot name="navBar"></slot>
-    </footer>
-    <footer id="smdDockedToolbar">
-      <slot name="dockedToolbar"></slot>
-    </footer>
-    <div id="smdFloatingToolbar">
-      <slot name="floatingToolbar"></slot>
-    </div>
-    <div id="smdFab">
-      <slot name="fab"></slot>
-    </div>
+    <slot name="navBar"></slot>
+    <slot name="dockedToolbar"></slot>
+    <slot name="floatingToolbar"></slot>
+    <slot name="fab"></slot>
   </div>
   <div id="smdModalDiv">
     <slot name="navRailModal"></slot>
@@ -323,8 +261,14 @@ SlmdResponsiveLayoutView >> addLoginDialog: label [
 SlmdResponsiveLayoutView >> adjustBodyHeight [
 	| bodyRegion bodyHeight |
 
+	true ifTrue: [
+		^ self ].
+
 	bodyRegion := self bodyRegionFind.
-	bodyRegion ifNil: [ ^ self  ].
+	self systemLog logTrace: bodyRegion printString.
+	bodyRegion ifNil: [
+		self systemLog logTrace: 'bodyRegion is nil'.
+		^ self  ].
 
 	bodyHeight := (self showNavBar or: [ self showDockedToolbar ])
 		ifTrue: [ 'calc(100vh - 64px)' ]
@@ -420,17 +364,16 @@ SlmdResponsiveLayoutView >> beNotEditablePane2 [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> bodyFind [
 
-	"^ self lastAncestorMatching: 'body'"
 	^ CpHtmlElement documentBody
 ]
 
-{ #category : 'body' }
+{ #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> bodyRegionFind [
 
-	^ self findByIdInShadowDom: 'smdBodyRegion'
+	^ self firstChildAtSlotNamed: #paneLayout
 ]
 
 { #category : 'body' }
@@ -565,7 +508,7 @@ SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 { #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> dialogView [
 
-	^ self firstChildAtSlotNamed: 'dialog'
+	^ self firstChildAtSlotNamed: #dialog
 ]
 
 { #category : 'toolbar' }
@@ -587,15 +530,26 @@ SlmdResponsiveLayoutView >> dockedToolbarOn [
 
 ]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> dockedToolbarView [
+
+	^ self firstChildAtSlotNamed: #dockedToolbar
+]
+
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> fabDisplay: aBoolean [
-	| element |
 
-	"The fab CSS uses fixed position, so use display none"
-	element := self firstChildAtSlotNamed: 'fab'.
-	element ifNil: [ ^ self ].
-	self element: element display: aBoolean.
+	self fabView
+		ifNil: [ self systemLog logTrace: 'Missing FAB view' ]
+		ifNotNil: [ :value |
+			"The fab CSS uses fixed position, so use display none"
+			value shadowElementId: #container display: aBoolean ]
+]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> fabView [
+
+	^ self firstChildAtSlotNamed: #fab
 ]
 
 { #category : 'login' }
@@ -639,6 +593,12 @@ SlmdResponsiveLayoutView >> floatingToolbarOn [
 
 ]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> floatingToolbarView [
+
+	^ self firstChildAtSlotNamed: #floatingToolbar
+]
+
 { #category : 'typography' }
 SlmdResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 	| element |
@@ -651,6 +611,17 @@ SlmdResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 
 	element styleAt: 'font-family' put: aFontFamily
 
+]
+
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> getPaneLayoutComponent: aSlotName [
+	| bodyRegion component |
+
+	bodyRegion := self paneLayoutView.
+	bodyRegion ifNil: [ self systemLog logTrace: 'paneLayoutView is nil' ].
+	component := bodyRegion firstChildAtSlotNamed: aSlotName.
+	component ifNil: [ self systemLog logTrace: 'No element at slot: ', aSlotName printString ].
+	^ component
 ]
 
 { #category : 'layout' }
@@ -923,8 +894,16 @@ SlmdResponsiveLayoutView >> modalSettingsOpen [
 { #category : 'navbar' }
 SlmdResponsiveLayoutView >> navBarDisplay: aBoolean [
 
-	self shadowElementId: 'smdNavBar' display: aBoolean
+	self navBarView
+		ifNil: [ self systemLog logTrace: 'Missing navbar view' ]
+		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
 
+]
+
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> navBarView [
+
+	^ self firstChildAtSlotNamed: #navBar
 ]
 
 { #category : 'accessing - settings' }
@@ -979,11 +958,10 @@ SlmdResponsiveLayoutView >> navRegionDisplay: aBoolean [
 
 ]
 
-{ #category : 'navrail' }
+{ #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> navRegionFind [
 
-	"^ CpHtmlElement documentBody firstDescendantMatching: '#smdNavRegion'"
-	^ self shadowedElementWithId: 'smdNavRegion'
+	^ self firstChildAtSlotNamed: #navRail
 ]
 
 { #category : 'body' }
@@ -1029,7 +1007,7 @@ SlmdResponsiveLayoutView >> pane2View [
 { #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> paneLayoutView [
 
-	^ self firstChildAtSlotNamed: 'paneLayout'
+	^ self firstChildAtSlotNamed: #paneLayout
 ]
 
 { #category : 'accessing' }
@@ -1233,8 +1211,15 @@ SlmdResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 { #category : 'sidesheet' }
 SlmdResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 
-	self shadowElementId: 'smdSidesheet' show: aBoolean
+	self sidesheetView
+		ifNil: [ self systemLog logTrace: 'Missing sidesheet view' ]
+		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
+]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> sidesheetView [
+
+	^ self getPaneLayoutComponent: #sidesheet
 ]
 
 { #category : 'initialization' }
@@ -1262,23 +1247,18 @@ SlmdResponsiveLayoutView >> themeUpdate [
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> toolbarDockedDisplay: aBoolean [
 
-	self shadowElementId: 'smdDockedToolbar' show: aBoolean
+	self dockedToolbarView
+		ifNil: [ self systemLog logTrace: 'Missing docked toolbar view' ]
+		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
 
 ]
 
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
-	| element |
 
-	"The floating toolbar CSS uses fixed position,
-	so the toolbar div itself must apply smd-hidden"
-	element := self firstChildAtSlotNamed: 'floatingToolbar'.
-	element ifNil: [
-		self systemLog logTrace: 'floating toolbar element was nil'.
-		^ self ].
-	element := element shadowedFirstDescendantMatching: '#container'.
-	self element: element show: aBoolean.
-
+	self floatingToolbarView
+		ifNil: [ self systemLog logTrace: 'Missing floating toolbar view' ]
+		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
 ]
 
 { #category : 'initialization' }

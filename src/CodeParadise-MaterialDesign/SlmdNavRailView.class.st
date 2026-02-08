@@ -12,10 +12,12 @@ SlmdNavRailView class >> style [
 
 	^ '
 .navrail {
+  flex: 0 0 96px;
   height: 100%;
-  overflow-y: auto;
   padding: 0;
+  margin: 0;
   background: var(--wa-color-brand-fill-quiet);
+  overflow-y: auto;
 }
 '
 ]

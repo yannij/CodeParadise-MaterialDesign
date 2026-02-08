@@ -15,7 +15,7 @@ SlmdPaneView class >> style [
 .smd-pane-content {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: calc(100vh - 64px);
+  /*max-height: calc(100vh - 64px);*/
 }
 '
 ]

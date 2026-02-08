@@ -12,27 +12,19 @@ SlmdSidesheetView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-sidesheet {
-  padding: 0;
-  margin-left: auto;
-  max-width: 400px;
+.smd-hidden {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
 
 .smd-sidesheet-container {
   padding: 0;
   margin: 0;
-}
-
-.smd-sidesheet-content {
-  padding: 0;
   width: 300px;
-  height: 100%;
-}
-
-.smd-sidesheet-card {
-  border-radius: 8px;
-  padding: 8px;
-  background: var(--wa-color-brand-fill-normal);
+  height: calc(100vh - 64px);
+  max-width: 400px;
+  overflow-y: auto;
 }
 '
 ]
@@ -44,11 +36,7 @@ SlmdSidesheetView class >> template [
 
 	^ '
 <div id="container" class="smd-sidesheet-container">
-  <div class="smd-sidesheet-content">
-    <div class="smd-sidesheet-card">
-      <slot name="content"></slot>
-    </div>
-  </div>
+  <slot name="content"></slot>
 </div>
 '
 ]
@@ -56,6 +44,6 @@ SlmdSidesheetView class >> template [
 { #category : 'rendering' }
 SlmdSidesheetView >> renderContent: aString [
 
-	self replaceAllChildrenWith: (aString inHtmlTag: #span) atSlotNamed: 'content'.
+	self replaceAllChildrenWith: aString asHtmlElement atSlotNamed: #content.
 
 ]

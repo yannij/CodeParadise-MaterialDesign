@@ -69,7 +69,7 @@ SlmdNavBarView class >> template [
 
 	^ '
 <div id="container" class="smd-navBar">
-  <slot name="navBar"></slot>
+  <slot name="content"></slot>
 </div>
 '
 ]
@@ -100,18 +100,18 @@ SlmdNavBarView >> navbarBuildItem: aNavAction [
 SlmdNavBarView >> renderNavContent: buttons [
 	| navList overflowList |
 
-	self removeChildrenAtSlotNamed: 'navBar'.
+	self removeChildrenAtSlotNamed: #content.
 
 	buttons size <= 4 ifTrue: [
 		buttons do: [ :each |
-			self appendChild: (self navbarBuildItem: each) atSlotNamed: 'navBar' ].
+			self appendChild: (self navbarBuildItem: each) atSlotNamed: #content ].
 		^ self ].
 
 	navList := buttons copyFrom: 1 to: 3.
 	navList do: [ :each  |
-		self appendChild: (self navbarBuildItem: each) atSlotNamed: 'navBar' ].
+		self appendChild: (self navbarBuildItem: each) atSlotNamed: #content ].
 
 	overflowList := buttons copyFrom: 4 to: buttons size.
-	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: 'navBar'.
+	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: #content.
 
 ]

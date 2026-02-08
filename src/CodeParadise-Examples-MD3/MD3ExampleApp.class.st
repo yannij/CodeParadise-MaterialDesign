@@ -60,6 +60,7 @@ MD3ExampleApp >> initialize [
 	layout := SlmdResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
+	layout paneLayout sidesheet: SlmdSidesheetModel new.
 	appBar1 := self layout appBar1.
 	appBar1 headline: self class appName.
 	appBar1 navActionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 

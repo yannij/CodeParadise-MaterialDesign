@@ -198,7 +198,7 @@ SlmdDemoMovieListingApp >> initialize [
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	layout := SlmdResponsiveLayoutModel new.
+	"layout := SlmdResponsiveLayoutModel new."
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.

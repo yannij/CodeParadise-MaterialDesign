@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamLayoutType',
 	#superclass : 'Object',
-	#category : 'CodeParadise-MaterialDesign-WAM',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'WAM'
+	#tag : 'Base'
 }
 
 { #category : 'accessing' }

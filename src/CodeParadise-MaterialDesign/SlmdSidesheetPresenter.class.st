@@ -9,5 +9,5 @@ Class {
 { #category : 'rendering' }
 SlmdSidesheetPresenter >> renderView [
 
-	self view renderContent: 'Sidesheet default content'
+	self view renderContent: (String loremIpsum: 1024)
 ]

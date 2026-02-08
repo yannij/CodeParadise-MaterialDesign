@@ -11,13 +11,7 @@ SlmdPaneContentView class >> template [
 
 	<webResource: #html>
 
-	^ '
-<div id="container">
-  <div class="smd-pane-content">
-    <slot name="content"></slot>
-  </div>
-</div>
-'
+	^ '<slot name="content"></slot>'
 ]
 
 { #category : 'rendering' }

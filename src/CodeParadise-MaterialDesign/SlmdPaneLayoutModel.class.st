@@ -3,8 +3,9 @@ Class {
 	#superclass : 'SlmdModel',
 	#instVars : [
 		'pane1',
+		'pane1Width',
 		'pane2',
-		'pane1Width'
+		'sidesheet'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -54,4 +55,16 @@ SlmdPaneLayoutModel >> pane2 [
 SlmdPaneLayoutModel >> pane2: anObject [
 
 	pane2 := anObject
+]
+
+{ #category : 'accessing' }
+SlmdPaneLayoutModel >> sidesheet [
+
+	^ sidesheet
+]
+
+{ #category : 'accessing' }
+SlmdPaneLayoutModel >> sidesheet: anObject [
+
+	sidesheet := anObject
 ]
