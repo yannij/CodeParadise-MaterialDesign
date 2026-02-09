@@ -91,7 +91,7 @@ SlmdResponsiveLayoutPresenter >> renderView [
 		self renderChildViewForModel: value atSlotNamed: #fab ].
 
 	self model layoutSettings ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: nil ].
+		self renderChildViewForModel: value atSlotNamed: #layoutSettings ].
 
 ]
 

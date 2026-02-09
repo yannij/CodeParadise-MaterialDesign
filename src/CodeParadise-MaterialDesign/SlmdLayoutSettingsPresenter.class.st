@@ -37,7 +37,8 @@ SlmdLayoutSettingsPresenter >> viewInitialized [
 
 	props := self model asMap.
 	self view
-		modalDivSetUp: props;
-		layoutInitialSetUp: props.
+		renderContent: props;
+		layoutInitialSetUp: props;
+		yourself.
 
 ]

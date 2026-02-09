@@ -5,9 +5,6 @@ Class {
 		'debounceTransition',
 		'layoutSettingsView',
 		'layoutWidthCached',
-		'activeToolbarDocked',
-		'activeToolbarFloating',
-		'activeFab',
 		'popups'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
@@ -177,8 +174,8 @@ SlmdResponsiveLayoutView class >> template [
 	<webResource: #html>
 
 	^ WaElement linkUtilitiesCss, '
-<div id="container" class="smd-layout" class="wa-cloak">
-  <div class="wa-stack wa-gap-0 wa-align-items-stretch">
+<wa-resize-observer>
+  <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
     <div class="wa-flank wa-gap-0 wa-align-items-stretch">
       <slot name="navRail"></slot>
       <slot name="paneLayout"></slot>
@@ -187,50 +184,12 @@ SlmdResponsiveLayoutView class >> template [
     <slot name="dockedToolbar"></slot>
     <slot name="floatingToolbar"></slot>
     <slot name="fab"></slot>
-  </div>
-  <div id="smdModalDiv">
-    <slot name="navRailModal"></slot>
-    <slot name="popups"></slot>
     <slot name="dialog"></slot>
+    <slot name="navRailModal"></slot>
+    <slot name="layoutSettings"></slot>
   </div>
-</div>
+</wa-resize-observer>
 '
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeFab [
-
-	^ activeFab
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeFab: anObject [
-
-	activeFab := anObject
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarDocked [
-
-	^ activeToolbarDocked
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarDocked: anObject [
-
-	activeToolbarDocked := anObject
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarFloating [
-
-	^ activeToolbarFloating
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> activeToolbarFloating: anObject [
-
-	activeToolbarFloating := anObject
 ]
 
 { #category : 'login' }
@@ -485,10 +444,10 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 
 ]
 
-{ #category : 'layout' }
+{ #category : 'resize' }
 SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 
-	self systemLog logTrace: 'debounceResizeEvent:'.
+	self systemLog logTrace: 'debounce'.
 
 	"If a running debounce transition is available, we're done"
 	(debounceTransition isNotNil and: [ debounceTransition isRunning ])
@@ -521,9 +480,6 @@ SlmdResponsiveLayoutView >> dockedToolbarOff [
 
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> dockedToolbarOn [
-
-	self activeToolbarDocked ifFalse: [
-		^ self ].
 
 	self showDockedToolbar: true.
 	self showDockedToolbarAdapt: true.
@@ -585,9 +541,6 @@ SlmdResponsiveLayoutView >> floatingToolbarOff [
 { #category : 'toolbar' }
 SlmdResponsiveLayoutView >> floatingToolbarOn [
 
-	self activeToolbarFloating ifFalse: [
-		^ self ].
-
 	self showFloatingToolbar: true.
 	self showFloatingToolbarAdapt: true.
 
@@ -624,9 +577,11 @@ SlmdResponsiveLayoutView >> getPaneLayoutComponent: aSlotName [
 	^ component
 ]
 
-{ #category : 'layout' }
+{ #category : 'resize' }
 SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	| newWidth |
+
+	self systemLog logTrace: 'resize'.
 
 	debounceTransition := nil.
 
@@ -644,8 +599,10 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	layoutWidthCached := newWidth.
 	self bodySplitPanelAdapt.
 
-	(self useAutoLayout not and: [ layoutWidthCached > 0 ]) ifTrue: [
-		^ self ].
+	self useAutoLayout
+		ifNil: [ ^ self ]
+		ifNotNil: [ :value |
+			(value not and: [ layoutWidthCached > 0 ]) ifTrue: [ ^ self ] ].
 
 	self layoutAdaptToWidth
 ]
@@ -665,9 +622,6 @@ SlmdResponsiveLayoutView >> initialize [
 	super initialize.
 
 	layoutWidthCached := 0.
-	activeToolbarDocked := false.
-	activeToolbarFloating := false.
-	activeFab := false.
 	popups := IdentityDictionary new.
 
 ]
@@ -794,19 +748,13 @@ SlmdResponsiveLayoutView >> layoutProfileMedium [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> layoutSettingsView [
 
 	layoutSettingsView ifNil: [
-		layoutSettingsView := SlmdLayoutSettingsView first ]
+		layoutSettingsView := self firstChildAtSlotNamed: #layoutSettings ]
 .
 	^ layoutSettingsView
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutView >> layoutSettingsView: anObject [
-
-	layoutSettingsView := anObject
 ]
 
 { #category : 'accessing - settings' }
@@ -885,9 +833,13 @@ SlmdResponsiveLayoutView >> modalNavOpen [
 
 { #category : 'actions' }
 SlmdResponsiveLayoutView >> modalSettingsOpen [
+	| drawer |
 
-	self systemLog logTrace: 'modalSettingsOpen'.
-	self modalSettingsElement openBeOn
+	drawer := self layoutSettingsView drawer.
+	self systemLog logTrace: drawer printString.
+	drawer
+		ifNil: [ self systemLog logError: 'Settings view is nil' ]
+		ifNotNil: [ drawer openBeOn ]
 
 ]
 
@@ -938,6 +890,12 @@ SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 
 	self bodySplitPanelAdapt.
 
+]
+
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> navRailModalView [
+
+	^ self firstChildAtSlotNamed: #navRailModal
 ]
 
 { #category : 'navrail' }
@@ -1037,16 +995,11 @@ SlmdResponsiveLayoutView >> requestLogin [
 
 ]
 
-{ #category : 'layout' }
+{ #category : 'resize' }
 SlmdResponsiveLayoutView >> resizeSetUp [
 
-	| target div resize |
-	target := self shadowedElementWithId: 'container'.
-	div := target firstChild.
-	resize := WaResizeObserver new.
-	resize when: WaResizeEvent send: #debounceResizeEvent: to: self.
-	target replaceChild: div with: resize.
-	resize appendChild: div
+	(self shadowedFirstDescendantMatching: WaResizeObserver asCssSelector)
+		when: WaResizeEvent send: #debounceResizeEvent: to: self
 ]
 
 { #category : 'body' }

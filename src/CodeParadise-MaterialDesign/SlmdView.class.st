@@ -244,16 +244,8 @@ SlmdView >> modalDivFind [
 SlmdView >> modalNavElementOrNil [
 	| component |
 
-	component := SlmdNavRailModalView first.
+	component := self layoutViewLazy navRailModalView.
 	^ component ifNil: [ nil ] ifNotNil: [ component drawer ].
-]
-
-{ #category : 'find element' }
-SlmdView >> modalSettingsElement [
-	| component |
-
-	component := SlmdLayoutSettingsView first.
-	^ component ifNil: [ self error: 'Not found: layout settings view' ] ifNotNil: [ component drawer ].
 ]
 
 { #category : 'utilities' }

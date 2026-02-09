@@ -23,12 +23,3 @@ SlmdNavRailModalPresenter >> viewCreated [
 	self subscribeToNavActionEvent
 
 ]
-
-{ #category : 'view' }
-SlmdNavRailModalPresenter >> viewInitialized [
-
-	super viewInitialized.
-
-	self view navModalPaneSetUp.
-
-]

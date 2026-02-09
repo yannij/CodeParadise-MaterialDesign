@@ -2,7 +2,6 @@ Class {
 	#name : 'SlmdLayoutSettingsView',
 	#superclass : 'SlmdLayoutComponentView',
 	#instVars : [
-		'drawer',
 		'colorThemeName',
 		'fontFamily'
 	],
@@ -22,9 +21,9 @@ SlmdLayoutSettingsView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container">
-  <slot name="content"></slot>
-</div>
+<wa-drawer>
+  <slot></slot>
+</wa-drawer>
 '
 ]
 
@@ -94,24 +93,13 @@ SlmdLayoutSettingsView >> colorThemeNameSet: anObject [
 { #category : 'accessing' }
 SlmdLayoutSettingsView >> drawer [
 
-	^ drawer
-]
-
-{ #category : 'accessing' }
-SlmdLayoutSettingsView >> drawer: anObject [
-
-	drawer := anObject
+	^ self shadowedFirstDescendantMatching: WaDrawer asCssSelector
 ]
 
 { #category : 'utilities' }
 SlmdLayoutSettingsView >> elementId: id [
 
-	"^ drawer shadowedFirstDescendantMatching: '#', id"
-	"^ drawer shadowedElementWithId: id"
-	^ drawer firstDescendantMatching: '#', id
-	"^ self findByIdInLightDom: id"
-	"^ self findByIdInShadowDom: id"
-	"^ CpHtmlElement documentBody firstDescendantMatching: '#', id"
+	^ self firstDescendantMatching: '#', id
 ]
 
 { #category : 'utilities' }
@@ -128,7 +116,9 @@ SlmdLayoutSettingsView >> elementId: id propertyAt: key put: value ifMissing: aB
 	| element |
 
 	element := self elementId: id.
-	element ifNil: [ ^ aBlock value ].
+	element ifNil: [
+		self systemLog logTrace: 'Missing: ', id printString.
+		^ aBlock value ].
 	element propertyAt: key put: value.
 
 ]
@@ -270,20 +260,6 @@ SlmdLayoutSettingsView >> modalDivContentWith: props [
 	^ element
 ]
 
-{ #category : 'initalize' }
-SlmdLayoutSettingsView >> modalDivSetUp: aDictionary [
-
-	drawer := WaDrawer new
-		id: 'smdSettings';
-		label: 'Layout settings';
-		customPropertyAt: 'size' put: '50vw';
-		appendChild: (self modalDivContentWith: aDictionary);
-		yourself.
-
-	self modalDivFind
-		appendChild: drawer
-]
-
 { #category : 'settings - switches' }
 SlmdLayoutSettingsView >> navRailExpanded [
 
@@ -321,6 +297,17 @@ SlmdLayoutSettingsView >> navRailExpandedSet: aBoolean [
 	self layoutViewLazy navRailExpandedAdapt: aBoolean.
 	self announceSetting: #navRailExpanded value: aBoolean.
 
+]
+
+{ #category : 'initalize' }
+SlmdLayoutSettingsView >> renderContent: aDictionary [
+
+	self drawer
+		label: 'Layout settings';
+		customPropertyAt: 'size' put: '50vw';
+		yourself.
+
+	self replaceAllChildrenWith: (self modalDivContentWith: aDictionary) atSlotNamed: nil
 ]
 
 { #category : 'settings - switches' }
