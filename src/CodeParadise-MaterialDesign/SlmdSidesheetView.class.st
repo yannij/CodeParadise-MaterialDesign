@@ -22,8 +22,7 @@ SlmdSidesheetView class >> style [
   padding: 0;
   margin: 0;
   width: 300px;
-  height: calc(100vh - 64px);
-  max-width: 400px;
+  max-width: 300px;
   overflow-y: auto;
 }
 '

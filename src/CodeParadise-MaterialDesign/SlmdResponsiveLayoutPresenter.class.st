@@ -93,6 +93,8 @@ SlmdResponsiveLayoutPresenter >> renderView [
 	self model layoutSettings ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #layoutSettings ].
 
+	self view layoutInitialSetUp: self model layoutSettings asMap.
+
 ]
 
 { #category : 'view' }

@@ -42,7 +42,7 @@ SlmdPaneLayoutView class >> style [
   flex: 100%;
   display: flex;  
   flex-direction: column;
-  padding: 0 4px;
+  padding: 0;
   margin: 0;
 }
 
@@ -61,9 +61,8 @@ SlmdPaneLayoutView class >> template [
 
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
-<div id="container" class="wa-flank:end wa-gap-0 wa-align-items-start">
-<div>
+	^ '
+<div id="container">
   <div id="smdSinglePaneLayout">
     <div id="smdSinglePaneLayoutP1" class="smd-pane">
       <slot name="singlePaneLayoutP1"></slot>
@@ -87,8 +86,6 @@ SlmdPaneLayoutView class >> template [
       </div>
     </wa-split-panel>
   </div>
-</div>
-  <slot name="sidesheet"></slot>
 </div>
 '
 ]

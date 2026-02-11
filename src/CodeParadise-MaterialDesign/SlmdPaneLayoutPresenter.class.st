@@ -17,7 +17,7 @@ SlmdPaneLayoutPresenter >> renderView [
 		"self renderChildViewForModel: value atSlotNamed: #singlePaneLayoutP2."
 		self renderChildViewForModel: value atSlotNamed: #twoPaneLayoutP2 ].
 
-	self model sidesheet ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
+	"self model sidesheet ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #sidesheet ]."
 
 ]

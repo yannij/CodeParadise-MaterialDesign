@@ -37,6 +37,12 @@ SlmdLog class >> logInfo: aString [
 ]
 
 { #category : 'logging' }
+SlmdLog class >> logString: aString [
+
+	self log: aString
+]
+
+{ #category : 'logging' }
 SlmdLog class >> logTrace5: aString [
 	"Emit aString to log.
 

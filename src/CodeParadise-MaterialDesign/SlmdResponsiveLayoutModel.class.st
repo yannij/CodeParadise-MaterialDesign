@@ -7,7 +7,6 @@ Class {
 		'twoPaneSplitPosition',
 		'navRail',
 		'navPopups',
-		'sidesheet',
 		'dialog',
 		'dockedToolbar',
 		'floatingToolbar',
@@ -188,13 +187,7 @@ SlmdResponsiveLayoutModel >> popupsHasKey: aSymbol [
 { #category : 'accessing' }
 SlmdResponsiveLayoutModel >> sidesheet [
 
-	^ sidesheet
-]
-
-{ #category : 'accessing' }
-SlmdResponsiveLayoutModel >> sidesheet: anObject [
-
-	sidesheet := anObject
+	^ self paneLayout sidesheet
 ]
 
 { #category : 'accessing' }

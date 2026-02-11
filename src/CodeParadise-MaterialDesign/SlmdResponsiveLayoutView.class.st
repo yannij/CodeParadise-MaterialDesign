@@ -176,9 +176,10 @@ SlmdResponsiveLayoutView class >> template [
 	^ WaElement linkUtilitiesCss, '
 <wa-resize-observer>
   <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
-    <div class="wa-flank wa-gap-0 wa-align-items-stretch">
+    <div class="wa-cluster wa-gap-0 wa-align-items-stretch wa-flex-nowrap">
       <slot name="navRail"></slot>
       <slot name="paneLayout"></slot>
+      <slot name="sidesheet"></slot>
     </div>
     <slot name="navBar"></slot>
     <slot name="dockedToolbar"></slot>
@@ -220,9 +221,6 @@ SlmdResponsiveLayoutView >> addLoginDialog: label [
 SlmdResponsiveLayoutView >> adjustBodyHeight [
 	| bodyRegion bodyHeight |
 
-	true ifTrue: [
-		^ self ].
-
 	bodyRegion := self bodyRegionFind.
 	self systemLog logTrace: bodyRegion printString.
 	bodyRegion ifNil: [
@@ -234,6 +232,13 @@ SlmdResponsiveLayoutView >> adjustBodyHeight [
 		ifFalse: [ '100vh' ].
 	bodyRegion styleAt: 'height' put: bodyHeight.
 	bodyRegion styleAt: 'max-height' put: bodyHeight.
+
+	self sidesheetView ifNotNil: [ :sv |
+		(sv shadowedElementWithId: 'container') ifNotNil: [ :value |
+			value styleAt: 'height' put: bodyHeight ] ].
+
+	self bodyWidthAdapt.
+
 ]
 
 { #category : 'body' }
@@ -347,6 +352,25 @@ SlmdResponsiveLayoutView >> bodySplitPanelAdapt [
 
 ]
 
+{ #category : 'body' }
+SlmdResponsiveLayoutView >> bodyWidthAdapt [
+	| paneLayout |
+
+	paneLayout := SlmdPaneLayoutView first.
+
+	paneLayout
+		ifNil: [ self systemLog logError: 'Missing body region' ]
+		ifNotNil: [
+			| reduceByWidth widthString |
+			reduceByWidth := self useModalNav ifTrue: [ 0 ] ifFalse: [ self navRailWidth ].
+			"self showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
+			widthString := reduceByWidth > 0
+				ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
+				ifFalse: [ '100vw' ].
+			paneLayout styleAt: 'width' put: widthString ].
+
+]
+
 { #category : 'login' }
 SlmdResponsiveLayoutView >> buttonLabel: label icon: icon send: selector [
 
@@ -447,7 +471,7 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 { #category : 'resize' }
 SlmdResponsiveLayoutView >> debounceResizeEvent: anEvent [
 
-	self systemLog logTrace: 'debounce'.
+	self systemLog logString: 'debounce'.
 
 	"If a running debounce transition is available, we're done"
 	(debounceTransition isNotNil and: [ debounceTransition isRunning ])
@@ -581,7 +605,7 @@ SlmdResponsiveLayoutView >> getPaneLayoutComponent: aSlotName [
 SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 	| newWidth |
 
-	self systemLog logTrace: 'resize'.
+	self systemLog logString: 'resize'.
 
 	debounceTransition := nil.
 
@@ -598,6 +622,7 @@ SlmdResponsiveLayoutView >> handleResizeEvent: anEvent [
 
 	layoutWidthCached := newWidth.
 	self bodySplitPanelAdapt.
+	self bodyWidthAdapt.
 
 	self useAutoLayout
 		ifNil: [ ^ self ]
@@ -1172,7 +1197,8 @@ SlmdResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 { #category : 'accessing - components' }
 SlmdResponsiveLayoutView >> sidesheetView [
 
-	^ self getPaneLayoutComponent: #sidesheet
+	^ self firstChildAtSlotNamed: #sidesheet
+	"^ self getPaneLayoutComponent: #sidesheet"
 ]
 
 { #category : 'initialization' }
