@@ -320,6 +320,7 @@ SlmdResponsiveLayoutView >> bodyHeightAdapt [
 		^ self ].
 
 	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
+	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
 	bodyHeightString := bodyHeightReduction > 0
 		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
 		ifFalse: [ '100vh' ].
@@ -1074,8 +1075,8 @@ SlmdResponsiveLayoutView >> setLayoutSettings: props [
 	self useTwoPaneBody: (props at: #useTwoPaneBody ifAbsent: [ false ]).
 	self showSidesheet: (props at: #showSidesheet ifAbsent: [ false ]).
 	self showAppBar: (props at: #showAppBar ifAbsent: [ false ]).
-	"self showDockedToolbar: (props at: #showDockedToolbar ifAbsent: [ false ]).
-	self showFloatingToolbar: (props at: #showFloatingToolbar ifAbsent: [ false ])."
+	self showDockedToolbar: (props at: #showDockedToolbar ifAbsent: [ false ]).
+	self showFloatingToolbar: (props at: #showFloatingToolbar ifAbsent: [ false ]).
 
 ]
 

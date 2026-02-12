@@ -120,6 +120,14 @@ SlmdAppBarView >> initialize [
 
 ]
 
+{ #category : 'rendering' }
+SlmdAppBarView >> isDisplayed [
+	
+	^ (self styleAt: 'display')
+		ifNil: [ true ]
+		ifNotNil: [ :value | value ~= 'none' ]
+]
+
 { #category : 'testing' }
 SlmdAppBarView >> isPrimary [
 

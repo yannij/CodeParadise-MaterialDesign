@@ -44,9 +44,9 @@ SlmdPaneView >> appBarView [
 ]
 
 { #category : 'testing' }
-SlmdPaneView >> hasAppBar [
+SlmdPaneView >> hasVisibleAppBar [
 
-	^ self appBarView notNil
+	^ self appBarView isDisplayed
 ]
 
 { #category : 'accessing' }
@@ -70,7 +70,7 @@ SlmdPaneView >> setPaneContentHeightReducedBy: bodyHeightReduction [
 		self systemLog logTrace: 'Missing container div'.
 		^ self ].
 
-	reduction := self hasAppBar
+	reduction := self hasVisibleAppBar
 		ifTrue: [ bodyHeightReduction + 64 ]
 		ifFalse: [ bodyHeightReduction ].
 	heightString := reduction > 0

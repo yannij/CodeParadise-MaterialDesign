@@ -352,7 +352,7 @@ SlmdLayoutSettingsView >> showAppBarSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
-	self layoutViewLazy appBarDisplay: aBoolean.
+	self layoutViewLazy appBarDisplay: aBoolean; resizeBodyRegion.
 	self announceSetting: #showAppBar value: aBoolean.
 
 ]

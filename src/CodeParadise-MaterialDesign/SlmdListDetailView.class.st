@@ -12,10 +12,15 @@ SlmdListDetailView class >> style [
 	<webResource: #css>
 
 	^'
+.smd-container {
+  box-sizing: border-box;
+  /*padding: var(--wa-space-xs);*/
+}
+
 .smd-list {
-margin-block-end: 0;
-margin-block-start: 0;
-padding-inline-start: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  padding-inline-start: 0;
 }'
 ]
 
@@ -24,7 +29,10 @@ SlmdListDetailView class >> template [
 
 	<webResource: #html>
 
-	^ '<ol class="wa-stack wa-gap-0 smd-list">
+	^ '
+<div id="container" class="smd-container">
+<ol class="wa-stack wa-gap-0 smd-list">
   <slot name="list"></slot>
-</ol>'
+</ol>
+</div>'
 ]

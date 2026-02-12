@@ -45,7 +45,6 @@ sl-input {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 8px;
   background: var(--wa-color-brand-fill-light);
 }
 '

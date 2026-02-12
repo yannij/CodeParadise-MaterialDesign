@@ -26,8 +26,14 @@ SlmdItemWrapperView class >> style [
 	<webResource: #css>
 
 	^ '
-#container {
+.smd-container {
+  box-sizing: border-box;
+  padding: var(--wa-space-xs);
+}
+
+.smd-item {
   display: flex;
+  flex-direction: column
 }
 '
 ]
@@ -37,10 +43,12 @@ SlmdItemWrapperView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container" style="flex-direction: column">
-  <slot name="header"></slot>
-  <slot name="wrapped"></slot>
-  <slot name="footer"></slot>
+	^ '<div id="container" class="smd-container">
+  <div class="smd-item">
+    <slot name="header"></slot>
+    <slot name="wrapped"></slot>
+    <slot name="footer"></slot>
+  </div>
 </div>'
 ]
 

@@ -18,6 +18,8 @@ SlmdNavRailView class >> style [
   margin: 0;
   background: var(--wa-color-brand-fill-quiet);
   overflow-y: auto;
+  box-sizing: border-box;
+  border-right: 1px solid var(--wa-color-neutral-70);
 }
 '
 ]
