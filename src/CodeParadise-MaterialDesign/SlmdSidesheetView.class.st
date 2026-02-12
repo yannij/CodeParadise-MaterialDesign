@@ -18,8 +18,7 @@ SlmdSidesheetView class >> style [
   left: -9999px !important;
 }
 
-.smd-sidesheet-container {
-  padding: 0;
+.smd-sidesheet-content {
   margin: 0;
   width: 300px;
   max-width: 300px;
@@ -34,15 +33,41 @@ SlmdSidesheetView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-sidesheet-container">
-  <slot name="content"></slot>
+<div id="container">
+  <div class="smd-sidesheet-content">
+    <slot name="paneContent"></slot>
+  </div>
 </div>
 '
 ]
 
-{ #category : 'rendering' }
-SlmdSidesheetView >> renderContent: aString [
+{ #category : 'accessing' }
+SlmdSidesheetView >> paneContentView [
 
-	self replaceAllChildrenWith: aString asHtmlElement atSlotNamed: #content.
+	^ self firstChildAtSlotNamed: 'paneContent'
+]
+
+{ #category : 'initialization' }
+SlmdSidesheetView >> setPaneContentHeightReducedBy: bodyHeightReduction [
+	| element heightString |
+
+	(element := self paneContentView) ifNil: [
+		self systemLog logTrace: 'Missing pane content component'.
+		^ self ].
+	"self systemLog logTrace: element printString.
+	self systemLog logString: element markupContent.
+	self systemLog logString: element style."
+
+	(element := element shadowedElementWithId: #container) ifNil: [
+		self systemLog logTrace: 'Missing container div'.
+		^ self ].
+
+	heightString := bodyHeightReduction > 0
+		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
+		ifFalse: [ '100vh' ].
+	element styleAt: 'height' put: heightString.
+	"self systemLog logTrace: element printString.
+	self systemLog logString: element markupContent.
+	self systemLog logString: element style."
 
 ]

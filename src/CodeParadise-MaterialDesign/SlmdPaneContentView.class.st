@@ -7,11 +7,26 @@ Class {
 }
 
 { #category : 'web resources' }
+SlmdPaneContentView class >> style [
+
+	<webResource: #css>
+
+	^ '
+.smd-container {
+  box-sizing: border-box;
+  padding: var(--wa-space-xs);
+}
+'
+]
+
+{ #category : 'web resources' }
 SlmdPaneContentView class >> template [
 
 	<webResource: #html>
 
-	^ '<slot name="content"></slot>'
+	^ '<div id="container" class="smd-container">
+  <slot name="content"></slot>
+</div>'
 ]
 
 { #category : 'rendering' }

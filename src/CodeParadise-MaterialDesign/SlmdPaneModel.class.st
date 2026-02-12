@@ -2,8 +2,6 @@ Class {
 	#name : 'SlmdPaneModel',
 	#superclass : 'SlmdModel',
 	#instVars : [
-		'id',
-		'content',
 		'paneContent',
 		'appBarModel',
 		'appBarDisplayed'

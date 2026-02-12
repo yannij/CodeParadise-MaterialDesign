@@ -140,7 +140,7 @@ SlmdPaneLayoutView >> primaryPaneOnly [
 		showNavBar: true;
 		showNavBarAdapt: true;
 		"floatingToolbarOff;"
-		adjustBodyHeight.
+		resizeBodyRegion.
 	self primaryPaneDisplay: true.
 	self secondaryPaneDisplay: false.
 
@@ -165,7 +165,7 @@ SlmdPaneLayoutView >> secondaryPaneOnly [
 		showNavBar: false;
 		showNavBarAdapt: false;
 		"floatingToolbarOn;"
-		adjustBodyHeight.
+		resizeBodyRegion.
 	self primaryPaneDisplay: false.
 	self secondaryPaneDisplay: true.
 

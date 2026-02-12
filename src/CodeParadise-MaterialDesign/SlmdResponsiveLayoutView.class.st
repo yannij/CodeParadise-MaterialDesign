@@ -218,30 +218,6 @@ SlmdResponsiveLayoutView >> addLoginDialog: label [
 ]
 
 { #category : 'body' }
-SlmdResponsiveLayoutView >> adjustBodyHeight [
-	| bodyRegion bodyHeight |
-
-	bodyRegion := self bodyRegionFind.
-	self systemLog logTrace: bodyRegion printString.
-	bodyRegion ifNil: [
-		self systemLog logTrace: 'bodyRegion is nil'.
-		^ self  ].
-
-	bodyHeight := (self showNavBar or: [ self showDockedToolbar ])
-		ifTrue: [ 'calc(100vh - 64px)' ]
-		ifFalse: [ '100vh' ].
-	bodyRegion styleAt: 'height' put: bodyHeight.
-	bodyRegion styleAt: 'max-height' put: bodyHeight.
-
-	self sidesheetView ifNotNil: [ :sv |
-		(sv shadowedElementWithId: 'container') ifNotNil: [ :value |
-			value styleAt: 'height' put: bodyHeight ] ].
-
-	self bodyWidthAdapt.
-
-]
-
-{ #category : 'body' }
 SlmdResponsiveLayoutView >> appBar2Display: anObject [
 	| components |
 
@@ -306,7 +282,7 @@ SlmdResponsiveLayoutView >> applyLayoutProfile: props [
 	self showDockedToolbarAdapt: (props at: #showDockedToolbar ifAbsent: [ false ]).
 	self showFloatingToolbarAdapt: (props at: #showFloatingToolbar ifAbsent: [ false ]).
 
-	self adjustBodyHeight.
+	self resizeBodyRegion.
 
 ]
 
@@ -332,6 +308,34 @@ SlmdResponsiveLayoutView >> beNotEditablePane2 [
 SlmdResponsiveLayoutView >> bodyFind [
 
 	^ CpHtmlElement documentBody
+]
+
+{ #category : 'body' }
+SlmdResponsiveLayoutView >> bodyHeightAdapt [
+	| bodyRegion bodyHeightReduction bodyHeightString |
+
+	bodyRegion := self bodyRegionFind.
+	bodyRegion ifNil: [
+		self systemLog logTrace: 'bodyRegion is nil'.
+		^ self ].
+
+	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
+	bodyHeightString := bodyHeightReduction > 0
+		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
+		ifFalse: [ '100vh' ].
+	bodyRegion styleAt: 'height' put: bodyHeightString.
+
+	self pane1View
+		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
+	self pane2View
+		ifNil: [ self systemLog logTrace: 'Missing pane2 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
+
+	self sidesheetView
+		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
+		ifNotNil: [ :v | v setPaneContentHeightReducedBy: bodyHeightReduction ].
+
 ]
 
 { #category : 'accessing - components' }
@@ -947,6 +951,18 @@ SlmdResponsiveLayoutView >> navRegionFind [
 	^ self firstChildAtSlotNamed: #navRail
 ]
 
+{ #category : 'accessing - components' }
+SlmdResponsiveLayoutView >> pane1View [
+	| paneLayoutView slotName |
+
+	paneLayoutView := self paneLayoutView.
+	paneLayoutView ifNil: [ ^ self ].
+	slotName := paneLayoutView isUsingSinglePaneLayout
+		ifTrue: [ 'singlePaneLayoutP1' ]
+		ifFalse: [ 'twoPaneLayoutP1' ].
+	^ paneLayoutView firstChildAtSlotNamed: slotName
+]
+
 { #category : 'body' }
 SlmdResponsiveLayoutView >> pane1WidthCompute [
 	| w |
@@ -1017,6 +1033,14 @@ SlmdResponsiveLayoutView >> requestLogin [
 	self systemLog logTrace: '==== request login'.
 	self serverAnnounce: (SlmdLoginRequested new).
 	self findLoginDialog openBeOff.
+
+]
+
+{ #category : 'body' }
+SlmdResponsiveLayoutView >> resizeBodyRegion [
+
+	self bodyHeightAdapt.
+	self bodyWidthAdapt.
 
 ]
 

@@ -104,11 +104,13 @@ SlmdLayoutSettingsView >> elementId: id [
 
 { #category : 'utilities' }
 SlmdLayoutSettingsView >> elementId: id propertyAt: key ifMissing: aBlock [
-	| element |
+	| element settingValue |
 
 	element := self elementId: id.
 	element ifNil: [ ^ aBlock value ].
-	^ element propertyAt: key
+	settingValue := element propertyAt: key.
+	settingValue ifNil: [ ^ aBlock value ].
+	^ settingValue
 ]
 
 { #category : 'utilities' }
@@ -389,7 +391,7 @@ SlmdLayoutSettingsView >> showDockedToolbarSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
-	self layoutViewLazy showDockedToolbarAdapt: aBoolean; adjustBodyHeight.
+	self layoutViewLazy showDockedToolbarAdapt: aBoolean; resizeBodyRegion.
 	self announceSetting: #showDockedToolbar value: aBoolean.
 
 ]
@@ -467,7 +469,7 @@ SlmdLayoutSettingsView >> showNavBarSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
-	self layoutViewLazy showNavBarAdapt: aBoolean; adjustBodyHeight.
+	self layoutViewLazy showNavBarAdapt: aBoolean; resizeBodyRegion.
 	self announceSetting: #showNavBar value: aBoolean.
 
 ]

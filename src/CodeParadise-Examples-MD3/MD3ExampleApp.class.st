@@ -50,17 +50,18 @@ MD3ExampleApp >> clientBehaviorClass [
 
 { #category : 'initialization' }
 MD3ExampleApp >> initialize [
-	| pane1Model pane2Model appBar1 |
+	| pane1Model pane2Model sidesheetModel appBar1 |
 
 	super initialize.
 
-	pane1Model := SlmdPaneModel on: (SlmdPaneContentModel on: 'Initial Pane1...').
-	pane2Model := SlmdPaneModel on: (SlmdPaneContentModel on: 'Initial Pane2...').
+	pane1Model := SlmdPaneModel on: (SlmdPaneContentModel on: (String loremIpsum: 4000)).
+	pane2Model := SlmdPaneModel on: (SlmdPaneContentModel on: (String loremIpsum: 2000)).
 	pane2Model appBarModel beSecondary.
+	sidesheetModel := SlmdSidesheetModel on: (SlmdPaneContentModel on: (String loremIpsum: 1000)).
 	layout := SlmdResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout paneLayout sidesheet: SlmdSidesheetModel new.
+	layout paneLayout sidesheet: sidesheetModel.
 	appBar1 := self layout appBar1.
 	appBar1 headline: self class appName.
 	appBar1 navActionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 

@@ -15,7 +15,7 @@ SlmdPaneView class >> style [
 .smd-pane-content {
   overflow-x: auto;
   overflow-y: auto;
-  /*max-height: calc(100vh - 64px);*/
+  background: var(--wa-color-brand-fill-quiet);
 }
 '
 ]
@@ -38,20 +38,47 @@ SlmdPaneView class >> template [
 ]
 
 { #category : 'accessing' }
+SlmdPaneView >> appBarView [
+
+	^ self firstChildAtSlotNamed: 'appBar'
+]
+
+{ #category : 'testing' }
+SlmdPaneView >> hasAppBar [
+
+	^ self appBarView notNil
+]
+
+{ #category : 'accessing' }
 SlmdPaneView >> paneContentView [
 
 	^ self firstChildAtSlotNamed: 'paneContent'
 ]
 
-{ #category : 'rendering' }
-SlmdPaneView >> renderId: paneId content: aString [
+{ #category : 'actions' }
+SlmdPaneView >> setPaneContentHeightReducedBy: bodyHeightReduction [
+	| element reduction heightString |
 
-	self
-		replaceAllChildrenWith: (#div asHtmlTag
-			"id: paneId;"
-			addClass: 'smd-pane';
-			appendChild: (aString inHtmlTag: #span);
-			yourself)
-		atSlotNamed: 'content'.
+	(element := self paneContentView) ifNil: [
+		self systemLog logTrace: 'Missing pane content component'.
+		^ self ].
+	"self systemLog logTrace: element printString.
+	self systemLog logString: element markupContent.
+	self systemLog logString: element style."
+
+	(element := element shadowedElementWithId: #container) ifNil: [
+		self systemLog logTrace: 'Missing container div'.
+		^ self ].
+
+	reduction := self hasAppBar
+		ifTrue: [ bodyHeightReduction + 64 ]
+		ifFalse: [ bodyHeightReduction ].
+	heightString := reduction > 0
+		ifTrue: [ 'calc(100vh - ', reduction printString, 'px)' ]
+		ifFalse: [ '100vh' ].
+	element styleAt: 'height' put: heightString.
+	"self systemLog logTrace: element printString.
+	self systemLog logString: element markupContent.
+	self systemLog logString: element style."
 
 ]
