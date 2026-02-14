@@ -25,9 +25,5 @@ SlmdDemoMovieListingAppView class >> template [
 
 	<webResource: #html>
 
-	^ '
-<div id="container">
-  <slot name="layout"></slot>
-</div>
-'
+	^ '<slot name="layout"></slot>'
 ]

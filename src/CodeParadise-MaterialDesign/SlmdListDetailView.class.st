@@ -31,8 +31,8 @@ SlmdListDetailView class >> template [
 
 	^ '
 <div id="container" class="smd-container">
-<ol class="wa-stack wa-gap-0 smd-list">
-  <slot name="list"></slot>
-</ol>
+  <ol class="wa-stack wa-gap-0 smd-list">
+    <slot name="list"></slot>
+  </ol>
 </div>'
 ]

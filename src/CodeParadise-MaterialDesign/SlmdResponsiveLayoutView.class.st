@@ -904,19 +904,16 @@ SlmdResponsiveLayoutView >> navRailExpanded: anObject [
 
 { #category : 'navrail' }
 SlmdResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
-	| modalElement |
 
 	self systemLog logTrace5: aBoolean printString.
 
 	self navRailExpanded: aBoolean.
 
-	self navRegionFind
-		styleAt: 'flex'
-		put: '0 0 ', self navRailWidth printString, 'px'.
+	self navRegionFind ifNotNil: [ :value |
+		value styleAt: 'flex' put: '0 0 ', self navRailWidth printString, 'px' ].
 
-	modalElement := self modalNavElementOrNil.
-	modalElement ifNotNil: [
-		modalElement customPropertyAt: 'size' put: self navRailWidth printString, 'px' ].
+	self modalNavElementOrNil ifNotNil: [ :value |
+		value customPropertyAt: 'size' put: self navRailWidth printString, 'px' ].
 
 	self bodySplitPanelAdapt.
 

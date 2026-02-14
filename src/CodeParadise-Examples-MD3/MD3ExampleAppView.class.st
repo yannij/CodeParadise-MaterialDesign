@@ -25,7 +25,9 @@ MD3ExampleAppView class >> style [
 
 	<webResource: #css>
 
-	^ ''
+	^ '*, *:before, *:after {
+	box-sizing: border-box;
+}'
 ]
 
 { #category : 'web resources' }
@@ -33,9 +35,5 @@ MD3ExampleAppView class >> template [
 
 	<webResource: #html>
 
-	^ '
-<div id="container">
-  <slot name="layout"></slot>
-</div>
-'
+	^ '<slot name="layout"></slot>'
 ]
