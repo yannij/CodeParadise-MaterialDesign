@@ -142,12 +142,12 @@ SlmdWebApplication >> listDetailAdd: anObject [
 	theModel wrappedModel handleSave: anObject.
 	theModel valueChanged.
 
-	listDetail := self layout pane1 paneContent.
+	listDetail := self layout paneLayout.
 	theModel isCreating
 		ifTrue: [
 			result := self modelAdd: listDetail detail wrappedModel.
-			listDetail listSet: self allModels.
-			self listDetailReset ]
+			listDetail list listSet: self allModels.
+			self listDetailReset. ]
 		ifFalse: [
 			result := self modelUpdate: listDetail detail wrappedModel ].
 
@@ -159,16 +159,16 @@ SlmdWebApplication >> listDetailAdd: anObject [
 SlmdWebApplication >> listDetailRemove: ignored [
 	| listDetail |
 
-	listDetail := self layout pane1 paneContent.
+	listDetail := self layout paneLayout.
 	self modelRemove: listDetail detail wrappedModel.
-	listDetail listSet: self allModels.
+	listDetail list listSet: self allModels.
 	self setDetailNone.
 
 ]
 
 { #category : 'model' }
 SlmdWebApplication >> listDetailReset [
-	| list detail |
+	"| list detail |
 
 	list := self layout pane1 paneContent list.
 	list isEmpty ifTrue: [
@@ -176,7 +176,8 @@ SlmdWebApplication >> listDetailReset [
 
 	detail := list first.
 	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail.
+	self layout pane2 setPaneContent: detail."
+	self layout pane2 setPaneContent: nil.
 	self setAppBar2EditDelete.
 
 ]
@@ -305,7 +306,7 @@ SlmdWebApplication >> processNavActionEvent: aNavEvent model: aModel [
 	eventId := aNavEvent id.
 
 	aNavEvent id = #setDetail ifTrue: [
-		self layout pane1 paneContent detail: aModel.
+		self layout paneLayout detail: aModel.
 		self layout pane2 setPaneContent: aModel.
 		self setAppBar2EditDelete.
 		^ self ].
@@ -354,7 +355,7 @@ SlmdWebApplication >> setDetailAddNew [
 
 	detail := self layout pane1 paneContent modelWrapperClass onNewModel: self newModelInstance.
 
-	self layout pane1 paneContent detail: detail.
+	self layout paneLayout detail: detail.
 	self layout pane2 setPaneContent: detail.
 
 ]
@@ -362,7 +363,7 @@ SlmdWebApplication >> setDetailAddNew [
 { #category : 'model' }
 SlmdWebApplication >> setDetailNone [
 
-	self layout pane1 paneContent detail: nil.
+	self layout paneLayout detail: nil.
 	self layout pane2 setPaneContent: nil.
 
 ]

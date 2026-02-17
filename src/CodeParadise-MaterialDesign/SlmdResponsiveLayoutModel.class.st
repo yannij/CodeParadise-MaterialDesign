@@ -85,7 +85,7 @@ SlmdResponsiveLayoutModel >> initialize [
 	navPopups := OrderedIdentityDictionary new.
 	layoutSettings := SlmdLayoutSettingsModel new.
 	twoPaneSplitPosition := 300.
-	paneLayout := SlmdPaneLayoutModel new.
+	paneLayout := SlmdListDetailLayoutModel new.
 	navRail := SlmdNavModel new.
 	dialog := SlmdDialogModel new.
 	dockedToolbar := SlmdToolbarDockedModel new.

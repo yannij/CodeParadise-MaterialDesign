@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdListDetailView',
+	#name : 'SlmdListView',
 	#superclass : 'SlmdLayoutComponentView',
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'web resources' }
-SlmdListDetailView class >> style [
+SlmdListView class >> style [
 
 	<webResource: #css>
 
@@ -25,7 +25,7 @@ SlmdListDetailView class >> style [
 ]
 
 { #category : 'web resources' }
-SlmdListDetailView class >> template [
+SlmdListView class >> template [
 
 	<webResource: #html>
 

@@ -10,6 +10,6 @@ Class {
 SlmdItemWrapperPresenter >> renderView [
 
 	self
-		renderChildViewForModel: self model wrappedModel
+		renderAllChildViewsForModels: (self model wrappedModel ifNil: [{}] ifNotNil: [ :value | {value} ])
 		atSlotNamed: #wrapped
 ]

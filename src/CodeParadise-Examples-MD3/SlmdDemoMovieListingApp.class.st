@@ -193,7 +193,7 @@ SlmdDemoMovieListingApp >> initialize [
 	self repositorySetup.
 
 	modelClass := SlmdDemoMoviesMovie.
-	pane1Content := SlmdListDetailModel new.
+	pane1Content := SlmdListModel new.
 	pane1Content listSet: self allModels.
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
@@ -203,7 +203,6 @@ SlmdDemoMovieListingApp >> initialize [
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
 	self setUpAppBar2.
-	self listDetailReset.
 
 ]
 

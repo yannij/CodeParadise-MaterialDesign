@@ -231,7 +231,7 @@ SlmdDemoAccountingApp >> initialize [
 	self repositorySetup.
 
 	modelClass := SlmdDemoAccountingCompany.
-	pane1Content := SlmdListDetailModel new.
+	pane1Content := SlmdListModel new.
 	pane1Content listSet: self allModels.
 	pane1Model := SlmdPaneModel on: pane1Content.
 	pane2Model := SlmdPaneModel new.
@@ -241,14 +241,14 @@ SlmdDemoAccountingApp >> initialize [
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #green; fontFamily: #'serif'.
 	self setUpAppBar2.
-	self listDetailReset.
 
 ]
 
 { #category : 'model' }
 SlmdDemoAccountingApp >> modelAdd: aModel [
 
-	self repository save: aModel
+	self repository save: aModel.
+	^ true
 ]
 
 { #category : 'accessing' }

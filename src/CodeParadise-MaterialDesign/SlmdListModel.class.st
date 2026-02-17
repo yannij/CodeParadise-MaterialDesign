@@ -1,48 +1,35 @@
 Class {
-	#name : 'SlmdListDetailModel',
+	#name : 'SlmdListModel',
 	#superclass : 'SlmdModel',
 	#instVars : [
-		'list',
-		'detail'
+		'list'
 	],
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'ListDetail'
 }
 
-{ #category : 'accessing' }
-SlmdListDetailModel >> detail [
-
-	^ detail
-]
-
-{ #category : 'accessing' }
-SlmdListDetailModel >> detail: anObject [
-
-	detail := anObject
-]
-
 { #category : 'initialization' }
-SlmdListDetailModel >> initialize [
+SlmdListModel >> initialize [
 
 	list := OrderedCollection new.
 
 ]
 
 { #category : 'accessing' }
-SlmdListDetailModel >> list [
+SlmdListModel >> list [
 
 	^ list
 ]
 
 { #category : 'accessing' }
-SlmdListDetailModel >> list: anObject [
+SlmdListModel >> list: anObject [
 
 	list := anObject
 ]
 
 { #category : 'accessing' }
-SlmdListDetailModel >> listSet: aCollection [
+SlmdListModel >> listSet: aCollection [
 	| wrapperClass |
 
 	wrapperClass := self modelWrapperClass.
@@ -53,7 +40,7 @@ SlmdListDetailModel >> listSet: aCollection [
 ]
 
 { #category : 'accessing' }
-SlmdListDetailModel >> modelWrapperClass [
+SlmdListModel >> modelWrapperClass [
 
 	^ SlmdItemWrapperModel
 

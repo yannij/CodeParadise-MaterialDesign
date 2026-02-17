@@ -46,15 +46,15 @@ TBRootApplication >> applicationPresenterClass [
 
 { #category : 'initialization' }
 TBRootApplication >> initialize [
-	| pane1Model pane2Model pane1Content |
+	| pane1Model pane2Model listModel detailModel |
 
 	super initialize.
 
-	pane1Content := SlmdListDetailModel new.
-	pane1Model := SlmdPaneModel on: pane1Content.
-	pane2Model := SlmdPaneModel new.
+	pane1Model := SlmdPaneModel on: (listModel := SlmdListModel new).
+	pane2Model := SlmdPaneModel on: (detailModel := SlmdItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 	"layout := SlmdResponsiveLayoutModel new."
+	layout paneLayout: SlmdListDetailLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout paneLayout sidesheet: SlmdSidesheetModel new.
@@ -63,8 +63,8 @@ TBRootApplication >> initialize [
 	self setUpAppBar2.
 	self layout appBar1 headline: self class appName.
 
-	pane1Content listSet: self allModels.
-	self listDetailReset.
+	listModel listSet: self allModels.
+	"self listDetailReset."
 
 ]
 
@@ -72,6 +72,7 @@ TBRootApplication >> initialize [
 TBRootApplication >> modelAdd: aModel [
 
 	TBBlogModel current writeBlogPost: aModel.
+	^ true
 
 ]
 
@@ -103,14 +104,14 @@ TBRootApplication >> postLoad [
 	super postLoad.
 
 	"self layout pane1 paneContent listSet: self allModels."
-	self listDetailReset.
+	"self listDetailReset."
 
 ]
 
 { #category : 'events' }
 TBRootApplication >> refresh [
 
-	self listDetailReset.
+	"self listDetailReset."
 
 ]
 

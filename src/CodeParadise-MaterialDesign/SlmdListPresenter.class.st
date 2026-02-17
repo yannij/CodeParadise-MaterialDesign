@@ -1,5 +1,5 @@
 Class {
-	#name : 'SlmdListDetailPresenter',
+	#name : 'SlmdListPresenter',
 	#superclass : 'SlmdPresenter',
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'rendering' }
-SlmdListDetailPresenter >> renderView [
+SlmdListPresenter >> renderView [
 
 	self
 		renderAllChildViewsForModels: self model list
