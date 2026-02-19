@@ -114,34 +114,6 @@ SlmdResponsiveLayoutView class >> style [
   padding: 0;
   overflow-y: auto;
 }
-
-.smd-navrailx {
-  height: 100%;
-  flow-direction: row;
-}
-
-.navrailx::part(body) {
-  padding: 8px 0;
-  background: var(--wa-color-brand-fill-normal);
-}
-
-.smd-navrailx-item {
-  display: flex;
-  border-radius: 28px;
-  height: 56px;
-  width: 100%;
-  align-items: center;
-}
-
-.smd-navrailx-icon {
-  padding-left: 20px;
-  font-size: 24px;
-}
-
-.smd-navrailx-labelText {
-  padding-left: 16px;
-  font-size: 16px;
-}
 '
 
 ]

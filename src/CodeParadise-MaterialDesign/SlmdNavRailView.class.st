@@ -28,7 +28,7 @@ SlmdNavRailView class >> style [
 SlmdNavRailView class >> template [
 	<webResource: #html>
 
-	^ '<nav id="container" class="navrail">
+	^ '<nav id="container" class="navrail wa-cloak">
   <slot name="content"></slot>
 </nav>
 '

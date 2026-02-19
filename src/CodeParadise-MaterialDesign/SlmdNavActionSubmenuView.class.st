@@ -9,7 +9,7 @@ Class {
 { #category : 'actions' }
 SlmdNavActionSubmenuView >> closeSubmenu [
 
-	self dropdownElement open: false.
+	self dropdownElement active: false.
 
 ]
 

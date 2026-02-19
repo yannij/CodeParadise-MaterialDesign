@@ -156,7 +156,7 @@ SlmdAppBarView >> primary: anObject [
 SlmdAppBarView >> renderHeadline: aString [
 
 	self
-		replaceAllChildrenWith: (aString inHtmlTag: #span)
+		replaceAllChildrenWith: (aString ifNil: [ '' ] ifNotNil: [ :value | value ]) asHtmlElement
 		atSlotNamed: 'headline'.
 
 ]

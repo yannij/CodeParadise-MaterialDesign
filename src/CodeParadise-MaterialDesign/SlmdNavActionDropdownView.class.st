@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'web resources' }
+SlmdNavActionDropdownView class >> beLoaded [
+
+	WaPopup beLoaded
+]
+
+{ #category : 'web resources' }
 SlmdNavActionDropdownView class >> style [
 	<webResource: #css>
 
@@ -69,21 +75,22 @@ SlmdNavActionDropdownView class >> template [
 
 	<webResource: #html>
 
-	^ '<wa-dropdown placement="right-start" class="smd-nav-dropdown">
+	^ '
+<wa-popup placement="right" hover-bridge shift>
   <slot name="content"></slot>
-</wa-dropdown>'
+</wa-popup>'
 ]
 
 { #category : 'rendering' }
 SlmdNavActionDropdownView >> dropdownElement [
 
-	^ self shadowRoot firstDescendantMatching: WaDropdown asCssSelector
+	^ self shadowRoot firstDescendantMatching: WaPopup asCssSelector
 ]
 
 { #category : 'actions' }
 SlmdNavActionDropdownView >> dropdownOpen: aBoolean [
 
-	self dropdownElement open: aBoolean
+	self dropdownElement active: aBoolean
 ]
 
 { #category : 'rendering' }
@@ -91,9 +98,10 @@ SlmdNavActionDropdownView >> renderNavExpandedDropdown: anItem [
 	| div |
 
 	div := self divExpanded: anItem.
-	div when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self.
-	"div when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self."
-	self dropdownElement replaceAllChildrenWith: div atSlotNamed: #trigger.
+	self dropdownElement
+		when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self;
+		when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self;
+		replaceAllChildrenWith: div atSlotNamed: #anchor.
 
 ]
 
@@ -102,9 +110,10 @@ SlmdNavActionDropdownView >> renderNavNarrowDropdown: anItem [
 	| div |
 
 	div := self divNarrow: anItem.
-	div when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self.
-	"div when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self."
-	self dropdownElement replaceAllChildrenWith: div atSlotNamed: #trigger.
+	self dropdownElement
+		when: CpPointerEnterEvent do: [ self dropdownOpen: true ] for: self;
+		when: CpPointerLeaveEvent do: [ self dropdownOpen: false ] for: self;
+		replaceAllChildrenWith: div atSlotNamed: #anchor.
 
 ]
 

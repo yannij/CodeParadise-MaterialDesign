@@ -24,7 +24,7 @@ SlmdPaneContentView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container" class="smd-container">
+	^ '<div id="container" class="smd-container wa-cloak">
   <slot name="content"></slot>
 </div>'
 ]

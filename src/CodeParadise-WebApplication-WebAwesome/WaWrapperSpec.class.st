@@ -37,6 +37,8 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waIconSpec generate.
 	self waInputSpec generate.
 	self waOptionSpec generate.
+	self waPopoverSpec generate.
+	self waPopupSpec generate.
 	self waRadioSpec generate.
 	self waRadioGroupSpec generate.
 	self waResizeObserverSpec generate.
@@ -285,6 +287,59 @@ WaWrapperSpec class >> waOptionSpec [
 		stringPropertyAt: 'value' put: #string;
 		booleanPropertyAt: 'disabled' put: false;
 		booleanPropertyAt: 'selected' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waPopoverSpec [
+
+	^ self new
+		wrapperClassName: #WaPopover;
+		booleanPropertyAt: 'open' put: false;
+		stringPropertyAt: 'for' put: '';
+		stringPropertyAt: 'placement' put: 'top|top-start|top-end|bottom|*bottom-start|bottom-end|right|right-start|right-end|left|left-start|left-end';
+		numberPropertyAt: 'distance' put: 8;
+		numberPropertyAt: 'skidding' put: 0;
+		booleanPropertyAt: 'without-arrow' put: false;
+		cssPropertieAdd: 'arrow-size';
+		cssPropertieAdd: 'max-width';
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waPopupSpec [
+
+	^ self new
+		wrapperClassName: #WaPopup;
+		slotsAddAll: #('anchor');
+		booleanPropertyAt: 'active' put: false;
+		stringPropertyAt: 'anchor' put: '';
+		booleanPropertyAt: 'arrow' put: false;
+		numberPropertyAt: 'arrow-padding' put: 10;
+		stringPropertyAt: 'arrow-placement' put: 'start|end|center|*anchor';
+		stringPropertyAt: 'auto-size' put: 'horizontal|vertical|both';
+		numberPropertyAt: 'auto-size-padding' put: 0;
+		stringPropertyAt: 'boundary' put: '*viewport|scroll';
+		numberPropertyAt: 'distance' put: 0;
+		booleanPropertyAt: 'flip' put: false;
+		stringPropertyAt: 'flip-fallback-placements' put: '';
+		stringPropertyAt: 'flip-fallback-strategy' put: '*best-fit|initial';
+		numberPropertyAt: 'flip-padding' put: 0;
+		booleanPropertyAt: 'hover-bridge' put: false;
+		stringPropertyAt: 'placement' put: '*top|top-start|top-end|bottom|bottom-start|bottom-end|right|right-start|right-end|left|left-start|left-end';
+		booleanPropertyAt: 'shift' put: false;
+		numberPropertyAt: 'shift-padding' put: 0;
+		numberPropertyAt: 'skidding' put: 0;
+		stringPropertyAt: 'sync' put: 'width|height|both';
+
+		cssPropertieAdd: 'arrow-color';
+		cssPropertieAdd: 'arrow-size';
+		cssPropertieAdd: 'auto-size-available-height';
+		cssPropertieAdd: 'auto-size-available-width';
+		cssPropertieAdd: 'show-duration';
+		cssPropertieAdd: 'hide-duration';
 		yourself
 ]
 

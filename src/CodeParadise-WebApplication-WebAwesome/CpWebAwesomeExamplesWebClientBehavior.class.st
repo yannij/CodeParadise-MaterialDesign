@@ -561,6 +561,80 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleInput [
 ]
 
 { #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> examplePopover [
+
+	<example: 'Popover' order: 100>
+
+	| outputElement popover button |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	popover := WaPopover new
+		for: 'popover__overview';
+		markupContent: '
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <p>This popover contains interactive content that users can engage with directly.</p>
+    <wa-button variant="primary" size="small">Take Action</wa-button>
+  </div>';
+		yourself.
+	button := WaButton new
+		id: 'popover__overview';
+		textContent: 'Show popover'.
+	outputElement
+		appendChild: popover;
+		appendChild: button.
+
+]
+
+{ #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> examplePopup [
+
+	<example: 'Popup' order: 100>
+
+	| outputElement div popup switch |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	outputElement markupContent: '
+<style>
+  .popup-active span[slot=''anchor''] {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: dashed 2px var(--wa-color-neutral-fill-loud);
+    margin: 50px;
+  }
+
+  .popup-active .box {
+    width: 100px;
+    height: 50px;
+    background: var(--wa-color-brand-fill-loud);
+    border-radius: var(--wa-border-radius-m);
+  }
+</style>
+'.
+	div := #div asHtmlTag
+		addClass: 'popup-active';
+		appendChild: (popup := WaPopup new
+			placementBeTop; activeBeOn;
+			appendChild: (#span asHtmlTag attributeAt: 'slot' put: 'anchor'; yourself);
+			appendChild: (#div asHtmlTag addClass: 'box'; yourself);
+			yourself);
+		appendChild: #br asHtmlTag;
+		appendChild: (WaSwitch new checkedBeOn; yourself);
+		yourself.
+	"Using markupContent: replaces all child elements, so append the div afterwards"
+	outputElement appendChild: div.
+	switch := outputElement firstDescendantMatching: WaSwitch asCssSelector.
+	switch when: CpChangeEvent do: [ popup active: switch checkedIsOn ] for: self.
+
+]
+
+{ #category : 'examples' }
 CpWebAwesomeExamplesWebClientBehavior >> exampleRadioGroup [
 
 	<example: 'RadioGroup' order: 100>

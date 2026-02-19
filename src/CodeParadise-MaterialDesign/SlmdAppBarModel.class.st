@@ -57,7 +57,6 @@ SlmdAppBarModel >> initialize [
 
 	super initialize.
 
-	headline := ''.
 	self bePrimary.
 
 ]
