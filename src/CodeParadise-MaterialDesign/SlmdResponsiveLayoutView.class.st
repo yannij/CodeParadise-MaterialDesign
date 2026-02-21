@@ -5,6 +5,7 @@ Class {
 		'debounceTransition',
 		'layoutSettingsView',
 		'layoutWidthCached',
+		'layoutBreakpoints',
 		'popups'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
@@ -440,6 +441,7 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 	theme do: [ :each |
 		element customPropertyAt: each key put: each value ].
 	CpHtmlElement documentBody
+		customPropertyAt: 'wa-form-control-border-style' put: 'none';
 		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
 		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
 
@@ -624,6 +626,7 @@ SlmdResponsiveLayoutView >> initialize [
 	super initialize.
 
 	layoutWidthCached := 0.
+	layoutBreakpoints := WamLayoutType defaultLayoutBreakpoints.
 	popups := IdentityDictionary new.
 
 ]
@@ -631,20 +634,24 @@ SlmdResponsiveLayoutView >> initialize [
 { #category : 'layout' }
 SlmdResponsiveLayoutView >> layoutAdaptToWidth [
 
-	layoutWidthCached < 600 ifTrue: [
-		^ self layoutTypeAdapt: WamLayoutType layoutTypeCompact ].
+	self layoutBreakpoints do: [ :each |
+		layoutWidthCached < each key ifTrue: [
+			^ self layoutTypeAdapt: each value ] ].
 
-	layoutWidthCached < 840 ifTrue: [
-		^ self layoutTypeAdapt: WamLayoutType layoutTypeMedium ].
+	self layoutTypeAdapt: self layoutBreakpoints last value.
 
-	layoutWidthCached < 1200 ifTrue: [
-		^ self layoutTypeAdapt: WamLayoutType layoutTypeExpanded ].
+]
 
-	layoutWidthCached < 1600 ifTrue: [
-		^ self layoutTypeAdapt: WamLayoutType layoutTypeLarge ].
+{ #category : 'accessing' }
+SlmdResponsiveLayoutView >> layoutBreakpoints [
 
-	self layoutTypeAdapt: WamLayoutType layoutTypeExtraLarge.
+	^ layoutBreakpoints
+]
 
+{ #category : 'accessing' }
+SlmdResponsiveLayoutView >> layoutBreakpoints: anObject [
+
+	layoutBreakpoints := anObject
 ]
 
 { #category : 'initialization' }
@@ -662,91 +669,6 @@ SlmdResponsiveLayoutView >> layoutInitialSetUp: props [
 		^ self ].
 
 	self applyLayoutProfile: props.
-
-]
-
-{ #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileCompact [
-
-	^ {
-		#navRailExpanded -> false.
-		#showNavMenuButton -> false.
-		#useModalNav -> true.
-		#showNavBar -> true.
-		#useTwoPaneBody -> false.
-		#showSidesheet -> false.
-		#showAppBar -> true.
-		"#showDockedToolbar -> false.
-		#showFloatingToolbar -> false"
-	} asDictionary
-
-]
-
-{ #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileExpanded [
-
-	^ {
-		#navRailExpanded -> false.
-		#showNavMenuButton -> true.
-		#useModalNav -> true.
-		#showNavBar -> false.
-		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
-		#showAppBar -> true.
-		"#showDockedToolbar -> false.
-		#showFloatingToolbar -> false"
-	} asDictionary
-
-]
-
-{ #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileExtraLarge [
-
-	^ {
-		#navRailExpanded -> true.
-		#showNavMenuButton -> false.
-		#useModalNav -> false.
-		#showNavBar -> false.
-		#useTwoPaneBody -> true.
-		#showSidesheet -> true.
-		#showAppBar -> true.
-		"#showDockedToolbar -> false.
-		#showFloatingToolbar -> false"
-	} asDictionary
-
-]
-
-{ #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileLarge [
-
-	^ {
-		#navRailExpanded -> false.
-		#showNavMenuButton -> false.
-		#useModalNav -> false.
-		#showNavBar -> false.
-		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
-		#showAppBar -> true.
-		"#showDockedToolbar -> false.
-		#showFloatingToolbar -> false"
-	} asDictionary
-
-]
-
-{ #category : 'layout' }
-SlmdResponsiveLayoutView >> layoutProfileMedium [
-
-	^ {
-		#navRailExpanded -> true.
-		#showNavMenuButton -> false.
-		#useModalNav -> true.
-		#showNavBar -> true.
-		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
-		#showAppBar -> true.
-		"#showDockedToolbar -> false.
-		#showFloatingToolbar -> false"
-	} asDictionary
 
 ]
 
@@ -774,25 +696,12 @@ SlmdResponsiveLayoutView >> layoutType: anObject [
 
 { #category : 'layout' }
 SlmdResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
-	| props |
 
-	self systemLog logTrace5: aLayoutType printString.
+	self systemLog logTrace: '**** ', aLayoutType printString.
 
-	aLayoutType = WamLayoutType layoutTypeCompact ifTrue: [
-		props := self layoutProfileCompact ].
-	aLayoutType = WamLayoutType layoutTypeMedium ifTrue: [
-		props := self layoutProfileMedium ].
-	aLayoutType = WamLayoutType layoutTypeExpanded ifTrue: [
-		props := self layoutProfileExpanded ].
-	aLayoutType = WamLayoutType layoutTypeLarge ifTrue: [
-		props := self layoutProfileLarge ].
-	aLayoutType = WamLayoutType layoutTypeExtraLarge ifTrue: [
-		props := self layoutProfileExtraLarge ].
-
-	props ifNil: [ ^ self ].
-	self layoutType: aLayoutType.
-	self setLayoutSettings: props.
-	self applyLayoutProfile: props.
+	self layoutType: (aLayoutType at: #name).
+	self setLayoutSettings: aLayoutType.
+	self applyLayoutProfile: aLayoutType.
 	self layoutSettingsView layoutUpdate.
 
 ]

@@ -1,36 +1,209 @@
 Class {
 	#name : 'WamLayoutType',
 	#superclass : 'Object',
+	#classVars : [
+		'ByName'
+	],
 	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Base'
 }
 
 { #category : 'accessing' }
+WamLayoutType class >> byName [
+
+	^ ByName ifNil: [ ByName := self byNameBuild ]
+]
+
+{ #category : 'accessing' }
+WamLayoutType class >> byName: anObject [
+
+	^ ByName := anObject
+]
+
+{ #category : 'accessing' }
+WamLayoutType class >> byNameBuild [
+
+	^ Dictionary new
+		at: self layoutTypeCompact put: self layoutProfileCompact;
+		at: self layoutTypeCompactRail put: self layoutProfileCompactRail;
+		at: self layoutTypeMedium put: self layoutProfileMedium;
+		at: self layoutTypeMediumRail put: self layoutProfileMediumRail;
+		at: self layoutTypeExpanded put: self layoutProfileExpanded;
+		at: self layoutTypeLarge put: self layoutProfileLarge;
+		at: self layoutTypeExtraLarge put: self layoutProfileExtraLarge;
+		yourself
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> defaultLayoutBreakpoints [
+
+	^ {
+	600 -> self layoutProfileCompact.
+	840 -> self layoutProfileMedium.
+	1200 -> self layoutProfileExpanded.
+	1600 -> self layoutProfileLarge.
+	SmallInteger maxVal -> self layoutProfileExtraLarge.
+	}
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileCompact [
+
+	^ {
+		#name -> self layoutTypeCompact.
+		#navRailExpanded -> false.
+		#showNavMenuButton -> false.
+		#useModalNav -> true.
+		#showNavBar -> true.
+		#useTwoPaneBody -> false.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileCompactRail [
+
+	^ {
+		#name -> self layoutTypeCompactRail.
+		#navRailExpanded -> false.
+		#showNavMenuButton -> true.
+		#useModalNav -> true.
+		#showNavBar -> false.
+		#useTwoPaneBody -> false.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileExpanded [
+
+	^ {
+		#name -> self layoutTypeExpanded.
+		#navRailExpanded -> false.
+		#showNavMenuButton -> true.
+		#useModalNav -> true.
+		#showNavBar -> false.
+		#useTwoPaneBody -> true.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileExtraLarge [
+
+	^ {
+		#name -> self layoutTypeExtraLarge.
+		#navRailExpanded -> true.
+		#showNavMenuButton -> false.
+		#useModalNav -> false.
+		#showNavBar -> false.
+		#useTwoPaneBody -> true.
+		#showSidesheet -> true.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileLarge [
+
+	^ {
+		#name -> self layoutTypeLarge.
+		#navRailExpanded -> false.
+		#showNavMenuButton -> false.
+		#useModalNav -> false.
+		#showNavBar -> false.
+		#useTwoPaneBody -> true.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileMedium [
+
+	^ {
+		#name -> self layoutTypeMedium.
+		#navRailExpanded -> true.
+		#showNavMenuButton -> false.
+		#useModalNav -> true.
+		#showNavBar -> true.
+		#useTwoPaneBody -> true.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutProfileMediumRail [
+
+	^ {
+		#name -> self layoutTypeMediumRail.
+		#navRailExpanded -> true.
+		#showNavMenuButton -> true.
+		#useModalNav -> true.
+		#showNavBar -> false.
+		#useTwoPaneBody -> true.
+		#showSidesheet -> false.
+		#showAppBar -> true.
+		"#showDockedToolbar -> false.
+		#showFloatingToolbar -> false"
+	} asDictionary
+
+]
+
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeCompact [
 
 	^ #compact
 ]
 
-{ #category : 'accessing' }
+{ #category : 'layout' }
+WamLayoutType class >> layoutTypeCompactRail [
+
+	^ #compactRail
+]
+
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeExpanded [
 
 	^ #expanded
 ]
 
-{ #category : 'accessing' }
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeExtraLarge [
 
 	^ #'extra-large'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeLarge [
 
 	^ #large
 ]
 
-{ #category : 'accessing' }
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeList [
 
 	^ {
@@ -42,8 +215,14 @@ WamLayoutType class >> layoutTypeList [
 	}
 ]
 
-{ #category : 'accessing' }
+{ #category : 'layout' }
 WamLayoutType class >> layoutTypeMedium [
 
 	^ #medium
+]
+
+{ #category : 'layout' }
+WamLayoutType class >> layoutTypeMediumRail [
+
+	^ #mediumRail
 ]
