@@ -217,7 +217,7 @@ SlmdLayoutSettingsView >> layoutTypeSet: anObject [
 
 	self useAutoLayoutUpdate: false.
 
-	self layoutViewLazy layoutTypeAdapt: anObject.
+	self layoutViewLazy layoutTypeAdapt: (WamLayoutType byName at: anObject ifAbsent: []).
 	self announceSetting: #layoutType value: anObject.
 
 ]

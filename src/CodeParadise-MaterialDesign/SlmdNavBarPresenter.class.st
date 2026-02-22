@@ -6,6 +6,13 @@ Class {
 	#tag : 'Nav'
 }
 
+{ #category : 'events' }
+SlmdNavBarPresenter >> handleNavEvent: aNavEvent [
+
+	self application navToNavAction: aNavEvent.
+
+]
+
 { #category : 'rendering' }
 SlmdNavBarPresenter >> renderView [
 	| list |

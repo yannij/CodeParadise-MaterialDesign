@@ -433,7 +433,7 @@ SlmdResponsiveLayoutView >> colorThemeName [
 	^ self layoutSettingsView colorThemeName
 ]
 
-{ #category : 'accessing - settings' }
+{ #category : 'color theme' }
 SlmdResponsiveLayoutView >> colorThemePut: theme [
 	| element |
 
@@ -441,7 +441,7 @@ SlmdResponsiveLayoutView >> colorThemePut: theme [
 	theme do: [ :each |
 		element customPropertyAt: each key put: each value ].
 	CpHtmlElement documentBody
-		customPropertyAt: 'wa-form-control-border-style' put: 'none';
+		"customPropertyAt: 'wa-form-control-border-style' put: 'none';"
 		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
 		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
 
