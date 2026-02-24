@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'events' }
-SlmdModel >> navActionFind: anObject [
+SlmdModel >> navActionAtId: anObject [
 
 	^ nil
 ]

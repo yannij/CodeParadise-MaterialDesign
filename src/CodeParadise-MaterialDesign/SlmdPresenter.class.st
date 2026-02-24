@@ -16,18 +16,13 @@ SlmdPresenter class >> isAbstract [
 SlmdPresenter >> handleNavEvent: aNavEvent [
 	| item |
 
-	item := self model navActionFind: aNavEvent id.
+	"self systemLog logTrace: '****', aNavEvent printString."
+	item := self model navActionAtId: aNavEvent id.
 	item ifNil: [
 		self systemLog logError: 'Not found: ', aNavEvent id printString.
 		^ self ].
 	self application navTo: item.
 
-]
-
-{ #category : 'events' }
-SlmdPresenter >> handleUserEvent: anObject [
-
-	self systemLog logTrace5: 'Subclass should provide code to handle: ', anObject printString
 ]
 
 { #category : 'accessing - model' }

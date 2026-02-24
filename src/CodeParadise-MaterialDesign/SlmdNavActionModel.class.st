@@ -157,19 +157,13 @@ SlmdNavActionModel >> isNavType [
 ]
 
 { #category : 'accessing' }
-SlmdNavActionModel >> itemName [
-
-	^ eventId
-]
-
-{ #category : 'accessing' }
 SlmdNavActionModel >> itemName: anObject [
 
 	eventId := anObject
 ]
 
 { #category : 'events' }
-SlmdNavActionModel >> navActionFind: anObject [
+SlmdNavActionModel >> navActionAtId: anObject [
 
 	^ self
 ]

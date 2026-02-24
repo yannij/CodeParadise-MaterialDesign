@@ -78,6 +78,7 @@ SlmdWebApplication >> doLogout [
 SlmdWebApplication >> doNavToItemNamed: aNavName [
 	| item |
 
+	self systemLog logTrace: '****'.
 	item := self navItemNamed: aNavName.
 	item ifNil: [
 		self systemLog logError: 'Not found: doNavToItemNamed:', aNavName.
@@ -273,6 +274,7 @@ SlmdWebApplication >> postLoad [
 
 	super postLoad.
 
+self systemLog logString: self navItemsToUse printString.
 	self layout navRail navItems: self navItemsToUse; valueChanged.
 
 	self layout fab fab: self userEventSpecFAB; valueChanged.

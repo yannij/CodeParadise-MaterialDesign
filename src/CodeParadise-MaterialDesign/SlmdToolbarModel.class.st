@@ -69,9 +69,9 @@ SlmdToolbarModel >> isVisible: anObject [
 ]
 
 { #category : 'events' }
-SlmdToolbarModel >> navActionFind: anObject [
+SlmdToolbarModel >> navActionAtId: anObject [
 
-	^ self navActionItems detect: [ :each | each itemName = anObject ] ifNone: [].
+	^ self navActionItems detect: [ :each | each eventId = anObject ] ifNone: [].
 
 ]
 

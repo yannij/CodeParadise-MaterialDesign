@@ -86,7 +86,7 @@ SlmdAppBarModel >> leadingAction: anObject [
 ]
 
 { #category : 'events' }
-SlmdAppBarModel >> navActionFind: anObject [
+SlmdAppBarModel >> navActionAtId: anObject [
 
 	self leadingAction ifNotNil: [ :value |
 		value eventId = anObject ifTrue: [

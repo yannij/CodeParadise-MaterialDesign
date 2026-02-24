@@ -32,7 +32,7 @@ SlmdAppBarPresenter >> handleNavEvent: aNavEvent [
 
 	self systemLog logTrace: aNavEvent printString.
 
-	item := self model navActionFind: aNavEvent id.
+	item := self model navActionAtId: aNavEvent id.
 	item ifNil: [
 		self systemLog logError: 'Not found: ', aNavEvent id printString.
 		^ self ].

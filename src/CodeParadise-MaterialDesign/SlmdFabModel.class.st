@@ -13,7 +13,7 @@ SlmdFabModel >> actionGroupToUse [
 ]
 
 { #category : 'events' }
-SlmdFabModel >> navActionFind: anObject [
+SlmdFabModel >> navActionAtId: anObject [
 
 	self fab ifNotNil: [ :value |
 		value eventId = anObject ifTrue: [
