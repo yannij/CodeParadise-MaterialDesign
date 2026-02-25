@@ -12,7 +12,7 @@ WamPaneContentView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-container {
+.wam-container {
   box-sizing: border-box;
   padding: var(--wa-space-xs);
 }
@@ -24,7 +24,7 @@ WamPaneContentView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container" class="smd-container wa-cloak">
+	^ '<div id="container" class="wam-container wa-cloak">
   <slot name="content"></slot>
 </div>'
 ]

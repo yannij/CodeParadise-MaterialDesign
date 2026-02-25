@@ -25,55 +25,55 @@ WamResponsiveLayoutView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-menu {
+.wam-menu {
   padding: 8px 0;
 }
 
-.smd-menu-item::part(base) {
+.wam-menu-item::part(base) {
   padding: 0;
 }
 
-.smd-menu-item::part(checked-icon) {
+.wam-menu-item::part(checked-icon) {
   display: none;
 }
 
-.smd-menu-item::part(prefix) {
+.wam-menu-item::part(prefix) {
   padding: 0;
 }
 
-.smd-menu-item::part(label) {
+.wam-menu-item::part(label) {
   padding: 8px 0;
 }
 
-.smd-menu-item {
+.wam-menu-item {
   padding: 0;
   height: 48px;
   min-width: 112px;
   max-width: 280px;
 }
 
-.smd-menu-icon {
+.wam-menu-icon {
   padding: 12px;
   font-size: 24px;
   margin-inline-end: 0;
 }
 
-.slmd-details::part(base) {
+.wam-details::part(base) {
   padding: 0;
   background: var(--wa-color-brand-80);
 }
 
-.slmd-details::part(summary) {
+.wam-details::part(summary) {
   padding: 0;
   background: var(--wa-color-brand-80);
 }
 
-.slmd-details::part(content) {
+.wam-details::part(content) {
   padding: 0;
   background: var(--wa-color-brand-80);
 }
 
-.smd-navrailx-item {
+.wam-navrailx-item {
   display: flex;
   border-radius: 28px;
   height: 56px;
@@ -81,12 +81,12 @@ WamResponsiveLayoutView class >> globalStyle [
   align-items: center;
 }
 
-.smd-navrailx-icon {
+.wam-navrailx-icon {
   padding-left: 20px;
   font-size: 24px;
 }
 
-.smd-navrailx-labelText {
+.wam-navrailx-labelText {
   padding-left: 16px;
   font-size: 16px;
 }
@@ -101,17 +101,17 @@ WamResponsiveLayoutView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-hidden {
+.wam-hidden {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
 }
 
-.smd-layout {
+.wam-layout {
   background: var(--wa-color-brand-fill-quiet);
 }
 
-.smd-settings-pane {
+.wam-settings-pane {
   padding: 0;
   overflow-y: auto;
 }
@@ -124,7 +124,7 @@ WamResponsiveLayoutView class >> styleTable [
 	<webResource: #css>
 
 	^ '
-.slmd-table {
+.wam-table {
   width: 100%;
 }
 
@@ -171,7 +171,7 @@ WamResponsiveLayoutView >> addLoginDialog: label [
 	| dialog fields |
 
 	fields := 'div' asHtmlTag
-		addClass: 'slmd-fields';
+		addClass: 'wam-fields';
 		appendChild: (self fieldAt: #loginUsername label: 'Username' input: '');
 		appendChild: (self fieldAt: #loginPassword label: 'Password' input: '');
 		yourself.
@@ -516,7 +516,7 @@ WamResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
 
 	^ WaInput new
 		name: key;
-		addClass: 'slmd-input';
+		addClass: 'wam-input';
 		labelText: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
@@ -866,7 +866,7 @@ WamResponsiveLayoutView >> pane2Content [
 	view := view firstChildAtSlotNamed: #paneContent.
 	self systemLog logTrace: view printString.
 
-	"^ SlmdItemWrapperView all"
+	"^ WamItemWrapperView all"
 	^ view
 ]
 

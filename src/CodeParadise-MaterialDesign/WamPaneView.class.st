@@ -12,7 +12,7 @@ WamPaneView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-pane-content {
+.wam-pane-content {
   overflow-x: auto;
   overflow-y: auto;
   background: var(--wa-color-brand-fill-quiet);
@@ -27,10 +27,10 @@ WamPaneView class >> template [
 
 	^ '
 <div id="container">
-  <div class="smdAppBar">
+  <div class="wamAppBar">
     <slot name="appBar"></slot>
   </div>
-  <div class="smd-pane-content">
+  <div class="wam-pane-content">
     <slot name="paneContent"></slot>
   </div>
 </div>

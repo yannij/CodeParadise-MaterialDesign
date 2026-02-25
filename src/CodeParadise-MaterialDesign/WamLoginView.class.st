@@ -12,19 +12,19 @@ WamLoginView class >> style [
 	<webResource: #css>
 
 	^ '
-.slmd-login-container {
+.wam-login-container {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
 }
-.slmd-login {
+.wam-login {
   min-width: 300px;
   max-width: 400px;
   background: var(--wa-color-brand-fill-normal);
 }
-.slmd-login-header {
+.wam-login-header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,9 +40,9 @@ WamLoginView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container" class="slmd-login-container">
-<div class="slmd-login">
-  <div class="slmd-login-header"><slot name="header"></slot></div>
+	^ '<div id="container" class="wam-login-container">
+<div class="wam-login">
+  <div class="wam-login-header"><slot name="header"></slot></div>
   <slot name="card"></slot>
   <slot name="buttons"></slot>
 </div>

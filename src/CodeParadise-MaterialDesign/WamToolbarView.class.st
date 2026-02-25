@@ -12,7 +12,7 @@ WamToolbarView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-toolbar-item {
+.wam-toolbar-item {
   display: flex;
   padding: 8px 0;
   height: 48px;
@@ -21,7 +21,7 @@ WamToolbarView class >> globalStyle [
   justify-content: center;
 }
 
-.smd-toolbar-floating-item {
+.wam-toolbar-floating-item {
   display: flex;
   padding: 8px 0;
   height: 48px;
@@ -30,7 +30,7 @@ WamToolbarView class >> globalStyle [
   justify-content: center;
 }
 
-.smd-toolbar-icon {
+.wam-toolbar-icon {
   font-size: 24px;
 }
 '
@@ -39,13 +39,13 @@ WamToolbarView class >> globalStyle [
 { #category : 'nav' }
 WamToolbarView >> buttonCssClass [
 
-	^ 'smd-toolbar-buttons'
+	^ 'wam-toolbar-buttons'
 ]
 
 { #category : 'nav' }
 WamToolbarView >> fabCssClass [
 
-	^ 'smd-toolbar-fab'
+	^ 'wam-toolbar-fab'
 ]
 
 { #category : 'nav' }
@@ -56,7 +56,7 @@ WamToolbarView >> renderButtons: buttons [
 		div := '' inHtmlTag: #div.
 		div addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
-			iconButton := self iconButtonForAction: eachItem css: 'smd-toolbar-item'.
+			iconButton := self iconButtonForAction: eachItem css: 'wam-toolbar-item'.
 			div appendChild: iconButton ].
 		self appendChild: div atSlotNamed: 'toolbar' ].
 

@@ -12,7 +12,7 @@ WamToolbarFloatingView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-toolbar-floating-buttons {
+.wam-toolbar-floating-buttons {
   display: flex;
   flex-flow: row nowrap;
   gap: 4px;
@@ -22,7 +22,7 @@ WamToolbarFloatingView class >> globalStyle [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-toolbar-floating-fab {
+.wam-toolbar-floating-fab {
   margin-left: 8px;
   padding: 8px;
   height: 48px;
@@ -39,13 +39,13 @@ WamToolbarFloatingView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-hidden {
+.wam-hidden {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
 }
 
-.smd-toolbar {
+.wam-toolbar {
   z-index: 10;
   display: flex;
   flex-flow: row nowrap;
@@ -63,7 +63,7 @@ WamToolbarFloatingView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-toolbar">
+<div id="container" class="wam-toolbar">
   <slot name="toolbar"></slot>
   <slot name="fab"></slot>
 </div>
@@ -73,13 +73,13 @@ WamToolbarFloatingView class >> template [
 { #category : 'nav' }
 WamToolbarFloatingView >> buttonCssClass [
 
-	^ 'smd-toolbar-floating-buttons'
+	^ 'wam-toolbar-floating-buttons'
 ]
 
 { #category : 'nav' }
 WamToolbarFloatingView >> fabCssClass [
 
-	^ 'smd-toolbar-floating-fab'
+	^ 'wam-toolbar-floating-fab'
 ]
 
 { #category : 'nav' }
@@ -91,8 +91,8 @@ WamToolbarFloatingView >> renderButtons: buttons [
 		element addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
 			"iconButton := self iconButtonForAction: eachItem."
-			iconButton := self iconButtonNamed: (eachItem at: #iconName) class: 'smd-toolbar-icon' navAction: eachItem.
-			element appendChild: (#div asHtmlTag addClass: 'smd-toolbar-floating-item'; appendChild: iconButton; yourself) ].
+			iconButton := self iconButtonNamed: (eachItem at: #iconName) class: 'wam-toolbar-icon' navAction: eachItem.
+			element appendChild: (#div asHtmlTag addClass: 'wam-toolbar-floating-item'; appendChild: iconButton; yourself) ].
 		self appendChild: element atSlotNamed: 'toolbar' ].
 
 ]

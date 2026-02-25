@@ -28,7 +28,7 @@ WamObjectView class >> globalStyle [
   --sl-focus-ring-style: none;
 }
 
-.slmd-input::part(input):disabled, .slmd-textarea::part(textarea):disabled {
+.wam-input::part(input):disabled, .wam-textarea::part(textarea):disabled {
   --sl-input-color: #000000;
 }
 
@@ -41,7 +41,7 @@ sl-input {
   --sl-input-height-medium: 56px;
 }
 
-.slmd-fields {
+.wam-fields {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -59,7 +59,7 @@ WamObjectView class >> globalStyleInput [
 	<webResource: #css>
 
 	^ '
-.slmd-input::part(input) {
+.wam-input::part(input) {
   position: relative;
   width: 100%;
   padding: 0;
@@ -68,7 +68,7 @@ WamObjectView class >> globalStyleInput [
   padding-top: 4px;
 }
 
-.slmd-input::part(label) {
+.wam-input::part(label) {
   height: 16px;
   font-size: 12px;
   margin-bottom: -16px;
@@ -77,14 +77,14 @@ WamObjectView class >> globalStyleInput [
   background-color: rgb(0 0 0 / 0);
 }
 
-.slmd-input::part(base) {
+.wam-input::part(base) {
   height: 56px;
   width: 100%;
   font-size: 16px;
   background: var(--wa-color-brand-fill-normal);
 }
 
-.slmd-input::part(hint) {
+.wam-input::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
@@ -100,12 +100,12 @@ WamObjectView class >> globalStyleSwitch [
 	<webResource: #css>
 
 	^ '
-.slmd-switch::part(base) {
+.wam-switch::part(base) {
   padding-top: 8px;
   padding-left: 16px;
 }
 
-.slmd-switch::part(hint) {
+.wam-switch::part(hint) {
   height: 16px;
   width: 100%;
   font-size: 12px;
@@ -121,7 +121,7 @@ WamObjectView class >> globalStyleTextarea [
 	<webResource: #css>
 
 	^ '
-.slmd-textarea::part(base) {
+.wam-textarea::part(base) {
   position: relative;
   width: 100%;
   padding: 0;
@@ -130,7 +130,7 @@ WamObjectView class >> globalStyleTextarea [
   padding-top: 16px;
 }
 
-.slmd-textarea::part(label) {
+.wam-textarea::part(label) {
   height: 16px;
   font-size: 12px;
   padding: 4px 16px 0 16px;
@@ -139,13 +139,13 @@ WamObjectView class >> globalStyleTextarea [
   background-color: rgb(0 0 0 / 0);
 }
 
-.slmd-textarea::part(textarea) {
+.wam-textarea::part(textarea) {
   width: 100%;
   font-size: 16px;
   background: var(--wa-color-brand-fill-normal);
 }
 
-.slmd-textarea::part(hint) {
+.wam-textarea::part(hint) {
   height: 16px;
   width: calc(100% - 32px);
   font-size: 12px;
@@ -200,7 +200,7 @@ WamObjectView >> fieldAt: key label: aLabel input: aText [
 	element := WaInput new
 		appearanceBeFilled;
 		name: key;
-		addClass: 'slmd-input';
+		addClass: 'wam-input';
 		label: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
@@ -218,7 +218,7 @@ WamObjectView >> fieldAt: key label: aLabel switch: aBoolean [
 
 	element := WaSwitch new
 		name: key;
-		addClass: 'slmd-switch';
+		addClass: 'wam-switch';
 		checked: aBoolean;
 		replaceAllChildrenWith: aLabel asHtmlElement atSlotNamed: nil;
 		replaceAllChildrenWith: ('Help text...' , aLabel) asHtmlElement atSlotNamed: #'help-text';
@@ -236,7 +236,7 @@ WamObjectView >> fieldAt: key label: aLabel textarea: aText [
 	element := WaTextarea new
 		appearanceBeFilled;
 		name: key;
-		addClass: 'slmd-textarea';
+		addClass: 'wam-textarea';
 		rows: 4;
 		labelText: aLabel;
 		value: aText;
@@ -302,7 +302,7 @@ WamObjectView >> fields: list map: map [
 
 	self fieldElementsClear.
 
-	fields := #div asHtmlTag addClass: 'slmd-fields'; yourself.
+	fields := #div asHtmlTag addClass: 'wam-fields'; yourself.
 	list do: [ :each |
 		fields appendChild: (self fieldFor: each map: map) ].
 
@@ -326,7 +326,7 @@ WamObjectView >> fieldsInExpansion: list map: map summary: summary open: aBoolea
 	element := self fields: list map: map.
 
 	expansion := WaDetails new
-		addClass: 'slmd-details';
+		addClass: 'wam-details';
 		propertyAt: 'summary' put: summary;
 		propertyAt: 'open' put: aBoolean;
 		appendChild: element;

@@ -20,15 +20,15 @@ WamNavActionSubmenuView >> divSubmenu: aNavAction [
 	iconName := aNavAction at: #iconName.
 
 	^ #div asHtmlTag
-		addClass: 'smd-navsubmenu-item';
+		addClass: 'wam-navsubmenu-item';
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navsubmenu-icon';
+				addClass: 'wam-navsubmenu-icon';
 				appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navsubmenu-labelText';
+				addClass: 'wam-navsubmenu-labelText';
 				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);

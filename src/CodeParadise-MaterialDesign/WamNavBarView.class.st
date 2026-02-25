@@ -11,13 +11,13 @@ WamNavBarView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-navbar-font {
+.wam-navbar-font {
   line-height: var(--wa-line-height-normal);
   font-size: var(--wa-font-size-small);
   font-weight: var(--wa-font-weight-normal);
 }
 
-.smd-navbar-item {
+.wam-navbar-item {
   flex-basis: max-content;
   display: flex;
   padding: 0 4px;
@@ -26,19 +26,19 @@ WamNavBarView class >> globalStyle [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-navbar-icon {
+.wam-navbar-icon {
   padding-top: 0;
   padding-left: 4px;
   font-size: 24px;
 }
 
-.smd-navbar-labelText {
+.wam-navbar-labelText {
   padding-top: 8px;
   padding-left: 4px;
   padding-right: 16px;
 }
 
-.smd-navbar-dropdown {
+.wam-navbar-dropdown {
   height: 40px;
   font-size: 24px;
 }
@@ -51,7 +51,7 @@ WamNavBarView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-navBar {
+.wam-navBar {
   z-index: 10;
   display: flex;
   justify-content: space-between;
@@ -68,7 +68,7 @@ WamNavBarView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-navBar">
+<div id="container" class="wam-navBar">
   <slot name="content"></slot>
 </div>
 '
@@ -81,15 +81,15 @@ WamNavBarView >> navbarBuildItem: aNavAction [
 	iconName := aNavAction at: #iconName.
 
 	^ #div asHtmlTag
-		addClass: 'smd-navbar-item';
-		addClass: 'smd-navbar-font';
+		addClass: 'wam-navbar-item';
+		addClass: 'wam-navbar-font';
 		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
 		appendChild: (#div asHtmlTag
-			addClass: 'smd-navbar-icon';
+			addClass: 'wam-navbar-icon';
 			appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
 			yourself);
 		appendChild: (#div asHtmlTag
-			addClass: 'smd-navbar-labelText';
+			addClass: 'wam-navbar-labelText';
 			addClass: 'wa-text-truncate';
 			textContent: (aNavAction at: #iconLabel);
 			yourself);

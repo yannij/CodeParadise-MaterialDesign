@@ -17,17 +17,17 @@ WamNavActionDropdownView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-nav-font {
+.wam-nav-font {
   line-height: var(--wa-line-height-normal);
   font-size: var(--wa-font-size-medium);
   font-weight: var(--wa-font-weight-bold);
 }
 
-.smd-nav-dropdown::part(menu) {
+.wam-nav-dropdown::part(menu) {
   padding: 0;
 }
 
-.smd-navrail-item {
+.wam-navrail-item {
   display: flex;
   flex-flow: column;
   height: 56px;
@@ -35,14 +35,14 @@ WamNavActionDropdownView class >> style [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-navrail-icon {
+.wam-navrail-icon {
   font-size: 24px;
   line-height: 28px;
   padding-left: 33px;
   padding-top: 4px;
 }
 
-.smd-navrail-labelText {
+.wam-navrail-labelText {
   height: 24px;
   line-height: 18px;
   font-size: 14px;
@@ -50,7 +50,7 @@ WamNavActionDropdownView class >> style [
   overflow-x: clip;
 }
 
-.smd-navrailx-item {
+.wam-navrailx-item {
   display: flex;
   border-radius: 28px;
   height: 56px;
@@ -58,12 +58,12 @@ WamNavActionDropdownView class >> style [
   align-items: center;
 }
 
-.smd-navrailx-icon {
+.wam-navrailx-icon {
   padding-left: 20px;
   font-size: 24px;
 }
 
-.smd-navrailx-labelText {
+.wam-navrailx-labelText {
   padding-left: 16px;
   font-size: 16px;
 }

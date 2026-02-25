@@ -198,7 +198,7 @@ WamDemoMovieListingApp >> initialize [
 	pane1Model := WamPaneModel on: pane1Content.
 	pane2Model := WamPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	"layout := SlmdResponsiveLayoutModel new."
+	"layout := WamResponsiveLayoutModel new."
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.

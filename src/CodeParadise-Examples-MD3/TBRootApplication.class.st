@@ -53,7 +53,7 @@ TBRootApplication >> initialize [
 	pane1Model := WamPaneModel on: (listModel := WamListModel new).
 	pane2Model := WamPaneModel on: (detailModel := WamItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	"layout := SlmdResponsiveLayoutModel new."
+	"layout := WamResponsiveLayoutModel new."
 	layout paneLayout: WamListDetailLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.

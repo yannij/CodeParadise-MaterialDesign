@@ -18,7 +18,7 @@ WamNavRailModalView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-navrailx {
+.wam-navrailx {
   height: 100%;
   flow-direction: row;
 }
@@ -28,7 +28,7 @@ WamNavRailModalView class >> style [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-navrailx-item {
+.wam-navrailx-item {
   display: flex;
   border-radius: 28px;
   height: 56px;
@@ -36,12 +36,12 @@ WamNavRailModalView class >> style [
   align-items: center;
 }
 
-.smd-navrailx-icon {
+.wam-navrailx-icon {
   padding-left: 20px;
   font-size: 24px;
 }
 
-.smd-navrailx-labelText {
+.wam-navrailx-labelText {
   padding-left: 16px;
   font-size: 16px;
 }
@@ -70,7 +70,7 @@ WamNavRailModalView >> drawer [
 WamNavRailModalView >> renderNavContent: buttons [
 	| nav |
 
-	nav := #nav asHtmlTag addClass: 'smd-navrailx'; yourself.
+	nav := #nav asHtmlTag addClass: 'wam-navrailx'; yourself.
 	buttons do: [ :each | | element |
 		element := self divExpanded: each.
 		element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self.

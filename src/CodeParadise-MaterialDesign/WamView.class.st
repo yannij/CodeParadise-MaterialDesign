@@ -33,14 +33,14 @@ WamView >> dropdownAppbar: actionList [
 
 	trigger := #div asHtmlTag
 		appendChild: (WaIcon fullyNamed: iconName).
-	trigger addClass: 'smd-toolbar-icon'.
+	trigger addClass: 'wam-toolbar-icon'.
 
 	dropdown := WaDropdown new
 		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
 		appendChild: menu;
 		yourself.
 
-	div := #div asHtmlTag appendChild: dropdown; addClass: 'smd-toolbar-item'; yourself.
+	div := #div asHtmlTag appendChild: dropdown; addClass: 'wam-toolbar-item'; yourself.
 
 	^ div
 
@@ -51,14 +51,14 @@ WamView >> dropdownMenuItems: actionList [
 	| menu |
 
 	menu := #div asHtmlTag.
-	menu addClass: 'smd-menu'.
+	menu addClass: 'wam-menu'.
 	actionList do: [ :each | | icon |
 		icon := (WaIcon fullyNamed: (each at: #iconName))
 			label: (each at: #iconName);
-			addClass: 'smd-menu-icon';
+			addClass: 'wam-menu-icon';
 			yourself.
 		menu appendChild: (WaDropdownItem new
-			addClass: 'smd-menu-item';
+			addClass: 'wam-menu-item';
 			when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self;
 			icon: icon;
 			textContent: (each at: #iconLabel);
@@ -77,14 +77,14 @@ WamView >> dropdownNavbar: actionList [
 
 	trigger := #div asHtmlTag
 		appendChild: (WaIcon fullyNamed: iconName).
-	trigger addClass: 'smd-navbar-dropdown'.
+	trigger addClass: 'wam-navbar-dropdown'.
 
 	dropdown := WaDropdown new
 		replaceAllChildrenWith: trigger atSlotNamed: #trigger;
 		appendChild: menu;
 		yourself.
 
-	div := #div asHtmlTag appendChild: dropdown; addClass: 'smd-navbar-item'; yourself.
+	div := #div asHtmlTag appendChild: dropdown; addClass: 'wam-navbar-item'; yourself.
 
 	^ div
 
@@ -107,7 +107,7 @@ WamView >> element: element show: aBoolean [
 	"self logTrace: element printString method: 'element:show:'."
 
 	element ifNotNil: [
-		element classed: #'smd-hidden' if: aBoolean not ]
+		element classed: #'wam-hidden' if: aBoolean not ]
 ]
 
 { #category : 'utilities' }
@@ -190,7 +190,7 @@ WamView >> iconButtonForAction: aNavAction css: cssClass [
 	tag := #div asHtmlTag
 		appendChild: ((WaIcon fullyNamed: iconName)
 			label: iconName;
-			addClass: 'smd-toolbar-icon';
+			addClass: 'wam-toolbar-icon';
 			when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
 			yourself);
 		yourself.
@@ -236,7 +236,7 @@ WamView >> layoutViewLazy [
 WamView >> modalDivFind [
 	"Locate the div where modal components can attach"
 
-	^ self layoutViewFind findByIdInShadowDom: 'smdModalDiv'
+	^ self layoutViewFind findByIdInShadowDom: 'wamModalDiv'
 
 ]
 
@@ -265,7 +265,7 @@ WamView >> pillButtonForAction: aNavAction css: cssClass [
 	iconLabel := aNavAction at: #iconLabel.
 
 	tag := #div asHtmlTag
-		"addClass: 'smd-toolbar-icon';"
+		"addClass: 'wam-toolbar-icon';"
 		appendChild: (self pillButtonLabel: iconLabel class: '' navAction: aNavAction);
 		yourself.
 

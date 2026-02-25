@@ -24,6 +24,6 @@ WamDemoAccountingSoilDbApp class >> repositoryClass [
 	self createData
 	"
 
-	"^ SlmdDemoSoilCheckpointRepository"
+	"^ WamDemoSoilCheckpointRepository"
 	^ WamDemoSoilRepository
 ]

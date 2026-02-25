@@ -11,13 +11,13 @@ WamNavAbstractView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-nav-font {
+.wam-nav-font {
   line-height: var(--wa-line-height-normal);
   font-size: var(--wa-font-size-medium);
   font-weight: var(--wa-font-weight-bold);
 }
 
-.smd-navrail-item {
+.wam-navrail-item {
   display: flex;
   flex-flow: column;
   height: 56px;
@@ -25,18 +25,18 @@ WamNavAbstractView class >> globalStyle [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-navrail-item:hover {
+.wam-navrail-item:hover {
   background: var(--wa-color-brand-fill-light);
 }
 
-.smd-navrail-icon {
+.wam-navrail-icon {
   font-size: 24px;
   line-height: 28px;
   padding-left: 33px;
   padding-top: 4px;
 }
 
-.smd-navrail-labelText {
+.wam-navrail-labelText {
   height: 24px;
   line-height: 18px;
   font-size: 14px;
@@ -44,7 +44,7 @@ WamNavAbstractView class >> globalStyle [
   overflow-x: clip;
 }
 
-.smd-navsubmenu-item {
+.wam-navsubmenu-item {
   display: flex;
   height: 56px;
   width: 220px;
@@ -52,12 +52,12 @@ WamNavAbstractView class >> globalStyle [
   align-items: center;
 }
 
-.smd-navsubmenu-icon {
+.wam-navsubmenu-icon {
   padding-left: 8px;
   font-size: 24px;
 }
 
-.smd-navsubmenu-labelText {
+.wam-navsubmenu-labelText {
   padding-left: 16px;
   font-size: 16px;
 }
@@ -68,15 +68,15 @@ WamNavAbstractView class >> globalStyle [
 WamNavAbstractView >> divExpanded: aNavAction [
 
 	^ #div asHtmlTag
-		addClass: 'smd-navrailx-item'; addClass: 'smd-nav-font';
+		addClass: 'wam-navrailx-item'; addClass: 'wam-nav-font';
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrailx-icon';
+				addClass: 'wam-navrailx-icon';
 				appendChild: ((WaIcon fullyNamed: (aNavAction at: #iconName)) label: (aNavAction at: #iconLabel); yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrailx-labelText';
+				addClass: 'wam-navrailx-labelText';
 				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
@@ -87,15 +87,15 @@ WamNavAbstractView >> divExpanded: aNavAction [
 WamNavAbstractView >> divNarrow: aNavAction [
 
 	^ #div asHtmlTag
-		addClass: 'smd-navrail-item';
+		addClass: 'wam-navrail-item';
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrail-icon';
+				addClass: 'wam-navrail-icon';
 				appendChild: ((WaIcon fullyNamed: (aNavAction at: #iconName)) label: (aNavAction at: #iconLabel); yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag
-				addClass: 'smd-navrail-labelText';
+				addClass: 'wam-navrail-labelText';
 				addClass: 'wa-text-truncate';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);

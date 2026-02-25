@@ -12,13 +12,13 @@ WamSidesheetView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-hidden {
+.wam-hidden {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
 }
 
-.smd-sidesheet-content {
+.wam-sidesheet-content {
   margin: 0;
   width: 300px;
   max-width: 300px;
@@ -34,7 +34,7 @@ WamSidesheetView class >> template [
 
 	^ '
 <div id="container">
-  <div class="smd-sidesheet-content">
+  <div class="wam-sidesheet-content">
     <slot name="paneContent"></slot>
   </div>
 </div>

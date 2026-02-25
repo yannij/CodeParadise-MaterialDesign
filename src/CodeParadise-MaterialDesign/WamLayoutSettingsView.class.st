@@ -50,7 +50,7 @@ WamLayoutSettingsView >> colorThemeBuildChooser: props [
 
 	selectedItem := props at: #colorThemeName ifAbsent: [].
 	chooser := WaSelect new
-		id: 'smdColorThemeChooser';
+		id: 'wamColorThemeChooser';
 		labelText: 'Use color theme:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
@@ -143,7 +143,7 @@ WamLayoutSettingsView >> fontFamilyChooser: props [
 
 	selectedItem := props at: #fontFamily ifAbsent: [].
 	chooser := WaSelect new
-		id: 'smdFontFamilyChooser';
+		id: 'wamFontFamilyChooser';
 		labelText: 'Use font family:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
@@ -183,13 +183,13 @@ WamLayoutSettingsView >> layoutInitialSetUp: props [
 { #category : 'settings - choosers' }
 WamLayoutSettingsView >> layoutType [
 
-	^ self elementId: 'smdLayoutTypeChooser' propertyAt: #value ifMissing: nil
+	^ self elementId: 'wamLayoutTypeChooser' propertyAt: #value ifMissing: nil
 ]
 
 { #category : 'settings - choosers' }
 WamLayoutSettingsView >> layoutType: aLayoutType [
 
-	self elementId: 'smdLayoutTypeChooser' propertyAt: #value put: aLayoutType ifMissing: nil
+	self elementId: 'wamLayoutTypeChooser' propertyAt: #value put: aLayoutType ifMissing: nil
 ]
 
 { #category : 'settings - choosers' }
@@ -199,7 +199,7 @@ WamLayoutSettingsView >> layoutTypeBuildChooser: props [
 	selectedItem := props at: #layoutType ifAbsent: [].
 
 	radioGroup := WaRadioGroup new
-		id: 'smdLayoutTypeChooser';
+		id: 'wamLayoutTypeChooser';
 		propertyAt: 'label' put: 'Use layout style:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
@@ -243,7 +243,7 @@ WamLayoutSettingsView >> modalDivContentWith: props [
 	| element |
 
 	element := #div asHtmlTag
-		addClass: 'smd-settings-pane';
+		addClass: 'wam-settings-pane';
 		appendChild: (self useAutoLayoutNewSwitch: props);
 		appendChild: (self layoutTypeBuildChooser: props);
 		appendChild: (self navRailExpandedNewSwitch: props);

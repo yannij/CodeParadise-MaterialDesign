@@ -10,7 +10,7 @@ Class {
 WamDemoObjectView >> renderModelTable: aList columns: columns title: aTitleString [
 	| table thead row tbody details |
 
-	table := #table asHtmlTag addClass: 'slmd-table'; yourself.
+	table := #table asHtmlTag addClass: 'wam-table'; yourself.
 	table attributeAt: 'border' put: '1'.
 	"table appendChild: (#caption asHtmlTag textContent: aTitleString; yourself).
 "
@@ -34,7 +34,7 @@ WamDemoObjectView >> renderModelTable: aList columns: columns title: aTitleStrin
 	table appendChild: tbody.
 
 	details := WaDetails new.
-	details addClass: 'slmd-details'.
+	details addClass: 'wam-details'.
 	details propertyAt: 'summary' put: aTitleString.
 	details propertyAt: 'open' put: true.
 	details appendChild: table.

@@ -12,7 +12,7 @@ WamItemWrapperView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.slmd-item-wrapper-header {
+.wam-item-wrapper-header {
   display: flex;
   flex-direction: row;
   margin-left: auto;
@@ -26,12 +26,12 @@ WamItemWrapperView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-container {
+.wam-container {
   box-sizing: border-box;
   padding: var(--wa-space-xs);
 }
 
-.smd-item {
+.wam-item {
   display: flex;
   flex-direction: column
 }
@@ -43,8 +43,8 @@ WamItemWrapperView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container" class="smd-container">
-  <div class="smd-item">
+	^ '<div id="container" class="wam-container">
+  <div class="wam-item">
     <slot name="header"></slot>
     <slot name="wrapped"></slot>
     <slot name="footer"></slot>

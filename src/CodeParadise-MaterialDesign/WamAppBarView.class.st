@@ -15,7 +15,7 @@ WamAppBarView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-appBar {
+.wam-appBar {
   display: flex;
   flex-flow: row nowrap;
   height: 64px;
@@ -23,12 +23,12 @@ WamAppBarView class >> style [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-appBar-leadingAction {
+.wam-appBar-leadingAction {
   height: 48px;
   width: 48px;
 }
 
-.smd-appBar-headline {
+.wam-appBar-headline {
   overflow: clip;
   white-space: nowrap;
   max-width: 66%;
@@ -38,7 +38,7 @@ WamAppBarView class >> style [
   font-size: 24px;
 }
 
-.smd-appBar-trailingActions {
+.wam-appBar-trailingActions {
   margin-left: auto;
   display: flex;
   flex-flow: row nowrap;
@@ -55,14 +55,14 @@ WamAppBarView class >> template [
 
 	^ '
 <div id="container">
-  <div class="smd-appBar">
-    <div class="smd-appBar-leadingAction">
+  <div class="wam-appBar">
+    <div class="wam-appBar-leadingAction">
       <slot name="leadingAction"></slot>
     </div>
-    <div class="smd-appBar-headline">
+    <div class="wam-appBar-headline">
       <slot name="headline"></slot>
     </div>
-    <div class="smd-appBar-trailingActions">
+    <div class="wam-appBar-trailingActions">
       <slot name="trailingActions"></slot>
     </div>
   </div>
@@ -96,7 +96,7 @@ WamAppBarView >> appBarLeadingButtonDisplay: aBoolean [
 { #category : 'rendering' }
 WamAppBarView >> appBarMenuFind [
 
-	^ self shadowedFirstDescendantMatching: '.smd-appBar-leadingAction'
+	^ self shadowedFirstDescendantMatching: '.wam-appBar-leadingAction'
 ]
 
 { #category : 'accessing' }
@@ -168,7 +168,7 @@ WamAppBarView >> renderLeadingAction: leadingAction [
 	self removeChildrenAtSlotNamed: 'leadingAction'.
 	leadingAction ifNil: [ ^ self ].
 
-	actionItem := self iconButtonForAction: leadingAction css: 'smd-toolbar-item'.
+	actionItem := self iconButtonForAction: leadingAction css: 'wam-toolbar-item'.
 	self appendChild: actionItem atSlotNamed: 'leadingAction'.
 
 ]
@@ -182,13 +182,13 @@ WamAppBarView >> renderTrailingActions: buttons [
 
 	buttons size <= overflowThreshold ifTrue: [
 		buttons do: [ :each |
-			actionItem := self iconButtonForAction: each css: 'smd-toolbar-item'.
+			actionItem := self iconButtonForAction: each css: 'wam-toolbar-item'.
 			self appendChild: actionItem atSlotNamed: 'trailingActions' ].
 		^ self ].
 
 	actionList := buttons copyFrom: 1 to: overflowThreshold - 1.
 	actionList do: [ :each |
-		actionItem := self iconButtonForAction: each css: 'smd-toolbar-item'.
+		actionItem := self iconButtonForAction: each css: 'wam-toolbar-item'.
 		self appendChild: actionItem atSlotNamed: 'trailingActions' ].
 
 	overflowList := buttons copyFrom: overflowThreshold to: buttons size.

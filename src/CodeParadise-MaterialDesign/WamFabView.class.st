@@ -12,7 +12,7 @@ WamFabView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-fab-fab {
+.wam-fab-fab {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -31,13 +31,13 @@ WamFabView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-hidden {
+.wam-hidden {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
 }
 
-.smd-fab {
+.wam-fab {
   z-index: 10;
   display: flex;
   flex-flow: row nowrap;
@@ -47,7 +47,7 @@ WamFabView class >> style [
   bottom: 16px;
 }
 
-.smd-fab-offset {
+.wam-fab-offset {
   bottom: 80px; !important
 }
 '
@@ -59,7 +59,7 @@ WamFabView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-fab">
+<div id="container" class="wam-fab">
   <slot name="fab"></slot>
 </div>
 '
@@ -68,7 +68,7 @@ WamFabView class >> template [
 { #category : 'nav' }
 WamFabView >> fabCssClass [
 
-	^ 'smd-fab-fab'
+	^ 'wam-fab-fab'
 ]
 
 { #category : 'rendering' }
@@ -80,7 +80,7 @@ WamFabView >> setExtraOffset: aBoolean [
 	container ifNil: [ ^ self ].
 
 	aBoolean
-		ifTrue: [ container addClass: 'smd-fab-offset' ]
-		ifFalse: [ container removeClass: 'smd-fab-offset' ]
+		ifTrue: [ container addClass: 'wam-fab-offset' ]
+		ifFalse: [ container removeClass: 'wam-fab-offset' ]
 
 ]

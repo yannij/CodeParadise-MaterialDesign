@@ -12,12 +12,12 @@ WamListView class >> style [
 	<webResource: #css>
 
 	^'
-.smd-container {
+.wam-container {
   box-sizing: border-box;
   /*padding: var(--wa-space-xs);*/
 }
 
-.smd-list {
+.wam-list {
   margin-block-end: 0;
   margin-block-start: 0;
   padding-inline-start: 0;
@@ -30,8 +30,8 @@ WamListView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container" class="smd-container">
-  <ol class="wa-stack wa-gap-0 smd-list">
+<div id="container" class="wam-container">
+  <ol class="wa-stack wa-gap-0 wam-list">
     <slot name="list"></slot>
   </ol>
 </div>'

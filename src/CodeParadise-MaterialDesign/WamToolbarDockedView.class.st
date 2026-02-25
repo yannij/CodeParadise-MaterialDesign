@@ -11,7 +11,7 @@ WamToolbarDockedView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
-.smd-toolbar-docked-buttons {
+.wam-toolbar-docked-buttons {
   display: flex;
   flex-flow: row wrap;
   gap: 32px;
@@ -20,7 +20,7 @@ WamToolbarDockedView class >> globalStyle [
   background: var(--wa-color-brand-fill-normal);
 }
 
-.smd-toolbar-docked-fab {
+.wam-toolbar-docked-fab {
   margin-left: auto;
   padding: 8px;
   height: 48px;
@@ -37,7 +37,7 @@ WamToolbarDockedView class >> style [
 	<webResource: #css>
 
 	^ '
-.smd-toolbar {
+.wam-toolbar {
   z-index: 10;
   display: flex;
   flex-flow: row wrap;
@@ -55,7 +55,7 @@ WamToolbarDockedView class >> template [
 
 	^ '
 <div id="container">
-  <div class="smd-toolbar">
+  <div class="wam-toolbar">
     <slot name="toolbar"></slot>
     <slot name="fab"></slot>
   </div>
@@ -66,11 +66,11 @@ WamToolbarDockedView class >> template [
 { #category : 'nav' }
 WamToolbarDockedView >> buttonCssClass [
 
-	^ 'smd-toolbar-docked-buttons'
+	^ 'wam-toolbar-docked-buttons'
 ]
 
 { #category : 'nav' }
 WamToolbarDockedView >> fabCssClass [
 
-	^ 'smd-toolbar-docked-fab'
+	^ 'wam-toolbar-docked-fab'
 ]

@@ -14,7 +14,7 @@ WamWebClientBehavior >> addLoginDialog: label [
 	| dialog fields |
 
 	fields := 'div' asHtmlTag
-		addClass: 'slmd-fields';
+		addClass: 'wam-fields';
 		appendChild: (self fieldAt: #loginUsername label: 'Username' input: '');
 		appendChild: (self fieldAt: #loginPassword label: 'Password' input: '');
 		yourself.
@@ -50,7 +50,7 @@ WamWebClientBehavior >> appTagName [
 	web component.
 	
 	Example:
-	SlmdDemoAccountingAppView tagName ==> 'slmd-demo-accounting-app'
+	WamDemoAccountingAppView tagName ==> 'wam-demo-accounting-app'
 	"
 
 	self subclassResponsibility
@@ -91,7 +91,7 @@ WamWebClientBehavior >> fieldAt: key label: aLabel input: aText [
 
 	^ WaInput new
 		name: key;
-		addClass: 'slmd-input';
+		addClass: 'wam-input';
 		labelText: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
