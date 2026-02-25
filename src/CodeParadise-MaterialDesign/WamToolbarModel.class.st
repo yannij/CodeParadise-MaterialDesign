@@ -26,7 +26,7 @@ WamToolbarModel >> actionItemFabOrNil [
 { #category : 'view' }
 WamToolbarModel >> actionItemsToUse [
 
-	^ self application actionItemsInGroup: self actionGroupToUse
+	^ self application navItemSpecsInGroup: self actionGroupToUse
 ]
 
 { #category : 'accessing' }

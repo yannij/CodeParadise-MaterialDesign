@@ -28,7 +28,7 @@ WamAppBarModel >> actionGroupToUse: anObject [
 WamAppBarModel >> bePrimary [
 
 	self primary: true.
-	self actionGroupToUse: #primary.
+	self actionGroupToUse: #appBar1.
 
 ]
 
@@ -36,7 +36,7 @@ WamAppBarModel >> bePrimary [
 WamAppBarModel >> beSecondary [
 
 	self primary: false.
-	self actionGroupToUse: #secondary.
+	self actionGroupToUse: #appBar2.
 
 ]
 

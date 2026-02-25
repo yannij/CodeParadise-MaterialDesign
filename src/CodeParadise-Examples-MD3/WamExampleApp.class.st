@@ -64,7 +64,7 @@ WamExampleApp >> initialize [
 	layout paneLayout sidesheet: sidesheetModel.
 	appBar1 := self layout appBar1.
 	appBar1 headline: self class appName.
-	appBar1 navActionItemsAddAll: (self actionItemsInGroup: appBar1 actionGroupToUse) 
+	appBar1 navActionItemsAddAll: (self navItemSpecsInGroup: appBar1 actionGroupToUse) 
 
 ]
 
@@ -91,7 +91,7 @@ WamExampleApp >> navItemsToUse [
 WamExampleApp >> navPopup1Items [
 
 	^ OrderedCollection new
-		addAll: (self navItemsSpecs select: [ :each | each groupTag = #popup1 ]);
+		addAll: (self userEventSpecs select: [ :each | each groupTag = #popup1 ]);
 		yourself.
 ]
 
@@ -121,14 +121,14 @@ WamExampleApp >> setUpCustomEvents [
 	super setUpCustomEvents.
 
 	self
-		addActionSubtype: #'circle' groupTag: #primary iconName: 'circle' iconLabel: 'Circle';
-		addActionSubtype: #'bookmark' groupTag: #primary  iconName: 'bookmark' iconLabel: 'Bookmark';
-		addActionSubtype: #'certificate' groupTag: #primary  iconName: 'certificate' iconLabel: 'Certificate' ;
-		addActionSubtype: #'crown' groupTag: #primary  iconName: 'crown' iconLabel: 'Crown' ;
-		addActionSubtype: #'square' groupTag: #float iconName: 'square' iconLabel: 'Square';
-		addActionSubtype: #'pentagon' groupTag: #float iconName: 'pentagon' iconLabel: 'Pentagon';
-		addActionSubtype: #'star' groupTag: #docked iconName: 'star' iconLabel: 'Star';
-		addActionSubtype: #'octagon' groupTag: #docked iconName: 'octagon' iconLabel: 'Octagon';
+		addNavSubtype: #'circle' groupTag: #appBar1 iconName: 'circle' iconLabel: 'Circle' data: 'Circle Page';
+		addNavSubtype: #'bookmark' groupTag: #appBar1 iconName: 'bookmark' iconLabel: 'Bookmark' data: 'Bookmark Page';
+		addNavSubtype: #'certificate' groupTag: #appBar1 iconName: 'certificate' iconLabel: 'Certificate' data: 'Certificate Page';
+		addNavSubtype: #'crown' groupTag: #appBar1 iconName: 'crown' iconLabel: 'Crown' data: 'Crown Page';
+		addNavSubtype: #'square2' groupTag: #float iconName: 'square' iconLabel: 'Square2' data: 'Square2 Page';
+		addNavSubtype: #'pentagon2' groupTag: #float iconName: 'pentagon' iconLabel: 'Pentagon2' data: 'Pentagon2 Page';
+		addNavSubtype: #'star2' groupTag: #docked iconName: 'star' iconLabel: 'Star2' data: 'Star2 Page';
+		addNavSubtype: #'octagon2' groupTag: #docked iconName: 'octagon' iconLabel: 'Octagon2' data: 'Octagon2 Page';
 		yourself.
 
 	self

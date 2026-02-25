@@ -31,12 +31,8 @@ WamPaneContentModel >> content: anObject [
 
 { #category : 'actions' }
 WamPaneContentModel >> processNavActionEvent: aBasicEvent [
-	| newContent |
 
-	newContent := (aBasicEvent eventType = #nav)
-		ifTrue: [ aBasicEvent data ]
-		ifFalse: [ aBasicEvent eventId ].
-	self setContent: newContent.
+	self setContent: aBasicEvent data.
 
 ]
 

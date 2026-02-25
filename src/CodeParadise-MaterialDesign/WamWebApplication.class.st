@@ -17,25 +17,6 @@ WamWebApplication class >> beLoaded [
 	WamLog beLoaded
 ]
 
-{ #category : 'accessing' }
-WamWebApplication >> actionItems [
-
-	^ self userEventSpecs select: [ :each | each isActionType ]
-]
-
-{ #category : 'accessing' }
-WamWebApplication >> actionItemsInGroup: aGroupName [
-
-	^ self actionItems select: [ :each | each groupTag = aGroupName ]
-]
-
-{ #category : 'events' }
-WamWebApplication >> addActionSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
-
-	self userEventSpecs add: (WamNavActionModel newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
-
-]
-
 { #category : 'events' }
 WamWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
@@ -240,13 +221,7 @@ WamWebApplication >> navItemNamed: aNavName [
 { #category : 'accessing' }
 WamWebApplication >> navItemSpecsInGroup: aGroupName [
 
-	^ self navItemsSpecs select: [ :each | each groupTag = aGroupName ]
-]
-
-{ #category : 'accessing' }
-WamWebApplication >> navItemsSpecs [
-
-	^ self userEventSpecs select: [ :each | each isNavType ]
+	^ self userEventSpecs select: [ :each | each groupTag = aGroupName ]
 ]
 
 { #category : 'accessing' }
@@ -274,18 +249,17 @@ WamWebApplication >> postLoad [
 
 	super postLoad.
 
-self systemLog logString: self navItemsToUse printString.
 	self layout navRail navItems: self navItemsToUse; valueChanged.
 
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 
 	toolbar := self layout floatingToolbar.
-	(self actionItemsInGroup: toolbar actionGroupToUse) do: [ :each |
+	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
 		toolbar addItem: each ].
 	toolbar valueChanged.
 
 	toolbar := self layout dockedToolbar.
-	(self actionItemsInGroup: toolbar actionGroupToUse) do: [ :each |
+	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
 		toolbar addItem: each ].
 	toolbar valueChanged.
 

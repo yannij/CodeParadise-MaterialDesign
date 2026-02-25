@@ -3,7 +3,6 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'eventId',
-		'eventType',
 		'groupTag',
 		'iconName',
 		'iconLabel',
@@ -15,23 +14,9 @@ Class {
 }
 
 { #category : 'instance creation' }
-WamNavActionModel class >> newActionSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
-
-	^ self new
-		eventType: #action;
-		eventId: subtype;
-		groupTag: groupTag;
-		iconName: iconName;
-		iconLabel: iconLabel;
-		data: data;
-		yourself
-]
-
-{ #category : 'instance creation' }
 WamNavActionModel class >> newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
-		eventType: #native;
 		eventId: subtype;
 		groupTag: groupTag;
 		iconName: iconName;
@@ -44,7 +29,6 @@ WamNavActionModel class >> newNativeSubtype: subtype groupTag: groupTag iconName
 WamNavActionModel class >> newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
-		eventType: #nav;
 		eventId: subtype;
 		groupTag: groupTag;
 		iconName: iconName;
@@ -57,12 +41,11 @@ WamNavActionModel class >> newNavSubtype: subtype groupTag: groupTag iconName: i
 WamNavActionModel >> asDictionary [
 
 	^ Dictionary new
-		at: #type put: eventType;
 		at: #eventId put: eventId;
-		at: #data put: data;
 		at: #groupTag put: groupTag;
 		at: #iconName put: iconName;
 		at: #iconLabel put: iconLabel;
+		at: #data put: data;
 		yourself
 ]
 
@@ -88,18 +71,6 @@ WamNavActionModel >> eventId [
 WamNavActionModel >> eventId: anObject [
 
 	eventId := anObject
-]
-
-{ #category : 'accessing' }
-WamNavActionModel >> eventType [
-
-	^ eventType
-]
-
-{ #category : 'accessing' }
-WamNavActionModel >> eventType: anObject [
-
-	eventType := anObject
 ]
 
 { #category : 'accessing' }
@@ -136,24 +107,6 @@ WamNavActionModel >> iconName [
 WamNavActionModel >> iconName: anObject [
 
 	iconName := anObject
-]
-
-{ #category : 'testing' }
-WamNavActionModel >> isActionType [
-
-	^ self eventType = #action
-]
-
-{ #category : 'testing' }
-WamNavActionModel >> isNativeType [
-
-	^ self eventType = #native
-]
-
-{ #category : 'testing' }
-WamNavActionModel >> isNavType [
-
-	^ self eventType = #nav
 ]
 
 { #category : 'accessing' }
