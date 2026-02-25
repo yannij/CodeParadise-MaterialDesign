@@ -1,6 +1,6 @@
 Class {
 	#name : 'WamDemoAppClientBehavior',
-	#superclass : 'SlmdWebClientBehavior',
+	#superclass : 'WamWebClientBehavior',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'SimpleDemo'

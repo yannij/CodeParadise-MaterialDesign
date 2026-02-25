@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoAccountingAppView',
-	#superclass : 'SlmdWebView',
+	#superclass : 'WamWebView',
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Accounting'

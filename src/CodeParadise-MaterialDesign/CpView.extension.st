@@ -6,5 +6,5 @@ CpView >> viewProxyLogTrace: aString [
 	Used only by Presenter to request View proxy to emit to client side log"
 
 	false ifTrue: [
-		SlmdLog log: aString level: 3 ]
+		WamLog log: aString level: 3 ]
 ]

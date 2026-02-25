@@ -1,6 +1,6 @@
 Class {
 	#name : 'MD3ExampleAppPresenter',
-	#superclass : 'SlmdWebPresenter',
+	#superclass : 'WamWebPresenter',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'SimpleDemo'

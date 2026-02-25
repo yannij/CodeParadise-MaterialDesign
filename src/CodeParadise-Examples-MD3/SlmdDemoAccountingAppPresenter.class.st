@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoAccountingAppPresenter',
-	#superclass : 'SlmdWebPresenter',
+	#superclass : 'WamWebPresenter',
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Accounting'

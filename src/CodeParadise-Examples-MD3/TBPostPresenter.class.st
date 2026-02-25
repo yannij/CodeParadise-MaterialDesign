@@ -1,6 +1,6 @@
 Class {
 	#name : 'TBPostPresenter',
-	#superclass : 'SlmdObjectPresenter',
+	#superclass : 'WamObjectPresenter',
 	#category : 'CodeParadise-Examples-MD3-TinyBlog',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'TinyBlog'

@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoMovieListingAppPresenter',
-	#superclass : 'SlmdWebPresenter',
+	#superclass : 'WamWebPresenter',
 	#category : 'CodeParadise-Examples-MD3-Movies',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Movies'

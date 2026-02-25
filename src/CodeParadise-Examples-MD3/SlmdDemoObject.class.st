@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoObject',
-	#superclass : 'SlmdObjectModel',
+	#superclass : 'WamObjectModel',
 	#category : 'CodeParadise-Examples-MD3-Common',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Common'

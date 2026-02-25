@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoObjectView',
-	#superclass : 'SlmdObjectView',
+	#superclass : 'WamObjectView',
 	#category : 'CodeParadise-Examples-MD3-Common',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Common'

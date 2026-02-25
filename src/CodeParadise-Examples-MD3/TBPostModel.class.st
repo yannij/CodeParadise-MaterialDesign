@@ -1,6 +1,6 @@
 Class {
 	#name : 'TBPostModel',
-	#superclass : 'SlmdObjectModel',
+	#superclass : 'WamObjectModel',
 	#instVars : [
 		'title',
 		'text',

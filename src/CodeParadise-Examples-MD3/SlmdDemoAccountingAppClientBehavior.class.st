@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoAccountingAppClientBehavior',
-	#superclass : 'SlmdWebClientBehavior',
+	#superclass : 'WamWebClientBehavior',
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'Accounting'

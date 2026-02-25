@@ -1,6 +1,6 @@
 Class {
 	#name : 'WamDemoAppView',
-	#superclass : 'SlmdWebView',
+	#superclass : 'WamWebView',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'SimpleDemo'

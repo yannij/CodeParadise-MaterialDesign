@@ -1,6 +1,6 @@
 Class {
 	#name : 'TBRootApplication',
-	#superclass : 'SlmdWebApplication',
+	#superclass : 'WamWebApplication',
 	#category : 'CodeParadise-Examples-MD3-TinyBlog',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'TinyBlog'
@@ -15,7 +15,7 @@ TBRootApplication class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { WaElement package. SlmdView package }
+	^ super allowedPackages, { WaElement package. WamView package }
 ]
 
 { #category : 'accessing' }
@@ -50,14 +50,14 @@ TBRootApplication >> initialize [
 
 	super initialize.
 
-	pane1Model := SlmdPaneModel on: (listModel := SlmdListModel new).
-	pane2Model := SlmdPaneModel on: (detailModel := SlmdItemWrapperModel new).
+	pane1Model := WamPaneModel on: (listModel := WamListModel new).
+	pane2Model := WamPaneModel on: (detailModel := WamItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 	"layout := SlmdResponsiveLayoutModel new."
-	layout paneLayout: SlmdListDetailLayoutModel new.
+	layout paneLayout: WamListDetailLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout paneLayout sidesheet: SlmdSidesheetModel new.
+	layout paneLayout sidesheet: WamSidesheetModel new.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
 	self setUpAppBar1.
 	self setUpAppBar2.

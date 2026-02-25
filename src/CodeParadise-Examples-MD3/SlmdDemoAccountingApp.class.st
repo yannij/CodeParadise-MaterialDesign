@@ -1,6 +1,6 @@
 Class {
 	#name : 'SlmdDemoAccountingApp',
-	#superclass : 'SlmdWebApplication',
+	#superclass : 'WamWebApplication',
 	#instVars : [
 		'repository',
 		'modelClass',
@@ -28,7 +28,7 @@ SlmdDemoAccountingApp class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { WaElement package. SlmdView package }
+	^ super allowedPackages, { WaElement package. WamView package }
 ]
 
 { #category : 'demo data' }
@@ -231,10 +231,10 @@ SlmdDemoAccountingApp >> initialize [
 	self repositorySetup.
 
 	modelClass := SlmdDemoAccountingCompany.
-	pane1Content := SlmdListModel new.
+	pane1Content := WamListModel new.
 	pane1Content listSet: self allModels.
-	pane1Model := SlmdPaneModel on: pane1Content.
-	pane2Model := SlmdPaneModel new.
+	pane1Model := WamPaneModel on: pane1Content.
+	pane2Model := WamPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 	"layout := SlmdResponsiveLayoutModel new."
 	layout paneLayout pane1: pane1Model.

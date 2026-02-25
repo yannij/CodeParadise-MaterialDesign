@@ -4,7 +4,7 @@ I only live in the ServerEnvironment.
 "
 Class {
 	#name : 'WamDemoApp',
-	#superclass : 'SlmdWebApplication',
+	#superclass : 'WamWebApplication',
 	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
 	#package : 'CodeParadise-Examples-MD3',
 	#tag : 'SimpleDemo'
@@ -19,7 +19,7 @@ WamDemoApp class >> allowedPackages [
 
 	See comment in superclass."
 
-	^ super allowedPackages, { WaElement package. SlmdView package }
+	^ super allowedPackages, { WaElement package. WamView package }
 ]
 
 { #category : 'accessing' }
@@ -54,10 +54,10 @@ WamDemoApp >> initialize [
 
 	super initialize.
 
-	pane1Model := SlmdPaneModel on: (SlmdPaneContentModel on: 'Initial Pane1...').
-	pane2Model := SlmdPaneModel on: (SlmdPaneContentModel on: (String loremIpsum: 2048)).
+	pane1Model := WamPaneModel on: (WamPaneContentModel on: 'Initial Pane1...').
+	pane2Model := WamPaneModel on: (WamPaneContentModel on: (String loremIpsum: 2048)).
 	pane2Model appBarModel beSecondary.
-	layout := SlmdResponsiveLayoutModel new.
+	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	appBar1 := self layout appBar1.
@@ -97,8 +97,8 @@ WamDemoApp >> navPopup1Items [
 WamDemoApp >> navPopup2Items [
 
 	^ OrderedCollection new
-		add: (SlmdNavActionModel newNavSubtype: #'spiral' groupTag: #popup2 iconName: 'spiral' iconLabel: 'Spiral popup' data: 'spiral popup');
-		add: (SlmdNavActionModel newNavSubtype: #'burst' groupTag: #popup2 iconName: 'burst' iconLabel: 'Burst popup' data: 'burst popup');
+		add: (WamNavActionModel newNavSubtype: #'spiral' groupTag: #popup2 iconName: 'spiral' iconLabel: 'Spiral popup' data: 'spiral popup');
+		add: (WamNavActionModel newNavSubtype: #'burst' groupTag: #popup2 iconName: 'burst' iconLabel: 'Burst popup' data: 'burst popup');
 		yourself.
 
 ]
@@ -145,7 +145,7 @@ WamDemoApp >> setUpCustomEvents [
 { #category : 'actions' }
 WamDemoApp >> setUpPopup1 [
 
-	self layout popupsAt: #popup1 put: (SlmdNavPopup new popupItems: self navPopup1Items; yourself).
+	self layout popupsAt: #popup1 put: (WamNavPopup new popupItems: self navPopup1Items; yourself).
 	self layout navRail valueChanged.
 
 ]
@@ -154,9 +154,9 @@ WamDemoApp >> setUpPopup1 [
 WamDemoApp >> setUpPopup2 [
 
 	self layout navRail
-		navActionAdd: (SlmdNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'shapes' iconLabel: 'Popup-2' data: #menu).
+		navActionAdd: (WamNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'shapes' iconLabel: 'Popup-2' data: #menu).
 
-	self layout popupsAt: #popup2 put: (SlmdNavPopup new popupItems: self navPopup2Items; yourself).
+	self layout popupsAt: #popup2 put: (WamNavPopup new popupItems: self navPopup2Items; yourself).
 	self layout navRail valueChanged.
 
 ]

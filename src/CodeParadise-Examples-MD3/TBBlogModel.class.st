@@ -1,6 +1,6 @@
 Class {
 	#name : 'TBBlogModel',
-	#superclass : 'SlmdObjectModel',
+	#superclass : 'WamObjectModel',
 	#instVars : [
 		'posts'
 	],
