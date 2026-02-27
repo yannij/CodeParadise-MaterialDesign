@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavActionSubmenuPresenter',
-	#superclass : 'WamNavActionPresenter',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavActionAbstractPresenter',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
 
 { #category : 'rendering' }

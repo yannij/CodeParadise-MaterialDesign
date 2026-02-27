@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavBarPresenter',
-	#superclass : 'WamNavAbstractPresenter',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementPresenter',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'events' }
@@ -14,12 +14,34 @@ WamNavBarPresenter >> handleNavEvent: aNavEvent [
 ]
 
 { #category : 'rendering' }
-WamNavBarPresenter >> renderView [
-	| list |
+WamNavBarPresenter >> navLists [
+	| items navList overflowList |
 
-	list := self model navItems collect: [ :each | each asDictionary ].
-	list isEmpty ifTrue: [ ^ self ].
-	self view renderNavContent: list asArray.
+	items := self model navItems.
+
+	items size <= 4 ifTrue: [
+		^ { items. {} } ].
+
+	navList := items copyFrom: 1 to: 3.
+	overflowList := items copyFrom: 4 to: items size.
+	^ { navList. overflowList }
+]
+
+{ #category : 'rendering' }
+WamNavBarPresenter >> renderView [
+	| lists |
+
+	lists := self navLists.
+
+	self
+		renderAllChildViewsForModels: lists first
+		usingPresenter: WamNavActionNavBarPresenter
+		atSlotNamed: nil.
+
+	self
+		renderAllChildViewsForModels: lists second
+		usingPresenter: WamNavActionNavBarPresenter
+		atSlotNamed: #overflow
 ]
 
 { #category : 'view' }

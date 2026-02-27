@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavActionDropdownView',
-	#superclass : 'WamNavActionView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavActionAbstractView',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
 
 { #category : 'web resources' }
@@ -77,7 +77,7 @@ WamNavActionDropdownView class >> template [
 
 	^ '
 <wa-popup placement="right" hover-bridge shift>
-  <slot name="content"></slot>
+  <slot></slot>
 </wa-popup>'
 ]
 

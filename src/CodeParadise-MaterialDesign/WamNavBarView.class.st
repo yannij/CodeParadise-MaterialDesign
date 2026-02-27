@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavBarView',
-	#superclass : 'WamNavAbstractView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementView',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'web resources' }
@@ -37,11 +37,6 @@ WamNavBarView class >> globalStyle [
   padding-left: 4px;
   padding-right: 16px;
 }
-
-.wam-navbar-dropdown {
-  height: 40px;
-  font-size: 24px;
-}
 '
 ]
 
@@ -59,6 +54,11 @@ WamNavBarView class >> style [
   padding: 12px 4px;
   background: var(--wa-color-brand-fill-normal);
 }
+
+.wam-navbar-dropdown {
+  height: 40px;
+  font-size: 24px;
+}
 '
 ]
 
@@ -69,9 +69,21 @@ WamNavBarView class >> template [
 
 	^ '
 <div id="container" class="wam-navBar">
-  <slot name="content"></slot>
+  <slot></slot>
+  <wa-dropdown>
+    <div slot="trigger" class="wam-navbar-dropdown">
+      <wa-icon name="ellipsis-vertical"></wa-icon>
+    </div>
+    <slot name="overflow"></slot>
+  </wa-dropdown>
 </div>
 '
+]
+
+{ #category : 'rendering' }
+WamNavBarView >> dropdownElement [
+
+	^ self shadowRoot firstDescendantMatching: WaDropdown asCssSelector
 ]
 
 { #category : 'rendering' }
@@ -100,18 +112,18 @@ WamNavBarView >> navbarBuildItem: aNavAction [
 WamNavBarView >> renderNavContent: buttons [
 	| navList overflowList |
 
-	self removeChildrenAtSlotNamed: #content.
+	self removeChildrenAtSlotNamed: nil.
 
 	buttons size <= 4 ifTrue: [
 		buttons do: [ :each |
-			self appendChild: (self navbarBuildItem: each) atSlotNamed: #content ].
+			self appendChild: (self navbarBuildItem: each) atSlotNamed: nil ].
 		^ self ].
 
 	navList := buttons copyFrom: 1 to: 3.
 	navList do: [ :each  |
-		self appendChild: (self navbarBuildItem: each) atSlotNamed: #content ].
+		self appendChild: (self navbarBuildItem: each) atSlotNamed: nil ].
 
 	overflowList := buttons copyFrom: 4 to: buttons size.
-	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: #content.
+	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: nil.
 
 ]

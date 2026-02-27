@@ -1,32 +1,17 @@
 Class {
 	#name : 'WamNavRailModalPresenter',
-	#superclass : 'WamNavAbstractPresenter',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementPresenter',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
-
-{ #category : 'events' }
-WamNavRailModalPresenter >> handleNavEvent: aNavEvent [
-
-	self application navToNavAction: aNavEvent.
-
-]
 
 { #category : 'rendering' }
 WamNavRailModalPresenter >> renderView [
-	| list |
 
-	list := self model navItems collect: [ :each | each asDictionary ].
-	list isEmpty ifTrue: [ ^ self ].
-	self view renderNavContent: list asArray.
-]
-
-{ #category : 'view' }
-WamNavRailModalPresenter >> viewCreated [
-
-	super viewCreated.
-
-	self subscribeToNavActionEvent
-
+	self view drawerSetup.
+	self
+		renderAllChildViewsForModels: self model navItems
+		usingPresenter: WamNavActionExpandedPresenter
+		atSlotNamed: nil
 ]

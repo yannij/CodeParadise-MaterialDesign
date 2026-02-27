@@ -1,5 +1,5 @@
 Class {
-	#name : 'WamNavActionExpandedView',
+	#name : 'WamNavActionNarrowView',
 	#superclass : 'WamNavActionAbstractView',
 	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-WamNavActionExpandedView class >> template [
+WamNavActionNarrowView class >> template [
 
 	<webResource: #html>
 
@@ -15,10 +15,10 @@ WamNavActionExpandedView class >> template [
 ]
 
 { #category : 'as yet unclassified' }
-WamNavActionExpandedView >> renderNavExpanded: anItem [
+WamNavActionNarrowView >> renderNavNarrow: anItem [
 	| element |
 
-	element := self divExpanded: anItem.
+	element := self divNarrow: anItem.
 	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 

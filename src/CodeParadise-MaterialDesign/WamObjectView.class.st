@@ -122,12 +122,10 @@ WamObjectView class >> globalStyleTextarea [
 
 	^ '
 .wam-textarea::part(base) {
-  position: relative;
   width: 100%;
   padding: 0;
   background: var(--wa-color-brand-fill-normal);
-  height: 100%;
-  padding-top: 16px;
+  margin-top: 16px;
 }
 
 .wam-textarea::part(label) {

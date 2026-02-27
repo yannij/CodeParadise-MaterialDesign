@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavActionDropdownPresenter',
-	#superclass : 'WamNavActionPresenter',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavActionAbstractPresenter',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
 
 { #category : 'rendering' }
@@ -17,7 +17,7 @@ WamNavActionDropdownPresenter >> renderPopup [
 	self
 		renderAllChildViewsForModels: popup popupItems
 		usingPresenter: WamNavActionSubmenuPresenter
-		atSlotNamed: #content
+		atSlotNamed: nil
 
 ]
 

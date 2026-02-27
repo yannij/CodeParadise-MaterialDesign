@@ -20,14 +20,14 @@ WamWebApplication class >> beLoaded [
 { #category : 'events' }
 WamWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
-	self nativeEventSpecs at: subtype put: (WamNavActionModel newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
+	self nativeEventSpecs at: subtype put: (WamNavActionModel newNavAction: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: nil).
 
 ]
 
 { #category : 'events' }
-WamWebApplication >> addNavSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data [
+WamWebApplication >> addNavActionAt: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data [
 
-	self userEventSpecs add: (WamNavActionModel newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
+	self userEventSpecs add: (WamNavActionModel newNavAction: subtype groupTag: groupTag iconName: iconName iconLabel: itemLabel data: data)
 ]
 
 { #category : 'model' }

@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavRailModalView',
-	#superclass : 'WamNavAbstractView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementView',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'class initialization' }
@@ -67,17 +67,10 @@ WamNavRailModalView >> drawer [
 ]
 
 { #category : 'rendering' }
-WamNavRailModalView >> renderNavContent: buttons [
-	| nav |
-
-	nav := #nav asHtmlTag addClass: 'wam-navrailx'; yourself.
-	buttons do: [ :each | | element |
-		element := self divExpanded: each.
-		element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self.
-		nav appendChild: element ].
+WamNavRailModalView >> drawerSetup [
 
 	self drawer
-		makeEmpty;
+		"makeEmpty;"
 		addClass: 'navrailx';
 		placementBeStart;
 		withoutHeaderBeOn;
@@ -86,6 +79,6 @@ WamNavRailModalView >> renderNavContent: buttons [
 		customPropertyAt: 'body-spacing' put: '0';
 		customPropertyAt: 'header-spacing' put: '0';
 		customPropertyAt: 'footer-spacing' put: '0';
-		appendChild: nav
+		yourself
 
 ]

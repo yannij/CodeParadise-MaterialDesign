@@ -8,28 +8,16 @@ Class {
 		'iconLabel',
 		'data'
 	],
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
 
 { #category : 'instance creation' }
-WamNavActionModel class >> newNativeSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
+WamNavActionModel class >> newNavAction: id groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
 
 	^ self new
-		eventId: subtype;
-		groupTag: groupTag;
-		iconName: iconName;
-		iconLabel: iconLabel;
-		data: data;
-		yourself
-]
-
-{ #category : 'instance creation' }
-WamNavActionModel class >> newNavSubtype: subtype groupTag: groupTag iconName: iconName iconLabel: iconLabel data: data [
-
-	^ self new
-		eventId: subtype;
+		eventId: id;
 		groupTag: groupTag;
 		iconName: iconName;
 		iconLabel: iconLabel;

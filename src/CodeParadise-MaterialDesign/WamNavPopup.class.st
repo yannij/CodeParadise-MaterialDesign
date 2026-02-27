@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'popupItems'
 	],
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'initialization' }

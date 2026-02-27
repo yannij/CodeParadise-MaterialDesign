@@ -1,13 +1,13 @@
 Class {
-	#name : 'WamNavAbstractView',
+	#name : 'WamNavActionAbstractView',
 	#superclass : 'WamLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
 
 { #category : 'web resources' }
-WamNavAbstractView class >> globalStyle [
+WamNavActionAbstractView class >> globalStyle [
 	<webResource: #css>
 
 	^ '
@@ -65,7 +65,7 @@ WamNavAbstractView class >> globalStyle [
 ]
 
 { #category : 'rendering' }
-WamNavAbstractView >> divExpanded: aNavAction [
+WamNavActionAbstractView >> divExpanded: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrailx-item'; addClass: 'wam-nav-font';
@@ -84,7 +84,7 @@ WamNavAbstractView >> divExpanded: aNavAction [
 ]
 
 { #category : 'rendering' }
-WamNavAbstractView >> divNarrow: aNavAction [
+WamNavActionAbstractView >> divNarrow: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrail-item';
@@ -104,7 +104,7 @@ WamNavAbstractView >> divNarrow: aNavAction [
 ]
 
 { #category : 'actions' }
-WamNavAbstractView >> triggerNavEvent: aNavAction [
+WamNavActionAbstractView >> triggerNavEvent: aNavAction [
 
 	super triggerNavEvent: aNavAction.
 

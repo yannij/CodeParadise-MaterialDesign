@@ -1,5 +1,5 @@
 Class {
-	#name : 'WamNavActionExpandedPresenter',
+	#name : 'WamNavActionNavBarPresenter',
 	#superclass : 'WamNavActionAbstractPresenter',
 	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,8 +7,8 @@ Class {
 }
 
 { #category : 'rendering' }
-WamNavActionExpandedPresenter >> renderView [
+WamNavActionNavBarPresenter >> renderView [
 
-	self view renderNavExpanded: self model asDictionary
+	self view renderNavBarItem: self model asDictionary
 
 ]

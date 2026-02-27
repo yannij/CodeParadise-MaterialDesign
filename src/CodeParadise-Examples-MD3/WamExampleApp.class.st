@@ -99,8 +99,8 @@ WamExampleApp >> navPopup1Items [
 WamExampleApp >> navPopup2Items [
 
 	^ OrderedCollection new
-		add: (WamNavActionModel newNavSubtype: #'spiral' groupTag: #popup2 iconName: 'spiral' iconLabel: 'Spiral popup' data: 'spiral popup');
-		add: (WamNavActionModel newNavSubtype: #'burst' groupTag: #popup2 iconName: 'burst' iconLabel: 'Burst popup' data: 'burst popup');
+		add: (WamNavActionModel newNavAction: #'spiral' groupTag: #popup2 iconName: 'spiral' iconLabel: 'Spiral popup' data: 'spiral popup');
+		add: (WamNavActionModel newNavAction: #'burst' groupTag: #popup2 iconName: 'burst' iconLabel: 'Burst popup' data: 'burst popup');
 		yourself.
 
 ]
@@ -121,25 +121,22 @@ WamExampleApp >> setUpCustomEvents [
 	super setUpCustomEvents.
 
 	self
-		addNavSubtype: #'circle' groupTag: #appBar1 iconName: 'circle' iconLabel: 'Circle' data: 'Circle Page';
-		addNavSubtype: #'bookmark' groupTag: #appBar1 iconName: 'bookmark' iconLabel: 'Bookmark' data: 'Bookmark Page';
-		addNavSubtype: #'certificate' groupTag: #appBar1 iconName: 'certificate' iconLabel: 'Certificate' data: 'Certificate Page';
-		addNavSubtype: #'crown' groupTag: #appBar1 iconName: 'crown' iconLabel: 'Crown' data: 'Crown Page';
-		addNavSubtype: #'square2' groupTag: #float iconName: 'square' iconLabel: 'Square2' data: 'Square2 Page';
-		addNavSubtype: #'pentagon2' groupTag: #float iconName: 'pentagon' iconLabel: 'Pentagon2' data: 'Pentagon2 Page';
-		addNavSubtype: #'star2' groupTag: #docked iconName: 'star' iconLabel: 'Star2' data: 'Star2 Page';
-		addNavSubtype: #'octagon2' groupTag: #docked iconName: 'octagon' iconLabel: 'Octagon2' data: 'Octagon2 Page';
-		yourself.
-
-	self
-		addNavSubtype: #'clover' groupTag: #primary iconName: 'clover' iconLabel: 'Clover' data: 'Clover Page';
-		addNavSubtype: #'diamond' groupTag: #primary iconName: 'diamond' iconLabel: 'Diamond' data: 'Diamond Page';
-		addNavSubtype: #'heart' groupTag: #primary iconName: 'heart' iconLabel: 'Heart' data: 'Heart Page';
-		addNavSubtype: #'star' groupTag: #primary iconName: 'star' iconLabel: 'Star' data: 'Star Page';
-		addNavSubtype: #'popup1' groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-1' data: #menu;
-		addNavSubtype: #'square' groupTag: #popup1 iconName: 'square' iconLabel: 'Square popup' data: 'Square popup';
-		addNavSubtype: #'pentagon' groupTag: #popup1 iconName: 'pentagon' iconLabel: 'Pentagon popup' data: 'Pentagon popup';
-		addNavSubtype: #'octagon' groupTag: #popup1 iconName: 'octagon' iconLabel: 'Octagon popup' data: 'Octagon popup';
+		addNavActionAt: #'clover' groupTag: #primary iconName: 'clover' iconLabel: 'Clover' data: 'Clover Page';
+		addNavActionAt: #'diamond' groupTag: #primary iconName: 'diamond' iconLabel: 'Diamond' data: 'Diamond Page';
+		addNavActionAt: #'heart' groupTag: #primary iconName: 'heart' iconLabel: 'Heart' data: 'Heart Page';
+		addNavActionAt: #'star' groupTag: #primary iconName: 'star' iconLabel: 'Star' data: 'Star Page';
+		addNavActionAt: #'popup1' groupTag: #primary iconName: 'hexagon' iconLabel: 'Popup-1' data: #menu;
+		addNavActionAt: #'square' groupTag: #popup1 iconName: 'square' iconLabel: 'Square popup' data: 'Square popup';
+		addNavActionAt: #'pentagon' groupTag: #popup1 iconName: 'pentagon' iconLabel: 'Pentagon popup' data: 'Pentagon popup';
+		addNavActionAt: #'octagon' groupTag: #popup1 iconName: 'octagon' iconLabel: 'Octagon popup' data: 'Octagon popup';
+		addNavActionAt: #'circle' groupTag: #appBar1 iconName: 'circle' iconLabel: 'Circle' data: 'Circle Page';
+		addNavActionAt: #'bookmark' groupTag: #appBar1 iconName: 'bookmark' iconLabel: 'Bookmark' data: 'Bookmark Page';
+		addNavActionAt: #'certificate' groupTag: #appBar1 iconName: 'certificate' iconLabel: 'Certificate' data: 'Certificate Page';
+		addNavActionAt: #'crown' groupTag: #appBar1 iconName: 'crown' iconLabel: 'Crown' data: 'Crown Page';
+		addNavActionAt: #'square2' groupTag: #float iconName: 'square' iconLabel: 'Square2' data: 'Square2 Page';
+		addNavActionAt: #'pentagon2' groupTag: #float iconName: 'pentagon' iconLabel: 'Pentagon2' data: 'Pentagon2 Page';
+		addNavActionAt: #'star2' groupTag: #docked iconName: 'star' iconLabel: 'Star2' data: 'Star2 Page';
+		addNavActionAt: #'octagon2' groupTag: #docked iconName: 'octagon' iconLabel: 'Octagon2' data: 'Octagon2 Page';
 		yourself.
 
 ]
@@ -156,7 +153,7 @@ WamExampleApp >> setUpPopup1 [
 WamExampleApp >> setUpPopup2 [
 
 	self layout navRail
-		navActionAdd: (WamNavActionModel newNavSubtype: #popup2 groupTag: #primary iconName: 'shapes' iconLabel: 'Popup-2' data: #menu).
+		navActionAdd: (WamNavActionModel newNavAction: #popup2 groupTag: #primary iconName: 'shapes' iconLabel: 'Popup-2' data: #menu).
 
 	self layout popupsAt: #popup2 put: (WamNavPopup new popupItems: self navPopup2Items; yourself).
 	self layout navRail valueChanged.

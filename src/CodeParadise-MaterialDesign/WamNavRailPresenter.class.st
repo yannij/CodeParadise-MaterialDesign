@@ -1,15 +1,21 @@
 Class {
 	#name : 'WamNavRailPresenter',
-	#superclass : 'WamNavAbstractPresenter',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementPresenter',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'rendering' }
 WamNavRailPresenter >> renderView [
+	| presenter |
+
+	presenter := self application layout layoutSettings navRailExpanded
+		ifTrue: [ WamNavActionExpandedPresenter ]
+		ifFalse: [ WamNavActionNarrowPresenter ].
 
 	self
 		renderAllChildViewsForModels: self model navItems
-		atSlotNamed: #content
+		usingPresenter: presenter
+		atSlotNamed: nil
 ]

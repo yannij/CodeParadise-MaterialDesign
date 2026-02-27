@@ -1,10 +1,18 @@
 Class {
 	#name : 'WamNavActionSubmenuView',
-	#superclass : 'WamNavActionView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavActionAbstractView',
+	#category : 'CodeParadise-MaterialDesign-NavAction',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavAction'
 }
+
+{ #category : 'web resources' }
+WamNavActionSubmenuView class >> template [
+
+	<webResource: #html>
+
+	^ '<slot></slot>'
+]
 
 { #category : 'actions' }
 WamNavActionSubmenuView >> closeSubmenu [
@@ -48,7 +56,7 @@ WamNavActionSubmenuView >> renderNavSubmenu: anItem [
 
 	element := self divSubmenu: anItem.
 	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
-	self replaceAllChildrenWith: element atSlotNamed: #content.
+	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]
 

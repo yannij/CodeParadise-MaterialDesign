@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamNavRailView',
-	#superclass : 'WamNavAbstractView',
-	#category : 'CodeParadise-MaterialDesign-Nav',
+	#superclass : 'WamNavElementView',
+	#category : 'CodeParadise-MaterialDesign-NavElement',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Nav'
+	#tag : 'NavElement'
 }
 
 { #category : 'web resources' }
@@ -29,7 +29,7 @@ WamNavRailView class >> template [
 	<webResource: #html>
 
 	^ '<nav id="container" class="navrail wa-cloak">
-  <slot name="content"></slot>
+  <slot></slot>
 </nav>
 '
 ]
