@@ -112,7 +112,8 @@ WamPaneLayoutView >> pane1WidthSet: anInteger [
 	split := self findByIdInShadowDom: 'wamBodySplitPanel'.
 	split ifNotNil: [
 		split
-			min: '300px';
+			min: '200px';
+			max: 'calc(100% - 200px)';
 			primaryBeStart;
 			positionInPixels: anInteger printString;
 			dividerWidth: '16px';
