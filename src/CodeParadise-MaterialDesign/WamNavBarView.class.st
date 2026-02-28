@@ -81,49 +81,13 @@ WamNavBarView class >> template [
 ]
 
 { #category : 'rendering' }
+WamNavBarView >> dropdownDisplay: aBoolean [
+
+	self element: self dropdownElement display: aBoolean
+]
+
+{ #category : 'rendering' }
 WamNavBarView >> dropdownElement [
 
 	^ self shadowRoot firstDescendantMatching: WaDropdown asCssSelector
-]
-
-{ #category : 'rendering' }
-WamNavBarView >> navbarBuildItem: aNavAction [
-	| iconName |
-
-	iconName := aNavAction at: #iconName.
-
-	^ #div asHtmlTag
-		addClass: 'wam-navbar-item';
-		addClass: 'wam-navbar-font';
-		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
-		appendChild: (#div asHtmlTag
-			addClass: 'wam-navbar-icon';
-			appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
-			yourself);
-		appendChild: (#div asHtmlTag
-			addClass: 'wam-navbar-labelText';
-			addClass: 'wa-text-truncate';
-			textContent: (aNavAction at: #iconLabel);
-			yourself);
-		yourself
-]
-
-{ #category : 'rendering' }
-WamNavBarView >> renderNavContent: buttons [
-	| navList overflowList |
-
-	self removeChildrenAtSlotNamed: nil.
-
-	buttons size <= 4 ifTrue: [
-		buttons do: [ :each |
-			self appendChild: (self navbarBuildItem: each) atSlotNamed: nil ].
-		^ self ].
-
-	navList := buttons copyFrom: 1 to: 3.
-	navList do: [ :each  |
-		self appendChild: (self navbarBuildItem: each) atSlotNamed: nil ].
-
-	overflowList := buttons copyFrom: 4 to: buttons size.
-	self appendChild: (self dropdownNavbar: overflowList) atSlotNamed: nil.
-
 ]

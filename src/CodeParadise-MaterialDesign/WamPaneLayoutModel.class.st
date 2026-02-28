@@ -18,6 +18,7 @@ WamPaneLayoutModel >> initialize [
 	super initialize.
 
 	pane1Width := 500.
+	sidesheet := WamSidesheetModel new.
 
 ]
 

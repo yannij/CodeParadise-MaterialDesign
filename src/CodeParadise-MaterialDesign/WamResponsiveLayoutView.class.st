@@ -584,15 +584,14 @@ WamResponsiveLayoutView >> getPaneLayoutComponent: aSlotName [
 WamResponsiveLayoutView >> handleResizeEvent: anEvent [
 	| newWidth |
 
-	self systemLog logString: 'resize'.
-
 	debounceTransition := nil.
 
 	anEvent detail valuesDo: [ :eachDetail |
 		eachDetail do: [ :eachEntry |
 			| rect |
 			rect := eachEntry apply: 'contentRect'.
-			newWidth := rect apply: 'width'
+			newWidth := rect apply: 'width'.
+			self systemLog logString: 'resize width=', newWidth printString.
 			"Don't bother with height. It seems to report 0. Probably no browser support"
 			"height := rect apply: 'height'." ] ].
 
@@ -600,15 +599,14 @@ WamResponsiveLayoutView >> handleResizeEvent: anEvent [
 		^ self ].
 
 	layoutWidthCached := newWidth.
+
+	self useAutoLayout ifNotNil: [ :value |
+		(value not and: [ layoutWidthCached > 0 ]) ifFalse: [
+			^ self layoutAdaptToWidth ] ].
+
 	self bodySplitPanelAdapt.
 	self bodyWidthAdapt.
 
-	self useAutoLayout
-		ifNil: [ ^ self ]
-		ifNotNil: [ :value |
-			(value not and: [ layoutWidthCached > 0 ]) ifTrue: [ ^ self ] ].
-
-	self layoutAdaptToWidth
 ]
 
 { #category : 'actions' }

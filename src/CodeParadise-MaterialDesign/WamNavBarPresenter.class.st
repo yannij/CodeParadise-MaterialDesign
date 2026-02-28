@@ -38,6 +38,7 @@ WamNavBarPresenter >> renderView [
 		usingPresenter: WamNavActionNavBarPresenter
 		atSlotNamed: nil.
 
+	self view dropdownDisplay: lists second notEmpty.
 	self
 		renderAllChildViewsForModels: lists second
 		usingPresenter: WamNavActionNavBarPresenter

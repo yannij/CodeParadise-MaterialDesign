@@ -11,7 +11,7 @@ WamSidesheetPresenter >> renderView [
 
 	self model paneContent
 		ifNil: [
-			self view removeChildrenAtSlotNamed: #paneContent.
-			self removeAllChildPresentersAtSlotNamed: #paneContent ]
-		ifNotNil: [ :value | self renderChildViewForModel: value atSlotNamed: #paneContent ].
+			self renderAllChildViewsForModels: {} atSlotNamed: #paneContent ]
+		ifNotNil: [ :value | 
+			self renderChildViewForModel: value atSlotNamed: #paneContent ].
 ]

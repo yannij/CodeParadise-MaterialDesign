@@ -9,11 +9,8 @@ Class {
 { #category : 'initialization' }
 WamToolbarPresenter >> clearAllSlots [
 
-	self removeAllChildPresentersAtSlotNamed: #toolbar.
-	self view removeChildrenAtSlotNamed: #toolbar.
-
-	self removeAllChildPresentersAtSlotNamed: #fab.
-	self view removeChildrenAtSlotNamed: #fab.
+	self renderAllChildViewsForModels: {} atSlotNamed: #toolbar.
+	self renderAllChildViewsForModels: {} atSlotNamed: #fab.
 
 ]
 

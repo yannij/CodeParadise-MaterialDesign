@@ -9,18 +9,16 @@ Class {
 { #category : 'rendering' }
 WamPanePresenter >> renderView [
 
-	self model appBarModel ifNotNil: [ :value |
-		self model appBarDisplayed
-			ifTrue: [
-				self renderChildViewForModel: value atSlotNamed: #appBar ]
-			ifFalse: [
-				self view removeChildrenAtSlotNamed: #appBar.
-				self removeAllChildPresentersAtSlotNamed: #appBar ] ].
+	self model appBarModel
+		ifNil: [
+			self renderAllChildViewsForModels: {} atSlotNamed: #appBar ]
+		ifNotNil: [ :value |
+			self renderChildViewForModel: value atSlotNamed: #appBar ].
 
 	self model paneContent
 		ifNil: [
-			self view removeChildrenAtSlotNamed: #paneContent.
-			self removeAllChildPresentersAtSlotNamed: #paneContent ]
-		ifNotNil: [ :value | self renderChildViewForModel: value atSlotNamed: #paneContent ].
+			self renderAllChildViewsForModels: {} atSlotNamed: #paneContent ]
+		ifNotNil: [ :value |
+			self renderChildViewForModel: value atSlotNamed: #paneContent ].
 
 ]
