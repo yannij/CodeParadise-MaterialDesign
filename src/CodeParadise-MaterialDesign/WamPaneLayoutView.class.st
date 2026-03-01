@@ -63,7 +63,7 @@ WamPaneLayoutView class >> template [
 
 	^ '
 <div id="container">
-  <div id="wamSinglePaneLayout">
+  <div id="wamSinglePaneLayout" class="wam-one-pane">
     <div id="wamSinglePaneLayoutP1" class="wam-pane">
       <slot name="singlePaneLayoutP1"></slot>
     </div>
@@ -71,7 +71,7 @@ WamPaneLayoutView class >> template [
       <slot name="singlePaneLayoutP2"></slot>
     </div>
   </div>
-  <div id="wamTwoPaneLayout">
+  <div id="wamTwoPaneLayout" class="wam-two-pane">
     <wa-split-panel id="wamBodySplitPanel" class="wam-body-split-panel">
       <wa-icon slot="divider" name="grip-vertical"></wa-icon>
       <div slot="start">
@@ -112,8 +112,8 @@ WamPaneLayoutView >> pane1WidthSet: anInteger [
 	split := self findByIdInShadowDom: 'wamBodySplitPanel'.
 	split ifNotNil: [
 		split
-			min: '200px';
-			max: 'calc(100% - 200px)';
+			min: 'min(344px,50vw - 16px)';
+			max: 'calc(100% - (max(344px,50vw - 16px)))';
 			primaryBeStart;
 			positionInPixels: anInteger printString;
 			dividerWidth: '16px';

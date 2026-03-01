@@ -31,11 +31,18 @@ WamAppBarView class >> style [
 .wam-appBar-headline {
   overflow: clip;
   white-space: nowrap;
-  max-width: 66%;
   padding-left: 8px;
   height: 48px;
   line-height: 64px;
   font-size: 24px;
+}
+
+.wam-one-pane .headline-width {
+  max-width: 66%;
+}
+
+.wam-two-pane .headline-width {
+  max-width: calc(50vw - 180px);
 }
 
 .wam-appBar-trailingActions {
@@ -54,17 +61,15 @@ WamAppBarView class >> template [
 	<webResource: #html>
 
 	^ '
-<div id="container">
-  <div class="wam-appBar">
-    <div class="wam-appBar-leadingAction">
-      <slot name="leadingAction"></slot>
-    </div>
-    <div class="wam-appBar-headline">
-      <slot name="headline"></slot>
-    </div>
-    <div class="wam-appBar-trailingActions">
-      <slot name="trailingActions"></slot>
-    </div>
+<div class="wam-appBar">
+  <div class="wam-appBar-leadingAction">
+    <slot name="leadingAction"></slot>
+  </div>
+  <div class="wam-appBar-headline headline-width">
+    <slot name="headline"></slot>
+  </div>
+  <div class="wam-appBar-trailingActions">
+    <slot name="trailingActions"></slot>
   </div>
 </div>
 '
@@ -78,6 +83,12 @@ WamAppBarView >> appBarDisplay: aBoolean [
 	aBoolean
 		ifTrue: [ self removeStyleAt: 'display' ]
 		ifFalse: [ self styleAt: 'display' put: 'none' ]
+]
+
+{ #category : 'rendering' }
+WamAppBarView >> appBarFind [
+
+	^ self shadowedFirstDescendantMatching: '.wam-appBar'
 ]
 
 { #category : 'rendering' }
@@ -97,6 +108,16 @@ WamAppBarView >> appBarLeadingButtonDisplay: aBoolean [
 WamAppBarView >> appBarMenuFind [
 
 	^ self shadowedFirstDescendantMatching: '.wam-appBar-leadingAction'
+]
+
+{ #category : 'rendering' }
+WamAppBarView >> appBarSetWidth [
+
+	self layoutViewLazy ifNotNil: [ :value |
+		value useTwoPaneBody
+			ifTrue: [ self appBarFind removeClass: 'wam-one-pane'; addClass: 'wam-two-pane' ]
+			ifFalse: [ self appBarFind removeClass: 'wam-two-pane'; addClass: 'wam-one-pane' ] ]
+
 ]
 
 { #category : 'accessing' }

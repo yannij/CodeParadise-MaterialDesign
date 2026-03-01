@@ -57,9 +57,9 @@ WamLayoutType class >> layoutProfileCompact [
 		#useModalNav -> true.
 		#showNavBar -> true.
 		#useTwoPaneBody -> false.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -75,9 +75,9 @@ WamLayoutType class >> layoutProfileCompactRail [
 		#useModalNav -> true.
 		#showNavBar -> false.
 		#useTwoPaneBody -> false.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -93,9 +93,9 @@ WamLayoutType class >> layoutProfileExpanded [
 		#useModalNav -> true.
 		#showNavBar -> false.
 		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -111,9 +111,9 @@ WamLayoutType class >> layoutProfileExtraLarge [
 		#useModalNav -> false.
 		#showNavBar -> false.
 		#useTwoPaneBody -> true.
-		#showSidesheet -> true.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -129,9 +129,9 @@ WamLayoutType class >> layoutProfileLarge [
 		#useModalNav -> false.
 		#showNavBar -> false.
 		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -147,9 +147,9 @@ WamLayoutType class >> layoutProfileMedium [
 		#useModalNav -> true.
 		#showNavBar -> true.
 		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 
@@ -165,9 +165,9 @@ WamLayoutType class >> layoutProfileMediumRail [
 		#useModalNav -> true.
 		#showNavBar -> false.
 		#useTwoPaneBody -> true.
-		#showSidesheet -> false.
 		#showAppBar -> true.
-		"#showDockedToolbar -> false.
+		"#showSidesheet -> false.
+		#showDockedToolbar -> false.
 		#showFloatingToolbar -> false"
 	} asDictionary
 

@@ -57,11 +57,11 @@ WamAppBarPresenter >> renderView [
 
 	leadingAction := self model leadingAction.
 	leadingAction ifNotNil: [
-	(self application layout layoutSettings useTwoPaneBody and: [ leadingAction eventId = #back ])
+	("self application layout layoutSettings useTwoPaneBody" true and: [ leadingAction eventId = #back ])
 		ifTrue: [ self view renderLeadingAction: nil ]
 		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ] ].
 
-	self view renderHeadline: self model headline.
+	self view appBarSetWidth; renderHeadline: self model headline.
 
 	list := self actionItemsToUse collect: [ :each | each asDictionary ].
 	list isEmpty ifTrue: [ ^ self ].

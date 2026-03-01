@@ -65,6 +65,11 @@ WamResponsiveLayoutPresenter >> layout [
 { #category : 'rendering' }
 WamResponsiveLayoutPresenter >> renderView [
 
+	self model layoutSettings ifNotNil: [ :value |
+		"Render the layout settings first,
+		so settings are accessible to other widgets"
+		self renderChildViewForModel: value atSlotNamed: #layoutSettings ].
+
 	self model navRail ifNotNil: [ :value |
 		"Render the navRail before the panes, so AppBar can find
 		the modal navRail pane for menu button to open"
@@ -89,9 +94,6 @@ WamResponsiveLayoutPresenter >> renderView [
 
 	self model fab ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #fab ].
-
-	self model layoutSettings ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #layoutSettings ].
 
 	self view layoutInitialSetUp: self model layoutSettings asMap.
 
