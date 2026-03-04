@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'contentModel',
 		'label',
-		'body'
+		'body',
+		'open'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -43,6 +44,15 @@ WamDialogModel >> contentModel: anObject [
 	contentModel := anObject
 ]
 
+{ #category : 'initialization' }
+WamDialogModel >> initialize [
+
+	super initialize.
+
+	open := false.
+
+]
+
 { #category : 'accessing' }
 WamDialogModel >> label [
 
@@ -56,10 +66,30 @@ WamDialogModel >> label: anObject [
 ]
 
 { #category : 'accessing' }
+WamDialogModel >> open [
+
+	^ open
+]
+
+{ #category : 'accessing' }
+WamDialogModel >> open: anObject [
+
+	open := anObject
+]
+
+{ #category : 'accessing' }
 WamDialogModel >> setContentModel: anObject [
 
 	self contentModel: anObject.
 	self valueChanged.
 	"self body: self contentModel printString."
+
+]
+
+{ #category : 'accessing' }
+WamDialogModel >> setOpen: aBoolean [
+
+	self open: aBoolean.
+	self valueChanged.
 
 ]

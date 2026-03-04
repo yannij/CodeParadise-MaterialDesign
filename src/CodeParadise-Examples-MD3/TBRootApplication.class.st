@@ -93,8 +93,7 @@ TBRootApplication >> modelRemove: aModel [
 TBRootApplication >> navItemsToUse [
 
 	^ OrderedCollection new
-		add: (self nativeEventSpecAt: #home);
-		add: (self nativeEventSpecAt: #settingsOpen);
+		add: (self nativeEventSpecAt: #brand);
 		yourself.
 ]
 

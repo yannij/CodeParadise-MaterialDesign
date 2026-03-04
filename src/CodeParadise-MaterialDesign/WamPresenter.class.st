@@ -16,12 +16,13 @@ WamPresenter class >> isAbstract [
 WamPresenter >> handleNavEvent: aNavEvent [
 	| item |
 
-	"self systemLog logTrace: '****', aNavEvent printString."
+	self systemLog logTrace: '**** ', aNavEvent printString.
+
 	item := self model navActionAtId: aNavEvent id.
-	item ifNil: [
-		self systemLog logError: 'Not found: ', aNavEvent id printString.
-		^ self ].
-	self application navTo: item.
+	item ifNotNil: [
+		^ self application navTo: item ].
+
+	self systemLog logError: 'Not found: ', aNavEvent id printString.
 
 ]
 

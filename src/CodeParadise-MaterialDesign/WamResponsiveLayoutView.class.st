@@ -156,13 +156,14 @@ WamResponsiveLayoutView class >> template [
     </div>
     <slot name="navBar"></slot>
     <slot name="dockedToolbar"></slot>
-    <slot name="floatingToolbar"></slot>
-    <slot name="fab"></slot>
-    <slot name="dialog"></slot>
-    <slot name="navRailModal"></slot>
-    <slot name="layoutSettings"></slot>
   </div>
 </wa-resize-observer>
+<slot name="navRailModal"></slot>
+<slot name="floatingToolbar"></slot>
+<slot name="fab"></slot>
+<slot name="dialog"></slot>
+<slot name="brandDialog"></slot>
+<slot name="layoutReady"></slot>
 '
 ]
 
@@ -187,6 +188,17 @@ WamResponsiveLayoutView >> addLoginDialog: label [
 	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'xmark' send: #openBeOff receiver: dialog).
 
 	CpHtmlElement documentBody appendChild: dialog.
+
+]
+
+{ #category : 'actions' }
+WamResponsiveLayoutView >> announceSetting: aspect value: anObject [
+
+	self serverAnnounce: (WamNavActionEvent id: #layoutSettingChange parameter: {
+		#type -> #action.
+		#aspect -> aspect.
+		#value -> anObject
+	} asDictionary).
 
 ]
 
@@ -349,6 +361,12 @@ WamResponsiveLayoutView >> bodyWidthAdapt [
 
 ]
 
+{ #category : 'accessing - components' }
+WamResponsiveLayoutView >> brandDialogView [
+
+	^ self firstChildAtSlotNamed: #brandDialog
+]
+
 { #category : 'login' }
 WamResponsiveLayoutView >> buttonLabel: label icon: icon send: selector [
 
@@ -430,7 +448,7 @@ WamResponsiveLayoutView >> colorThemeInitial: aColorName [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> colorThemeName [
 
-	^ self layoutSettingsView colorThemeName
+	^ self layoutSettingAt: #colorThemeName
 ]
 
 { #category : 'color theme' }
@@ -657,39 +675,53 @@ WamResponsiveLayoutView >> layoutInitialSetUp: props [
 	"Invoked by presenter's viewCreated"
 
 	self systemLog logTrace5: props printString.
-	self resizeSetUp.
 
 	props at: #colorThemeName ifPresent: [ :value | self colorThemeInitial: value ].
 	props at: #fontFamily ifPresent: [ :value | self fontFamilyAdapt: value ].
+	self applyLayoutProfile: props.
 
 	(props at: #useAutoLayout ifAbsent: [ true ]) ifTrue: [
-		self layoutAdaptToWidth.
-		^ self ].
+		self layoutAdaptToWidth ].
 
-	self applyLayoutProfile: props.
+	self resizeSetUp.
+
 
 ]
 
-{ #category : 'accessing - components' }
-WamResponsiveLayoutView >> layoutSettingsView [
-
-	layoutSettingsView ifNil: [
-		layoutSettingsView := self firstChildAtSlotNamed: #layoutSettings ]
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> layoutSettingAt: key [
 .
-	^ layoutSettingsView
+	"^ self customPropertyAt: key"
+	^ self settingsView perform: key
+]
+
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> layoutSettingAt: key put: anObject [
+.
+	"self customPropertyAt: key put: anObject"
+	self settingsView perform: (key, ':') asSymbol with: anObject
+]
+
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> layoutSettingAtQ: key [
+.
+	"^ (self customPropertyAt: key) = 'true'"
+	^ self settingsView
+		ifNil: [ false ]
+		ifNotNil: [ :v | v perform: key ]
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> layoutType [
 
-	^ self layoutSettingsView layoutType
+	^ self layoutSettingAt: #layoutType
 
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> layoutType: anObject [
 
-	self layoutSettingsView layoutType: anObject
+	self layoutSettingAt: #layoutType put: anObject
 ]
 
 { #category : 'layout' }
@@ -700,8 +732,23 @@ WamResponsiveLayoutView >> layoutTypeAdapt: aLayoutType [
 	self layoutType: (aLayoutType at: #name).
 	self setLayoutSettings: aLayoutType.
 	self applyLayoutProfile: aLayoutType.
-	self layoutSettingsView layoutUpdate.
+	self settingsView layoutUpdate.
 
+]
+
+{ #category : 'actions' }
+WamResponsiveLayoutView >> layoutUpdate [
+	| props |
+
+	props := {
+		#navRailExpanded -> self navRailExpanded.
+		#showNavBar -> self showNavBar.
+		#useTwoPaneBody -> self useTwoPaneBody.
+		#showAppBar -> self showAppBar.
+		#useModalNav -> self useModalNav.
+	} asDictionary.
+
+	self announceSetting: #layoutUpdate value: props
 ]
 
 { #category : 'accessing' }
@@ -740,18 +787,6 @@ WamResponsiveLayoutView >> modalNavOpen [
 		ifNotNil: [ drawer openBeOn ]
 ]
 
-{ #category : 'actions' }
-WamResponsiveLayoutView >> modalSettingsOpen [
-	| drawer |
-
-	drawer := self layoutSettingsView drawer.
-	self systemLog logTrace: drawer printString.
-	drawer
-		ifNil: [ self systemLog logError: 'Settings view is nil' ]
-		ifNotNil: [ drawer openBeOn ]
-
-]
-
 { #category : 'navbar' }
 WamResponsiveLayoutView >> navBarDisplay: aBoolean [
 
@@ -770,15 +805,13 @@ WamResponsiveLayoutView >> navBarView [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> navRailExpanded [
 
-	^ self layoutSettingsView
-		ifNil: [ false ]
-		ifNotNil: [ :value | value navRailExpanded ]
+	^ self layoutSettingAtQ: #navRailExpanded
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> navRailExpanded: anObject [
 
-	^ self layoutSettingsView navRailExpanded: anObject
+	^ self layoutSettingAt: #navRailExpanded put: anObject
 ]
 
 { #category : 'navrail' }
@@ -860,8 +893,7 @@ WamResponsiveLayoutView >> pane1WidthMin [
 WamResponsiveLayoutView >> pane2Content [
 	| view |
 
-	view := self paneLayoutView firstChildAtSlotNamed: #twoPaneLayoutP2.
-	view := view firstChildAtSlotNamed: #paneContent.
+	view := self pane2View firstChildAtSlotNamed: #paneContent.
 	self systemLog logTrace: view printString.
 
 	"^ WamItemWrapperView all"
@@ -949,23 +981,29 @@ WamResponsiveLayoutView >> setLayoutSettings: props [
 	self useModalNav: (props at: #useModalNav ifAbsent: [ false ]).
 	self showNavBar: (props at: #showNavBar ifAbsent: [ false ]).
 	self useTwoPaneBody: (props at: #useTwoPaneBody ifAbsent: [ false ]).
-	self showSidesheet: (props at: #showSidesheet ifAbsent: [ false ]).
 	self showAppBar: (props at: #showAppBar ifAbsent: [ false ]).
+	self showSidesheet: (props at: #showSidesheet ifAbsent: [ false ]).
 	self showDockedToolbar: (props at: #showDockedToolbar ifAbsent: [ false ]).
 	self showFloatingToolbar: (props at: #showFloatingToolbar ifAbsent: [ false ]).
 
 ]
 
+{ #category : 'accessing - components' }
+WamResponsiveLayoutView >> settingsView [
+
+	^ (self brandDialogView) firstChildAtSlotNamed: #content
+]
+
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showAppBar [
 
-	^ self layoutSettingsView showAppBar
+	^ self layoutSettingAtQ: #showAppBar
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showAppBar: anObject [
 
-	self layoutSettingsView showAppBar: anObject
+	self layoutSettingAt: #showAppBar put: anObject
 ]
 
 { #category : 'toolbar' }
@@ -980,13 +1018,13 @@ WamResponsiveLayoutView >> showAppBarAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showDockedToolbar [
 
-	^ self layoutSettingsView showDockedToolbar
+	^ self layoutSettingAtQ: #showDockedToolbar
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showDockedToolbar: anObject [
 
-	self layoutSettingsView showDockedToolbar: anObject
+	self layoutSettingAt: #showDockedToolbar put: anObject
 ]
 
 { #category : 'toolbar' }
@@ -1010,13 +1048,13 @@ WamResponsiveLayoutView >> showFabAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showFloatingToolbar [
 
-	^ self layoutSettingsView showFloatingToolbar
+	^ self layoutSettingAtQ: #showFloatingToolbar
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showFloatingToolbar: anObject [
 
-	self layoutSettingsView showFloatingToolbar: anObject
+	self layoutSettingAt: #showFloatingToolbar put: anObject
 ]
 
 { #category : 'toolbar' }
@@ -1031,13 +1069,13 @@ WamResponsiveLayoutView >> showFloatingToolbarAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showNavBar [
 
-	^ self layoutSettingsView showNavBar
+	^ self layoutSettingAtQ: #showNavBar
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showNavBar: anObject [
 
-	self layoutSettingsView showNavBar: anObject
+	self layoutSettingAt: #showNavBar put: anObject
 ]
 
 { #category : 'navbar' }
@@ -1056,7 +1094,7 @@ WamResponsiveLayoutView >> showNavBarAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showNavMenuButton: anObject [
 
-	self layoutSettingsView showNavMenuButton: anObject
+	self layoutSettingAt: #showNavMenuButton put: anObject
 ]
 
 { #category : 'body' }
@@ -1069,13 +1107,13 @@ WamResponsiveLayoutView >> showNavMenuButtonAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showSidesheet [
 
-	^ self layoutSettingsView showSidesheet
+	^ self layoutSettingAtQ: #showSidesheet
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> showSidesheet: anObject [
 
-	self layoutSettingsView showSidesheet: anObject
+	self layoutSettingAt: #showSidesheet put: anObject
 ]
 
 { #category : 'sidesheet' }
@@ -1153,25 +1191,25 @@ WamResponsiveLayoutView >> updateGlobalStyle [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useAutoLayout [
 
-	^ self layoutSettingsView useAutoLayout
+	^ self layoutSettingAtQ: #useAutoLayout
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useAutoLayout: anObject [
 
-	self layoutSettingsView useAutoLayout: anObject
+	self layoutSettingAt: #useAutoLayout put: anObject
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useModalNav [
 
-	^ self layoutSettingsView useModalNav
+	^ self layoutSettingAtQ: #useModalNav
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useModalNav: anObject [
 
-	self layoutSettingsView useModalNav: anObject
+	self layoutSettingAt: #useModalNav put: anObject
 ]
 
 { #category : 'navrail' }
@@ -1187,13 +1225,13 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useTwoPaneBody [
 
-	^ self layoutSettingsView useTwoPaneBody
+	^ self layoutSettingAtQ: #useTwoPaneBody
 ]
 
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useTwoPaneBody: anObject [
 
-	self layoutSettingsView useTwoPaneBody: anObject
+	self layoutSettingAt: #useTwoPaneBody put: anObject
 ]
 
 { #category : 'body' }

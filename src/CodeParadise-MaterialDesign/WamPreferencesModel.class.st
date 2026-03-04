@@ -1,5 +1,5 @@
 Class {
-	#name : 'WamLayoutSettingsModel',
+	#name : 'WamPreferencesModel',
 	#superclass : 'WamModel',
 	#instVars : [
 		'colorThemeName',
@@ -17,13 +17,13 @@ Class {
 		'showDockedToolbar',
 		'showFloatingToolbar'
 	],
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Preferences'
 }
 
 { #category : 'converting' }
-WamLayoutSettingsModel >> asMap [
+WamPreferencesModel >> asMap [
 
 	^ Dictionary new
 		at: #colorThemeName put: self colorThemeName;
@@ -43,31 +43,31 @@ WamLayoutSettingsModel >> asMap [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> colorThemeName [
+WamPreferencesModel >> colorThemeName [
 
 	^ colorThemeName
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> colorThemeName: anObject [
+WamPreferencesModel >> colorThemeName: anObject [
 
 	colorThemeName := anObject
 ]
 
 { #category : 'color theme' }
-WamLayoutSettingsModel >> defaultColorThemeName [
+WamPreferencesModel >> defaultColorThemeName [
 
 	^ nil
 ]
 
 { #category : 'typography' }
-WamLayoutSettingsModel >> defaultFontFamily [
+WamPreferencesModel >> defaultFontFamily [
 
 	^ #'monospace'
 ]
 
 { #category : 'events' }
-WamLayoutSettingsModel >> doLayoutSettings: anObject [
+WamPreferencesModel >> doLayoutSettings: anObject [
 	| aspect aspectValue |
 
 	self systemLog logTrace5: anObject printString.
@@ -85,19 +85,19 @@ WamLayoutSettingsModel >> doLayoutSettings: anObject [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> fontFamily [
+WamPreferencesModel >> fontFamily [
 
 	^ fontFamily
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> fontFamily: anObject [
+WamPreferencesModel >> fontFamily: anObject [
 
 	fontFamily := anObject
 ]
 
 { #category : 'initialization' }
-WamLayoutSettingsModel >> initialize [
+WamPreferencesModel >> initialize [
 
 	super initialize.
 
@@ -118,19 +118,19 @@ WamLayoutSettingsModel >> initialize [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> layoutType [
+WamPreferencesModel >> layoutType [
 
 	^ layoutType
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> layoutType: anObject [
+WamPreferencesModel >> layoutType: anObject [
 
 	layoutType := anObject
 ]
 
 { #category : 'events' }
-WamLayoutSettingsModel >> layoutUpdate: props [
+WamPreferencesModel >> layoutUpdate: props [
 
 	self systemLog logTrace5: props printString.
 
@@ -150,25 +150,25 @@ WamLayoutSettingsModel >> layoutUpdate: props [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> layoutWidth [
+WamPreferencesModel >> layoutWidth [
 
 	^ layoutWidth
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> layoutWidth: anObject [
+WamPreferencesModel >> layoutWidth: anObject [
 
 	layoutWidth := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> navRailExpanded [
+WamPreferencesModel >> navRailExpanded [
 
 	^ navRailExpanded
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> navRailExpanded: anObject [
+WamPreferencesModel >> navRailExpanded: anObject [
 
 	navRailExpanded := anObject.
 	self application layout navRail navItems do: [ :each | each valueChanged ].
@@ -176,109 +176,109 @@ WamLayoutSettingsModel >> navRailExpanded: anObject [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showAppBar [
+WamPreferencesModel >> showAppBar [
 
 	^ showAppBar
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showAppBar: anObject [
+WamPreferencesModel >> showAppBar: anObject [
 
 	showAppBar := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showDockedToolbar [
+WamPreferencesModel >> showDockedToolbar [
 
 	^ showDockedToolbar
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showDockedToolbar: anObject [
+WamPreferencesModel >> showDockedToolbar: anObject [
 
 	showDockedToolbar := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showFloatingToolbar [
+WamPreferencesModel >> showFloatingToolbar [
 
 	^ showFloatingToolbar
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showFloatingToolbar: anObject [
+WamPreferencesModel >> showFloatingToolbar: anObject [
 
 	showFloatingToolbar := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showNavBar [
+WamPreferencesModel >> showNavBar [
 
 	^ showNavBar
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showNavBar: anObject [
+WamPreferencesModel >> showNavBar: anObject [
 
 	showNavBar := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showNavMenuButton [
+WamPreferencesModel >> showNavMenuButton [
 
 	^ showNavMenuButton
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showNavMenuButton: anObject [
+WamPreferencesModel >> showNavMenuButton: anObject [
 
 	showNavMenuButton := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showSidesheet [
+WamPreferencesModel >> showSidesheet [
 
 	^ showSidesheet
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> showSidesheet: anObject [
+WamPreferencesModel >> showSidesheet: anObject [
 
 	showSidesheet := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useAutoLayout [
+WamPreferencesModel >> useAutoLayout [
 
 	^ useAutoLayout
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useAutoLayout: anObject [
+WamPreferencesModel >> useAutoLayout: anObject [
 
 	useAutoLayout := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useModalNav [
+WamPreferencesModel >> useModalNav [
 
 	^ useModalNav
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useModalNav: anObject [
+WamPreferencesModel >> useModalNav: anObject [
 
 	useModalNav := anObject
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useTwoPaneBody [
+WamPreferencesModel >> useTwoPaneBody [
 
 	^ useTwoPaneBody
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsModel >> useTwoPaneBody: anObject [
+WamPreferencesModel >> useTwoPaneBody: anObject [
 
 	useTwoPaneBody := anObject
 ]

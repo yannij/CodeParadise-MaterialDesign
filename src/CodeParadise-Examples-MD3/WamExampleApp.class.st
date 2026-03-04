@@ -81,8 +81,7 @@ WamExampleApp >> load [
 WamExampleApp >> navItemsToUse [
 
 	^ OrderedCollection new
-		add: (self nativeEventSpecAt: #settingsOpen);
-		add: (self nativeEventSpecAt: #login);
+		add: (self nativeEventSpecAt: #brand);
 		addAll: super navItemsToUse;
 		yourself.
 ]

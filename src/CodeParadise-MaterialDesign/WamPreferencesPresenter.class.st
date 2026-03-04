@@ -1,13 +1,13 @@
 Class {
-	#name : 'WamLayoutSettingsPresenter',
+	#name : 'WamPreferencesPresenter',
 	#superclass : 'WamPresenter',
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Preferences'
 }
 
 { #category : 'events' }
-WamLayoutSettingsPresenter >> handleNavEvent: anObject [
+WamPreferencesPresenter >> handleNavEvent: anObject [
 	| eventId |
 
 	self systemLog logTrace: anObject printString.
@@ -21,16 +21,8 @@ WamLayoutSettingsPresenter >> handleNavEvent: anObject [
 
 ]
 
-{ #category : 'view' }
-WamLayoutSettingsPresenter >> viewCreated [
-
-	super viewCreated.
-
-	self subscribeToNavActionEvent
-]
-
-{ #category : 'view' }
-WamLayoutSettingsPresenter >> viewInitialized [
+{ #category : 'rendering' }
+WamPreferencesPresenter >> renderView [
 	| props |
 
 	super viewInitialized.
@@ -38,7 +30,15 @@ WamLayoutSettingsPresenter >> viewInitialized [
 	props := self model asMap.
 	self view
 		renderContent: props;
-		layoutInitialSetUp: props;
+		"layoutInitialSetUp: props;"
 		yourself.
 
+]
+
+{ #category : 'view' }
+WamPreferencesPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self subscribeToNavActionEvent
 ]

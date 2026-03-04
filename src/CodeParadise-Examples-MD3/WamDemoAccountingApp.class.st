@@ -279,7 +279,6 @@ WamDemoAccountingApp >> modelUpdate: aModel [
 WamDemoAccountingApp >> navItemsToUse [ 
 
 	^ OrderedCollection new
-		add: (self nativeEventSpecAt: #settingsOpen);
 		add: (self nativeEventSpecAt: #login);
 		add: (self nativeEventSpecAt: #logout);
 		addAll: super navItemsToUse;

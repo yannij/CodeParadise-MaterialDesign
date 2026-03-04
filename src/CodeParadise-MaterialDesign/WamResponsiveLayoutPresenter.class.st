@@ -56,6 +56,24 @@ WamResponsiveLayoutPresenter >> doUpdate: aNavActionEvent [
 
 ]
 
+{ #category : 'events' }
+WamResponsiveLayoutPresenter >> handleNavEvent: aNavEvent [
+	| eventId item |
+
+	self systemLog logTrace: '**** ', aNavEvent printString.
+
+	eventId := aNavEvent id.
+	eventId = #layoutSettingChange ifTrue: [
+		^ self model layoutSettings doLayoutSettings: aNavEvent ].
+
+	item := self model navActionAtId: eventId.
+	item ifNotNil: [
+		^ self application navTo: item ].
+
+	self systemLog logError: 'Not found: ', aNavEvent id printString.
+
+]
+
 { #category : 'accessing - model' }
 WamResponsiveLayoutPresenter >> layout [
 
@@ -65,10 +83,13 @@ WamResponsiveLayoutPresenter >> layout [
 { #category : 'rendering' }
 WamResponsiveLayoutPresenter >> renderView [
 
-	self model layoutSettings ifNotNil: [ :value |
-		"Render the layout settings first,
+	self model brandDialog ifNotNil: [ :value |
+		"Render this part first,
 		so settings are accessible to other widgets"
-		self renderChildViewForModel: value atSlotNamed: #layoutSettings ].
+		self renderChildViewForModel: value atSlotNamed: #brandDialog ].
+
+	self model dialog ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #dialog ].
 
 	self model navRail ifNotNil: [ :value |
 		"Render the navRail before the panes, so AppBar can find
@@ -83,9 +104,6 @@ WamResponsiveLayoutPresenter >> renderView [
 	self model sidesheet ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
 
-	self model dialog ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #dialog ].
-
 	self model dockedToolbar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #dockedToolbar ].
 
@@ -95,7 +113,8 @@ WamResponsiveLayoutPresenter >> renderView [
 	self model fab ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #fab ].
 
-	self view layoutInitialSetUp: self model layoutSettings asMap.
+	self model layoutReady ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #layoutReady ].
 
 ]
 

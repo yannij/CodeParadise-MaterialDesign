@@ -1,40 +1,30 @@
 Class {
-	#name : 'WamLayoutSettingsView',
+	#name : 'WamPreferencesView',
 	#superclass : 'WamLayoutComponentView',
 	#instVars : [
 		'colorThemeName',
 		'fontFamily'
 	],
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Preferences'
 }
 
-{ #category : 'class initialization' }
-WamLayoutSettingsView class >> beLoaded [
-
-	WaDrawer beLoaded
-]
-
 { #category : 'web resources' }
-WamLayoutSettingsView class >> template [
+WamPreferencesView class >> template [
 	<webResource: #html>
 
-	^ '
-<wa-drawer>
-  <slot></slot>
-</wa-drawer>
-'
+	^ '<slot></slot>'
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> addAttributeContainerStyle: element [
+WamPreferencesView >> addAttributeContainerStyle: element [
 
 	^ element styleAt: 'padding-bottom' put: '12px'; yourself
 ]
 
 { #category : 'actions' }
-WamLayoutSettingsView >> announceSetting: aspect value: anObject [
+WamPreferencesView >> announceSetting: aspect value: anObject [
 
 	self serverAnnounce: (WamNavActionEvent id: #layoutSettingChange parameter: {
 		#type -> #action.
@@ -45,7 +35,7 @@ WamLayoutSettingsView >> announceSetting: aspect value: anObject [
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> colorThemeBuildChooser: props [
+WamPreferencesView >> colorThemeBuildChooser: props [
 	| chooser selectedItem |
 
 	selectedItem := props at: #colorThemeName ifAbsent: [].
@@ -67,19 +57,19 @@ red orange yellow green cyan blue indigo purple pink gray
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsView >> colorThemeName [
+WamPreferencesView >> colorThemeName [
 
 	^ colorThemeName
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsView >> colorThemeName: anObject [
+WamPreferencesView >> colorThemeName: anObject [
 
 	colorThemeName := anObject asString
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> colorThemeNameSet: anObject [
+WamPreferencesView >> colorThemeNameSet: anObject [
 
 	self colorThemeName = anObject ifTrue: [
 		^ self ].
@@ -91,19 +81,19 @@ WamLayoutSettingsView >> colorThemeNameSet: anObject [
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsView >> drawer [
+WamPreferencesView >> drawer [
 
 	^ self shadowedFirstDescendantMatching: WaDrawer asCssSelector
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> elementId: id [
+WamPreferencesView >> elementId: id [
 
 	^ self firstDescendantMatching: '#', id
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> elementId: id propertyAt: key ifMissing: aBlock [
+WamPreferencesView >> elementId: id propertyAt: key ifMissing: aBlock [
 	| element settingValue |
 
 	element := self elementId: id.
@@ -114,7 +104,7 @@ WamLayoutSettingsView >> elementId: id propertyAt: key ifMissing: aBlock [
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> elementId: id propertyAt: key put: value ifMissing: aBlock [
+WamPreferencesView >> elementId: id propertyAt: key put: value ifMissing: aBlock [
 	| element |
 
 	element := self elementId: id.
@@ -126,19 +116,19 @@ WamLayoutSettingsView >> elementId: id propertyAt: key put: value ifMissing: aBl
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsView >> fontFamily [
+WamPreferencesView >> fontFamily [
 
 	^ fontFamily
 ]
 
 { #category : 'accessing' }
-WamLayoutSettingsView >> fontFamily: anObject [
+WamPreferencesView >> fontFamily: anObject [
 
 	fontFamily := anObject
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> fontFamilyChooser: props [
+WamPreferencesView >> fontFamilyChooser: props [
 	| chooser selectedItem |
 
 	selectedItem := props at: #fontFamily ifAbsent: [].
@@ -162,7 +152,7 @@ nil -> 'Default'.
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> fontFamilySet: anObject [
+WamPreferencesView >> fontFamilySet: anObject [
 
 	self fontFamily = anObject ifTrue: [
 		^ self ].
@@ -173,27 +163,20 @@ WamLayoutSettingsView >> fontFamilySet: anObject [
 
 ]
 
-{ #category : 'initalize' }
-WamLayoutSettingsView >> layoutInitialSetUp: props [
-
-	self layoutViewLazy layoutInitialSetUp: props.
-
-]
-
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> layoutType [
+WamPreferencesView >> layoutType [
 
 	^ self elementId: 'wamLayoutTypeChooser' propertyAt: #value ifMissing: nil
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> layoutType: aLayoutType [
+WamPreferencesView >> layoutType: aLayoutType [
 
 	self elementId: 'wamLayoutTypeChooser' propertyAt: #value put: aLayoutType ifMissing: nil
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> layoutTypeBuildChooser: props [
+WamPreferencesView >> layoutTypeBuildChooser: props [
 	| radioGroup selectedItem |
 
 	selectedItem := props at: #layoutType ifAbsent: [].
@@ -213,7 +196,7 @@ WamLayoutSettingsView >> layoutTypeBuildChooser: props [
 ]
 
 { #category : 'settings - choosers' }
-WamLayoutSettingsView >> layoutTypeSet: anObject [
+WamPreferencesView >> layoutTypeSet: anObject [
 
 	self useAutoLayoutUpdate: false.
 
@@ -223,13 +206,12 @@ WamLayoutSettingsView >> layoutTypeSet: anObject [
 ]
 
 { #category : 'actions' }
-WamLayoutSettingsView >> layoutUpdate [
+WamPreferencesView >> layoutUpdate [
 	| props |
 
 	props := {
 		#navRailExpanded -> self navRailExpanded.
 		#showNavBar -> self showNavBar.
-		#showSidesheet -> self showSidesheet.
 		#useTwoPaneBody -> self useTwoPaneBody.
 		#showAppBar -> self showAppBar.
 		#useModalNav -> self useModalNav.
@@ -239,7 +221,7 @@ WamLayoutSettingsView >> layoutUpdate [
 ]
 
 { #category : 'initalize' }
-WamLayoutSettingsView >> modalDivContentWith: props [
+WamPreferencesView >> modalDivContentWith: props [
 	| element |
 
 	element := #div asHtmlTag
@@ -263,25 +245,25 @@ WamLayoutSettingsView >> modalDivContentWith: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> navRailExpanded [
+WamPreferencesView >> navRailExpanded [
 
 	^ self switchId: self navRailExpandedId ifMissing: true
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> navRailExpanded: aBoolean [
+WamPreferencesView >> navRailExpanded: aBoolean [
 
 	self switchId: self navRailExpandedId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> navRailExpandedId [
+WamPreferencesView >> navRailExpandedId [
 
 	^ 'navRailExpanded'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> navRailExpandedNewSwitch: props [
+WamPreferencesView >> navRailExpandedNewSwitch: props [
 
 	^ self
 		switchNewWithId: self navRailExpandedId
@@ -292,7 +274,7 @@ WamLayoutSettingsView >> navRailExpandedNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> navRailExpandedSet: aBoolean [
+WamPreferencesView >> navRailExpandedSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
@@ -302,42 +284,37 @@ WamLayoutSettingsView >> navRailExpandedSet: aBoolean [
 ]
 
 { #category : 'initalize' }
-WamLayoutSettingsView >> renderContent: aDictionary [
-
-	self drawer
-		label: 'Layout settings';
-		customPropertyAt: 'size' put: '50vw';
-		yourself.
+WamPreferencesView >> renderContent: aDictionary [
 
 	self replaceAllChildrenWith: (self modalDivContentWith: aDictionary) atSlotNamed: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBar [
+WamPreferencesView >> showAppBar [
 
 	^ self switchId: self showAppBarId ifMissing: true
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBar: aBoolean [
+WamPreferencesView >> showAppBar: aBoolean [
 
 	self switchId: self showAppBarId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBarId [
+WamPreferencesView >> showAppBarId [
 
 	^ 'showAppBar'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBarLeadingButtonId [
+WamPreferencesView >> showAppBarLeadingButtonId [
 
 	^ 'showAppBarLeadingButton'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBarNewSwitch: props [
+WamPreferencesView >> showAppBarNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showAppBarId
@@ -348,7 +325,7 @@ WamLayoutSettingsView >> showAppBarNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showAppBarSet: aBoolean [
+WamPreferencesView >> showAppBarSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
@@ -358,25 +335,25 @@ WamLayoutSettingsView >> showAppBarSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showDockedToolbar [
+WamPreferencesView >> showDockedToolbar [
 
 	^ self switchId: self showDockedToolbarId ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showDockedToolbar: aBoolean [
+WamPreferencesView >> showDockedToolbar: aBoolean [
 
 	self switchId: self showDockedToolbarId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showDockedToolbarId [
+WamPreferencesView >> showDockedToolbarId [
 
 	^ 'showDockedToolbar'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showDockedToolbarNewSwitch: props [
+WamPreferencesView >> showDockedToolbarNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showDockedToolbarId
@@ -387,9 +364,9 @@ WamLayoutSettingsView >> showDockedToolbarNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showDockedToolbarSet: aBoolean [
+WamPreferencesView >> showDockedToolbarSet: aBoolean [
 
-	self useAutoLayoutUpdate: false.
+	"self useAutoLayoutUpdate: false."
 
 	self layoutViewLazy showDockedToolbarAdapt: aBoolean; resizeBodyRegion.
 	self announceSetting: #showDockedToolbar value: aBoolean.
@@ -397,25 +374,25 @@ WamLayoutSettingsView >> showDockedToolbarSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showFloatingToolbar [
+WamPreferencesView >> showFloatingToolbar [
 
 	^ self switchId: self showFloatingToolbarId ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showFloatingToolbar: aBoolean [
+WamPreferencesView >> showFloatingToolbar: aBoolean [
 
 	self switchId: self showFloatingToolbarId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showFloatingToolbarId [
+WamPreferencesView >> showFloatingToolbarId [
 
 	^ 'showFloatingToolbar'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showFloatingToolbarNewSwitch: props [
+WamPreferencesView >> showFloatingToolbarNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showFloatingToolbarId
@@ -426,9 +403,9 @@ WamLayoutSettingsView >> showFloatingToolbarNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showFloatingToolbarSet: aBoolean [
+WamPreferencesView >> showFloatingToolbarSet: aBoolean [
 
-	self useAutoLayoutUpdate: false.
+	"self useAutoLayoutUpdate: false."
 
 	self layoutViewLazy showFloatingToolbarAdapt: aBoolean.
 	self announceSetting: #showFloatingToolbar value: aBoolean.
@@ -436,25 +413,25 @@ WamLayoutSettingsView >> showFloatingToolbarSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavBar [
+WamPreferencesView >> showNavBar [
 
 	^ self switchId: self showNavBarId ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavBar: aBoolean [
+WamPreferencesView >> showNavBar: aBoolean [
 
 	self switchId: self showNavBarId put: aBoolean ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavBarId [
+WamPreferencesView >> showNavBarId [
 
 	^ 'showNavBar'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavBarNewSwitch: props [
+WamPreferencesView >> showNavBarNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showNavBarId
@@ -465,7 +442,7 @@ WamLayoutSettingsView >> showNavBarNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavBarSet: aBoolean [
+WamPreferencesView >> showNavBarSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
@@ -475,25 +452,25 @@ WamLayoutSettingsView >> showNavBarSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavMenuButton [
+WamPreferencesView >> showNavMenuButton [
 
 	^ self switchId: self showNavMenuButtonId ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavMenuButton: aBoolean [
+WamPreferencesView >> showNavMenuButton: aBoolean [
 
 	self switchId: self showNavMenuButtonId put: aBoolean ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavMenuButtonId [
+WamPreferencesView >> showNavMenuButtonId [
 
 	^ 'showNavMenuButton'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavMenuButtonNewSwitch: props [
+WamPreferencesView >> showNavMenuButtonNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showNavMenuButtonId
@@ -504,7 +481,7 @@ WamLayoutSettingsView >> showNavMenuButtonNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showNavMenuButtonSet: aBoolean [
+WamPreferencesView >> showNavMenuButtonSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
@@ -514,25 +491,25 @@ WamLayoutSettingsView >> showNavMenuButtonSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showSidesheet [
+WamPreferencesView >> showSidesheet [
 
 	^ self switchId: self showSidesheetId ifMissing: true
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showSidesheet: aBoolean [
+WamPreferencesView >> showSidesheet: aBoolean [
 
 	self switchId: self showSidesheetId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showSidesheetId [
+WamPreferencesView >> showSidesheetId [
 
 	^ 'showSidesheet'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showSidesheetNewSwitch: props [
+WamPreferencesView >> showSidesheetNewSwitch: props [
 
 	^ self
 		switchNewWithId: self showSidesheetId
@@ -543,9 +520,9 @@ WamLayoutSettingsView >> showSidesheetNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> showSidesheetSet: aBoolean [
+WamPreferencesView >> showSidesheetSet: aBoolean [
 
-	self useAutoLayoutUpdate: false.
+	"self useAutoLayoutUpdate: false."
 
 	self layoutViewLazy sidesheetDisplay: aBoolean.
 	self announceSetting: #showSidesheet value: aBoolean.
@@ -553,19 +530,19 @@ WamLayoutSettingsView >> showSidesheetSet: aBoolean [
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> switchId: id ifMissing: aBlock [
+WamPreferencesView >> switchId: id ifMissing: aBlock [
 
 	^ self elementId: id propertyAt: #checked ifMissing: aBlock
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> switchId: id put: value ifMissing: aBlock [
+WamPreferencesView >> switchId: id put: value ifMissing: aBlock [
 
 	^ self elementId: id propertyAt: #checked put: value ifMissing: nil
 ]
 
 { #category : 'utilities' }
-WamLayoutSettingsView >> switchNewWithId: id label: label checked: checked do: aBlock [
+WamPreferencesView >> switchNewWithId: id label: label checked: checked do: aBlock [
 	| toggle |
 
 	toggle := WaSwitch new
@@ -583,25 +560,25 @@ WamLayoutSettingsView >> switchNewWithId: id label: label checked: checked do: a
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayout [
+WamPreferencesView >> useAutoLayout [
 
 	^ self switchId: self useAutoLayoutId ifMissing: true
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayout: aBoolean [
+WamPreferencesView >> useAutoLayout: aBoolean [
 
 	self switchId: self useAutoLayoutId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayoutId [
+WamPreferencesView >> useAutoLayoutId [
 
 	^ 'useAutoLayout'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayoutNewSwitch: props [
+WamPreferencesView >> useAutoLayoutNewSwitch: props [
 
 	^ self
 		switchNewWithId: self useAutoLayoutId
@@ -612,7 +589,7 @@ WamLayoutSettingsView >> useAutoLayoutNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayoutSet: aBoolean [
+WamPreferencesView >> useAutoLayoutSet: aBoolean [
 
 	aBoolean ifTrue: [ self layoutViewLazy layoutAdaptToWidth ].
 	self announceSetting: #useAutoLayout value: aBoolean.
@@ -620,7 +597,7 @@ WamLayoutSettingsView >> useAutoLayoutSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useAutoLayoutUpdate: aBoolean [
+WamPreferencesView >> useAutoLayoutUpdate: aBoolean [
 
 	self useAutoLayout: aBoolean.
 	self announceSetting: #useAutoLayout value: aBoolean.
@@ -628,25 +605,25 @@ WamLayoutSettingsView >> useAutoLayoutUpdate: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useModalNav [
+WamPreferencesView >> useModalNav [
 
 	^ self switchId: self useModalNavId ifMissing: false
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useModalNav: aBoolean [
+WamPreferencesView >> useModalNav: aBoolean [
 
 	self switchId: self useModalNavId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useModalNavId [
+WamPreferencesView >> useModalNavId [
 
 	^ 'useModalNav'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useModalNavNewSwitch: props [
+WamPreferencesView >> useModalNavNewSwitch: props [
 
 	^ self
 		switchNewWithId: self useModalNavId
@@ -657,7 +634,7 @@ WamLayoutSettingsView >> useModalNavNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useModalNavSet: aBoolean [
+WamPreferencesView >> useModalNavSet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 
@@ -669,25 +646,25 @@ WamLayoutSettingsView >> useModalNavSet: aBoolean [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useTwoPaneBody [
+WamPreferencesView >> useTwoPaneBody [
 
 	^ self switchId: self useTwoPaneBodyId ifMissing: true
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useTwoPaneBody: aBoolean [
+WamPreferencesView >> useTwoPaneBody: aBoolean [
 
 	self switchId: self useTwoPaneBodyId put: aBoolean ifMissing: nil
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useTwoPaneBodyId [
+WamPreferencesView >> useTwoPaneBodyId [
 
 	^ 'useTwoPaneBody'
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useTwoPaneBodyNewSwitch: props [
+WamPreferencesView >> useTwoPaneBodyNewSwitch: props [
 
 	^ self
 		switchNewWithId: self useTwoPaneBodyId
@@ -698,7 +675,7 @@ WamLayoutSettingsView >> useTwoPaneBodyNewSwitch: props [
 ]
 
 { #category : 'settings - switches' }
-WamLayoutSettingsView >> useTwoPaneBodySet: aBoolean [
+WamPreferencesView >> useTwoPaneBodySet: aBoolean [
 
 	self useAutoLayoutUpdate: false.
 

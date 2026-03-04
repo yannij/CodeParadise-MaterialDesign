@@ -42,3 +42,10 @@ WamDialogView >> renderLabel: aString [
 	self dialogComponent label: aString.
 
 ]
+
+{ #category : 'rendering' }
+WamDialogView >> renderOpen: aBoolean [
+
+	self dialogComponent open: aBoolean
+
+]

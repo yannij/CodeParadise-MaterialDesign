@@ -53,13 +53,17 @@ WamAppBarPresenter >> handleNavEvent: aNavEvent [
 
 { #category : 'view' }
 WamAppBarPresenter >> renderView [
-	| list leadingAction |
+	| list |
 
-	leadingAction := self model leadingAction.
-	leadingAction ifNotNil: [
-	("self application layout layoutSettings useTwoPaneBody" true and: [ leadingAction eventId = #back ])
-		ifTrue: [ self view renderLeadingAction: nil ]
-		ifFalse: [ self view renderLeadingAction: leadingAction asDictionary ] ].
+	self model leadingAction
+		ifNil: [ self view renderLeadingAction: nil ]
+		ifNotNil: [ :value |
+			self model isPrimary
+				ifTrue: [ self view renderLeadingAction: value asDictionary ]
+				ifFalse: [
+					(value eventId = #back and: [ self application layout layoutSettings useTwoPaneBody not ])
+						ifTrue: [ self view renderLeadingAction: value asDictionary ]
+						ifFalse: [ self view renderLeadingAction: nil ] ] ].
 
 	self view appBarSetWidth; renderHeadline: self model headline.
 

@@ -44,6 +44,19 @@ WamWebApplication >> applicationModel [
 	^ self
 ]
 
+{ #category : 'actions' }
+WamWebApplication >> brandDialogOpen [
+	| d |
+
+	d := self layout brandDialog.
+		"label: 'Brand';
+		setContentModel: self layout layoutSettings;"
+	"d contentModel valueChanged."
+	d open: true.
+	d valueChanged.
+
+]
+
 { #category : 'accessing' }
 WamWebApplication >> customColorTheme [
 
@@ -52,19 +65,6 @@ WamWebApplication >> customColorTheme [
 
 { #category : 'actions - toolbar' }
 WamWebApplication >> doLogout [
-
-]
-
-{ #category : 'events' }
-WamWebApplication >> doNavToItemNamed: aNavName [
-	| item |
-
-	self systemLog logTrace: '****'.
-	item := self navItemNamed: aNavName.
-	item ifNil: [
-		self systemLog logError: 'Not found: doNavToItemNamed:', aNavName.
-		^ self ].
-	self navTo: item.
 
 ]
 
@@ -233,6 +233,9 @@ WamWebApplication >> navItemsToUse [
 { #category : 'events' }
 WamWebApplication >> navTo: aNavActionEvent [
 
+	aNavActionEvent eventId = #brand ifTrue: [
+		^ self brandDialogOpen ].
+
 	self layout pane1 processNavActionEvent: aNavActionEvent; valueChanged.
 ]
 
@@ -367,7 +370,7 @@ WamWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
 		addNativeSubtype: #meta groupTag: #toolbar iconName: 'star' iconLabel: 'Meta';
 		addNativeSubtype: #modalNav groupTag: #primary iconName: 'bars' iconLabel: 'Menu';
-		addNativeSubtype: #settingsOpen groupTag: #primary iconName: 'gear' iconLabel: 'Settings';
+		addNativeSubtype: #brand groupTag: #brand iconName: 'gem' iconLabel: 'Brand';
 		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';
 		addNativeSubtype: #logout groupTag: #primary iconName: 'right-from-bracket' iconLabel: 'Logout';
 		yourself.

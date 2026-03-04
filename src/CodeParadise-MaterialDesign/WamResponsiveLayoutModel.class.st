@@ -7,10 +7,12 @@ Class {
 		'twoPaneSplitPosition',
 		'navRail',
 		'navPopups',
-		'dialog',
 		'dockedToolbar',
 		'floatingToolbar',
-		'fab'
+		'fab',
+		'dialog',
+		'brandDialog',
+		'layoutReady'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -27,6 +29,18 @@ WamResponsiveLayoutModel >> appBar1 [
 WamResponsiveLayoutModel >> appBar2 [
 
 	^ self pane2 appBarModel
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> brandDialog [
+
+	^ brandDialog
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> brandDialog: anObject [
+
+	brandDialog := anObject
 ]
 
 { #category : 'accessing' }
@@ -83,15 +97,29 @@ WamResponsiveLayoutModel >> initialize [
 	super initialize.
 
 	navPopups := OrderedIdentityDictionary new.
-	layoutSettings := WamLayoutSettingsModel new.
+	layoutSettings := WamPreferencesModel new.
 	twoPaneSplitPosition := 300.
 	paneLayout := WamListDetailLayoutModel new.
 	navRail := WamNavModel new.
-	dialog := WamDialogModel new.
 	dockedToolbar := WamToolbarDockedModel new.
 	floatingToolbar := WamToolbarFloatingModel new.
 	fab := WamFabModel new.
+	dialog := WamDialogModel new.
+	brandDialog := (WamDialogModel new contentModel: layoutSettings; yourself).
+	layoutReady := WamLayoutReadyModel new.
 
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> layoutReady [
+
+	^ layoutReady
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> layoutReady: anObject [
+
+	layoutReady := anObject
 ]
 
 { #category : 'accessing' }

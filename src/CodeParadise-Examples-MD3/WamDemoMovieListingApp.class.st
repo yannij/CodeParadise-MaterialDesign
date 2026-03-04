@@ -261,15 +261,6 @@ WamDemoMovieListingApp >> modelView: anObject [
 	modelView := anObject
 ]
 
-{ #category : 'accessing' }
-WamDemoMovieListingApp >> navItemsToUse [
-
-	^ OrderedCollection new
-		add: (self nativeEventSpecAt: #settingsOpen);
-		addAll: super navItemsToUse;
-		yourself.
-]
-
 { #category : 'events' }
 WamDemoMovieListingApp >> navTo: aNavActionEvent [
 	| data |

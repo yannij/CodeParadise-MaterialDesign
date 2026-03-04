@@ -345,8 +345,6 @@ WamView >> triggerNavEvent: aNavAction [
 
 	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
-	eventId = #settingsOpen ifTrue: [
-		^ self layoutViewLazy modalSettingsOpen ].
 	eventId = #login ifTrue: [
 		^ self layoutViewLazy loginOpen ].
 
