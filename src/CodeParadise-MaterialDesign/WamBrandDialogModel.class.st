@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'contentModel',
 		'label',
-		'body'
+		'body',
+		'open'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
@@ -55,11 +56,32 @@ WamBrandDialogModel >> label: anObject [
 	label := anObject
 ]
 
+{ #category : 'accessing' }
+WamBrandDialogModel >> open [
+
+	^ open
+]
+
+{ #category : 'accessing' }
+WamBrandDialogModel >> open: anObject [
+
+	open := anObject
+]
+
 { #category : 'initialization' }
 WamBrandDialogModel >> setContentModel: anObject [
 
 	self contentModel: anObject.
+	"anObject valueChanged."
 	self valueChanged.
 	"self body: self contentModel printString."
+
+]
+
+{ #category : 'initialization' }
+WamBrandDialogModel >> setOpen: aBoolean [
+
+	self open: aBoolean.
+	self valueChanged.
 
 ]

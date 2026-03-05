@@ -750,6 +750,35 @@ CpWebAwesomeExamplesWebClientBehavior >> exampleSwitch [
 ]
 
 { #category : 'examples' }
+CpWebAwesomeExamplesWebClientBehavior >> exampleTabGroup [
+
+	<example: 'Tab Group' order: 100>
+
+	| outputElement tabGroup |
+
+	"Clear content"
+	outputElement := self outputElement.
+	outputElement textContent: ''.
+
+	tabGroup := WaTabGroup new.
+	tabGroup
+		appendChild: (WaTab new panel: 'general'; textContent: 'General'; yourself);
+		appendChild: (WaTab new panel: 'custom'; textContent: 'Custom'; yourself);
+		appendChild: (WaTab new panel: 'advanced'; textContent: 'Advanced'; yourself);
+		appendChild: (WaTab new panel: 'disabled'; disabledBeOn; textContent: 'Disabled'; yourself);
+		yourself.
+	tabGroup
+		appendChild: (WaTabPanel new name: 'general'; textContent: 'This is the general tab panel.'; yourself);
+		appendChild: (WaTabPanel new name: 'custom'; textContent: 'This is the custom tab panel.'; yourself);
+		appendChild: (WaTabPanel new name: 'advanced'; textContent: 'This is the advanced tab panel.'; yourself);
+		appendChild: (WaTabPanel new name: 'disabled'; textContent: 'This is a disabled tab panel.'; yourself);
+		yourself.
+
+	outputElement appendChild: tabGroup.
+
+]
+
+{ #category : 'examples' }
 CpWebAwesomeExamplesWebClientBehavior >> exampleTextarea [
 
 	<example: 'Textarea' order: 100>

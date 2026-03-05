@@ -8,11 +8,15 @@ Class {
 
 { #category : 'view' }
 WamLayoutReadyPresenter >> viewInitialized [
-	| props |
+	| layout props |
 
 	super viewInitialized.
 
-	props := self application layout layoutSettings asMap.
+	layout := self application layout.
+
+	layout brandDialog label: self application class appName.
+
+	props := layout layoutSettings asMap.
 	self view
 		layoutInitialSetUp: props;
 		yourself.

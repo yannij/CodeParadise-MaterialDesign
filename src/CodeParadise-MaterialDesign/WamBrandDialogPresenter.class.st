@@ -11,8 +11,11 @@ WamBrandDialogPresenter >> renderView [
 
 	self model label ifNotNil: [ :value |
 		self view renderLabel: value ].
+
 	self model contentModel ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: nil.
-		self view openDialog ]
+		self renderChildViewForModel: value atSlotNamed: #layoutSettings.
+		self view openDialog ].
+
+	self view renderOpen: self model open.
 
 ]

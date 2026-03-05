@@ -78,6 +78,7 @@ WamNavActionAbstractView >> divExpanded: aNavAction [
 			#div asHtmlTag
 				addClass: 'wam-navrailx-labelText';
 				addClass: 'wa-text-truncate';
+				styleAt: 'max-width' put: '170px';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself

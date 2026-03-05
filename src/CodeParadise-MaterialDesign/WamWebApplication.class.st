@@ -11,6 +11,28 @@ Class {
 	#tag : 'Base'
 }
 
+{ #category : 'accessing' }
+WamWebApplication class >> appIcon [
+	"Answer icon name to use for Nav item.
+	Subclasses should override.
+
+	Note: this method is defined on class side because
+	during initialization a widget's application may still be nil."
+
+	^ #gem
+]
+
+{ #category : 'accessing' }
+WamWebApplication class >> appName [
+	"Answer name to be shown in AppBar headline, and in Nav icon label.
+	Subclasses should override.
+
+	Note: this method is defined on class side because
+	during initialization a widget's application may still be nil."
+
+	^ #Brand
+]
+
 { #category : 'class initialization' }
 WamWebApplication class >> beLoaded [
 
@@ -370,7 +392,7 @@ WamWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #back groupTag: #primary iconName: 'arrow-left' iconLabel: 'Back';
 		addNativeSubtype: #meta groupTag: #toolbar iconName: 'star' iconLabel: 'Meta';
 		addNativeSubtype: #modalNav groupTag: #primary iconName: 'bars' iconLabel: 'Menu';
-		addNativeSubtype: #brand groupTag: #brand iconName: 'gem' iconLabel: 'Brand';
+		addNativeSubtype: #brand groupTag: #brand iconName: self class appIcon iconLabel: self class appName;
 		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';
 		addNativeSubtype: #logout groupTag: #primary iconName: 'right-from-bracket' iconLabel: 'Logout';
 		yourself.

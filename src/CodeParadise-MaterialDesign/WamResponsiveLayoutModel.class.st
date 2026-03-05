@@ -105,7 +105,7 @@ WamResponsiveLayoutModel >> initialize [
 	floatingToolbar := WamToolbarFloatingModel new.
 	fab := WamFabModel new.
 	dialog := WamDialogModel new.
-	brandDialog := (WamDialogModel new contentModel: layoutSettings; yourself).
+	brandDialog := (WamBrandDialogModel new contentModel: layoutSettings; yourself).
 	layoutReady := WamLayoutReadyModel new.
 
 ]

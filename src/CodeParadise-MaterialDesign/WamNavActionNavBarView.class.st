@@ -44,6 +44,7 @@ WamNavActionNavBarView >> navbarBuildItem: aNavAction [
 		appendChild: (#div asHtmlTag
 			addClass: 'wam-navbar-labelText';
 			addClass: 'wa-text-truncate';
+			styleAt: 'max-width' put: '200px';
 			textContent: (aNavAction at: #iconLabel);
 			yourself);
 		yourself

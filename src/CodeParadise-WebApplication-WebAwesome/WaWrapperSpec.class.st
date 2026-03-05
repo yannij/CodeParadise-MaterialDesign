@@ -45,6 +45,9 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waSelectSpec generate.
 	self waSplitPanelSpec generate.
 	self waSwitchSpec generate.
+	self waTabSpec generate.
+	self waTabPanelSpec generate.
+	self waTabGroupSpec generate.
 	self waTextareaSpec generate.
 	self waTreeSpec generate.
 	self waTreeItemSpec generate.
@@ -445,6 +448,39 @@ WaWrapperSpec class >> waSwitchSpec [
 		cssPropertieAdd: 'width';
 		cssPropertieAdd: 'height';
 		cssPropertieAdd: 'thumb-size';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTabGroupSpec [
+
+	^ self new
+		wrapperClassName: #WaTabGroup;
+		slotAdd: 'nav';
+		stringPropertyAt: 'activation' put: '*auto|manual';
+		stringPropertyAt: 'active' put: '';
+		stringPropertyAt: 'placement' put: '*top|bottom|start|end';
+		booleanPropertyAt: 'without-scroll-controls' put: false;
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTabPanelSpec [
+
+	^ self new
+		wrapperClassName: #WaTabPanel;
+		booleanPropertyAt: 'active' put: false;
+		stringPropertyAt: 'name' put: '';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waTabSpec [
+
+	^ self new
+		wrapperClassName: #WaTab;
+		booleanPropertyAt: 'disabled' put: false;
+		stringPropertyAt: 'panel' put: '';
 		yourself
 ]
 
