@@ -14,7 +14,7 @@ WamLayoutReadyPresenter >> viewInitialized [
 
 	layout := self application layout.
 
-	layout brandDialog label: self application class appName.
+	layout brandDialog label: self application class appName; valueChanged.
 
 	props := layout layoutSettings asMap.
 	self view

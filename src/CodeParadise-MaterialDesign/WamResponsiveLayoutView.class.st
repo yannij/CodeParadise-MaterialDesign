@@ -991,7 +991,7 @@ WamResponsiveLayoutView >> setLayoutSettings: props [
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> settingsView [
 
-	^ (self brandDialogView) firstChildAtSlotNamed: #layoutSettings
+	^ self brandDialogView settingsView
 ]
 
 { #category : 'accessing - settings' }

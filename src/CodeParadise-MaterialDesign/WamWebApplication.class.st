@@ -275,7 +275,6 @@ WamWebApplication >> postLoad [
 	super postLoad.
 
 	self layout navRail navItems: self navItemsToUse; valueChanged.
-
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 
 	toolbar := self layout floatingToolbar.

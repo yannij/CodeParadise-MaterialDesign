@@ -12,9 +12,12 @@ WamBrandDialogPresenter >> renderView [
 	self model label ifNotNil: [ :value |
 		self view renderLabel: value ].
 
-	self model contentModel ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #layoutSettings.
-		self view openDialog ].
+	self model tabGroupItems doWithIndex: [ :eachItem :i |
+		eachItem ifNotNil: [
+		| key |
+		key := 'p', i printString.
+		self view renderTab: key label: eachItem tabName.
+		self renderChildViewForModel: eachItem atSlotNamed: key ] ].
 
 	self view renderOpen: self model open.
 

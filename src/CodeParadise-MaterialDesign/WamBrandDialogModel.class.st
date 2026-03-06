@@ -2,46 +2,23 @@ Class {
 	#name : 'WamBrandDialogModel',
 	#superclass : 'WamModel',
 	#instVars : [
-		'contentModel',
 		'label',
-		'body',
-		'open'
+		'open',
+		'tabGroupItems'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Preferences'
 }
 
-{ #category : 'instance creation' }
-WamBrandDialogModel class >> on: aModel [
+{ #category : 'initialization' }
+WamBrandDialogModel >> initialize [
 
-	^ self new
-		contentModel: aModel;
-		yourself
-]
+	super initialize.
 
-{ #category : 'accessing' }
-WamBrandDialogModel >> body [
+	"There are 5 tabs hardcoded in the template"
+	tabGroupItems := Array new: 5.
 
-	^ body
-]
-
-{ #category : 'accessing' }
-WamBrandDialogModel >> body: anObject [
-
-	body := anObject
-]
-
-{ #category : 'accessing' }
-WamBrandDialogModel >> contentModel [
-
-	^ contentModel
-]
-
-{ #category : 'accessing' }
-WamBrandDialogModel >> contentModel: anObject [
-
-	contentModel := anObject
 ]
 
 { #category : 'accessing' }
@@ -69,19 +46,27 @@ WamBrandDialogModel >> open: anObject [
 ]
 
 { #category : 'initialization' }
-WamBrandDialogModel >> setContentModel: anObject [
-
-	self contentModel: anObject.
-	"anObject valueChanged."
-	self valueChanged.
-	"self body: self contentModel printString."
-
-]
-
-{ #category : 'initialization' }
 WamBrandDialogModel >> setOpen: aBoolean [
 
 	self open: aBoolean.
 	self valueChanged.
 
+]
+
+{ #category : 'accessing' }
+WamBrandDialogModel >> tabGroupItemAt: index put: aTabGroupItem [
+
+	self tabGroupItems at: index put: aTabGroupItem
+]
+
+{ #category : 'accessing' }
+WamBrandDialogModel >> tabGroupItems [
+
+	^ tabGroupItems
+]
+
+{ #category : 'accessing' }
+WamBrandDialogModel >> tabGroupItems: anObject [
+
+	tabGroupItems := anObject
 ]

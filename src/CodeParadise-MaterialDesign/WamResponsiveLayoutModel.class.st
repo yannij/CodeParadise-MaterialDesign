@@ -93,6 +93,7 @@ WamResponsiveLayoutModel >> floatingToolbar: anObject [
 
 { #category : 'initialization' }
 WamResponsiveLayoutModel >> initialize [
+	| item |
 
 	super initialize.
 
@@ -105,7 +106,9 @@ WamResponsiveLayoutModel >> initialize [
 	floatingToolbar := WamToolbarFloatingModel new.
 	fab := WamFabModel new.
 	dialog := WamDialogModel new.
-	brandDialog := (WamBrandDialogModel new contentModel: layoutSettings; yourself).
+	item := WamTabGroupItemModel on: layoutSettings label: 'Settings'.
+	brandDialog := WamBrandDialogModel new.
+	brandDialog tabGroupItemAt: 1 put: item.
 	layoutReady := WamLayoutReadyModel new.
 
 ]
