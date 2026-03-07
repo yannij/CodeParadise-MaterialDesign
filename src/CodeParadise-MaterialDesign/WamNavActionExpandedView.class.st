@@ -14,12 +14,11 @@ WamNavActionExpandedView class >> template [
 	^ '<slot></slot>'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'rendering' }
 WamNavActionExpandedView >> renderNavExpanded: anItem [
 	| element |
 
 	element := self divExpanded: anItem.
-	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]

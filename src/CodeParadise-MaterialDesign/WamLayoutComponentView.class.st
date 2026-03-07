@@ -10,6 +10,12 @@ Class {
 }
 
 { #category : 'actions' }
+WamLayoutComponentView >> closeBrandDialog [
+
+	self layoutViewLazy brandDialogView closeBrandDialog
+]
+
+{ #category : 'actions' }
 WamLayoutComponentView >> closeDialog [
 
 	self layoutViewLazy dialogView closeDialog

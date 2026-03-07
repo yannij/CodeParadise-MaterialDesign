@@ -14,12 +14,11 @@ WamNavActionNarrowView class >> template [
 	^ '<slot></slot>'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'rendering' }
 WamNavActionNarrowView >> renderNavNarrow: anItem [
 	| element |
 
 	element := self divNarrow: anItem.
-	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]

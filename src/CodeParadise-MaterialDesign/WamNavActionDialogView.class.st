@@ -42,7 +42,6 @@ WamNavActionDialogView >> renderDialogItem: aNavAction [
 	| element |
 
 	element := self dialogBuildItem: aNavAction.
-	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]
@@ -50,7 +49,7 @@ WamNavActionDialogView >> renderDialogItem: aNavAction [
 { #category : 'rendering' }
 WamNavActionDialogView >> triggerNavEvent: aNavAction [
 
-	self closeDialog.
+	self closeBrandDialog.
 	super triggerNavEvent: aNavAction.
 
 ]

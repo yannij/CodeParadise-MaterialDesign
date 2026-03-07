@@ -38,7 +38,7 @@ WamBrandDialogView class >> template [
 ]
 
 { #category : 'rendering' }
-WamBrandDialogView >> closeDialog [
+WamBrandDialogView >> closeBrandDialog [
 
 	self dialogComponent openBeOff
 

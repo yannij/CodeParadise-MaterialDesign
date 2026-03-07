@@ -29,6 +29,7 @@ WamNavActionSubmenuView >> divSubmenu: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navsubmenu-item';
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navsubmenu-icon';
@@ -55,7 +56,6 @@ WamNavActionSubmenuView >> renderNavSubmenu: anItem [
 	| element |
 
 	element := self divSubmenu: anItem.
-	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: anItem ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]

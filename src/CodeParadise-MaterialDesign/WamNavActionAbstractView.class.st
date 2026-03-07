@@ -69,6 +69,7 @@ WamNavActionAbstractView >> divExpanded: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrailx-item'; addClass: 'wam-nav-font';
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrailx-icon';
@@ -89,6 +90,7 @@ WamNavActionAbstractView >> divNarrow: aNavAction [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrail-item';
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrail-icon';

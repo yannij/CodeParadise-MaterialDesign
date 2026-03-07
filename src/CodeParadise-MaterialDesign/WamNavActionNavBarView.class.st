@@ -56,7 +56,6 @@ WamNavActionNavBarView >> renderNavBarItem: aNavAction [
 	| element |
 
 	element := self navbarBuildItem: aNavAction.
-	element when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self.
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]
