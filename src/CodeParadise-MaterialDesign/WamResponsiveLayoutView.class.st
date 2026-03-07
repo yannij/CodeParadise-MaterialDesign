@@ -284,8 +284,7 @@ WamResponsiveLayoutView >> beEditablePane2 [
 WamResponsiveLayoutView >> beNotEditablePane2 [
 
 	self fabDisplay: true.
-	"self pane2Content wrappedView do: [ :each | each setEditable: false ]."
-	self pane2Content setEditable: false.
+	self pane2Content ifNotNil: [ :value | value setEditable: false ].
 
 ]
 
@@ -968,7 +967,7 @@ WamResponsiveLayoutView >> secondaryPaneOnly [
 
 	component := self paneLayoutView.
 	component ifNil: [
-		^ self systemLog logError: 'Pane lyout not found' ].
+		^ self systemLog logError: 'Pane layout not found' ].
 	component secondaryPaneOnly.
 
 ]
