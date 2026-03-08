@@ -12,6 +12,18 @@ Class {
 	#tag : 'Layout'
 }
 
+{ #category : 'accessing' }
+WamPaneLayoutModel >> detail [
+
+	^ self pane2 paneContent
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> detail: anObject [
+
+	self pane2 setPaneContent: anObject
+]
+
 { #category : 'initialization' }
 WamPaneLayoutModel >> initialize [
 
@@ -20,6 +32,18 @@ WamPaneLayoutModel >> initialize [
 	pane1Width := 500.
 	sidesheet := WamSidesheetModel new.
 
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> list [
+
+	^ self pane1 paneContent
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> list: anObject [
+
+	self pane1 setPaneContent: anObject
 ]
 
 { #category : 'accessing' }

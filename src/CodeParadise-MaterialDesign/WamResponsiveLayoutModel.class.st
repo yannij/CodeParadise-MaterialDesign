@@ -100,7 +100,7 @@ WamResponsiveLayoutModel >> initialize [
 	navPopups := OrderedIdentityDictionary new.
 	layoutSettings := WamPreferencesModel new.
 	twoPaneSplitPosition := 300.
-	paneLayout := WamListDetailLayoutModel new.
+	paneLayout := WamPaneLayoutModel new.
 	navRail := WamNavModel new.
 	dockedToolbar := WamToolbarDockedModel new.
 	floatingToolbar := WamToolbarFloatingModel new.
