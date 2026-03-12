@@ -58,6 +58,18 @@ WamWebApplication >> allModels [
 	self subclassResponsibility
 ]
 
+{ #category : 'navigation' }
+WamWebApplication >> appBar1Headline: aString [
+
+	self layout appBar1 headline: aString; valueChanged
+]
+
+{ #category : 'navigation' }
+WamWebApplication >> appBar2Headline: aString [
+
+	self layout appBar2 headline: aString; valueChanged
+]
+
 { #category : 'accessing' }
 WamWebApplication >> applicationModel [
 
@@ -181,9 +193,10 @@ WamWebApplication >> listDetailReset [
 	detail := list first.
 	self layout pane1 paneContent detail: detail.
 	self layout pane2 setPaneContent: detail."
-	self layout pane2 setPaneContent: nil.
-	self setAppBar2EditDelete.
+	"self layout pane2 setPaneContent: nil.
+	self setAppBar2EditDelete."
 
+	self setDetailNone
 ]
 
 { #category : 'model' }
@@ -350,6 +363,16 @@ WamWebApplication >> setAppBar2SaveCancel [
 ]
 
 { #category : 'model' }
+WamWebApplication >> setAppBar2TrailingActionsNone [
+
+	self layout appBar2
+		navActionItemsClear;
+		valueChanged;
+		yourself.
+
+]
+
+{ #category : 'model' }
 WamWebApplication >> setDetailAddNew [
 	| detail |
 
@@ -365,6 +388,8 @@ WamWebApplication >> setDetailNone [
 
 	self layout paneLayout detail: nil.
 	self layout pane2 setPaneContent: nil.
+	self appBar2Headline: ''.
+	self setAppBar2TrailingActionsNone.
 
 ]
 
