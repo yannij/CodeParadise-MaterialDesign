@@ -135,7 +135,7 @@ WamDemoAccountingApp class >> createDemoUserCompaniesIn: aRepository [
 	(2 2)
 	) do: [ :data | | newObject |
 		newObject := modelClass new
-			id: UUID versionSafeNew;
+			id: UUID new;
 			userId: (data at: 1);
 			companyId: (data at: 2);
 			yourself.
