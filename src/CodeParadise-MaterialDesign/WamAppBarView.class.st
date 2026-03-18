@@ -228,10 +228,12 @@ WamAppBarView >> triggerNavEvent: aNavAction [
 	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
 
-	eventId = 'save' ifTrue: [ | changes paneContentView |
+	eventId = #save ifTrue: [ | changes paneContentView |
 		paneContentView := self layoutViewLazy pane2View paneContentView.
+		self systemLog logString: '****', paneContentView printString.
 		paneContentView ifNil: [ ^ self ].
 		changes := paneContentView "wrappedView" changeMap.
+		self systemLog logString: '****', changes printString.
 		event parameters at: #changes put: changes ].
 
 	self serverAnnounce: event

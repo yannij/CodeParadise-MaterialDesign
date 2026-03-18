@@ -95,11 +95,6 @@ WamItemWrapperModel >> isUpdating [
 	^ self crudState = #updating
 ]
 
-{ #category : 'todo' }
-WamItemWrapperModel >> setContent: anObject [
-	"TODO"
-]
-
 { #category : 'accessing' }
 WamItemWrapperModel >> wrappedModel [
 

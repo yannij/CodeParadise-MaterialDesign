@@ -9,28 +9,16 @@ Class {
 { #category : 'events' }
 WamResponsiveLayoutPresenter >> doCancel: aNavActionEvent [
 
-	self application setAppBar2EditDelete.
+	self application wrapperCancel: aNavActionEvent.
 	self view beNotEditablePane2.
-
-]
-
-{ #category : 'events' }
-WamResponsiveLayoutPresenter >> doCreate: aNavActionEvent [
-
-	self application setDetailAddNew.
-	self layout pane2 valueChanged.
-	self view beEditablePane2.
-	self view secondaryPaneOnly.
-	self application setAppBar2SaveCancel.
-
 
 ]
 
 { #category : 'events' }
 WamResponsiveLayoutPresenter >> doDelete: aNavActionEvent [
 
+	self application wrapperDelete: aNavActionEvent.
 	self view primaryPaneOnly.
-	self application listDetailRemove: aNavActionEvent.
 
 ]
 
@@ -38,10 +26,7 @@ WamResponsiveLayoutPresenter >> doDelete: aNavActionEvent [
 WamResponsiveLayoutPresenter >> doSave: aNavActionEvent [
 	| result |
 
-	result := self application listDetailAdd: aNavActionEvent.
-	self layout pane2 valueChanged.
-	self layout pane2 paneContent valueChanged.
-	self application setAppBar2EditDelete.
+	result := self application wrapperSave: aNavActionEvent.
 	result = true ifTrue: [
 		self view beNotEditablePane2 ].
 
@@ -50,8 +35,7 @@ WamResponsiveLayoutPresenter >> doSave: aNavActionEvent [
 { #category : 'events' }
 WamResponsiveLayoutPresenter >> doUpdate: aNavActionEvent [
 
-	self layout pane2 valueChanged.
-	self application setAppBar2SaveCancel.
+	self application wrapperUpdate: aNavActionEvent.
 	self view beEditablePane2.
 
 ]

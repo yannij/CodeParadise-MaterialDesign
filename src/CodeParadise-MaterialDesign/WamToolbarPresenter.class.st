@@ -17,7 +17,7 @@ WamToolbarPresenter >> clearAllSlots [
 { #category : 'events' }
 WamToolbarPresenter >> doCancel: aNavActionEvent [
 
-	self application setAppBar2EditDelete.
+	self application wrapperCancel: aNavActionEvent.
 	self view beNotEditablePane2.
 
 ]
@@ -26,19 +26,16 @@ WamToolbarPresenter >> doCancel: aNavActionEvent [
 WamToolbarPresenter >> doCreate: aNavActionEvent [
 
 	self application setDetailAddNew.
-	self layout pane2 valueChanged.
 	self view beEditablePane2.
 	self view secondaryPaneOnly.
-	self application setAppBar2SaveCancel.
-
 
 ]
 
 { #category : 'events' }
 WamToolbarPresenter >> doDelete: aNavActionEvent [
 
+	self application wrapperDelete: aNavActionEvent.
 	self view primaryPaneOnly.
-	self application listDetailRemove: aNavActionEvent.
 
 ]
 
@@ -46,10 +43,7 @@ WamToolbarPresenter >> doDelete: aNavActionEvent [
 WamToolbarPresenter >> doSave: aNavActionEvent [
 	| result |
 
-	result := self application listDetailAdd: aNavActionEvent.
-	self layout pane2 valueChanged.
-	self layout pane2 paneContent ifNotNil: [ :value | value valueChanged ].
-	self application setAppBar2EditDelete.
+	result := self application wrapperSave: aNavActionEvent.
 	result = true ifTrue: [
 		self view beNotEditablePane2 ].
 
@@ -58,8 +52,7 @@ WamToolbarPresenter >> doSave: aNavActionEvent [
 { #category : 'events' }
 WamToolbarPresenter >> doUpdate: aNavActionEvent [
 
-	self layout pane2 valueChanged.
-	self application setAppBar2SaveCancel.
+	self application wrapperUpdate: aNavActionEvent.
 	self view beEditablePane2.
 
 ]

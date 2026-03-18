@@ -63,8 +63,8 @@ WamItemWrapperView >> setEditable: aBoolean [
 
 	self systemLog logTrace: 'setEditable: ', aBoolean printString.
 
-	(self childrenAtSlotNamed: #wrapped) do: [ :eachAttribute |
-		eachAttribute setEditable: aBoolean ]
+	(self childrenAtSlotNamed: #wrapped) do: [ :each |
+		each setEditable: aBoolean ]
 
 ]
 

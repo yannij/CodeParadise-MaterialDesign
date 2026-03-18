@@ -151,27 +151,6 @@ WamWebApplication >> layout: anObject [
 ]
 
 { #category : 'model' }
-WamWebApplication >> listDetailAdd: anObject [
-	| theModel listDetail result |
-
-	theModel := self layout pane2 paneContent.
-	theModel wrappedModel handleSave: anObject.
-	theModel valueChanged.
-
-	listDetail := self layout paneLayout.
-	theModel isCreating
-		ifTrue: [
-			result := self modelAdd: listDetail detail wrappedModel.
-			listDetail list listSet: self allModels.
-			self listDetailReset. ]
-		ifFalse: [
-			result := self modelUpdate: listDetail detail wrappedModel ].
-
-	^ result
-
-]
-
-{ #category : 'model' }
 WamWebApplication >> listDetailRemove: ignored [
 	| listDetail |
 
@@ -184,17 +163,6 @@ WamWebApplication >> listDetailRemove: ignored [
 
 { #category : 'model' }
 WamWebApplication >> listDetailReset [
-	"| list detail |
-
-	list := self layout pane1 paneContent list.
-	list isEmpty ifTrue: [
-		^ self setDetailNone ].
-
-	detail := list first.
-	self layout pane1 paneContent detail: detail.
-	self layout pane2 setPaneContent: detail."
-	"self layout pane2 setPaneContent: nil.
-	self setAppBar2EditDelete."
 
 	self setDetailNone
 ]
@@ -374,12 +342,15 @@ WamWebApplication >> setAppBar2TrailingActionsNone [
 
 { #category : 'model' }
 WamWebApplication >> setDetailAddNew [
-	| detail |
+	| newModel detail |
 
-	detail := self layout pane1 paneContent modelWrapperClass onNewModel: self newModelInstance.
+	newModel := self newModelInstance.
+	detail := self layout pane1 paneContent modelWrapperClass onNewModel: newModel.
 
 	self layout paneLayout detail: detail.
 	self layout pane2 setPaneContent: detail.
+	self appBar2Headline: 'ADD: '.
+	self setAppBar2SaveCancel.
 
 ]
 
@@ -445,4 +416,51 @@ WamWebApplication >> userEventSpecs [
 WamWebApplication >> userEventSpecs: anObject [
 
 	userEventSpecs := anObject
+]
+
+{ #category : 'model' }
+WamWebApplication >> wrapperCancel: aNavActionEvent [
+
+	self setAppBar2EditDelete.
+
+]
+
+{ #category : 'model' }
+WamWebApplication >> wrapperDelete: aNavActionEvent [
+
+	self listDetailRemove: aNavActionEvent.
+
+]
+
+{ #category : 'model' }
+WamWebApplication >> wrapperSave: anObject [
+	| theModel listDetail result |
+
+	theModel := self layout pane2 paneContent.
+	theModel wrappedModel handleSave: anObject.
+	theModel valueChanged.
+
+	listDetail := self layout paneLayout.
+	theModel isCreating
+		ifTrue: [
+			result := self modelAdd: listDetail detail wrappedModel.
+			listDetail list listSet: self allModels.
+			self listDetailReset. ]
+		ifFalse: [
+			result := self modelUpdate: listDetail detail wrappedModel ].
+
+	self layout pane2 valueChanged.
+	self layout pane2 paneContent ifNotNil: [ :value | value valueChanged ].
+	self setAppBar2EditDelete.
+
+	^ result
+
+]
+
+{ #category : 'model' }
+WamWebApplication >> wrapperUpdate: aNavActionEvent [
+
+	self layout pane2 valueChanged.
+	self setAppBar2SaveCancel.
+
 ]
