@@ -6,14 +6,6 @@ Class {
 	#tag : 'NavAction'
 }
 
-{ #category : 'as yet unclassified' }
-WamNavActionExpandedView class >> template [
-
-	<webResource: #html>
-
-	^ '<slot></slot>'
-]
-
 { #category : 'rendering' }
 WamNavActionExpandedView >> renderNavExpanded: anItem [
 	| element |

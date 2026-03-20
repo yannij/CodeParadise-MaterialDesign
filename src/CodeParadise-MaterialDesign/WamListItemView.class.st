@@ -47,14 +47,6 @@ WamListItemView class >> globalStyle [
 '
 ]
 
-{ #category : 'web resources' }
-WamListItemView class >> template [
-
-	<webResource: #html>
-
-	^ '<slot name="listItem"></slot>'
-]
-
 { #category : 'rendering' }
 WamListItemView >> renderListItem: aMap [
 	| headline leadingIcon leadingAction leadingIconTag trailingIcon trailingAction trailingIconTag listItemTag elSpan1 elSpan2 |
@@ -90,7 +82,7 @@ WamListItemView >> renderListItem: aMap [
 		ifNil: [
 			self removeChildrenAtSlotNamed: #listItem ]
 		ifNotNil: [ :value |
-			self replaceAllChildrenWith: listItemTag atSlotNamed: #listItem ].
+			self replaceAllChildrenWith: listItemTag atSlotNamed: nil ].
 
 ]
 

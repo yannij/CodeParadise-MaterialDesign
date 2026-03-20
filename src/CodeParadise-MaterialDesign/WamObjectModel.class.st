@@ -69,6 +69,15 @@ WamObjectModel >> handleUpdate: anObject [
 ]
 
 { #category : 'printing' }
+WamObjectModel >> mdAddingTitle [
+	"Answer a string to show when the receiver
+	is a new instance to be added.
+	Subclasses should provide better string"
+
+	^ 'ADD: ', self class name asString
+]
+
+{ #category : 'printing' }
 WamObjectModel >> mdPrimaryString [
 	"Answer a short descriptive string of the receiver.
 	Typically used for display in a list.

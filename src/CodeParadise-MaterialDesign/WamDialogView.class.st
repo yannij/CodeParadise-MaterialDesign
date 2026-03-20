@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamDialogView',
 	#superclass : 'WamLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Dialog'
 }
 
 { #category : 'web resources' }

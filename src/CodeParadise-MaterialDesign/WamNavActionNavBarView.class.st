@@ -6,14 +6,6 @@ Class {
 	#tag : 'NavAction'
 }
 
-{ #category : 'web resources' }
-WamNavActionNavBarView class >> template [
-
-	<webResource: #html>
-
-	^ '<slot></slot>'
-]
-
 { #category : 'rendering' }
 WamNavActionNavBarView >> closeSubmenu [
 

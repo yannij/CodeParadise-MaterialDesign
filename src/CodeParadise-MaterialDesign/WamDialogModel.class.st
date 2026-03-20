@@ -4,12 +4,11 @@ Class {
 	#instVars : [
 		'contentModel',
 		'label',
-		'body',
 		'open'
 	],
-	#category : 'CodeParadise-MaterialDesign-Layout',
+	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#tag : 'Dialog'
 }
 
 { #category : 'instance creation' }
@@ -18,18 +17,6 @@ WamDialogModel class >> on: aModel [
 	^ self new
 		contentModel: aModel;
 		yourself
-]
-
-{ #category : 'accessing' }
-WamDialogModel >> body [
-
-	^ body
-]
-
-{ #category : 'accessing' }
-WamDialogModel >> body: anObject [
-
-	body := anObject
 ]
 
 { #category : 'accessing' }
@@ -82,7 +69,6 @@ WamDialogModel >> setContentModel: anObject [
 
 	self contentModel: anObject.
 	self valueChanged.
-	"self body: self contentModel printString."
 
 ]
 

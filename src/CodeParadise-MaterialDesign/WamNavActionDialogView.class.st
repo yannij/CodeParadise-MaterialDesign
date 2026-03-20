@@ -6,14 +6,6 @@ Class {
 	#tag : 'NavAction'
 }
 
-{ #category : 'web resources' }
-WamNavActionDialogView class >> template [
-
-	<webResource: #html>
-
-	^ '<slot></slot>'
-]
-
 { #category : 'rendering' }
 WamNavActionDialogView >> dialogBuildItem: aNavAction [
 	| iconName |

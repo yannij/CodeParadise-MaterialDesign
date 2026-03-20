@@ -6,14 +6,6 @@ Class {
 	#tag : 'NavAction'
 }
 
-{ #category : 'as yet unclassified' }
-WamNavActionNarrowView class >> template [
-
-	<webResource: #html>
-
-	^ '<slot></slot>'
-]
-
 { #category : 'rendering' }
 WamNavActionNarrowView >> renderNavNarrow: anItem [
 	| element |

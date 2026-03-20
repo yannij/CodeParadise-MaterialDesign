@@ -10,13 +10,6 @@ Class {
 	#tag : 'Preferences'
 }
 
-{ #category : 'web resources' }
-WamPreferencesView class >> template [
-	<webResource: #html>
-
-	^ '<slot></slot>'
-]
-
 { #category : 'utilities' }
 WamPreferencesView >> addAttributeContainerStyle: element [
 

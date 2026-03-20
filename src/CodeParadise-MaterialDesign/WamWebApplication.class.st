@@ -91,10 +91,36 @@ WamWebApplication >> brandDialogOpen [
 
 ]
 
+{ #category : 'actions' }
+WamWebApplication >> confirm: aString onAnswer: aBlock [
+	| d |
+
+	d := self layout dialog
+		label: '';
+		setContentModel: (WamYesOrNoDialogModel new
+			message: aString;
+			answerBlock: aBlock;
+			yourself);
+		yourself.
+	d open: true.
+	d valueChanged.
+
+]
+
 { #category : 'accessing' }
 WamWebApplication >> customColorTheme [
 
 	^ nil
+]
+
+{ #category : 'actions' }
+WamWebApplication >> dialogOpen: aBoolean [
+	| d |
+
+	d := self layout dialog.
+	d open: aBoolean.
+	d valueChanged.
+
 ]
 
 { #category : 'actions - toolbar' }
@@ -122,7 +148,7 @@ WamWebApplication >> eventSpecMeta [
 { #category : 'events' }
 WamWebApplication >> handleLoginRequested: anObject [
 
-	self systemLog logTrace: ' Login Requested'.
+	self systemLog logTrace: 'Login Requested'.
 
 ]
 
@@ -151,7 +177,7 @@ WamWebApplication >> layout: anObject [
 ]
 
 { #category : 'model' }
-WamWebApplication >> listDetailRemove: ignored [
+WamWebApplication >> listDetailRemove [
 	| listDetail |
 
 	listDetail := self layout paneLayout.
@@ -159,6 +185,17 @@ WamWebApplication >> listDetailRemove: ignored [
 	listDetail list listSet: self allModels.
 	self setDetailNone.
 
+]
+
+{ #category : 'model' }
+WamWebApplication >> listDetailRemoveConfirm: aString [
+	| result |
+
+	result := false.
+	self
+		confirm: aString
+		onAnswer: [ :answer | answer ifTrue: [ result := self listDetailRemove ] ].
+	^ result
 ]
 
 { #category : 'model' }
@@ -349,7 +386,7 @@ WamWebApplication >> setDetailAddNew [
 
 	self layout paneLayout detail: detail.
 	self layout pane2 setPaneContent: detail.
-	self appBar2Headline: 'ADD: '.
+	self appBar2Headline: detail wrappedModel mdAddingTitle.
 	self setAppBar2SaveCancel.
 
 ]
@@ -426,9 +463,12 @@ WamWebApplication >> wrapperCancel: aNavActionEvent [
 ]
 
 { #category : 'model' }
-WamWebApplication >> wrapperDelete: aNavActionEvent [
+WamWebApplication >> wrapperDelete: ignored [
+	| confirmString detail |
 
-	self listDetailRemove: aNavActionEvent.
+	detail := self layout paneLayout detail.
+	confirmString := 'Remove: ', detail wrappedModel mdPrimaryString, ' ?'.
+	self listDetailRemoveConfirm: confirmString.
 
 ]
 

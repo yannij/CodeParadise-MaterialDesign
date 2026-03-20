@@ -31,6 +31,7 @@ WaWrapperSpec class >> generateAllWrappers [
 	self waColorPickerSpec generate.
 	self waDetailsSpec generate.
 	self waDialogSpec generate.
+	self waDividerSpec generate.
 	self waDrawerSpec generate.
 	self waDropdownSpec generate.
 	self waDropdownItemSpec generate.
@@ -176,6 +177,18 @@ WaWrapperSpec class >> waDialogSpec [
 		cssPropertieAdd: 'width';
 		cssPropertieAdd: 'show-duration';
 		cssPropertieAdd: 'hide-duration';
+		yourself
+]
+
+{ #category : 'code generation' }
+WaWrapperSpec class >> waDividerSpec [
+
+	^ self new
+		wrapperClassName: #WaDivider;
+		stringPropertyAt: 'orientation' put: '*horizontal|vertical';
+		cssPropertieAdd: 'color';
+		cssPropertieAdd: 'spacing';
+		cssPropertieAdd: 'width';
 		yourself
 ]
 
