@@ -62,6 +62,12 @@ WamItemWrapperModel >> crudState: anObject [
 	crudState := anObject
 ]
 
+{ #category : 'actions' }
+WamItemWrapperModel >> handleSave: aNavActionEvent [
+
+	self wrappedModel handleSave: aNavActionEvent
+]
+
 { #category : 'initialization' }
 WamItemWrapperModel >> initialize [
 

@@ -49,12 +49,12 @@ WamObjectModel >> handleDelete: anObject [
 ]
 
 { #category : 'rendering' }
-WamObjectModel >> handleSave: anObject [
+WamObjectModel >> handleSave: aNavActionEvent [
 	| changes |
 
-	self systemLog logTrace: anObject printString.
+	self systemLog logTrace: aNavActionEvent printString.
 
-	changes := anObject parameterAt: #changes.
+	changes := aNavActionEvent parameterAt: #changes.
 	changes ifNil: [
 		^ self systemLog logError: 'Missing "changes" value on "save" event'].
 	self applyChanges: changes.

@@ -286,6 +286,12 @@ WamWebApplication >> newModelInstance [
 
 ]
 
+{ #category : 'model' }
+WamWebApplication >> newWrappedModel [
+
+	^ self layout pane1 paneContent modelWrapperClass onNewModel: self newModelInstance
+]
+
 { #category : 'actions' }
 WamWebApplication >> postLoad [
 	| toolbar appBar leadingAction |
@@ -379,11 +385,9 @@ WamWebApplication >> setAppBar2TrailingActionsNone [
 
 { #category : 'model' }
 WamWebApplication >> setDetailAddNew [
-	| newModel detail |
+	| detail |
 
-	newModel := self newModelInstance.
-	detail := self layout pane1 paneContent modelWrapperClass onNewModel: newModel.
-
+	detail := self newWrappedModel.
 	self layout paneLayout detail: detail.
 	self layout pane2 setPaneContent: detail.
 	self appBar2Headline: detail wrappedModel mdAddingTitle.
@@ -473,11 +477,11 @@ WamWebApplication >> wrapperDelete: ignored [
 ]
 
 { #category : 'model' }
-WamWebApplication >> wrapperSave: anObject [
+WamWebApplication >> wrapperSave: aNavActionEvent [
 	| theModel listDetail result |
 
 	theModel := self layout pane2 paneContent.
-	theModel wrappedModel handleSave: anObject.
+	theModel handleSave: aNavActionEvent.
 	theModel valueChanged.
 
 	listDetail := self layout paneLayout.
