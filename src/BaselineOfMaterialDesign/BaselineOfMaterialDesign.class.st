@@ -30,5 +30,5 @@ BaselineOfMaterialDesign >> codeparadise: spec [
 	spec
 		baseline: 'CodeParadise'
 		with: [ spec repository: 'github://ErikOnBike/CodeParadise';
-			loads: #('MVP') ]
+			loads: #('MVP' 'CodeParadise-WebApplication-Development') ]
 ]
