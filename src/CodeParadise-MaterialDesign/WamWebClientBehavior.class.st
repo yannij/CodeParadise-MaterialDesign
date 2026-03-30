@@ -59,7 +59,7 @@ WamWebClientBehavior >> appTagName [
 { #category : 'accessing' }
 WamWebClientBehavior >> appViewElement [
 
-	^ CpDomElement document firstDescendantMatching: self appTagName
+	^ CpBrowserDocument current firstDescendantMatching: self appTagName
 ]
 
 { #category : 'accessing' }
