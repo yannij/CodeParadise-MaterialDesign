@@ -151,7 +151,7 @@ WamWebApplication >> extensionMethodCategories [
 	"Answer the collection of extension method categories needed for the receiver"
 
 	^ super extensionMethodCategories,
-		#(webApplicationWebAwesomeExtension)
+		#(webApplicationWebAwesomeExtension webApplicationWebAwesomeDebuggerExtension)
 ]
 
 { #category : 'events' }
