@@ -3,7 +3,6 @@ Class {
 	#superclass : 'WamView',
 	#instVars : [
 		'debounceTransition',
-		'layoutSettingsView',
 		'layoutWidthCached',
 		'layoutBreakpoints',
 		'popups'

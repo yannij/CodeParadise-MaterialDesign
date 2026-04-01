@@ -217,27 +217,14 @@ WamView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 
 { #category : 'find element' }
 WamView >> layoutViewFind [
-	| appComponent |
 
-	"^ WamResponsiveLayoutView first"
-	"^ self class document firstDescendantMatching: WamResponsiveLayoutView asCssSelector"
-	appComponent := CpHtmlElement documentBody children detect: [ :each | each isWebComponent ] ifNone: [].
-	"self systemLog logTrace: appComponent printString."
-	^ appComponent firstChildAtSlotNamed: #layout
+	^ WamResponsiveLayoutView first
 ]
 
 { #category : 'accessing' }
 WamView >> layoutViewLazy [
 
 	self subclassResponsibility
-]
-
-{ #category : 'find element' }
-WamView >> modalDivFind [
-	"Locate the div where modal components can attach"
-
-	^ self layoutViewFind findByIdInShadowDom: 'wamModalDiv'
-
 ]
 
 { #category : 'find element' }
