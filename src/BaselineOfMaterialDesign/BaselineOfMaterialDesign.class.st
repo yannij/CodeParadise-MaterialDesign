@@ -10,11 +10,7 @@ BaselineOfMaterialDesign >> baseline: spec [
 	<baseline>
 
 	spec for: #'common' do: [
-		"self codeparadise: spec."
-		spec package: 'CodeParadise-WebApplication' with: [
-			spec repository: 'github://ErikOnBike/CodeParadise'].
-		spec package: 'CodeParadise-WebApplication-MVP' with: [
-			spec repository: 'github://ErikOnBike/CodeParadise'].
+		self codeparadise: spec.
 
 		spec
 			package: 'CodeParadise-WebApplication-WebAwesome' with: [
@@ -36,5 +32,10 @@ BaselineOfMaterialDesign >> codeparadise: spec [
 	spec
 		baseline: 'CodeParadise'
 		with: [ spec repository: 'github://ErikOnBike/CodeParadise';
-			loads: #('MVP') ]
+			loads: #('MVP') ].
+
+	spec package: 'CodeParadise-WebApplication' with: [
+		spec repository: 'github://ErikOnBike/CodeParadise'].
+	spec package: 'CodeParadise-WebApplication-MVP' with: [
+		spec repository: 'github://ErikOnBike/CodeParadise'].
 ]
