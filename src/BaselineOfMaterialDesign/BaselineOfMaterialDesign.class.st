@@ -14,7 +14,7 @@ BaselineOfMaterialDesign >> baseline: spec [
 
 		spec
 			package: 'CodeParadise-WebApplication-WebAwesome' with: [
-				spec requires: #('CodeParadise-WebApplication') ];
+				spec requires: #('CodeParadise-WebApplication' 'CodeParadise-Browser-Support') ];
 			package: 'CodeParadise-MaterialDesign' with: [
 				spec requires: #('CodeParadise-WebApplication-WebAwesome' 'CodeParadise-WebApplication-MVP') ];
 			package: 'CodeParadise-Examples-MD3' with: [
@@ -29,11 +29,13 @@ BaselineOfMaterialDesign >> baseline: spec [
 { #category : 'baselines - dependencies' }
 BaselineOfMaterialDesign >> codeparadise: spec [
 
-	spec
+	"spec
 		baseline: 'CodeParadise'
 		with: [ spec repository: 'github://ErikOnBike/CodeParadise';
-			loads: #('MVP') ].
+			loads: #('MVP') ]."
 
+	spec package: 'CodeParadise-Browser-Support-WebApplication' with: [
+		spec repository: 'github://ErikOnBike/CodeParadise'].
 	spec package: 'CodeParadise-WebApplication' with: [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
 	spec package: 'CodeParadise-WebApplication-MVP' with: [
