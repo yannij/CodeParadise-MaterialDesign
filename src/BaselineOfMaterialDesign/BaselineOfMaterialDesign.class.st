@@ -29,10 +29,10 @@ BaselineOfMaterialDesign >> baseline: spec [
 { #category : 'baselines - dependencies' }
 BaselineOfMaterialDesign >> codeparadise: spec [
 
-	"spec
+	spec
 		baseline: 'CodeParadise'
 		with: [ spec repository: 'github://ErikOnBike/CodeParadise';
-			loads: #('MVP') ]."
+			loads: #('MVP') ].
 
 	spec package: 'CodeParadise-Browser-Support' with: [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
