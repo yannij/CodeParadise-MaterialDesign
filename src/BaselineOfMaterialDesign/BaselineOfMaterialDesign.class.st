@@ -34,7 +34,7 @@ BaselineOfMaterialDesign >> codeparadise: spec [
 		with: [ spec repository: 'github://ErikOnBike/CodeParadise';
 			loads: #('MVP') ]."
 
-	spec package: 'CodeParadise-Browser-Support-WebApplication' with: [
+	spec package: 'CodeParadise-Browser-Support' with: [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
 	spec package: 'CodeParadise-WebApplication' with: [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
