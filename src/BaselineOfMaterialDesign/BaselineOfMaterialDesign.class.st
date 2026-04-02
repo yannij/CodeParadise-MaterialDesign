@@ -10,18 +10,24 @@ BaselineOfMaterialDesign >> baseline: spec [
 	<baseline>
 
 	spec for: #'common' do: [
-		self codeparadise: spec.
+		"self codeparadise: spec."
+		spec package: 'CodeParadise-WebApplication' with: [
+			spec repository: 'github://ErikOnBike/CodeParadise'].
+		spec package: 'CodeParadise-WebApplication-MVP' with: [
+			spec repository: 'github://ErikOnBike/CodeParadise'].
 
 		spec
-			package: 'CodeParadise-WebApplication-WebAwesome' with: [ spec requires: #('CodeParadise') ];
-			package: 'CodeParadise-MaterialDesign' with: [ spec requires: #('CodeParadise-WebApplication-WebAwesome') ];
-			package: 'CodeParadise-Examples-MD3' with: [ spec requires: #('CodeParadise-MaterialDesign') ].
+			package: 'CodeParadise-WebApplication-WebAwesome' with: [
+				spec requires: #('CodeParadise-WebApplication') ];
+			package: 'CodeParadise-MaterialDesign' with: [
+				spec requires: #('CodeParadise-WebApplication-WebAwesome' 'CodeParadise-WebApplication-MVP') ];
+			package: 'CodeParadise-Examples-MD3' with: [
+				spec requires: #('CodeParadise-MaterialDesign') ].
 
 		spec
-			group: 'Core' with: #('CodeParadise-MaterialDesign');
-			group: 'Tests' with: #();
-			group: 'Examples' with: #('CodeParadise-Examples-MD3');
-			group: 'default' with: #('Core' 'Tests' 'Examples') ]
+			group: 'Production' with: #('CodeParadise-MaterialDesign');
+			group: 'Examples' with: #('Development' 'CodeParadise-Examples-MD3');
+			group: 'default' with: #('Examples') ]
 ]
 
 { #category : 'baselines - dependencies' }
