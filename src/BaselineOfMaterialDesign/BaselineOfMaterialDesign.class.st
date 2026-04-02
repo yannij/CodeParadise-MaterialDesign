@@ -14,7 +14,7 @@ BaselineOfMaterialDesign >> baseline: spec [
 
 		spec
 			package: 'CodeParadise-WebApplication-WebAwesome' with: [
-				spec requires: #('CodeParadise-WebApplication' 'CodeParadise-Browser-Support') ];
+				spec requires: #('CodeParadise-WebApplication' 'CodeParadise' 'CodeParadise-Browser-Support') ];
 			package: 'CodeParadise-MaterialDesign' with: [
 				spec requires: #('CodeParadise-WebApplication-WebAwesome' 'CodeParadise-WebApplication-MVP') ];
 			package: 'CodeParadise-Examples-MD3' with: [
