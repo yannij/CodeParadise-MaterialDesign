@@ -1,95 +1,52 @@
 Class {
 	#name : 'WamLoginView',
-	#superclass : 'WamObjectView',
-	#category : 'CodeParadise-MaterialDesign-Login',
+	#superclass : 'WamDialogContentView',
+	#instVars : [
+		'loginUsername',
+		'loginPassword'
+	],
+	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Login'
+	#tag : 'Dialog'
 }
 
-{ #category : 'web resources' }
-WamLoginView class >> style [
+{ #category : 'rendering' }
+WamLoginView >> answerParameters: answer [
 
-	<webResource: #css>
+	^ {
+		#yesOrNo -> answer.
+		#loginUsername -> loginUsername value.
+		#loginPassword -> loginPassword value.
+	} asDictionary
 
-	^ '
-.wam-login-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
-}
-.wam-login {
-  min-width: 300px;
-  max-width: 400px;
-  background: var(--wa-color-brand-fill-normal);
-}
-.wam-login-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  background: var(--wa-color-brand-fill-normal);
-  font-size: var(--wa-font-size-x-large);
- }
-'
-]
-
-{ #category : 'web resources' }
-WamLoginView class >> template [
-
-	<webResource: #html>
-
-	^ '<div id="container" class="wam-login-container">
-<div class="wam-login">
-  <div class="wam-login-header"><slot name="header"></slot></div>
-  <slot name="card"></slot>
-  <slot name="buttons"></slot>
-</div>
-</div>'
 ]
 
 { #category : 'rendering' }
-WamLoginView >> addButtons [
-	| element |
+WamLoginView >> fieldAt: key label: aLabel input: aText [
 
-	element := WaButton new
-		variantBeBrand;
-		label: 'Login';
-		when: CpClickEvent basicPrimary send: #login to: self;
-		styleAt: 'width' put: '100%';
-		styleAt: 'padding' put: '0 8px 8px 8px';
+	^ WaInput new
+		name: key;
+		addClass: 'wam-input';
+		labelText: aLabel;
+		value: aText;
+		"hint: 'Help text...', aLabel;"
+		disabled: false;
+		attributeAdd: #filled;
 		yourself.
-	self appendChild: element atSlotNamed: #buttons.
 
-	element := WaButton new
-		variantBeNeutral;
-		label: 'Cancel';
-		when: CpClickEvent basicPrimary send: #cancel to: self;
-		styleAt: 'width' put: '100%';
-		styleAt: 'padding' put: '0 8px 8px 8px';
-		yourself.
-	self appendChild: element atSlotNamed: #buttons.
-]
-
-{ #category : 'actions' }
-WamLoginView >> cancel [
 ]
 
 { #category : 'rendering' }
-WamLoginView >> header: aString [
+WamLoginView >> renderMainContent: aString [
+	| fields |
 
-	self replaceAllChildrenWith: aString asHtmlElement atSlotNamed: #header.
-]
+	fields := 'div' asHtmlTag
+		addClass: 'wam-fields';
+		appendChild: (loginUsername := self fieldAt: #loginUsername label: 'Username' input: '');
+		appendChild: (loginPassword := self fieldAt: #loginPassword label: 'Password' input: '');
+		yourself.
 
-{ #category : 'accessing' }
-WamLoginView >> layoutViewLazy [
+	self removeChildrenAtSlotNamed: nil.
+	self appendChild: fields atSlotNamed: nil.
 
-	self shouldNotImplement
-]
-
-{ #category : 'actions' }
-WamLoginView >> login [
-
-	self serverAnnounce: WamLoginRequested new
 ]

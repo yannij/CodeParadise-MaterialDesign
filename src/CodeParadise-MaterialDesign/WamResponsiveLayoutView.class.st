@@ -166,30 +166,6 @@ WamResponsiveLayoutView class >> template [
 '
 ]
 
-{ #category : 'login' }
-WamResponsiveLayoutView >> addLoginDialog: label [
-	| dialog fields |
-
-	fields := 'div' asHtmlTag
-		addClass: 'wam-fields';
-		appendChild: (self fieldAt: #loginUsername label: 'Username' input: '');
-		appendChild: (self fieldAt: #loginPassword label: 'Password' input: '');
-		yourself.
-
-	dialog := WaDialog new
-		id: 'login-dialog';
-		label: label;
-		appendChild: fields;
-		appendChild: (self buttonLabel: 'Login' icon: 'right-to-bracket' send: #requestLogin);
-		yourself.
-
-	"Do separately, so dialog is not nil"
-	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'xmark' send: #openBeOff receiver: dialog).
-
-	CpHtmlElement documentBody appendChild: dialog.
-
-]
-
 { #category : 'actions' }
 WamResponsiveLayoutView >> announceSetting: aspect value: anObject [
 
@@ -768,14 +744,6 @@ WamResponsiveLayoutView >> layoutWidthCached: anObject [
 ]
 
 { #category : 'actions' }
-WamResponsiveLayoutView >> loginOpen [
-
-	self systemLog logTrace: 'loginOpen'.
-	self findLoginDialog openBeOn
-
-]
-
-{ #category : 'actions' }
 WamResponsiveLayoutView >> modalNavOpen [
 	| drawer |
 
@@ -939,7 +907,6 @@ WamResponsiveLayoutView >> requestLogin [
 
 	self systemLog logTrace: '==== request login'.
 	self serverAnnounce: (WamLoginRequested new).
-	self findLoginDialog openBeOff.
 
 ]
 

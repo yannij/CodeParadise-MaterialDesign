@@ -333,7 +333,7 @@ WamView >> triggerNavEvent: aNavAction [
 	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
 	eventId = #login ifTrue: [
-		^ self layoutViewLazy loginOpen ].
+		^ self layoutViewLazy requestLogin ].
 
 	data := aNavAction at: #data.
 	navActionEvent := data

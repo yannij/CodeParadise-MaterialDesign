@@ -1,37 +1,15 @@
 Class {
 	#name : 'WamLoginPresenter',
-	#superclass : 'WamObjectPresenter',
-	#category : 'CodeParadise-MaterialDesign-Login',
+	#superclass : 'WamDialogContentPresenter',
+	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Login'
+	#tag : 'Dialog'
 }
-
-{ #category : 'actions' }
-WamLoginPresenter >> handleLoginRequested: anObject [
-
-	self application username: 'foobar'.
-	self application layout valueChanged.
-
-]
 
 { #category : 'rendering' }
 WamLoginPresenter >> renderView [
-	| props |
-
-	props := self model asMap.
-	self view
-		header: self application class appName;
-		fields: self model fieldsData map: props slot: #fields;
-		addButtons;
-		yourself.
-
-]
-
-{ #category : 'view' }
-WamLoginPresenter >> viewCreated [
-
-	super viewCreated.
 
 	self view
-		when: WamLoginRequested send: #handleLoginRequested: to: self
+		renderMainContent: self model message;
+		renderButtons: { 'Login'->true. 'Cancel'->false }
 ]

@@ -1,14 +1,13 @@
 Class {
 	#name : 'WamLogin',
-	#superclass : 'WamObjectModel',
+	#superclass : 'WamDialogContentModel',
 	#instVars : [
 		'username',
-		'password',
-		'message'
+		'password'
 	],
-	#category : 'CodeParadise-MaterialDesign-Login',
+	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Login'
+	#tag : 'Dialog'
 }
 
 { #category : 'converting' }
@@ -32,18 +31,6 @@ WamLogin >> initialize [
 	super initialize.
 
 	self username: 'tu1@test.co'
-]
-
-{ #category : 'accessing' }
-WamLogin >> message [
-
-	^ message
-]
-
-{ #category : 'accessing' }
-WamLogin >> message: anObject [
-
-	message := anObject
 ]
 
 { #category : 'accessing' }

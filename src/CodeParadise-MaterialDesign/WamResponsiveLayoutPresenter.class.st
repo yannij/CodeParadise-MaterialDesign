@@ -107,7 +107,7 @@ WamResponsiveLayoutPresenter >> viewCreated [
 
 	super viewCreated.
 
-	self view addLoginDialog: self application class appName.
+	self view when: WamLoginRequested send: #handleLoginRequested: to: self application.
 
 ]
 

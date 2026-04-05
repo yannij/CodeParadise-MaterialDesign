@@ -39,6 +39,13 @@ WamWebApplication class >> beLoaded [
 	WamLog beLoaded
 ]
 
+{ #category : 'tags' }
+WamWebApplication class >> isAbstractTag [
+
+	"The method is present to indicate the receiver is abstract.
+	This method will NOT be evaluated to decide if the receiver is abstract."
+]
+
 { #category : 'events' }
 WamWebApplication >> addNativeSubtype: subtype  groupTag: groupTag iconName: iconName iconLabel: itemLabel [
 
@@ -78,6 +85,27 @@ WamWebApplication >> applicationModel [
 	^ self
 ]
 
+{ #category : 'iam' }
+WamWebApplication >> authenticateLoginRequest: parameters [
+	| yesOrNo username password |
+
+	yesOrNo := parameters at: #yesOrNo ifAbsent: [ false ].
+	yesOrNo ifFalse: [ ^ self ].
+
+	username := parameters at: #loginUsername ifAbsent: [].
+	password := parameters at: #loginPassword ifAbsent: [].
+
+	(self authenticateUsername: username password: password)
+		ifTrue: [ "Note the username" ]
+		ifFalse: [ self confirm: 'Login failed!' onAnswer: [ :answer | ] ]
+]
+
+{ #category : 'iam' }
+WamWebApplication >> authenticateUsername: aUsername password: aPassword [
+
+	^ aPassword = 'todo'
+]
+
 { #category : 'actions' }
 WamWebApplication >> brandDialogOpen [
 	| d |
@@ -99,7 +127,7 @@ WamWebApplication >> confirm: aString onAnswer: aBlock [
 		label: '';
 		setContentModel: (WamYesOrNoDialogModel new
 			message: aString;
-			answerBlock: aBlock;
+			answerBlock: [ :parameters | aBlock value: (parameters at: #yesOrNo ifAbsent: []) ];
 			yourself);
 		yourself.
 	d open: true.
@@ -154,10 +182,11 @@ WamWebApplication >> extensionMethodCategories [
 		#(webApplicationWebAwesomeExtension)
 ]
 
-{ #category : 'events' }
+{ #category : 'iam' }
 WamWebApplication >> handleLoginRequested: anObject [
 
 	self systemLog logTrace: 'Login Requested'.
+	self loginOnAnswer: [ :parameters | self authenticateLoginRequest: parameters ].
 
 ]
 
@@ -211,6 +240,22 @@ WamWebApplication >> listDetailRemoveConfirm: aString [
 WamWebApplication >> listDetailReset [
 
 	self setDetailNone
+]
+
+{ #category : 'actions' }
+WamWebApplication >> loginOnAnswer: aBlock [
+	| d |
+
+	d := self layout dialog
+		label: '';
+		setContentModel: (WamLogin new
+			message: self class appName;
+			answerBlock: aBlock;
+			yourself);
+		yourself.
+	d open: true.
+	d valueChanged.
+
 ]
 
 { #category : 'model' }
