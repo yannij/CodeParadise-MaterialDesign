@@ -54,6 +54,20 @@ WamDialogContentView >> renderButtons: buttons [
 ]
 
 { #category : 'rendering' }
+WamDialogContentView >> renderMainContent [
+
+	self removeChildrenAtSlotNamed: nil
+]
+
+{ #category : 'rendering' }
+WamDialogContentView >> renderWithButtons: buttons [
+
+	self renderMainContent.
+	self renderButtons: buttons.
+
+]
+
+{ #category : 'rendering' }
 WamDialogContentView >> triggerAnswer: answer [
 
 	self serverAnnounce: (WamNavActionEvent id: #dialogAnswer parameter: (self answerParameters: answer))

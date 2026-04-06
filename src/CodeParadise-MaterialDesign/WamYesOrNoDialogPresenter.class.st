@@ -9,7 +9,5 @@ Class {
 { #category : 'rendering' }
 WamYesOrNoDialogPresenter >> renderView [
 
-	self view
-		"renderMainContent: self model message;"
-		renderButtons: { 'Yes'->true. 'No'->false }
+	self view renderWithButtons: { 'Yes'->true. 'No'->false }
 ]

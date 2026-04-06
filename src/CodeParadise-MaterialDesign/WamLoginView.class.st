@@ -37,7 +37,7 @@ WamLoginView >> fieldAt: key label: aLabel input: aText [
 ]
 
 { #category : 'rendering' }
-WamLoginView >> renderMainContent: aString [
+WamLoginView >> mainContent [
 	| fields |
 
 	fields := 'div' asHtmlTag
@@ -46,7 +46,14 @@ WamLoginView >> renderMainContent: aString [
 		appendChild: (loginPassword := self fieldAt: #loginPassword label: 'Password' input: '');
 		yourself.
 
+	^ fields
+
+]
+
+{ #category : 'rendering' }
+WamLoginView >> renderMainContent [
+
 	self removeChildrenAtSlotNamed: nil.
-	self appendChild: fields atSlotNamed: nil.
+	self appendChild: self mainContent atSlotNamed: nil.
 
 ]

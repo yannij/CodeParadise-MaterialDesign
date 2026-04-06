@@ -12,11 +12,3 @@ WamYesOrNoDialogView >> answerParameters: answer [
 	^ { #yesOrNo -> answer } asDictionary
 
 ]
-
-{ #category : 'rendering' }
-WamYesOrNoDialogView >> renderMainContent: aString [
-
-	self removeChildrenAtSlotNamed: nil.
-	self appendChild: (#div asHtmlTag textContent: aString) atSlotNamed: nil.
-
-]

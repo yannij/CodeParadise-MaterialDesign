@@ -243,15 +243,21 @@ WamWebApplication >> listDetailReset [
 ]
 
 { #category : 'actions' }
+WamWebApplication >> loginContent: aBlock [
+
+	^ WamLogin new
+		message: self class appName;
+		answerBlock: aBlock;
+		yourself
+]
+
+{ #category : 'actions' }
 WamWebApplication >> loginOnAnswer: aBlock [
 	| d |
 
 	d := self layout dialog
 		label: '';
-		setContentModel: (WamLogin new
-			message: self class appName;
-			answerBlock: aBlock;
-			yourself);
+		setContentModel: (self loginContent: aBlock);
 		yourself.
 	d open: true.
 	d valueChanged.
