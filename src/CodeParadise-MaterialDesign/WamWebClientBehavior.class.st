@@ -1,35 +1,34 @@
 Class {
 	#name : 'WamWebClientBehavior',
 	#superclass : 'CpMvpWebClientBehavior',
-	#instVars : [
-		'outputElement'
-	],
 	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Base'
 }
 
-{ #category : 'login' }
-WamWebClientBehavior >> addLoginDialog: label [
-	| dialog fields |
+{ #category : 'operations' }
+WamWebClientBehavior >> announceSessionParameters [
+	"Gather session parameters from URL,
+	and announce those values to server"
 
-	fields := 'div' asHtmlTag
-		addClass: 'wam-fields';
-		appendChild: (self fieldAt: #loginUsername label: 'Username' input: '');
-		appendChild: (self fieldAt: #loginPassword label: 'Password' input: '');
-		yourself.
+	| location searchParams code state data |
 
-	dialog := WaDialog new
-		id: 'login-dialog';
-		label: label;
-		appendChild: fields;
-		appendChild: (self buttonLabel: 'Login' icon: 'right-to-bracket' send: #requestLogin);
-		yourself.
+	location := CpBrowserDocument current location.
+	searchParams := CpBrowserURLSearchParams newInstanceWithArguments: { location search }.
 
-	"Do separately, so dialog is not nil"
-	dialog appendChild: (self buttonLabel: 'Cancel' icon: 'xmark' send: #openBeOff receiver: dialog).
+	code := (searchParams hasKey: #code) ifTrue: [ searchParams getKey: #code ] ifFalse: [].
+	code ifNil: [ ^ self ].
+	state := (searchParams hasKey: #state) ifTrue: [ searchParams getKey: #state ] ifFalse: [].
+	state ifNil: [ ^ self ].
 
-	CpHtmlElement documentBody appendChild: dialog.
+	data := { #code-> code . #state -> state } asDictionary.
+	self clientEnvironment serverAnnounce: (WamEvent id: #session parameters: data).
+
+	"Update browser URL to not have the code and state paramters"
+	location := CpBrowserURL newUrl: location hrefWithoutSearch.
+	searchParams deleteKey: #code; deleteKey: #state.
+	location search: searchParams toString.
+	CpBrowserHistory current replaceState: nil url: location href.
 
 ]
 
@@ -66,65 +65,4 @@ WamWebClientBehavior >> appViewElement [
 WamWebClientBehavior >> appViewId [
 
 	^ self appViewElement id asSymbol
-]
-
-{ #category : 'login' }
-WamWebClientBehavior >> buttonLabel: label icon: icon send: selector [
-
-	^ self buttonLabel: label icon: icon send: selector receiver: self
-]
-
-{ #category : 'login' }
-WamWebClientBehavior >> buttonLabel: label icon: icon send: selector receiver: receiver [
-
-	^ WaButton new
-		label: label;
-		start: (WaIcon fullyNamed: icon);
-		when: CpClickEvent basicPrimary send: selector to: receiver;
-		styleAt: 'width' put: '100%';
-		styleAt: 'padding' put: '0 8px 8px 8px';
-		yourself.
-]
-
-{ #category : 'login' }
-WamWebClientBehavior >> fieldAt: key label: aLabel input: aText [
-
-	^ WaInput new
-		name: key;
-		addClass: 'wam-input';
-		labelText: aLabel;
-		value: aText;
-		hint: 'Help text...', aLabel;
-		disabled: false;
-		attributeAdd: #filled;
-		yourself.
-
-]
-
-{ #category : 'login' }
-WamWebClientBehavior >> findLoginDialog [
-
-	^ CpHtmlElement documentBody firstDescendantMatching: '#login-dialog'
-
-]
-
-{ #category : 'initialization' }
-WamWebClientBehavior >> initialize [
-
-	super initialize.
-
-	"self addLoginDialog: self appName."
-
-]
-
-{ #category : 'login' }
-WamWebClientBehavior >> requestLogin [
-
-	WamLog logTrace: '==== request login'.
-	self clientEnvironment serverAnnounce: (CpViewAnnouncement new
-		viewId: self appViewId;
-		announcement: WamLoginRequested new;
-		yourself).
-	self findLoginDialog openBeOff.
-
 ]

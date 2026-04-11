@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'layout',
 		'nativeEventSpecs',
-		'userEventSpecs'
+		'userEventSpecs',
+		'session'
 	],
 	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
@@ -119,6 +120,15 @@ WamWebApplication >> brandDialogOpen [
 
 ]
 
+{ #category : 'events' }
+WamWebApplication >> checkRedirectUrl [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #announceSessionParameters)
+
+]
+
 { #category : 'actions' }
 WamWebApplication >> confirm: aString onAnswer: aBlock [
 	| d |
@@ -190,6 +200,20 @@ WamWebApplication >> handleLoginRequested: anObject [
 
 ]
 
+{ #category : 'events' }
+WamWebApplication >> handleRedirectUrlCallback: anEvent [
+	| githubSession emailData primaryEmail |
+
+	self systemLog logTrace: anEvent printString.
+	githubSession := ZnOAuth2Session github: SsrLogin githubData.
+	githubSession handleAuthenticationCallback: anEvent parameters.
+	emailData := githubSession getUserEmails.
+	primaryEmail := emailData detect: [ :each | each at:'primary' ] ifNone: [].
+	primaryEmail ifNotNil: [ :value |
+		self session propertyAt: #email put: (value at: 'email') ]
+
+]
+
 { #category : 'initialization' }
 WamWebApplication >> initialize [
 
@@ -198,6 +222,7 @@ WamWebApplication >> initialize [
 	self setUpNativeEvents.
 	self setUpCustomEvents.
 
+	session := WamSessionModel new.
 	layout := WamResponsiveLayoutModel new.
 
 ]
@@ -358,6 +383,9 @@ WamWebApplication >> postLoad [
 
 	super postLoad.
 
+	self systemLog logTrace: 'postLoad'.
+	self checkRedirectUrl.
+
 	self layout navRail navItems: self navItemsToUse; valueChanged.
 	self layout fab fab: self userEventSpecFAB; valueChanged.
 
@@ -378,6 +406,16 @@ WamWebApplication >> postLoad [
 	appBar := self layout appBar2.
 	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
 	appBar leadingAction: leadingAction.
+
+]
+
+{ #category : 'actions' }
+WamWebApplication >> postReload [
+
+	super postReload.
+
+	self systemLog logTrace: 'postReload'.
+	self checkRedirectUrl.
 
 ]
 
@@ -407,6 +445,18 @@ WamWebApplication >> processNavActionEvent: aNavEvent model: aModel [
 
 { #category : 'events' }
 WamWebApplication >> refresh [
+]
+
+{ #category : 'accessing' }
+WamWebApplication >> session [
+
+	^ session
+]
+
+{ #category : 'accessing' }
+WamWebApplication >> session: anObject [
+
+	session := anObject
 ]
 
 { #category : 'model' }
@@ -462,6 +512,18 @@ WamWebApplication >> setDetailNone [
 	self layout pane2 setPaneContent: nil.
 	self appBar2Headline: ''.
 	self setAppBar2TrailingActionsNone.
+
+]
+
+{ #category : 'initialization' }
+WamWebApplication >> setUp [
+
+	"Setup the receiver to handle session events from client"
+
+	super setUp.
+
+	self environment
+		when: WamEvent send: #handleRedirectUrlCallback: to: self.
 
 ]
 

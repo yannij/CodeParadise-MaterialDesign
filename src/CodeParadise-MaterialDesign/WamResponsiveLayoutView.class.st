@@ -904,9 +904,14 @@ WamResponsiveLayoutView >> primaryPaneOnly [
 
 { #category : 'login' }
 WamResponsiveLayoutView >> requestLogin [
+	| clientBehavior |
 
 	self systemLog logTrace: '==== request login'.
 	self serverAnnounce: (WamLoginRequested new).
+	"clientBehavior := CpClientEnvironment current objectRegistry objectWithId: #client.
+	self systemLog logTrace: clientBehavior printString."
+	"clientBehavior loginWithPopup."
+	"clientBehavior removeRedirectParameters."
 
 ]
 
