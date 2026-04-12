@@ -10,9 +10,18 @@ Class {
 }
 
 { #category : 'printing' }
+WamEvent >> eventTypeString [
+
+	^ self class name asString
+]
+
+{ #category : 'printing' }
 WamEvent >> printOn: aStream [
 
-	aStream nextPutAll: 'EVENT id: '; print: id.
+	aStream
+		nextPutAll: self eventTypeString;
+		nextPutAll: ' id: ';
+		print: id.
 	(self hasParameters and: [ parameters ~~ #UndefinedObject ]) ifTrue: [
 		aStream nextPutAll: ', parameters: '; print: parameters ]
 ]

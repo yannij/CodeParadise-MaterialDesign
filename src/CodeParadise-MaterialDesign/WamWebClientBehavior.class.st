@@ -22,7 +22,7 @@ WamWebClientBehavior >> announceSessionParameters [
 	state ifNil: [ ^ self ].
 
 	data := { #code-> code . #state -> state } asDictionary.
-	self clientEnvironment serverAnnounce: (WamEvent id: #session parameters: data).
+	self clientEnvironment serverAnnounce: (WamSessionEvent id: #redirectUrl parameters: data).
 
 	"Update browser URL to not have the code and state paramters"
 	location := CpBrowserURL newUrl: location hrefWithoutSearch.

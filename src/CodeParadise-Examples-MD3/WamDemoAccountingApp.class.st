@@ -3,8 +3,7 @@ Class {
 	#superclass : 'WamWebApplication',
 	#instVars : [
 		'repository',
-		'modelClass',
-		'username'
+		'modelClass'
 	],
 	#category : 'CodeParadise-Examples-MD3-Accounting',
 	#package : 'CodeParadise-Examples-MD3',
@@ -206,14 +205,6 @@ WamDemoAccountingApp >> clientBehaviorClass [
 	^ WamDemoAccountingAppClientBehavior
 ]
 
-{ #category : 'actions - toolbar' }
-WamDemoAccountingApp >> doLogout [
-
-	self systemLog logTrace: 'doLogout'.
-	self username: nil.
-
-]
-
 { #category : 'events' }
 WamDemoAccountingApp >> handleLoginRequested: anObject [
 
@@ -345,16 +336,4 @@ WamDemoAccountingApp >> setUpCustomEvents [
 		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Transactions' data: #transactions;
 		yourself.
 
-]
-
-{ #category : 'accessing' }
-WamDemoAccountingApp >> username [
-
-	^ username
-]
-
-{ #category : 'accessing' }
-WamDemoAccountingApp >> username: anObject [
-
-	username := anObject
 ]

@@ -5,3 +5,9 @@ Class {
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'NavAction'
 }
+
+{ #category : 'printing' }
+WamNavActionEvent >> eventTypeString [
+
+	^ 'NavAction'
+]

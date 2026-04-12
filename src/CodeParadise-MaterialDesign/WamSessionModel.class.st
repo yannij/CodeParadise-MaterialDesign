@@ -9,6 +9,26 @@ Class {
 	#tag : 'Base'
 }
 
+{ #category : 'accessing' }
+WamSessionModel >> email [
+
+	^ self propertyAt: #email
+]
+
+{ #category : 'accessing' }
+WamSessionModel >> email: anObject [
+
+	self propertyAt: #email put: anObject
+]
+
+{ #category : 'accessing' }
+WamSessionModel >> emailSet: anObject [
+
+	self email: anObject.
+	self valueChanged.
+
+]
+
 { #category : 'initialization' }
 WamSessionModel >> initialize [
 
@@ -16,6 +36,18 @@ WamSessionModel >> initialize [
 
 	properties := IdentityDictionary new.
 
+]
+
+{ #category : 'testing' }
+WamSessionModel >> isAuthenticated [
+
+	^ self email notNil
+]
+
+{ #category : 'actions' }
+WamSessionModel >> logout [
+
+	self emailSet: nil
 ]
 
 { #category : 'accessing' }
@@ -40,4 +72,9 @@ WamSessionModel >> propertyAt: aKey [
 WamSessionModel >> propertyAt: aKey put: anObject [
 
 	self properties at: aKey put: anObject
+]
+
+{ #category : 'sso' }
+WamSessionModel >> ssoRedirectUrlCallback: anEvent [
+	"Subclasses may enhance"
 ]

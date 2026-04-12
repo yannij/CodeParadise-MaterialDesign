@@ -107,7 +107,7 @@ WamResponsiveLayoutPresenter >> viewCreated [
 
 	super viewCreated.
 
-	self view when: WamLoginRequested send: #handleLoginRequested: to: self application.
+	self view when: (WamSessionEvent id: #login) send: #handleLoginRequested: to: self application.
 
 ]
 

@@ -43,6 +43,15 @@ WamResponsiveLayoutModel >> brandDialog: anObject [
 	brandDialog := anObject
 ]
 
+{ #category : 'initialization' }
+WamResponsiveLayoutModel >> brandDialogSetup [
+	| item |
+
+	item := WamTabGroupItemModel on: layoutSettings label: 'Settings'.
+	brandDialog tabGroupItemAt: 1 put: item.
+
+]
+
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> dialog [
 
@@ -93,7 +102,6 @@ WamResponsiveLayoutModel >> floatingToolbar: anObject [
 
 { #category : 'initialization' }
 WamResponsiveLayoutModel >> initialize [
-	| item |
 
 	super initialize.
 
@@ -106,9 +114,10 @@ WamResponsiveLayoutModel >> initialize [
 	floatingToolbar := WamToolbarFloatingModel new.
 	fab := WamFabModel new.
 	dialog := WamDialogModel new.
-	item := WamTabGroupItemModel on: layoutSettings label: 'Settings'.
 	brandDialog := WamBrandDialogModel new.
-	brandDialog tabGroupItemAt: 1 put: item.
+	self brandDialogSetup.
+
+	"Do this last"
 	layoutReady := WamLayoutReadyModel new.
 
 ]

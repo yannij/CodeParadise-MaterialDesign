@@ -97,8 +97,8 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 	password := parameters at: #loginPassword ifAbsent: [].
 
 	(self authenticateUsername: username password: password)
-		ifTrue: [ "Note the username" ]
-		ifFalse: [ self confirm: 'Login failed!' onAnswer: [ :answer | ] ]
+		ifTrue: [ self session emailSet: username ]
+		ifFalse: [ self inform: 'Login failed!' ]
 ]
 
 { #category : 'iam' }
@@ -121,11 +121,11 @@ WamWebApplication >> brandDialogOpen [
 ]
 
 { #category : 'events' }
-WamWebApplication >> checkRedirectUrl [
+WamWebApplication >> brandDialogSetupSessionTab [
+	| item |
 
-	self sendMessage: (MessageSend
-		receiver: self clientBehaviorClass clientId
-		selector: #announceSessionParameters)
+	item := WamTabGroupItemModel on: self session label: 'Session'.
+	self layout brandDialog tabGroupItemAt: 2 put: item.
 
 ]
 
@@ -164,6 +164,7 @@ WamWebApplication >> dialogOpen: aBoolean [
 { #category : 'actions - toolbar' }
 WamWebApplication >> doLogout [
 
+	self session logout
 ]
 
 { #category : 'events' }
@@ -200,17 +201,25 @@ WamWebApplication >> handleLoginRequested: anObject [
 
 ]
 
-{ #category : 'events' }
-WamWebApplication >> handleRedirectUrlCallback: anEvent [
-	| githubSession emailData primaryEmail |
+{ #category : 'actions' }
+WamWebApplication >> inform: aString [
 
-	self systemLog logTrace: anEvent printString.
-	githubSession := ZnOAuth2Session github: SsrLogin githubData.
-	githubSession handleAuthenticationCallback: anEvent parameters.
-	emailData := githubSession getUserEmails.
-	primaryEmail := emailData detect: [ :each | each at:'primary' ] ifNone: [].
-	primaryEmail ifNotNil: [ :value |
-		self session propertyAt: #email put: (value at: 'email') ]
+	self inform: aString onAnswer: [ :answer | ]
+]
+
+{ #category : 'actions' }
+WamWebApplication >> inform: aString onAnswer: aBlock [
+	| d |
+
+	d := self layout dialog
+		label: '';
+		setContentModel: (WamInformDialogModel new
+			message: aString;
+			answerBlock: [ :parameters | aBlock value: (parameters at: #yesOrNo ifAbsent: []) ];
+			yourself);
+		yourself.
+	d open: true.
+	d valueChanged.
 
 ]
 
@@ -222,7 +231,7 @@ WamWebApplication >> initialize [
 	self setUpNativeEvents.
 	self setUpCustomEvents.
 
-	session := WamSessionModel new.
+	session := self sessionClass new.
 	layout := WamResponsiveLayoutModel new.
 
 ]
@@ -361,6 +370,9 @@ WamWebApplication >> navTo: aNavActionEvent [
 	aNavActionEvent eventId = #brand ifTrue: [
 		^ self brandDialogOpen ].
 
+	aNavActionEvent eventId = #logout ifTrue: [
+		^ self doLogout ].
+
 	self layout pane1 processNavActionEvent: aNavActionEvent; valueChanged.
 ]
 
@@ -384,7 +396,7 @@ WamWebApplication >> postLoad [
 	super postLoad.
 
 	self systemLog logTrace: 'postLoad'.
-	self checkRedirectUrl.
+	self ssoRedirectUrlParameters.
 
 	self layout navRail navItems: self navItemsToUse; valueChanged.
 	self layout fab fab: self userEventSpecFAB; valueChanged.
@@ -407,6 +419,9 @@ WamWebApplication >> postLoad [
 	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
 	appBar leadingAction: leadingAction.
 
+	(self nativeEventSpecAt: #login) groupTag: #session.
+	self brandDialogSetupSessionTab.
+
 ]
 
 { #category : 'actions' }
@@ -415,7 +430,7 @@ WamWebApplication >> postReload [
 	super postReload.
 
 	self systemLog logTrace: 'postReload'.
-	self checkRedirectUrl.
+	self ssoRedirectUrlParameters.
 
 ]
 
@@ -457,6 +472,12 @@ WamWebApplication >> session [
 WamWebApplication >> session: anObject [
 
 	session := anObject
+]
+
+{ #category : 'initialization' }
+WamWebApplication >> sessionClass [
+
+	^ WamSessionModel
 ]
 
 { #category : 'model' }
@@ -523,7 +544,7 @@ WamWebApplication >> setUp [
 	super setUp.
 
 	self environment
-		when: WamEvent send: #handleRedirectUrlCallback: to: self.
+		when: (WamSessionEvent id: #redirectUrl) send: #ssoRedirectUrlCallback: to: self.
 
 ]
 
@@ -554,6 +575,21 @@ WamWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';
 		addNativeSubtype: #logout groupTag: #primary iconName: 'right-from-bracket' iconLabel: 'Logout';
 		yourself.
+
+]
+
+{ #category : 'iam' }
+WamWebApplication >> ssoRedirectUrlCallback: anEvent [
+
+	self session ssoRedirectUrlCallback: anEvent
+]
+
+{ #category : 'iam' }
+WamWebApplication >> ssoRedirectUrlParameters [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #announceSessionParameters)
 
 ]
 
