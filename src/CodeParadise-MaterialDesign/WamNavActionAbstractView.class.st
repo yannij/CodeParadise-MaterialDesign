@@ -20,7 +20,6 @@ WamNavActionAbstractView class >> globalStyle [
 .wam-navrail-item {
   display: flex;
   flex-flow: column;
-  height: 56px;
   width: 96px;
   background: var(--wa-color-brand-fill-normal);
 }
@@ -37,11 +36,9 @@ WamNavActionAbstractView class >> globalStyle [
 }
 
 .wam-navrail-labelText {
-  height: 24px;
   line-height: 18px;
   font-size: 14px;
   text-align: center;
-  overflow-x: clip;
 }
 
 .wam-navsubmenu-item {
@@ -78,8 +75,8 @@ WamNavActionAbstractView >> divExpanded: aNavAction [
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrailx-labelText';
-				addClass: 'wa-text-truncate';
-				styleAt: 'max-width' put: '170px';
+				"addClass: 'wa-text-truncate';"
+				styleAt: 'width' put: '170px';
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself
@@ -99,7 +96,7 @@ WamNavActionAbstractView >> divNarrow: aNavAction [
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrail-labelText';
-				addClass: 'wa-text-truncate';
+				"addClass: 'wa-text-truncate';"
 				textContent: (aNavAction at: #iconLabel);
 				yourself);
 		yourself.

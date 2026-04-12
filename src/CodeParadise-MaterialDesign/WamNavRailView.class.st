@@ -12,13 +12,8 @@ WamNavRailView class >> style [
 
 	^ '
 .navrail {
-  flex: 0 0 96px;
   height: 100%;
-  padding: 0;
-  margin: 0;
   background: var(--wa-color-brand-fill-quiet);
-  overflow-y: auto;
-  box-sizing: border-box;
   border-right: 1px solid var(--wa-color-neutral-70);
 }
 '
@@ -28,8 +23,27 @@ WamNavRailView class >> style [
 WamNavRailView class >> template [
 	<webResource: #html>
 
-	^ '<nav id="container" class="navrail wa-cloak">
+	^ WaElement linkUtilitiesCss, '
+<div id="container" class="navrail wa-split:column wa-gap-0 wa-cloak">
+<nav class="wa-stack wa-gap-0">
   <slot></slot>
 </nav>
+<nav class="wa-stack wa-gap-0">
+  <slot name="bottom"></slot>
+</nav>
+</div>
 '
+]
+
+{ #category : 'rendering' }
+WamNavRailView >> renderBottom: aString [
+	| div |
+
+	div := #div asHtmlElement
+		styleAt: 'max-width' put: '96px';
+		styleAt: 'overflow-wrap' put: 'anywhere';
+		styleAt: 'font-size' put: 'var(--wa-font-size-s)';
+		textContent: aString.
+
+	self replaceAllChildrenWith: div atSlotNamed: #bottom
 ]

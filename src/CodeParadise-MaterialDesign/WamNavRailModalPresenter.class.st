@@ -9,7 +9,10 @@ Class {
 { #category : 'rendering' }
 WamNavRailModalPresenter >> renderView [
 
-	self view drawerSetup.
+	self view
+		drawerSetup;
+		renderBottom: (self application session email ifNil: [ '?' ] ifNotNil: [ :value | value asString ]).
+
 	self
 		renderAllChildViewsForModels: self model navItems
 		usingPresenter: WamNavActionExpandedPresenter

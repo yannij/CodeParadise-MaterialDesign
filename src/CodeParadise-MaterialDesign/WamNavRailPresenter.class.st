@@ -14,6 +14,7 @@ WamNavRailPresenter >> renderView [
 		ifTrue: [ WamNavActionExpandedPresenter ]
 		ifFalse: [ WamNavActionNarrowPresenter ].
 
+	self view renderBottom: (self application session email ifNil: [ '?' ] ifNotNil: [ :value | value asString ]).
 	self
 		renderAllChildViewsForModels: self model navItems
 		usingPresenter: presenter

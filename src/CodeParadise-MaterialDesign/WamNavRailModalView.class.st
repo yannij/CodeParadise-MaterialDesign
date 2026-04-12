@@ -19,11 +19,12 @@ WamNavRailModalView class >> style [
 
 	^ '
 .wam-navrailx {
-  height: 100%;
-  flow-direction: row;
+  background: var(--wa-color-brand-fill-quiet);
+  border-right: 1px solid var(--wa-color-neutral-70);
 }
 
 .navrailx::part(body) {
+  height: 100%;
   padding: 8px 0;
   background: var(--wa-color-brand-fill-normal);
 }
@@ -53,9 +54,16 @@ WamNavRailModalView class >> style [
 WamNavRailModalView class >> template [
 	<webResource: #html>
 
-	^ '
+	^ WaElement linkUtilitiesCss, '
 <wa-drawer>
+<div class="wa-split:column wa-gap-0 wa-cloak" style="height: 100%">
+<nav class="wa-stack wa-gap-0">
   <slot></slot>
+</nav>
+<nav class="wa-stack wa-gap-0">
+  <slot name="bottom"></slot>
+</nav>
+</div>
 </wa-drawer>
 '
 ]
@@ -81,4 +89,17 @@ WamNavRailModalView >> drawerSetup [
 		customPropertyAt: 'footer-spacing' put: '0';
 		yourself
 
+]
+
+{ #category : 'rendering' }
+WamNavRailModalView >> renderBottom: aString [
+	| div |
+
+	div := #div asHtmlElement
+		styleAt: 'max-width' put: '220px';
+		styleAt: 'overflow-wrap' put: 'anywhere';
+		styleAt: 'font-size' put: 'var(--wa-font-size-s)';
+		textContent: aString.
+
+	self replaceAllChildrenWith: div atSlotNamed: #bottom
 ]
