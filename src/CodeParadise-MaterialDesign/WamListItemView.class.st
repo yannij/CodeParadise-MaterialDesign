@@ -17,7 +17,6 @@ WamListItemView class >> globalStyle [
   min-height: 40px;
   padding: 8px 0;
   background: var(--wa-color-brand-fill-normal);
-  border-top: 1px solid var(--wa-color-neutral-60);
 }
 
 .wam-item-span1 {

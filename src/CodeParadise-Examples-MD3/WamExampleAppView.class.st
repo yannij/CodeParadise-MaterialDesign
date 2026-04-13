@@ -7,20 +7,6 @@ Class {
 }
 
 { #category : 'web resources' }
-WamExampleAppView class >> globalStyle [
-
-	<webResource: #css>
-
-	^ '
-body {
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-}
-'
-]
-
-{ #category : 'web resources' }
 WamExampleAppView class >> style [
 
 	<webResource: #css>

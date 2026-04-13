@@ -229,6 +229,17 @@ WamResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
 
 ]
 
+{ #category : 'color theme' }
+WamResponsiveLayoutView >> applyDesignTokensTheme [
+
+	CpHtmlElement documentBody
+		"customPropertyAt: 'wa-form-control-border-style' put: 'none';"
+		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
+		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)';
+		"customPropertyAt: 'wa-form-control-height' put: '64px';"
+		yourself
+]
+
 { #category : 'layout' }
 WamResponsiveLayoutView >> applyLayoutProfile: props [
 
@@ -432,10 +443,6 @@ WamResponsiveLayoutView >> colorThemePut: theme [
 	element := CpHtmlElement documentBody.
 	theme do: [ :each |
 		element customPropertyAt: each key put: each value ].
-	CpHtmlElement documentBody
-		"customPropertyAt: 'wa-form-control-border-style' put: 'none';"
-		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
-		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
 
 ]
 

@@ -7,19 +7,6 @@ Class {
 }
 
 { #category : 'web resources' }
-TBRootView class >> globalStyle [
-
-	<webResource: #css>
-
-	^ '
-body {
-  margin: 0;
-  padding: 0;
-}
-'
-]
-
-{ #category : 'web resources' }
 TBRootView class >> template [
 
 	<webResource: #html>

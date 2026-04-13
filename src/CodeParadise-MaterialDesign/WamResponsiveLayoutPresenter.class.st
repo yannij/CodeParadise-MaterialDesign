@@ -119,6 +119,8 @@ WamResponsiveLayoutPresenter >> viewInitialized [
 	self application customColorTheme ifNotNil: [ :value |
 		self view colorThemePut: value ].
 
+	self view applyDesignTokensTheme.
+
 	"self view popupSetUp"
 
 ]

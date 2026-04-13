@@ -14,7 +14,7 @@ WamListView class >> style [
 	^'
 .wam-container {
   box-sizing: border-box;
-  /*padding: var(--wa-space-xs);*/
+  padding: var(--wa-space-xs);
 }
 
 .wam-list {
@@ -29,9 +29,9 @@ WamListView class >> template [
 
 	<webResource: #html>
 
-	^ '
+	^ WaElement linkUtilitiesCss, '
 <div id="container" class="wam-container">
-  <ol class="wa-stack wa-gap-0 wam-list">
+  <ol class="wa-stack wa-gap-s wam-list">
     <slot name="list"></slot>
   </ol>
 </div>'

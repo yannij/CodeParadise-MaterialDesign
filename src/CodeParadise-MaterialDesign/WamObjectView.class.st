@@ -17,151 +17,14 @@ WamObjectView class >> beLoaded [
 ]
 
 { #category : 'web resources' }
-WamObjectView class >> globalStyle [
-
-	<webResource: #css>
-
-	^ '
-:root,
-:host,
-.sl-theme-light {
-  --sl-focus-ring-style: none;
-}
-
-.wam-input::part(input):disabled, .wam-textarea::part(textarea):disabled {
-  --sl-input-color: #000000;
-}
-
-sl-input, sl-textarea {
-  box-sizing: content-box;
-  --sl-input-filled-background-color-focus: #E6E0E9;
-}
-
-sl-input {
-  --sl-input-height-medium: 56px;
-}
-
-.wam-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: var(--wa-color-brand-fill-light);
-}
-'
-, self globalStyleInput
-, self globalStyleTextarea
-, self globalStyleSwitch
-]
-
-{ #category : 'web resources' }
-WamObjectView class >> globalStyleInput [
-
-	<webResource: #css>
-
-	^ '
-.wam-input::part(input) {
-  position: relative;
-  width: 100%;
-  padding: 0;
-  background: var(--wa-color-brand-fill-light);
-  height: 64px;
-  padding-top: 4px;
-}
-
-.wam-input::part(label) {
-  height: 16px;
-  font-size: 12px;
-  margin-bottom: -16px;
-  padding: 4px 16px 0 16px;
-  z-index: 10;
-  background-color: rgb(0 0 0 / 0);
-}
-
-.wam-input::part(base) {
-  height: 56px;
-  width: 100%;
-  font-size: 16px;
-  background: var(--wa-color-brand-fill-normal);
-}
-
-.wam-input::part(hint) {
-  height: 16px;
-  width: calc(100% - 32px);
-  font-size: 12px;
-  padding: 0 16px;
-  background: var(--wa-color-brand-fill-light);
-}
-'
-]
-
-{ #category : 'web resources' }
-WamObjectView class >> globalStyleSwitch [
-
-	<webResource: #css>
-
-	^ '
-.wam-switch::part(base) {
-  padding-top: 8px;
-  padding-left: 16px;
-}
-
-.wam-switch::part(hint) {
-  height: 16px;
-  width: 100%;
-  font-size: 12px;
-  padding: 4px 16px 0 16px;
-  background: var(--wa-color-brand-fill-light);
-}
-'
-]
-
-{ #category : 'web resources' }
-WamObjectView class >> globalStyleTextarea [
-
-	<webResource: #css>
-
-	^ '
-.wam-textarea::part(base) {
-  width: 100%;
-  padding: 0;
-  background: var(--wa-color-brand-fill-normal);
-  margin-top: 16px;
-}
-
-.wam-textarea::part(label) {
-  height: 16px;
-  font-size: 12px;
-  padding: 4px 16px 0 16px;
-  margin-bottom: -16px;
-  z-index: 10;
-  background-color: rgb(0 0 0 / 0);
-}
-
-.wam-textarea::part(textarea) {
-  width: 100%;
-  font-size: 16px;
-  background: var(--wa-color-brand-fill-normal);
-}
-
-.wam-textarea::part(hint) {
-  height: 16px;
-  width: calc(100% - 32px);
-  font-size: 12px;
-  padding: 0 16px;
-  background: var(--wa-color-brand-fill-light);
-}
-'
-]
-
-{ #category : 'web resources' }
 WamObjectView class >> style [
 
 	<webResource: #css>
 
 	^ '
 #container {
-  min-width: 300px;
-  width: 100%;
+  box-sizing: border-box;
+  padding: var(--wa-space-xs);
 }
 '
 ]
@@ -171,8 +34,9 @@ WamObjectView class >> template [
 
 	<webResource: #html>
 
-	^ '<div id="container">
-  <slot name="fields"></slot>
+	^ WaElement linkUtilitiesCss, '
+<slot name="fields"></slot>
+<div id="container">
   <slot name="details"></slot>
 </div>'
 ]
@@ -299,10 +163,13 @@ WamObjectView >> fields: list map: map [
 	| fields |
 
 	self fieldElementsClear.
-
-	fields := #div asHtmlTag addClass: 'wam-fields'; yourself.
+	fields := #div asHtmlTag
+		addClass: 'wa-grid';
+		addClass: 'wa-gap-xs';
+		customPropertyAt: 'min-column-size' put: '40ch';
+		yourself.
 	list do: [ :each |
-		fields appendChild: (self fieldFor: each map: map) ].
+		fields appendChild: (#div asHtmlTag appendChild: (self fieldFor: each map: map)) ].
 
 	^ fields
 
