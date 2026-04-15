@@ -24,7 +24,8 @@ WamObjectView class >> style [
 	^ '
 #container {
   box-sizing: border-box;
-  padding: var(--wa-space-xs);
+  padding: var(--wam-space);
+  gap: var(--wam-gap);
 }
 '
 ]
@@ -165,7 +166,7 @@ WamObjectView >> fields: list map: map [
 	self fieldElementsClear.
 	fields := #div asHtmlTag
 		addClass: 'wa-grid';
-		addClass: 'wa-gap-xs';
+		styleAt: 'gap' put: 'var(--wam-gap)';
 		customPropertyAt: 'min-column-size' put: '40ch';
 		yourself.
 	list do: [ :each |

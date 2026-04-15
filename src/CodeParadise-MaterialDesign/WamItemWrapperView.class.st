@@ -149,7 +149,7 @@ WamItemWrapperView class >> style [
 	^ '
 .wam-container {
   box-sizing: border-box;
-  padding: var(--wa-space-xs);
+  padding: var(--wam-space);
 }
 
 .wam-item {

@@ -71,11 +71,3 @@ WamLayoutComponentView >> setElementPadding: element [
 	self setElement: element padding: self layoutViewLazy wamPadding.
 
 ]
-
-{ #category : 'initialization' }
-WamLayoutComponentView >> setGap: gap of: element [
-
-	element removeClasses: #('wa-gap-3xs' 'wa-gap-2xs' 'wa-gap-xs' 'wa-gap-s' 'wa-gap-m').
-	element addClass: gap.
-
-]
