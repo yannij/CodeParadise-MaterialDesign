@@ -41,3 +41,41 @@ WamLayoutComponentView >> layoutViewLazy [
 
 	^ layoutView
 ]
+
+{ #category : 'initialization' }
+WamLayoutComponentView >> setElement: element gap: gap [
+
+	element removeClasses: #('wa-gap-3xs' 'wa-gap-2xs' 'wa-gap-xs' 'wa-gap-s' 'wa-gap-m').
+	element addClass: gap.
+
+]
+
+{ #category : 'initialization' }
+WamLayoutComponentView >> setElement: element padding: pad [
+
+	element styleAt: 'padding' put: pad.
+
+]
+
+{ #category : 'initialization' }
+WamLayoutComponentView >> setElementGap: element [
+
+	element removeClasses: #('wa-gap-3xs' 'wa-gap-2xs' 'wa-gap-xs' 'wa-gap-s' 'wa-gap-m').
+	element addClass: self layoutViewLazy wamGap.
+
+]
+
+{ #category : 'initialization' }
+WamLayoutComponentView >> setElementPadding: element [
+
+	self setElement: element padding: self layoutViewLazy wamPadding.
+
+]
+
+{ #category : 'initialization' }
+WamLayoutComponentView >> setGap: gap of: element [
+
+	element removeClasses: #('wa-gap-3xs' 'wa-gap-2xs' 'wa-gap-xs' 'wa-gap-s' 'wa-gap-m').
+	element addClass: gap.
+
+]

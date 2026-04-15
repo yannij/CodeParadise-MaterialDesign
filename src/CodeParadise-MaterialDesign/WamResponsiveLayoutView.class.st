@@ -237,6 +237,7 @@ WamResponsiveLayoutView >> applyDesignTokensTheme [
 		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
 		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)';
 		"customPropertyAt: 'wa-form-control-height' put: '64px';"
+		customPropertyAt: 'wam-spacing' put: 'var(--wa-space-s)';
 		yourself
 ]
 
@@ -1217,4 +1218,16 @@ WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 			ifTrue: [ component useTwoPaneLayout ]
 			ifFalse: [ component useSinglePaneLayout ] ].
 
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutView >> wamGap [
+
+	^ 'wa-gap-s'
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutView >> wamPadding [
+
+	^ 'var(--wa-space-s)'
 ]
