@@ -597,14 +597,17 @@ WamResponsiveLayoutView >> handleResizeEvent: anEvent [
 			"height := rect apply: 'height'." ] ].
 
 	layoutWidthCached = newWidth ifTrue: [
+		self systemLog logString: 'resize width is unchanged'.
 		^ self ].
 
 	layoutWidthCached := newWidth.
 
 	self useAutoLayout ifNotNil: [ :value |
 		(value not and: [ layoutWidthCached > 0 ]) ifFalse: [
+			self systemLog logString: 'resize using layoutAdaptToWidth'.
 			^ self layoutAdaptToWidth ] ].
 
+	self systemLog logString: 'resize to newWidth: ', newWidth printString.
 	self bodySplitPanelAdapt.
 	self bodyWidthAdapt.
 
@@ -661,13 +664,13 @@ WamResponsiveLayoutView >> layoutInitialSetUp: props [
 
 	props at: #colorThemeName ifPresent: [ :value | self colorThemeInitial: value ].
 	props at: #fontFamily ifPresent: [ :value | self fontFamilyAdapt: value ].
-	self applyLayoutProfile: props.
-
-	(props at: #useAutoLayout ifAbsent: [ true ]) ifTrue: [
-		self layoutAdaptToWidth ].
 
 	self resizeSetUp.
 
+	self applyLayoutProfile: props.
+	self layoutAdaptToWidth.
+	"(props at: #useAutoLayout ifAbsent: [ true ]) ifTrue: [
+		self layoutAdaptToWidth ]."
 
 ]
 

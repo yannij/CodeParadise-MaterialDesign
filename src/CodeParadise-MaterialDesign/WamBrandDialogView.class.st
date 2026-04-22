@@ -21,7 +21,7 @@ WamBrandDialogView class >> template [
 
 	<webResource: #html>
 
-	^ '<wa-dialog id="brandDialog" light-dismiss>
+	^ '<wa-dialog id="brandDialog" light-dismiss wa-cloak>
   <wa-tab-group id="wamTagGroup" active="p1">
     <wa-tab id="p1" panel="p1"></wa-tab>
     <wa-tab-panel name="p1"><slot name="p1"></slot></wa-tab-panel>

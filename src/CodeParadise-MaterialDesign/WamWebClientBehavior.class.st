@@ -66,3 +66,16 @@ WamWebClientBehavior >> appViewId [
 
 	^ self appViewElement id asSymbol
 ]
+
+{ #category : 'actions' }
+WamWebClientBehavior >> finishSetUp: props [
+
+	self layoutViewElement layoutInitialSetUp: props.
+
+]
+
+{ #category : 'accessing' }
+WamWebClientBehavior >> layoutViewElement [
+
+	^ CpHtmlElement documentBody firstDescendantMatching: WamResponsiveLayoutView asCssSelector
+]

@@ -97,7 +97,10 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 	password := parameters at: #loginPassword ifAbsent: [].
 
 	(self authenticateUsername: username password: password)
-		ifTrue: [ self session emailSet: username ]
+		ifTrue: [
+			self session emailSet: username.
+			self dialogOpen: false.
+			self brandDialogClose ]
 		ifFalse: [ self inform: 'Login failed!' ]
 ]
 
@@ -105,6 +108,14 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 WamWebApplication >> authenticateUsername: aUsername password: aPassword [
 
 	^ aPassword = 'todo'
+]
+
+{ #category : 'actions' }
+WamWebApplication >> brandDialogClose [
+
+	self layout brandDialog open: false; valueChanged.
+	self layout navRail valueChanged.
+
 ]
 
 { #category : 'actions' }
@@ -161,10 +172,13 @@ WamWebApplication >> dialogOpen: aBoolean [
 
 ]
 
-{ #category : 'actions - toolbar' }
+{ #category : 'actions' }
 WamWebApplication >> doLogout [
 
-	self session logout
+	self session logout.
+	self dialogOpen: false.
+	self brandDialogClose.
+
 ]
 
 { #category : 'events' }
@@ -191,6 +205,16 @@ WamWebApplication >> extensionMethodCategories [
 
 	^ super extensionMethodCategories,
 		#(webApplicationWebAwesomeExtension)
+]
+
+{ #category : 'actions' }
+WamWebApplication >> finishSetUp [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #finishSetUp:
+		argument: self layout layoutSettings asMap)
+
 ]
 
 { #category : 'iam' }
@@ -391,36 +415,11 @@ WamWebApplication >> newWrappedModel [
 
 { #category : 'actions' }
 WamWebApplication >> postLoad [
-	| toolbar appBar leadingAction |
 
 	super postLoad.
 
 	self systemLog logTrace: 'postLoad'.
-	self ssoRedirectUrlParameters.
-
-	self layout navRail navItems: self navItemsToUse; valueChanged.
-	self layout fab fab: self userEventSpecFAB; valueChanged.
-
-	toolbar := self layout floatingToolbar.
-	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
-		toolbar addItem: each ].
-	toolbar valueChanged.
-
-	toolbar := self layout dockedToolbar.
-	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
-		toolbar addItem: each ].
-	toolbar valueChanged.
-
-	appBar := self layout appBar1.
-	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
-	appBar leadingAction: leadingAction.
-
-	appBar := self layout appBar2.
-	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
-	appBar leadingAction: leadingAction.
-
-	(self nativeEventSpecAt: #login) groupTag: #session.
-	self brandDialogSetupSessionTab.
+	self setUpPostLoadAndReload.
 
 ]
 
@@ -430,7 +429,7 @@ WamWebApplication >> postReload [
 	super postReload.
 
 	self systemLog logTrace: 'postReload'.
-	self ssoRedirectUrlParameters.
+	self setUpPostLoadAndReload.
 
 ]
 
@@ -555,6 +554,20 @@ WamWebApplication >> setUpCustomEvents [
 	userEventSpecs := OrderedCollection new
 ]
 
+{ #category : 'actions' }
+WamWebApplication >> setUpExtra [
+	| props |
+
+	self layout brandDialog label: self class appName; valueChanged.
+
+	"props := self layout layoutSettings asMap.
+	self view
+		layoutInitialSetUp: props;
+		yourself."
+	self finishSetUp.
+
+]
+
 { #category : 'events' }
 WamWebApplication >> setUpNativeEvents [
 
@@ -578,10 +591,47 @@ WamWebApplication >> setUpNativeEvents [
 
 ]
 
+{ #category : 'actions' }
+WamWebApplication >> setUpPostLoadAndReload [
+	| toolbar appBar leadingAction |
+
+	self systemLog logTrace: '>>>>'.
+	self ssoRedirectUrlParameters.
+
+	self layout navRail navItems: self navItemsToUse; valueChanged.
+	self layout fab fab: self userEventSpecFAB; valueChanged.
+
+	toolbar := self layout floatingToolbar.
+	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+		toolbar addItem: each ].
+	toolbar valueChanged.
+
+	toolbar := self layout dockedToolbar.
+	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
+		toolbar addItem: each ].
+	toolbar valueChanged.
+
+	appBar := self layout appBar1.
+	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
+	appBar leadingAction: leadingAction.
+
+	appBar := self layout appBar2.
+	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
+	appBar leadingAction: leadingAction.
+
+	(self nativeEventSpecAt: #login) groupTag: #session.
+	self brandDialogSetupSessionTab.
+	self setUpExtra.
+
+]
+
 { #category : 'iam' }
 WamWebApplication >> ssoRedirectUrlCallback: anEvent [
 
-	self session ssoRedirectUrlCallback: anEvent
+	self session ssoRedirectUrlCallback: anEvent.
+	self dialogOpen: false.
+	self brandDialogClose.
+
 ]
 
 { #category : 'iam' }

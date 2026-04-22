@@ -6,6 +6,19 @@ Class {
 	#tag : 'NavAction'
 }
 
+{ #category : 'events' }
+WamNavActionDialogPresenter >> handleNavEvent: aNavEvent [
+
+	self systemLog logTrace: '**** ', aNavEvent printString.
+
+	super handleNavEvent: aNavEvent.
+	self application layout dialog open: false.
+	self application layout brandDialog open: false.
+
+	self systemLog logError: 'Not found: ', aNavEvent id printString.
+
+]
+
 { #category : 'rendering' }
 WamNavActionDialogPresenter >> renderView [
 

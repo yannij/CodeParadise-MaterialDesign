@@ -97,8 +97,8 @@ WamResponsiveLayoutPresenter >> renderView [
 	self model fab ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #fab ].
 
-	self model layoutReady ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #layoutReady ].
+	"self model layoutReady ifNotNil: [ :value |
+		self renderChildViewForModel: value atSlotNamed: #layoutReady ]."
 
 ]
 

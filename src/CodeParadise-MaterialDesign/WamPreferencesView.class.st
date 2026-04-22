@@ -359,7 +359,7 @@ WamPreferencesView >> showDockedToolbarNewSwitch: props [
 { #category : 'settings - switches' }
 WamPreferencesView >> showDockedToolbarSet: aBoolean [
 
-	"self useAutoLayoutUpdate: false."
+	self useAutoLayoutUpdate: false.
 
 	self layoutViewLazy showDockedToolbarAdapt: aBoolean; resizeBodyRegion.
 	self announceSetting: #showDockedToolbar value: aBoolean.

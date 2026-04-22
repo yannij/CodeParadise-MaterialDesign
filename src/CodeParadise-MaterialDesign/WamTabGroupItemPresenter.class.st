@@ -9,6 +9,7 @@ Class {
 { #category : 'rendering' }
 WamTabGroupItemPresenter >> renderView [
 
+self systemLog logTrace: self model tabContent printString.
 	self renderChildViewForModel: self model tabContent.
 
 ]

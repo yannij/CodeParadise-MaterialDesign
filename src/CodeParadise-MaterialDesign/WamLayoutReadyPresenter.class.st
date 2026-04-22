@@ -5,20 +5,3 @@ Class {
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Layout'
 }
-
-{ #category : 'view' }
-WamLayoutReadyPresenter >> viewInitialized [
-	| layout props |
-
-	super viewInitialized.
-
-	layout := self application layout.
-
-	layout brandDialog label: self application class appName; valueChanged.
-
-	props := layout layoutSettings asMap.
-	self view
-		layoutInitialSetUp: props;
-		yourself.
-
-]

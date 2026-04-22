@@ -25,8 +25,6 @@ WamPreferencesPresenter >> handleNavEvent: anObject [
 WamPreferencesPresenter >> renderView [
 	| props |
 
-	super viewInitialized.
-
 	props := self model asMap.
 	self view
 		renderContent: props;

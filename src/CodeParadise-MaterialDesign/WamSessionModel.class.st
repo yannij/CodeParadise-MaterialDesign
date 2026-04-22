@@ -26,7 +26,6 @@ WamSessionModel >> emailSet: anObject [
 
 	self email: anObject.
 	self valueChanged.
-	self application layout navRail valueChanged.
 
 ]
 

@@ -5,6 +5,6 @@ CpView >> viewProxyLogTrace: aString [
 	"Emit aString to log.
 	Used only by Presenter to request View proxy to emit to client side log"
 
-	false ifTrue: [
+	true ifTrue: [
 		WamLog log: aString level: 3 ]
 ]

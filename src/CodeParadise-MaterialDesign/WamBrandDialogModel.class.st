@@ -16,6 +16,7 @@ WamBrandDialogModel >> initialize [
 
 	super initialize.
 
+	open := false.
 	"There are 5 tabs hardcoded in the template"
 	tabGroupItems := Array new: 5.
 

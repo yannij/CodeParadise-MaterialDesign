@@ -65,7 +65,7 @@ WamAppBarPresenter >> renderView [
 						ifTrue: [ self view renderLeadingAction: value asDictionary ]
 						ifFalse: [ self view renderLeadingAction: nil ] ] ].
 
-	self view appBarSetWidth; renderHeadline: self model headline.
+	self view "appBarSetWidth;" renderHeadline: self model headline.
 
 	list := self actionItemsToUse collect: [ :each | each asDictionary ].
 	self view renderTrailingActions: list asArray.
