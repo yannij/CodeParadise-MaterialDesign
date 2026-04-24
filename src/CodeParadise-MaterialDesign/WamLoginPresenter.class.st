@@ -9,5 +9,6 @@ Class {
 { #category : 'rendering' }
 WamLoginPresenter >> renderView [
 
-	self view renderWithButtons: { 'Login'->true. 'Cancel'->false }
+	self view renderWithButtons: { 'Login'->true. 'Cancel'->false }.
+
 ]

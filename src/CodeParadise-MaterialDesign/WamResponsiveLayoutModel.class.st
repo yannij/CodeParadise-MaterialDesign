@@ -117,9 +117,6 @@ WamResponsiveLayoutModel >> initialize [
 	brandDialog := WamBrandDialogModel new.
 	self brandDialogSetup.
 
-	"Do this last"
-	layoutReady := WamLayoutReadyModel new.
-
 ]
 
 { #category : 'accessing' }

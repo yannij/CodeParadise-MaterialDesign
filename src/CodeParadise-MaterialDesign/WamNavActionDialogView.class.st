@@ -41,7 +41,7 @@ WamNavActionDialogView >> renderDialogItem: aNavAction [
 { #category : 'rendering' }
 WamNavActionDialogView >> triggerNavEvent: aNavAction [
 
-	self closeBrandDialog.
+	self brandDialogClose.
 	super triggerNavEvent: aNavAction.
 
 ]

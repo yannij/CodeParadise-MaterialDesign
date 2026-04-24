@@ -348,6 +348,12 @@ WamResponsiveLayoutView >> bodyWidthAdapt [
 
 ]
 
+{ #category : 'actions' }
+WamResponsiveLayoutView >> brandDialogOpen [
+
+	self brandDialogView brandDialogOpen
+]
+
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> brandDialogView [
 
@@ -968,6 +974,12 @@ WamResponsiveLayoutView >> setLayoutSettings: props [
 WamResponsiveLayoutView >> settingsView [
 
 	^ self brandDialogView settingsView
+]
+
+{ #category : 'actions' }
+WamResponsiveLayoutView >> sharedDialogOpen [
+
+	self dialogView sharedDialogOpen
 ]
 
 { #category : 'accessing - settings' }

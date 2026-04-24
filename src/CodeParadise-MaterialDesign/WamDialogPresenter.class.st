@@ -13,6 +13,4 @@ WamDialogPresenter >> renderView [
 		content message ifNotNil: [ :value | self view renderLabel: value ].
 		self renderChildViewForModel: content atSlotNamed: #content ].
 
-	self view renderOpen: self model open.
-
 ]

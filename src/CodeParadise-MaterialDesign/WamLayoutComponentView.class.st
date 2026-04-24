@@ -10,15 +10,15 @@ Class {
 }
 
 { #category : 'actions' }
-WamLayoutComponentView >> closeBrandDialog [
+WamLayoutComponentView >> brandDialogClose [
 
-	self layoutViewLazy brandDialogView closeBrandDialog
+	self layoutViewLazy brandDialogView brandDialogClose
 ]
 
 { #category : 'actions' }
-WamLayoutComponentView >> closeDialog [
+WamLayoutComponentView >> brandDialogOpen [
 
-	self layoutViewLazy dialogView closeDialog
+	self layoutViewLazy brandDialogView brandDialogOpen
 ]
 
 { #category : 'accessing' }
@@ -70,4 +70,16 @@ WamLayoutComponentView >> setElementPadding: element [
 
 	self setElement: element padding: self layoutViewLazy wamPadding.
 
+]
+
+{ #category : 'actions' }
+WamLayoutComponentView >> sharedDialogClose [
+
+	self layoutViewLazy dialogView sharedDialogClose
+]
+
+{ #category : 'actions' }
+WamLayoutComponentView >> sharedDialogOpen [
+
+	self layoutViewLazy dialogView sharedDialogOpen
 ]

@@ -20,6 +20,6 @@ self systemLog logTrace: self model tabGroupItems printString.
 		self view renderTab: key label: eachItem tabName.
 		self renderChildViewForModel: eachItem atSlotNamed: key ] ].
 
-	self view renderOpen: self model open.
-
+	"self view renderOpen: self model open.
+"
 ]

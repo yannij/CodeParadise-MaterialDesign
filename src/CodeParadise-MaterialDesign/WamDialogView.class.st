@@ -17,23 +17,9 @@ WamDialogView class >> template [
 ]
 
 { #category : 'rendering' }
-WamDialogView >> closeDialog [
-
-	self dialogComponent openBeOff
-
-]
-
-{ #category : 'rendering' }
 WamDialogView >> dialogComponent [
 
 	^ self shadowRoot elementWithId: #sharedDialog
-]
-
-{ #category : 'rendering' }
-WamDialogView >> openDialog [
-
-	self dialogComponent openBeOn
-
 ]
 
 { #category : 'rendering' }
@@ -44,8 +30,15 @@ WamDialogView >> renderLabel: aString [
 ]
 
 { #category : 'rendering' }
-WamDialogView >> renderOpen: aBoolean [
+WamDialogView >> sharedDialogClose [
 
-	self dialogComponent open: aBoolean
+	self dialogComponent openBeOff
+
+]
+
+{ #category : 'rendering' }
+WamDialogView >> sharedDialogOpen [
+
+	self dialogComponent openBeOn
 
 ]

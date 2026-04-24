@@ -36,6 +36,7 @@ WamDialogContentView >> button: label answer: answer [
 
 	^ (WaButton label: label)
 		variantBeBrand;
+		attributeAt: 'data-dialog' put: 'close';
 		when: CpClickEvent basicPrimary do: [ self triggerAnswer: answer ] for: self;
 		yourself
 ]
