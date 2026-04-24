@@ -3,7 +3,6 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'label',
-		'open',
 		'tabGroupItems'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
@@ -16,7 +15,6 @@ WamBrandDialogModel >> initialize [
 
 	super initialize.
 
-	open := false.
 	"There are 5 tabs hardcoded in the template"
 	tabGroupItems := Array new: 5.
 
@@ -32,26 +30,6 @@ WamBrandDialogModel >> label [
 WamBrandDialogModel >> label: anObject [
 
 	label := anObject
-]
-
-{ #category : 'accessing' }
-WamBrandDialogModel >> open [
-
-	^ open
-]
-
-{ #category : 'accessing' }
-WamBrandDialogModel >> open: anObject [
-
-	open := anObject
-]
-
-{ #category : 'initialization' }
-WamBrandDialogModel >> setOpen: aBoolean [
-
-	self open: aBoolean.
-	self valueChanged.
-
 ]
 
 { #category : 'accessing' }

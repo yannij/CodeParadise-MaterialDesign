@@ -3,8 +3,7 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'contentModel',
-		'label',
-		'open'
+		'label'
 	],
 	#category : 'CodeParadise-MaterialDesign-Dialog',
 	#package : 'CodeParadise-MaterialDesign',

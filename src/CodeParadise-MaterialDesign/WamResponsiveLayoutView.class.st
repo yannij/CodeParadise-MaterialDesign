@@ -977,6 +977,12 @@ WamResponsiveLayoutView >> settingsView [
 ]
 
 { #category : 'actions' }
+WamResponsiveLayoutView >> sharedDialogClose [
+
+	self dialogView sharedDialogClose
+]
+
+{ #category : 'actions' }
 WamResponsiveLayoutView >> sharedDialogOpen [
 
 	self dialogView sharedDialogOpen

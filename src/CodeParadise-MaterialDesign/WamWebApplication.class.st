@@ -99,8 +99,7 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 	(self authenticateUsername: username password: password)
 		ifTrue: [
 			self session emailSet: username.
-			self dialogOpen: false.
-			self brandDialogClose ]
+			self layout navRail valueChanged ]
 		ifFalse: [ self inform: 'Login failed!' ]
 ]
 
@@ -108,14 +107,6 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 WamWebApplication >> authenticateUsername: aUsername password: aPassword [
 
 	^ aPassword = 'todo'
-]
-
-{ #category : 'actions' }
-WamWebApplication >> brandDialogClose [
-
-	self layout brandDialog open: false; valueChanged.
-	self layout navRail valueChanged.
-
 ]
 
 { #category : 'events' }
@@ -133,7 +124,7 @@ WamWebApplication >> clientBehaviorClass [
 	^ WamWebClientBehavior
 ]
 
-{ #category : 'actions' }
+{ #category : 'dialogs' }
 WamWebApplication >> confirm: aString onAnswer: aBlock [
 	| d |
 
@@ -144,8 +135,8 @@ WamWebApplication >> confirm: aString onAnswer: aBlock [
 			answerBlock: [ :parameters | aBlock value: (parameters at: #yesOrNo ifAbsent: []) ];
 			yourself);
 		yourself.
-	"d open: true."
 	d valueChanged.
+	self sharedDialogOpen.
 
 ]
 
@@ -155,22 +146,11 @@ WamWebApplication >> customColorTheme [
 	^ nil
 ]
 
-{ #category : 'actions' }
-WamWebApplication >> dialogOpen: aBoolean [
-	| d |
-
-	d := self layout dialog.
-	"d open: aBoolean."
-	d valueChanged.
-
-]
-
-{ #category : 'actions' }
+{ #category : 'iam' }
 WamWebApplication >> doLogout [
 
 	self session logout.
-	self dialogOpen: false.
-	self brandDialogClose.
+	self layout navRail valueChanged.
 
 ]
 
@@ -218,13 +198,13 @@ WamWebApplication >> handleLoginRequested: anObject [
 
 ]
 
-{ #category : 'actions' }
+{ #category : 'dialogs' }
 WamWebApplication >> inform: aString [
 
 	self inform: aString onAnswer: [ :answer | ]
 ]
 
-{ #category : 'actions' }
+{ #category : 'dialogs' }
 WamWebApplication >> inform: aString onAnswer: aBlock [
 	| d |
 
@@ -236,6 +216,7 @@ WamWebApplication >> inform: aString onAnswer: aBlock [
 			yourself);
 		yourself.
 	d valueChanged.
+	self sharedDialogOpen.
 
 ]
 
@@ -292,7 +273,7 @@ WamWebApplication >> listDetailReset [
 	self setDetailNone
 ]
 
-{ #category : 'actions' }
+{ #category : 'iam' }
 WamWebApplication >> loginContent: aBlock [
 
 	^ WamLogin new
@@ -301,7 +282,7 @@ WamWebApplication >> loginContent: aBlock [
 		yourself
 ]
 
-{ #category : 'actions' }
+{ #category : 'iam' }
 WamWebApplication >> loginOnAnswer: aBlock [
 	| d |
 
@@ -309,8 +290,8 @@ WamWebApplication >> loginOnAnswer: aBlock [
 		label: '';
 		setContentModel: (self loginContent: aBlock);
 		yourself.
-	"d open: true."
 	d valueChanged.
+	self sharedDialogOpen.
 
 ]
 
@@ -594,6 +575,24 @@ WamWebApplication >> setUpNativeEvents [
 		addNativeSubtype: #login groupTag: #primary iconName: 'right-to-bracket' iconLabel: 'Login';
 		addNativeSubtype: #logout groupTag: #primary iconName: 'right-from-bracket' iconLabel: 'Logout';
 		yourself.
+
+]
+
+{ #category : 'dialogs' }
+WamWebApplication >> sharedDialogClose [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #sharedDialogClose)
+
+]
+
+{ #category : 'dialogs' }
+WamWebApplication >> sharedDialogOpen [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #sharedDialogOpen)
 
 ]
 

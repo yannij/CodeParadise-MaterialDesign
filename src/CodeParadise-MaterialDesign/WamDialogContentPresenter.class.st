@@ -14,7 +14,6 @@ WamDialogContentPresenter >> handleNavEvent: aNavEvent [
 
 	eventId := aNavEvent id.
 	eventId = #dialogAnswer ifTrue: [
-		self application dialogOpen: false.
 		^ self model answerBlock value: aNavEvent parameters. ].
 
 	self systemLog logError: 'No handler: ', aNavEvent id printString.

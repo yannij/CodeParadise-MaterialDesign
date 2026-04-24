@@ -80,3 +80,9 @@ WamWebClientBehavior >> layoutViewElement [
 
 	^ CpHtmlElement documentBody firstDescendantMatching: WamResponsiveLayoutView asCssSelector
 ]
+
+{ #category : 'actions' }
+WamWebClientBehavior >> sharedDialogOpen [
+
+	self layoutViewElement sharedDialogOpen
+]
