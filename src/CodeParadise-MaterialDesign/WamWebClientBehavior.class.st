@@ -70,6 +70,7 @@ WamWebClientBehavior >> appViewId [
 { #category : 'actions' }
 WamWebClientBehavior >> finishSetUp: props [
 
+	self announceSessionParameters.
 	self layoutViewElement layoutInitialSetUp: props.
 
 ]

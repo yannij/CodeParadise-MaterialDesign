@@ -127,6 +127,12 @@ WamWebApplication >> brandDialogSetupSessionTab [
 
 ]
 
+{ #category : 'accessing' }
+WamWebApplication >> clientBehaviorClass [
+
+	^ WamWebClientBehavior
+]
+
 { #category : 'actions' }
 WamWebApplication >> confirm: aString onAnswer: aBlock [
 	| d |
@@ -138,7 +144,7 @@ WamWebApplication >> confirm: aString onAnswer: aBlock [
 			answerBlock: [ :parameters | aBlock value: (parameters at: #yesOrNo ifAbsent: []) ];
 			yourself);
 		yourself.
-	d open: true.
+	"d open: true."
 	d valueChanged.
 
 ]
@@ -401,8 +407,8 @@ WamWebApplication >> postLoad [
 
 	super postLoad.
 
-	self brandDialogSetupSessionTab.
-	self setUpPostLoadAndReload.
+	self setUpLayout.
+	self finishSetUp.
 
 ]
 
@@ -411,7 +417,8 @@ WamWebApplication >> postReload [
 
 	super postReload.
 
-	self setUpPostLoadAndReload.
+	"self setUpLayout."
+	self finishSetUp.
 
 ]
 
@@ -537,18 +544,6 @@ WamWebApplication >> setUpCustomEvents [
 ]
 
 { #category : 'actions' }
-WamWebApplication >> setUpDialogs [
-
-	(self nativeEventSpecAt: #login) groupTag: #session.
-
-	self ssoRedirectUrlParameters.
-	self layout brandDialog label: self class appName; valueChanged.
-
-	self finishSetUp.
-
-]
-
-{ #category : 'actions' }
 WamWebApplication >> setUpLayout [
 	| toolbar appBar leadingAction |
 
@@ -572,6 +567,10 @@ WamWebApplication >> setUpLayout [
 	appBar := self layout appBar2.
 	leadingAction := self nativeEventSpecAt: (appBar isPrimary ifTrue: [ #modalNav ] ifFalse: [ #back ]).
 	appBar leadingAction: leadingAction.
+
+	(self nativeEventSpecAt: #login) groupTag: #session.
+	self brandDialogSetupSessionTab.
+	self layout brandDialog label: self class appName; valueChanged.
 
 ]
 
@@ -598,29 +597,10 @@ WamWebApplication >> setUpNativeEvents [
 
 ]
 
-{ #category : 'actions' }
-WamWebApplication >> setUpPostLoadAndReload [
-
-	self setUpLayout.
-	self setUpDialogs.
-	self dialogOpen: false.
-	self brandDialogClose.
-
-]
-
 { #category : 'iam' }
 WamWebApplication >> ssoRedirectUrlCallback: anEvent [
 
 	self session ssoRedirectUrlCallback: anEvent.
-
-]
-
-{ #category : 'iam' }
-WamWebApplication >> ssoRedirectUrlParameters [
-
-	self sendMessage: (MessageSend
-		receiver: self clientBehaviorClass clientId
-		selector: #announceSessionParameters)
 
 ]
 
