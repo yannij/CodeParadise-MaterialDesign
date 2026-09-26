@@ -13,8 +13,6 @@ WamNavActionDialogPresenter >> handleNavEvent: aNavEvent [
 
 	super handleNavEvent: aNavEvent.
 
-	self systemLog logError: 'Not found: ', aNavEvent id printString.
-
 ]
 
 { #category : 'rendering' }

@@ -44,7 +44,7 @@ WamDemoSoilRepository >> collectionNameFor: aClass [
 WamDemoSoilRepository >> collectionNewFor: aClass [
 
 	"^ Set new"
-	^ SoilSkipListDictionary new
+	^ (SoilIndexedDictionary newWithBackend: SoilSkipList)
 		keySize: 16;
 		maxLevel: 8;
 		yourself
