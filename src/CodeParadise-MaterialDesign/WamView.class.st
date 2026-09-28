@@ -7,9 +7,9 @@ Class {
 }
 
 { #category : 'accessing' }
-WamView class >> eventAspectCrud [
+WamView class >> linkUtilitiesCss [
 
-	^ #crud
+	^ '<link rel="stylesheet" href="', WaElement importBasePath, 'styles/utilities.css"></link>'
 ]
 
 { #category : 'utilities' }

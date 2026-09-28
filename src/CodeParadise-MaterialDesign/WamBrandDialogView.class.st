@@ -40,14 +40,14 @@ WamBrandDialogView class >> template [
 { #category : 'rendering' }
 WamBrandDialogView >> brandDialogClose [
 
-	self dialogComponent openBeOff
+	self dialogComponent beNotOpen
 
 ]
 
 { #category : 'rendering' }
 WamBrandDialogView >> brandDialogOpen [
 
-	self dialogComponent openBeOn
+	self dialogComponent beOpen
 
 ]
 
@@ -60,7 +60,7 @@ WamBrandDialogView >> dialogComponent [
 { #category : 'rendering' }
 WamBrandDialogView >> openDialog [
 
-	self dialogComponent openBeOn
+	self dialogComponent beOpen
 
 ]
 

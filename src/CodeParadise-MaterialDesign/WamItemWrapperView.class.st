@@ -164,7 +164,7 @@ WamItemWrapperView class >> template [
 
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <div id="container" class="wam-container">
   <div class="wam-item">
     <slot name="header"></slot>

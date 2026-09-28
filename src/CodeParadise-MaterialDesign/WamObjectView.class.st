@@ -35,7 +35,7 @@ WamObjectView class >> template [
 
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <slot name="fields"></slot>
 <div id="container">
   <slot name="details"></slot>
@@ -97,7 +97,7 @@ WamObjectView >> fieldAt: key label: aLabel textarea: aText [
 	| element |
 
 	element := WaTextarea new
-		appearanceBeFilled;
+		appearanceFilled;
 		name: key;
 		addClass: 'wam-textarea';
 		rows: 4;

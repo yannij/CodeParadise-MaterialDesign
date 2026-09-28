@@ -30,7 +30,7 @@ WamListView class >> template [
 
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <div id="container" class="wam-container">
   <ol class="wa-stack wam-list">
     <slot name="list"></slot>

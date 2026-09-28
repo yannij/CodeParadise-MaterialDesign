@@ -54,7 +54,7 @@ WamNavRailModalView class >> style [
 WamNavRailModalView class >> template [
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <wa-drawer>
 <div class="wa-split:column wa-gap-0 wa-cloak" style="height: 100%">
 <nav class="wa-stack wa-gap-0">
@@ -80,8 +80,8 @@ WamNavRailModalView >> drawerSetup [
 	self drawer
 		"makeEmpty;"
 		addClass: 'navrailx';
-		placementBeStart;
-		withoutHeaderBeOn;
+		placementStart;
+		beWithoutHeader;
 		customPropertyAt: 'size' put: '220px';
 		"customPropertyAt: 'size' put: self layoutViewLazy navRailWidth printString, 'px';"
 		customPropertyAt: 'body-spacing' put: '0';

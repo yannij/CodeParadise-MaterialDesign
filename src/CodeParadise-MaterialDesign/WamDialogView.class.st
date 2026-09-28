@@ -32,13 +32,13 @@ WamDialogView >> renderLabel: aString [
 { #category : 'rendering' }
 WamDialogView >> sharedDialogClose [
 
-	self dialogComponent openBeOff
+	self dialogComponent beNotOpen
 
 ]
 
 { #category : 'rendering' }
 WamDialogView >> sharedDialogOpen [
 
-	self dialogComponent openBeOn
+	self dialogComponent beOpen
 
 ]

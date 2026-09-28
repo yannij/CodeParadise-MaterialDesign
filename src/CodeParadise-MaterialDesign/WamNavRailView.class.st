@@ -23,7 +23,7 @@ WamNavRailView class >> style [
 WamNavRailView class >> template [
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <div id="container" class="navrail wa-split:column wa-gap-0 wa-cloak">
 <nav class="wa-stack wa-gap-0">
   <slot></slot>

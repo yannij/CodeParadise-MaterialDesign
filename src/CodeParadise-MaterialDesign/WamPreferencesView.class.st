@@ -39,7 +39,7 @@ WamPreferencesView >> colorThemeBuildChooser: props [
 		yourself.
 	self colorThemeName: selectedItem.
 
-	chooser when: WaChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
+	chooser when: CpChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
 
 	#(
 red orange yellow green cyan blue indigo purple pink gray
@@ -131,7 +131,7 @@ WamPreferencesView >> fontFamilyChooser: props [
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 
-	chooser when: WaChangeEvent do: [ self fontFamilySet: chooser value ] for: self.
+	chooser when: CpChangeEvent do: [ self fontFamilySet: chooser value ] for: self.
 
 	{
 nil -> 'Default'.
@@ -180,7 +180,7 @@ WamPreferencesView >> layoutTypeBuildChooser: props [
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 
-	radioGroup when: WaChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
+	radioGroup when: CpChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
 
 	WamLayoutType layoutTypeList do: [ :each |
 		radioGroup appendChild: (WaRadio new value: each key; textContent: each value; yourself) ].
@@ -542,7 +542,7 @@ WamPreferencesView >> switchNewWithId: id label: label checked: checked do: aBlo
 		id: id;
 		label: label;
 		checked: checked;
-		when: WaChangeEvent do: aBlock for: self;
+		when: CpChangeEvent do: aBlock for: self;
 		yourself.
 
 	^ (CpHtmlElement newWithTag: #div)

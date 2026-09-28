@@ -145,7 +145,7 @@ WamResponsiveLayoutView class >> template [
 
 	<webResource: #html>
 
-	^ WaElement linkUtilitiesCss, '
+	^ WamView linkUtilitiesCss, '
 <wa-resize-observer>
   <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
     <div class="wa-cluster wa-gap-0 wa-align-items-stretch wa-flex-nowrap">
@@ -625,7 +625,7 @@ WamResponsiveLayoutView >> hideNavModal [
 
 	modalElement := self modalNavElementOrNil.
 	modalElement ifNotNil: [
-		modalElement openBeOff ].
+		modalElement beNotOpen ].
 ]
 
 { #category : 'initialization' }
@@ -768,7 +768,7 @@ WamResponsiveLayoutView >> modalNavOpen [
 	drawer := self modalNavElementOrNil.
 	drawer
 		ifNil: [ self systemLog logError: 'modal nav element is nil' ]
-		ifNotNil: [ drawer openBeOn ]
+		ifNotNil: [ drawer beOpen ]
 ]
 
 { #category : 'navbar' }
