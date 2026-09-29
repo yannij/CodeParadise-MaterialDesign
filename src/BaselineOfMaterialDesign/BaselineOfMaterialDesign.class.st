@@ -40,4 +40,6 @@ BaselineOfMaterialDesign >> codeparadise: spec [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
 	spec package: 'CodeParadise-WebApplication-MVP' with: [
 		spec repository: 'github://ErikOnBike/CodeParadise'].
+	spec package: 'CodeParadise-WebApplication-WebAwesome' with: [
+		spec repository: 'github://ErikOnBike/CodeParadise'].
 ]
