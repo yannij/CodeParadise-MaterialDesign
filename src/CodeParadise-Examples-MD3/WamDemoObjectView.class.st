@@ -11,7 +11,6 @@ WamDemoObjectView >> renderModelTable: aList columns: columns title: aTitleStrin
 	| table thead row tbody details |
 
 	table := #table asHtmlTag addClass: 'wam-table'; yourself.
-	table attributeAt: 'border' put: '1'.
 	"table appendChild: (#caption asHtmlTag textContent: aTitleString; yourself).
 "
 	thead := #thead asHtmlTag.

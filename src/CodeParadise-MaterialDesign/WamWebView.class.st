@@ -21,6 +21,9 @@ body {
   margin: 0;
   padding: 0;
 }
+table, th, td {
+  border-width: 1px;
+}
 '
 ]
 

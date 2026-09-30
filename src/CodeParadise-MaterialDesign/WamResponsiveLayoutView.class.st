@@ -58,7 +58,7 @@ WamResponsiveLayoutView class >> globalStyle [
 }
 
 .wam-details::part(base) {
-  padding: 0;
+  padding: var(--wa-space-s);
   background: var(--wa-color-brand-80);
 }
 

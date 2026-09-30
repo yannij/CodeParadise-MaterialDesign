@@ -37,9 +37,7 @@ WamObjectView class >> template [
 
 	^ WamView linkUtilitiesCss, '
 <slot name="fields"></slot>
-<div id="container">
-  <slot name="details"></slot>
-</div>'
+<slot name="details"></slot>'
 ]
 
 { #category : 'rendering' }
@@ -61,7 +59,7 @@ WamObjectView >> fieldAt: key label: aLabel input: aText [
 	| element |
 
 	element := WaInput new
-		appearanceBeFilled;
+		appearanceFilled;
 		name: key;
 		addClass: 'wam-input';
 		label: aLabel;
