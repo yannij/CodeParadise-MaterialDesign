@@ -50,7 +50,7 @@ TBRootApplication >> initialize [
 
 	super initialize.
 
-	pane1Model := WamPaneModel on: (listModel := WamListModel new).
+	pane1Model := WamPaneModel on: (listModel := WamBasicListModel new).
 	pane2Model := WamPaneModel on: (detailModel := WamItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 	layout paneLayout: WamPaneLayoutModel new.

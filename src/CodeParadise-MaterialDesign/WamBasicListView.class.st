@@ -1,5 +1,5 @@
 Class {
-	#name : 'WamListView',
+	#name : 'WamBasicListView',
 	#superclass : 'WamLayoutComponentView',
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'web resources' }
-WamListView class >> style [
+WamBasicListView class >> style [
 
 	<webResource: #css>
 
@@ -26,7 +26,7 @@ WamListView class >> style [
 ]
 
 { #category : 'web resources' }
-WamListView class >> template [
+WamBasicListView class >> template [
 
 	<webResource: #html>
 

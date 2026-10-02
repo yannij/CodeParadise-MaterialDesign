@@ -193,7 +193,7 @@ WamDemoMovieListingApp >> initialize [
 	self repositorySetup.
 
 	modelClass := WamDemoMoviesMovie.
-	pane1Content := WamListModel new.
+	pane1Content := WamBasicListModel new.
 	pane1Content listSet: self allModels.
 	pane1Model := WamPaneModel on: pane1Content.
 	pane2Model := WamPaneModel new.
