@@ -98,6 +98,12 @@ WamListItemModel >> leadingVideoThumbnail: anObject [
 	leadingVideoThumbnail := anObject
 ]
 
+{ #category : 'presenter' }
+WamListItemModel >> preferredPresenterClass [
+
+	^ WamListItemPresenter
+]
+
 { #category : 'accessing' }
 WamListItemModel >> supportingText [
 

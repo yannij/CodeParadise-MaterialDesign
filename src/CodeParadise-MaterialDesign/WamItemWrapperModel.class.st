@@ -101,6 +101,12 @@ WamItemWrapperModel >> isUpdating [
 	^ self crudState = #updating
 ]
 
+{ #category : 'presenter' }
+WamItemWrapperModel >> preferredPresenterClass [
+
+	^ WamItemWrapperPresenter
+]
+
 { #category : 'accessing' }
 WamItemWrapperModel >> wrappedModel [
 

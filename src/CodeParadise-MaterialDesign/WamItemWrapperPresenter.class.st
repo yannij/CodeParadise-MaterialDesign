@@ -6,6 +6,12 @@ Class {
 	#tag : 'ListDetail'
 }
 
+{ #category : 'accessing' }
+WamItemWrapperPresenter class >> defaultViewClass [
+
+	^ WamItemWrapperView
+]
+
 { #category : 'rendering' }
 WamItemWrapperPresenter >> renderView [
 

@@ -250,8 +250,8 @@ WamWebApplication >> listDetailRemove [
 	| listDetail |
 
 	listDetail := self layout paneLayout.
-	self modelRemove: listDetail detail wrappedModel.
-	listDetail list listSet: self allModels.
+	self modelRemove: listDetail itemDetailGet wrappedModel.
+	listDetail itemListGet listSet: self allModels.
 	self setDetailNone.
 
 ]
@@ -412,8 +412,7 @@ WamWebApplication >> processNavActionEvent: aNavEvent model: aModel [
 	eventId := aNavEvent id.
 
 	aNavEvent id = #setDetail ifTrue: [
-		self layout paneLayout detail: aModel.
-		self layout pane2 setPaneContent: aModel.
+		self layout paneLayout itemDetailSet: aModel.
 		self setAppBar2EditDelete.
 		^ self ].
 
@@ -488,8 +487,7 @@ WamWebApplication >> setDetailAddNew [
 	| detail |
 
 	detail := self newWrappedModel.
-	self layout paneLayout detail: detail.
-	self layout pane2 setPaneContent: detail.
+	self layout paneLayout itemDetailSet: detail.
 	self appBar2Headline: detail wrappedModel mdAddingTitle.
 	self setAppBar2SaveCancel.
 
@@ -498,8 +496,7 @@ WamWebApplication >> setDetailAddNew [
 { #category : 'model' }
 WamWebApplication >> setDetailNone [
 
-	self layout paneLayout detail: nil.
-	self layout pane2 setPaneContent: nil.
+	self layout paneLayout itemDetailSet: nil.
 	self appBar2Headline: ''.
 	self setAppBar2TrailingActionsNone.
 
@@ -638,7 +635,7 @@ WamWebApplication >> wrapperCancel: aNavActionEvent [
 WamWebApplication >> wrapperDelete: ignored [
 	| confirmString detail |
 
-	detail := self layout paneLayout detail.
+	detail := self layout paneLayout itemDetailGet.
 	confirmString := 'Remove: ', detail wrappedModel mdPrimaryString, ' ?'.
 	self listDetailRemoveConfirm: confirmString.
 
@@ -655,11 +652,11 @@ WamWebApplication >> wrapperSave: aNavActionEvent [
 	listDetail := self layout paneLayout.
 	theModel isCreating
 		ifTrue: [
-			result := self modelAdd: listDetail detail wrappedModel.
-			listDetail list listSet: self allModels.
+			result := self modelAdd: listDetail itemDetailGet wrappedModel.
+			listDetail itemListGet listSet: self allModels.
 			self listDetailReset. ]
 		ifFalse: [
-			result := self modelUpdate: listDetail detail wrappedModel ].
+			result := self modelUpdate: listDetail itemDetailGet wrappedModel ].
 
 	self layout pane2 valueChanged.
 	self layout pane2 paneContent ifNotNil: [ :value | value valueChanged ].

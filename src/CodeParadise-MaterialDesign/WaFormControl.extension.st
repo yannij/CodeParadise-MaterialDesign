@@ -20,26 +20,6 @@ WaFormControl >> label: ignored [
 ]
 
 { #category : '*CodeParadise-MaterialDesign' }
-WaFormControl >> labelText [
-
-	"Answer the label text (a String) of the receiver.
-	For richer HTML element use #label instead."
-
-	^ self label
-		ifNotNil: [ :label | label textContent ]
-		ifNil: [ '' ]
-]
-
-{ #category : '*CodeParadise-MaterialDesign' }
-WaFormControl >> labelText: aString [
-
-	"Set the label text to the specified String value.
-	For richer HTML element use #label: instead."
-
-	self label: aString asHtmlElement
-]
-
-{ #category : '*CodeParadise-MaterialDesign' }
 WaFormControl >> readonly: aBoolean [
 	"Set form element to read only.
 	

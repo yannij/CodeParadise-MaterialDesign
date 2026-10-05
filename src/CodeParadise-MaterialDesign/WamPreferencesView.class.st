@@ -34,7 +34,7 @@ WamPreferencesView >> colorThemeBuildChooser: props [
 	selectedItem := props at: #colorThemeName ifAbsent: [].
 	chooser := WaSelect new
 		id: 'wamColorThemeChooser';
-		labelText: 'Use color theme:';
+		label: 'Use color theme:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 	self colorThemeName: selectedItem.
@@ -127,7 +127,7 @@ WamPreferencesView >> fontFamilyChooser: props [
 	selectedItem := props at: #fontFamily ifAbsent: [].
 	chooser := WaSelect new
 		id: 'wamFontFamilyChooser';
-		labelText: 'Use font family:';
+		label: 'Use font family:';
 		propertyAt: 'value' put: selectedItem asString;
 		yourself.
 

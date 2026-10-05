@@ -99,9 +99,9 @@ WamObjectView >> fieldAt: key label: aLabel textarea: aText [
 		name: key;
 		addClass: 'wam-textarea';
 		rows: 4;
-		labelText: aLabel;
+		label: aLabel;
 		value: aText;
-		hintText: 'Help text...', aLabel;
+		hint: 'Help text...', aLabel;
 		disabled: true;
 		yourself.
 

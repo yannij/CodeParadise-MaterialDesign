@@ -18,12 +18,6 @@ WamPaneLayoutModel >> detail [
 	^ self pane2 paneContent
 ]
 
-{ #category : 'accessing' }
-WamPaneLayoutModel >> detail: anObject [
-
-	self pane2 setPaneContent: anObject
-]
-
 { #category : 'initialization' }
 WamPaneLayoutModel >> initialize [
 
@@ -35,13 +29,25 @@ WamPaneLayoutModel >> initialize [
 ]
 
 { #category : 'accessing' }
-WamPaneLayoutModel >> list [
+WamPaneLayoutModel >> itemDetailGet [
+
+	^ self pane2 paneContent
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> itemDetailSet: anObject [
+
+	self pane2 setPaneContent: anObject
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> itemListGet [
 
 	^ self pane1 paneContent
 ]
 
 { #category : 'accessing' }
-WamPaneLayoutModel >> list: anObject [
+WamPaneLayoutModel >> itemListSet: anObject [
 
 	self pane1 setPaneContent: anObject
 ]

@@ -524,7 +524,7 @@ WamResponsiveLayoutView >> fieldAt: key label: aLabel input: aText [
 	^ WaInput new
 		name: key;
 		addClass: 'wam-input';
-		labelText: aLabel;
+		label: aLabel;
 		value: aText;
 		hint: 'Help text...', aLabel;
 		disabled: false;
