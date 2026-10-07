@@ -345,19 +345,14 @@ WamResponsiveLayoutView >> bodyFind [
 
 { #category : 'body' }
 WamResponsiveLayoutView >> bodyHeightAdapt [
-	| bodyRegion bodyHeightReduction bodyHeightString |
-
-	bodyRegion := self bodyRegionFind.
-	bodyRegion ifNil: [
-		self systemLog logTrace: 'bodyRegion is nil'.
-		^ self ].
+	| bodyHeightReduction bodyHeightString |
 
 	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
 	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
 	bodyHeightString := bodyHeightReduction > 0
 		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
 		ifFalse: [ '100vh' ].
-	bodyRegion styleAt: 'height' put: bodyHeightString.
+	self styleAt: 'height' put: bodyHeightString.
 
 	self pane1View
 		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
@@ -370,13 +365,6 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
 		ifNotNil: [ :v | v setPaneContentHeightReducedBy: bodyHeightReduction ].
 
-]
-
-{ #category : 'accessing - components' }
-WamResponsiveLayoutView >> bodyRegionFind [
-
-	"^ self firstChildAtSlotNamed: #paneLayout"
-	^ self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
 ]
 
 { #category : 'body' }
@@ -638,17 +626,6 @@ WamResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 
 	element styleAt: 'font-family' put: aFontFamily
 
-]
-
-{ #category : 'accessing - components' }
-WamResponsiveLayoutView >> getPaneLayoutComponent: aSlotName [
-	| bodyRegion component |
-
-	bodyRegion := self paneLayoutView.
-	bodyRegion ifNil: [ self systemLog logTrace: 'paneLayoutView is nil' ].
-	component := bodyRegion firstChildAtSlotNamed: aSlotName.
-	component ifNil: [ self systemLog logTrace: 'No element at slot: ', aSlotName printString ].
-	^ component
 ]
 
 { #category : 'resize' }
@@ -922,14 +899,12 @@ WamResponsiveLayoutView >> navRegionFind [
 
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> pane1View [
-	| paneLayoutView slotName |
+	| slotName |
 
-	paneLayoutView := self paneLayoutView.
-	paneLayoutView ifNil: [ ^ self ].
-	slotName := paneLayoutView isUsingSinglePaneLayout
+	slotName := self isUsingSinglePaneLayout
 		ifTrue: [ 'singlePaneLayoutP1' ]
 		ifFalse: [ 'twoPaneLayoutP1' ].
-	^ paneLayoutView firstChildAtSlotNamed: slotName
+	^ self firstChildAtSlotNamed: slotName
 ]
 
 { #category : 'body' }
@@ -966,33 +941,24 @@ WamResponsiveLayoutView >> pane1WidthSet: anInteger [
 
 ]
 
-{ #category : 'actions' }
+{ #category : 'pane layout' }
 WamResponsiveLayoutView >> pane2Content [
 	| view |
 
 	view := self pane2View firstChildAtSlotNamed: #paneContent.
-	self systemLog logTrace: view printString.
+	"self systemLog logTrace: view printString."
 
-	"^ WamItemWrapperView all"
 	^ view
 ]
 
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> pane2View [
-	| paneLayoutView pane2SlotName |
+	| pane2SlotName |
 
-	paneLayoutView := self paneLayoutView.
-	paneLayoutView ifNil: [ ^ self ].
-	pane2SlotName := paneLayoutView isUsingSinglePaneLayout
+	pane2SlotName := self isUsingSinglePaneLayout
 		ifTrue: [ 'singlePaneLayoutP2' ]
 		ifFalse: [ 'twoPaneLayoutP2' ].
-	^ paneLayoutView firstChildAtSlotNamed: pane2SlotName
-]
-
-{ #category : 'accessing - components' }
-WamResponsiveLayoutView >> paneLayoutView [
-
-	^ self
+	^ self firstChildAtSlotNamed: pane2SlotName
 ]
 
 { #category : 'accessing' }
@@ -1255,7 +1221,6 @@ WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 WamResponsiveLayoutView >> sidesheetView [
 
 	^ self firstChildAtSlotNamed: #sidesheet
-	"^ self getPaneLayoutComponent: #sidesheet"
 ]
 
 { #category : 'initialization' }

@@ -274,7 +274,7 @@ WamView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
 { #category : 'actions' }
 WamView >> primaryPaneOnly [
 
-	self layoutViewLazy paneLayoutView primaryPaneOnly
+	self layoutViewLazy primaryPaneOnly
 ]
 
 { #category : 'rendering' }
