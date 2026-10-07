@@ -1,13 +1,13 @@
 Class {
-	#name : 'WamPaneContentView',
+	#name : 'WamExampleContentView',
 	#superclass : 'WamLayoutComponentView',
-	#category : 'CodeParadise-MaterialDesign-Layout',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'SimpleDemo'
 }
 
 { #category : 'web resources' }
-WamPaneContentView class >> style [
+WamExampleContentView class >> style [
 
 	<webResource: #css>
 
@@ -20,7 +20,7 @@ WamPaneContentView class >> style [
 ]
 
 { #category : 'web resources' }
-WamPaneContentView class >> template [
+WamExampleContentView class >> template [
 
 	<webResource: #html>
 
@@ -30,7 +30,7 @@ WamPaneContentView class >> template [
 ]
 
 { #category : 'rendering' }
-WamPaneContentView >> renderContent: aString [
+WamExampleContentView >> renderContent: aString [
 
 	self replaceAllChildrenWith: (aString inHtmlTag: #span) atSlotNamed: 'content'.
 

@@ -118,7 +118,7 @@ WamResponsiveLayoutModel >> initialize [
 	layoutSettings := WamPreferencesModel new.
 	twoPaneSplitPosition := 300.
 	pane1Width := 500.
-	sidesheet := WamSidesheetModel new.
+	sidesheet := nil.
 	navRail := WamNavModel new.
 	dockedToolbar := WamToolbarDockedModel new.
 	floatingToolbar := WamToolbarFloatingModel new.

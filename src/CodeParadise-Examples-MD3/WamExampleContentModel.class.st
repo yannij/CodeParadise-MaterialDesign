@@ -1,16 +1,16 @@
 Class {
-	#name : 'WamPaneContentModel',
+	#name : 'WamExampleContentModel',
 	#superclass : 'WamModel',
 	#instVars : [
 		'content'
 	],
-	#category : 'CodeParadise-MaterialDesign-Layout',
-	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'Layout'
+	#category : 'CodeParadise-Examples-MD3-SimpleDemo',
+	#package : 'CodeParadise-Examples-MD3',
+	#tag : 'SimpleDemo'
 }
 
 { #category : 'instance creation' }
-WamPaneContentModel class >> on: aString [
+WamExampleContentModel class >> on: aString [
 
 	^ self new
 		content: aString;
@@ -18,26 +18,26 @@ WamPaneContentModel class >> on: aString [
 ]
 
 { #category : 'accessing' }
-WamPaneContentModel >> content [
+WamExampleContentModel >> content [
 
 	^ content
 ]
 
 { #category : 'accessing' }
-WamPaneContentModel >> content: anObject [
+WamExampleContentModel >> content: anObject [
 
 	content := anObject
 ]
 
 { #category : 'actions' }
-WamPaneContentModel >> processNavActionEvent: aBasicEvent [
+WamExampleContentModel >> processNavActionEvent: aBasicEvent [
 
 	self setContent: aBasicEvent data.
 
 ]
 
 { #category : 'accessing' }
-WamPaneContentModel >> setContent: anObject [
+WamExampleContentModel >> setContent: anObject [
 
 	self content: anObject.
 	self valueChanged.

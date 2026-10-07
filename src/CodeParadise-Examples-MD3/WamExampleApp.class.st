@@ -54,10 +54,10 @@ WamExampleApp >> initialize [
 
 	super initialize.
 
-	pane1Model := WamPaneModel on: (WamPaneContentModel on: (String loremIpsum: 4000)).
-	pane2Model := WamPaneModel on: (WamPaneContentModel on: (String loremIpsum: 2000)).
+	pane1Model := WamPaneModel on: (WamExampleContentModel on: (String loremIpsum: 4000)).
+	pane2Model := WamPaneModel on: (WamExampleContentModel on: (String loremIpsum: 2000)).
 	pane2Model appBarModel beSecondary.
-	sidesheetModel := WamSidesheetModel on: (WamPaneContentModel on: (String loremIpsum: 1000)).
+	sidesheetModel := WamPaneModel on: (WamExampleContentModel on: (String loremIpsum: 1000)).
 	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
