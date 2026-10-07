@@ -5,6 +5,7 @@ Class {
 		'debounceTransition',
 		'layoutWidthCached',
 		'layoutBreakpoints',
+		'isUsingSinglePaneLayout',
 		'popups'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
@@ -16,6 +17,8 @@ Class {
 WamResponsiveLayoutView class >> beLoaded [
 
 	CpTransition beLoaded.
+	WaIcon beLoaded.
+	WaSplitPanel beLoaded
 
 ]
 
@@ -115,7 +118,42 @@ WamResponsiveLayoutView class >> style [
   overflow-y: auto;
 }
 '
+, self stylePaneLayout
 
+]
+
+{ #category : 'web resources' }
+WamResponsiveLayoutView class >> stylePaneLayout [
+
+	<webResource: #css>
+	^ '
+.wam-body-region {
+  flex: auto;
+  display: flex;  
+  flex-direction: row;
+  background: var(--wa-color-brand-fill-quiet);
+}
+
+.wam-pane-layout {
+  height: 100%;
+}
+
+.wam-pane {
+  flex: 100%;
+  display: flex;  
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.wam-body-split-panel {
+  height: 100%;
+}
+
+.wam-pane-layout wa-split-panel::part(divider) {
+  background-color: var(--wa-color-brand-fill-quiet);
+}
+'
 ]
 
 { #category : 'web resources' }
@@ -150,7 +188,31 @@ WamResponsiveLayoutView class >> template [
   <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
     <div class="wa-cluster wa-gap-0 wa-align-items-stretch wa-flex-nowrap">
       <slot name="navRail"></slot>
-      <slot name="paneLayout"></slot>
+<div class="wam-pane-layout">
+  <div id="wamSinglePaneLayout" class="wam-one-pane">
+    <div id="wamSinglePaneLayoutP1" class="wam-pane">
+      <slot name="singlePaneLayoutP1"></slot>
+    </div>
+    <div id="wamSinglePaneLayoutP2" class="wam-pane">
+      <slot name="singlePaneLayoutP2"></slot>
+    </div>
+  </div>
+  <div id="wamTwoPaneLayout" class="wam-two-pane">
+    <wa-split-panel id="wamBodySplitPanel" class="wam-body-split-panel">
+      <wa-icon slot="divider" name="grip-vertical"></wa-icon>
+      <div slot="start">
+        <div id="wamTwoPaneLayoutP1" class="wam-pane">
+          <slot name="twoPaneLayoutP1"></slot>
+        </div>
+      </div>
+      <div slot="end">
+        <div id="wamTwoPaneLayoutP2" class="wam-pane">
+          <slot name="twoPaneLayoutP2"></slot>
+        </div>
+      </div>
+    </wa-split-panel>
+  </div>
+</div>
       <slot name="sidesheet"></slot>
     </div>
     <slot name="navBar"></slot>
@@ -162,7 +224,6 @@ WamResponsiveLayoutView class >> template [
 <slot name="fab"></slot>
 <slot name="dialog"></slot>
 <slot name="brandDialog"></slot>
-<slot name="layoutReady"></slot>
 '
 ]
 
@@ -314,28 +375,31 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> bodyRegionFind [
 
-	^ self firstChildAtSlotNamed: #paneLayout
+	"^ self firstChildAtSlotNamed: #paneLayout"
+	^ self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
 ]
 
 { #category : 'body' }
 WamResponsiveLayoutView >> bodySplitPanelAdapt [
 	| paneLayout w |
 
-	paneLayout := WamPaneLayoutView first.
-	w := self pane1WidthCompute.
+	"paneLayout := WamPaneLayoutView first."
+	paneLayout := self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
 
 	paneLayout ifNotNil: [
+		w := self pane1WidthCompute.
 		paneLayout pane1WidthSet: w ].
 
 ]
 
 { #category : 'body' }
 WamResponsiveLayoutView >> bodyWidthAdapt [
-	| paneLayout |
+	| splitPanel |
 
-	paneLayout := WamPaneLayoutView first.
+	"paneLayout := WamPaneLayoutView first."
+	splitPanel := self findByIdInShadowDom: 'wamBodySplitPanel'.
 
-	paneLayout
+	splitPanel
 		ifNil: [ self systemLog logError: 'Missing body region' ]
 		ifNotNil: [
 			| reduceByWidth widthString |
@@ -344,7 +408,7 @@ WamResponsiveLayoutView >> bodyWidthAdapt [
 			widthString := reduceByWidth > 0
 				ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
 				ifFalse: [ '100vw' ].
-			paneLayout styleAt: 'width' put: widthString ].
+			splitPanel styleAt: 'width' put: widthString ].
 
 ]
 
@@ -633,10 +697,17 @@ WamResponsiveLayoutView >> initialize [
 
 	super initialize.
 
+	isUsingSinglePaneLayout := false.
 	layoutWidthCached := 0.
 	layoutBreakpoints := WamLayoutType defaultLayoutBreakpoints.
 	popups := IdentityDictionary new.
 
+]
+
+{ #category : 'testing' }
+WamResponsiveLayoutView >> isUsingSinglePaneLayout [
+
+	^ isUsingSinglePaneLayout.
 ]
 
 { #category : 'layout' }
@@ -823,8 +894,12 @@ WamResponsiveLayoutView >> navRailModalView [
 
 { #category : 'navrail' }
 WamResponsiveLayoutView >> navRailWidth [
+	"Answer with of navrail.
+	- regular is 96
+	- expanded is 220
+	- the right border is 1px"
 
-	^ self navRailExpanded ifTrue: [ 220 ] ifFalse: [ 96 ]
+	^ self navRailExpanded ifTrue: [ 221 ] ifFalse: [ 97 ]
 ]
 
 { #category : 'navrail' }
@@ -873,6 +948,24 @@ WamResponsiveLayoutView >> pane1WidthMin [
 	^ 300
 ]
 
+{ #category : 'pane layout' }
+WamResponsiveLayoutView >> pane1WidthSet: anInteger [
+	| split |
+
+	split := self findByIdInShadowDom: 'wamBodySplitPanel'.
+	split ifNotNil: [
+		split
+			customPropertyAt: 'min' put: 'min(344px,50vw - 16px)';
+			customPropertyAt: 'max' put: 'calc(100% - (max(344px,50vw - 16px)))';
+			customPropertyAt: 'divider-width' put: '16px';
+			customPropertyAt: 'divider-hit-area' put: '16px';
+			primary: 'start';
+			positionInPixels: anInteger printString;
+			snap: (anInteger printString), 'px 50%';
+			snapThreshold: 24 ].
+
+]
+
 { #category : 'actions' }
 WamResponsiveLayoutView >> pane2Content [
 	| view |
@@ -899,7 +992,7 @@ WamResponsiveLayoutView >> pane2View [
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> paneLayoutView [
 
-	^ self firstChildAtSlotNamed: #paneLayout
+	^ self
 ]
 
 { #category : 'accessing' }
@@ -914,10 +1007,29 @@ WamResponsiveLayoutView >> popups: anObject [
 	popups := anObject
 ]
 
-{ #category : 'actions' }
+{ #category : 'pane layout' }
+WamResponsiveLayoutView >> primaryPaneDisplay: aBoolean [
+
+	self shadowElementId: 'wamSinglePaneLayoutP1' show: aBoolean.
+
+]
+
+{ #category : 'pane layout' }
 WamResponsiveLayoutView >> primaryPaneOnly [
 
-	self paneLayoutView primaryPaneOnly
+	self systemLog logTrace5: 'primaryPaneOnly'.
+
+	self isUsingSinglePaneLayout not ifTrue: [
+		^ self ].
+
+	self
+		showNavBar: true;
+		showNavBarAdapt: true;
+		"floatingToolbarOff;"
+		resizeBodyRegion.
+	self primaryPaneDisplay: true.
+	self secondaryPaneDisplay: false.
+
 ]
 
 { #category : 'login' }
@@ -942,16 +1054,28 @@ WamResponsiveLayoutView >> resizeSetUp [
 		when: WaResizeEvent send: #debounceResizeEvent: to: self
 ]
 
-{ #category : 'body' }
+{ #category : 'pane layout' }
+WamResponsiveLayoutView >> secondaryPaneDisplay: aBoolean [
+
+	self shadowElementId: 'wamSinglePaneLayoutP2' show: aBoolean.
+
+]
+
+{ #category : 'pane layout' }
 WamResponsiveLayoutView >> secondaryPaneOnly [
-	| component |
 
 	self systemLog logTrace5: 'secondaryPaneOnly'.
 
-	component := self paneLayoutView.
-	component ifNil: [
-		^ self systemLog logError: 'Pane layout not found' ].
-	component secondaryPaneOnly.
+	self isUsingSinglePaneLayout not ifTrue: [
+		^ self ].
+
+	self
+		showNavBar: false;
+		showNavBarAdapt: false;
+		"floatingToolbarOn;"
+		resizeBodyRegion.
+	self primaryPaneDisplay: false.
+	self secondaryPaneDisplay: true.
 
 ]
 
@@ -1216,6 +1340,23 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 
 ]
 
+{ #category : 'pane layout' }
+WamResponsiveLayoutView >> useSinglePaneLayout [
+
+	"self traceCr: 'View: useSinglePaneLayout'."
+	isUsingSinglePaneLayout := true.
+	self shadowElementId: 'wamTwoPaneLayout' show: false.
+	self moveChildrenFromSlot: 'twoPaneLayoutP1' to: 'singlePaneLayoutP1'.
+	self moveChildrenFromSlot: 'twoPaneLayoutP2' to: 'singlePaneLayoutP2'.
+	self shadowElementId: 'wamSinglePaneLayout' show: true.
+	self primaryPaneOnly.
+	self layoutViewLazy
+		appBar2Display: true;
+		"appBar2LeadingButtonDisplay: true;"
+		yourself.
+
+]
+
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useTwoPaneBody [
 
@@ -1234,11 +1375,29 @@ WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
-	component := WamPaneLayoutView first.
+	"component := WamPaneLayoutView first."
+	component := self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
 	component ifNotNil: [
 		aBoolean
 			ifTrue: [ component useTwoPaneLayout ]
 			ifFalse: [ component useSinglePaneLayout ] ].
+
+]
+
+{ #category : 'pane layout' }
+WamResponsiveLayoutView >> useTwoPaneLayout [
+
+	"self traceCr: 'View: useTwoPaneLayout'."
+	isUsingSinglePaneLayout := false.
+	self shadowElementId: 'wamSinglePaneLayout' show: false.
+	self moveChildrenFromSlot: 'singlePaneLayoutP1' to: 'twoPaneLayoutP1'.
+	self moveChildrenFromSlot: 'singlePaneLayoutP2' to: 'twoPaneLayoutP2'.
+	self shadowElementId: 'wamTwoPaneLayout' show: true.
+	self layoutViewLazy
+		"floatingToolbarOn;"
+		"appBar2Display: false;"
+		"appBar2LeadingButtonDisplay: false;"
+		yourself.
 
 ]
 

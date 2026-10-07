@@ -53,7 +53,6 @@ TBRootApplication >> initialize [
 	pane1Model := WamPaneModel on: (listModel := WamBasicListModel new).
 	pane2Model := WamPaneModel on: (detailModel := WamItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	layout paneLayout: WamPaneLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.

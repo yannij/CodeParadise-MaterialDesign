@@ -3,6 +3,10 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'layoutSettings',
+		'pane1',
+		'pane1Width',
+		'pane2',
+		'sidesheet',
 		'paneLayout',
 		'twoPaneSplitPosition',
 		'navRail',
@@ -11,8 +15,7 @@ Class {
 		'floatingToolbar',
 		'fab',
 		'dialog',
-		'brandDialog',
-		'layoutReady'
+		'brandDialog'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -50,6 +53,12 @@ WamResponsiveLayoutModel >> brandDialogSetup [
 	item := WamTabGroupItemModel on: layoutSettings label: 'Settings'.
 	brandDialog tabGroupItemAt: 1 put: item.
 
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> detail [
+
+	^ self pane2 paneContent
 ]
 
 { #category : 'accessing' }
@@ -108,7 +117,8 @@ WamResponsiveLayoutModel >> initialize [
 	navPopups := OrderedIdentityDictionary new.
 	layoutSettings := WamPreferencesModel new.
 	twoPaneSplitPosition := 300.
-	paneLayout := WamPaneLayoutModel new.
+	pane1Width := 500.
+	sidesheet := WamSidesheetModel new.
 	navRail := WamNavModel new.
 	dockedToolbar := WamToolbarDockedModel new.
 	floatingToolbar := WamToolbarFloatingModel new.
@@ -119,16 +129,28 @@ WamResponsiveLayoutModel >> initialize [
 
 ]
 
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutReady [
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> itemDetailGet [
 
-	^ layoutReady
+	^ self pane2 paneContent
 ]
 
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutReady: anObject [
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> itemDetailSet: anObject [
 
-	layoutReady := anObject
+	self pane2 setPaneContent: anObject
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> itemListGet [
+
+	^ self pane1 paneContent
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> itemListSet: anObject [
+
+	self pane1 setPaneContent: anObject
 ]
 
 { #category : 'accessing' }
@@ -167,28 +189,46 @@ WamResponsiveLayoutModel >> navRail: anObject [
 	navRail := anObject
 ]
 
-{ #category : 'accessing - derived' }
+{ #category : 'accessing' }
 WamResponsiveLayoutModel >> pane1 [
 
-	^ self paneLayout pane1
+	^ pane1
 ]
 
-{ #category : 'accessing - derived' }
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> pane1: anObject [
+
+	pane1 := anObject
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> pane1Width [
+
+	^ pane1Width
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> pane1Width: anObject [
+
+	pane1Width := anObject
+]
+
+{ #category : 'accessing' }
 WamResponsiveLayoutModel >> pane2 [
 
-	^ self paneLayout pane2
+	^ pane2
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> pane2: anObject [
+
+	pane2 := anObject
 ]
 
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> paneLayout [
 
-	^ paneLayout
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> paneLayout: anObject [
-
-	paneLayout := anObject
+	^ self
 ]
 
 { #category : 'accessing - popups' }
@@ -224,7 +264,13 @@ WamResponsiveLayoutModel >> popupsHasKey: aSymbol [
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> sidesheet [
 
-	^ self paneLayout sidesheet
+	^ sidesheet
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> sidesheet: anObject [
+
+	sidesheet := anObject
 ]
 
 { #category : 'accessing' }
