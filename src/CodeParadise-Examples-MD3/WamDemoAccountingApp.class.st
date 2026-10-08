@@ -215,11 +215,16 @@ WamDemoAccountingApp >> handleLoginRequested: anObject [
 
 { #category : 'initialization' }
 WamDemoAccountingApp >> initialize [
-	| pane1Model pane2Model pane1Content |
+
+	self repositorySetup.
 
 	super initialize.
 
-	self repositorySetup.
+]
+
+{ #category : 'initialization' }
+WamDemoAccountingApp >> initializeLayout [
+	| pane1Model pane2Model pane1Content |
 
 	modelClass := WamDemoAccountingCompany.
 	pane1Content := WamBasicListModel new.
@@ -227,7 +232,8 @@ WamDemoAccountingApp >> initialize [
 	pane1Model := WamPaneModel on: pane1Content.
 	pane2Model := WamPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	"layout := WamResponsiveLayoutModel new."
+
+	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #green; fontFamily: #'serif'.

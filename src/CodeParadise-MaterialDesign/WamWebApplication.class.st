@@ -225,11 +225,37 @@ WamWebApplication >> initialize [
 
 	super initialize.
 
+	self initializeEvents.
+	self initializeSession.
+	self initializeLayout.
+
+]
+
+{ #category : 'initialization' }
+WamWebApplication >> initializeEvents [
+	"Set up application events.
+	Subclasses may override"
+
 	self setUpNativeEvents.
 	self setUpCustomEvents.
 
-	session := self sessionClass new.
-	layout := WamResponsiveLayoutModel new.
+]
+
+{ #category : 'initialization' }
+WamWebApplication >> initializeLayout [
+
+	self subclassResponsibility.
+
+	"layout := WamResponsiveLayoutModel new."
+
+]
+
+{ #category : 'initialization' }
+WamWebApplication >> initializeSession [
+	"Set up application session.
+	Subclasses may override"
+
+	session := WamSessionModel new.
 
 ]
 
@@ -440,12 +466,6 @@ WamWebApplication >> session [
 WamWebApplication >> session: anObject [
 
 	session := anObject
-]
-
-{ #category : 'initialization' }
-WamWebApplication >> sessionClass [
-
-	^ WamSessionModel
 ]
 
 { #category : 'model' }

@@ -60,7 +60,7 @@ WamView >> dropdownMenuItems: actionList [
 		menu appendChild: (WaDropdownItem new
 			addClass: 'wam-menu-item';
 			when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self;
-			icon: icon;
+			iconElement: icon;
 			textContent: (each at: #iconLabel);
 			yourself) ].
 

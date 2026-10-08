@@ -186,11 +186,16 @@ WamDemoMovieListingApp >> applicationTitle [
 
 { #category : 'initialization' }
 WamDemoMovieListingApp >> initialize [
-	| pane1Model pane2Model pane1Content |
 
 	super initialize.
 
 	self repositorySetup.
+
+]
+
+{ #category : 'initialization' }
+WamDemoMovieListingApp >> initializeLayout [
+	| pane1Model pane2Model pane1Content |
 
 	modelClass := WamDemoMoviesMovie.
 	pane1Content := WamBasicListModel new.
@@ -198,7 +203,8 @@ WamDemoMovieListingApp >> initialize [
 	pane1Model := WamPaneModel on: pane1Content.
 	pane2Model := WamPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
-	"layout := WamResponsiveLayoutModel new."
+
+	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
 	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
