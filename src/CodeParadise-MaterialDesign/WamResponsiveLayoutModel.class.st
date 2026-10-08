@@ -7,7 +7,6 @@ Class {
 		'pane1Width',
 		'pane2',
 		'sidesheet',
-		'paneLayout',
 		'twoPaneSplitPosition',
 		'navRail',
 		'navPopups',

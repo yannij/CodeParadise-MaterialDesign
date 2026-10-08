@@ -127,15 +127,10 @@ WamResponsiveLayoutView class >> stylePaneLayout [
 
 	<webResource: #css>
 	^ '
-.wam-body-region {
-  flex: auto;
-  display: flex;  
-  flex-direction: row;
-  background: var(--wa-color-brand-fill-quiet);
-}
-
 .wam-pane-layout {
   height: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
 }
 
 .wam-pane {
@@ -144,6 +139,8 @@ WamResponsiveLayoutView class >> stylePaneLayout [
   flex-direction: column;
   padding: 0;
   margin: 0;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .wam-body-split-panel {
@@ -369,14 +366,8 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 
 { #category : 'body' }
 WamResponsiveLayoutView >> bodySplitPanelAdapt [
-	| paneLayout w |
 
-	"paneLayout := WamPaneLayoutView first."
-	paneLayout := self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
-
-	paneLayout ifNotNil: [
-		w := self pane1WidthCompute.
-		paneLayout pane1WidthSet: w ].
+	self pane1WidthSet: self pane1WidthCompute.
 
 ]
 
@@ -1336,16 +1327,12 @@ WamResponsiveLayoutView >> useTwoPaneBody: anObject [
 
 { #category : 'body' }
 WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
-	| component |
 
 	self systemLog logTrace5: aBoolean printString.
 
-	"component := WamPaneLayoutView first."
-	component := self "shadowedFirstDescendantMatching: '.wam-pane-layout'".
-	component ifNotNil: [
-		aBoolean
-			ifTrue: [ component useTwoPaneLayout ]
-			ifFalse: [ component useSinglePaneLayout ] ].
+	aBoolean
+		ifTrue: [ self useTwoPaneLayout ]
+		ifFalse: [ self useSinglePaneLayout ].
 
 ]
 

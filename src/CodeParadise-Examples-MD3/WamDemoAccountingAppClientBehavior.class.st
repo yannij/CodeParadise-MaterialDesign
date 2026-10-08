@@ -11,9 +11,3 @@ WamDemoAccountingAppClientBehavior >> appName [
 
 	^ 'Accounting'
 ]
-
-{ #category : 'accessing' }
-WamDemoAccountingAppClientBehavior >> appTagName [
-
-	^ 'wam-demo-accounting-app'
-]

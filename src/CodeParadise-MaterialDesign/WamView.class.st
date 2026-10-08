@@ -218,7 +218,8 @@ WamView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
 { #category : 'find element' }
 WamView >> layoutViewFind [
 
-	^ WamResponsiveLayoutView first
+	"^ WamResponsiveLayoutView first"
+	^ CpHtmlElement documentBody firstChild firstChildAtSlotNamed: #layout
 ]
 
 { #category : 'accessing' }

@@ -10,7 +10,7 @@ WaFormControl >> disabled: aBoolean [
 { #category : '*CodeParadise-MaterialDesign' }
 WaFormControl >> label [
 
-	^ nil
+	self subclassResponsibility
 ]
 
 { #category : '*CodeParadise-MaterialDesign' }

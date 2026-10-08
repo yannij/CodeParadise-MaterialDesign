@@ -40,25 +40,12 @@ WamWebClientBehavior >> appName [
 ]
 
 { #category : 'accessing' }
-WamWebClientBehavior >> appTagName [
-	"Answer application web component tag name.
-
-	Note: the #tagName method below involves hueristics in asKebabCase.
-	If it fails to yield the correct tag name, thenn use the browser
-	element inspector to find the correct tag name of the application
-	web component.
-	
-	Example:
-	WamDemoAccountingAppView tagName ==> 'wam-demo-accounting-app'
-	"
-
-	self subclassResponsibility
-]
-
-{ #category : 'accessing' }
 WamWebClientBehavior >> appViewElement [
+	"Answer the webcomponent of the app"
 
-	^ CpBrowserDocument current firstDescendantMatching: self appTagName
+	"During loading, the first child is a loading div,
+	which is later removed. So search for the component."
+	^ CpHtmlElement documentBody children detect: [ :each | each isWebComponent ] ifNone: []
 ]
 
 { #category : 'accessing' }
@@ -78,7 +65,7 @@ WamWebClientBehavior >> finishSetUp: props [
 { #category : 'accessing' }
 WamWebClientBehavior >> layoutViewElement [
 
-	^ CpHtmlElement documentBody firstDescendantMatching: WamResponsiveLayoutView asCssSelector
+	^ self appViewElement firstChildAtSlotNamed: #layout
 ]
 
 { #category : 'actions' }
