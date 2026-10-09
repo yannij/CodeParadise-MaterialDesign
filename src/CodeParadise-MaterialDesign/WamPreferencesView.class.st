@@ -2,8 +2,8 @@ Class {
 	#name : 'WamPreferencesView',
 	#superclass : 'WamLayoutComponentView',
 	#instVars : [
-		'colorThemeName',
-		'fontFamily'
+		'fontFamily',
+		'variantBrandColor'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
@@ -24,52 +24,6 @@ WamPreferencesView >> announceSetting: aspect value: anObject [
 		#aspect -> aspect.
 		#value -> anObject
 	} asDictionary).
-
-]
-
-{ #category : 'settings - choosers' }
-WamPreferencesView >> colorThemeBuildChooser: props [
-	| chooser selectedItem |
-
-	selectedItem := props at: #colorThemeName ifAbsent: [].
-	chooser := WaSelect new
-		id: 'wamColorThemeChooser';
-		label: 'Use color theme:';
-		propertyAt: 'value' put: selectedItem asString;
-		yourself.
-	self colorThemeName: selectedItem.
-
-	chooser when: CpChangeEvent do: [ self colorThemeNameSet: chooser value ] for: self.
-
-	#(
-red orange yellow green cyan blue indigo purple pink gray
-	) do: [ :each |
-		chooser appendChild: (WaOption new value: each; textContent: each capitalized; yourself) ].
-
-	^ self addAttributeContainerStyle: chooser
-]
-
-{ #category : 'accessing' }
-WamPreferencesView >> colorThemeName [
-
-	^ colorThemeName
-]
-
-{ #category : 'accessing' }
-WamPreferencesView >> colorThemeName: anObject [
-
-	colorThemeName := anObject asString
-]
-
-{ #category : 'settings - choosers' }
-WamPreferencesView >> colorThemeNameSet: anObject [
-
-	self colorThemeName = anObject ifTrue: [
-		^ self ].
-
-	self layoutViewLazy colorThemeAdapt: anObject from: self colorThemeName.
-	self colorThemeName: anObject.
-	self announceSetting: #colorThemeName value: anObject.
 
 ]
 
@@ -176,14 +130,15 @@ WamPreferencesView >> layoutTypeBuildChooser: props [
 
 	radioGroup := WaRadioGroup new
 		id: 'wamLayoutTypeChooser';
-		propertyAt: 'label' put: 'Use layout style:';
-		propertyAt: 'value' put: selectedItem asString;
+		label: 'Use layout style:';
+		orientation: 'horizontal';
+		value: selectedItem asString;
 		yourself.
 
 	radioGroup when: CpChangeEvent do: [ self layoutTypeSet: radioGroup value ] for: self.
 
 	WamLayoutType layoutTypeList do: [ :each |
-		radioGroup appendChild: (WaRadio new value: each key; textContent: each value; yourself) ].
+		radioGroup appendChild: (WaRadio new value: each key; label: each value; appearanceButton; sizeXs; yourself) ].
 
 	^ self addAttributeContainerStyle: radioGroup
 ]
@@ -230,7 +185,7 @@ WamPreferencesView >> modalDivContentWith: props [
 		appendChild: (self showAppBarNewSwitch: props);
 		appendChild: (self showDockedToolbarNewSwitch: props);
 		appendChild: (self showFloatingToolbarNewSwitch: props);
-		appendChild: (self colorThemeBuildChooser: props);
+		appendChild: (self variantBrandColorBuildChooser: props);
 		appendChild: (self fontFamilyChooser: props);
 		yourself.
 
@@ -674,5 +629,51 @@ WamPreferencesView >> useTwoPaneBodySet: aBoolean [
 
 	self layoutViewLazy useTwoPaneBodyAdapt: aBoolean.
 	self announceSetting: #useTwoPaneBody value: aBoolean.
+
+]
+
+{ #category : 'accessing' }
+WamPreferencesView >> variantBrandColor [
+
+	^ variantBrandColor
+]
+
+{ #category : 'accessing' }
+WamPreferencesView >> variantBrandColor: anObject [
+
+	variantBrandColor := anObject asString
+]
+
+{ #category : 'settings - choosers' }
+WamPreferencesView >> variantBrandColorBuildChooser: props [
+	| chooser selectedItem |
+
+	selectedItem := props at: #variantBrandColor ifAbsent: [].
+	chooser := WaSelect new
+		id: 'wamColorThemeChooser';
+		label: 'Use palette:';
+		propertyAt: 'value' put: selectedItem asString;
+		yourself.
+	self variantBrandColor: selectedItem.
+
+	chooser when: CpChangeEvent do: [ self variantBrandColorSet: chooser value ] for: self.
+
+	#(
+red orange yellow green cyan blue indigo purple pink gray
+	) do: [ :each |
+		chooser appendChild: (WaOption new value: each; textContent: each capitalized; yourself) ].
+
+	^ self addAttributeContainerStyle: chooser
+]
+
+{ #category : 'settings - choosers' }
+WamPreferencesView >> variantBrandColorSet: anObject [
+
+	self variantBrandColor = anObject ifTrue: [
+		^ self ].
+
+	self layoutViewLazy variantBrandColorAdapt: anObject from: self variantBrandColor.
+	self variantBrandColor: anObject.
+	self announceSetting: #variantBrandColor value: anObject.
 
 ]

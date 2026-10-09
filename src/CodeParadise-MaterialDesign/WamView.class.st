@@ -7,9 +7,35 @@ Class {
 }
 
 { #category : 'accessing' }
+WamView class >> importThemeAwesomePath [
+
+	^ WaElement importBasePath, 'styles/themes/awesome.css'
+]
+
+{ #category : 'accessing' }
+WamView class >> importThemeShoelacePath [
+
+	^ WaElement importBasePath, 'styles/themes/shoelace.css'
+]
+
+{ #category : 'accessing' }
 WamView class >> linkUtilitiesCss [
 
 	^ '<link rel="stylesheet" href="', WaElement importBasePath, 'styles/utilities.css"></link>'
+]
+
+{ #category : 'class initialization' }
+WamView class >> loadThemes [
+
+	CpHtmlElement documentAddStylesheet: self importThemeAwesomePath.
+	CpHtmlElement documentAddStylesheet: self importThemeShoelacePath.
+
+]
+
+{ #category : 'class initialization' }
+WamView class >> postInstallOnce [
+
+	self loadThemes
 ]
 
 { #category : 'utilities' }

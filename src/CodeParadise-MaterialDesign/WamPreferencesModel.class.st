@@ -2,7 +2,7 @@ Class {
 	#name : 'WamPreferencesModel',
 	#superclass : 'WamModel',
 	#instVars : [
-		'colorThemeName',
+		'themeName',
 		'fontFamily',
 		'layoutWidth',
 		'layoutType',
@@ -15,7 +15,8 @@ Class {
 		'showNavBar',
 		'showSidesheet',
 		'showDockedToolbar',
-		'showFloatingToolbar'
+		'showFloatingToolbar',
+		'variantBrandColor'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
@@ -26,7 +27,7 @@ Class {
 WamPreferencesModel >> asMap [
 
 	^ Dictionary new
-		at: #colorThemeName put: self colorThemeName;
+		at: #variantBrandColor put: self variantBrandColor;
 		at: #fontFamily put: self fontFamily;
 		at: #layoutType put: self layoutType;
 		at: #navRailExpanded put: self navRailExpanded;
@@ -42,28 +43,16 @@ WamPreferencesModel >> asMap [
 		yourself
 ]
 
-{ #category : 'accessing' }
-WamPreferencesModel >> colorThemeName [
-
-	^ colorThemeName
-]
-
-{ #category : 'accessing' }
-WamPreferencesModel >> colorThemeName: anObject [
-
-	colorThemeName := anObject
-]
-
-{ #category : 'color theme' }
-WamPreferencesModel >> defaultColorThemeName [
-
-	^ nil
-]
-
 { #category : 'typography' }
 WamPreferencesModel >> defaultFontFamily [
 
 	^ #'monospace'
+]
+
+{ #category : 'color theme' }
+WamPreferencesModel >> defaultVariantBrandColor [
+
+	^ #cyan
 ]
 
 { #category : 'events' }
@@ -101,7 +90,7 @@ WamPreferencesModel >> initialize [
 
 	super initialize.
 
-	colorThemeName := self defaultColorThemeName.
+	variantBrandColor := self defaultVariantBrandColor.
 	fontFamily := self defaultFontFamily.
 	layoutType := nil.
 	useAutoLayout := true.
@@ -281,4 +270,16 @@ WamPreferencesModel >> useTwoPaneBody [
 WamPreferencesModel >> useTwoPaneBody: anObject [
 
 	useTwoPaneBody := anObject
+]
+
+{ #category : 'accessing' }
+WamPreferencesModel >> variantBrandColor [
+
+	^ variantBrandColor
+]
+
+{ #category : 'accessing' }
+WamPreferencesModel >> variantBrandColor: anObject [
+
+	variantBrandColor := anObject
 ]

@@ -35,7 +35,7 @@ WamDemoAccountingApp class >> createData [
 	"Run this code only in a concrete subclass. See #repositoryClass implementors"
 	| repo |
 
-	self repositoryClass mapReset.
+	"self repositoryClass mapReset."
 	self repositoryClass mapCreateAt: self databasePath.
 
 	repo := self accountingRepository.
@@ -236,7 +236,7 @@ WamDemoAccountingApp >> initializeLayout [
 	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings colorThemeName: #green; fontFamily: #'serif'.
+	layout layoutSettings variantBrandColor: #green; fontFamily: #'serif'.
 	self setUpAppBar2.
 
 ]

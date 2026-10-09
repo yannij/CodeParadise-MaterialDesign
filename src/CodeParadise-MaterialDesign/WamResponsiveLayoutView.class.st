@@ -292,8 +292,8 @@ WamResponsiveLayoutView >> applyDesignTokensTheme [
 
 	CpHtmlElement documentBody
 		"customPropertyAt: 'wa-form-control-border-style' put: 'none';"
-		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
-		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)';
+		"customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
+		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)';"
 		"customPropertyAt: 'wa-form-control-height' put: '64px';"
 		customPropertyAt: 'wam-space' put: 'var(--wa-space-s)';
 		customPropertyAt: 'wam-gap' put: 'var(--wa-space-s)';
@@ -428,33 +428,6 @@ WamResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
 ]
 
 { #category : 'color theme' }
-WamResponsiveLayoutView >> colorThemeAdapt: aColorName [
-
-	self systemLog logTrace5: aColorName printString.
-	aColorName ifNil: [ ^ self ].
-	"self updateGlobalStyle."
-	CpHtmlElement documentHtml
-		addClass: 'wa-theme-default';
-		addClass: 'wa-palette-default';
-		addClass: ('wa-brand-', aColorName).
-	CpHtmlElement documentBody
-		customPropertyAt: 'wa-color-brand-fill-quiet' put: 'var(--wa-color-brand-95)';
-		customPropertyAt: 'wa-color-brand-fill-normal' put: 'var(--wa-color-brand-90)'
-]
-
-{ #category : 'color theme' }
-WamResponsiveLayoutView >> colorThemeAdapt: aColorName from: oldColorName [
-
-	self systemLog logTrace5: aColorName printString.
-	aColorName ifNil: [
-		^ self ].
-
-	CpHtmlElement documentHtml
-		removeClass: ('wa-brand-', oldColorName);
-		addClass: ('wa-brand-', aColorName).
-]
-
-{ #category : 'color theme' }
 WamResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 
 	#('05' '10' '20' '30' '40' '50' '60' '70' '80' '90' '95') do: [ :each |
@@ -466,25 +439,6 @@ WamResponsiveLayoutView >> colorThemeFrom: base on: aStream [
 			nextPutAll: ');';
 			yourself ].
 
-]
-
-{ #category : 'color theme' }
-WamResponsiveLayoutView >> colorThemeInitial: aColorName [
-
-	self systemLog logTrace5: aColorName printString.
-	aColorName ifNil: [
-		^ self ].
-
-	CpHtmlElement documentHtml
-		addClass: 'wa-theme-default';
-		addClass: 'wa-palette-default';
-		addClass: ('wa-brand-', aColorName).
-]
-
-{ #category : 'accessing - settings' }
-WamResponsiveLayoutView >> colorThemeName [
-
-	^ self layoutSettingAt: #colorThemeName
 ]
 
 { #category : 'color theme' }
@@ -707,7 +661,10 @@ WamResponsiveLayoutView >> layoutInitialSetUp: props [
 
 	self systemLog logTrace5: props printString.
 
-	props at: #colorThemeName ifPresent: [ :value | self colorThemeInitial: value ].
+	CpHtmlElement documentHtml
+		addClass: 'wa-theme-default';
+		addClass: 'wa-palette-default'.
+	props at: #variantBrandColor ifPresent: [ :value | self variantBrandColorInitial: value ].
 	props at: #fontFamily ifPresent: [ :value | self fontFamilyAdapt: value ].
 
 	self resizeSetUp.
@@ -1214,28 +1171,6 @@ WamResponsiveLayoutView >> sidesheetView [
 	^ self firstChildAtSlotNamed: #sidesheet
 ]
 
-{ #category : 'initialization' }
-WamResponsiveLayoutView >> themeUpdate [
-
-	^ String streamContents: [:s |
-		s nextPutAll: '
-:root,
-:host,
-.sl-theme-light {
-'.
-		self colorThemeFrom: self colorThemeName asString on: s.
-		"s nextPutAll: '--sl-focus-ring-style: none;'.
-		s nextPutAll: '--sl-input-color: #1D1B20;'.
-		s nextPutAll: '--sl-input-color-disabled: #1D1B20;'.
-		s nextPutAll: '--sl-input-background-color-focus: #E6E0E9;'.
-		s nextPutAll: '--sl-input-filled-color: #1D1B20;'.
-		s nextPutAll: '--sl-input-filled-color-disabled: #1D1B20;'.
-		s nextPutAll: '--sl-input-filled-background-color-focus: #E6E0E9;'."
-		s nextPutAll: '
-}
-' ]
-]
-
 { #category : 'toolbar' }
 WamResponsiveLayoutView >> toolbarDockedDisplay: aBoolean [
 
@@ -1256,9 +1191,9 @@ WamResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 { #category : 'initialization' }
 WamResponsiveLayoutView >> updateGlobalStyle [
 
-	self systemLog logTrace5: 'colorThemeName = ', self colorThemeName printString.
-	self colorThemeName ifNil: [ ^ self ].
-	CpHtmlElement documentAddStyle: self themeUpdate.
+	self systemLog logTrace5: 'variantBrandColor = ', self variantBrandColor printString.
+	self variantBrandColor ifNil: [ ^ self ].
+	CpHtmlElement documentAddStyle: self variantBrandColorUpdate.
 
 ]
 
@@ -1351,6 +1286,56 @@ WamResponsiveLayoutView >> useTwoPaneLayout [
 		"appBar2LeadingButtonDisplay: false;"
 		yourself.
 
+]
+
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> variantBrandColor [
+
+	^ self layoutSettingAt: #variantBrandColor
+]
+
+{ #category : 'color theme' }
+WamResponsiveLayoutView >> variantBrandColorAdapt: aColorName from: oldColorName [
+
+	self systemLog logTrace5: aColorName printString.
+	aColorName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml
+		removeClass: ('wa-brand-', oldColorName);
+		addClass: ('wa-brand-', aColorName).
+]
+
+{ #category : 'color theme' }
+WamResponsiveLayoutView >> variantBrandColorInitial: aColorName [
+
+	self systemLog logTrace5: aColorName printString.
+	aColorName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml addClass: ('wa-brand-', aColorName).
+]
+
+{ #category : 'initialization' }
+WamResponsiveLayoutView >> variantBrandColorUpdate [
+
+	^ String streamContents: [:s |
+		s nextPutAll: '
+:root,
+:host,
+.sl-theme-light {
+'.
+		self colorThemeFrom: self variantBrandColor asString on: s.
+		"s nextPutAll: '--sl-focus-ring-style: none;'.
+		s nextPutAll: '--sl-input-color: #1D1B20;'.
+		s nextPutAll: '--sl-input-color-disabled: #1D1B20;'.
+		s nextPutAll: '--sl-input-background-color-focus: #E6E0E9;'.
+		s nextPutAll: '--sl-input-filled-color: #1D1B20;'.
+		s nextPutAll: '--sl-input-filled-color-disabled: #1D1B20;'.
+		s nextPutAll: '--sl-input-filled-background-color-focus: #E6E0E9;'."
+		s nextPutAll: '
+}
+' ]
 ]
 
 { #category : 'accessing' }

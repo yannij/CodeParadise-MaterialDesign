@@ -118,8 +118,8 @@ WamResponsiveLayoutPresenter >> viewInitialized [
 
 	super viewInitialized.
 
-	self application customColorTheme ifNotNil: [ :value |
-		self view colorThemePut: value ].
+	"self application customColorTheme ifNotNil: [ :value |
+		self view colorThemePut: value ]."
 
 	self view applyDesignTokensTheme.
 

@@ -43,8 +43,8 @@ WamDemoMovieListingApp class >> createData [
 	"
 	| repo |
 
-	self repositoryClass mapReset.
-	self repositoryClass mapCreateAt: self soilPath.
+	"self repositoryClass mapReset."
+	self repositoryClass mapCreateAt: self databasePath.
 
 	repo := self movieRepository.
 	self createDemoMovieIn: repo.
@@ -137,17 +137,23 @@ WamDemoMovieListingApp class >> createDemoTheatreIn: aRepository [
 ]
 
 { #category : 'demo data' }
+WamDemoMovieListingApp class >> databasePath [
+
+	^ 'demo-movies'
+]
+
+{ #category : 'demo data' }
 WamDemoMovieListingApp class >> movieRepository [
 
 	^ self repositoryClass
-		mapAt: self soilPath
-		ifAbsent: [ (self repositoryClass onPath: self soilPath) open; yourself ]
+		mapAt: self databasePath
+		ifAbsent: [ (self repositoryClass onPath: self databasePath) open; yourself ]
 ]
 
 { #category : 'demo data' }
 WamDemoMovieListingApp class >> movieRepositoryCreate [
 
-	^ self repositoryClass mapCreateAt: self soilPath
+	^ self repositoryClass mapCreateAt: self databasePath
 ]
 
 { #category : 'demo data' }
@@ -156,13 +162,7 @@ WamDemoMovieListingApp class >> repositoryClass [
 	self createData
 	"
 
-	^ WamDemoSoilRepository
-]
-
-{ #category : 'demo data' }
-WamDemoMovieListingApp class >> soilPath [
-
-	^ 'demo-movies'
+	^ WamDemoMemoryRepository
 ]
 
 { #category : 'model' }
@@ -187,9 +187,9 @@ WamDemoMovieListingApp >> applicationTitle [
 { #category : 'initialization' }
 WamDemoMovieListingApp >> initialize [
 
-	super initialize.
-
 	self repositorySetup.
+
+	super initialize.
 
 ]
 
@@ -207,7 +207,7 @@ WamDemoMovieListingApp >> initializeLayout [
 	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings colorThemeName: #cyan; fontFamily: #'serif'.
+	layout layoutSettings variantBrandColor: #cyan; fontFamily: #'serif'.
 	self setUpAppBar2.
 
 ]
