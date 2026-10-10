@@ -2,7 +2,6 @@ Class {
 	#name : 'WamPreferencesModel',
 	#superclass : 'WamModel',
 	#instVars : [
-		'themeName',
 		'fontFamily',
 		'layoutWidth',
 		'layoutType',
@@ -16,7 +15,8 @@ Class {
 		'showSidesheet',
 		'showDockedToolbar',
 		'showFloatingToolbar',
-		'variantBrandColor'
+		'variantBrandColor',
+		'webAwesomeTheme'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
@@ -27,6 +27,7 @@ Class {
 WamPreferencesModel >> asMap [
 
 	^ Dictionary new
+		at: #webAwesomeTheme put: self webAwesomeTheme;
 		at: #variantBrandColor put: self variantBrandColor;
 		at: #fontFamily put: self fontFamily;
 		at: #layoutType put: self layoutType;
@@ -47,6 +48,12 @@ WamPreferencesModel >> asMap [
 WamPreferencesModel >> defaultFontFamily [
 
 	^ #'monospace'
+]
+
+{ #category : 'color theme' }
+WamPreferencesModel >> defaultTheme [
+
+	^ #default
 ]
 
 { #category : 'color theme' }
@@ -282,4 +289,16 @@ WamPreferencesModel >> variantBrandColor [
 WamPreferencesModel >> variantBrandColor: anObject [
 
 	variantBrandColor := anObject
+]
+
+{ #category : 'accessing' }
+WamPreferencesModel >> webAwesomeTheme [
+
+	^ webAwesomeTheme
+]
+
+{ #category : 'accessing' }
+WamPreferencesModel >> webAwesomeTheme: anObject [
+
+	webAwesomeTheme := anObject
 ]

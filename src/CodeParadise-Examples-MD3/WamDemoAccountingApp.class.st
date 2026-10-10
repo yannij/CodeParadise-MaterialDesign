@@ -236,7 +236,7 @@ WamDemoAccountingApp >> initializeLayout [
 	layout := WamResponsiveLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings variantBrandColor: #green; fontFamily: #'serif'.
+	layout layoutSettings webAwesomeTheme: #default; variantBrandColor: #green; fontFamily: #'serif'.
 	self setUpAppBar2.
 
 ]

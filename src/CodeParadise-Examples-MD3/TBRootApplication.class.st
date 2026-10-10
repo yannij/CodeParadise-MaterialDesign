@@ -55,7 +55,7 @@ TBRootApplication >> initializeLayout [
 	layout := WamListDetailLayoutModel new.
 	layout paneLayout pane1: pane1Model.
 	layout paneLayout pane2: pane2Model.
-	layout layoutSettings variantBrandColor: #cyan; fontFamily: #'serif'.
+	layout layoutSettings webAwesomeTheme: #default; variantBrandColor: #cyan; fontFamily: #'serif'.
 	self setUpAppBar1.
 	self setUpAppBar2.
 	self layout appBar1 headline: self class appName.

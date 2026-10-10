@@ -3,7 +3,8 @@ Class {
 	#superclass : 'WamLayoutComponentView',
 	#instVars : [
 		'fontFamily',
-		'variantBrandColor'
+		'variantBrandColor',
+		'webAwesomeTheme'
 	],
 	#category : 'CodeParadise-MaterialDesign-Preferences',
 	#package : 'CodeParadise-MaterialDesign',
@@ -185,6 +186,7 @@ WamPreferencesView >> modalDivContentWith: props [
 		appendChild: (self showAppBarNewSwitch: props);
 		appendChild: (self showDockedToolbarNewSwitch: props);
 		appendChild: (self showFloatingToolbarNewSwitch: props);
+		appendChild: (self webAwesomeThemeBuildChooser: props);
 		appendChild: (self variantBrandColorBuildChooser: props);
 		appendChild: (self fontFamilyChooser: props);
 		yourself.
@@ -675,5 +677,49 @@ WamPreferencesView >> variantBrandColorSet: anObject [
 	self layoutViewLazy variantBrandColorAdapt: anObject from: self variantBrandColor.
 	self variantBrandColor: anObject.
 	self announceSetting: #variantBrandColor value: anObject.
+
+]
+
+{ #category : 'accessing' }
+WamPreferencesView >> webAwesomeTheme [
+
+	^ webAwesomeTheme
+]
+
+{ #category : 'accessing' }
+WamPreferencesView >> webAwesomeTheme: anObject [
+
+	webAwesomeTheme := anObject
+]
+
+{ #category : 'settings - choosers' }
+WamPreferencesView >> webAwesomeThemeBuildChooser: props [
+	| chooser selectedItem |
+
+	selectedItem := props at: #webAwesomeTheme ifAbsent: [].
+	chooser := WaSelect new
+		id: 'wamThemeChooser';
+		label: 'Use theme:';
+		propertyAt: 'value' put: selectedItem asString;
+		yourself.
+	self webAwesomeTheme: selectedItem.
+
+	chooser when: CpChangeEvent do: [ self webAwesomeThemeSet: chooser value ] for: self.
+
+	#(default awesome shoelace) do: [ :each |
+		chooser appendChild: (WaOption new value: each; textContent: each capitalized; yourself) ].
+
+	^ self addAttributeContainerStyle: chooser
+]
+
+{ #category : 'settings - choosers' }
+WamPreferencesView >> webAwesomeThemeSet: anObject [
+
+	self webAwesomeTheme = anObject ifTrue: [
+		^ self ].
+
+	self layoutViewLazy webAwesomeThemeAdapt: anObject from: self webAwesomeTheme.
+	self webAwesomeTheme: anObject.
+	self announceSetting: #webAwesomeTheme value: anObject.
 
 ]

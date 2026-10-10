@@ -661,9 +661,8 @@ WamResponsiveLayoutView >> layoutInitialSetUp: props [
 
 	self systemLog logTrace5: props printString.
 
-	CpHtmlElement documentHtml
-		addClass: 'wa-theme-default';
-		addClass: 'wa-palette-default'.
+	CpHtmlElement documentHtml addClass: 'wa-palette-default'.
+	props at: #webAwesomeTheme ifPresent: [ :value | self webAwesomeThemeInitial: value ].
 	props at: #variantBrandColor ifPresent: [ :value | self variantBrandColorInitial: value ].
 	props at: #fontFamily ifPresent: [ :value | self fontFamilyAdapt: value ].
 
@@ -1348,4 +1347,32 @@ WamResponsiveLayoutView >> wamGap [
 WamResponsiveLayoutView >> wamPadding [
 
 	^ 'var(--wa-space-s)'
+]
+
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> webAwesomeTheme [
+
+	^ self layoutSettingAt: #webAwesomeTheme
+]
+
+{ #category : 'color theme' }
+WamResponsiveLayoutView >> webAwesomeThemeAdapt: aThemeName from: oldThemeName [
+
+	self systemLog logTrace5: aThemeName printString.
+	aThemeName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml
+		removeClass: ('wa-theme-', oldThemeName);
+		addClass: ('wa-theme-', aThemeName).
+]
+
+{ #category : 'color theme' }
+WamResponsiveLayoutView >> webAwesomeThemeInitial: aThemeName [
+
+	self systemLog logTrace5: aThemeName printString.
+	aThemeName ifNil: [
+		^ self ].
+
+	CpHtmlElement documentHtml addClass: ('wa-theme-', aThemeName).
 ]
