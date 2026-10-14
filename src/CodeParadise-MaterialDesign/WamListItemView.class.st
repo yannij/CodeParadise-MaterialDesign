@@ -12,33 +12,23 @@ WamListItemView class >> globalStyle [
 
 	^ '
 .wam-item {
-  margin-inline-start: 0;
-  display: flex;
   min-height: 40px;
-  padding: 8px 0;
+  padding: 8px 0 8px 16px;
   background: var(--wa-color-brand-fill-normal);
 }
 
-.wam-item-span1 {
-  padding: 0 8px;
-  min-height: 24px;
-}
-
-.wam-item-span2 {
-  padding: 0 8px;
-}
-
 .wam-item-leadingIcon {
-  margin-top: 4px;
+  padding-right: 16px;
   font-size: 24px;
 }
 
 .wam-item-trailingIcon {
+  padding-right: 16px;
   font-size: 24px;
 }
 
-.wam-item-headline {
-  padding-left: 16px;
+.wam-item-label-text {
+  padding-right: 16px;
   font-size: 16px;
   text-align: left;
   text-overflow: ellipsis;
@@ -47,42 +37,112 @@ WamListItemView class >> globalStyle [
 ]
 
 { #category : 'rendering' }
-WamListItemView >> renderListItem: aMap [
-	| headline leadingIcon leadingAction leadingIconTag trailingIcon trailingAction trailingIconTag listItemTag elSpan1 elSpan2 |
+WamListItemView >> contentElement: aMap [
+	| labelText leadingAction tag |
+
+	labelText := aMap at: #labelText ifAbsent: [].
+	leadingAction := aMap at: #leadingAction ifAbsent: [ #setDetail ].
+
+	labelText ifNil: [ ^ nil ].
+
+	tag := #div asHtmlTag textContent: labelText.
+	tag addClass: 'wam-item-label-text'.
+	tag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+
+	^ tag
+]
+
+{ #category : 'rendering' }
+WamListItemView >> leadingElement: aMap [
+	| leadingIcon leadingAction leadingIconTag |
 
 	leadingIcon := aMap at: #leadingIcon ifAbsent: [].
 	leadingAction := aMap at: #leadingAction ifAbsent: [ #setDetail ].
-	headline := aMap at: #headline ifAbsent: [].
+
+	leadingIcon ifNil: [ ^ nil ].
+
+	leadingIconTag := WaIcon fullyNamed: leadingIcon.
+	leadingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+
+	^ #div asHtmlTag
+		appendChild: leadingIconTag;
+		addClass: 'wam-item-leadingIcon';
+		yourself
+]
+
+{ #category : 'rendering' }
+WamListItemView >> renderListItem: aMap [
+
+	"self renderListItemAsCard: aMap."
+	self renderListItemAsDiv: aMap.
+
+]
+
+{ #category : 'rendering' }
+WamListItemView >> renderListItemAsCard: aMap [
+	| contentsElement card |
+
+
+	(contentsElement := self contentElement: aMap) ifNil: [
+		^ self removeChildrenAtSlotNamed: nil ].
+
+	card := WaCard new orientation: 'horizontal'; yourself.
+	card replaceAllChildrenWith: contentsElement atSlotNamed: nil.
+
+	(self leadingElement: aMap)
+		ifNil: [ card removeChildrenAtSlotNamed: #media ]
+		ifNotNil: [ :value | card replaceAllChildrenWith: value atSlotNamed: #media ].
+
+	(self trailingElement: aMap)
+		ifNil: [ card removeChildrenAtSlotNamed: #actions ]
+		ifNotNil: [ :value | card replaceAllChildrenWith: value atSlotNamed: #actions ].
+
+	self replaceAllChildrenWith: card atSlotNamed: nil.
+
+]
+
+{ #category : 'rendering' }
+WamListItemView >> renderListItemAsDiv: aMap [
+	| contentElement item div1 div2 divider div |
+
+	(contentElement := self contentElement: aMap) ifNil: [
+		^ self removeChildrenAtSlotNamed: nil ].
+
+	div1 := #div asHtmlTag addClass: 'wa-flank:end'; addClass: 'wa-gap-0'; yourself.
+	div2 := #div asHtmlTag addClass: 'wa-flank'; addClass: 'wa-gap-0'; yourself.
+	div1 appendChild: div2.
+	item := #div asHtmlTag addClass: 'wam-item'; appendChild: div1; yourself.
+
+	(self leadingElement: aMap) ifNotNil: [ :element | div2 appendChild: element ].
+	div2 appendChild: contentElement.
+	(self trailingElement: aMap) ifNotNil: [ :element | div1 appendChild: element ].
+
+	divider := WaDivider new
+		customPropertyAt: 'spacing' put: '0'; 
+		customPropertyAt: 'color' put: 'var(--wa-color-text-normal)';
+		yourself .
+	div := #div asHtmlTag appendChild: item; appendChild: divider; yourself.
+
+	self replaceAllChildrenWith: div atSlotNamed: nil.
+
+]
+
+{ #category : 'rendering' }
+WamListItemView >> trailingElement: aMap [
+	| trailingIcon trailingAction trailingIconTag |
+
 	trailingIcon := aMap at: #trailingIcon ifAbsent: [].
 	trailingAction := aMap at: #trailingAction ifAbsent: [ #setDetail ].
-	elSpan1 := #span asHtmlTag "addClass: 'wa-flank';" addClass: 'wam-item-span1'; yourself.
-	elSpan2 := #span asHtmlTag addClass: 'wa-cluster'; addClass: 'wam-item-span2'; yourself.
-	listItemTag := #li asHtmlTag addClass: 'wa-split'; addClass: 'wa-align-items-center'; addClass: 'wam-item'; appendChild: elSpan1; appendChild: elSpan2; yourself.
 
-	leadingIcon ifNotNil: [ :value |
-		leadingIconTag := WaIcon fullyNamed: value.
-		leadingIconTag addClass: 'wam-item-leadingIcon'.
-		leadingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
-		elSpan1 appendChild: leadingIconTag. ].
+	trailingIcon ifNil: [ ^ nil ].
 
-	headline ifNotNil: [ :value | | tag |
-		tag := value asHtmlElement.
-		tag addClass: 'wam-item-headline'.
-		tag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
-		elSpan1 appendChild: tag ].
+	trailingIconTag := WaIcon fullyNamed: trailingIcon.
+	trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: trailingAction ] for: self.
 
-	trailingIcon ifNotNil: [ :value |
-		trailingIconTag := WaIcon fullyNamed: value.
-		trailingIconTag addClass: 'wam-item-trailingIcon'.
-		trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: trailingAction ] for: self.
-		elSpan2 appendChild: trailingIconTag. ].
-
-	headline
-		ifNil: [
-			self removeChildrenAtSlotNamed: #listItem ]
-		ifNotNil: [ :value |
-			self replaceAllChildrenWith: listItemTag atSlotNamed: nil ].
-
+	^ #div asHtmlTag
+		appendChild: trailingIconTag;
+		addClass: 'wam-item-trailingIcon';
+		yourself
 ]
 
 { #category : 'rendering' }

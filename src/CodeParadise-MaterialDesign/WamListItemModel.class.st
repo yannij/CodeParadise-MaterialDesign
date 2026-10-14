@@ -2,15 +2,15 @@ Class {
 	#name : 'WamListItemModel',
 	#superclass : 'WamModel',
 	#instVars : [
-		'headline',
-		'supportingText',
-		'leadingAvatarContainer',
-		'leadingAvatarLabelText',
 		'leadingIcon',
-		'leadingVideoThumbnail',
+		'leadingAvatar',
+		'leadingMedia',
+		'overline',
+		'supportingText',
 		'trailingIcon',
-		'trailingSupportingText',
-		'divider'
+		'trailingText',
+		'divider',
+		'labelText'
 	],
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -29,49 +29,37 @@ WamListItemModel >> divider: anObject [
 	divider := anObject
 ]
 
-{ #category : 'accessing' }
-WamListItemModel >> headline [
-
-	^ headline
-]
-
-{ #category : 'accessing' }
-WamListItemModel >> headline: anObject [
-
-	headline := anObject
-]
-
 { #category : 'initialization' }
 WamListItemModel >> initialize [
 
 	super initialize.
 
-	headline := ''.
+	labelText := ''.
 
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingAvatarContainer [
+WamListItemModel >> labelText [
 
-	^ leadingAvatarContainer
+	^ labelText
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingAvatarContainer: anObject [
+WamListItemModel >> labelText: anObject [
 
-	leadingAvatarContainer := anObject
+	labelText := anObject
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingAvatarLabelText [
+WamListItemModel >> leadingAvatar [
 
-	^ leadingAvatarLabelText
+	^ leadingAvatar
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingAvatarLabelText: anObject [
+WamListItemModel >> leadingAvatar: anObject [
 
-	leadingAvatarLabelText := anObject
+	leadingAvatar := anObject
 ]
 
 { #category : 'accessing' }
@@ -87,15 +75,27 @@ WamListItemModel >> leadingIcon: anObject [
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingVideoThumbnail [
+WamListItemModel >> leadingMedia [
 
-	^ leadingVideoThumbnail
+	^ leadingMedia
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> leadingVideoThumbnail: anObject [
+WamListItemModel >> leadingMedia: anObject [
 
-	leadingVideoThumbnail := anObject
+	leadingMedia := anObject
+]
+
+{ #category : 'accessing' }
+WamListItemModel >> overline [
+
+	^ overline
+]
+
+{ #category : 'accessing' }
+WamListItemModel >> overline: anObject [
+
+	overline := anObject
 ]
 
 { #category : 'presenter' }
@@ -129,13 +129,13 @@ WamListItemModel >> trailingIcon: anObject [
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> trailingSupportingText [
+WamListItemModel >> trailingText [
 
-	^ trailingSupportingText
+	^ trailingText
 ]
 
 { #category : 'accessing' }
-WamListItemModel >> trailingSupportingText: anObject [
+WamListItemModel >> trailingText: anObject [
 
-	trailingSupportingText := anObject
+	trailingText := anObject
 ]

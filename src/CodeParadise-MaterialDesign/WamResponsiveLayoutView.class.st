@@ -131,6 +131,7 @@ WamResponsiveLayoutView class >> stylePaneLayout [
   height: 100%;
   overflow-x: visible;
   overflow-y: visible;
+  background: var(--wa-color-brand-fill-quiet);
 }
 
 .wam-pane {
@@ -559,6 +560,12 @@ WamResponsiveLayoutView >> floatingToolbarView [
 	^ self firstChildAtSlotNamed: #floatingToolbar
 ]
 
+{ #category : 'accessing - settings' }
+WamResponsiveLayoutView >> fontFamily [
+
+	^ self layoutSettingAt: #fontFamily
+]
+
 { #category : 'typography' }
 WamResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 	| element |
@@ -569,7 +576,8 @@ WamResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
 	element := self bodyFind.
 	element ifNil: [ ^ self ].
 
-	element styleAt: 'font-family' put: aFontFamily
+	"element styleAt: 'font-family' put: aFontFamily."
+	element customPropertyAt: 'wa-font-family-body' put: aFontFamily.
 
 ]
 

@@ -147,9 +147,10 @@ WamItemWrapperView class >> style [
 	<webResource: #css>
 
 	^ '
-.wam-container {
+.wam-item-wrapper {
   box-sizing: border-box;
   padding: var(--wam-space);
+  padding-left: 0;
 }
 
 .wam-item {
@@ -165,7 +166,7 @@ WamItemWrapperView class >> template [
 	<webResource: #html>
 
 	^ WamView linkUtilitiesCss, '
-<div id="container" class="wam-container">
+<div id="container" class="wam-item-wrapper">
   <div class="wam-item">
     <slot name="header"></slot>
     <slot name="wrapped"></slot>

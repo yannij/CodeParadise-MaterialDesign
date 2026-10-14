@@ -38,6 +38,32 @@ WamView class >> postInstallOnce [
 	self loadThemes
 ]
 
+{ #category : 'accessing' }
+WamView class >> registerBootstrapIcons [
+
+	"Register Bootstrap as icon library to load icons from CDN"
+
+	CpHtmlElement documentAddModuleScript: self registerBootstrapIconsCode
+]
+
+{ #category : 'accessing' }
+WamView class >> registerBootstrapIconsCode [
+
+	^ String streamContents: [ :stream |
+
+		stream
+			nextPutAll: 'import { registerIconLibrary } from "' ;
+			nextPutAll: WaElement importBasePath ;
+			nextPutAll: 'webawesome.js";' ;
+
+			nextPutAll: 'registerIconLibrary("bootstrap", {' ;
+			nextPutAll: '  resolver: function(name, family) {' ;
+			nextPutAll: '    const suffix = family === "filled" ? "-fill" : "";' ;
+			nextPutAll: '    return `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/${name}${suffix}.svg`;' ;
+			nextPutAll: '  },' ;
+			nextPutAll: '});' ]
+]
+
 { #category : 'utilities' }
 WamView >> beEditablePane2 [
 

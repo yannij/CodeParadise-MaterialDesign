@@ -14,14 +14,13 @@ WamBasicListView class >> style [
 	^'
 .wam-container {
   box-sizing: border-box;
-  padding: var(--wam-space);
 }
 
 .wam-list {
   margin-block-end: 0;
   margin-block-start: 0;
   padding-inline-start: 0;
-  gap: var(--wam-gap);
+  gap: var(--wa-gap-0);
 }'
 ]
 

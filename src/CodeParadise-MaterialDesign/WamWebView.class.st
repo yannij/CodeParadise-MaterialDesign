@@ -30,5 +30,5 @@ table, th, td {
 { #category : 'examples' }
 WamWebView >> registerIcons [
 
-	WaElement registerBootstrapIcons.
+	WamView registerBootstrapIcons.
 ]
