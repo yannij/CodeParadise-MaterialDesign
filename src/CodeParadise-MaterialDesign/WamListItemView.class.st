@@ -121,7 +121,7 @@ WamListItemView >> renderListItemAsDiv: aMap [
 		customPropertyAt: 'spacing' put: '0'; 
 		customPropertyAt: 'color' put: 'var(--wa-color-text-normal)';
 		yourself .
-	div := #div asHtmlTag appendChild: item; appendChild: divider; yourself.
+	div := #div asHtmlTag appendChild: divider; appendChild: item; yourself.
 
 	self replaceAllChildrenWith: div atSlotNamed: nil.
 

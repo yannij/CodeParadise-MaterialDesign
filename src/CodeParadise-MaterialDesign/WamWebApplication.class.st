@@ -275,7 +275,7 @@ WamWebApplication >> layout: anObject [
 WamWebApplication >> listDetailRemove [
 	| listDetail |
 
-	listDetail := self layout paneLayout.
+	listDetail := self layout.
 	self modelRemove: listDetail itemDetailGet wrappedModel.
 	listDetail itemListGet listSet: self allModels.
 	self setDetailNone.
@@ -438,7 +438,7 @@ WamWebApplication >> processNavActionEvent: aNavEvent model: aModel [
 	eventId := aNavEvent id.
 
 	aNavEvent id = #setDetail ifTrue: [
-		self layout paneLayout itemDetailSet: aModel.
+		self layout itemDetailSet: aModel.
 		self setAppBar2EditDelete.
 		^ self ].
 
@@ -507,7 +507,7 @@ WamWebApplication >> setDetailAddNew [
 	| detail |
 
 	detail := self newWrappedModel.
-	self layout paneLayout itemDetailSet: detail.
+	self layout itemDetailSet: detail.
 	self appBar2Headline: detail wrappedModel mdAddingTitle.
 	self setAppBar2SaveCancel.
 
@@ -516,7 +516,7 @@ WamWebApplication >> setDetailAddNew [
 { #category : 'model' }
 WamWebApplication >> setDetailNone [
 
-	self layout paneLayout itemDetailSet: nil.
+	self layout itemDetailSet: nil.
 	self appBar2Headline: ''.
 	self setAppBar2TrailingActionsNone.
 
@@ -655,7 +655,7 @@ WamWebApplication >> wrapperCancel: aNavActionEvent [
 WamWebApplication >> wrapperDelete: ignored [
 	| confirmString detail |
 
-	detail := self layout paneLayout itemDetailGet.
+	detail := self layout itemDetailGet.
 	confirmString := 'Remove: ', detail wrappedModel mdPrimaryString, ' ?'.
 	self listDetailRemoveConfirm: confirmString.
 
@@ -669,7 +669,7 @@ WamWebApplication >> wrapperSave: aNavActionEvent [
 	theModel handleSave: aNavActionEvent.
 	theModel valueChanged.
 
-	listDetail := self layout paneLayout.
+	listDetail := self layout.
 	theModel isCreating
 		ifTrue: [
 			result := self modelAdd: listDetail itemDetailGet wrappedModel.

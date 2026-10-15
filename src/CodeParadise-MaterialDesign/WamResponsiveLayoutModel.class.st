@@ -54,12 +54,6 @@ WamResponsiveLayoutModel >> brandDialogSetup [
 
 ]
 
-{ #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> detail [
-
-	^ self pane2 paneContent
-]
-
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> dialog [
 
@@ -222,12 +216,6 @@ WamResponsiveLayoutModel >> pane2 [
 WamResponsiveLayoutModel >> pane2: anObject [
 
 	pane2 := anObject
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> paneLayout [
-
-	^ self
 ]
 
 { #category : 'accessing - popups' }

@@ -58,9 +58,9 @@ WamExampleApp >> initializeLayout [
 	sidesheetModel := WamPaneModel on: (WamExampleContentModel on: (String loremIpsum: 1000)).
 
 	layout := WamResponsiveLayoutModel new.
-	layout paneLayout pane1: pane1Model.
-	layout paneLayout pane2: pane2Model.
-	layout paneLayout sidesheet: sidesheetModel.
+	layout pane1: pane1Model.
+	layout pane2: pane2Model.
+	layout sidesheet: sidesheetModel.
 	appBar1 := self layout appBar1.
 	appBar1 headline: self class appName.
 	appBar1 navActionItemsAddAll: (self navItemSpecsInGroup: appBar1 actionGroupToUse) 
