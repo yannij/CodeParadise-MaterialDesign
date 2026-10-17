@@ -86,7 +86,7 @@ WamListItemView >> renderListItemAsCard: aMap [
 	(contentsElement := self contentElement: aMap) ifNil: [
 		^ self removeChildrenAtSlotNamed: nil ].
 
-	card := WaCard new orientation: 'horizontal'; yourself.
+	card := WaCard new "orientation: 'horizontal'; yourself".
 	card replaceAllChildrenWith: contentsElement atSlotNamed: nil.
 
 	(self leadingElement: aMap)

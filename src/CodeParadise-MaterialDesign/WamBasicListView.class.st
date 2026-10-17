@@ -21,6 +21,10 @@ WamBasicListView class >> style [
   margin-block-start: 0;
   padding-inline-start: 0;
   gap: var(--wa-gap-0);
+}
+
+.wam-pagination {
+  padding: 8px;
 }'
 ]
 
@@ -31,8 +35,25 @@ WamBasicListView class >> template [
 
 	^ WamView linkUtilitiesCss, '
 <div id="container" class="wam-container">
+  <div class="wam-pagination">
+    <slot name="pagination"></slot>
+  </div>
   <ol class="wa-stack wam-list">
     <slot name="list"></slot>
   </ol>
 </div>'
+]
+
+{ #category : 'rendering' }
+WamBasicListView >> renderPaginationTotal: total pageSize: pageSize page: page [
+	| element |
+
+	element := WaPagination new
+		beWithSummary;
+		total: total;
+		pageSize: pageSize;
+		page: page;
+		yourself.
+	self replaceAllChildrenWith: element atSlotNamed: #pagination.
+
 ]

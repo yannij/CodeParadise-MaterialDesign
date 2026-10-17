@@ -1,9 +1,9 @@
 Class {
 	#name : 'WamListModel',
 	#superclass : 'WamModel',
-	#category : 'CodeParadise-MaterialDesign-ListDetail',
+	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
-	#tag : 'ListDetail'
+	#tag : 'Base'
 }
 
 { #category : 'accessing' }

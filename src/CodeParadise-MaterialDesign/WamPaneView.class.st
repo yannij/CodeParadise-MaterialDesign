@@ -40,7 +40,7 @@ WamPaneView class >> template [
 { #category : 'accessing' }
 WamPaneView >> appBarView [
 
-	^ self firstChildAtSlotNamed: 'appBar'
+	^ self firstChildAtSlotNamed: #appBar
 ]
 
 { #category : 'testing' }
@@ -52,7 +52,7 @@ WamPaneView >> hasVisibleAppBar [
 { #category : 'accessing' }
 WamPaneView >> paneContentView [
 
-	^ self firstChildAtSlotNamed: 'paneContent'
+	^ self firstChildAtSlotNamed: #paneContent
 ]
 
 { #category : 'actions' }

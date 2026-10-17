@@ -140,12 +140,6 @@ WamWebApplication >> confirm: aString onAnswer: aBlock [
 
 ]
 
-{ #category : 'accessing' }
-WamWebApplication >> customColorTheme [
-
-	^ nil
-]
-
 { #category : 'iam' }
 WamWebApplication >> doLogout [
 

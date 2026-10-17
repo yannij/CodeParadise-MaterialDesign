@@ -2,7 +2,8 @@ Class {
 	#name : 'WamBasicListModel',
 	#superclass : 'WamListModel',
 	#instVars : [
-		'list'
+		'list',
+		'modelWrapperClass'
 	],
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -42,8 +43,13 @@ WamBasicListModel >> listSet: aCollection [
 { #category : 'accessing' }
 WamBasicListModel >> modelWrapperClass [
 
-	^ WamItemWrapperModel
+	^ modelWrapperClass ifNil: [ modelWrapperClass := WamItemWrapperModel ]
+]
 
+{ #category : 'accessing' }
+WamBasicListModel >> modelWrapperClass: anObject [
+
+	^ modelWrapperClass := anObject
 ]
 
 { #category : 'presenter' }

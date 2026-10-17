@@ -57,21 +57,6 @@ WamLayoutComponentView >> setElement: element padding: pad [
 
 ]
 
-{ #category : 'initialization' }
-WamLayoutComponentView >> setElementGap: element [
-
-	element removeClasses: #('wa-gap-3xs' 'wa-gap-2xs' 'wa-gap-xs' 'wa-gap-s' 'wa-gap-m').
-	element addClass: self layoutViewLazy wamGap.
-
-]
-
-{ #category : 'initialization' }
-WamLayoutComponentView >> setElementPadding: element [
-
-	self setElement: element padding: self layoutViewLazy wamPadding.
-
-]
-
 { #category : 'actions' }
 WamLayoutComponentView >> sharedDialogClose [
 

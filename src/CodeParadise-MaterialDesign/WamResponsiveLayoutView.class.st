@@ -176,55 +176,6 @@ caption {
 
 ]
 
-{ #category : 'web resources' }
-WamResponsiveLayoutView class >> template [
-
-	<webResource: #html>
-
-	^ WamView linkUtilitiesCss, '
-<wa-resize-observer>
-  <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
-    <div class="wa-cluster wa-gap-0 wa-align-items-stretch wa-flex-nowrap">
-      <slot name="navRail"></slot>
-<div class="wam-pane-layout">
-  <div id="wamSinglePaneLayout" class="wam-one-pane">
-    <div id="wamSinglePaneLayoutP1" class="wam-pane">
-      <slot name="singlePaneLayoutP1"></slot>
-    </div>
-    <div id="wamSinglePaneLayoutP2" class="wam-pane">
-      <slot name="singlePaneLayoutP2"></slot>
-    </div>
-  </div>
-  <div id="wamTwoPaneLayout" class="wam-two-pane">
-    <wa-split-panel id="wamBodySplitPanel" class="wam-body-split-panel">
-      <wa-icon slot="divider" name="grip-vertical"></wa-icon>
-      <div slot="start">
-        <div id="wamTwoPaneLayoutP1" class="wam-pane">
-          <slot name="twoPaneLayoutP1"></slot>
-        </div>
-      </div>
-      <div slot="end">
-        <div id="wamTwoPaneLayoutP2" class="wam-pane">
-          <slot name="twoPaneLayoutP2"></slot>
-        </div>
-      </div>
-    </wa-split-panel>
-  </div>
-</div>
-      <slot name="sidesheet"></slot>
-    </div>
-    <slot name="navBar"></slot>
-    <slot name="dockedToolbar"></slot>
-  </div>
-</wa-resize-observer>
-<slot name="navRailModal"></slot>
-<slot name="floatingToolbar"></slot>
-<slot name="fab"></slot>
-<slot name="dialog"></slot>
-<slot name="brandDialog"></slot>
-'
-]
-
 { #category : 'actions' }
 WamResponsiveLayoutView >> announceSetting: aspect value: anObject [
 
@@ -288,7 +239,7 @@ WamResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
 
 ]
 
-{ #category : 'color theme' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> applyDesignTokensTheme [
 
 	CpHtmlElement documentBody
@@ -335,12 +286,6 @@ WamResponsiveLayoutView >> beNotEditablePane2 [
 
 ]
 
-{ #category : 'accessing - components' }
-WamResponsiveLayoutView >> bodyFind [
-
-	^ CpHtmlElement documentBody
-]
-
 { #category : 'body' }
 WamResponsiveLayoutView >> bodyHeightAdapt [
 	| bodyHeightReduction bodyHeightString |
@@ -381,14 +326,21 @@ WamResponsiveLayoutView >> bodyWidthAdapt [
 
 	splitPanel
 		ifNil: [ self systemLog logError: 'Missing body region' ]
-		ifNotNil: [
-			| reduceByWidth widthString |
-			reduceByWidth := self useModalNav ifTrue: [ 0 ] ifFalse: [ self navRailWidth ].
-			"self showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
-			widthString := reduceByWidth > 0
-				ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
-				ifFalse: [ '100vw' ].
-			splitPanel styleAt: 'width' put: widthString ].
+		ifNotNil: [ splitPanel styleAt: 'width' put: self bodyWidthToUse ].
+
+]
+
+{ #category : 'body' }
+WamResponsiveLayoutView >> bodyWidthToUse [
+	| reduceByWidth widthString |
+
+	reduceByWidth := self useModalNav ifTrue: [ 0 ] ifFalse: [ self navRailWidth ].
+	"self showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
+	widthString := reduceByWidth > 0
+		ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
+		ifFalse: [ '100vw' ].
+
+	^ widthString
 
 ]
 
@@ -420,36 +372,6 @@ WamResponsiveLayoutView >> buttonLabel: label icon: icon send: selector receiver
 		styleAt: 'width' put: '100%';
 		styleAt: 'padding' put: '0 8px 8px 8px';
 		yourself.
-]
-
-{ #category : 'accessing - settings' }
-WamResponsiveLayoutView >> colorProperty: customPropertyName rgb: rgb [
-
-	self customPropertyAt: customPropertyName put: rgb
-]
-
-{ #category : 'color theme' }
-WamResponsiveLayoutView >> colorThemeFrom: base on: aStream [
-
-	#('05' '10' '20' '30' '40' '50' '60' '70' '80' '90' '95') do: [ :each |
-		aStream
-			nextPutAll: '--wa-color-brand-';
-			nextPutAll: each;
-			nextPutAll: ': var(--wa-color-', base, '-';
-			nextPutAll: each;
-			nextPutAll: ');';
-			yourself ].
-
-]
-
-{ #category : 'color theme' }
-WamResponsiveLayoutView >> colorThemePut: theme [
-	| element |
-
-	element := CpHtmlElement documentBody.
-	theme do: [ :each |
-		element customPropertyAt: each key put: each value ].
-
 ]
 
 { #category : 'resize' }
@@ -566,18 +488,10 @@ WamResponsiveLayoutView >> fontFamily [
 	^ self layoutSettingAt: #fontFamily
 ]
 
-{ #category : 'typography' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> fontFamilyAdapt: aFontFamily [
-	| element |
 
-	aFontFamily ifNil: [ ^ self ].
-	"aFontFamily = self fontFamily ifTrue: [ ^ self ]."
-
-	element := self bodyFind.
-	element ifNil: [ ^ self ].
-
-	"element styleAt: 'font-family' put: aFontFamily."
-	element customPropertyAt: 'wa-font-family-body' put: aFontFamily.
+	CpHtmlElement documentBody customPropertyAt: 'wa-font-family-body' put: aFontFamily.
 
 ]
 
@@ -878,7 +792,7 @@ WamResponsiveLayoutView >> pane1WidthMin [
 	^ 300
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> pane1WidthSet: anInteger [
 	| split |
 
@@ -896,7 +810,7 @@ WamResponsiveLayoutView >> pane1WidthSet: anInteger [
 
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> pane2Content [
 	| view |
 
@@ -928,14 +842,14 @@ WamResponsiveLayoutView >> popups: anObject [
 	popups := anObject
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> primaryPaneDisplay: aBoolean [
 
 	self shadowElementId: 'wamSinglePaneLayoutP1' show: aBoolean.
 
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> primaryPaneOnly [
 
 	self systemLog logTrace5: 'primaryPaneOnly'.
@@ -975,14 +889,14 @@ WamResponsiveLayoutView >> resizeSetUp [
 		when: WaResizeEvent send: #debounceResizeEvent: to: self
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> secondaryPaneDisplay: aBoolean [
 
 	self shadowElementId: 'wamSinglePaneLayoutP2' show: aBoolean.
 
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> secondaryPaneOnly [
 
 	self systemLog logTrace5: 'secondaryPaneOnly'.
@@ -1155,7 +1069,7 @@ WamResponsiveLayoutView >> showSidesheet: anObject [
 	self layoutSettingAt: #showSidesheet put: anObject
 ]
 
-{ #category : 'sidesheet' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
@@ -1164,7 +1078,7 @@ WamResponsiveLayoutView >> showSidesheetAdapt: aBoolean [
 
 ]
 
-{ #category : 'sidesheet' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 
 	self sidesheetView
@@ -1193,15 +1107,6 @@ WamResponsiveLayoutView >> toolbarFloatingDisplay: aBoolean [
 	self floatingToolbarView
 		ifNil: [ self systemLog logTrace: 'Missing floating toolbar view' ]
 		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
-]
-
-{ #category : 'initialization' }
-WamResponsiveLayoutView >> updateGlobalStyle [
-
-	self systemLog logTrace5: 'variantBrandColor = ', self variantBrandColor printString.
-	self variantBrandColor ifNil: [ ^ self ].
-	CpHtmlElement documentAddStyle: self variantBrandColorUpdate.
-
 ]
 
 { #category : 'accessing - settings' }
@@ -1238,7 +1143,7 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> useSinglePaneLayout [
 
 	"self traceCr: 'View: useSinglePaneLayout'."
@@ -1278,7 +1183,7 @@ WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 
 ]
 
-{ #category : 'pane layout' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> useTwoPaneLayout [
 
 	"self traceCr: 'View: useTwoPaneLayout'."
@@ -1301,7 +1206,7 @@ WamResponsiveLayoutView >> variantBrandColor [
 	^ self layoutSettingAt: #variantBrandColor
 ]
 
-{ #category : 'color theme' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> variantBrandColorAdapt: aColorName from: oldColorName [
 
 	self systemLog logTrace5: aColorName printString.
@@ -1313,7 +1218,7 @@ WamResponsiveLayoutView >> variantBrandColorAdapt: aColorName from: oldColorName
 		addClass: ('wa-brand-', aColorName).
 ]
 
-{ #category : 'color theme' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> variantBrandColorInitial: aColorName [
 
 	self systemLog logTrace5: aColorName printString.
@@ -1323,47 +1228,13 @@ WamResponsiveLayoutView >> variantBrandColorInitial: aColorName [
 	CpHtmlElement documentHtml addClass: ('wa-brand-', aColorName).
 ]
 
-{ #category : 'initialization' }
-WamResponsiveLayoutView >> variantBrandColorUpdate [
-
-	^ String streamContents: [:s |
-		s nextPutAll: '
-:root,
-:host,
-.sl-theme-light {
-'.
-		self colorThemeFrom: self variantBrandColor asString on: s.
-		"s nextPutAll: '--sl-focus-ring-style: none;'.
-		s nextPutAll: '--sl-input-color: #1D1B20;'.
-		s nextPutAll: '--sl-input-color-disabled: #1D1B20;'.
-		s nextPutAll: '--sl-input-background-color-focus: #E6E0E9;'.
-		s nextPutAll: '--sl-input-filled-color: #1D1B20;'.
-		s nextPutAll: '--sl-input-filled-color-disabled: #1D1B20;'.
-		s nextPutAll: '--sl-input-filled-background-color-focus: #E6E0E9;'."
-		s nextPutAll: '
-}
-' ]
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutView >> wamGap [
-
-	^ 'wa-gap-s'
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutView >> wamPadding [
-
-	^ 'var(--wa-space-s)'
-]
-
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> webAwesomeTheme [
 
 	^ self layoutSettingAt: #webAwesomeTheme
 ]
 
-{ #category : 'color theme' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> webAwesomeThemeAdapt: aThemeName from: oldThemeName [
 
 	self systemLog logTrace5: aThemeName printString.
@@ -1375,7 +1246,7 @@ WamResponsiveLayoutView >> webAwesomeThemeAdapt: aThemeName from: oldThemeName [
 		addClass: ('wa-theme-', aThemeName).
 ]
 
-{ #category : 'color theme' }
+{ #category : 'theme' }
 WamResponsiveLayoutView >> webAwesomeThemeInitial: aThemeName [
 
 	self systemLog logTrace5: aThemeName printString.

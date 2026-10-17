@@ -65,6 +65,12 @@ WamResponsiveLayoutPresenter >> layout [
 ]
 
 { #category : 'rendering' }
+WamResponsiveLayoutPresenter >> renderPanes [
+
+	self subclassResponsibility
+]
+
+{ #category : 'rendering' }
 WamResponsiveLayoutPresenter >> renderView [
 
 	self model brandDialog ifNotNil: [ :value |
@@ -82,16 +88,7 @@ WamResponsiveLayoutPresenter >> renderView [
 		self renderChildViewForModel: value usingPresenter: WamNavRailModalPresenter atSlotNamed: #navRailModal.
 		self renderChildViewForModel: value usingPresenter: WamNavBarPresenter atSlotNamed: #navBar ].
 
-	self model pane1 ifNotNil: [ :value |
-		"self renderChildViewForModel: value atSlotNamed: #singlePaneLayoutP1."
-		self renderChildViewForModel: value atSlotNamed: #twoPaneLayoutP1 ].
-
-	self model pane2 ifNotNil: [ :value |
-		"self renderChildViewForModel: value atSlotNamed: #singlePaneLayoutP2."
-		self renderChildViewForModel: value atSlotNamed: #twoPaneLayoutP2 ].
-
-	self model sidesheet ifNotNil: [ :value |
-		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
+	self renderPanes.
 
 	self model dockedToolbar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #dockedToolbar ].
@@ -117,9 +114,6 @@ WamResponsiveLayoutPresenter >> viewCreated [
 WamResponsiveLayoutPresenter >> viewInitialized [
 
 	super viewInitialized.
-
-	"self application customColorTheme ifNotNil: [ :value |
-		self view colorThemePut: value ]."
 
 	self view applyDesignTokensTheme.
 

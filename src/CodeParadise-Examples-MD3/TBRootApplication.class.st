@@ -52,7 +52,7 @@ TBRootApplication >> initializeLayout [
 	pane2Model := WamPaneModel on: (detailModel := WamItemWrapperModel new).
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 
-	layout := WamListDetailLayoutModel new.
+	layout := WamResponsiveLayoutModel newListDetail.
 	layout pane1: pane1Model.
 	layout pane2: pane2Model.
 	layout layoutSettings webAwesomeTheme: #default; variantBrandColor: #cyan; fontFamily: #'serif'.
