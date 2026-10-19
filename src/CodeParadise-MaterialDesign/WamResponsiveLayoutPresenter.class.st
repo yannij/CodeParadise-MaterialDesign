@@ -6,6 +6,12 @@ Class {
 	#tag : 'Layout'
 }
 
+{ #category : 'accessing' }
+WamResponsiveLayoutPresenter class >> defaultViewClass [
+
+	^ WamResponsiveLayoutView 
+]
+
 { #category : 'events' }
 WamResponsiveLayoutPresenter >> doCancel: aNavActionEvent [
 
@@ -65,12 +71,6 @@ WamResponsiveLayoutPresenter >> layout [
 ]
 
 { #category : 'rendering' }
-WamResponsiveLayoutPresenter >> renderPanes [
-
-	self subclassResponsibility
-]
-
-{ #category : 'rendering' }
 WamResponsiveLayoutPresenter >> renderView [
 
 	self model brandDialog ifNotNil: [ :value |
@@ -88,7 +88,9 @@ WamResponsiveLayoutPresenter >> renderView [
 		self renderChildViewForModel: value usingPresenter: WamNavRailModalPresenter atSlotNamed: #navRailModal.
 		self renderChildViewForModel: value usingPresenter: WamNavBarPresenter atSlotNamed: #navBar ].
 
-	self renderPanes.
+	self model paneLayout ifNotNil: [ :value |
+		self renderChildViewForModel: value usingPresenter: value presenterClassToUse atSlotNamed: #paneLayout.
+		self view resizeBodyRegion ].
 
 	self model dockedToolbar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #dockedToolbar ].

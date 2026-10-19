@@ -3,12 +3,11 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'layoutSettings',
-		'layoutPresenter',
-		'layoutPresenterChanged',
 		'pane1',
 		'pane1Width',
 		'pane2',
 		'sidesheet',
+		'paneLayout',
 		'twoPaneSplitPosition',
 		'navRail',
 		'navPopups',
@@ -129,7 +128,7 @@ WamResponsiveLayoutModel >> initialize [
 
 	navPopups := OrderedIdentityDictionary new.
 	layoutSettings := WamPreferencesModel new.
-	layoutPresenterChanged := false.
+	paneLayout := WamPaneLayoutModel on: self.
 	twoPaneSplitPosition := 300.
 	pane1Width := 500.
 	sidesheet := nil.
@@ -170,7 +169,7 @@ WamResponsiveLayoutModel >> itemListSet: anObject [
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> layoutBeFeed [
 
-	self layoutPresenter: WamFeedLayoutPresenter.
+	"self layoutPresenter: WamFeedLayoutPresenter."
 	"self application applicationPresenter renderView."
 
 ]
@@ -178,32 +177,8 @@ WamResponsiveLayoutModel >> layoutBeFeed [
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> layoutBeListDetail [
 
-	self layoutPresenter: WamListDetailLayoutPresenter.
+	"self layoutPresenter: WamListDetailLayoutPresenter."
 	"self application applicationPresenter renderView."
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutPresenter [
-
-	^ layoutPresenter ifNil: [ WamListDetailLayoutPresenter ]
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutPresenter: anObject [
-
-	layoutPresenter := anObject
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutPresenterChanged [
-
-	^ layoutPresenterChanged
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutPresenterChanged: anObject [
-
-	layoutPresenterChanged := anObject
 ]
 
 { #category : 'accessing' }
@@ -278,6 +253,34 @@ WamResponsiveLayoutModel >> pane2: anObject [
 	pane2 := anObject
 ]
 
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayout [
+
+	^ paneLayout
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayout: anObject [
+
+	paneLayout := anObject
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayoutBeFeed [
+
+	self paneLayout useFeedStrategy.
+	self valueChanged.
+
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayoutBeListDetail [
+
+	self paneLayout useListDetailStrategy.
+	self valueChanged.
+
+]
+
 { #category : 'accessing - popups' }
 WamResponsiveLayoutModel >> popupsAt: aSymbol [
 
@@ -311,7 +314,7 @@ WamResponsiveLayoutModel >> popupsHasKey: aSymbol [
 { #category : 'presenter' }
 WamResponsiveLayoutModel >> preferredPresenterClass [
 
-	^ self layoutPresenter
+	^ WamResponsiveLayoutPresenter
 ]
 
 { #category : 'accessing' }

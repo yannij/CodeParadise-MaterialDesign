@@ -176,6 +176,30 @@ caption {
 
 ]
 
+{ #category : 'web resources' }
+WamResponsiveLayoutView class >> template [
+
+	<webResource: #html>
+
+	^ WamView linkUtilitiesCss, '
+<wa-resize-observer>
+  <div class="wa-cloak wa-stack wa-gap-0 wa-align-items-stretch">
+    <div class="wa-cluster wa-gap-0 wa-align-items-stretch wa-flex-nowrap">
+      <slot name="navRail"></slot>
+      <slot name="paneLayout"></slot>
+    </div>
+    <slot name="navBar"></slot>
+    <slot name="dockedToolbar"></slot>
+  </div>
+</wa-resize-observer>
+<slot name="navRailModal"></slot>
+<slot name="floatingToolbar"></slot>
+<slot name="fab"></slot>
+<slot name="dialog"></slot>
+<slot name="brandDialog"></slot>
+'
+]
+
 { #category : 'actions' }
 WamResponsiveLayoutView >> announceSetting: aspect value: anObject [
 
@@ -313,6 +337,8 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 { #category : 'body' }
 WamResponsiveLayoutView >> bodySplitPanelAdapt [
 
+	self isFeed ifTrue: [ ^ self ].
+
 	self pane1WidthSet: self pane1WidthCompute.
 
 ]
@@ -321,8 +347,16 @@ WamResponsiveLayoutView >> bodySplitPanelAdapt [
 WamResponsiveLayoutView >> bodyWidthAdapt [
 	| splitPanel |
 
+	self isFeed ifTrue: [
+		| element |
+		element := self paneLayoutView findByIdInShadowDom: 'wamSinglePaneLayoutP1'.
+		element
+			ifNil: [ self systemLog logError: 'Missing body region' ]
+			ifNotNil: [ element styleAt: 'width' put: self bodyWidthToUse ].
+		^ self ].
+
 	"paneLayout := WamPaneLayoutView first."
-	splitPanel := self findByIdInShadowDom: 'wamBodySplitPanel'.
+	splitPanel := self paneLayoutView findByIdInShadowDom: 'wamBodySplitPanel'.
 
 	splitPanel
 		ifNil: [ self systemLog logError: 'Missing body region' ]
@@ -548,8 +582,16 @@ WamResponsiveLayoutView >> initialize [
 
 ]
 
+{ #category : 'panes' }
+WamResponsiveLayoutView >> isFeed [
+
+	^ self paneLayoutView class = WamFeedLayoutView
+]
+
 { #category : 'testing' }
 WamResponsiveLayoutView >> isUsingSinglePaneLayout [
+
+	self isFeed ifTrue: [ ^ false ].
 
 	^ isUsingSinglePaneLayout.
 ]
@@ -773,7 +815,7 @@ WamResponsiveLayoutView >> pane1View [
 	slotName := self isUsingSinglePaneLayout
 		ifTrue: [ 'singlePaneLayoutP1' ]
 		ifFalse: [ 'twoPaneLayoutP1' ].
-	^ self firstChildAtSlotNamed: slotName
+	^ self paneLayoutView firstChildAtSlotNamed: slotName
 ]
 
 { #category : 'body' }
@@ -796,7 +838,9 @@ WamResponsiveLayoutView >> pane1WidthMin [
 WamResponsiveLayoutView >> pane1WidthSet: anInteger [
 	| split |
 
-	split := self findByIdInShadowDom: 'wamBodySplitPanel'.
+	self isFeed ifTrue: [ ^ self ].
+
+	split := self paneLayoutView findByIdInShadowDom: 'wamBodySplitPanel'.
 	split ifNotNil: [
 		split
 			customPropertyAt: 'min' put: 'min(344px,50vw - 16px)';
@@ -827,7 +871,13 @@ WamResponsiveLayoutView >> pane2View [
 	pane2SlotName := self isUsingSinglePaneLayout
 		ifTrue: [ 'singlePaneLayoutP2' ]
 		ifFalse: [ 'twoPaneLayoutP2' ].
-	^ self firstChildAtSlotNamed: pane2SlotName
+	^ self paneLayoutView firstChildAtSlotNamed: pane2SlotName
+]
+
+{ #category : 'accessing - components' }
+WamResponsiveLayoutView >> paneLayoutView [
+
+	^ self firstChildAtSlotNamed: #paneLayout
 ]
 
 { #category : 'accessing' }
@@ -1089,7 +1139,7 @@ WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> sidesheetView [
 
-	^ self firstChildAtSlotNamed: #sidesheet
+	^ self paneLayoutView firstChildAtSlotNamed: #sidesheet
 ]
 
 { #category : 'toolbar' }
@@ -1146,6 +1196,8 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 { #category : 'panes' }
 WamResponsiveLayoutView >> useSinglePaneLayout [
 
+	self isFeed ifTrue: [ ^ self ].
+
 	"self traceCr: 'View: useSinglePaneLayout'."
 	isUsingSinglePaneLayout := true.
 	self shadowElementId: 'wamTwoPaneLayout' show: false.
@@ -1185,6 +1237,8 @@ WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 
 { #category : 'panes' }
 WamResponsiveLayoutView >> useTwoPaneLayout [
+
+	self isFeed ifTrue: [ ^ self ].
 
 	"self traceCr: 'View: useTwoPaneLayout'."
 	isUsingSinglePaneLayout := false.

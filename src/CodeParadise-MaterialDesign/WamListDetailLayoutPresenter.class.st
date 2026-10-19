@@ -1,6 +1,6 @@
 Class {
 	#name : 'WamListDetailLayoutPresenter',
-	#superclass : 'WamResponsiveLayoutPresenter',
+	#superclass : 'WamPaneLayoutPresenter',
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Layout'
@@ -13,17 +13,17 @@ WamListDetailLayoutPresenter class >> defaultViewClass [
 ]
 
 { #category : 'rendering' }
-WamListDetailLayoutPresenter >> renderPanes [
+WamListDetailLayoutPresenter >> renderView [
 
-	self model pane1 ifNotNil: [ :value |
+	self model scaffold pane1 ifNotNil: [ :value |
 		"self renderChildViewForModel: value atSlotNamed: #singlePaneLayoutP1."
 		self renderChildViewForModel: value atSlotNamed: #twoPaneLayoutP1 ].
 
-	self model pane2 ifNotNil: [ :value |
+	self model scaffold pane2 ifNotNil: [ :value |
 		"self renderChildViewForModel: value atSlotNamed: #singlePaneLayoutP2."
 		self renderChildViewForModel: value atSlotNamed: #twoPaneLayoutP2 ].
 
-	self model sidesheet ifNotNil: [ :value |
+	self model scaffold sidesheet ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #sidesheet ].
 
 ]
