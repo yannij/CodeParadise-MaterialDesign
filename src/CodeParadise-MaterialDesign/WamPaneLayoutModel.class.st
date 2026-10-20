@@ -66,11 +66,15 @@ WamPaneLayoutModel >> scaffold: anObject [
 { #category : 'accessing' }
 WamPaneLayoutModel >> useFeedStrategy [
 
-	self paneLayoutStrategy: #feed
+	self paneLayoutStrategy: #feed.
+	self scaffold pane1 paneContent viewStyleBeCard.
+
 ]
 
 { #category : 'accessing' }
 WamPaneLayoutModel >> useListDetailStrategy [
 
-	self paneLayoutStrategy: #listDetail
+	self paneLayoutStrategy: #listDetail.
+	self scaffold pane1 paneContent viewStyleBeListItem.
+
 ]

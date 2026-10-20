@@ -22,24 +22,6 @@ Class {
 	#tag : 'Layout'
 }
 
-{ #category : 'instance creation' }
-WamResponsiveLayoutModel class >> new [
-
-	^ self newListDetail
-]
-
-{ #category : 'instance creation' }
-WamResponsiveLayoutModel class >> newFeed [
-
-	^ super new layoutBeFeed; yourself
-]
-
-{ #category : 'instance creation' }
-WamResponsiveLayoutModel class >> newListDetail [
-
-	^ super new layoutBeListDetail; yourself
-]
-
 { #category : 'accessing - derived' }
 WamResponsiveLayoutModel >> appBar1 [
 
@@ -164,21 +146,6 @@ WamResponsiveLayoutModel >> itemListGet [
 WamResponsiveLayoutModel >> itemListSet: anObject [
 
 	self pane1 setPaneContent: anObject
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutBeFeed [
-
-	"self layoutPresenter: WamFeedLayoutPresenter."
-	"self application applicationPresenter renderView."
-
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> layoutBeListDetail [
-
-	"self layoutPresenter: WamListDetailLayoutPresenter."
-	"self application applicationPresenter renderView."
 ]
 
 { #category : 'accessing' }

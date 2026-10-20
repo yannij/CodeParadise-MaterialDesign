@@ -38,10 +38,16 @@ WamBasicListView class >> template [
   <div class="wam-pagination">
     <slot name="pagination"></slot>
   </div>
-  <ol class="wa-stack wam-list">
+  <div id="wamCollection" class="wam-list">
     <slot name="list"></slot>
-  </ol>
+  </div>
 </div>'
+]
+
+{ #category : 'rendering' }
+WamBasicListView >> collectionElement [
+
+	^ self findByIdInShadowDom: 'wamCollection'
 ]
 
 { #category : 'rendering' }
@@ -56,4 +62,24 @@ WamBasicListView >> renderPaginationTotal: total pageSize: pageSize page: page [
 		yourself.
 	self replaceAllChildrenWith: element atSlotNamed: #pagination.
 
+]
+
+{ #category : 'rendering' }
+WamBasicListView >> useCards [
+	| el |
+
+	el := self collectionElement.
+	#('wa-stack' 'wa-grid') do: [ :e | el removeClass: e ].
+
+	el addClass: 'wa-grid'
+]
+
+{ #category : 'rendering' }
+WamBasicListView >> useListItem [
+	| el |
+
+	el := self collectionElement.
+	#('wa-stack' 'wa-grid') do: [ :e | el removeClass: e ].
+
+	el addClass: 'wa-stack'
 ]

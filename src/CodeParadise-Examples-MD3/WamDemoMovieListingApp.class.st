@@ -204,7 +204,7 @@ WamDemoMovieListingApp >> initializeLayout [
 	pane2Model := WamPaneModel new.
 	pane2Model appBarModel beSecondary; actionGroupToUse: #toolbar.
 
-	layout := WamResponsiveLayoutModel newListDetail.
+	layout := WamResponsiveLayoutModel new.
 	layout pane1: pane1Model.
 	layout pane2: pane2Model.
 	layout layoutSettings webAwesomeTheme: #default; variantBrandColor: #cyan; fontFamily: #'serif'.

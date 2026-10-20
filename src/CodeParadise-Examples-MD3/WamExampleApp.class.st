@@ -57,7 +57,7 @@ WamExampleApp >> initializeLayout [
 	pane2Model appBarModel beSecondary.
 	sidesheetModel := WamPaneModel on: (WamExampleContentModel on: (String loremIpsum: 1000)).
 
-	layout := WamResponsiveLayoutModel newListDetail.
+	layout := WamResponsiveLayoutModel new.
 	layout pane1: pane1Model.
 	layout pane2: pane2Model.
 	layout sidesheet: sidesheetModel.

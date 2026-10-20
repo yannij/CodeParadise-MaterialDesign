@@ -7,6 +7,55 @@ Class {
 }
 
 { #category : 'web resources' }
+WamFeedLayoutView class >> style [
+
+	<webResource: #css>
+
+	^ '
+.wam-hidden {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.wam-layout {
+  background: var(--wa-color-brand-fill-quiet);
+}
+
+.wam-settings-pane {
+  padding: 0;
+  overflow-y: auto;
+}
+'
+, self stylePaneLayout
+
+]
+
+{ #category : 'web resources' }
+WamFeedLayoutView class >> stylePaneLayout [
+
+	<webResource: #css>
+	^ '
+.wam-pane-layout {
+  height: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  background: var(--wa-color-brand-fill-quiet);
+}
+
+.wam-pane {
+  flex: 100%;
+  display: flex;  
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+'
+]
+
+{ #category : 'web resources' }
 WamFeedLayoutView class >> template [
 
 	<webResource: #html>

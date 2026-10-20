@@ -6,12 +6,6 @@ Class {
 	#tag : 'ListDetail'
 }
 
-{ #category : 'accessing' }
-WamListItemPresenter class >> defaultViewClass [
-
-	^ WamListItemView
-]
-
 { #category : 'events' }
 WamListItemPresenter >> handleNavEvent: aNavEvent [
 
@@ -25,13 +19,6 @@ WamListItemPresenter >> handleNavEvent: aNavEvent [
 	self application ifNotNil: [ :value |
 		value layout itemDetailGet notNil ifTrue: [
 			self view secondaryPaneOnly ] ].
-
-]
-
-{ #category : 'rendering' }
-WamListItemPresenter >> renderView [
-
-	self view renderListItem: self model wrappedModel asListItemMap.
 
 ]
 

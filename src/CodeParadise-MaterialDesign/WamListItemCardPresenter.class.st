@@ -6,6 +6,12 @@ Class {
 	#tag : 'ListDetail'
 }
 
+{ #category : 'accessing' }
+WamListItemCardPresenter class >> defaultViewClass [
+
+	^ WamListItemCardView
+]
+
 { #category : 'rendering' }
 WamListItemCardPresenter >> renderView [
 

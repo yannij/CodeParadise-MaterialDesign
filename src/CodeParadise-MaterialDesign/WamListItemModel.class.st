@@ -101,7 +101,7 @@ WamListItemModel >> overline: anObject [
 { #category : 'presenter' }
 WamListItemModel >> preferredPresenterClass [
 
-	^ WamListItemPresenter
+	^ WamListItemDivPresenter
 ]
 
 { #category : 'accessing' }

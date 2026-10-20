@@ -314,6 +314,10 @@ WamResponsiveLayoutView >> beNotEditablePane2 [
 WamResponsiveLayoutView >> bodyHeightAdapt [
 	| bodyHeightReduction bodyHeightString |
 
+	self isFeed ifTrue: [
+		self bodyHeightAdaptOnePane.
+		^ self ].
+
 	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
 	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
 	bodyHeightString := bodyHeightReduction > 0
@@ -326,6 +330,27 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
 	self pane2View
 		ifNil: [ self systemLog logTrace: 'Missing pane2 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
+
+	self sidesheetView
+		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
+		ifNotNil: [ :v | v setPaneContentHeightReducedBy: bodyHeightReduction ].
+
+]
+
+{ #category : 'body' }
+WamResponsiveLayoutView >> bodyHeightAdaptOnePane [
+	| bodyHeightReduction bodyHeightString |
+
+	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
+	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
+	bodyHeightString := bodyHeightReduction > 0
+		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
+		ifFalse: [ '100vh' ].
+	self styleAt: 'height' put: bodyHeightString.
+
+	self pane1View
+		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
 		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
 
 	self sidesheetView
@@ -811,6 +836,9 @@ WamResponsiveLayoutView >> navRegionFind [
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> pane1View [
 	| slotName |
+
+	self isFeed ifTrue: [
+		^ self paneLayoutView firstChildAtSlotNamed: 'singlePaneLayoutP1' ].
 
 	slotName := self isUsingSinglePaneLayout
 		ifTrue: [ 'singlePaneLayoutP1' ]

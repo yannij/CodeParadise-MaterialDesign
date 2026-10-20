@@ -3,7 +3,8 @@ Class {
 	#superclass : 'WamListModel',
 	#instVars : [
 		'list',
-		'modelWrapperClass'
+		'modelWrapperClass',
+		'viewStyle'
 	],
 	#category : 'CodeParadise-MaterialDesign-ListDetail',
 	#package : 'CodeParadise-MaterialDesign',
@@ -56,4 +57,28 @@ WamBasicListModel >> modelWrapperClass: anObject [
 WamBasicListModel >> preferredPresenterClass [
 
 	^ WamBasicListPresenter
+]
+
+{ #category : 'accessing' }
+WamBasicListModel >> viewStyle [
+
+	^ viewStyle
+]
+
+{ #category : 'accessing' }
+WamBasicListModel >> viewStyle: anObject [
+
+	viewStyle := anObject
+]
+
+{ #category : 'accessing' }
+WamBasicListModel >> viewStyleBeCard [
+
+	self viewStyle: #card
+]
+
+{ #category : 'accessing' }
+WamBasicListModel >> viewStyleBeListItem [
+
+	self viewStyle: #listItem
 ]
