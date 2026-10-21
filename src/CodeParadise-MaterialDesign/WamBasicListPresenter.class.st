@@ -28,7 +28,7 @@ WamBasicListPresenter >> renderView [
 		ifTrue: [ self view useCards ]
 		ifFalse: [ self view useListItem ].
 
-	self renderAllChildViewsForModels: {} atSlotNamed: #list.
+	"self renderAllChildViewsForModels: {} atSlotNamed: #list."
 	self
 		renderAllChildViewsForModels: self model list
 		usingPresenter: (self model viewStyle = #card ifTrue: [WamListItemCardPresenter] ifFalse: [WamListItemDivPresenter])

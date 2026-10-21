@@ -7,55 +7,6 @@ Class {
 }
 
 { #category : 'web resources' }
-WamFeedLayoutView class >> style [
-
-	<webResource: #css>
-
-	^ '
-.wam-hidden {
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-}
-
-.wam-layout {
-  background: var(--wa-color-brand-fill-quiet);
-}
-
-.wam-settings-pane {
-  padding: 0;
-  overflow-y: auto;
-}
-'
-, self stylePaneLayout
-
-]
-
-{ #category : 'web resources' }
-WamFeedLayoutView class >> stylePaneLayout [
-
-	<webResource: #css>
-	^ '
-.wam-pane-layout {
-  height: 100%;
-  overflow-x: visible;
-  overflow-y: visible;
-  background: var(--wa-color-brand-fill-quiet);
-}
-
-.wam-pane {
-  flex: 100%;
-  display: flex;  
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-'
-]
-
-{ #category : 'web resources' }
 WamFeedLayoutView class >> template [
 
 	<webResource: #html>
@@ -72,23 +23,32 @@ WamFeedLayoutView class >> template [
 '
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
+WamFeedLayoutView >> bodyHeightAdapt: heightReduction [
+
+	self pane1View
+		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: heightReduction ].
+
+	self sidesheetView
+		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
+		ifNotNil: [ :v | v setPaneContentHeightReducedBy: heightReduction ].
+
+]
+
+{ #category : 'panes' }
 WamFeedLayoutView >> bodySplitPanelAdapt [
 
 	"Do nothing for Feed layout"
 
 ]
 
-{ #category : 'body' }
-WamFeedLayoutView >> bodyWidthAdapt [
-	| element |
+{ #category : 'panes' }
+WamFeedLayoutView >> bodyWidthAdapt: width [
 
-	element := self findByIdInShadowDom: 'wamSinglePaneLayoutP1'.
-
-	element
+	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1')
 		ifNil: [ self systemLog logError: 'Missing body region' ]
-		ifNotNil: [ element styleAt: 'width' put: self bodyWidthToUse ].
-
+		ifNotNil: [ :value | value styleAt: 'width' put: width ]
 ]
 
 { #category : 'testing' }
@@ -97,11 +57,23 @@ WamFeedLayoutView >> isUsingSinglePaneLayout [
 	^ false
 ]
 
+{ #category : 'accessing - components' }
+WamFeedLayoutView >> pane1View [
+
+	^ self firstChildAtSlotNamed: 'singlePaneLayoutP1'
+]
+
 { #category : 'panes' }
 WamFeedLayoutView >> pane1WidthSet: anInteger [
 
-	"Do nothing for Feed layout"
+	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1') ifNotNil: [ :value |
+		value styleAt: 'width' put: anInteger printString, 'px' ]
+]
 
+{ #category : 'accessing - components' }
+WamFeedLayoutView >> pane2View [
+
+	self error: 'Should not use'
 ]
 
 { #category : 'panes' }

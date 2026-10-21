@@ -5,7 +5,6 @@ Class {
 		'debounceTransition',
 		'layoutWidthCached',
 		'layoutBreakpoints',
-		'isUsingSinglePaneLayout',
 		'popups'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
@@ -211,7 +210,7 @@ WamResponsiveLayoutView >> announceSetting: aspect value: anObject [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> appBar2Display: anObject [
 	| components |
 
@@ -224,7 +223,7 @@ WamResponsiveLayoutView >> appBar2Display: anObject [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
 	| components |
 
@@ -237,7 +236,7 @@ WamResponsiveLayoutView >> appBar2LeadingButtonDisplay: anObject [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> appBarDisplay: anObject [
 	| components |
 
@@ -250,7 +249,7 @@ WamResponsiveLayoutView >> appBarDisplay: anObject [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> appBarLeadingButtonDisplay: anObject [
 	| components |
 
@@ -310,96 +309,53 @@ WamResponsiveLayoutView >> beNotEditablePane2 [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> bodyHeightAdapt [
 	| bodyHeightReduction bodyHeightString |
 
-	self isFeed ifTrue: [
-		self bodyHeightAdaptOnePane.
-		^ self ].
-
 	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
-	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
+
 	bodyHeightString := bodyHeightReduction > 0
 		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
 		ifFalse: [ '100vh' ].
+
 	self styleAt: 'height' put: bodyHeightString.
 
-	self pane1View
-		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
-		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
-	self pane2View
-		ifNil: [ self systemLog logTrace: 'Missing pane2 component' ]
-		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
-
-	self sidesheetView
-		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
-		ifNotNil: [ :v | v setPaneContentHeightReducedBy: bodyHeightReduction ].
+	self paneLayoutView bodyHeightAdapt: bodyHeightReduction.
 
 ]
 
-{ #category : 'body' }
-WamResponsiveLayoutView >> bodyHeightAdaptOnePane [
-	| bodyHeightReduction bodyHeightString |
-
-	bodyHeightReduction := (self showNavBar or: [ self showDockedToolbar ]) ifTrue: [ 64 ] ifFalse: [ 0 ].
-	"self systemLog logString: 'bodyHeightReduction: ', bodyHeightReduction printString."
-	bodyHeightString := bodyHeightReduction > 0
-		ifTrue: [ 'calc(100vh - ', bodyHeightReduction printString, 'px)' ]
-		ifFalse: [ '100vh' ].
-	self styleAt: 'height' put: bodyHeightString.
-
-	self pane1View
-		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
-		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: bodyHeightReduction ].
-
-	self sidesheetView
-		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
-		ifNotNil: [ :v | v setPaneContentHeightReducedBy: bodyHeightReduction ].
-
-]
-
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> bodySplitPanelAdapt [
 
-	self isFeed ifTrue: [ ^ self ].
-
-	self pane1WidthSet: self pane1WidthCompute.
+	self paneLayoutView pane1WidthSet: self pane1WidthCompute.
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> bodyWidthAdapt [
-	| splitPanel |
 
-	self isFeed ifTrue: [
-		| element |
-		element := self paneLayoutView findByIdInShadowDom: 'wamSinglePaneLayoutP1'.
-		element
-			ifNil: [ self systemLog logError: 'Missing body region' ]
-			ifNotNil: [ element styleAt: 'width' put: self bodyWidthToUse ].
-		^ self ].
-
-	"paneLayout := WamPaneLayoutView first."
-	splitPanel := self paneLayoutView findByIdInShadowDom: 'wamBodySplitPanel'.
-
-	splitPanel
-		ifNil: [ self systemLog logError: 'Missing body region' ]
-		ifNotNil: [ splitPanel styleAt: 'width' put: self bodyWidthToUse ].
-
+	self paneLayoutView bodyWidthAdapt: self bodyWidthAsCssProperty
 ]
 
-{ #category : 'body' }
-WamResponsiveLayoutView >> bodyWidthToUse [
+{ #category : 'panes' }
+WamResponsiveLayoutView >> bodyWidthAsCssProperty [
 	| reduceByWidth widthString |
 
-	reduceByWidth := self useModalNav ifTrue: [ 0 ] ifFalse: [ self navRailWidth ].
+	reduceByWidth := self bodyWidthReduction.
 	"self showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
 	widthString := reduceByWidth > 0
 		ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
 		ifFalse: [ '100vw' ].
 
 	^ widthString
+
+]
+
+{ #category : 'panes' }
+WamResponsiveLayoutView >> bodyWidthReduction [
+
+	^ self useModalNav ifTrue: [ 0 ] ifFalse: [ self navRailWidth ]
 
 ]
 
@@ -600,7 +556,6 @@ WamResponsiveLayoutView >> initialize [
 
 	super initialize.
 
-	isUsingSinglePaneLayout := false.
 	layoutWidthCached := 0.
 	layoutBreakpoints := WamLayoutType defaultLayoutBreakpoints.
 	popups := IdentityDictionary new.
@@ -616,9 +571,7 @@ WamResponsiveLayoutView >> isFeed [
 { #category : 'testing' }
 WamResponsiveLayoutView >> isUsingSinglePaneLayout [
 
-	self isFeed ifTrue: [ ^ false ].
-
-	^ isUsingSinglePaneLayout.
+	^ self paneLayoutView isUsingSinglePaneLayout.
 ]
 
 { #category : 'layout' }
@@ -835,51 +788,35 @@ WamResponsiveLayoutView >> navRegionFind [
 
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> pane1View [
-	| slotName |
 
-	self isFeed ifTrue: [
-		^ self paneLayoutView firstChildAtSlotNamed: 'singlePaneLayoutP1' ].
-
-	slotName := self isUsingSinglePaneLayout
-		ifTrue: [ 'singlePaneLayoutP1' ]
-		ifFalse: [ 'twoPaneLayoutP1' ].
-	^ self paneLayoutView firstChildAtSlotNamed: slotName
-]
-
-{ #category : 'body' }
-WamResponsiveLayoutView >> pane1WidthCompute [
-	| w |
-
-	w := (self layoutWidthCached / 2) asInteger.
-	self useModalNav ifFalse: [  w := w - self navRailWidth ].
-	w < self pane1WidthMin ifTrue: [ w := self pane1WidthMin ].
-	^ w
-]
-
-{ #category : 'body' }
-WamResponsiveLayoutView >> pane1WidthMin [
-
-	^ 300
+	^ self paneLayoutView pane1View
 ]
 
 { #category : 'panes' }
-WamResponsiveLayoutView >> pane1WidthSet: anInteger [
-	| split |
+WamResponsiveLayoutView >> pane1WidthCompute [
+	| w |
 
-	self isFeed ifTrue: [ ^ self ].
+	self isUsingSinglePaneLayout ifTrue: [ | reduceByWidth |
+		reduceByWidth := self bodyWidthReduction.
+self systemLog logTrace: 'bodyWidthReduction: ', self bodyWidthReduction asString.
+self systemLog logTrace: 'layoutWidthCached: ', self layoutWidthCached asString.
+		^ reduceByWidth > 0
+			ifTrue: [ self layoutWidthCached - self bodyWidthReduction ]
+			ifFalse: [ self layoutWidthCached ] ].
 
-	split := self paneLayoutView findByIdInShadowDom: 'wamBodySplitPanel'.
-	split ifNotNil: [
-		split
-			customPropertyAt: 'min' put: 'min(344px,50vw - 16px)';
-			customPropertyAt: 'max' put: 'calc(100% - (max(344px,50vw - 16px)))';
-			customPropertyAt: 'divider-width' put: '16px';
-			customPropertyAt: 'divider-hit-area' put: '16px';
-			primary: 'start';
-			positionInPixels: anInteger printString;
-			snap: (anInteger printString), 'px 50%';
-			snapThreshold: 24 ].
+	w := (self layoutWidthCached / 2) asInteger.
+self systemLog logTrace: 'w1: ', w asString.
+	self useModalNav ifFalse: [  w := w - self navRailWidth ].
+self systemLog logTrace: 'w2: ', w asString.
+	w < self pane1WidthMin ifTrue: [ w := self pane1WidthMin ].
+self systemLog logTrace: 'w3: ', w asString.
+	^ w
+]
 
+{ #category : 'panes' }
+WamResponsiveLayoutView >> pane1WidthMin [
+
+	^ 300
 ]
 
 { #category : 'panes' }
@@ -894,12 +831,8 @@ WamResponsiveLayoutView >> pane2Content [
 
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> pane2View [
-	| pane2SlotName |
 
-	pane2SlotName := self isUsingSinglePaneLayout
-		ifTrue: [ 'singlePaneLayoutP2' ]
-		ifFalse: [ 'twoPaneLayoutP2' ].
-	^ self paneLayoutView firstChildAtSlotNamed: pane2SlotName
+	^ self paneLayoutView pane2View
 ]
 
 { #category : 'accessing - components' }
@@ -923,7 +856,7 @@ WamResponsiveLayoutView >> popups: anObject [
 { #category : 'panes' }
 WamResponsiveLayoutView >> primaryPaneDisplay: aBoolean [
 
-	self shadowElementId: 'wamSinglePaneLayoutP1' show: aBoolean.
+	self paneLayoutView shadowElementId: 'wamSinglePaneLayoutP1' show: aBoolean.
 
 ]
 
@@ -952,7 +885,7 @@ WamResponsiveLayoutView >> requestLogin [
 
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> resizeBodyRegion [
 
 	self bodyHeightAdapt.
@@ -970,7 +903,7 @@ WamResponsiveLayoutView >> resizeSetUp [
 { #category : 'panes' }
 WamResponsiveLayoutView >> secondaryPaneDisplay: aBoolean [
 
-	self shadowElementId: 'wamSinglePaneLayoutP2' show: aBoolean.
+	self paneLayoutView shadowElementId: 'wamSinglePaneLayoutP2' show: aBoolean.
 
 ]
 
@@ -1128,7 +1061,7 @@ WamResponsiveLayoutView >> showNavMenuButton: anObject [
 	self layoutSettingAt: #showNavMenuButton put: anObject
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> showNavMenuButtonAdapt: aBoolean [
 
 	self appBarLeadingButtonDisplay: aBoolean.
@@ -1161,13 +1094,13 @@ WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 
 	self sidesheetView
 		ifNil: [ self systemLog logTrace: 'Missing sidesheet view' ]
-		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
+		ifNotNil: [ :value | value paneLayoutView shadowElementId: #container display: aBoolean ]
 ]
 
 { #category : 'accessing - components' }
 WamResponsiveLayoutView >> sidesheetView [
 
-	^ self paneLayoutView firstChildAtSlotNamed: #sidesheet
+	^ self paneLayoutView sidesheetView
 ]
 
 { #category : 'toolbar' }
@@ -1221,25 +1154,6 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 
 ]
 
-{ #category : 'panes' }
-WamResponsiveLayoutView >> useSinglePaneLayout [
-
-	self isFeed ifTrue: [ ^ self ].
-
-	"self traceCr: 'View: useSinglePaneLayout'."
-	isUsingSinglePaneLayout := true.
-	self shadowElementId: 'wamTwoPaneLayout' show: false.
-	self moveChildrenFromSlot: 'twoPaneLayoutP1' to: 'singlePaneLayoutP1'.
-	self moveChildrenFromSlot: 'twoPaneLayoutP2' to: 'singlePaneLayoutP2'.
-	self shadowElementId: 'wamSinglePaneLayout' show: true.
-	self primaryPaneOnly.
-	self layoutViewLazy
-		appBar2Display: true;
-		"appBar2LeadingButtonDisplay: true;"
-		yourself.
-
-]
-
 { #category : 'accessing - settings' }
 WamResponsiveLayoutView >> useTwoPaneBody [
 
@@ -1252,33 +1166,18 @@ WamResponsiveLayoutView >> useTwoPaneBody: anObject [
 	self layoutSettingAt: #useTwoPaneBody put: anObject
 ]
 
-{ #category : 'body' }
+{ #category : 'panes' }
 WamResponsiveLayoutView >> useTwoPaneBodyAdapt: aBoolean [
 
 	self systemLog logTrace5: aBoolean printString.
 
 	aBoolean
-		ifTrue: [ self useTwoPaneLayout ]
-		ifFalse: [ self useSinglePaneLayout ].
-
-]
-
-{ #category : 'panes' }
-WamResponsiveLayoutView >> useTwoPaneLayout [
-
-	self isFeed ifTrue: [ ^ self ].
-
-	"self traceCr: 'View: useTwoPaneLayout'."
-	isUsingSinglePaneLayout := false.
-	self shadowElementId: 'wamSinglePaneLayout' show: false.
-	self moveChildrenFromSlot: 'singlePaneLayoutP1' to: 'twoPaneLayoutP1'.
-	self moveChildrenFromSlot: 'singlePaneLayoutP2' to: 'twoPaneLayoutP2'.
-	self shadowElementId: 'wamTwoPaneLayout' show: true.
-	self layoutViewLazy
-		"floatingToolbarOn;"
-		"appBar2Display: false;"
-		"appBar2LeadingButtonDisplay: false;"
-		yourself.
+		ifTrue: [
+			self paneLayoutView useTwoPaneLayout ]
+		ifFalse: [
+			self paneLayoutView useSinglePaneLayout.
+			self primaryPaneOnly.
+			self appBar2Display: true ].
 
 ]
 
