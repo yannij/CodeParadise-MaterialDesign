@@ -6,6 +6,12 @@ Class {
 	#tag : 'Layout'
 }
 
+{ #category : 'accessing' }
+WamPanePresenter class >> defaultViewClass [
+
+	^ WamPaneView 
+]
+
 { #category : 'rendering' }
 WamPanePresenter >> renderView [
 

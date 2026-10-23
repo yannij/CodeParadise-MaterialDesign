@@ -47,6 +47,7 @@ WamPaneLayoutModel >> preferredPresenterClass [
 WamPaneLayoutModel >> presenterClassToUse [
 
 	self paneLayoutStrategy = #feed ifTrue: [ ^ WamFeedLayoutPresenter ].
+	self paneLayoutStrategy = #supportingPane ifTrue: [ ^ WamSupportingPaneLayoutPresenter ].
 
 	^ WamListDetailLayoutPresenter
 ]
@@ -76,5 +77,13 @@ WamPaneLayoutModel >> useListDetailStrategy [
 
 	self paneLayoutStrategy: #listDetail.
 	self scaffold pane1 paneContent viewStyleBeListItem.
+
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> useSupportingPaneStrategy [
+
+	self paneLayoutStrategy: #supportingPane.
+	self scaffold pane1 paneContent viewStyleBeSupportingPane.
 
 ]

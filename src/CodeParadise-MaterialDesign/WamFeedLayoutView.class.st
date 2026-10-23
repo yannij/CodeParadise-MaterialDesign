@@ -37,13 +37,6 @@ WamFeedLayoutView >> bodyHeightAdapt: heightReduction [
 ]
 
 { #category : 'panes' }
-WamFeedLayoutView >> bodySplitPanelAdapt [
-
-	"Do nothing for Feed layout"
-
-]
-
-{ #category : 'panes' }
 WamFeedLayoutView >> bodyWidthAdapt: width [
 
 	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1')

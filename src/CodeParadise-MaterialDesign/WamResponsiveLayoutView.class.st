@@ -25,6 +25,15 @@ WamResponsiveLayoutView class >> beLoaded [
 WamResponsiveLayoutView class >> globalStyle [
 	<webResource: #css>
 
+	^ self globalStyleMenu
+	, self globalStyleTable
+
+]
+
+{ #category : 'web resources' }
+WamResponsiveLayoutView class >> globalStyleMenu [
+	<webResource: #css>
+
 	^ '
 .wam-menu {
   padding: 8px 0;
@@ -92,7 +101,28 @@ WamResponsiveLayoutView class >> globalStyle [
   font-size: 16px;
 }
 '
-, self styleTable
+
+]
+
+{ #category : 'web resources' }
+WamResponsiveLayoutView class >> globalStyleTable [
+	<webResource: #css>
+
+	^ '
+.wam-table {
+  width: 100%;
+}
+
+table, th, td {
+  border-style: solid;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: 8px 0;
+}
+'
 
 ]
 
@@ -115,61 +145,6 @@ WamResponsiveLayoutView class >> style [
 .wam-settings-pane {
   padding: 0;
   overflow-y: auto;
-}
-'
-, self stylePaneLayout
-
-]
-
-{ #category : 'web resources' }
-WamResponsiveLayoutView class >> stylePaneLayout [
-
-	<webResource: #css>
-	^ '
-.wam-pane-layout {
-  height: 100%;
-  overflow-x: visible;
-  overflow-y: visible;
-  background: var(--wa-color-brand-fill-quiet);
-}
-
-.wam-pane {
-  flex: 100%;
-  display: flex;  
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
-.wam-body-split-panel {
-  height: 100%;
-}
-
-.wam-pane-layout wa-split-panel::part(divider) {
-  background-color: var(--wa-color-brand-fill-quiet);
-}
-'
-]
-
-{ #category : 'web resources' }
-WamResponsiveLayoutView class >> styleTable [
-	<webResource: #css>
-
-	^ '
-.wam-table {
-  width: 100%;
-}
-
-table, th, td {
-  border-style: solid;
-}
-
-caption {
-  caption-side: top;
-  text-align: left;
-  padding: 8px 0;
 }
 '
 
@@ -560,12 +535,6 @@ WamResponsiveLayoutView >> initialize [
 	layoutBreakpoints := WamLayoutType defaultLayoutBreakpoints.
 	popups := IdentityDictionary new.
 
-]
-
-{ #category : 'panes' }
-WamResponsiveLayoutView >> isFeed [
-
-	^ self paneLayoutView class = WamFeedLayoutView
 ]
 
 { #category : 'testing' }
@@ -1094,7 +1063,7 @@ WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 
 	self sidesheetView
 		ifNil: [ self systemLog logTrace: 'Missing sidesheet view' ]
-		ifNotNil: [ :value | value paneLayoutView shadowElementId: #container display: aBoolean ]
+		ifNotNil: [ :value | value shadowElementId: #container display: aBoolean ]
 ]
 
 { #category : 'accessing - components' }

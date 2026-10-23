@@ -30,9 +30,30 @@ WamExampleContentModel >> content: anObject [
 ]
 
 { #category : 'actions' }
-WamExampleContentModel >> processNavActionEvent: aBasicEvent [
+WamExampleContentModel >> doExtraActions: aNavActionEvent [
+	| actionId |
 
-	self setContent: aBasicEvent data.
+	actionId := aNavActionEvent eventId.
+
+	actionId = #clover ifTrue: [
+		self application layout paneLayoutBeListDetail.
+		^ self ].
+
+	actionId = #diamond ifTrue: [
+		self application layout paneLayoutBeFeed.
+		^ self ].
+
+	actionId = #heart ifTrue: [
+		self application layout paneLayoutBeSupportingPane.
+		^ self ].
+
+]
+
+{ #category : 'actions' }
+WamExampleContentModel >> processNavActionEvent: aNavActionEvent [
+
+	self doExtraActions: aNavActionEvent.
+	self setContent: aNavActionEvent data.
 
 ]
 
@@ -42,4 +63,19 @@ WamExampleContentModel >> setContent: anObject [
 	self content: anObject.
 	self valueChanged.
 
+]
+
+{ #category : 'actions' }
+WamExampleContentModel >> viewStyleBeCard [
+	"TODO"
+]
+
+{ #category : 'actions' }
+WamExampleContentModel >> viewStyleBeListItem [
+	"TODO"
+]
+
+{ #category : 'actions' }
+WamExampleContentModel >> viewStyleBeSupportingPane [
+	"TODO"
 ]

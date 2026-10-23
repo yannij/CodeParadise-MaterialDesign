@@ -65,6 +65,12 @@ WamPaneModel >> paneContent: anObject [
 	paneContent := anObject
 ]
 
+{ #category : 'presenter' }
+WamPaneModel >> preferredPresenterClass [
+
+	^ WamPanePresenter
+]
+
 { #category : 'actions' }
 WamPaneModel >> processNavActionEvent: aBasicEvent [
 

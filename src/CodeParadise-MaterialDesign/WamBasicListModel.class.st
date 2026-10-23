@@ -82,3 +82,9 @@ WamBasicListModel >> viewStyleBeListItem [
 
 	self viewStyle: #listItem
 ]
+
+{ #category : 'accessing' }
+WamBasicListModel >> viewStyleBeSupportingPane [
+
+	self viewStyle: #supportingPane
+]

@@ -76,7 +76,7 @@ WamExampleApp >> load [
 	"self addViewInspector"
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 WamExampleApp >> navItemsToUse [
 
 	^ OrderedCollection new
@@ -158,7 +158,7 @@ WamExampleApp >> setUpPopup2 [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 WamExampleApp >> userEventSpecFAB [
 	"Subclasses may override"
 

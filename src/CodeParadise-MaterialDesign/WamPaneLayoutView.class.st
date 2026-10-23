@@ -63,6 +63,14 @@ WamPaneLayoutView class >> stylePaneLayout [
   overflow-x: auto;
   overflow-y: auto;
 }
+
+.wam-body-split-panel {
+  height: 100%;
+}
+
+.wam-pane-layout wa-split-panel::part(divider) {
+  background-color: var(--wa-color-brand-fill-quiet);
+}
 '
 ]
 

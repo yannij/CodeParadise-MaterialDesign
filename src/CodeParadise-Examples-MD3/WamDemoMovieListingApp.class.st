@@ -319,9 +319,9 @@ WamDemoMovieListingApp >> setUpCustomEvents [
 	super setUpCustomEvents.
 
 	self
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Movies' data: #movie;
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Theatres' data: #theatre;
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Show Times' data: #showtime;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'square' iconLabel: 'Movies' data: #movie;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'pentagon' iconLabel: 'Theatres' data: #theatre;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'circle' iconLabel: 'Show Times' data: #showtime;
 		yourself.
 
 ]

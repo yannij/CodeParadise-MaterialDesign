@@ -336,10 +336,10 @@ WamDemoAccountingApp >> setUpCustomEvents [
 	super setUpCustomEvents.
 
 	self
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Users' data: #user;
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Companies' data: #company;
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Accounts' data: #account;
-		addNavActionAt: #navTo groupTag: #primary iconName: 'suit-club' iconLabel: 'Transactions' data: #transactions;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'clover' iconLabel: 'Users' data: #user;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'diamond' iconLabel: 'Companies' data: #company;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'heart' iconLabel: 'Accounts' data: #account;
+		addNavActionAt: #navTo groupTag: #primary iconName: 'star' iconLabel: 'Transactions' data: #transactions;
 		yourself.
 
 ]

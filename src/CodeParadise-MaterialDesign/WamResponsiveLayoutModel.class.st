@@ -248,6 +248,14 @@ WamResponsiveLayoutModel >> paneLayoutBeListDetail [
 
 ]
 
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayoutBeSupportingPane [
+
+	self paneLayout useSupportingPaneStrategy.
+	self valueChanged.
+
+]
+
 { #category : 'accessing - popups' }
 WamResponsiveLayoutModel >> popupsAt: aSymbol [
 
