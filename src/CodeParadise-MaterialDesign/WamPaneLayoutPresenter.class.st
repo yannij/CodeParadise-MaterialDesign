@@ -5,3 +5,9 @@ Class {
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Layout'
 }
+
+{ #category : 'accessing' }
+WamPaneLayoutPresenter class >> strategyName [
+
+	self subclassResponsibility
+]

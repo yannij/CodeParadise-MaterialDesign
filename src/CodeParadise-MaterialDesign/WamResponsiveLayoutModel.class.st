@@ -196,6 +196,18 @@ WamResponsiveLayoutModel >> pane1: anObject [
 	pane1 := anObject
 ]
 
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane1ContentGet [
+
+	^ self pane1 paneContent
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane1ContentSet: anObject [
+
+	self pane1 setPaneContent: anObject
+]
+
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> pane1Width [
 
@@ -220,6 +232,18 @@ WamResponsiveLayoutModel >> pane2: anObject [
 	pane2 := anObject
 ]
 
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane2ContentGet [
+
+	^ self pane2 paneContent
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane2ContentSet: anObject [
+
+	self pane2 setPaneContent: anObject
+]
+
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> paneLayout [
 
@@ -236,7 +260,7 @@ WamResponsiveLayoutModel >> paneLayout: anObject [
 WamResponsiveLayoutModel >> paneLayoutBeFeed [
 
 	self paneLayout useFeedStrategy.
-	self valueChanged.
+	self pane1 paneContent viewStyleBeCard.
 
 ]
 
@@ -244,16 +268,28 @@ WamResponsiveLayoutModel >> paneLayoutBeFeed [
 WamResponsiveLayoutModel >> paneLayoutBeListDetail [
 
 	self paneLayout useListDetailStrategy.
-	self valueChanged.
+	self pane1 paneContent viewStyleBeListItem.
 
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> paneLayoutBeNotChanged [
+
+	^ self paneLayout paneLayoutChanged: false
 ]
 
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> paneLayoutBeSupportingPane [
 
 	self paneLayout useSupportingPaneStrategy.
-	self valueChanged.
+	self pane1 paneContent viewStyleBeSupportingPane.
 
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> paneLayoutChanged [
+
+	^ self paneLayout paneLayoutChanged
 ]
 
 { #category : 'accessing - popups' }

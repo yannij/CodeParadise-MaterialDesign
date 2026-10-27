@@ -3,7 +3,9 @@ Class {
 	#superclass : 'WamModel',
 	#instVars : [
 		'scaffold',
-		'paneLayoutStrategy'
+		'paneLayoutStrategy',
+		'paneLayoutChanged',
+		'presenterClassMap'
 	],
 	#category : 'CodeParadise-MaterialDesign-Layout',
 	#package : 'CodeParadise-MaterialDesign',
@@ -21,8 +23,22 @@ WamPaneLayoutModel >> initialize [
 
 	super initialize.
 
-	paneLayoutStrategy := #listDetail.
+	presenterClassMap := self presenterClassMapDefault.
+	paneLayoutChanged := true.
+	paneLayoutStrategy := WamListDetailLayoutPresenter strategyName.
 
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> paneLayoutChanged [
+
+	^ paneLayoutChanged
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> paneLayoutChanged: anObject [
+
+	paneLayoutChanged := anObject
 ]
 
 { #category : 'accessing' }
@@ -44,12 +60,39 @@ WamPaneLayoutModel >> preferredPresenterClass [
 ]
 
 { #category : 'accessing' }
+WamPaneLayoutModel >> presenterClassMap [
+
+	^ presenterClassMap
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> presenterClassMap: anObject [
+
+	presenterClassMap := anObject
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> presenterClassMapAt: key put: value [
+
+	self presenterClassMap at: key put: value
+]
+
+{ #category : 'initialization' }
+WamPaneLayoutModel >> presenterClassMapDefault [
+
+	^ IdentityDictionary new
+		at: WamFeedLayoutPresenter strategyName put: WamFeedLayoutPresenter;
+		at: WamListDetailLayoutPresenter strategyName put: WamListDetailLayoutPresenter;
+		at: WamSupportingPaneLayoutPresenter strategyName put: WamSupportingPaneLayoutPresenter;
+		yourself
+]
+
+{ #category : 'accessing' }
 WamPaneLayoutModel >> presenterClassToUse [
 
-	self paneLayoutStrategy = #feed ifTrue: [ ^ WamFeedLayoutPresenter ].
-	self paneLayoutStrategy = #supportingPane ifTrue: [ ^ WamSupportingPaneLayoutPresenter ].
-
-	^ WamListDetailLayoutPresenter
+	^ self presenterClassMap
+		at: self paneLayoutStrategy
+		ifAbsent: [ self error: 'Pane layout strategy not found: '. self paneLayoutStrategy asString ]
 ]
 
 { #category : 'accessing' }
@@ -67,23 +110,30 @@ WamPaneLayoutModel >> scaffold: anObject [
 { #category : 'accessing' }
 WamPaneLayoutModel >> useFeedStrategy [
 
-	self paneLayoutStrategy: #feed.
-	self scaffold pane1 paneContent viewStyleBeCard.
+	self useStrategy: WamFeedLayoutPresenter strategyName.
+
 
 ]
 
 { #category : 'accessing' }
 WamPaneLayoutModel >> useListDetailStrategy [
 
-	self paneLayoutStrategy: #listDetail.
-	self scaffold pane1 paneContent viewStyleBeListItem.
+	self useStrategy: WamListDetailLayoutPresenter strategyName.
+
+
+]
+
+{ #category : 'accessing' }
+WamPaneLayoutModel >> useStrategy: aStrategyName [
+
+	self paneLayoutStrategy: aStrategyName.
+	self paneLayoutChanged: true.
 
 ]
 
 { #category : 'accessing' }
 WamPaneLayoutModel >> useSupportingPaneStrategy [
 
-	self paneLayoutStrategy: #supportingPane.
-	self scaffold pane1 paneContent viewStyleBeSupportingPane.
+	self useStrategy: WamSupportingPaneLayoutPresenter strategyName.
 
 ]

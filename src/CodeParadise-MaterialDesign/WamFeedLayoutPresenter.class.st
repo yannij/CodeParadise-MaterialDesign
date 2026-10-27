@@ -12,6 +12,12 @@ WamFeedLayoutPresenter class >> defaultViewClass [
 	^ WamFeedLayoutView
 ]
 
+{ #category : 'accessing' }
+WamFeedLayoutPresenter class >> strategyName [
+
+	^ #feed
+]
+
 { #category : 'rendering' }
 WamFeedLayoutPresenter >> renderView [
 

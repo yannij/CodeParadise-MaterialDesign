@@ -90,7 +90,10 @@ WamResponsiveLayoutPresenter >> renderView [
 
 	self model paneLayout ifNotNil: [ :value |
 		self renderChildViewForModel: value usingPresenter: value presenterClassToUse atSlotNamed: #paneLayout.
-		self view layoutAdaptToWidth ].
+		self view layoutAdaptToWidth.
+		self model paneLayoutChanged ifTrue: [
+			self model paneLayoutBeNotChanged.
+			self view paneLayoutAdapt ] ].
 
 	self model dockedToolbar ifNotNil: [ :value |
 		self renderChildViewForModel: value atSlotNamed: #dockedToolbar ].

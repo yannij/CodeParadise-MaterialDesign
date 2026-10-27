@@ -12,6 +12,12 @@ WamListDetailLayoutPresenter class >> defaultViewClass [
 	^ WamListDetailLayoutView 
 ]
 
+{ #category : 'accessing' }
+WamListDetailLayoutPresenter class >> strategyName [
+
+	^ #listDetail
+]
+
 { #category : 'rendering' }
 WamListDetailLayoutPresenter >> renderView [
 

@@ -301,30 +301,9 @@ WamResponsiveLayoutView >> bodyHeightAdapt [
 ]
 
 { #category : 'panes' }
-WamResponsiveLayoutView >> bodySplitPanelAdapt [
-
-	self paneLayoutView pane1WidthSet: self pane1WidthCompute.
-
-]
-
-{ #category : 'panes' }
 WamResponsiveLayoutView >> bodyWidthAdapt [
 
-	self paneLayoutView bodyWidthAdapt: self bodyWidthAsCssProperty
-]
-
-{ #category : 'panes' }
-WamResponsiveLayoutView >> bodyWidthAsCssProperty [
-	| reduceByWidth widthString |
-
-	reduceByWidth := self bodyWidthReduction.
-	"self showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
-	widthString := reduceByWidth > 0
-		ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
-		ifFalse: [ '100vw' ].
-
-	^ widthString
-
+	self paneLayoutView bodyWidthAdaptWith: self
 ]
 
 { #category : 'panes' }
@@ -512,7 +491,7 @@ WamResponsiveLayoutView >> handleResizeEvent: anEvent [
 			^ self layoutAdaptToWidth ] ].
 
 	self systemLog logString: 'resize to newWidth: ', newWidth printString.
-	self bodySplitPanelAdapt.
+	self paneLayoutAdapt.
 	self bodyWidthAdapt.
 
 ]
@@ -717,7 +696,7 @@ WamResponsiveLayoutView >> navRailExpandedAdapt: aBoolean [
 	self modalNavElementOrNil ifNotNil: [ :value |
 		value customPropertyAt: 'size' put: self navRailWidth printString, 'px' ].
 
-	self bodySplitPanelAdapt.
+	self paneLayoutAdapt.
 
 ]
 
@@ -762,33 +741,6 @@ WamResponsiveLayoutView >> pane1View [
 ]
 
 { #category : 'panes' }
-WamResponsiveLayoutView >> pane1WidthCompute [
-	| w |
-
-	self isUsingSinglePaneLayout ifTrue: [ | reduceByWidth |
-		reduceByWidth := self bodyWidthReduction.
-self systemLog logTrace: 'bodyWidthReduction: ', self bodyWidthReduction asString.
-self systemLog logTrace: 'layoutWidthCached: ', self layoutWidthCached asString.
-		^ reduceByWidth > 0
-			ifTrue: [ self layoutWidthCached - self bodyWidthReduction ]
-			ifFalse: [ self layoutWidthCached ] ].
-
-	w := (self layoutWidthCached / 2) asInteger.
-self systemLog logTrace: 'w1: ', w asString.
-	self useModalNav ifFalse: [  w := w - self navRailWidth ].
-self systemLog logTrace: 'w2: ', w asString.
-	w < self pane1WidthMin ifTrue: [ w := self pane1WidthMin ].
-self systemLog logTrace: 'w3: ', w asString.
-	^ w
-]
-
-{ #category : 'panes' }
-WamResponsiveLayoutView >> pane1WidthMin [
-
-	^ 300
-]
-
-{ #category : 'panes' }
 WamResponsiveLayoutView >> pane2Content [
 	| view |
 
@@ -802,6 +754,13 @@ WamResponsiveLayoutView >> pane2Content [
 WamResponsiveLayoutView >> pane2View [
 
 	^ self paneLayoutView pane2View
+]
+
+{ #category : 'panes' }
+WamResponsiveLayoutView >> paneLayoutAdapt [
+
+	self paneLayoutView paneLayoutAdaptWith: self.
+
 ]
 
 { #category : 'accessing - components' }
@@ -1119,7 +1078,7 @@ WamResponsiveLayoutView >> useModalNavAdapt: aBoolean [
 	self systemLog logTrace5: aBoolean printString.
 
 	self navRegionDisplay: aBoolean not.
-	self bodySplitPanelAdapt.
+	self paneLayoutAdapt.
 
 ]
 

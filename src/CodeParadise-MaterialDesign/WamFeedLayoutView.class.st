@@ -37,11 +37,9 @@ WamFeedLayoutView >> bodyHeightAdapt: heightReduction [
 ]
 
 { #category : 'panes' }
-WamFeedLayoutView >> bodyWidthAdapt: width [
+WamFeedLayoutView >> bodyRegionFind [
 
-	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1')
-		ifNil: [ self systemLog logError: 'Missing body region' ]
-		ifNotNil: [ :value | value styleAt: 'width' put: width ]
+	^ self findByIdInShadowDom: 'wamSinglePaneLayoutP1'
 ]
 
 { #category : 'testing' }
@@ -57,16 +55,31 @@ WamFeedLayoutView >> pane1View [
 ]
 
 { #category : 'panes' }
-WamFeedLayoutView >> pane1WidthSet: anInteger [
+WamFeedLayoutView >> pane1WidthComputeWith: aScaffoldView [
+	| w |
 
-	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1') ifNotNil: [ :value |
-		value styleAt: 'width' put: anInteger printString, 'px' ]
+	w := aScaffoldView layoutWidthCached.
+	w := w - aScaffoldView bodyWidthReduction.
+	w := w max: self pane1WidthMin.
+
+	^ w
+
 ]
 
 { #category : 'accessing - components' }
 WamFeedLayoutView >> pane2View [
 
 	self error: 'Should not use'
+]
+
+{ #category : 'panes' }
+WamFeedLayoutView >> paneLayoutAdaptWith: aScaffoldView [
+	| anInteger |
+
+	anInteger := self pane1WidthComputeWith: aScaffoldView.
+
+	(self findByIdInShadowDom: 'wamSinglePaneLayoutP1') ifNotNil: [ :value |
+		value styleAt: 'width' put: anInteger printString, 'px' ]
 ]
 
 { #category : 'panes' }

@@ -57,12 +57,9 @@ WamListDetailLayoutView >> bodyHeightAdapt: heightReduction [
 ]
 
 { #category : 'panes' }
-WamListDetailLayoutView >> bodyWidthAdapt: width [
+WamListDetailLayoutView >> bodyRegionFind [
 
-	(self findByIdInShadowDom: 'wamBodySplitPanel')
-		ifNil: [ self systemLog logError: 'Missing body region' ]
-		ifNotNil: [ :value | value styleAt: 'width' put: width ].
-
+	^ self findByIdInShadowDom: 'wamBodySplitPanel'
 ]
 
 { #category : 'accessing - components' }
@@ -77,8 +74,40 @@ WamListDetailLayoutView >> pane1View [
 ]
 
 { #category : 'panes' }
-WamListDetailLayoutView >> pane1WidthSet: anInteger [
-	| split |
+WamListDetailLayoutView >> pane1WidthComputeWith: aScaffoldView [
+	| lwc w |
+
+	lwc := aScaffoldView layoutWidthCached.
+	self isUsingSinglePaneLayout ifTrue: [ | reduceByWidth |
+		reduceByWidth := aScaffoldView bodyWidthReduction.
+		^ reduceByWidth > 0
+			ifTrue: [ lwc - aScaffoldView bodyWidthReduction ]
+			ifFalse: [ lwc ] ].
+
+	w :=  (lwc / 2) asInteger.
+	aScaffoldView useModalNav ifFalse: [  w := w - aScaffoldView navRailWidth ].
+	w := w max: self pane1WidthMin.
+
+	^ w
+
+]
+
+{ #category : 'accessing - components' }
+WamListDetailLayoutView >> pane2View [
+	| slotName |
+
+	slotName := self isUsingSinglePaneLayout
+		ifTrue: [ 'singlePaneLayoutP2' ]
+		ifFalse: [ 'twoPaneLayoutP2' ].
+
+	^ self firstChildAtSlotNamed: slotName
+]
+
+{ #category : 'panes' }
+WamListDetailLayoutView >> paneLayoutAdaptWith: aScaffoldView [
+	| split anInteger |
+
+	anInteger := self pane1WidthComputeWith: aScaffoldView.
 
 	split := self findByIdInShadowDom: 'wamBodySplitPanel' ifNone: [].
 	split ifNotNil: [
@@ -95,17 +124,6 @@ WamListDetailLayoutView >> pane1WidthSet: anInteger [
 	(self findByIdInShadowDom: 'wamSinglePaneLayout' ifNone: []) ifNotNil: [ :value |
 		value styleAt: 'width' put: anInteger printString, 'px' ]
 
-]
-
-{ #category : 'accessing - components' }
-WamListDetailLayoutView >> pane2View [
-	| slotName |
-
-	slotName := self isUsingSinglePaneLayout
-		ifTrue: [ 'singlePaneLayoutP2' ]
-		ifFalse: [ 'twoPaneLayoutP2' ].
-
-	^ self firstChildAtSlotNamed: slotName
 ]
 
 { #category : 'panes' }

@@ -12,6 +12,12 @@ WamSupportingPaneLayoutPresenter class >> defaultViewClass [
 	^ WamSupportingPaneLayoutView
 ]
 
+{ #category : 'accessing' }
+WamSupportingPaneLayoutPresenter class >> strategyName [
+
+	^ #supportingPane
+]
+
 { #category : 'rendering' }
 WamSupportingPaneLayoutPresenter >> renderView [
 

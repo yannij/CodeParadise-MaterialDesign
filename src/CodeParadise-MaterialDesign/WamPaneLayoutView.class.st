@@ -81,9 +81,25 @@ WamPaneLayoutView >> bodyHeightAdapt: heightReduction [
 ]
 
 { #category : 'panes' }
-WamPaneLayoutView >> bodyWidthAdapt: width [
+WamPaneLayoutView >> bodyRegionFind [
 
 	self subclassResponsibility
+]
+
+{ #category : 'panes' }
+WamPaneLayoutView >> bodyWidthAdaptWith: aScaffold [
+	| reduceByWidth widthString |
+
+	reduceByWidth := aScaffold bodyWidthReduction.
+	"aScaffold showSidesheet ifTrue: [ reduceByWidth := reduceByWidth + 300 ]."
+	widthString := reduceByWidth > 0
+		ifTrue: [ 'calc(100vw - ', reduceByWidth printString, 'px)' ]
+		ifFalse: [ '100vw' ].
+
+	self bodyRegionFind
+		ifNil: [ self systemLog logError: 'Missing body region' ]
+		ifNotNil: [ :value | value styleAt: 'width' put: widthString ].
+
 ]
 
 { #category : 'initialization' }
@@ -114,13 +130,26 @@ WamPaneLayoutView >> pane1View [
 ]
 
 { #category : 'panes' }
-WamPaneLayoutView >> pane1WidthSet: anInteger [
+WamPaneLayoutView >> pane1WidthComputeWith: aScaffoldView [
 
 	self subclassResponsibility
+
+]
+
+{ #category : 'panes' }
+WamPaneLayoutView >> pane1WidthMin [
+
+	^ 300
 ]
 
 { #category : 'accessing - components' }
 WamPaneLayoutView >> pane2View [
+
+	self subclassResponsibility
+]
+
+{ #category : 'panes' }
+WamPaneLayoutView >> paneLayoutAdaptWith: aScaffoldView [
 
 	self subclassResponsibility
 ]
