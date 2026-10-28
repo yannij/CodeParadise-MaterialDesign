@@ -42,6 +42,15 @@ WamBasicListModel >> listSet: aCollection [
 ]
 
 { #category : 'accessing' }
+WamBasicListModel >> listValues: aCollection [
+
+	list := aCollection
+		inject: OrderedCollection new
+		into: [ :coll :each | coll add: (modelWrapperClass on: each). coll ].
+
+]
+
+{ #category : 'accessing' }
 WamBasicListModel >> modelWrapperClass [
 
 	^ modelWrapperClass ifNil: [ modelWrapperClass := WamItemWrapperModel ]
@@ -81,10 +90,4 @@ WamBasicListModel >> viewStyleBeCard [
 WamBasicListModel >> viewStyleBeListItem [
 
 	self viewStyle: #listItem
-]
-
-{ #category : 'accessing' }
-WamBasicListModel >> viewStyleBeSupportingPane [
-
-	self viewStyle: #supportingPane
 ]

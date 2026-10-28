@@ -22,3 +22,13 @@ WamModel >> systemLog [
 
 	^ WamLog
 ]
+
+{ #category : 'view style' }
+WamModel >> viewStyleBeCard [
+	"Subclasses may specialize"
+]
+
+{ #category : 'view style' }
+WamModel >> viewStyleBeListItem [
+	"Subclasses may specialize"
+]

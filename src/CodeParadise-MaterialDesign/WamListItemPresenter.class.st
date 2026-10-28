@@ -17,7 +17,7 @@ WamListItemPresenter >> handleNavEvent: aNavEvent [
 	results in this presenter being freed, leading to #application
 	now answering nil, instead of non-nil in the preceeding line."
 	self application ifNotNil: [ :value |
-		value layout itemDetailGet notNil ifTrue: [
+		value layout pane2Content notNil ifTrue: [
 			self view secondaryPaneOnly ] ].
 
 ]

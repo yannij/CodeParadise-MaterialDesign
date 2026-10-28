@@ -298,7 +298,7 @@ WamDemoAccountingApp >> navTo: aNavActionEvent [
 		modelClass := WamDemoAccountingUser ].
 
 	self layout pane1 paneContent listSet: self allModels.
-	self listDetailReset.
+	self pane2Clear.
 
 ]
 

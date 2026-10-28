@@ -64,18 +64,3 @@ WamExampleContentModel >> setContent: anObject [
 	self valueChanged.
 
 ]
-
-{ #category : 'actions' }
-WamExampleContentModel >> viewStyleBeCard [
-	"TODO"
-]
-
-{ #category : 'actions' }
-WamExampleContentModel >> viewStyleBeListItem [
-	"TODO"
-]
-
-{ #category : 'actions' }
-WamExampleContentModel >> viewStyleBeSupportingPane [
-	"TODO"
-]

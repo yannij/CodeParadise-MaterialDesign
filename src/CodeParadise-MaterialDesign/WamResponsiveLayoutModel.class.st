@@ -124,30 +124,6 @@ WamResponsiveLayoutModel >> initialize [
 
 ]
 
-{ #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> itemDetailGet [
-
-	^ self pane2 paneContent
-]
-
-{ #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> itemDetailSet: anObject [
-
-	self pane2 setPaneContent: anObject
-]
-
-{ #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> itemListGet [
-
-	^ self pane1 paneContent
-]
-
-{ #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> itemListSet: anObject [
-
-	self pane1 setPaneContent: anObject
-]
-
 { #category : 'accessing' }
 WamResponsiveLayoutModel >> layoutSettings [
 
@@ -197,15 +173,21 @@ WamResponsiveLayoutModel >> pane1: anObject [
 ]
 
 { #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> pane1ContentGet [
+WamResponsiveLayoutModel >> pane1Changed [
+
+	self pane1 valueChanged
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane1Content [
 
 	^ self pane1 paneContent
 ]
 
 { #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> pane1ContentSet: anObject [
+WamResponsiveLayoutModel >> pane1Content: anObject [
 
-	self pane1 setPaneContent: anObject
+	self pane1 paneContent: anObject
 ]
 
 { #category : 'accessing' }
@@ -233,15 +215,21 @@ WamResponsiveLayoutModel >> pane2: anObject [
 ]
 
 { #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> pane2ContentGet [
+WamResponsiveLayoutModel >> pane2Changed [
+
+	self pane2 valueChanged
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane2Content [
 
 	^ self pane2 paneContent
 ]
 
 { #category : 'accessing - derived' }
-WamResponsiveLayoutModel >> pane2ContentSet: anObject [
+WamResponsiveLayoutModel >> pane2Content: anObject [
 
-	self pane2 setPaneContent: anObject
+	self pane2 paneContent: anObject
 ]
 
 { #category : 'accessing' }
@@ -282,7 +270,7 @@ WamResponsiveLayoutModel >> paneLayoutBeNotChanged [
 WamResponsiveLayoutModel >> paneLayoutBeSupportingPane [
 
 	self paneLayout useSupportingPaneStrategy.
-	self pane1 paneContent viewStyleBeSupportingPane.
+	self pane1 paneContent viewStyleBeCard.
 
 ]
 
