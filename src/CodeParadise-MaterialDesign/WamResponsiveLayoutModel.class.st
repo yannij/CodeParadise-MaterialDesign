@@ -29,9 +29,21 @@ WamResponsiveLayoutModel >> appBar1 [
 ]
 
 { #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> appBar1Headline: aString [
+
+	self appBar1 headline: aString; valueChanged
+]
+
+{ #category : 'accessing - derived' }
 WamResponsiveLayoutModel >> appBar2 [
 
 	^ self pane2 appBarModel
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> appBar2Headline: aString [
+
+	self appBar2 headline: aString; valueChanged
 ]
 
 { #category : 'accessing' }
@@ -221,6 +233,16 @@ WamResponsiveLayoutModel >> pane2Changed [
 ]
 
 { #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> pane2Clear [
+
+	self pane2Content: nil.
+	self pane2Changed.
+	self appBar2Headline: ''.
+	self setAppBar2TrailingActionsNone.
+
+]
+
+{ #category : 'accessing - derived' }
 WamResponsiveLayoutModel >> pane2Content [
 
 	^ self pane2 paneContent
@@ -314,6 +336,52 @@ WamResponsiveLayoutModel >> popupsHasKey: aSymbol [
 WamResponsiveLayoutModel >> preferredPresenterClass [
 
 	^ WamResponsiveLayoutPresenter
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> setAppBar2EditDelete [
+
+	self appBar2
+		navActionItemsClear;
+		navActionItemsAdd: (self application nativeEventSpecAt: #delete);
+		navActionItemsAdd: (self application nativeEventSpecAt: #update);
+		valueChanged;
+		yourself.
+
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> setAppBar2SaveCancel [
+
+	self appBar2
+		navActionItemsClear;
+		navActionItemsAdd: (self application nativeEventSpecAt: #save);
+		navActionItemsAdd: (self application nativeEventSpecAt: #cancel);
+		valueChanged;
+		yourself.
+
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> setAppBar2TrailingActionsNone [
+
+	self appBar2
+		navActionItemsClear;
+		valueChanged;
+		yourself.
+
+]
+
+{ #category : 'accessing - derived' }
+WamResponsiveLayoutModel >> setDetailAddNew [
+	| detail |
+
+	detail := self application newWrappedModel.
+	self pane2Content: detail.
+	self pane2Changed.
+	self appBar2Headline: detail wrappedModel mdAddingTitle.
+	self setAppBar2SaveCancel.
+
 ]
 
 { #category : 'accessing' }

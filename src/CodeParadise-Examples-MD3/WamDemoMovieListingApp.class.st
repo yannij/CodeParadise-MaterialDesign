@@ -281,7 +281,7 @@ WamDemoMovieListingApp >> navTo: aNavActionEvent [
 		modelClass := WamDemoMoviesShowTime ].
 
 	self layout pane1 paneContent listSet: self allModels.
-	self pane2Clear.
+	self layout pane2Clear.
 
 ]
 

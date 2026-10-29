@@ -66,18 +66,6 @@ WamWebApplication >> allModels [
 	self subclassResponsibility
 ]
 
-{ #category : 'navigation' }
-WamWebApplication >> appBar1Headline: aString [
-
-	self layout appBar1 headline: aString; valueChanged
-]
-
-{ #category : 'navigation' }
-WamWebApplication >> appBar2Headline: aString [
-
-	self layout appBar2 headline: aString; valueChanged
-]
-
 { #category : 'accessing' }
 WamWebApplication >> applicationModel [
 
@@ -154,8 +142,6 @@ WamWebApplication >> doRefresh: anObject [
 	"self logTrace: anObject printString method: 'doRefresh:'."
 
 	self refresh.
-	"self model pane1 paneContent valueChanged.
-	self model pane1 valueChanged."
 
 ]
 
@@ -270,7 +256,7 @@ WamWebApplication >> listDetailRemove [
 
 	self modelRemove: self layout pane2Content wrappedModel.
 	self layout pane1Content listSet: self allModels.
-	self pane2Clear.
+	self layout pane2Clear.
 
 ]
 
@@ -392,17 +378,7 @@ WamWebApplication >> newModelInstance [
 { #category : 'model' }
 WamWebApplication >> newWrappedModel [
 
-	^ self layout pane1 paneContent modelWrapperClass onNewModel: self newModelInstance
-]
-
-{ #category : 'model' }
-WamWebApplication >> pane2Clear [
-
-	self layout pane2Content: nil.
-	self layout pane2Changed.
-	self appBar2Headline: ''.
-	self setAppBar2TrailingActionsNone.
-
+	^ self layout pane1Content modelWrapperClass onNewModel: self newModelInstance
 ]
 
 { #category : 'actions' }
@@ -436,7 +412,7 @@ WamWebApplication >> processNavActionEvent: aNavEvent model: aModel [
 	aNavEvent id = #setDetail ifTrue: [
 		self layout pane2Content: aModel.
 		self layout pane2Changed.
-		self setAppBar2EditDelete.
+		self layout setAppBar2EditDelete.
 		^ self ].
 
 	eventId = #refresh ifTrue: [
@@ -463,52 +439,6 @@ WamWebApplication >> session [
 WamWebApplication >> session: anObject [
 
 	session := anObject
-]
-
-{ #category : 'model' }
-WamWebApplication >> setAppBar2EditDelete [
-
-	self layout appBar2
-		navActionItemsClear;
-		navActionItemsAdd: (self nativeEventSpecAt: #delete);
-		navActionItemsAdd: (self nativeEventSpecAt: #update);
-		valueChanged;
-		yourself.
-
-]
-
-{ #category : 'model' }
-WamWebApplication >> setAppBar2SaveCancel [
-
-	self layout appBar2
-		navActionItemsClear;
-		navActionItemsAdd: (self nativeEventSpecAt: #save);
-		navActionItemsAdd: (self nativeEventSpecAt: #cancel);
-		valueChanged;
-		yourself.
-
-]
-
-{ #category : 'model' }
-WamWebApplication >> setAppBar2TrailingActionsNone [
-
-	self layout appBar2
-		navActionItemsClear;
-		valueChanged;
-		yourself.
-
-]
-
-{ #category : 'model' }
-WamWebApplication >> setDetailAddNew [
-	| detail |
-
-	detail := self newWrappedModel.
-	self layout pane2Content: detail.
-	self layout pane2Changed.
-	self appBar2Headline: detail wrappedModel mdAddingTitle.
-	self setAppBar2SaveCancel.
-
 ]
 
 { #category : 'initialization' }
@@ -636,7 +566,7 @@ WamWebApplication >> userEventSpecs: anObject [
 { #category : 'model' }
 WamWebApplication >> wrapperCancel: aNavActionEvent [
 
-	self setAppBar2EditDelete.
+	self layout setAppBar2EditDelete.
 
 ]
 
@@ -662,13 +592,13 @@ WamWebApplication >> wrapperSave: aNavActionEvent [
 		ifTrue: [
 			result := self modelAdd: self layout pane2Content wrappedModel.
 			self layout pane1Content listSet: self allModels.
-			self pane2Clear. ]
+			self layout pane2Clear. ]
 		ifFalse: [
 			result := self modelUpdate: self layout pane2Content wrappedModel ].
 
-	self layout pane2 valueChanged.
-	self layout pane2 paneContent ifNotNil: [ :value | value valueChanged ].
-	self setAppBar2EditDelete.
+	self layout pane2Changed.
+	self layout pane2Content ifNotNil: [ :value | value valueChanged ].
+	self layout setAppBar2EditDelete.
 
 	^ result
 
@@ -678,6 +608,6 @@ WamWebApplication >> wrapperSave: aNavActionEvent [
 WamWebApplication >> wrapperUpdate: aNavActionEvent [
 
 	self layout pane2 valueChanged.
-	self setAppBar2SaveCancel.
+	self layout setAppBar2SaveCancel.
 
 ]
