@@ -23,7 +23,7 @@ WamObjectModel >> asListItemMap [
 	"Subclasses may override"
 
 	^ Dictionary new
-		at: #labelText put: self mdPrimaryString;
+		at: #mdPrimaryString put: self mdPrimaryString;
 		yourself
 ]
 

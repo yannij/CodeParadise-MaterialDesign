@@ -69,9 +69,12 @@ WamBasicListView >> useCards [
 	| el |
 
 	el := self collectionElement.
-	#('wa-stack' 'wa-grid') do: [ :e | el removeClass: e ].
 
-	el addClass: 'wa-grid'
+	#('wa-stack' 'wam-list') do: [ :e | el removeClass: e ].
+	(el isClassed: 'wa-grid') ifFalse: [ el addClass: 'wa-grid' ].
+	(el isClassed: 'wa-gap-s') ifFalse: [ el addClass: 'wa-gap-s' ].
+	el customPropertyAt: 'min-column-size' put: '32ch'.
+
 ]
 
 { #category : 'rendering' }
@@ -79,7 +82,9 @@ WamBasicListView >> useListItem [
 	| el |
 
 	el := self collectionElement.
-	#('wa-stack' 'wa-grid') do: [ :e | el removeClass: e ].
 
-	el addClass: 'wa-stack'
+	#('wa-grid') do: [ :e | el removeClass: e ].
+	(el isClassed: 'wa-stack') ifFalse: [ el addClass: 'wa-stack' ].
+	(el isClassed: 'wam-list') ifFalse: [ el addClass: 'wam-list' ].
+
 ]
