@@ -72,9 +72,11 @@ WamPaneLayoutModel >> presenterClassMap: anObject [
 ]
 
 { #category : 'accessing' }
-WamPaneLayoutModel >> presenterClassMapAt: key put: value [
+WamPaneLayoutModel >> presenterClassMapAdd: aPresenterClass [
 
-	self presenterClassMap at: key put: value
+	self presenterClassMap
+		at: aPresenterClass strategyName
+		put: aPresenterClass
 ]
 
 { #category : 'initialization' }

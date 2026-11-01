@@ -381,6 +381,12 @@ WamWebApplication >> newWrappedModel [
 	^ self layout pane1Content modelWrapperClass onNewModel: self newModelInstance
 ]
 
+{ #category : 'accessing - derived' }
+WamWebApplication >> paneLayout [
+
+	^ self layout paneLayout
+]
+
 { #category : 'actions' }
 WamWebApplication >> postLoad [
 

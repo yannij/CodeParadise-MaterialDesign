@@ -13,6 +13,12 @@ WamFeedLayoutPresenter class >> defaultViewClass [
 ]
 
 { #category : 'accessing' }
+WamFeedLayoutPresenter class >> defaultViewMode [
+
+	^ WamView modeCardGrid
+]
+
+{ #category : 'accessing' }
 WamFeedLayoutPresenter class >> strategyName [
 
 	^ #feed

@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'accessing' }
+WamPaneLayoutPresenter class >> defaultViewMode [
+
+	self subclassResponsibility
+]
+
+{ #category : 'accessing' }
 WamPaneLayoutPresenter class >> strategyName [
 
 	self subclassResponsibility

@@ -36,15 +36,21 @@ WamExampleContentModel >> doExtraActions: aNavActionEvent [
 	actionId := aNavActionEvent eventId.
 
 	actionId = #clover ifTrue: [
-		self application layout paneLayoutBeListDetail; valueChanged.
+		self application layout
+			paneLayoutPresenterClass: WamListDetailLayoutPresenter;
+			valueChanged.
 		^ self ].
 
 	actionId = #diamond ifTrue: [
-		self application layout paneLayoutBeFeed; valueChanged.
+		self application layout
+			paneLayoutPresenterClass: WamFeedLayoutPresenter;
+			valueChanged.
 		^ self ].
 
 	actionId = #heart ifTrue: [
-		self application layout paneLayoutBeSupportingPane; valueChanged.
+		self application layout
+			paneLayoutPresenterClass: WamSupportingPaneLayoutPresenter;
+			valueChanged.
 		^ self ].
 
 ]

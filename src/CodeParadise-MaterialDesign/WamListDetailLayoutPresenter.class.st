@@ -13,6 +13,12 @@ WamListDetailLayoutPresenter class >> defaultViewClass [
 ]
 
 { #category : 'accessing' }
+WamListDetailLayoutPresenter class >> defaultViewMode [
+
+	^ WamView modeListItem
+]
+
+{ #category : 'accessing' }
 WamListDetailLayoutPresenter class >> strategyName [
 
 	^ #listDetail

@@ -271,8 +271,7 @@ WamResponsiveLayoutView >> applyLayoutProfile: props [
 WamResponsiveLayoutView >> beEditablePane2 [
 
 	self fabDisplay: false.
-	"self pane2Content wrappedView do: [ :each | each setEditable: true ]."
-	self pane2Content setEditable: true.
+	self pane2Content ifNotNil: [ :value | value setEditable: true ].
 
 ]
 
@@ -742,12 +741,10 @@ WamResponsiveLayoutView >> pane1View [
 
 { #category : 'panes' }
 WamResponsiveLayoutView >> pane2Content [
-	| view |
 
-	view := self pane2View firstChildAtSlotNamed: #paneContent.
-	"self systemLog logTrace: view printString."
-
-	^ view
+	^ self pane2View
+		ifNil: [ nil ]
+		ifNotNil: [ :value | value firstChildAtSlotNamed: #paneContent ]
 ]
 
 { #category : 'accessing - components' }

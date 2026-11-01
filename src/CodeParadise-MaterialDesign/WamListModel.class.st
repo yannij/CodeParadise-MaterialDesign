@@ -1,6 +1,9 @@
 Class {
 	#name : 'WamListModel',
 	#superclass : 'WamModel',
+	#instVars : [
+		'viewMode'
+	],
 	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Base'
@@ -32,4 +35,16 @@ WamListModel >> modelWrapperClass [
 
 	self subclassResponsibility
 
+]
+
+{ #category : 'accessing' }
+WamListModel >> viewMode [
+
+	^ viewMode
+]
+
+{ #category : 'accessing' }
+WamListModel >> viewMode: anObject [
+
+	viewMode := anObject
 ]

@@ -69,7 +69,7 @@ WamFeedLayoutView >> pane1WidthComputeWith: aScaffoldView [
 { #category : 'accessing - components' }
 WamFeedLayoutView >> pane2View [
 
-	self error: 'Should not use'
+	^ nil
 ]
 
 { #category : 'panes' }

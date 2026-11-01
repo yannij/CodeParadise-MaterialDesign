@@ -24,11 +24,15 @@ WamModel >> systemLog [
 ]
 
 { #category : 'view style' }
-WamModel >> viewStyleBeCard [
-	"Subclasses may specialize"
+WamModel >> viewMode [
+	"Subclasses may specialize.
+	
+	Any model that is set as the paneContent of WamPaneModel
+	must support this method.
+	"
 ]
 
 { #category : 'view style' }
-WamModel >> viewStyleBeListItem [
+WamModel >> viewMode: aViewMode [
 	"Subclasses may specialize"
 ]

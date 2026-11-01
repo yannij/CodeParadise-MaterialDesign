@@ -32,6 +32,18 @@ WamView class >> loadThemes [
 
 ]
 
+{ #category : 'view modes' }
+WamView class >> modeCardGrid [
+
+	^ #cardGrid
+]
+
+{ #category : 'view modes' }
+WamView class >> modeListItem [
+
+	^ #listItem
+]
+
 { #category : 'class initialization' }
 WamView class >> postInstallOnce [
 

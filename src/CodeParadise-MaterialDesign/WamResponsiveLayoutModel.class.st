@@ -266,40 +266,27 @@ WamResponsiveLayoutModel >> paneLayout: anObject [
 	paneLayout := anObject
 ]
 
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> paneLayoutBeFeed [
-
-	self paneLayout useFeedStrategy.
-	self pane1 paneContent viewStyleBeCard.
-
-]
-
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> paneLayoutBeListDetail [
-
-	self paneLayout useListDetailStrategy.
-	self pane1 paneContent viewStyleBeListItem.
-
-]
-
 { #category : 'accessing - derived' }
 WamResponsiveLayoutModel >> paneLayoutBeNotChanged [
 
 	^ self paneLayout paneLayoutChanged: false
 ]
 
-{ #category : 'accessing' }
-WamResponsiveLayoutModel >> paneLayoutBeSupportingPane [
-
-	self paneLayout useSupportingPaneStrategy.
-	self pane1 paneContent viewStyleBeCard.
-
-]
-
 { #category : 'accessing - derived' }
 WamResponsiveLayoutModel >> paneLayoutChanged [
 
 	^ self paneLayout paneLayoutChanged
+]
+
+{ #category : 'accessing' }
+WamResponsiveLayoutModel >> paneLayoutPresenterClass: aPresenterClass [
+
+	(self paneLayout paneLayoutStrategy = aPresenterClass strategyName) ifTrue: [
+		^ self ].
+
+	self paneLayout useStrategy: aPresenterClass strategyName.
+	self pane1Content viewMode: aPresenterClass defaultViewMode.
+
 ]
 
 { #category : 'accessing - popups' }

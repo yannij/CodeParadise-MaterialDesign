@@ -13,6 +13,12 @@ WamSupportingPaneLayoutPresenter class >> defaultViewClass [
 ]
 
 { #category : 'accessing' }
+WamSupportingPaneLayoutPresenter class >> defaultViewMode [
+
+	^ WamView modeListItem
+]
+
+{ #category : 'accessing' }
 WamSupportingPaneLayoutPresenter class >> strategyName [
 
 	^ #supportingPane

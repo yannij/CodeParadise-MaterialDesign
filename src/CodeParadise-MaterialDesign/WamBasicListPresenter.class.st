@@ -24,13 +24,13 @@ WamBasicListPresenter >> renderView [
 	self view
 		renderPaginationTotal: list size pageSize: pageSize page: page.
 
-	self model viewStyle = #card
+	self model viewMode = WamView modeCardGrid
 		ifTrue: [ self view useCards ]
 		ifFalse: [ self view useListItem ].
 
 	"self renderAllChildViewsForModels: {} atSlotNamed: #list."
 	self
 		renderAllChildViewsForModels: self model list
-		usingPresenter: (self model viewStyle = #card ifTrue: [WamListItemCardPresenter] ifFalse: [WamListItemDivPresenter])
+		usingPresenter: (self model viewMode = WamView modeCardGrid ifTrue: [WamListItemCardPresenter] ifFalse: [WamListItemDivPresenter])
 		atSlotNamed: #list
 ]
