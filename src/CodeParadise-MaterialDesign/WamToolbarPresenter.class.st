@@ -25,7 +25,8 @@ WamToolbarPresenter >> doCancel: aNavActionEvent [
 { #category : 'events' }
 WamToolbarPresenter >> doCreate: aNavActionEvent [
 
-	self application layout setDetailAddNew.
+	(self application doCreate: aNavActionEvent) ifNil: [
+		^ self ].
 	self view beEditablePane2.
 	self view secondaryPaneOnly.
 

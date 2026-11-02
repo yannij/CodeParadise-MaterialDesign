@@ -128,6 +128,14 @@ WamWebApplication >> confirm: aString onAnswer: aBlock [
 
 ]
 
+{ #category : 'events' }
+WamWebApplication >> doCreate: aNavActionEvent [
+	"Subclasses may override"
+
+	self layout setDetailAddNew.
+
+]
+
 { #category : 'iam' }
 WamWebApplication >> doLogout [
 
@@ -236,6 +244,22 @@ WamWebApplication >> initializeSession [
 	Subclasses may override"
 
 	session := WamSessionModel new.
+
+]
+
+{ #category : 'dialogs' }
+WamWebApplication >> input: aString onAnswer: aBlock [
+	| d |
+
+	d := self layout dialog
+		label: '';
+		setContentModel: (WamInputDialogModel new
+			message: aString;
+			answerBlock: [ :parameters | aBlock value: parameters ];
+			yourself);
+		yourself.
+	d valueChanged.
+	self sharedDialogOpen.
 
 ]
 
