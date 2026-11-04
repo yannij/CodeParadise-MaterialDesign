@@ -84,17 +84,29 @@ WamWebApplication >> authenticateLoginRequest: parameters [
 	username := parameters at: #loginUsername ifAbsent: [].
 	password := parameters at: #loginPassword ifAbsent: [].
 
-	(self authenticateUsername: username password: password)
-		ifTrue: [
-			self session emailSet: username.
-			self layout navRail valueChanged ]
-		ifFalse: [ self inform: 'Login failed!' ]
+	self authenticateUsername: username password: password.
+
 ]
 
 { #category : 'iam' }
 WamWebApplication >> authenticateUsername: aUsername password: aPassword [
+	"Subclasses should override"
+	| okay |
 
-	^ aPassword = 'todo'
+	okay := false.
+
+	okay
+		ifTrue: [ self authenticated: aUsername ]
+		ifFalse: [ self inform: 'Login failed!' ]
+
+]
+
+{ #category : 'iam' }
+WamWebApplication >> authenticated: aUsername [
+
+	self session userEmailSet: aUsername.
+	self layout navRail valueChanged.
+
 ]
 
 { #category : 'events' }

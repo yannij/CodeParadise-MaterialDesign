@@ -59,6 +59,8 @@ WamListItemCardView >> renderListItemAsCard: aMap [
 		^ self removeChildrenAtSlotNamed: nil ].
 
 	card := WaCard new "orientation: 'horizontal'; yourself".
+	card styleAt: 'max-width' put: '300px'.
+	card customPropertyAt: 'spacing' put: 'var(--wa-space-s)'.
 	card replaceAllChildrenWith: contentsElement atSlotNamed: nil.
 
 	(self footerElement: aMap)

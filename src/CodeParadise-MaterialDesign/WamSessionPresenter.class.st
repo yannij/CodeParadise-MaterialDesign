@@ -16,7 +16,7 @@ WamSessionPresenter >> renderView [
 WamSessionPresenter >> sessionNavItems [
 	| items logInOrOut|
 
-	logInOrOut := self model isAuthenticated ifTrue: [ #logout ] ifFalse: [ #login ].
+	logInOrOut := self model isUserAuthenticated ifTrue: [ #logout ] ifFalse: [ #login ].
 
 	items := OrderedCollection new.
 	items

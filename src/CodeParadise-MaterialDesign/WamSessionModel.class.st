@@ -2,32 +2,13 @@ Class {
 	#name : 'WamSessionModel',
 	#superclass : 'WamModel',
 	#instVars : [
+		'userEmail',
 		'properties'
 	],
 	#category : 'CodeParadise-MaterialDesign-Base',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Base'
 }
-
-{ #category : 'accessing' }
-WamSessionModel >> email [
-
-	^ self propertyAt: #email
-]
-
-{ #category : 'accessing' }
-WamSessionModel >> email: anObject [
-
-	self propertyAt: #email put: anObject
-]
-
-{ #category : 'accessing' }
-WamSessionModel >> emailSet: anObject [
-
-	self email: anObject.
-	self valueChanged.
-
-]
 
 { #category : 'initialization' }
 WamSessionModel >> initialize [
@@ -39,15 +20,15 @@ WamSessionModel >> initialize [
 ]
 
 { #category : 'testing' }
-WamSessionModel >> isAuthenticated [
+WamSessionModel >> isUserAuthenticated [
 
-	^ self email notNil
+	^ self userEmail notNil
 ]
 
 { #category : 'actions' }
 WamSessionModel >> logout [
 
-	self emailSet: nil
+	self userEmailSet: nil
 ]
 
 { #category : 'accessing' }
@@ -77,4 +58,24 @@ WamSessionModel >> propertyAt: aKey put: anObject [
 { #category : 'sso' }
 WamSessionModel >> ssoRedirectUrlCallback: anEvent [
 	"Subclasses may enhance"
+]
+
+{ #category : 'accessing' }
+WamSessionModel >> userEmail [
+
+	^ userEmail
+]
+
+{ #category : 'accessing' }
+WamSessionModel >> userEmail: anObject [
+
+	userEmail := anObject
+]
+
+{ #category : 'accessing' }
+WamSessionModel >> userEmailSet: anObject [
+
+	self userEmail: anObject.
+	self valueChanged.
+
 ]

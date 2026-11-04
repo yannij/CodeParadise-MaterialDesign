@@ -11,7 +11,7 @@ WamNavRailModalPresenter >> renderView [
 
 	self view
 		drawerSetup;
-		renderBottom: (self application session email ifNil: [ '?' ] ifNotNil: [ :value | value asString ]).
+		renderBottom: (self application session userEmail ifNil: [ '?' ] ifNotNil: [ :value | value asString ]).
 
 	self
 		renderAllChildViewsForModels: self model navItems
