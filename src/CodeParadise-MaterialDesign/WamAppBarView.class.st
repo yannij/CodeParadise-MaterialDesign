@@ -234,7 +234,8 @@ WamAppBarView >> triggerNavEvent: aNavAction [
 		paneContentView ifNil: [ ^ self ].
 		changes := paneContentView "wrappedView" changeMap.
 		self systemLog logString: '****', changes printString.
-		event parameters at: #changes put: changes ].
+		event parameters at: #changes put: changes.
+		^ paneContentView serverAnnounce: event ].
 
 	self serverAnnounce: event
 ]
