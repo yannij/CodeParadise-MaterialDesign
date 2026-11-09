@@ -40,8 +40,6 @@ WamAppBarPresenter >> handleNavEvent: aNavEvent [
 		^ self view primaryPaneOnly ].
 	item eventId = #update ifTrue: [
 		^ self doUpdate: aNavEvent ].
-	item eventId = #save ifTrue: [
-		^ self doSave: aNavEvent ].
 	item eventId = #cancel ifTrue: [
 		^ self doCancel: aNavEvent ].
 	item eventId = #delete ifTrue: [

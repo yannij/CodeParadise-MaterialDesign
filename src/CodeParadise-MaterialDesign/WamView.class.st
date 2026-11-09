@@ -391,6 +391,15 @@ WamView >> systemLog [
 
 { #category : 'actions' }
 WamView >> triggerNavEvent: aNavAction [
+
+	self triggerNavEventPre: aNavAction.
+	self triggerNavEventBasic: aNavAction.
+	self triggerNavEventPost: aNavAction.
+
+]
+
+{ #category : 'actions' }
+WamView >> triggerNavEventBasic: aNavAction [
 	| eventId data navActionEvent |
 
 	eventId := aNavAction at: #eventId.
@@ -405,8 +414,31 @@ WamView >> triggerNavEvent: aNavAction [
 		^ self ].
 
 	data := aNavAction at: #data.
+	eventId = #save ifTrue: [ | event changes paneContentView |
+		event := WamNavActionEvent id: eventId parameter: data.
+		paneContentView := self layoutViewLazy pane2View paneContentView.
+		self systemLog logString: '****', paneContentView printString.
+		paneContentView ifNil: [ ^ self ].
+		changes := paneContentView changeMap.
+		self systemLog logString: '****', changes printString.
+		event parameters at: #changes put: changes.
+		^ paneContentView serverAnnounce: event ].
+
 	navActionEvent := data
 		ifNil: [ WamNavActionEvent id: eventId ]
 		ifNotNil: [ :value | WamNavActionEvent id: eventId parameter: value ].
+
+	"N.B. self is the subclass instance, and that view's corresponding presenter
+	is the receiver of the event on the server side"
 	self serverAnnounce: navActionEvent.
+]
+
+{ #category : 'actions' }
+WamView >> triggerNavEventPost: aNavAction [
+	"Subclasses may override"
+]
+
+{ #category : 'actions' }
+WamView >> triggerNavEventPre: aNavAction [
+	"Subclasses may override"
 ]

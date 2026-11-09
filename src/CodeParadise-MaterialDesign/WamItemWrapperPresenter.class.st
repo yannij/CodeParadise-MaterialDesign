@@ -30,6 +30,10 @@ WamItemWrapperPresenter >> handleNavEvent: anObject [
 
 	eventId := anObject id.
 
+	"WamView>>triggerNavEventBasic: redirects the #save event
+	to the pane2 content presenter, to arrive here.
+	Be sure to register the presenter for nav events,
+	in the #viewCreated method"
 	eventId = #save ifTrue: [
 		^ self doSave: anObject ].
 
@@ -42,4 +46,13 @@ WamItemWrapperPresenter >> renderView [
 	self
 		renderAllChildViewsForModels: (self model wrappedModel ifNil: [{}] ifNotNil: [ :value | {value} ])
 		atSlotNamed: #wrapped
+]
+
+{ #category : 'view' }
+WamItemWrapperPresenter >> viewCreated [
+
+	super viewCreated.
+
+	self subscribeToNavActionEvent.
+
 ]

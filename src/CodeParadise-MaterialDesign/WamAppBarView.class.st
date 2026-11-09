@@ -216,26 +216,3 @@ WamAppBarView >> renderTrailingActions: buttons [
 	self appendChild: (self dropdownAppbar: overflowList) atSlotNamed: 'trailingActions'.
 
 ]
-
-{ #category : 'actions' }
-WamAppBarView >> triggerNavEvent: aNavAction [
-	| eventId data event |
-
-	eventId := aNavAction at: #eventId.
-	data := aNavAction at: #data.
-	event := WamNavActionEvent id: eventId parameter: data.
-
-	eventId = #modalNav ifTrue: [
-		^ self layoutViewLazy modalNavOpen ].
-
-	eventId = #save ifTrue: [ | changes paneContentView |
-		paneContentView := self layoutViewLazy pane2View paneContentView.
-		self systemLog logString: '****', paneContentView printString.
-		paneContentView ifNil: [ ^ self ].
-		changes := paneContentView "wrappedView" changeMap.
-		self systemLog logString: '****', changes printString.
-		event parameters at: #changes put: changes.
-		^ paneContentView serverAnnounce: event ].
-
-	self serverAnnounce: event
-]

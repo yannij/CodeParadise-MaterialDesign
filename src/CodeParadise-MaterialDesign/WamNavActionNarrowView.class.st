@@ -14,3 +14,9 @@ WamNavActionNarrowView >> renderNavNarrow: anItem [
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]
+
+{ #category : 'actions' }
+WamNavActionNarrowView >> triggerNavEventPost: aNavAction [
+
+	self layoutViewLazy hideNavModal.
+]

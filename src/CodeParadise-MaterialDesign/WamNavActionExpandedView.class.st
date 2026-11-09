@@ -14,3 +14,9 @@ WamNavActionExpandedView >> renderNavExpanded: anItem [
 	self replaceAllChildrenWith: element atSlotNamed: nil.
 
 ]
+
+{ #category : 'actions' }
+WamNavActionExpandedView >> triggerNavEventPost: aNavAction [
+
+	self layoutViewLazy hideNavModal.
+]

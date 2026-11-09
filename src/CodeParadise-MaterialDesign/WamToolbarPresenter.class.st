@@ -41,16 +41,6 @@ WamToolbarPresenter >> doDelete: aNavActionEvent [
 ]
 
 { #category : 'events' }
-WamToolbarPresenter >> doSave: aNavActionEvent [
-	| result |
-
-	result := self application wrapperSave: aNavActionEvent.
-	result = true ifTrue: [
-		self view beNotEditablePane2 ].
-
-]
-
-{ #category : 'events' }
 WamToolbarPresenter >> doUpdate: aNavActionEvent [
 
 	self application wrapperUpdate: aNavActionEvent.

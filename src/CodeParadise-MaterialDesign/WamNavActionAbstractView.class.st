@@ -102,11 +102,3 @@ WamNavActionAbstractView >> divNarrow: aNavAction [
 		yourself.
 
 ]
-
-{ #category : 'actions' }
-WamNavActionAbstractView >> triggerNavEvent: aNavAction [
-
-	super triggerNavEvent: aNavAction.
-
-	self layoutViewLazy hideNavModal.
-]

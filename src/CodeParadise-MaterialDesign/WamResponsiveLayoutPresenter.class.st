@@ -29,16 +29,6 @@ WamResponsiveLayoutPresenter >> doDelete: aNavActionEvent [
 ]
 
 { #category : 'events' }
-WamResponsiveLayoutPresenter >> doSave: aNavActionEvent [
-	| result |
-
-	result := self application wrapperSave: aNavActionEvent.
-	result = true ifTrue: [
-		self view beNotEditablePane2 ].
-
-]
-
-{ #category : 'events' }
 WamResponsiveLayoutPresenter >> doUpdate: aNavActionEvent [
 
 	self application wrapperUpdate: aNavActionEvent.

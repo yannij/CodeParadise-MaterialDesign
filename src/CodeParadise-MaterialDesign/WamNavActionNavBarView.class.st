@@ -53,9 +53,8 @@ WamNavActionNavBarView >> renderNavBarItem: aNavAction [
 ]
 
 { #category : 'rendering' }
-WamNavActionNavBarView >> triggerNavEvent: aNavAction [
+WamNavActionNavBarView >> triggerNavEventPre: aNavAction [
 
 	self closeSubmenu.
-	super triggerNavEvent: aNavAction.
 
 ]

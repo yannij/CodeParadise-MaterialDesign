@@ -53,9 +53,8 @@ WamNavActionSubmenuView >> renderNavSubmenu: anItem [
 ]
 
 { #category : 'actions' }
-WamNavActionSubmenuView >> triggerNavEvent: aNavAction [
+WamNavActionSubmenuView >> triggerNavEventPre: aNavAction [
 
 	self closeSubmenu.
-	super triggerNavEvent: aNavAction.
 
 ]
