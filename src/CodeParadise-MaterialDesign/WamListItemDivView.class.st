@@ -8,34 +8,30 @@ Class {
 
 { #category : 'rendering' }
 WamListItemDivView >> contentElement: aMap [
-	| labelText leadingAction tag |
+	| labelText action tag |
 
 	labelText := aMap at: #mdPrimaryString ifAbsent: [].
-	leadingAction := aMap at: #defaultAction ifAbsent: [ #setDetail ].
+	action := aMap at: #defaultAction ifAbsent: [ #setDetail ].
 
 	labelText ifNil: [ ^ nil ].
 
 	tag := #div asHtmlTag textContent: labelText.
 	tag addClass: 'wam-item-label-text'.
-	tag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+	tag when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent id: action) ] for: self.
 
 	^ tag
 ]
 
 { #category : 'rendering' }
 WamListItemDivView >> leadingElement: aMap [
-	| leadingIcon leadingAction leadingIconTag |
+	| iconName action |
 
-	leadingIcon := aMap at: #mdIcon ifAbsent: [].
-	leadingAction := aMap at: #defaultAction ifAbsent: [ #setDetail ].
+	iconName := aMap at: #mdIcon ifAbsent: [].
+	action := aMap at: #defaultAction ifAbsent: [ #setDetail ].
 
-	leadingIcon ifNil: [ ^ nil ].
+	iconName ifNil: [ ^ nil ].
 
-	leadingIconTag := WaIcon fullyNamed: leadingIcon.
-	leadingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
-
-	^ #div asHtmlTag
-		appendChild: leadingIconTag;
+	^ (self icon: iconName action: action)
 		addClass: 'wam-item-leadingIcon';
 		yourself
 ]
@@ -68,18 +64,14 @@ WamListItemDivView >> renderListItemAsDiv: aMap [
 
 { #category : 'rendering' }
 WamListItemDivView >> trailingElement: aMap [
-	| trailingIcon trailingAction trailingIconTag |
+	| iconName action |
 
-	trailingIcon := aMap at: #trailingIcon ifAbsent: [].
-	trailingAction := aMap at: #trailingAction ifAbsent: [ #setDetail ].
+	iconName := aMap at: #trailingIcon ifAbsent: [].
+	action := aMap at: #trailingAction ifAbsent: [ #setDetail ].
 
-	trailingIcon ifNil: [ ^ nil ].
+	iconName ifNil: [ ^ nil ].
 
-	trailingIconTag := WaIcon fullyNamed: trailingIcon.
-	trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: trailingAction ] for: self.
-
-	^ #div asHtmlTag
-		appendChild: trailingIconTag;
+	^ (self icon: iconName action: action)
 		addClass: 'wam-item-trailingIcon';
 		yourself
 ]

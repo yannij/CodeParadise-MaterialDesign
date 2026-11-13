@@ -178,7 +178,7 @@ WamAppBarView >> renderHeadline: aString [
 
 	self
 		replaceAllChildrenWith: (aString ifNil: [ '' ] ifNotNil: [ :value | value ]) asHtmlElement
-		atSlotNamed: 'headline'.
+		atSlotNamed: #headline.
 
 ]
 
@@ -186,11 +186,13 @@ WamAppBarView >> renderHeadline: aString [
 WamAppBarView >> renderLeadingAction: leadingAction [
 	| actionItem |
 
-	self removeChildrenAtSlotNamed: 'leadingAction'.
+	self removeChildrenAtSlotNamed: #leadingAction.
 	leadingAction ifNil: [ ^ self ].
 
-	actionItem := self iconButtonForAction: leadingAction css: 'wam-toolbar-item'.
-	self appendChild: actionItem atSlotNamed: 'leadingAction'.
+	actionItem := self icon: (leadingAction at: #iconName) eventDictionary: leadingAction.
+	actionItem firstChild addClass: 'wam-toolbar-icon'.
+	actionItem addClass: 'wam-toolbar-item'.
+	self appendChild: actionItem atSlotNamed: #leadingAction.
 
 ]
 
@@ -198,21 +200,25 @@ WamAppBarView >> renderLeadingAction: leadingAction [
 WamAppBarView >> renderTrailingActions: buttons [
 	| overflowThreshold actionItem actionList overflowList |
 
-	self removeChildrenAtSlotNamed: 'trailingActions'.
+	self removeChildrenAtSlotNamed: #trailingActions.
 	overflowThreshold := 2.
 
 	buttons size <= overflowThreshold ifTrue: [
-		buttons do: [ :each |
-			actionItem := self iconButtonForAction: each css: 'wam-toolbar-item'.
-			self appendChild: actionItem atSlotNamed: 'trailingActions' ].
+		buttons do: [ :eachItem |
+			actionItem := self icon: (eachItem at: #iconName) eventDictionary: eachItem.
+			actionItem firstChild addClass: 'wam-toolbar-icon'.
+			actionItem addClass: 'wam-toolbar-item'.
+			self appendChild: actionItem atSlotNamed: #trailingActions ].
 		^ self ].
 
 	actionList := buttons copyFrom: 1 to: overflowThreshold - 1.
-	actionList do: [ :each |
-		actionItem := self iconButtonForAction: each css: 'wam-toolbar-item'.
-		self appendChild: actionItem atSlotNamed: 'trailingActions' ].
+	actionList do: [ :eachItem |
+		actionItem := self icon: (eachItem at: #iconName) eventDictionary: eachItem.
+		actionItem firstChild addClass: 'wam-toolbar-icon'.
+		actionItem addClass: 'wam-toolbar-item'.
+		self appendChild: actionItem atSlotNamed: #trailingActions ].
 
 	overflowList := buttons copyFrom: overflowThreshold to: buttons size.
-	self appendChild: (self dropdownAppbar: overflowList) atSlotNamed: 'trailingActions'.
+	self appendChild: (self dropdownAppbar: overflowList) atSlotNamed: #trailingActions.
 
 ]

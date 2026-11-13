@@ -35,12 +35,3 @@ WamListItemView class >> globalStyle [
 }
 '
 ]
-
-{ #category : 'rendering' }
-WamListItemView >> triggerAction: action [
-
-	self systemLog logTrace5: action printString.
-
-	self serverAnnounce: (WamNavActionEvent id: action parameters: UndefinedObject)
-
-]

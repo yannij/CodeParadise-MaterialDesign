@@ -7,15 +7,15 @@ Class {
 }
 
 { #category : 'rendering' }
-WamNavActionDialogView >> dialogBuildItem: aNavAction [
+WamNavActionDialogView >> dialogBuildItem: aDictionary [
 	| iconName |
 
-	iconName := aNavAction at: #iconName.
+	iconName := aDictionary at: #iconName.
 
 	^ #div asHtmlTag
 		addClass: 'wam-navbar-item';
 		addClass: 'wam-navbar-font';
-		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: aDictionary) ] for: self;
 		appendChild: (#div asHtmlTag
 			addClass: 'wam-navbar-icon';
 			appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
@@ -23,7 +23,7 @@ WamNavActionDialogView >> dialogBuildItem: aNavAction [
 		appendChild: (#div asHtmlTag
 			addClass: 'wam-navbar-labelText';
 			addClass: 'wa-text-truncate';
-			textContent: (aNavAction at: #iconLabel);
+			textContent: (aDictionary at: #iconLabel);
 			yourself);
 		yourself
 

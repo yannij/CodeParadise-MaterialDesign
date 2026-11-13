@@ -50,23 +50,27 @@ WamToolbarView >> fabCssClass [
 
 { #category : 'nav' }
 WamToolbarView >> renderButtons: buttons [
-	| div iconButton |
+	| div |
 
 	buttons ifNotEmpty: [
 		div := '' inHtmlTag: #div.
 		div addClass: self buttonCssClass.
-		buttons withIndexDo: [ :eachItem :index |
-			iconButton := self iconButtonForAction: eachItem css: 'wam-toolbar-item'.
-			div appendChild: iconButton ].
-		self appendChild: div atSlotNamed: 'toolbar' ].
+		buttons withIndexDo: [ :eachItem :index | | actionItem |
+			actionItem := self icon: (eachItem at: #iconName) eventDictionary: eachItem.
+			actionItem firstChild addClass: 'wam-toolbar-icon'.
+			actionItem addClass: 'wam-toolbar-item'.
+			div appendChild: actionItem ].
+		self appendChild: div atSlotNamed: #toolbar ].
 
 ]
 
 { #category : 'nav' }
 WamToolbarView >> renderFab: fab [
-	| iconButton |
+	| actionItem |
 
-	iconButton := self iconButtonForAction: fab css: self fabCssClass.
-	self appendChild: iconButton atSlotNamed: 'fab'.
+	actionItem := self icon: (fab at: #iconName) eventDictionary: fab.
+	actionItem firstChild addClass: 'wam-toolbar-icon'.
+	actionItem addClass: self fabCssClass.
+	self appendChild: actionItem atSlotNamed: #fab.
 
 ]

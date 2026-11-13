@@ -785,7 +785,7 @@ WamResponsiveLayoutView >> primaryPaneDisplay: aBoolean [
 
 ]
 
-{ #category : 'panes' }
+{ #category : 'actions' }
 WamResponsiveLayoutView >> primaryPaneOnly [
 
 	self systemLog logTrace5: 'primaryPaneOnly'.
@@ -832,7 +832,7 @@ WamResponsiveLayoutView >> secondaryPaneDisplay: aBoolean [
 
 ]
 
-{ #category : 'panes' }
+{ #category : 'actions' }
 WamResponsiveLayoutView >> secondaryPaneOnly [
 
 	self systemLog logTrace5: 'secondaryPaneOnly'.

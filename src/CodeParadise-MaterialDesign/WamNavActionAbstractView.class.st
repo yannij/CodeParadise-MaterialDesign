@@ -62,42 +62,42 @@ WamNavActionAbstractView class >> globalStyle [
 ]
 
 { #category : 'rendering' }
-WamNavActionAbstractView >> divExpanded: aNavAction [
+WamNavActionAbstractView >> divExpanded: aDictionary [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrailx-item'; addClass: 'wam-nav-font';
-		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: aDictionary) ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrailx-icon';
-				appendChild: ((WaIcon fullyNamed: (aNavAction at: #iconName)) label: (aNavAction at: #iconLabel); yourself);
+				appendChild: ((WaIcon fullyNamed: (aDictionary at: #iconName)) label: (aDictionary at: #iconLabel); yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrailx-labelText';
 				"addClass: 'wa-text-truncate';"
 				styleAt: 'width' put: '170px';
-				textContent: (aNavAction at: #iconLabel);
+				textContent: (aDictionary at: #iconLabel);
 				yourself);
 		yourself
 ]
 
 { #category : 'rendering' }
-WamNavActionAbstractView >> divNarrow: aNavAction [
+WamNavActionAbstractView >> divNarrow: aDictionary [
 
 	^ #div asHtmlTag
 		addClass: 'wam-navrail-item';
-		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: aDictionary) ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrail-icon';
-				appendChild: ((WaIcon fullyNamed: (aNavAction at: #iconName)) label: (aNavAction at: #iconLabel); yourself);
+				appendChild: ((WaIcon fullyNamed: (aDictionary at: #iconName)) label: (aDictionary at: #iconLabel); yourself);
 				yourself);
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navrail-labelText';
 				"addClass: 'wa-text-truncate';"
-				textContent: (aNavAction at: #iconLabel);
+				textContent: (aDictionary at: #iconLabel);
 				yourself);
 		yourself.
 

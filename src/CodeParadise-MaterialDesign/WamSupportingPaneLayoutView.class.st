@@ -27,20 +27,78 @@ WamSupportingPaneLayoutView class >> template [
 ]
 
 { #category : 'panes' }
+WamSupportingPaneLayoutView >> bodyHeightAdapt: heightReduction [
+
+	self pane1View
+		ifNil: [ self systemLog logTrace: 'Missing pane1 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: heightReduction ].
+	self pane2View
+		ifNil: [ self systemLog logTrace: 'Missing pane2 component' ]
+		ifNotNil: [ :pv | pv setPaneContentHeightReducedBy: heightReduction ].
+
+	self sidesheetView
+		ifNil: [ self systemLog logTrace: 'Missing sidesheet component' ]
+		ifNotNil: [ :v | v setPaneContentHeightReducedBy: heightReduction ].
+]
+
+{ #category : 'panes' }
+WamSupportingPaneLayoutView >> bodyRegionFind [
+
+	^ self findByIdInShadowDom: 'wamSupportingPaneLayout'
+]
+
+{ #category : 'panes' }
+WamSupportingPaneLayoutView >> isUsingSinglePaneLayout [
+
+	^ false
+]
+
+{ #category : 'accessing - components' }
+WamSupportingPaneLayoutView >> pane1View [
+
+	^ self firstChildAtSlotNamed: 'focusPane'
+]
+
+{ #category : 'panes' }
 WamSupportingPaneLayoutView >> pane1WidthComputeWith: aScaffoldView [
-	| lwc w |
+	| w gap |
 
-	lwc := aScaffoldView layoutWidthCached.
-	self isUsingSinglePaneLayout ifTrue: [ | reduceByWidth |
-		reduceByWidth := aScaffoldView bodyWidthReduction.
-		^ reduceByWidth > 0
-			ifTrue: [ lwc - aScaffoldView bodyWidthReduction ]
-			ifFalse: [ lwc ] ].
-
-	w :=  (lwc / 2) asInteger.
-	aScaffoldView useModalNav ifFalse: [  w := w - aScaffoldView navRailWidth ].
+	gap := 16.
+	w := ((aScaffoldView layoutWidthCached - gap) / 2) asInteger.
+	w := w - aScaffoldView bodyWidthReduction.
 	w := w max: self pane1WidthMin.
 
 	^ w
 
+]
+
+{ #category : 'accessing - components' }
+WamSupportingPaneLayoutView >> pane2View [
+
+	^ self firstChildAtSlotNamed: 'supportingPane'
+]
+
+{ #category : 'panes' }
+WamSupportingPaneLayoutView >> paneLayoutAdaptWith: aScaffoldView [
+	| anInteger |
+
+	anInteger := self pane1WidthComputeWith: aScaffoldView.
+
+	(self findByIdInShadowDom: 'wamFocusPane' ifNone: []) ifNotNil: [ :value |
+		value
+			styleAt: 'float' put: 'left';
+			styleAt: 'width' put: anInteger printString, 'px' ]
+]
+
+{ #category : 'panes' }
+WamSupportingPaneLayoutView >> useSinglePaneLayout [
+
+	"Don't change to single pane"
+	self isUsingSinglePaneLayout: false.
+]
+
+{ #category : 'panes' }
+WamSupportingPaneLayoutView >> useTwoPaneLayout [
+
+	self isUsingSinglePaneLayout: false.
 ]

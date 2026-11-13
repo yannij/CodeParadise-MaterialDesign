@@ -76,13 +76,13 @@ WamView class >> registerBootstrapIconsCode [
 			nextPutAll: '});' ]
 ]
 
-{ #category : 'utilities' }
+{ #category : 'actions' }
 WamView >> beEditablePane2 [
 
 	self layoutViewLazy beEditablePane2
 ]
 
-{ #category : 'utilities' }
+{ #category : 'actions' }
 WamView >> beNotEditablePane2 [
 
 	self layoutViewLazy beNotEditablePane2
@@ -123,7 +123,7 @@ WamView >> dropdownMenuItems: actionList [
 			yourself.
 		menu appendChild: (WaDropdownItem new
 			addClass: 'wam-menu-item';
-			when: CpClickEvent basicPrimary do: [ self triggerNavEvent: each ] for: self;
+			when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: each) ] for: self;
 			iconElement: icon;
 			textContent: (each at: #iconLabel);
 			yourself) ].
@@ -228,54 +228,33 @@ WamView >> findFirstDescendantInShadowDom: anId ifNone: aBlock [
 
 ]
 
-{ #category : 'utilities' }
-WamView >> iconButton: iconName navAction: aNavAction [
+{ #category : 'buttons' }
+WamView >> icon: iconName action: action [
+	| element |
 
-	^ WaButton new
-		appendChild: (WaIcon fullyNamed: iconName);
-		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
+	element := WaIcon fullyNamed: iconName.
+	element
+		when: CpClickEvent basicPrimary
+		do: [ self triggerNavEvent: (WamNavActionEvent id: action) ]
+		for: self.
+
+	^ #div asHtmlTag
+		appendChild: element;
 		yourself
 ]
 
-{ #category : 'utilities' }
-WamView >> iconButtonForAction: aNavAction [
-	| iconName |
+{ #category : 'buttons' }
+WamView >> icon: iconName eventDictionary: eventDictionary [
+	| element |
 
-	iconName := aNavAction at: #iconName.
-	^ self iconButton: iconName navAction: aNavAction
-]
+	element := WaIcon fullyNamed: iconName.
+	element
+		when: CpClickEvent basicPrimary
+		do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: eventDictionary) ]
+		for: self.
 
-{ #category : 'utilities' }
-WamView >> iconButtonForAction: aNavAction css: cssClass [
-	| iconName tag |
-
-	iconName := aNavAction at: #iconName.
-
-	tag := #div asHtmlTag
-		appendChild: ((WaIcon fullyNamed: iconName)
-			label: iconName;
-			addClass: 'wam-toolbar-icon';
-			when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
-			yourself);
-		yourself.
-
-	cssClass ifNotNil: [ tag addClass: cssClass ].
-
-	^ tag
-]
-
-{ #category : 'utilities' }
-WamView >> iconButtonNamed: iconName class: cssClass navAction: aNavAction [
-
-	"^ #div asHtmlTag
-		addClass: cssClass;
-		appendChild: ((WaIcon fullyNamed: iconName) label: iconName; yourself);
-		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
-		yourself"
-	^ (WaIcon fullyNamed: iconName)
-		label: iconName;
-		addClass: cssClass;
-		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
+	^ #div asHtmlTag
+		appendChild: element;
 		yourself
 ]
 
@@ -300,40 +279,13 @@ WamView >> modalNavElementOrNil [
 	^ component ifNil: [ nil ] ifNotNil: [ component drawer ].
 ]
 
-{ #category : 'utilities' }
+{ #category : 'buttons' }
 WamView >> moveChildrenFromSlot: fromSlot to: toSlot [
 	| list |
 
 	list := self childrenAtSlotNamed: fromSlot.
 	list do: [ :each | self appendChild: each atSlotNamed: toSlot ].
 
-]
-
-{ #category : 'utilities' }
-WamView >> pillButtonForAction: aNavAction css: cssClass [
-	| iconName iconLabel tag |
-
-	iconName := aNavAction at: #iconName.
-	iconLabel := aNavAction at: #iconLabel.
-
-	tag := #div asHtmlTag
-		"addClass: 'wam-toolbar-icon';"
-		appendChild: (self pillButtonLabel: iconLabel class: '' navAction: aNavAction);
-		yourself.
-
-	"cssClass ifNotNil: [ tag addClass: cssClass ]."
-
-	^ tag
-]
-
-{ #category : 'utilities' }
-WamView >> pillButtonLabel: buttonLabal class: cssClass navAction: aNavAction [
-
-	^ (WaButton label: buttonLabal)
-		pillBeOn;
-		when: CpClickEvent primary do: [ :event | self triggerNavEvent: aNavAction ] for: self;
-		"addClass: cssClass;"
-		yourself
 ]
 
 { #category : 'actions' }
@@ -350,7 +302,7 @@ WamView >> renderString: aString [
 	self replaceAllChildrenWith: aString asHtmlElement
 ]
 
-{ #category : 'utilities' }
+{ #category : 'actions' }
 WamView >> secondaryPaneOnly [
 
 	self layoutViewLazy secondaryPaneOnly
@@ -389,7 +341,7 @@ WamView >> systemLog [
 	^ WamLog
 ]
 
-{ #category : 'actions' }
+{ #category : 'buttons' }
 WamView >> triggerNavEvent: aNavAction [
 
 	self triggerNavEventPre: aNavAction.
@@ -398,11 +350,11 @@ WamView >> triggerNavEvent: aNavAction [
 
 ]
 
-{ #category : 'actions' }
+{ #category : 'buttons' }
 WamView >> triggerNavEventBasic: aNavAction [
 	| eventId data navActionEvent |
 
-	eventId := aNavAction at: #eventId.
+	eventId := aNavAction id.
 
 	eventId = #modalNav ifTrue: [
 		^ self layoutViewLazy modalNavOpen ].
@@ -413,7 +365,7 @@ WamView >> triggerNavEventBasic: aNavAction [
 		self layoutViewLazy sharedDialogOpen.
 		^ self ].
 
-	data := aNavAction at: #data.
+	data := aNavAction parameters.
 	eventId = #save ifTrue: [ | event changes paneContentView |
 		event := WamNavActionEvent id: eventId parameter: data.
 		paneContentView := self layoutViewLazy pane2View paneContentView.
@@ -433,12 +385,12 @@ WamView >> triggerNavEventBasic: aNavAction [
 	self serverAnnounce: navActionEvent.
 ]
 
-{ #category : 'actions' }
+{ #category : 'buttons' }
 WamView >> triggerNavEventPost: aNavAction [
 	"Subclasses may override"
 ]
 
-{ #category : 'actions' }
+{ #category : 'buttons' }
 WamView >> triggerNavEventPre: aNavAction [
 	"Subclasses may override"
 ]

@@ -84,15 +84,15 @@ WamToolbarFloatingView >> fabCssClass [
 
 { #category : 'nav' }
 WamToolbarFloatingView >> renderButtons: buttons [
-	| element iconButton |
+	| element actionItem |
 
 	buttons ifNotEmpty: [
 		element := #div asHtmlTag.
 		element addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
-			"iconButton := self iconButtonForAction: eachItem."
-			iconButton := self iconButtonNamed: (eachItem at: #iconName) class: 'wam-toolbar-icon' navAction: eachItem.
-			element appendChild: (#div asHtmlTag addClass: 'wam-toolbar-floating-item'; appendChild: iconButton; yourself) ].
-		self appendChild: element atSlotNamed: 'toolbar' ].
+			actionItem := self icon: (eachItem at: #iconName) action: eachItem.
+			actionItem firstChild addClass: 'wam-toolbar-icon'.
+			actionItem addClass: 'wam-toolbar-floating-item' ].
+		self appendChild: element atSlotNamed: #toolbar ].
 
 ]

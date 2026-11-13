@@ -8,11 +8,11 @@ Class {
 
 { #category : 'rendering' }
 WamListItemCardView >> contentElement: aMap [
-	| heading headingEl supportingText supportingTextEl leadingAction tag |
+	| heading headingEl supportingText supportingTextEl action tag |
 
 	heading := aMap at: #mdPrimaryString ifAbsent: [].
 	supportingText := aMap at: #mdSecondaryString ifAbsent: [].
-	leadingAction := aMap at: #leadingAction ifAbsent: [ #setDetail ].
+	action := aMap at: #leadingAction ifAbsent: [ #setDetail ].
 
 	heading ifNil: [ ^ nil ].
 
@@ -22,22 +22,22 @@ WamListItemCardView >> contentElement: aMap [
 	headingEl addClass: 'wa-body-m'.
 	tag := #div asHtmlTag.
 	tag appendChild: headingEl; appendChild: supportingTextEl.
-	tag when: CpClickEvent basicPrimary do: [ self triggerAction: leadingAction ] for: self.
+	tag when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent id: action) ] for: self.
 
 	^ tag
 ]
 
 { #category : 'rendering' }
 WamListItemCardView >> footerElement: aMap [
-	| trailingIcon trailingAction trailingIconTag iconDiv |
+	| trailingIcon action trailingIconTag iconDiv |
 
 	trailingIcon := aMap at: #trailingIcon ifAbsent: [].
-	trailingAction := aMap at: #trailingAction ifAbsent: [].
+	action := aMap at: #trailingAction ifAbsent: [].
 
 	trailingIcon ifNil: [ ^ nil ].
 
 	trailingIconTag := WaIcon fullyNamed: trailingIcon.
-	trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerAction: trailingAction ] for: self.
+	trailingIconTag when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent id: action) ] for: self.
 
 	iconDiv := #div asHtmlTag
 		appendChild: trailingIconTag;

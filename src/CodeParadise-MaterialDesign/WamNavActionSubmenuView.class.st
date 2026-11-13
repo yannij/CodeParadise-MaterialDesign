@@ -14,14 +14,14 @@ WamNavActionSubmenuView >> closeSubmenu [
 ]
 
 { #category : 'rendering' }
-WamNavActionSubmenuView >> divSubmenu: aNavAction [
+WamNavActionSubmenuView >> divSubmenu: aDictionary [
 	| iconName |
 
-	iconName := aNavAction at: #iconName.
+	iconName := aDictionary at: #iconName.
 
 	^ #div asHtmlTag
 		addClass: 'wam-navsubmenu-item';
-		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: aNavAction ] for: self;
+		when: CpClickEvent basicPrimary do: [ self triggerNavEvent: (WamNavActionEvent fromDictionary: aDictionary) ] for: self;
 		appendChild: (
 			#div asHtmlTag
 				addClass: 'wam-navsubmenu-icon';
@@ -31,7 +31,7 @@ WamNavActionSubmenuView >> divSubmenu: aNavAction [
 			#div asHtmlTag
 				addClass: 'wam-navsubmenu-labelText';
 				addClass: 'wa-text-truncate';
-				textContent: (aNavAction at: #iconLabel);
+				textContent: (aDictionary at: #iconLabel);
 				yourself);
 		yourself.
 

@@ -13,6 +13,26 @@ WamBasicListPresenter class >> defaultViewClass [
 ]
 
 { #category : 'rendering' }
+WamBasicListPresenter >> presenterForCard [
+
+	^ WamListItemCardPresenter
+]
+
+{ #category : 'rendering' }
+WamBasicListPresenter >> presenterForList [
+
+	^ WamListItemDivPresenter
+]
+
+{ #category : 'rendering' }
+WamBasicListPresenter >> presenterToUse [
+
+	^ self model viewMode = WamView modeCardGrid
+		ifTrue: [ self presenterForCard ]
+		ifFalse: [ self presenterForList ]
+]
+
+{ #category : 'rendering' }
 WamBasicListPresenter >> renderView [
 	| list page pageSize slice |
 
@@ -28,9 +48,8 @@ WamBasicListPresenter >> renderView [
 		ifTrue: [ self view useCards ]
 		ifFalse: [ self view useListItem ].
 
-	"self renderAllChildViewsForModels: {} atSlotNamed: #list."
 	self
 		renderAllChildViewsForModels: self model list
-		usingPresenter: (self model viewMode = WamView modeCardGrid ifTrue: [WamListItemCardPresenter] ifFalse: [WamListItemDivPresenter])
+		usingPresenter: self presenterToUse
 		atSlotNamed: #list
 ]
