@@ -17,7 +17,9 @@ WamResponsiveLayoutView class >> beLoaded [
 
 	CpTransition beLoaded.
 	WaIcon beLoaded.
-	WaSplitPanel beLoaded
+	WaSplitPanel beLoaded.
+	WaToast beLoaded.
+	WaToastItem beLoaded.
 
 ]
 
@@ -169,6 +171,7 @@ WamResponsiveLayoutView class >> template [
 <slot name="navRailModal"></slot>
 <slot name="floatingToolbar"></slot>
 <slot name="fab"></slot>
+<slot name="toast"><wa-toast></wa-toast></slot>
 <slot name="dialog"></slot>
 <slot name="brandDialog"></slot>
 '
@@ -1026,6 +1029,30 @@ WamResponsiveLayoutView >> sidesheetDisplay: aBoolean [
 WamResponsiveLayoutView >> sidesheetView [
 
 	^ self paneLayoutView sidesheetView
+]
+
+{ #category : 'actions' }
+WamResponsiveLayoutView >> toast: aString icon: anIconName [
+	| toastItem |
+
+	toastItem := WaToastItem new.
+	anIconName ifNotNil: [ :value |
+		toastItem appendChild: (WaIcon fullyNamed: value) atSlotNamed: #icon].
+	toastItem appendChild: aString asHtmlElement.
+	self toastView appendChild: toastItem atSlotNamed: nil
+]
+
+{ #category : 'actions' }
+WamResponsiveLayoutView >> toastCreate: aString [
+
+	self toastView apply: #create withArguments: { aString }
+]
+
+{ #category : 'accessing - components' }
+WamResponsiveLayoutView >> toastView [
+
+	"^ self firstChildAtSlotNamed: #toast"
+	^ self shadowedFirstDescendantMatching: WaToast asCssSelector
 ]
 
 { #category : 'toolbar' }

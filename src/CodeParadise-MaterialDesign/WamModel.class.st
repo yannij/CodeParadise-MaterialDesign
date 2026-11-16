@@ -20,7 +20,7 @@ WamModel >> processNavActionEvent: aBasicEvent [
 { #category : 'accessing' }
 WamModel >> systemLog [
 
-	^ WamLog
+	^ WamServerLog
 ]
 
 { #category : 'view style' }

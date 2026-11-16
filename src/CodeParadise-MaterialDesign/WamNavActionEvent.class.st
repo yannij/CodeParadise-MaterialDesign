@@ -11,8 +11,8 @@ WamNavActionEvent class >> fromDictionary: aDictionary [
 
 	aDictionary
 		at: #data
-		ifPresent: [ :value | ^ self id: (aDictionary at: #eventId) parameters: value ]
-		ifAbsent: [ ^ self id: (aDictionary at: #eventId) ]
+		ifPresent: [ :value | ^ self id: #action parameters: value ]
+		ifAbsent: [ ^ self id: #action parameter: (aDictionary at: #eventId) ]
 ]
 
 { #category : 'printing' }

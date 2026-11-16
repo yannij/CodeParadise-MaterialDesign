@@ -37,7 +37,7 @@ WamWebApplication class >> appName [
 { #category : 'class initialization' }
 WamWebApplication class >> beLoaded [
 
-	WamLog beLoaded
+	WamServerLog beLoaded
 ]
 
 { #category : 'tags' }
@@ -584,7 +584,27 @@ WamWebApplication >> ssoRedirectUrlCallback: anEvent [
 { #category : 'accessing' }
 WamWebApplication >> systemLog [
 
-	^ WamLog
+	^ WamServerLog
+]
+
+{ #category : 'dialogs' }
+WamWebApplication >> toast: aString icon: anIconName [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #toast:icon:
+		arguments: { aString. anIconName })
+
+]
+
+{ #category : 'dialogs' }
+WamWebApplication >> toastCreate: aString [
+
+	self sendMessage: (MessageSend
+		receiver: self clientBehaviorClass clientId
+		selector: #toastCreate:
+		arguments: { aString })
+
 ]
 
 { #category : 'accessing' }

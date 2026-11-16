@@ -338,7 +338,7 @@ WamView >> shadowFirstDescendantMatching: cssSelectorString show: aBoolean [
 { #category : 'accessing' }
 WamView >> systemLog [
 
-	^ WamLog
+	^ WamClientLog
 ]
 
 { #category : 'buttons' }

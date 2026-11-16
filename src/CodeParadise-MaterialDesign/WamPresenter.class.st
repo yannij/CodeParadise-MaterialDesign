@@ -41,7 +41,7 @@ WamPresenter >> subscribeToNavActionEvent [
 { #category : 'accessing' }
 WamPresenter >> systemLog [
 
-	^ WamLog
+	^ WamServerLog
 ]
 
 { #category : 'view' }

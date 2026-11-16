@@ -73,3 +73,15 @@ WamWebClientBehavior >> sharedDialogOpen [
 
 	self layoutViewElement sharedDialogOpen
 ]
+
+{ #category : 'actions' }
+WamWebClientBehavior >> toast: aString icon: anIconName [
+
+	self layoutViewElement toast: aString icon: anIconName
+]
+
+{ #category : 'actions' }
+WamWebClientBehavior >> toastCreate: aString [
+
+	self layoutViewElement toastCreate: aString
+]

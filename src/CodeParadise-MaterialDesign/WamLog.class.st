@@ -9,6 +9,13 @@ Class {
 	#tag : 'Base'
 }
 
+{ #category : 'accessing' }
+WamLog class >> application [
+
+	^ self subclassResponsibility
+
+]
+
 { #category : 'logging' }
 WamLog class >> log: aString [
 
@@ -26,14 +33,18 @@ WamLog class >> log: aString level: level [
 
 { #category : 'logging' }
 WamLog class >> logError: aString [
+	| message |
 
-	self log: '[Error] ', aString, ' [', (self trimSenderString: thisContext sender printString), ']'
+	message := (self trimSenderString: thisContext sender printString).
+	self log: '[Error] ', aString, ' [', message, ']'.
+
 ]
 
 { #category : 'logging' }
 WamLog class >> logInfo: aString [
 
-	self log: '[Info] ', aString
+	self log: '[Info] ', aString.
+
 ]
 
 { #category : 'logging' }
@@ -84,7 +95,8 @@ WamLog class >> logTrace: aString level: level [
 { #category : 'logging' }
 WamLog class >> logWarn: aString [
 
-	self log: '[Warn] ', aString
+	self log: '[Warn] ', aString.
+
 ]
 
 { #category : 'accessing' }
