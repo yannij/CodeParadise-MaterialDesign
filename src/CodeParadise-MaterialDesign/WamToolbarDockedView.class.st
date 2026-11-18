@@ -57,7 +57,6 @@ WamToolbarDockedView class >> template [
 <div id="container">
   <div class="wam-toolbar">
     <slot name="toolbar"></slot>
-    <slot name="fab"></slot>
   </div>
 </div>
 '

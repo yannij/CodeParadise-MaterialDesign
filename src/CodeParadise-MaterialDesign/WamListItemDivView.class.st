@@ -24,14 +24,14 @@ WamListItemDivView >> contentElement: aMap [
 
 { #category : 'rendering' }
 WamListItemDivView >> leadingElement: aMap [
-	| iconName action |
+	| iconName eventId |
 
 	iconName := aMap at: #mdIcon ifAbsent: [].
-	action := aMap at: #defaultAction ifAbsent: [ #setDetail ].
-
 	iconName ifNil: [ ^ nil ].
 
-	^ (self icon: iconName action: action)
+	eventId := aMap at: #defaultAction ifAbsent: [ #setDetail ].
+
+	^ (self icon: iconName eventId: eventId)
 		addClass: 'wam-item-leadingIcon';
 		yourself
 ]
@@ -64,14 +64,18 @@ WamListItemDivView >> renderListItemAsDiv: aMap [
 
 { #category : 'rendering' }
 WamListItemDivView >> trailingElement: aMap [
-	| iconName action |
+	| iconName eventId eventDictionary |
 
 	iconName := aMap at: #trailingIcon ifAbsent: [].
-	action := aMap at: #trailingAction ifAbsent: [ #setDetail ].
-
 	iconName ifNil: [ ^ nil ].
 
-	^ (self icon: iconName action: action)
+	eventDictionary := Dictionary new.
+	eventId := aMap
+		at: #trailingAction
+		ifPresent: [ :value | eventDictionary at: #eventId put: #action; at: #data put: value ]
+		ifAbsent: [ eventDictionary at: #eventId put: #setDetail ].
+
+	^ (self icon: iconName eventDictionary: eventDictionary)
 		addClass: 'wam-item-trailingIcon';
 		yourself
 ]

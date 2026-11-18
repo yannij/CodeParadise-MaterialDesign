@@ -79,9 +79,3 @@ WamWebClientBehavior >> toast: aString icon: anIconName [
 
 	self layoutViewElement toast: aString icon: anIconName
 ]
-
-{ #category : 'actions' }
-WamWebClientBehavior >> toastCreate: aString [
-
-	self layoutViewElement toastCreate: aString
-]

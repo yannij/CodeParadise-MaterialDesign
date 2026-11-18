@@ -229,21 +229,6 @@ WamView >> findFirstDescendantInShadowDom: anId ifNone: aBlock [
 ]
 
 { #category : 'buttons' }
-WamView >> icon: iconName action: action [
-	| element |
-
-	element := WaIcon fullyNamed: iconName.
-	element
-		when: CpClickEvent basicPrimary
-		do: [ self triggerNavEvent: (WamNavActionEvent id: action) ]
-		for: self.
-
-	^ #div asHtmlTag
-		appendChild: element;
-		yourself
-]
-
-{ #category : 'buttons' }
 WamView >> icon: iconName eventDictionary: eventDictionary [
 	| element |
 
@@ -256,6 +241,27 @@ WamView >> icon: iconName eventDictionary: eventDictionary [
 	^ #div asHtmlTag
 		appendChild: element;
 		yourself
+]
+
+{ #category : 'buttons' }
+WamView >> icon: iconName eventId: eventId [
+	| element |
+
+	element := WaIcon fullyNamed: iconName.
+	element
+		when: CpClickEvent basicPrimary
+		do: [ self triggerNavEvent: (WamNavActionEvent id: eventId) ]
+		for: self.
+
+	^ #div asHtmlTag
+		appendChild: element;
+		yourself
+]
+
+{ #category : 'buttons' }
+WamView >> icon: iconName eventId: eventId data: data [
+
+	^ self icon: iconName eventDictionary: { #eventId: eventId. #data -> data } asDictionary
 ]
 
 { #category : 'find element' }

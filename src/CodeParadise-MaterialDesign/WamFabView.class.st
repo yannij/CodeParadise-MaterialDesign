@@ -72,6 +72,23 @@ WamFabView >> fabCssClass [
 ]
 
 { #category : 'rendering' }
+WamFabView >> fabDisplay: aBoolean [
+
+	self shadowElementId: #container display: aBoolean
+]
+
+{ #category : 'rendering' }
+WamFabView >> renderFab: fab [
+	| actionItem |
+
+	actionItem := self icon: (fab at: #iconName) eventDictionary: fab.
+	actionItem firstChild addClass: 'wam-toolbar-icon'.
+	actionItem addClass: self fabCssClass.
+	self replaceAllChildrenWith: actionItem atSlotNamed: #fab.
+
+]
+
+{ #category : 'rendering' }
 WamFabView >> setExtraOffset: aBoolean [
 	"Increase the offset from bottom, to accomodate a nav bar"
 	| container |

@@ -65,7 +65,6 @@ WamToolbarFloatingView class >> template [
 	^ '
 <div id="container" class="wam-toolbar">
   <slot name="toolbar"></slot>
-  <slot name="fab"></slot>
 </div>
 '
 ]
@@ -90,7 +89,7 @@ WamToolbarFloatingView >> renderButtons: buttons [
 		element := #div asHtmlTag.
 		element addClass: self buttonCssClass.
 		buttons withIndexDo: [ :eachItem :index |
-			actionItem := self icon: (eachItem at: #iconName) action: eachItem.
+			actionItem := self icon: (eachItem at: #iconName) eventId: eachItem.
 			actionItem firstChild addClass: 'wam-toolbar-icon'.
 			actionItem addClass: 'wam-toolbar-floating-item' ].
 		self appendChild: element atSlotNamed: #toolbar ].

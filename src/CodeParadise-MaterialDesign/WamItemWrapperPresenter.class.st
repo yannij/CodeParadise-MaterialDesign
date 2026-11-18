@@ -14,12 +14,8 @@ WamItemWrapperPresenter class >> defaultViewClass [
 
 { #category : 'events' }
 WamItemWrapperPresenter >> doSave: aNavActionEvent [
-	| result |
 
-	result := self application wrapperSave: aNavActionEvent.
-	result = true ifTrue: [
-		self view beNotEditablePane2 ].
-
+	^ self application wrapperSave: aNavActionEvent.
 ]
 
 { #category : 'events' }
@@ -34,8 +30,11 @@ WamItemWrapperPresenter >> handleNavEvent: anObject [
 	to the pane2 content presenter, to arrive here.
 	Be sure to register the presenter for nav events,
 	in the #viewCreated method"
-	eventId = #save ifTrue: [
-		^ self doSave: anObject ].
+	eventId = #save ifTrue: [ | result |
+		result := self doSave: anObject.
+		result = true ifTrue: [
+			self view ifNotNil: [ :value | value beNotEditablePane2 ] ].
+		^ self ].
 
 	^ super handleNavEvent: anObject
 ]

@@ -2,9 +2,8 @@ Class {
 	#name : 'WamToolbarModel',
 	#superclass : 'WamModel',
 	#instVars : [
-		'fab',
-		'isVisible',
-		'navActionItems'
+		'navActionItems',
+		'hidden'
 	],
 	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
@@ -15,12 +14,6 @@ Class {
 WamToolbarModel >> actionGroupToUse [
 
 	self subclassResponsibility
-]
-
-{ #category : 'view' }
-WamToolbarModel >> actionItemFabOrNil [
-
-	^ self application userEventSpecFAB
 ]
 
 { #category : 'view' }
@@ -36,15 +29,15 @@ WamToolbarModel >> addItem: anObject [
 ]
 
 { #category : 'accessing' }
-WamToolbarModel >> fab [
+WamToolbarModel >> hidden [
 
-	^ fab
+	^ hidden
 ]
 
 { #category : 'accessing' }
-WamToolbarModel >> fab: anObject [
+WamToolbarModel >> hidden: anObject [
 
-	fab := anObject
+	hidden := anObject
 ]
 
 { #category : 'initialization' }
@@ -52,20 +45,9 @@ WamToolbarModel >> initialize [
 
 	super initialize.
 
+	hidden := false.
 	self navActionItemsClear.
 
-]
-
-{ #category : 'accessing' }
-WamToolbarModel >> isVisible [
-
-	^ isVisible
-]
-
-{ #category : 'accessing' }
-WamToolbarModel >> isVisible: anObject [
-
-	isVisible := anObject
 ]
 
 { #category : 'events' }

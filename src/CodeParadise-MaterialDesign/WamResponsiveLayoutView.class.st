@@ -281,7 +281,6 @@ WamResponsiveLayoutView >> beEditablePane2 [
 { #category : 'actions' }
 WamResponsiveLayoutView >> beNotEditablePane2 [
 
-	self fabDisplay: true.
 	self pane2Content ifNotNil: [ :value | value setEditable: false ].
 
 ]
@@ -401,6 +400,18 @@ WamResponsiveLayoutView >> fabDisplay: aBoolean [
 		ifNotNil: [ :value |
 			"The fab CSS uses fixed position, so use display none"
 			value shadowElementId: #container display: aBoolean ]
+]
+
+{ #category : 'toolbar' }
+WamResponsiveLayoutView >> fabOff [
+
+	self fabDisplay: false
+]
+
+{ #category : 'toolbar' }
+WamResponsiveLayoutView >> fabOn [
+
+	self fabDisplay: true
 ]
 
 { #category : 'accessing - components' }

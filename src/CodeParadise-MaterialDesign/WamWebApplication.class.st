@@ -351,6 +351,7 @@ WamWebApplication >> modelRemove: aModel [
 WamWebApplication >> modelUpdate: aModel [
 
 	"self subclassResponsibility"
+	^ true
 ]
 
 { #category : 'accessing' }
@@ -507,7 +508,7 @@ WamWebApplication >> setUpLayout [
 	| toolbar appBar leadingAction |
 
 	self layout navRail navItems: self navItemsToUse; valueChanged.
-	self layout fab fab: self userEventSpecFAB; valueChanged.
+	self layout fab fabAction: self userEventSpecFAB; valueChanged.
 
 	toolbar := self layout floatingToolbar.
 	(self navItemSpecsInGroup: toolbar actionGroupToUse) do: [ :each |
@@ -597,16 +598,6 @@ WamWebApplication >> toast: aString icon: anIconName [
 
 ]
 
-{ #category : 'dialogs' }
-WamWebApplication >> toastCreate: aString [
-
-	self sendMessage: (MessageSend
-		receiver: self clientBehaviorClass clientId
-		selector: #toastCreate:
-		arguments: { aString })
-
-]
-
 { #category : 'accessing' }
 WamWebApplication >> userEventSpecFAB [
 
@@ -644,23 +635,26 @@ WamWebApplication >> wrapperDelete: ignored [
 
 { #category : 'model' }
 WamWebApplication >> wrapperSave: aNavActionEvent [
-	| theModel result |
+	| wrapper theModel result |
 
-	theModel := self layout pane2 paneContent.
-	theModel handleSave: aNavActionEvent.
-	theModel valueChanged.
+	wrapper := self layout pane2Content.
+	wrapper handleSave: aNavActionEvent.
+	wrapper valueChanged.
 
-	theModel isCreating
+	theModel := wrapper wrappedModel.
+	wrapper isCreating
 		ifTrue: [
-			result := self modelAdd: self layout pane2Content wrappedModel.
+			result := self modelAdd: theModel.
 			self layout pane1Content listSet: self allModels.
 			self layout pane2Clear. ]
 		ifFalse: [
-			result := self modelUpdate: self layout pane2Content wrappedModel ].
+			result := self modelUpdate: theModel.
+			self layout pane2Changed.
+			wrapper valueChanged ].
 
-	self layout pane2Changed.
-	self layout pane2Content ifNotNil: [ :value | value valueChanged ].
-	self layout setAppBar2EditDelete.
+	result ifTrue: [
+		self layout fab hidden: false; valueChanged.
+		self layout setAppBar2EditDelete ].
 
 	^ result
 

@@ -63,14 +63,3 @@ WamToolbarView >> renderButtons: buttons [
 		self appendChild: div atSlotNamed: #toolbar ].
 
 ]
-
-{ #category : 'nav' }
-WamToolbarView >> renderFab: fab [
-	| actionItem |
-
-	actionItem := self icon: (fab at: #iconName) eventDictionary: fab.
-	actionItem firstChild addClass: 'wam-toolbar-icon'.
-	actionItem addClass: self fabCssClass.
-	self appendChild: actionItem atSlotNamed: #fab.
-
-]

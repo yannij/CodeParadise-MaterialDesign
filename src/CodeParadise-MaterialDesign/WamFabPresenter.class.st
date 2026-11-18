@@ -1,6 +1,9 @@
 Class {
 	#name : 'WamFabPresenter',
 	#superclass : 'WamToolbarPresenter',
+	#instVars : [
+		'hidden'
+	],
 	#category : 'CodeParadise-MaterialDesign-Toolbar',
 	#package : 'CodeParadise-MaterialDesign',
 	#tag : 'Toolbar'
@@ -25,7 +28,9 @@ WamFabPresenter >> handleNavEvent: aNavEvent [
 { #category : 'rendering' }
 WamFabPresenter >> renderView [
 
-	self model fab ifNotNil: [ :value |
-		self view renderFab: value asDictionary ].
+	self model fabAction ifNotNil: [ :value |
+		self view
+			renderFab: value asDictionary;
+			fabDisplay: self model hidden not ].
 
 ]
